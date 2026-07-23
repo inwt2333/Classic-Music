@@ -1,0 +1,13 @@
+{
+  "city": "上海",
+  "sources": [
+    {
+      "id": "shsymphony-official",
+      "name": "上海交响乐团官网",
+      "adapter": "shsymphony-api",
+      "url": "https://www.shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale",
+      "venue": "捷豹上海交响音乐厅",
+      "pageSize": 20
+    }
+  ]
+}

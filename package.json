@@ -1,0 +1,42 @@
+{
+  "name": "classic-music",
+  "version": "1.0.0",
+  "description": "Shanghai classical music concert discovery demo.",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "scrape": "tsx scripts/scrape.ts",
+    "scrape:ai": "tsx scripts/scrape.ts --ai",
+    "test:parser": "tsx scripts/adapters/shanghai-symphony.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inwt2333/Classic-Music.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inwt2333/Classic-Music/issues"
+  },
+  "homepage": "https://github.com/inwt2333/Classic-Music#readme",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "lucide-react": "^1.25.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5"
+  }
+}

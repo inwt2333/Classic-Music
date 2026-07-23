@@ -1,0 +1,5626 @@
+{
+  "generatedAt": "2026-07-23T06:25:36.719Z",
+  "city": "上海",
+  "events": [
+    {
+      "id": "shsymphony_21857",
+      "title": "马思聪的音乐碎片",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-08-28T11:15:00.000Z",
+      "endTime": "2026-08-28T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "08/28",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥200",
+      "priceTiers": [
+        80,
+        120,
+        200
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21857&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21857&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "上海交响乐团",
+      "performers": [
+        "柳鸣",
+        "林瑞沣",
+        "李秉璋",
+        "王喆",
+        "罗晓筱",
+        "郑锦"
+      ],
+      "composers": [
+        "马思聪"
+      ],
+      "program": [
+        {
+          "composer": "马思聪",
+          "title": "《内蒙组曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "马思聪",
+          "title": "《西藏音诗》",
+          "confidence": "official"
+        },
+        {
+          "composer": "马思聪",
+          "title": "《山歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "马思聪",
+          "title": "《新疆狂想曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "马思聪",
+          "title": "《阿美组曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "马思聪",
+          "title": "双小提琴协奏曲（第二乐章：小行板）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "马思聪"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21754",
+      "title": "上海交响乐团2026-27音乐季开幕音乐会（一） 余隆与卡瓦科斯纪念肖斯塔科维奇诞辰120周年",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-11T11:30:00.000Z",
+      "endTime": "2026-09-11T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "09/11",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21754&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21754&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "列奥尼达斯·卡瓦科斯"
+      ],
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "program": [
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "f小调第一交响曲，作品10",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "a小调第一小提琴协奏曲，作品77",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "肖斯塔科维奇",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21818",
+      "title": "内尔松·格纳钢琴独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-12T11:15:00.000Z",
+      "endTime": "2026-09-12T13:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "09/12",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥480",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380,
+        480
+      ],
+      "description": "上半场的曲目对阿根廷人内尔松·格纳有特殊意义，他致敬了生命中的两位重要的女钢琴家：玛塔·阿格里奇在聆听了这位年轻同胞的弹奏后，为他寻到了日内瓦音乐学院的奖学金，并邀请玛丽亚·蒂波（Maria Tipo）收下这位学生。巴赫的这一首《c小调托卡塔》和舒曼的《C大调幻想曲》都是阿格里奇录音过的保留曲目；巴赫与舒曼是他的恩师蒂波的看家本领，而当这两首曲目连续演奏时又形成了「前奏曲-幻想曲」的经典结构。\n\n下半场的半本《伊比利亚》组曲则是西语钢琴家们的看家本领，从德奥的音乐语言中穿越到西班牙—南美场景，正是格纳在一次访谈中说的「但我从不想那样限制自己」。《阿劳谈艺录》几个世代以来都影响着全世界的钢琴家，而对南美的钢琴家尤甚。格纳对其中的一句话有着极深的记忆：「他说，对他来说，做诠释者就像做一只变色龙。钢琴家必须自在且能说多种不同的语言，适应任何风格。我至今还记得。特别是在我们这个时代，我觉得人们喜欢把别人装进抽屉里，去分类他们。我认为“艺术家”这个词的定义本身就意味着一个无法被完全分类或贴标签的人。」这也正是组织自己音乐会曲目的乐趣所在——展示差异，展示风格。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21818&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21818&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "内尔松·格纳钢琴独奏会丨上海交响乐团",
+      "performers": [
+        "内尔松·格纳"
+      ],
+      "composers": [
+        "巴赫",
+        "舒曼",
+        "阿尔韦尼斯"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "C小调托卡塔, BWV 911",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒曼",
+          "title": "C大调幻想曲，作品17",
+          "confidence": "official"
+        },
+        {
+          "composer": "阿尔韦尼斯",
+          "title": "《伊比利亚》（第三册）",
+          "confidence": "official"
+        },
+        {
+          "composer": "阿尔韦尼斯",
+          "title": "阿尔瓦伊辛—波罗调—拉瓦皮耶斯",
+          "confidence": "official"
+        },
+        {
+          "composer": "阿尔韦尼斯",
+          "title": "《伊比利亚》（第四册）",
+          "confidence": "official"
+        },
+        {
+          "composer": "阿尔韦尼斯",
+          "title": "马拉加—赫雷斯—埃里塔纳",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "舒曼",
+        "阿尔韦尼斯",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21755",
+      "title": "上海交响乐团2026-27音乐季开幕音乐会（二） 肖斯塔科维奇第十交响曲",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-13T11:30:00.000Z",
+      "endTime": "2026-09-13T13:30:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "09/13",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21755&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21755&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "列奥尼达斯·卡瓦科斯"
+      ],
+      "composers": [
+        "莫扎特",
+        "肖斯塔科维奇"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "G大调第三小提琴协奏曲，作品216",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "e小调第十交响曲，作品93",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "肖斯塔科维奇",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21756",
+      "title": "张国勇、卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-18T11:30:00.000Z",
+      "endTime": "2026-09-18T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "09/18",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21756&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21756&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团",
+      "conductor": "张国勇",
+      "performers": [
+        "张国勇",
+        "列奥尼达斯·卡瓦科斯",
+        "卡瓦科斯"
+      ],
+      "composers": [
+        "门德尔松",
+        "勃拉姆斯"
+      ],
+      "program": [
+        {
+          "composer": "门德尔松",
+          "title": "《仲夏夜之梦》组曲，作品61",
+          "confidence": "official",
+          "movements": [
+            {
+              "number": "1",
+              "title": "谐谑曲"
+            },
+            {
+              "number": "7",
+              "title": "夜曲"
+            },
+            {
+              "number": "2",
+              "title": "小精灵进行曲"
+            },
+            {
+              "number": "9",
+              "title": "婚礼进行曲"
+            }
+          ]
+        },
+        {
+          "composer": "门德尔松",
+          "title": "e小调小提琴协奏曲，作品64",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "D大调小提琴协奏曲，作品77",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "门德尔松",
+        "勃拉姆斯",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21851",
+      "title": "碎片之一「惊叹」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-19T07:00:00.000Z",
+      "endTime": "2026-09-19T09:00:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "09/19",
+      "timeLabel": "15:00",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "2020年12月，在新冠疫情封锁的漫长沉寂中，阿莉莎·韦勒斯坦开始在纸上涂写灵感，憧憬着人们重聚音乐厅的那一天。她渴望创造一种直击感官、情感丰沛且极具个人色彩的演出体验——既能回应我们所处的时代，又不失音乐会作为表达方式的思想深度与美学品格。她追问自己：如果我们能先放下一切预设，仅仅是倾听，音乐带给我们的会是什么？这个念头最终生长为「Fragments」（碎片）——一项横跨多个乐季的宏大独奏大提琴计划。\n\n此项目由六套音乐会曲目（即六片「碎片」）组成，每场长约一小时，均以无间歇方式一气呵成。整个系列将巴赫六首无伴奏大提琴组曲的全部36个乐章，与27位在世作曲家的委约新作交织融合，在创作手法、种族、性别、年龄、国籍及艺术生涯阶段上均呈现出广泛多元的面貌。韦勒斯坦向每位作曲家提出相同的创作要求：创作十分钟左右、可拆分为两至三个独立片段的音乐。她随后将这些新作碎片与巴赫的乐章重新编织，形成六条各自独立而又完整的情绪弧线。\n\n与常见的「新作配经典」不同，「碎片」刻意放弃等级与叙事。整场演出不设中场、没有曲目单——节目细节只在演出结束后才发放。历史、生平、地点与时间线统统退场，唯一重要的是不同音乐声音之间的对话。韦勒斯坦希望以此剥离听众习惯于分类与语境化的本能，让人得以先单纯地聆听。此外，「碎片」还是一场多感官的沉浸式制作。每个「碎片」都配有独特的灯光与舞美装置——灯光放大音乐的感染力，布景元素则在熟悉的音乐厅中唤醒崭新的空间。如她所言：「《碎片》的核心是连接——连接不同代际与背景的作曲家，连接熟悉与陌生，连接观众与表演者。」在这场新旧交融的音乐旅程中，声音以超越语言的方式在灵魂上作画，而我们得以在更深的层面上，与音乐相遇。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21851&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21851&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "阿莉莎·韦勒斯坦独奏会丨上海交响乐团",
+      "performers": [
+        "阿莉莎·韦勒斯坦"
+      ],
+      "composers": [
+        "家"
+      ],
+      "program": [
+        {
+          "composer": "家",
+          "title": "阿利森·洛金斯-赫尔、吉利·施瓦茨曼、琼·陶尔、约翰·塞巴斯蒂安·巴赫、雷纳尔多·莫亚、陈怡",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "家",
+        "交响",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21852",
+      "title": "碎片之二「激荡」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-19T11:15:00.000Z",
+      "endTime": "2026-09-19T13:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "09/19",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "2020年12月，在新冠疫情封锁的漫长沉寂中，阿莉莎·韦勒斯坦开始在纸上涂写灵感，憧憬着人们重聚音乐厅的那一天。她渴望创造一种直击感官、情感丰沛且极具个人色彩的演出体验——既能回应我们所处的时代，又不失音乐会作为表达方式的思想深度与美学品格。她追问自己：如果我们能先放下一切预设，仅仅是倾听，音乐带给我们的会是什么？这个念头最终生长为「Fragments」（碎片）——一项横跨多个乐季的宏大独奏大提琴计划。\n\n此项目由六套音乐会曲目（即六片「碎片」）组成，每场长约一小时，均以无间歇方式一气呵成。整个系列将巴赫六首无伴奏大提琴组曲的全部36个乐章，与27位在世作曲家的委约新作交织融合，在创作手法、种族、性别、年龄、国籍及艺术生涯阶段上均呈现出广泛多元的面貌。韦勒斯坦向每位作曲家提出相同的创作要求：创作十分钟左右、可拆分为两至三个独立片段的音乐。她随后将这些新作碎片与巴赫的乐章重新编织，形成六条各自独立而又完整的情绪弧线。\n\n与常见的「新作配经典」不同，「碎片」刻意放弃等级与叙事。整场演出不设中场、没有曲目单——节目细节只在演出结束后才发放。历史、生平、地点与时间线统统退场，唯一重要的是不同音乐声音之间的对话。韦勒斯坦希望以此剥离听众习惯于分类与语境化的本能，让人得以先单纯地聆听。此外，「碎片」还是一场多感官的沉浸式制作。每个「碎片」都配有独特的灯光与舞美装置——灯光放大音乐的感染力，布景元素则在熟悉的音乐厅中唤醒崭新的空间。如她所言：「《碎片》的核心是连接——连接不同代际与背景的作曲家，连接熟悉与陌生，连接观众与表演者。」在这场新旧交融的音乐旅程中，声音以超越语言的方式在灵魂上作画，而我们得以在更深的层面上，与音乐相遇。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21852&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21852&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "阿莉莎·韦勒斯坦独奏会丨上海交响乐团",
+      "performers": [
+        "阿莉莎·韦勒斯坦"
+      ],
+      "composers": [
+        "家"
+      ],
+      "program": [
+        {
+          "composer": "家",
+          "title": "艾伦·弗莱彻、安娜·索科洛维奇、卡罗琳·肖、丹尼尔·基达内、吉蒂·拉扎兹、约翰·塞巴斯蒂安·巴赫",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "家",
+        "交响",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21830",
+      "title": "哈德利希小提琴独奏音乐会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-22T11:30:00.000Z",
+      "endTime": "2026-09-22T13:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "09/22",
+      "timeLabel": "19:30",
+      "price": "¥180 - ¥1080",
+      "priceTiers": [
+        180,
+        380,
+        580,
+        780,
+        980,
+        1080
+      ],
+      "description": "哈德利希在24/25乐季的闭幕音乐会上奉献了一场精彩卓绝的贝多芬小提琴协奏曲，而他的两首带着浓郁美国特色的安可曲更是叫人念念不忘。今年，他的亚洲巡演特地借道上海，为他中意的「馄饨皮」观众奉献这场仅此一站的独奏小提琴音乐会。\n\n巴赫的无伴奏小提琴组曲上海观众已经欣赏过多次，但他同行，名气远胜于他的作曲家，也是他为自己心爱的儿子C.P.E.巴赫延请的教父，格奥尔格·菲利普·泰勒曼（1681-1767）也曾创作过无伴奏的小提琴独奏曲：在编号TWV 40中，有着十二首一组的长笛、小提琴、维奥尔琴幻想曲，还有许许多多在当时看来天马行空的乐器组合，比如他就曾尝试过无低音乐器的三重奏鸣曲。泰勒曼的作曲技法不如巴赫那样艰深宏大，或许他更好地代表着那个时代的主流审美以，但这并不意味着他在创作上毫无新意，这些无伴奏的幻想曲即是一例。最早出版的无伴奏小提琴作品已不可考，但之后我们有巴赫，以及受巴赫影响的帕格尼尼、伊萨伊，这都是小提琴无伴奏中的常规曲目。\n\n这次音乐会最珍惜的曲目当属珀金森（Coleridge-Taylor Perkinson）的作品，这位来自纽约的非裔作曲家，创作了包括爵士乐、舞曲、大量的交响作品，这首《布鲁斯形式》是他题献给非裔小提琴家桑福德·阿伦的作品，以庆贺他成为纽约爱乐的第一位黑人乐手。《路易斯安那布鲁斯漫步》原本作为前述组曲的末乐章创作，哈德利希常把它作为加演，本次可以在完整的上下文中欣赏。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21830&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21830&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "哈德利希小提琴独奏音乐会丨上海交响乐团",
+      "performers": [
+        "奥古斯丁·哈德利希"
+      ],
+      "composers": [
+        "泰勒曼",
+        "科尔里奇-泰勒·珀金森",
+        "伊萨依",
+        "帕格尼尼",
+        "巴赫"
+      ],
+      "program": [
+        {
+          "composer": "泰勒曼",
+          "title": "E大调第八无伴奏小提琴幻想曲，TWV 40:21",
+          "confidence": "official"
+        },
+        {
+          "composer": "科尔里奇-泰勒·珀金森",
+          "title": "《路易斯安那布鲁斯漫步——一首独奏小提琴的蛋糕舞曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "科尔里奇-泰勒·珀金森",
+          "title": "《布鲁斯形式》",
+          "confidence": "official"
+        },
+        {
+          "composer": "伊萨依",
+          "title": "G大调无伴奏小提琴奏鸣曲，作品27之5",
+          "confidence": "official"
+        },
+        {
+          "composer": "帕格尼尼",
+          "title": "降E大调第十九随想曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "帕格尼尼",
+          "title": "g小调第十六随想曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "d小调第二无伴奏小提琴组曲，BWV 1004",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "泰勒曼",
+        "科尔里奇-泰勒·珀金森",
+        "伊萨依",
+        "帕格尼尼",
+        "巴赫",
+        "交响",
+        "音乐会",
+        "小提琴"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21781",
+      "title": "斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-24T11:15:00.000Z",
+      "endTime": "2026-09-24T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "09/24",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "来自苏黎世的斯特拉迪瓦里四重奏曾于2015年（同沈洋合作《冬之旅》弦乐四重奏版）和2019年两次来访上海交响音乐厅。在组合成立二十周年前夕，「馄饨皮」再次迎来四把名琴造访。2022年，他们找到了曾在苏黎世求学的斯特凡·塔拉拉，他担任过曼海姆爱乐的首席，现在也是活力四射的瑞士室内乐CHAARTS的一员。塔拉拉的加入让四重奏在疫情后以新的声音启航——他使用的也是一把克莱斯勒曾持有的斯特拉迪瓦里小提琴。\n\n这将是组合第一次在上海演奏莫扎特，他们于2015年曾录制过三首「普鲁士」（KV 575，589及590）四重奏，本次将呈上F大调的KV 590，也是莫扎特在弦乐四重奏体裁中的绝笔。莫扎特在弦乐四重奏的基础上加入一把中提琴，创作了六首弦乐五重奏，这也是他自己演奏室内乐时最喜欢的乐器。本次演奏的《g小调第四弦乐五重奏》（KV 516）中，上海交响乐团的中提琴首席巴桐将助阵，来呈现这室内乐体裁里中声部最精致丰富的作品。下半场是另一位神童的作品，组合上一次在演艺厅演出的门德尔松《A大调第二四重奏》现场录音已由拿索斯发行唱片，这次带来的f小调也是其最后一首弦乐四重奏。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21781&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21781&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团",
+      "performers": [
+        "王晓明",
+        "斯特凡·塔拉拉",
+        "莱赫·安东尼奥·乌申斯基",
+        "马娅·迪姆-韦伯",
+        "巴桐"
+      ],
+      "composers": [
+        "莫扎特",
+        "门德尔松"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "F大调第二十三弦乐四重奏，KV 590",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "g小调第四弦乐五重奏，KV 516",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "f小调第六弦乐四重奏，作品80",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "门德尔松",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21757",
+      "title": "孙一凡、上海交响乐团与国家大剧院合唱团演绎《布兰诗歌》丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-25T11:30:00.000Z",
+      "endTime": "2026-09-25T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "09/25",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21757&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21757&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "上海交响乐团与国家大剧院合唱团",
+      "conductor": "孙一凡",
+      "performers": [
+        "孙一凡",
+        "乌列热",
+        "郑瑶",
+        "廖昌永",
+        "上海交响乐团"
+      ],
+      "composers": [
+        "卡尔·奥尔夫"
+      ],
+      "program": [
+        {
+          "composer": "卡尔·奥尔夫",
+          "title": "《布兰诗歌》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "卡尔·奥尔夫",
+        "交响",
+        "合唱"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21782",
+      "title": "环球之旅——国家大剧院合唱团音乐会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-26T11:30:00.000Z",
+      "endTime": "2026-09-26T13:30:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "09/26",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "国家大剧院合唱团自成立起就在国家大剧院精彩纷呈的歌剧制作中绽放夺目光彩，2021年上海交响乐团在音乐总监余隆的带领下进京参演国大制作的《茶花女》，同国家大剧院合唱团有了愉快的合作。洛林·马泽尔说这支合唱团「充满激情」，执掌英国皇家歌剧院的安东尼奥·帕帕诺也认为「他们有着美妙的，和谐的声音，而且训练有素」。\n\n除了歌剧演出的本职工作外，他们每个乐季都有合唱团的单独亮相，这次在「馄饨皮」的首演也端上了万花筒般的曲目菜单：中外诗词配曲《敕勒歌》、《声声慢》和《蓝鸟》、《月夜》；傣族民歌《崴萨啰》和朝鲜民歌《阿里郎》；英国、美国、巴西、墨西哥的民谣；意大利和俄罗斯的歌曲；还有电影音乐中的名曲《一步之遥》。这场演出展示了国家大剧院合唱团丰富的「军火库」，也应当注意到有两位编曲者——国家大剧院的驻院作曲家蔡东真与合唱团的驻团作曲刘晓星，他们的音乐涉猎与合唱编曲塑造了合唱团的声音样貌。这场环球声音漫游的领航员焦淼，从2009年合唱团筹建时就深度参与，在其恩师吴灵芬教授退休后接棒执掌。去年她曾指挥上海歌剧院合唱团在上海演出，而这次我们将听到她带领亲兵登台。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21782&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21782&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "国家大剧院合唱团音乐会丨上海交响乐团",
+      "conductor": "焦淼",
+      "performers": [
+        "焦淼"
+      ],
+      "composers": [
+        "领唱"
+      ],
+      "program": [
+        {
+          "title": "【混声合唱】",
+          "confidence": "official"
+        },
+        {
+          "title": "《蓝鸟》（柯勒律治词，斯坦福曲）",
+          "confidence": "official"
+        },
+        {
+          "title": "《大海》（法国歌曲，特雷内词曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "title": "《月亮圆圈舞》（巴西民谣，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "title": "【混声小合唱】",
+          "confidence": "official"
+        },
+        {
+          "title": "《斯卡布罗集市》（英国民歌，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "title": "《香榭丽舍大街》（威尔肖曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "徐达",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《你眼里的蓝》（意大利歌曲，米利亚奇、莫杜尼奥词，莫杜尼奥曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "柴进，王姝婷",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "【混声合唱】",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《敕勒歌》（改编自北朝乐府民歌，薛保勤词，刘洲曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "王蓉蓉",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《阿里郎》（朝鲜民歌，蔡东真编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "董京兰",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《崴萨啰》（卢云生词，刘晓耕曲）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "【男声合唱】",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《月夜》（艾兴多夫词，舒曼曲，蔡东真编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《莫斯科郊外的晚上》（马都索夫斯基词，谢多伊曲，蔡东真编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《美丽的天使》（墨西哥民歌，门多萨-科尔特斯词曲）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "佟子杨，刘栋",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "【女声合唱】",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《声声慢》（崔开潮词，刘洋曲，李天达编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《贝加尔湖畔》（李健词曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《我真挚的爱人》（大卫、斯坦纳词曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《山南道河》（美国民歌，威尔伯格编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "《一步之遥》（勒佩拉词，加德尔曲，刘晓星编合唱）",
+          "confidence": "official"
+        },
+        {
+          "composer": "领唱",
+          "title": "王姝婷",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "领唱",
+        "交响",
+        "音乐会",
+        "合唱"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21790",
+      "title": "凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-27T07:00:00.000Z",
+      "endTime": "2026-09-27T09:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "09/27",
+      "timeLabel": "15:00",
+      "price": "¥120 - ¥680",
+      "priceTiers": [
+        120,
+        280,
+        480,
+        680
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21790&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21790&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团",
+      "performers": [
+        "让-吉安·凯拉斯"
+      ],
+      "composers": [
+        "巴赫"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "G大调第一无伴奏大提琴组曲，BWV 1007",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "d小调第二无伴奏大提琴组曲，BWV 1008",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "C大调第三无伴奏大提琴组曲，BWV 1009",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "降E大调第四无伴奏大提琴组曲，BWV 1010",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "c小调第五无伴奏大提琴组曲，BWV 1011",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "D大调第六无伴奏大提琴组曲，BWV 1012",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "交响",
+        "大提琴"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21811",
+      "title": "晚高峰音乐会1：时间里的莫扎特丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-09-29T10:30:00.000Z",
+      "endTime": "2026-09-29T12:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "09/29",
+      "timeLabel": "18:30",
+      "price": "¥100 - ¥150",
+      "priceTiers": [
+        100,
+        150
+      ],
+      "description": "从编号里，听见莫扎特的一生。\n\n270年过去，莫扎特的音乐依然是我们这个星球上最动人的“流行乐”。2026-27乐季的「晚高峰音乐会」将以一场“时间里的莫扎特”拉开帷幕，四部作品恰好勾勒出这位天才从神童到成年的完整轨迹。\n\n开场是那首所有人都能哼唱的「小星星」主题变奏曲。莫扎特将一首法国童谣化作十二段玲珑剔透的变奏，每一段都是一颗不同颜色的糖——有的俏皮，有的温柔，有的像在夜色中轻轻摇曳。这首作品写于莫扎特二十多岁时，是他旅居巴黎期间留下的轻盈笔触。\n\n紧随其后的《C大调弦乐小夜曲》则是2024年才在德国莱比锡图书馆被重新发现的“音乐遗珠”——莫扎特在268岁“高龄”，又发了一首“新歌”。这首编号KV 648的作品创作于莫扎特约10至13岁的少年时期，由两把小提琴和低音提琴演奏，在尘封两百余年后，终于在这个夜晚与观众见面。\n\n《降E大调交响协奏曲》是莫扎特约23岁时的杰作。小提琴与中提琴在乐队中展开一场势均力敌的对话，时而竞奏，时而缠绕，如同两位老友在黄昏中边走边聊。第二乐章的慢板尤为动人——旋律简朴到近乎透明，却藏着无尽的深情。\n\n音乐会以《A大调第二十三钢琴协奏曲》收束，这是莫扎特30岁时的巅峰之作。第一乐章的快板充满生命力，钢琴的每一次进入都像一道光；第二乐章的慢板则被誉为莫扎特最哀而不伤的音乐——在看似平静的旋律下，涌动着克制的深情。\n\n四部作品，四个编号，也是四段人生。9月29日，来《晚高峰音乐会》的第一场，让我们用60分钟的时间陪伴莫扎特长大。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21811&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21811&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "时间里的莫扎特丨上海交响乐团",
+      "performers": [
+        "武奥列",
+        "罗畅",
+        "曹亦博",
+        "俞海锋",
+        "周润青",
+        "郑舒颐",
+        "薛源"
+      ],
+      "composers": [
+        "莫扎特"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "C大调「小星星」主题变奏曲，KV 265（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "C大调弦乐小夜曲，KV 648",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "降E大调交响协奏曲，KV 364（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "A大调第二十三钢琴协奏曲，KV 488（选段）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21759",
+      "title": "第二十五届中国上海国际艺术节参演剧目 上海交响乐团纪念长征胜利90周年音乐会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-09-30T11:30:00.000Z",
+      "endTime": "2026-09-30T13:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "09/30",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21759&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21759&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "第二十五届中国上海国际艺术节参演剧目 上海交响乐团",
+      "conductor": "孙一凡",
+      "performers": [
+        "孙一凡"
+      ],
+      "composers": [
+        "吕其明",
+        "梁皓一",
+        "丁善德"
+      ],
+      "program": [
+        {
+          "composer": "吕其明",
+          "title": "《红旗颂》",
+          "confidence": "official"
+        },
+        {
+          "composer": "梁皓一",
+          "title": "《信仰之路——星火与征途》 （上海交响乐团委约，世界首演）",
+          "confidence": "official"
+        },
+        {
+          "composer": "丁善德",
+          "title": "《长征交响曲》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "吕其明",
+        "梁皓一",
+        "丁善德",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21758",
+      "title": "迪图瓦、莱昂斯卡娅与上海交响乐团演绎莫扎特与雷斯皮吉《罗马三部曲》丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-10-07T11:30:00.000Z",
+      "endTime": "2026-10-07T13:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "10/07",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥1280",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880,
+        1280
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21758&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21758&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "莱昂斯卡娅与上海交响乐团",
+      "conductor": "夏尔·迪图瓦",
+      "performers": [
+        "夏尔·迪图瓦",
+        "伊丽莎白·莱昂斯卡娅",
+        "莱昂斯卡娅",
+        "响乐团演绎莫扎特"
+      ],
+      "composers": [
+        "莫扎特",
+        "雷斯皮吉"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "降E大调第二十二钢琴协奏曲，K.482",
+          "confidence": "official"
+        },
+        {
+          "composer": "雷斯皮吉",
+          "title": "《罗马的节日》，作品157",
+          "confidence": "official"
+        },
+        {
+          "composer": "雷斯皮吉",
+          "title": "《罗马的喷泉》，作品106",
+          "confidence": "official"
+        },
+        {
+          "composer": "雷斯皮吉",
+          "title": "《罗马的松树》，作品141",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "雷斯皮吉",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21859",
+      "title": "汉努·林图、蔡珂宜与新加坡交响乐团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-10-13T11:30:00.000Z",
+      "endTime": "2026-10-13T13:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "10/13",
+      "timeLabel": "19:30",
+      "price": "¥180 - ¥1080",
+      "priceTiers": [
+        180,
+        380,
+        580,
+        880,
+        1080
+      ],
+      "description": "去年，上海交响乐团刚刚和新加坡交响乐团签署了战略合作协议，为沪新合作注入文化驱动力。上海的SSO于今年三月首次出访新加坡，半年后，那边的SSO应约而来，上次造访申城已是2007年——那一年蔡珂宜刚刚出生。她在最近一次上交新年音乐会中以韦克斯曼改编的《卡门幻想曲》博得上海观众的激赏，被乐迷戏称为「蔡教授」的她也是新加坡的骄傲，此次随团出访演绎门德尔松抒情而内省的小提琴协奏曲。乐团选择了新加坡作曲家王辰威的《姐妹岛》以展示新加坡的风土人情：姐妹岛是新加坡外海上的一对小岛，这首交响诗刻画了姐妹入海化岛的民间传说。\n\n这也是新加坡交响乐团本乐季新到任的总监汉努·林图的第一次巡演，在本土，他用马勒《第五交响曲》开启这一意义重大的乐季，随后就是巡演的马勒《第一交响曲》。汉努·林图对马勒作品的诠释以结构清晰、音色精美著称，其2015年与芬兰广播交响乐团录制的《马勒第一交响曲》广受好评，被《留声机》杂志赞为「耳目一新、清晰透彻」，这次巡演他有望以精妙的层次与蓬勃的生命力，为观众带来一次令人期待的诠释。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21859&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21859&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "蔡珂宜与新加坡交响乐团丨上海交响乐团",
+      "conductor": "汉努·林图",
+      "performers": [
+        "汉努·林图",
+        "蔡珂宜"
+      ],
+      "composers": [
+        "王辰威",
+        "门德尔松",
+        "马勒"
+      ],
+      "program": [
+        {
+          "composer": "王辰威",
+          "title": "《姐妹岛》",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "e小调小提琴协奏曲，作品64",
+          "confidence": "official"
+        },
+        {
+          "composer": "马勒",
+          "title": "D大调第一交响曲「巨人」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "王辰威",
+        "门德尔松",
+        "马勒",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21804",
+      "title": "上交室内乐1·上交弦乐队演绎尼尔森、伯恩斯坦与巴托克丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-10-15T11:15:00.000Z",
+      "endTime": "2026-10-15T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "10/15",
+      "timeLabel": "19:15",
+      "price": "¥120 - ¥220",
+      "priceTiers": [
+        120,
+        220
+      ],
+      "description": "本乐季上交室内乐第1场由驻团指挥孙一凡指挥，携乐队首席柳鸣，带领上交弦乐队带来一场跨地域的音乐语言对话。尼尔森抒情优美的《弦乐小组曲》、伯恩斯坦为小提琴和弦乐队而作的《西区故事》组曲，以及巴托克的《嬉游曲》，让北欧、百老汇与中欧的音乐语言在同一舞台相遇，充分展现弦乐合奏丰富的音响层次。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21804&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21804&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "伯恩斯坦与巴托克丨上海交响乐团",
+      "conductor": "孙一凡",
+      "performers": [
+        "孙一凡",
+        "柳鸣",
+        "李学鸿",
+        "马谦艺",
+        "于任超",
+        "徐堉杰",
+        "严多加",
+        "周燕妮",
+        "陆逸帆",
+        "曹亦博",
+        "孙泽昊",
+        "王柏淳",
+        "陈少俊",
+        "赵长宏",
+        "赵丽媛",
+        "郑舒颐",
+        "伯恩斯坦"
+      ],
+      "composers": [
+        "尼尔森",
+        "伯恩斯坦",
+        "巴托克"
+      ],
+      "program": [
+        {
+          "composer": "尼尔森",
+          "title": "弦乐小组曲，作品1",
+          "confidence": "official"
+        },
+        {
+          "composer": "伯恩斯坦",
+          "title": "为小提琴和弦乐队而作的《西区故事》组曲（保罗·贝特曼改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴托克",
+          "title": "嬉游曲，Sz. 113",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "尼尔森",
+        "伯恩斯坦",
+        "巴托克",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21819",
+      "title": "音乐地图课堂系列 1：古典主义时期丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-10-18T06:00:00.000Z",
+      "endTime": "2026-10-18T08:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "10/18",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21819&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21819&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "古典主义时期丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "莫扎特",
+        "海顿",
+        "贝多芬",
+        "福雷"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "「快板」，选自《G大调弦乐小夜曲》，KV 525",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "「很快的快板」，选自《g小调第四十交响曲》，KV 550",
+          "confidence": "official"
+        },
+        {
+          "composer": "海顿",
+          "title": "「行板」，选自《G大调第九十四交响曲「惊愕」》",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "「活泼而充满活力的快板」，选自《F大调第八交响曲》，作品93 8’",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "「西西里舞曲」，选自《佩雷阿斯与梅丽桑德》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "海顿",
+        "贝多芬",
+        "福雷",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21783",
+      "title": "加贝塔与科帕钦斯卡娅丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-10-20T11:30:00.000Z",
+      "endTime": "2026-10-20T13:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "10/20",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380,
+        580
+      ],
+      "description": "「我们在舞台上下都像姐妹。」2003年的伯尔尼，年轻的索尔·加贝塔正与一位芬兰钢琴家寻找组建三重奏的小提琴手，一位朋友告诉她：「这里有一位令人惊叹的小提琴手，也许有点疯狂，但我们可以试试。」两人便在这次合作中获得了音乐的共鸣。此后二十年，二人各自驰骋于独奏舞台，却从未真正分开。科帕钦斯卡娅天马行空、充满叛逆精神，加贝塔则兼具力量与细腻——表面上风格迥异，但她们共同拥有对未知曲目的强烈好奇心，对冒险的渴望。「信任就是一切，」科帕说，「知道对方在你身后，会像杂技演员一样接住你，你就能探索新的道路。」\n\n本次音乐会的曲目，将现场演绎她们在Alpha唱片公司发行的专辑《Sol & Pat》——这张专辑录制于瑞士两处教堂，历时五年才最终完成，见证了她们纵观巴洛克、古典、印象派与当代的广阔视野。从勒克莱尔的《铃鼓舞》到拉威尔的奏鸣曲，从柯达伊的二重奏到克塞纳基斯《双重螺旋》中希腊民间舞的奇异节奏，二人仿佛音乐杂技演员在危险的跳跃中彼此托举。科帕以笔名「PatKop」创作的二重奏《随想曲集》——献给朋友大提琴家尼古拉斯·阿尔特施泰特（Nicolas Altstaedt）和小提琴家维尔德·弗朗（Vilde Frang）——以其诙谐灵动的气质点缀其中，为这场演出增添了一抹亲笔描绘的亮色。二十年过去，她们依然保持着那份初次见面时的激动与好奇。科帕说：「我预见我们俩八十岁时还站在舞台上，仍然在交谈。」",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21783&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21783&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "加贝塔与科帕钦斯卡娅丨上海交响乐团",
+      "performers": [
+        "帕特里恰·科帕钦斯卡娅",
+        "索尔·加贝塔",
+        "加贝塔"
+      ],
+      "composers": [
+        "勒克莱尔",
+        "维德曼",
+        "巴赫",
+        "科尔",
+        "拉威尔",
+        "科帕钦斯卡娅",
+        "利盖蒂",
+        "克塞纳基斯",
+        "柯达伊"
+      ],
+      "program": [
+        {
+          "composer": "勒克莱尔",
+          "title": "C大调铃鼓舞曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "维德曼",
+          "title": "24首小提琴与大提琴二重奏，第二卷（选段）",
+          "confidence": "official",
+          "movements": [
+            {
+              "number": "VIII",
+              "title": "巴伐利亚圆舞曲"
+            },
+            {
+              "number": "XI",
+              "title": "英国式小托卡塔"
+            }
+          ]
+        },
+        {
+          "composer": "巴赫",
+          "title": "G大调前奏曲，BWV 860",
+          "confidence": "official"
+        },
+        {
+          "composer": "科尔",
+          "title": "《根茎》",
+          "confidence": "official"
+        },
+        {
+          "composer": "拉威尔",
+          "title": "小提琴与大提琴奏鸣曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "十五首二部创意曲，BWV 772–786（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "科帕钦斯卡娅",
+          "title": "随想曲集（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "利盖蒂",
+          "title": "《致敬希尔丁·罗森贝格》",
+          "confidence": "official"
+        },
+        {
+          "composer": "克塞纳基斯",
+          "title": "《双重螺旋》",
+          "confidence": "official"
+        },
+        {
+          "composer": "克塞纳基斯",
+          "title": "卡尔·菲利普·埃马努埃尔·巴赫：C小调键盘急板，Wq 114/3",
+          "confidence": "official"
+        },
+        {
+          "composer": "柯达伊",
+          "title": "小提琴与大提琴二重奏，作品7",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "勒克莱尔",
+        "维德曼",
+        "巴赫",
+        "科尔",
+        "拉威尔",
+        "科帕钦斯卡娅",
+        "利盖蒂",
+        "克塞纳基斯"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21832",
+      "title": "奥皮茨与上海四重奏丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-10-22T11:15:00.000Z",
+      "endTime": "2026-10-22T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "10/22",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "1996年，奥皮茨与上海四重奏在香港初次合作；2015年，他们都为各自的贝多芬全集到访上交音乐厅，却在主厅和演艺厅擦肩而过；2018年，他们终于在上海前缘再续，合作了勃拉姆斯的四重奏与五重奏。八年过去，他们又将在「小馄饨」的格栅交错中重逢。\n\n奥皮茨本次来上海用第二十四钢琴协奏曲致敬作曲家的270岁诞辰（10月23日），室内乐的上半场也献给了莫扎特（10月22日）。在门德尔松复兴「马太」之前，维也纳其实没有忘记过巴赫的作品，莫扎特的赞助人斯维腾男爵周日的派对音乐会就专注巴赫和亨德尔的作品，他借此接触到这些伟大的复调写作，他的未婚妻康斯坦策「狠狠地要求他」把这些弦乐四重奏改编的赋格记录、出版。\n\n钢琴四重奏是莫扎特在维也纳的创举，他不但是最早使用钢琴—小提琴—中提琴—大提琴编制的作曲家之一，也是最早把室内乐从业余爱好者的享乐推向高难度水准的「幕后黑手」，向他委约了三首钢琴四重奏的出版商霍夫迈斯特在看到《g小调第一钢琴四重奏》（KV 478）后中止了合同，大概是出于「你写这么难我去卖给谁啊」这样现实的理由。当然，这部复杂的，充满新挑战的作品能听到他学习巴赫的成果。「小馄饨」上一次演出这部作品是莫扎特盲盒系列，张橹-唐韵-施宇成-陈少俊因该次音乐会合作，而上海四重奏则会提供老牌室内乐劲旅的默契演奏。\n\n1842年是舒曼的「室内乐年」，创作了许多包括这部《钢琴五重奏》在内的许多作品，是百年前梅百器与富华就爱演出的作品，同上海的因缘非常深。他的创举在于让钢琴与四把提琴「平起平坐」，这一思路在最后的双重赋格中产生了辉煌的奇效。上海四重奏的四十多年生涯中同包括王羽佳在内不计其数的钢琴名家合作过这部作品，但特别的是，1996年他们同奥皮茨初次相逢就演出了舒曼和勃拉姆斯的钢琴五重奏，三十年后，他们再一次一起演奏这部触动人心的舒曼作品。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21832&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21832&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "奥皮茨与上海四重奏丨上海交响乐团",
+      "performers": [
+        "格哈德·奥皮茨",
+        "李伟纲",
+        "于翔",
+        "李宏刚",
+        "何思昊",
+        "奥皮茨"
+      ],
+      "composers": [
+        "莫扎特",
+        "舒曼"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "改编自巴赫《平均律键盘曲集》的五首赋格，KV 405",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "g小调第一钢琴四重奏，KV 478",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒曼",
+          "title": "降E大调钢琴五重奏，作品44",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "舒曼",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21760",
+      "title": "奥滕萨默、奥皮茨与上海交响乐团纪念莫扎特诞辰270周年丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-10-23T11:30:00.000Z",
+      "endTime": "2026-10-23T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "10/23",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21760&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21760&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "奥皮茨与上海交响乐团",
+      "conductor": "安德烈亚斯·奥滕萨默",
+      "performers": [
+        "安德烈亚斯·奥滕萨默",
+        "格哈德·奥皮茨",
+        "奥皮茨"
+      ],
+      "composers": [
+        "莫扎特",
+        "理查·施特劳斯"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "F大调嬉游曲，作品138",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "c小调第二十四钢琴协奏曲，K.491",
+          "confidence": "official"
+        },
+        {
+          "composer": "理查·施特劳斯",
+          "title": "《唐璜》，作品20",
+          "confidence": "official"
+        },
+        {
+          "composer": "理查·施特劳斯",
+          "title": "理查·施特劳斯《玫瑰骑士》组曲，作品59",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "理查·施特劳斯",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21833",
+      "title": "奥皮茨演绎舒伯特与勃拉姆斯丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-10-25T11:15:00.000Z",
+      "endTime": "2026-10-25T13:15:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "10/25",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "奥皮茨是一位全集专家，他在录制了贝多芬、舒伯特、勃拉姆斯的奏鸣曲全集，格里格的钢琴作品全集，如今也正攀登着舒曼全集的高峰；他曾多次演奏全套贝多芬的全套32首钢琴奏鸣曲（包括在上交音乐厅），还曾连续五个晚上演奏勃拉姆斯的作品、连续十一个夜晚演奏舒伯特钢琴作品全集、莫扎特奏鸣曲等。这位在业余驾驶飞机的钢琴家，其勃拉姆斯的演绎受到欧陆观众的认可，德国石荷州勃拉姆斯协会向他颁发勃拉姆斯奖，巴伐利亚州也向他颁发了科学与艺术马克西米利安勋章，勃拉姆斯本人也获颁这一荣誉。\n\n他本次呈现的两部奏鸣曲都是宏大的，但都有一个感人的慢乐章，舒伯特的「小行板」与勃拉姆斯的「行板」；两首奏鸣曲虽然遵循古典风格奏鸣曲动机推进模式，主题却并非简短要扼，而以长线条的歌唱旋律为素材创作，这是一套悦耳且感人的曲目。舒伯特同诗歌—艺术歌曲的联系不需赘述，他的三首遗作奏鸣曲（D. 958-960）都有着无词歌一般动人的旋律；勃拉姆斯对舒伯特（以及舒曼）的崇敬不但体现为他后来创作的许多艺术歌曲，也显露在这首年轻时的奏鸣曲中，行板的配诗值得人铭记：「暮色渐浓，月光照亮——两颗心，因爱结合，在狂喜中相拥。」",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21833&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21833&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "奥皮茨演绎舒伯特与勃拉姆斯丨上海交响乐团",
+      "performers": [
+        "格哈德·奥皮茨",
+        "奥皮茨演绎舒伯特"
+      ],
+      "composers": [
+        "勃拉姆斯",
+        "舒伯特"
+      ],
+      "program": [
+        {
+          "composer": "舒伯特",
+          "title": "A大调第二十钢琴奏鸣曲，D. 959",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "f小调第三钢琴奏鸣曲，作品5",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "勃拉姆斯",
+        "舒伯特",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21827",
+      "title": "德奈什·瓦尔永钢琴独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-10-29T11:15:00.000Z",
+      "endTime": "2026-10-29T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "10/29",
+      "timeLabel": "19:15",
+      "price": "¥120 - ¥480",
+      "priceTiers": [
+        120,
+        240,
+        360,
+        480
+      ],
+      "description": "匈牙利钢琴家德奈什·瓦尔永以严谨的音乐理解和富有层次的演奏风格受到关注。他长期深耕德奥音乐传统，在贝多芬、舒曼等作品的诠释中展现出对作品结构与情感内涵的深入把握。\n\n本场音乐会，他将从巴赫的复调秩序出发，穿越贝多芬晚期作品的沉思世界，再进入舒曼充满幻想与回忆的浪漫主义篇章。一场关于时间、记忆与情感的音乐旅程将在琴键之间展开。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21827&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21827&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "德奈什·瓦尔永钢琴独奏会丨上海交响乐团",
+      "performers": [
+        "德奈什·瓦尔永"
+      ],
+      "composers": [
+        "巴赫",
+        "贝多芬",
+        "舒曼"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "a小调第二英国组曲，BWV 807",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "E大调第三十钢琴奏鸣曲，作品109",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒曼",
+          "title": "C大调幻想曲，作品17",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒曼",
+          "title": "《童年情景》，作品15",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "贝多芬",
+        "舒曼",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21761",
+      "title": "大地与传说——吕绍嘉、法齐尔·萨伊与上海交响乐团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-10-30T11:30:00.000Z",
+      "endTime": "2026-10-30T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "10/30",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21761&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21761&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "法齐尔·萨伊与上海交响乐团丨上海交响乐团",
+      "conductor": "吕绍嘉",
+      "performers": [
+        "吕绍嘉",
+        "法齐尔·萨伊",
+        "大地"
+      ],
+      "composers": [
+        "法齐尔·萨伊",
+        "西贝柳斯"
+      ],
+      "program": [
+        {
+          "composer": "法齐尔·萨伊",
+          "title": "钢琴协奏曲《大地母亲》，作品111",
+          "confidence": "official"
+        },
+        {
+          "composer": "西贝柳斯",
+          "title": "莱明凯宁组曲，作品22「传奇」",
+          "confidence": "official",
+          "movements": [
+            {
+              "number": "I",
+              "title": "莱明凯宁与岛上的少女们"
+            },
+            {
+              "number": "II",
+              "title": "图内拉的天鹅"
+            },
+            {
+              "number": "III",
+              "title": "图内拉的莱明凯宁"
+            },
+            {
+              "number": "IV",
+              "title": "莱明凯宁的归来"
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "法齐尔·萨伊",
+        "西贝柳斯",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21805",
+      "title": "上交室内乐 2：北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-06T11:15:00.000Z",
+      "endTime": "2026-11-06T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "11/06",
+      "timeLabel": "19:15",
+      "price": "¥120",
+      "priceTiers": [
+        120
+      ],
+      "description": "北极星四重奏将与中提琴演奏家王柏淳带来两部弦乐五重奏作品：莫扎特g小调第四弦乐五重奏情感细腻而富有张力，德沃夏克降E大调第三弦乐五重奏融汇了波希米亚传统与新大陆灵感。上交室内乐第2场的这两部作品共同展现弦乐合奏历久弥新的艺术魅力。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21805&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21805&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团",
+      "performers": [
+        "苏婷",
+        "武奥列",
+        "俞海锋",
+        "黄北星",
+        "王柏淳",
+        "四重奏演绎莫扎特"
+      ],
+      "composers": [
+        "莫扎特",
+        "德沃夏克"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "g小调第四弦乐五重奏，KV 516",
+          "confidence": "official"
+        },
+        {
+          "composer": "德沃夏克",
+          "title": "降E大调第三弦乐五重奏，作品97",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "德沃夏克",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21828",
+      "title": "米歇尔·达尔贝托演奏莫扎特丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-11-06T11:30:00.000Z",
+      "endTime": "2026-11-06T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "11/06",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "这组莫扎特曲目的调性为c-a-A-D-a-c，首尾的幻想曲-奏鸣曲常被一同演奏录制，以此三个降号的c小调为轮廓；中层填充以奏鸣曲-回旋曲，无升降记号的a小调；内层为三个升号的A大调及其下属调D大调，奏鸣曲-变奏曲，而A大调奏鸣曲的第一乐章本身也是一首隽永的变奏曲。这个典雅的拱形结构曲目精彩纷呈，既有全局上的暗-明-暗色彩安排，也充分体现了莫扎特高超的「变奏」技巧。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21828&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21828&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "米歇尔·达尔贝托演奏莫扎特丨上海交响乐团",
+      "performers": [
+        "米歇尔·达尔贝托"
+      ],
+      "composers": [
+        "莫扎特"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "c小调幻想曲，KV 475",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "a小调第八钢琴奏鸣曲，KV 310",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "A大调第十一钢琴奏鸣曲，KV 331",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "迪波尔小步舞曲主题变奏曲，KV 573",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "a小调回旋曲，KV 511",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "c小调第十四钢琴奏鸣曲，KV 457",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21762",
+      "title": "节奏幻想——钱骏平、林喆与上海交响乐团 丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-11-07T11:30:00.000Z",
+      "endTime": "2026-11-07T13:30:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "11/07",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21762&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21762&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "林喆与上海交响乐团 丨上海交响乐团",
+      "conductor": "钱骏平",
+      "performers": [
+        "钱骏平",
+        "林喆"
+      ],
+      "composers": [
+        "拉威尔",
+        "埃马纽埃尔·塞茹尔内",
+        "罗迪翁·谢德林"
+      ],
+      "program": [
+        {
+          "composer": "拉威尔",
+          "title": "《丑角的晨歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "埃马纽埃尔·塞茹尔内",
+          "title": "幻想协奏曲（第二马林巴协奏曲）",
+          "confidence": "official"
+        },
+        {
+          "composer": "罗迪翁·谢德林",
+          "title": "卡门组曲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "拉威尔",
+        "埃马纽埃尔·塞茹尔内",
+        "罗迪翁·谢德林",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21763",
+      "title": "秋夜北国回响——李心草、秦立巍与上海交响乐团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-11-13T11:30:00.000Z",
+      "endTime": "2026-11-13T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "11/13",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21763&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21763&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "秦立巍与上海交响乐团丨上海交响乐团",
+      "conductor": "李心草",
+      "performers": [
+        "李心草",
+        "秦立巍"
+      ],
+      "composers": [
+        "肖斯塔科维奇",
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "G大调第二大提琴协奏曲，作品126",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "C大调弦乐小夜曲，作品48",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "肖斯塔科维奇（巴尔沙伊改编）：室内交响曲，作品110a",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "肖斯塔科维奇",
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21820",
+      "title": "音乐地图课堂系列 2：浪漫主义时期丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-15T06:00:00.000Z",
+      "endTime": "2026-11-15T08:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "11/15",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21820&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21820&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "浪漫主义时期丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "门德尔松",
+        "李斯特",
+        "福雷",
+        "柴可夫斯基",
+        "小约翰·施特劳斯"
+      ],
+      "program": [
+        {
+          "composer": "门德尔松",
+          "title": "《A大调第四交响曲》，作品90「意大利」（第一乐章）",
+          "confidence": "official"
+        },
+        {
+          "composer": "李斯特",
+          "title": "超技练习曲第十二首「追雪」",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "帕凡舞曲，作品50",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "C大调弦乐小夜曲（第二乐章）",
+          "confidence": "official"
+        },
+        {
+          "composer": "小约翰·施特劳斯",
+          "title": "拨弦波尔卡",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "门德尔松",
+        "李斯特",
+        "福雷",
+        "柴可夫斯基",
+        "小约翰·施特劳斯",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21784",
+      "title": "第八届上海早期音乐节 忧思——塔利斯学者合唱团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-11-17T11:30:00.000Z",
+      "endTime": "2026-11-17T13:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "11/17",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380,
+        580
+      ],
+      "description": "近十年来「馄饨皮」邀请十六人合唱团、根特声乐学院合唱团、国王歌手合唱团、杰苏阿尔多六人团、黯声合唱团等无伴奏合唱的强团，让观众得以品尝这些磨合多年的合唱醍醐味，而塔利斯学者更是个中翘楚。2024年庆祝建团五十周年时，他们在上海留下了两场精妙绝伦的演唱会《天地》与《良夜》，那次巡演走访新加坡、香港、台北、北京、上海，涵盖五套曲目，给中文世界的观众留下了莫大的震撼，关乎艺术，也关乎他们排练的效率和精力之充沛。合唱团的创始人、指挥彼得·菲利普斯同样也被国内观众专注的现场气氛触动，期望再次与大家见面——这也将是他们到访上海交响音乐厅的十周年纪念。\n\n《忧思》的上半场以母亲的苦难歌颂女性奉献之伟大，普世的语言或许不存在，但母爱永远令人动容；下半场则有家国沦丧、生计艰辛等等沉重话题，主人公在宁静的夜中无处倾诉。塔利斯学者这次选择聚焦「爱与悲伤」这两个歌曲的最大创作来源，只是角度却非寻常。从作曲家来看，帕莱斯特里纳、若斯坎、吉本斯、威尔比都是合唱团的看家曲目，本次我们也终于得以聆听「塔利斯学者演唱塔利斯」。除了2016年首次来厅时就奉献的阿尔沃·佩尔特（Arvo Pärt）的两首作品之外，此次曲目还包括了美国作曲家尼科·米利（Nico Muhly）为塔利斯学者量身定制的第一首作品《记念》——观众或许还记得两年前音乐会上《粗糙笔记》给大家带来的震撼。菲利普斯这样描述作曲家与合唱团的合作：「他（米利）接受了这样的挑战，他非常清楚塔利斯学者的歌唱音响是怎样的图景、知道怎样的写作更能展现我们的演唱。我希望他撰写十声部的作品——这在任何时期都不常见，大部分听众很难在脑海中清晰地听到十个声部——但我想他可以做到……如此光辉的音响世界，就像在梦里。」",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21784&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21784&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "塔利斯学者合唱团丨上海交响乐团",
+      "conductor": "彼得·菲利普斯",
+      "performers": [
+        "彼得·菲利普斯"
+      ],
+      "composers": [
+        "帕莱斯特里纳",
+        "若斯坎",
+        "佩尔特",
+        "皮尔索尔",
+        "米利",
+        "塔利斯",
+        "菲诺",
+        "吉本斯",
+        "威尔比"
+      ],
+      "program": [
+        {
+          "composer": "帕莱斯特里纳",
+          "title": "《母亲的歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "若斯坎",
+          "title": "《母亲的歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "佩尔特",
+          "title": "《凯撒的物》",
+          "confidence": "official"
+        },
+        {
+          "composer": "佩尔特",
+          "title": "《携香液瓶的妇人》",
+          "confidence": "official"
+        },
+        {
+          "composer": "皮尔索尔",
+          "title": "《放上花环》",
+          "confidence": "official"
+        },
+        {
+          "composer": "米利",
+          "title": "《记念》",
+          "confidence": "official"
+        },
+        {
+          "composer": "塔利斯",
+          "title": "《哀歌之一》",
+          "confidence": "official"
+        },
+        {
+          "composer": "菲诺",
+          "title": "《哀歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "吉本斯",
+          "title": "《人生何义》",
+          "confidence": "official"
+        },
+        {
+          "composer": "威尔比",
+          "title": "《甜蜜的夜降临》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "帕莱斯特里纳",
+        "若斯坎",
+        "佩尔特",
+        "皮尔索尔",
+        "米利",
+        "塔利斯",
+        "菲诺",
+        "吉本斯"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21806",
+      "title": "上交室内乐 3：马勒第四交响曲室内乐版丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-18T11:15:00.000Z",
+      "endTime": "2026-11-18T13:15:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "11/18",
+      "timeLabel": "19:15",
+      "price": "¥120 - ¥220",
+      "priceTiers": [
+        120,
+        220
+      ],
+      "description": "《马勒第四交响曲》室内乐版本由勋伯格学派成员埃尔温·施泰因改编，上交室内乐3由孙一凡执棒，领衔一众声部首席倾情奉献，在保留作品核心内容的同时，以更精炼的编制呈现马勒细腻丰富的音乐织体，带领观众感受这部经典交响作品独特的音响魅力。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21806&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21806&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "马勒第四交响曲室内乐版丨上海交响乐团",
+      "conductor": "孙一凡",
+      "performers": [
+        "孙一凡",
+        "谭城",
+        "巴尔托洛梅奥·奥迪西奥",
+        "张欣",
+        "吴昱如",
+        "柳鸣",
+        "李学鸿",
+        "巴桐",
+        "朱琳",
+        "江非凡"
+      ],
+      "composers": [
+        "马勒"
+      ],
+      "program": [
+        {
+          "composer": "马勒",
+          "title": "G大调第四交响曲（室内乐版，埃尔温·施泰因改编）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "马勒",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21785",
+      "title": "第八届上海早期音乐节 叶斯廷·戴维斯演唱约翰·道兰丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-22T07:00:00.000Z",
+      "endTime": "2026-11-22T13:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "11/22",
+      "timeLabel": "15:00",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "2023年，叶斯廷·戴维斯以《罗德琳达》中的男主角贝塔里多一角的出色演绎为上海观众铭记，当时，赛尔希奥·布切利随英国合奏团一同巡演。这位年轻同事的技艺让戴维斯一眼相中，随即邀请他一道在威格莫音乐厅举办音乐会。98年出生的布切利与79年出生的戴维斯隔了不止一代，但两人的音乐塑造却无缝贴合，英国广播公司对这一跨世代的新组合赞不绝口。\n\n十年前的第三届上海巴洛克音乐节上，安德烈亚斯·朔尔和埃丁·卡拉马佐夫将半场音乐会献给了约翰·道兰（John Dowland, c. 1563-1626），而今年是其逝世四百周年，「馄饨皮」欢迎这对新组合首演，用全场琴歌致敬这位了不起的英国文艺复兴作曲家。这些琴歌，在十六世纪的英国有一个专门的名字「Ayre」，到现代英语中变成了「Air」，与意大利的咏叹调（Aria）词意合流，但在歌剧方兴未艾的文艺复兴时期，道兰就是歌曲的代名词。\n\n道兰以其忧郁形象为时人所知，十年前和今次的音乐会都绕不开他最知名的那些「泪」与「忧郁」的名曲，我们将再次欣赏到「请让我沉入黑暗」「时光凝滞」「她能否宽恕我的过错」，也将听到琉特琴独奏的「我看见我的爱人哭泣」。道兰作为那个时代最顶尖的琉特琴演奏家，他的作品往往是先有琉特琴器乐曲，再为乐曲配诗：琉特琴独奏《泪》及其成曲《流下我的眼泪》即是最具代表性的一例。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21785&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21785&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "第八届上海早期音乐节 叶斯廷·戴维斯演唱约翰·道兰丨上海交响乐团",
+      "performers": [
+        "叶斯廷·戴维斯"
+      ],
+      "composers": [
+        "约翰·道兰"
+      ],
+      "program": [
+        {
+          "composer": "约翰·道兰",
+          "title": "「让我在黑暗中栖居」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「她能否宽恕我的过错」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「再来吧」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "《眼泪》（琉特琴独奏）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「我是否该以言辞争取？」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「时光凝滞」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "《忧郁加利亚德》（琉特琴独奏）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「所有被爱或命运背叛的人」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「流下我的眼泪」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "《永远的道兰，永远的忧伤》（琉特琴独奏）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「来吧，沉重的睡眠」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "《我看见我的女士哭泣》（琉特琴独奏）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「远离凯旋的宫廷」",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "《命运，我的敌人》（琉特琴独奏）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·道兰",
+          "title": "「悲伤，且留步」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "约翰·道兰",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21834",
+      "title": "可可和丹麦豆豆爵士三人行丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-28T11:15:00.000Z",
+      "endTime": "2026-11-28T13:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "11/28",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21834&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21834&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "可可和丹麦豆豆爵士三人行丨上海交响乐团",
+      "performers": [
+        "马丁·沙克",
+        "可可"
+      ],
+      "composers": [],
+      "program": [
+        {
+          "title": "我只能给你爱",
+          "confidence": "official"
+        },
+        {
+          "title": "新鲜事",
+          "confidence": "official"
+        },
+        {
+          "title": "我会见到你",
+          "confidence": "official"
+        },
+        {
+          "title": "忧伤",
+          "confidence": "official"
+        },
+        {
+          "title": "不再忧郁",
+          "confidence": "official"
+        },
+        {
+          "title": "鸳鸯茶",
+          "confidence": "official"
+        },
+        {
+          "title": "旧恶魔月亮",
+          "confidence": "official"
+        },
+        {
+          "title": "据我们所知",
+          "confidence": "official"
+        },
+        {
+          "title": "星期天的故事",
+          "confidence": "official"
+        },
+        {
+          "title": "怀念",
+          "confidence": "official"
+        },
+        {
+          "title": "花好月圆",
+          "confidence": "official"
+        },
+        {
+          "title": "得不到的爱情",
+          "confidence": "official"
+        },
+        {
+          "title": "爱情待售",
+          "confidence": "official"
+        },
+        {
+          "title": "你微笑的阴影",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21829",
+      "title": "第八届上海早期音乐节 忧郁的排遣——安德烈亚斯·施泰尔独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-11-30T11:15:00.000Z",
+      "endTime": "2026-11-30T13:15:00.000Z",
+      "weekday": "周一",
+      "dateLabel": "11/30",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "安德烈亚斯·施泰尔是古乐运动阿姆斯特丹这一支的门徒，他跟随莱昂哈特和库普曼学习，同时演奏早期钢琴和羽管键琴。他在deutsche harmonia mundi，TELDEC，harmonia mundi公司用各个时代的键盘乐器留下了近百张的录音，是对本真运动键盘音乐感兴趣的乐迷绕不开的一个名字。\n\n本次早期音乐节以「忧郁」mélancolie为主题，施泰尔2013年录制的这张《…（为了）忧郁的排遣》专辑仿佛正为今年的音乐节而来。巴洛克音乐中的「忧郁」经历了一次深刻的嬗变。它从一个特定的情绪，发展为一种融合了哲学思辨、音乐修辞与个人表达的复杂艺术理念，细看施泰尔选曲的巧妙之处，正在于它并非单纯地呈现悲伤。通过精心编排从弗罗贝格尔到穆法特的作品，展现作曲家们如何以音乐为媒介，或沉溺于忧郁，或试图超越它。最终在「世俗的虚妄与艺术家的荣光」（施泰尔语）之间寻得一种微妙的平衡。\n\n巴洛克音乐中的「忧郁」并非单一的情绪表达，而是一个复杂的哲学与美学概念。它既是对世俗浮华虚妄的沉思，也是艺术家探索自我与荣耀的途径。从文艺复兴的英国到巴洛克时期的西欧，这条脉络随着音乐风格与思想的演进而不断丰富。上周的道兰是这一概念的第一位推手，而他的巴洛克晚辈们也追随着这一潮流，最终形成了巴洛克时期的美学宗旨「情绪论」。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21829&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21829&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "安德烈亚斯·施泰尔独奏会丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "约翰·雅各布·弗罗贝格尔",
+        "让-亨利·当格勒贝尔",
+        "路易·库普兰",
+        "路易-尼古拉·克莱朗博",
+        "乔治·穆法特"
+      ],
+      "program": [
+        {
+          "composer": "约翰·雅各布·弗罗贝格尔",
+          "title": "a小调第三十组曲",
+          "confidence": "official",
+          "movements": [
+            {
+              "title": "伦敦悲歌，为排遣忧郁而作，须以节制而缓慢的节奏演奏"
+            },
+            {
+              "title": "库朗特舞曲"
+            },
+            {
+              "title": "萨拉班德"
+            },
+            {
+              "title": "舞曲吉格舞曲"
+            }
+          ]
+        },
+        {
+          "composer": "让-亨利·当格勒贝尔",
+          "title": "为管风琴而作的严肃赋格",
+          "confidence": "official"
+        },
+        {
+          "composer": "让-亨利·当格勒贝尔",
+          "title": "约翰·卡斯帕·费迪南德·费舍尔：「乌拉尼亚组曲」（选段）",
+          "confidence": "official",
+          "movements": [
+            {
+              "title": "托卡塔"
+            },
+            {
+              "title": "帕萨卡利亚"
+            }
+          ]
+        },
+        {
+          "composer": "路易·库普兰",
+          "title": "F大调组曲",
+          "confidence": "official",
+          "movements": [
+            {
+              "title": "前奏曲"
+            },
+            {
+              "title": "庄重的阿勒芒德舞曲"
+            },
+            {
+              "title": "库朗特舞曲"
+            },
+            {
+              "title": "萨拉班德舞曲"
+            },
+            {
+              "title": "夏空舞曲"
+            },
+            {
+              "title": "布朗什罗歇先生挽歌"
+            }
+          ]
+        },
+        {
+          "composer": "让-亨利·当格勒贝尔",
+          "title": "《羽管键琴曲集第一册》（选段",
+          "confidence": "official",
+          "movements": [
+            {
+              "title": "d小调前奏曲"
+            },
+            {
+              "title": "尚博尼埃先生挽歌"
+            },
+            {
+              "title": "D大调回旋曲式夏空舞曲"
+            }
+          ]
+        },
+        {
+          "composer": "让-亨利·当格勒贝尔",
+          "title": "约翰·卡斯帕·费迪南德·费舍尔：《四旬期创意曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "路易-尼古拉·克莱朗博",
+          "title": "《羽管键琴曲集 第一册》（选段）",
+          "confidence": "official",
+          "movements": [
+            {
+              "title": "前奏曲"
+            },
+            {
+              "title": "阿勒芒德舞曲"
+            },
+            {
+              "title": "库朗特舞曲"
+            },
+            {
+              "title": "萨拉班德舞曲"
+            },
+            {
+              "title": "吉格舞曲"
+            }
+          ]
+        },
+        {
+          "composer": "乔治·穆法特",
+          "title": "g小调帕萨卡利亚，选自《管风琴音乐装置》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "约翰·雅各布·弗罗贝格尔",
+        "让-亨利·当格勒贝尔",
+        "路易·库普兰",
+        "路易-尼古拉·克莱朗博",
+        "乔治·穆法特",
+        "交响",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21835",
+      "title": "皮奥特·安德谢夫斯基钢琴独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-12-02T11:30:00.000Z",
+      "endTime": "2026-12-02T13:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "12/02",
+      "timeLabel": "19:30",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21835&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21835&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "皮奥特·安德谢夫斯基钢琴独奏会丨上海交响乐团",
+      "performers": [
+        "皮奥特·安德谢夫斯基"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "c小调第三十二钢琴奏鸣曲，作品111",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21807",
+      "title": "上交室内乐 4：风与键的编年史丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-12-11T11:15:00.000Z",
+      "endTime": "2026-12-11T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "12/11",
+      "timeLabel": "19:15",
+      "price": "¥120",
+      "priceTiers": [
+        120
+      ],
+      "description": "上交室内乐4「风与键的编年史」将视角转向木管与键盘乐器。从巴洛克时期到20世纪，不同作曲家的作品依次登场，长笛、双簧管、大管与钢琴、羽管键琴相互交织，在不同音色之间勾勒出数百年来室内乐发展的脉络，也让观众体验木管室内乐细腻而丰富的表现力。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21807&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21807&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "风与键的编年史丨上海交响乐团",
+      "performers": [
+        "洪健钧",
+        "盛中原",
+        "刘于靖",
+        "王逸佳"
+      ],
+      "composers": [
+        "布拉韦",
+        "C.P.E. 巴赫",
+        "维瓦尔第",
+        "莫谢莱斯",
+        "科里亚",
+        "哈拉尔德·根茨默尔"
+      ],
+      "program": [
+        {
+          "composer": "布拉韦",
+          "title": "g小调长笛奏鸣曲，作品2之4",
+          "confidence": "official"
+        },
+        {
+          "composer": "C.P.E. 巴赫",
+          "title": "g小调双簧管奏鸣曲，H. 549",
+          "confidence": "official"
+        },
+        {
+          "composer": "维瓦尔第",
+          "title": "为长笛与大管而作的a小调奏鸣曲，RV 86",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫谢莱斯",
+          "title": "F大调交响协奏曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "科里亚",
+          "title": "长笛、大管与钢琴三重奏",
+          "confidence": "official"
+        },
+        {
+          "composer": "哈拉尔德·根茨默尔",
+          "title": "长笛、大管与钢琴三重奏",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "布拉韦",
+        "C.P.E. 巴赫",
+        "维瓦尔第",
+        "莫谢莱斯",
+        "科里亚",
+        "哈拉尔德·根茨默尔",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21821",
+      "title": "音乐地图课堂系列 3：乐无中西丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-12-12T06:00:00.000Z",
+      "endTime": "2026-12-12T08:00:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "12/12",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21821&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21821&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "乐无中西丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "刘天华",
+        "任光",
+        "孙以强",
+        "沙汉昆",
+        "俄罗斯民歌",
+        "小约翰·施特劳斯",
+        "黄贻钧"
+      ],
+      "program": [
+        {
+          "composer": "刘天华",
+          "title": "《良宵》",
+          "confidence": "official"
+        },
+        {
+          "composer": "任光",
+          "title": "《彩云追月》",
+          "confidence": "official"
+        },
+        {
+          "composer": "孙以强",
+          "title": "《春舞》",
+          "confidence": "official"
+        },
+        {
+          "composer": "沙汉昆",
+          "title": "《牧歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "俄罗斯民歌",
+          "title": "《卡林卡》",
+          "confidence": "official"
+        },
+        {
+          "composer": "小约翰·施特劳斯",
+          "title": "拨弦波尔卡",
+          "confidence": "official"
+        },
+        {
+          "composer": "黄贻钧",
+          "title": "《花好月圆》（陈燮阳改编）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "刘天华",
+        "任光",
+        "孙以强",
+        "沙汉昆",
+        "俄罗斯民歌",
+        "小约翰·施特劳斯",
+        "黄贻钧",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21812",
+      "title": "晚高峰音乐会2：弦上东西丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-12-16T10:30:00.000Z",
+      "endTime": "2026-12-16T12:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "12/16",
+      "timeLabel": "18:30",
+      "price": "¥100 - ¥300",
+      "priceTiers": [
+        100,
+        200,
+        300
+      ],
+      "description": "岁末将至，上海交响乐团《晚高峰音乐会》迎来一场特别的“年末大戏”——上交弦乐重奏与管乐演奏家，首次携手全网粉丝百万的国风顶流乐团自得琴社，以“弦上东西”为题，完成一次跨越东西的音乐对话。\n\n巴赫的庄严与吉松隆的梦幻，自得琴社艺术总监唐彬笔下的猫与风筝，李清照词中的婉转春愁，拉威尔童话里的鹅妈妈——东方与西方，古典与当代，在同一个舞台上彼此呼应。而这份“平分秋色”不仅体现在曲目上，更藏在每一首作品的编制里。\n\n开场巴赫《G弦上的咏叹调》，笛子与中阮以东方音色重新诠释巴洛克的温柔，自得琴社率先登场。吉松隆《鸟梦月华之时》则由上交单簧管、大提琴演奏家与钢琴接棒，以纯粹的西方室内乐织体，勾勒东方的梦幻之境。\n\n真正的“对话”在中段展开。《寻猫》中，笛子、古琴、打击乐、中阮与低音提琴同台，逸猫寻踪的灵动与低音提琴的深厚底蕴交织；《追风筝》里，琵琶的铮鸣与低音提琴的拨奏共同描摹纸鸢忽远忽近的轨迹；《月牙泉》中，单簧管与古琴、琵琶、中阮、打击乐、低音提琴同奏，西域市声在东西音色的交织中徐徐铺展。\n\n《揽雾》回归至简，长笛与古筝的对答如山岚朝雾，清逸悠远；《如梦令》中人声、古琴、手碟、中阮与弦乐四重奏融为一体，李清照词中的婉转柔肠在东西音色的包裹下更显幽深；《梅花新弄》则以古琴领奏，弦乐四重奏、单簧管与低音提琴环绕呼应——“东风吹散梅梢雪”，尽显寒梅待春之意。\n\n最终，全体演奏家共同奏响拉威尔《鹅妈妈组曲》选段——从巴赫到拉威尔，从唐彬到吉松隆，这场音乐会的曲目单，正是一次“弦上东西”的奇妙漫游。\n\n12月16日18:30，让我们用“堵车”的时间，听一场东西相遇的音乐对话。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21812&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21812&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "弦上东西丨上海交响乐团",
+      "performers": [
+        "武奥列",
+        "罗畅",
+        "俞海锋",
+        "周润青",
+        "洪健钧",
+        "吴昱如",
+        "薛源"
+      ],
+      "composers": [
+        "巴赫",
+        "吉松隆",
+        "唐彬",
+        "唐彬、田汨、周楚航",
+        "拉威尔"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "G弦上的咏叹调",
+          "confidence": "official"
+        },
+        {
+          "composer": "吉松隆",
+          "title": "《鸟梦月华之时》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬",
+          "title": "《寻猫 》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬",
+          "title": "《追风筝》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬",
+          "title": "《月牙泉》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬",
+          "title": "《揽雾》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬、田汨、周楚航",
+          "title": "《如梦令》",
+          "confidence": "official"
+        },
+        {
+          "composer": "唐彬、田汨、周楚航",
+          "title": "《梅花新弄》（唐彬改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "拉威尔",
+          "title": "鹅妈妈组曲（选段）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "吉松隆",
+        "唐彬",
+        "唐彬、田汨、周楚航",
+        "拉威尔",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21837",
+      "title": "华人贝多芬钢琴独奏全集 1：黄家正丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2026-12-17T11:15:00.000Z",
+      "endTime": "2026-12-17T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "12/17",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21837&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21837&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "黄家正丨上海交响乐团",
+      "performers": [
+        "黄家正"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "f小调第一钢琴奏鸣曲，作品2之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "十一首小品，作品119",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降B大调第二十九钢琴奏鸣曲，作品106「槌子键琴」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21764",
+      "title": "余隆、蒂博代与上海交响乐团演绎圣-桑丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2026-12-20T11:30:00.000Z",
+      "endTime": "2026-12-20T13:30:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "12/20",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21764&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21764&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "蒂博代与上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "让-伊夫·蒂博代",
+        "蒂博代"
+      ],
+      "composers": [
+        "圣-桑"
+      ],
+      "program": [
+        {
+          "composer": "圣-桑",
+          "title": "F大调第五钢琴协奏曲，作品103「埃及」",
+          "confidence": "official"
+        },
+        {
+          "composer": "圣-桑",
+          "title": "c小调第三交响曲，作品78，「管风琴」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "圣-桑",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21836",
+      "title": "帕胡德长笛独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-01-07T11:30:00.000Z",
+      "endTime": "2027-01-07T13:30:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "01/07",
+      "timeLabel": "19:30",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21836&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21836&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "帕胡德长笛独奏会丨上海交响乐团",
+      "performers": [
+        "埃马纽埃尔·帕胡德"
+      ],
+      "composers": [
+        "皮埃尔-奥克塔夫·费鲁",
+        "马蒂亚斯·平切尔",
+        "约翰·塞巴斯蒂安·巴赫",
+        "菲利普·马努里",
+        "安德烈·若利韦"
+      ],
+      "program": [
+        {
+          "title": "卡尔·菲利普·埃马努埃尔·巴赫：a小调无伴奏长笛奏鸣曲，Wq. 132",
+          "confidence": "official"
+        },
+        {
+          "composer": "皮埃尔-奥克塔夫·费鲁",
+          "title": "三首无伴奏长笛小品",
+          "confidence": "official"
+        },
+        {
+          "composer": "皮埃尔-奥克塔夫·费鲁",
+          "title": "I. 被困的牧人",
+          "confidence": "official"
+        },
+        {
+          "composer": "皮埃尔-奥克塔夫·费鲁",
+          "title": "II. 玉",
+          "confidence": "official"
+        },
+        {
+          "composer": "皮埃尔-奥克塔夫·费鲁",
+          "title": "III. 端阳节",
+          "confidence": "official"
+        },
+        {
+          "composer": "马蒂亚斯·平切尔",
+          "title": "《超越（一个流逝的系统）》",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "a小调无伴奏长笛组曲，BWV 1013",
+          "confidence": "official"
+        },
+        {
+          "composer": "菲利普·马努里",
+          "title": "《惊跳》",
+          "confidence": "official"
+        },
+        {
+          "composer": "安德烈·若利韦",
+          "title": "《五首咒歌》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "皮埃尔-奥克塔夫·费鲁",
+        "马蒂亚斯·平切尔",
+        "约翰·塞巴斯蒂安·巴赫",
+        "菲利普·马努里",
+        "安德烈·若利韦",
+        "交响",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21765",
+      "title": "魔笛与歌剧幻想——孙一凡、帕胡德与上海交响乐团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-01-08T11:30:00.000Z",
+      "endTime": "2027-01-08T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "01/08",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21765&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21765&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "帕胡德与上海交响乐团丨上海交响乐团",
+      "conductor": "孙一凡",
+      "performers": [
+        "孙一凡",
+        "埃马纽埃尔·帕胡德",
+        "洪健钧",
+        "魔笛",
+        "帕胡德"
+      ],
+      "composers": [
+        "柴可夫斯基",
+        "莫扎特"
+      ],
+      "program": [
+        {
+          "composer": "柴可夫斯基",
+          "title": "《罗密欧与朱丽叶》幻想序曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "《魔笛》序曲、莫扎特（福布斯改编）：《魔笛》幻想曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "柴可夫斯基（布朗斯坦、加姆佐夫改编）：连斯基的咏叹调，选自《叶甫盖尼·奥涅金》",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "《哈姆雷特》幻想序曲，作品67",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "威尔第（F.多普勒、K.多普勒、加姆佐夫改编）：《弄臣》幻想曲，双长笛与乐队",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "比才（博尔内、梅朗改编）：《卡门》辉煌幻想曲，长笛与乐队",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "柴可夫斯基",
+        "莫扎特",
+        "交响",
+        "歌剧"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21813",
+      "title": "晚高峰音乐会3：巴赫的N次方丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-01-13T10:30:00.000Z",
+      "endTime": "2027-01-13T12:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "01/13",
+      "timeLabel": "18:30",
+      "price": "¥100 - ¥150",
+      "priceTiers": [
+        100,
+        150
+      ],
+      "description": "巴赫的音乐，像一座取之不尽的矿藏——有人听见数学的精密，有人听见信仰的虔诚，有人听见最深沉的人间情感。2027年1月13日的《晚高峰音乐会》，我们将用巴赫的十首“网红曲”，为你呈现巴赫的N种可能。\n\n从《G大调第一无伴奏大提琴组曲》开始，一把大提琴独自歌唱，像一个人在月光下低语。《g小调第一无伴奏小提琴奏鸣曲》则让琴弓化作画笔，在四根弦上勾勒出繁复的巴洛克线条。而《平均律键盘曲集》的选段，将展示巴赫如何用音符搭建一座声音的宫殿。\n\n你一定听过《G弦上的咏叹调》——那旋律像一条缓缓流淌的河，温柔却不容忽视。《羊儿可以安静地吃草》则是一幅田园画卷，低音线条如青草般连绵不绝，上声部的旋律如同牧人的笛声。《d小调键盘协奏曲》的柔板，是巴赫笔下最动人的慢乐章之一——每一个音符都像一声叹息。\n\n两首康塔塔选段，将带来巴赫音乐中最具温度的一面。《我的一只脚踏在坟墓里》在死亡的阴影中透出希望的光芒；《心、口、行止与生活》则充满欢欣与感恩，其中的旋律你一定在哪里听过。\n\n音乐会的重头戏——《哥德堡变奏曲》选段，将展示巴赫如何从一个简单的主题出发，变幻出无穷无尽的可能性。而最后以《d小调托卡塔与赋格》收尾——管风琴的轰鸣化作钢琴的激流，为这场巴赫之旅画上一个惊叹号。\n\nN次方，可以理解为N种乐器、N种情绪、N种聆听的方式。新的一年，来《晚高峰音乐会》拆解巴赫的N种可能。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21813&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21813&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "巴赫的N次方丨上海交响乐团",
+      "performers": [
+        "罗畅",
+        "严多加",
+        "俞海锋",
+        "周润青",
+        "薛源"
+      ],
+      "composers": [
+        "巴赫"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "G大调第一无伴奏大提琴组曲，BWV 1007（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "g小调第一无伴奏小提琴奏鸣曲，BWV 1001（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "《平均律键盘曲集》（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "G弦上的咏叹调",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "《羊儿可以安静地吃草》",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "《马太受难曲》，BWV 244（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "「柔板」，选自d小调键盘协奏曲，BWV 974",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "康塔塔《我的一只脚踏在坟墓里》，BWV 156（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "康塔塔《心、口、行止与生活》，BWV 147（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "《哥德堡变奏曲》，BWV 988（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "d小调托卡塔与赋格，BWV 565",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21808",
+      "title": "上交室内乐 5：英雄的致意——从地中海到新大陆丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-01-15T11:15:00.000Z",
+      "endTime": "2027-01-15T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "01/15",
+      "timeLabel": "19:15",
+      "price": "¥120",
+      "priceTiers": [
+        120
+      ],
+      "description": "华金·图里纳：《圆》，为钢琴、小提琴和大提琴而作的幻想曲，作品91\n\n作为20世纪初西班牙民族乐派的领军人物，图里纳在这部创作于1936年的作品中，完美融合了巴黎印象派的精致与安达卢西亚的热情。\n\n作品名为“圆”（Círculo），象征着时光在昼夜间的轮回。全曲不间断地分为三个部分：“黎明” (Amanecer) 在钢琴微弱的震音中开启，小提琴与大提琴如同晨曦中苏醒的生命，交织出极具氛围感的线条；“正午” (Mediodía) 风格骤变，充满活力的节奏模拟了西班牙阳光下的舞蹈与狂欢；最后在 “暮色” (Crepúsculo) 中，音乐回归静谧，仿佛光影隐没在海平线下。这首曲子为整场音乐会奠定了色调——那是关于“时间”与“感官”的序曲。\n\n雷蒙多·佩纳福特：《英雄三重奏》\n\n巴西裔美国作曲家佩纳福特的这部作品，是当代室内乐文献中极其出色的“跨界”力作。作品受著名的“英雄三重奏”（Eroica Trio）委约创作，其标题既是向演奏家致敬，也隐喻了音乐中跨越时空的英雄气概。\n\n三个乐章分别构成了一次跨越文化的“致敬之旅”：\n\n* 阿斯托尔 (Astor)： 带着皮亚佐拉式新探戈的凌厉与哀愁，展现了布宜诺斯艾利斯的都市张力。\n\n* 莫里斯 (Maurice)： 向拉威尔致敬。其音响织体透明且深邃，呼应了上半场开篇图里纳的法式色彩。\n\n* 卡皮巴 (Capiba)： 回归巴西东北部的弗雷沃（Frevo）舞曲，热烈且艰深的节奏将上半场推向巅峰。\n\n佩纳福特的笔触让古典的三重奏形式焕发出了如万花筒般绚烂的现代性。\n\n贝多芬：降B大调第七钢琴三重奏，作品97「大公」\n\n下半场，我们将回归室内乐历史中那座不可逾越的巅峰。创作于1811年的《大公》三重奏，是贝多芬“中期英雄风格”的绝响。这部作品题献给贝多芬的赞助人与学生鲁道夫大公，其规模之宏大、气息之高贵，使之更像是一部“三件乐器的微缩交响曲”。\n\n从第一乐章那宽广如圣咏的主题，到第二乐章诙谐曲中的神秘对位，再到第三乐章如大海般深沉的变奏曲，贝多芬在此完成了从“英雄式斗争”向“精神升华”的转变。末乐章的热情洋溢，不仅在形式上呼应了上半场的舞蹈节奏，更在精神维度上，为这场“英雄”主题的音乐会画上了最庄严而圆满的句号。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21808&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21808&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "从地中海到新大陆丨上海交响乐团",
+      "performers": [
+        "武奥列",
+        "周润青",
+        "王逸佳"
+      ],
+      "composers": [
+        "华金·图里纳",
+        "雷蒙多·佩纳福特",
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "华金·图里纳",
+          "title": "《圆》，为钢琴、小提琴和大提琴而作的幻想曲，作品91",
+          "confidence": "official"
+        },
+        {
+          "composer": "雷蒙多·佩纳福特",
+          "title": "《英雄三重奏》",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降B大调第七钢琴三重奏，作品97「大公」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "华金·图里纳",
+        "雷蒙多·佩纳福特",
+        "贝多芬",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21822",
+      "title": "音乐地图课堂系列 4：舞蹈音乐丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-01-17T06:00:00.000Z",
+      "endTime": "2027-01-17T08:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "01/17",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21822&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21822&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "舞蹈音乐丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "亨德尔",
+        "明库斯",
+        "舒伯特",
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "亨德尔",
+          "title": "F大调《水上音乐》第一组曲，HWV 348（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "明库斯",
+          "title": "「双人舞」，选自芭蕾舞剧《唐吉诃德》",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒伯特",
+          "title": "「芭蕾音乐第二首」，选自《罗莎蒙德》，D. 797",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "「小序曲」，选自《胡桃夹子》组曲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "亨德尔",
+        "明库斯",
+        "舒伯特",
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21766",
+      "title": "错爱之境——余隆、卡瓦科斯、陆轶文与上海交响乐团演绎拉赫玛尼诺夫与周天丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-01-20T11:30:00.000Z",
+      "endTime": "2027-01-20T13:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "01/20",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21766&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21766&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "陆轶文与上海交响乐团演绎拉赫玛尼诺夫与周天丨上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "列奥尼达斯·卡瓦科斯",
+        "陆轶文",
+        "演绎拉赫玛尼诺夫"
+      ],
+      "composers": [
+        "拉赫玛尼诺夫",
+        "周天"
+      ],
+      "program": [
+        {
+          "composer": "周天",
+          "title": "小提琴与二胡协奏曲「错爱」（上海交响乐团委约，世界首演）",
+          "confidence": "official"
+        },
+        {
+          "composer": "拉赫玛尼诺夫",
+          "title": "交响舞曲，作品45",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "拉赫玛尼诺夫",
+        "周天",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21838",
+      "title": "华人贝多芬钢琴独奏全集 2：孙嘉言丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-01-22T11:15:00.000Z",
+      "endTime": "2027-01-22T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "01/22",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21838&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21838&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "孙嘉言丨上海交响乐团",
+      "performers": [
+        "孙嘉言"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "降E大调第四钢琴奏鸣曲，作品7「大奏鸣曲」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "升F大调第二十四钢琴奏鸣曲，作品78「献给泰蕾兹」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "E大调第九钢琴奏鸣曲，作品14之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "G大调第十钢琴奏鸣曲，作品14之2",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21767",
+      "title": "2027上海新春音乐会 余隆、马友友、吴彤、吴蛮与上海交响乐团演绎赵麟 丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-01-29T11:30:00.000Z",
+      "endTime": "2027-01-29T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "01/29",
+      "timeLabel": "19:30",
+      "price": "¥180 - ¥1880",
+      "priceTiers": [
+        180,
+        380,
+        580,
+        880,
+        1280,
+        1580,
+        1880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21767&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21767&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "吴蛮与上海交响乐团演绎赵麟 丨上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "马友友",
+        "吴蛮"
+      ],
+      "composers": [
+        "赵麟"
+      ],
+      "program": [
+        {
+          "composer": "赵麟",
+          "title": "《云水溶漾，为笙与管弦乐队所作》，选自交响音诗《千里江山》",
+          "confidence": "official"
+        },
+        {
+          "composer": "赵麟",
+          "title": "笙：吴彤",
+          "confidence": "official"
+        },
+        {
+          "composer": "赵麟",
+          "title": "大提琴与笙双协奏曲《度》",
+          "confidence": "official"
+        },
+        {
+          "composer": "赵麟",
+          "title": "《月壑松风，为琵琶与管弦乐队所作》，选自交响音诗《千里江山》",
+          "confidence": "official"
+        },
+        {
+          "composer": "赵麟",
+          "title": "大提琴与琵琶协奏曲《逍遥游》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "赵麟",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21768",
+      "title": "黄屹、沙马尤、鲍力卓与上海交响乐团演绎拉威尔与理查·施特劳斯丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-02-26T11:30:00.000Z",
+      "endTime": "2027-02-26T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "02/26",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21768&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21768&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "鲍力卓与上海交响乐团演绎拉威尔与理查·施特劳斯丨上海交响乐团",
+      "conductor": "黄屹",
+      "performers": [
+        "黄屹",
+        "贝特朗·沙马尤",
+        "鲍力卓",
+        "响乐团演绎拉威尔"
+      ],
+      "composers": [
+        "柏辽兹",
+        "拉威尔",
+        "理查·施特劳斯"
+      ],
+      "program": [
+        {
+          "composer": "柏辽兹",
+          "title": "《罗马狂欢节》序曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "拉威尔",
+          "title": "D大调左手钢琴协奏曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "理查·施特劳斯",
+          "title": "《堂·吉诃德》，作品35",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "柏辽兹",
+        "拉威尔",
+        "理查·施特劳斯",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21839",
+      "title": "华人贝多芬钢琴独奏全集 3：孔嘉宁丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-02-27T11:15:00.000Z",
+      "endTime": "2027-02-27T13:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "02/27",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21839&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21839&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "孔嘉宁丨上海交响乐团",
+      "performers": [
+        "孔嘉宁"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "g小调第十九钢琴奏鸣曲，作品49之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "三首小品，选自《七首小品》，作品33之1-3",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "c小调小品，WoO 52",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降E大调第十八钢琴奏鸣曲，作品31之3「狩猎」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "G大调第二十钢琴奏鸣曲，作品49之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "四首小品，选自《七首小品》，作品33之4-7",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降E大调第二十六钢琴奏鸣曲，作品81a「告别」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21844",
+      "title": "无言的浪漫——沙马尤钢琴独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-03-02T11:30:00.000Z",
+      "endTime": "2027-03-02T12:30:00.000Z",
+      "weekday": "周二",
+      "dateLabel": "03/02",
+      "timeLabel": "19:30",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21844&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21844&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "沙马尤钢琴独奏会丨上海交响乐团",
+      "performers": [
+        "贝特朗·沙马尤"
+      ],
+      "composers": [
+        "门德尔松",
+        "艾夫斯",
+        "福雷",
+        "克拉拉·舒曼",
+        "罗伯特·舒曼",
+        "列侬与麦卡特尼",
+        "乔治·克拉姆",
+        "库尔塔格",
+        "舒伯特"
+      ],
+      "program": [
+        {
+          "composer": "门德尔松",
+          "title": "三首无词歌",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "作品19之1 — 作品19之2 — 作品38之5",
+          "confidence": "official"
+        },
+        {
+          "composer": "艾夫斯",
+          "title": "《无（好）词歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "四首无词歌",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "作品53之4 — 作品30之2 — 作品53之3 — 作品38之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "无词浪漫曲，作品17之3",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "《乘着歌声的翅膀》（李斯特改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "无词歌，作品67之4",
+          "confidence": "official"
+        },
+        {
+          "composer": "克拉拉·舒曼",
+          "title": "a小调浪漫曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "作品85之2 — 作品30之6 — 作品67之5 — 作品67之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "罗伯特·舒曼",
+          "title": "《春之夜》（李斯特改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "列侬与麦卡特尼",
+          "title": "《金色梦乡》（武满彻改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "罗伯特·舒曼",
+          "title": "《奉献》（李斯特改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "乔治·克拉姆",
+          "title": "《一首小小的午夜音乐》",
+          "confidence": "official"
+        },
+        {
+          "composer": "库尔塔格",
+          "title": "《隐约忆起的科林达旋律残片》（致敬费伦茨·法尔卡什第二首）",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒伯特",
+          "title": "C大调幻想曲，D. 760「流浪者」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "门德尔松",
+        "艾夫斯",
+        "福雷",
+        "克拉拉·舒曼",
+        "罗伯特·舒曼",
+        "列侬与麦卡特尼",
+        "乔治·克拉姆",
+        "库尔塔格"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21845",
+      "title": "马尔钦·迪拉吉他独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-04T11:15:00.000Z",
+      "endTime": "2027-03-04T12:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "03/04",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21845&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21845&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "马尔钦·迪拉吉他独奏会丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "图里纳",
+        "马内恩",
+        "塔雷加",
+        "桑切斯-贝尔杜",
+        "罗德里戈",
+        "庞塞"
+      ],
+      "program": [
+        {
+          "composer": "图里纳",
+          "title": "塞维利亚舞曲，作品29",
+          "confidence": "official"
+        },
+        {
+          "composer": "马内恩",
+          "title": "幻想奏鸣曲，作品22",
+          "confidence": "official"
+        },
+        {
+          "composer": "塔雷加",
+          "title": "四首玛祖卡",
+          "confidence": "official"
+        },
+        {
+          "composer": "桑切斯-贝尔杜",
+          "title": "《书》第一首",
+          "confidence": "official"
+        },
+        {
+          "composer": "罗德里戈",
+          "title": "祈愿与舞曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "庞塞",
+          "title": "古典奏鸣曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "庞塞",
+          "title": "24首前奏曲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "图里纳",
+        "马内恩",
+        "塔雷加",
+        "桑切斯-贝尔杜",
+        "罗德里戈",
+        "庞塞",
+        "交响",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21769",
+      "title": "汤沐海、卡瓦科斯、陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-03-05T11:30:00.000Z",
+      "endTime": "2027-03-05T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "03/05",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21769&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21769&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团",
+      "conductor": "汤沐海",
+      "performers": [
+        "汤沐海",
+        "列奥尼达斯·卡瓦科斯",
+        "陈亦柏"
+      ],
+      "composers": [
+        "普罗科菲耶夫",
+        "米亚斯科夫斯基",
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "普罗科菲耶夫",
+          "title": "古典交响曲（第一交响曲），作品25",
+          "confidence": "official"
+        },
+        {
+          "composer": "米亚斯科夫斯基",
+          "title": "大提琴协奏曲，作品66",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "D大调小提琴协奏曲，作品35",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "普罗科菲耶夫",
+        "米亚斯科夫斯基",
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21770",
+      "title": "水蓝、卡瓦科斯与上海交响乐团演绎巴托克与霍尔斯特《行星组曲》丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-03-12T11:30:00.000Z",
+      "endTime": "2027-03-12T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "03/12",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21770&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21770&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "卡瓦科斯与上海交响乐团",
+      "conductor": "水蓝",
+      "performers": [
+        "水蓝",
+        "列奥尼达斯·卡瓦科斯",
+        "卡瓦科斯",
+        "响乐团演绎巴托克"
+      ],
+      "composers": [
+        "巴托克",
+        "霍尔斯特"
+      ],
+      "program": [
+        {
+          "composer": "巴托克",
+          "title": "第二小提琴协奏曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "霍尔斯特",
+          "title": "《行星组曲》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴托克",
+        "霍尔斯特",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21846",
+      "title": "朱斯坦·泰勒演奏《哥德堡变奏曲》丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-13T11:15:00.000Z",
+      "endTime": "2027-03-13T12:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "03/13",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21846&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21846&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "巴赫"
+      ],
+      "program": [
+        {
+          "composer": "巴赫",
+          "title": "《哥德堡变奏曲》，BWV 988",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "巴赫",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21847",
+      "title": "让-马克·路易萨达钢琴独奏会丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-19T11:15:00.000Z",
+      "endTime": "2027-03-19T12:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "03/19",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21847&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21847&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "马克·路易萨达钢琴独奏会丨上海交响乐团",
+      "performers": [
+        "让-马克·路易萨达"
+      ],
+      "composers": [
+        "舒伯特",
+        "勃拉姆斯",
+        "福雷",
+        "肖邦"
+      ],
+      "program": [
+        {
+          "composer": "舒伯特",
+          "title": "a小调第四钢琴奏鸣曲，D. 537",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒伯特",
+          "title": "f小调即兴曲，D. 935之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "舒伯特",
+          "title": "降A大调音乐瞬间，D. 780之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "a小调间奏曲，作品118之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "A大调间奏曲，作品118之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "g小调叙事曲，作品118之3",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "帕凡舞曲，作品50",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "升c小调第七夜曲，作品74",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖邦",
+          "title": "摇篮曲，作品57",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖邦",
+          "title": "升c小调第三谐谑曲，作品39",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖邦",
+          "title": "b小调第一谐谑曲，作品20",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "舒伯特",
+        "勃拉姆斯",
+        "福雷",
+        "肖邦",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21771",
+      "title": "柴可夫斯基2+2：林大叶、罗维与上海交响乐团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-03-19T11:30:00.000Z",
+      "endTime": "2027-03-19T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "03/19",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21771&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21771&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "罗维与上海交响乐团丨上海交响乐团",
+      "conductor": "林大叶",
+      "performers": [
+        "林大叶",
+        "罗维"
+      ],
+      "composers": [
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "柴可夫斯基",
+          "title": "G大调第二钢琴协奏曲，作品44",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "c小调第二交响曲，作品17「小俄罗斯」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21840",
+      "title": "华人贝多芬钢琴独奏全集 4：贠思齐丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-26T11:15:00.000Z",
+      "endTime": "2027-03-26T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "03/26",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21840&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21840&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "贠思齐丨上海交响乐团",
+      "performers": [
+        "贠思齐"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "e小调第二十七钢琴奏鸣曲，作品90",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "G大调第二十五钢琴奏鸣曲，作品79「杜鹃」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降A大调第十二钢琴奏鸣曲，作品26「葬礼进行曲」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "f小调第二十三钢琴奏鸣曲，作品57「热情」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21823",
+      "title": "音乐地图课堂系列 5：歌剧音乐丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-27T06:00:00.000Z",
+      "endTime": "2027-03-27T08:00:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "03/27",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21823&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21823&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "歌剧音乐丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "莫扎特",
+        "普契尼",
+        "比才",
+        "马斯卡尼"
+      ],
+      "program": [
+        {
+          "composer": "莫扎特",
+          "title": "《费加罗的婚礼》序曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "普契尼",
+          "title": "为弦乐四重奏而作的挽歌《菊花》",
+          "confidence": "official"
+        },
+        {
+          "composer": "比才",
+          "title": "《采珠人》序曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "马斯卡尼",
+          "title": "《乡村骑士》间奏曲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "莫扎特",
+        "普契尼",
+        "比才",
+        "马斯卡尼",
+        "交响",
+        "歌剧"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21814",
+      "title": "晚高峰音乐会4：三个世纪的春丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-03-31T10:30:00.000Z",
+      "endTime": "2027-03-31T12:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "03/31",
+      "timeLabel": "18:30",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21814&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21814&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "三个世纪的春丨上海交响乐团",
+      "performers": [
+        "武奥列",
+        "罗畅",
+        "严多加",
+        "俞海锋",
+        "郑舒颐",
+        "洪健钧",
+        "薛源"
+      ],
+      "composers": [
+        "维瓦尔第",
+        "贝多芬",
+        "门德尔松",
+        "德彪西",
+        "莉莉·布朗热",
+        "吉松隆"
+      ],
+      "program": [
+        {
+          "composer": "维瓦尔第",
+          "title": "E大调小提琴协奏曲「春」，选自《四季》",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "F大调第五钢琴与小提琴奏鸣曲，作品24「春天」（选段）",
+          "confidence": "official"
+        },
+        {
+          "composer": "门德尔松",
+          "title": "《春之歌》",
+          "confidence": "official"
+        },
+        {
+          "composer": "德彪西",
+          "title": "《春》，L. 61",
+          "confidence": "official"
+        },
+        {
+          "composer": "莉莉·布朗热",
+          "title": "《春天的清晨》",
+          "confidence": "official"
+        },
+        {
+          "composer": "吉松隆",
+          "title": "《白景》",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "维瓦尔第",
+        "贝多芬",
+        "门德尔松",
+        "德彪西",
+        "莉莉·布朗热",
+        "吉松隆",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21809",
+      "title": "上交室内乐 6：美乐四重奏演绎法式浪漫与印象丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-04-02T11:15:00.000Z",
+      "endTime": "2027-04-02T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "04/02",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21809&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21809&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "美乐四重奏演绎法式浪漫与印象丨上海交响乐团",
+      "performers": [
+        "于任超",
+        "马谦艺",
+        "施贞莉",
+        "赵长宏",
+        "安宇",
+        "重奏演绎法式浪漫"
+      ],
+      "composers": [
+        "福雷",
+        "弗兰克",
+        "德彪西",
+        "拉威尔"
+      ],
+      "program": [
+        {
+          "composer": "福雷",
+          "title": "三首歌曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "I.「梦醒时分」，作品7之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "II.「西西里舞曲」，作品78",
+          "confidence": "official"
+        },
+        {
+          "composer": "福雷",
+          "title": "III.「月光」，作品46之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "弗兰克",
+          "title": "A大调小提琴与钢琴奏鸣曲 ，FWV 8",
+          "confidence": "official"
+        },
+        {
+          "composer": "德彪西",
+          "title": "g小调弦乐四重奏，作品10",
+          "confidence": "official"
+        },
+        {
+          "composer": "拉威尔",
+          "title": "F大调弦乐四重奏，M. 35",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "福雷",
+        "弗兰克",
+        "德彪西",
+        "拉威尔",
+        "交响",
+        "室内乐"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21772",
+      "title": "拉赫林、麦克尔拉维与上海交响乐团演绎沃尔顿和马勒丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-04-03T11:30:00.000Z",
+      "endTime": "2027-04-03T13:30:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "04/03",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21772&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21772&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "麦克尔拉维与上海交响乐团演绎沃尔顿和马勒丨上海交响乐团",
+      "conductor": "朱利安·拉赫林",
+      "performers": [
+        "朱利安·拉赫林",
+        "萨拉·麦克尔拉维",
+        "麦克尔拉维",
+        "响乐团演绎沃尔顿"
+      ],
+      "composers": [
+        "马勒",
+        "沃顿"
+      ],
+      "program": [
+        {
+          "composer": "沃顿",
+          "title": "中提琴协奏曲",
+          "confidence": "official"
+        },
+        {
+          "composer": "马勒",
+          "title": "D大调第一交响曲「巨人」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "马勒",
+        "沃顿",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21773",
+      "title": "复调的巨浪—— 阿尔布雷希特、巴赫拉米与上海交响乐团演绎斯托科夫斯基交响巴赫丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-04-16T11:30:00.000Z",
+      "endTime": "2027-04-16T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "04/16",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21773&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21773&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "巴赫拉米与上海交响乐团演绎斯托科夫斯基交响巴赫丨上海交响乐团",
+      "conductor": "汉斯约尔格·阿尔布雷希特",
+      "performers": [
+        "汉斯约尔格·阿尔布雷希特",
+        "拉明·巴赫拉米",
+        "巴赫拉米"
+      ],
+      "composers": [
+        "约翰·塞巴斯蒂安·巴赫"
+      ],
+      "program": [
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "d小调托卡塔与赋格，作品 565（斯托科夫斯基改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "D大调前奏曲与赋格，作品 532 （雷斯皮吉改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "d小调键盘协奏曲，作品1052（带木管和弦乐版，改编者待确认）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "g小调幻想曲与赋格，作品 542 （斯托科夫斯基改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "d小调恰空，选自第二小提琴帕蒂塔，作品1004（斯托科夫斯基改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "约翰·塞巴斯蒂安·巴赫",
+          "title": "c小调帕萨卡利亚与赋格，作品 582（雷斯皮吉改编）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "约翰·塞巴斯蒂安·巴赫",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21824",
+      "title": "音乐地图课堂系列 6：民族乐派丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-04-18T06:00:00.000Z",
+      "endTime": "2027-04-18T08:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "04/18",
+      "timeLabel": "14:00",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21824&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21824&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "民族乐派丨上海交响乐团",
+      "performers": [],
+      "composers": [
+        "鲍罗丁",
+        "巴托克",
+        "德沃夏克",
+        "格里格"
+      ],
+      "program": [
+        {
+          "composer": "鲍罗丁",
+          "title": "在中亚细亚草原上",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴托克",
+          "title": "罗马尼亚民间舞曲，Sz. 56",
+          "confidence": "official"
+        },
+        {
+          "composer": "德沃夏克",
+          "title": "《捷克组曲》（选段），作品39",
+          "confidence": "official",
+          "movements": [
+            {
+              "number": "I",
+              "title": "前奏曲"
+            },
+            {
+              "number": "II",
+              "title": "波尔卡"
+            }
+          ]
+        },
+        {
+          "composer": "格里格",
+          "title": "「夜曲」，选自《抒情小品集》，作品54之4",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "鲍罗丁",
+        "巴托克",
+        "德沃夏克",
+        "格里格",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21841",
+      "title": "华人贝多芬钢琴独奏全集 5：史博阳丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-04-23T11:15:00.000Z",
+      "endTime": "2027-04-23T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "04/23",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21841&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21841&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "史博阳丨上海交响乐团",
+      "performers": [
+        "史博阳"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "c小调小快板，WoO 53",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "c小调第五钢琴奏鸣曲，作品10之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "F大调第六钢琴奏鸣曲，作品10之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "六首小品，作品126",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "D大调第七钢琴奏鸣曲，作品10之3",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21774",
+      "title": "余隆、音乐永恒合唱团与上海交响乐团演绎肖斯塔科维奇第二、第三交响曲丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-04-29T11:30:00.000Z",
+      "endTime": "2027-04-29T13:30:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "04/29",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥1280",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880,
+        1280
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21774&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21774&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "音乐永恒合唱团与上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "音乐永恒合唱团"
+      ],
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "program": [
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "B大调第二交响曲，作品14「献给十月」",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "降E大调第三交响曲，作品20「五月一日」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "肖斯塔科维奇",
+        "交响",
+        "合唱"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21848",
+      "title": "达内尔四重奏演绎肖斯塔科维奇丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-04-30T11:15:00.000Z",
+      "endTime": "2027-04-30T12:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "04/30",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21848&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21848&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "达内尔四重奏演绎肖斯塔科维奇丨上海交响乐团",
+      "performers": [
+        "马克·达内尔",
+        "吉勒·米勒",
+        "弗拉德·波格达纳斯",
+        "约万·马尔科维奇"
+      ],
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "program": [
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "C大调第一弦乐四重奏，作品49",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "c小调第八弦乐四重奏，作品110",
+          "confidence": "official"
+        },
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "降B大调第五弦乐四重奏，作品92",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "肖斯塔科维奇",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21775",
+      "title": "尘埃与回响—— 余隆、格内、音乐永恒合唱团与上海交响乐团肖斯塔科维奇第十三交响曲丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-05-02T11:30:00.000Z",
+      "endTime": "2027-05-02T13:30:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "05/02",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥1280",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880,
+        1280
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21775&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21775&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "音乐永恒合唱团与上海交响乐团肖斯塔科维奇第十三交响曲丨上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "马蒂亚斯·格内",
+        "尘埃",
+        "音乐永恒合唱团"
+      ],
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "program": [
+        {
+          "composer": "肖斯塔科维奇",
+          "title": "降b小调第十三交响曲，作品113",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "肖斯塔科维奇",
+        "交响",
+        "合唱"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21776",
+      "title": "古斯塔夫·库恩、格哈特与上海交响乐团演绎舒曼和瓦格纳丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-05-09T11:30:00.000Z",
+      "endTime": "2027-05-09T13:30:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "05/09",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥1280",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880,
+        1280
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21776&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21776&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "格哈特与上海交响乐团演绎舒曼和瓦格纳丨上海交响乐团",
+      "conductor": "古斯塔夫·库恩",
+      "performers": [
+        "古斯塔夫·库恩",
+        "阿尔班·格哈特",
+        "詹姆斯·基",
+        "南希·魏斯巴赫",
+        "格哈特",
+        "交响乐团演绎舒曼"
+      ],
+      "composers": [
+        "舒曼",
+        "瓦格纳",
+        "齐格弗里德",
+        "饰布伦希尔德"
+      ],
+      "program": [
+        {
+          "composer": "舒曼",
+          "title": "a小调大提琴协奏曲，作品129",
+          "confidence": "official"
+        },
+        {
+          "composer": "瓦格纳",
+          "title": "《齐格弗里德》第三幕第三场（终场）",
+          "confidence": "official"
+        },
+        {
+          "composer": "齐格弗里德",
+          "title": "詹姆斯·基",
+          "confidence": "official"
+        },
+        {
+          "composer": "饰布伦希尔德",
+          "title": "南希·魏斯巴赫",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "舒曼",
+        "瓦格纳",
+        "齐格弗里德",
+        "饰布伦希尔德",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21786",
+      "title": "格哈特与薛颖佳演绎贝多芬丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-05-12T11:30:00.000Z",
+      "endTime": "2027-05-12T13:30:00.000Z",
+      "weekday": "周三",
+      "dateLabel": "05/12",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "description": "薛颖佳2025年底在「馄饨皮」举办了大获好评的独奏会《小步舞曲两百年》，而他作为室内乐合作伙伴的那一面也值得推荐给更多观众：前两年他和王健的巡演大获好评；而在欧洲求学时，包括雷诺·卡普松和昂希·德马凯特（Henri Demarquette）在内的名家都高度评价同他的合作；上交的观众肯定也不会忘记十余年来他在上交室内乐系列的精彩表现。去年，他和阿尔班·格哈特在经纪公司的一次寻常接洽后达成初次合作，演出一结束，大提琴家就在后台向薛颖佳发出再次合作的邀约。\n\n格哈特的父亲是柏林爱乐的小提琴手，他自幼跟随乐团内的多位名师学习，又向在柏林任教的鲍里斯·佩尔加门希科夫（Boris Pergamenschikow，1974年柴赛大提琴金奖）求学，贝多芬和普罗科菲耶夫都是他的音乐「母语」。此次他首次在「馄饨皮」演出，一则以贝多芬的作品102两首纪念作曲家逝世200周年，一则以自己熟悉的俄罗斯曲目向上海观众展示他最得意的篇章。而这些俄罗斯曲目中，又有一道暗线：普罗科菲耶夫自1914年初次抵达巴黎，至1936年回到苏联，巴黎是他海外旅居生活的活动中心，他后来的音乐创作都深受这段法国岁月的影响，《大提琴奏鸣曲》中的新古典主义风格，以及《灰姑娘》对法式芭蕾风格的继承与超越，都能品出几分巴黎味道；柴可夫斯基的《随想曲》则在巴黎由其本人首演了钢琴—大提琴的版本。",
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21786&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21786&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "格哈特与薛颖佳演绎贝多芬丨上海交响乐团",
+      "performers": [
+        "阿尔班·格哈特",
+        "薛颖佳",
+        "格哈特"
+      ],
+      "composers": [
+        "贝多芬",
+        "普罗科菲耶夫",
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "C大调第四大提琴奏鸣曲，作品102之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "D大调第五大提琴奏鸣曲，作品102之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "普罗科菲耶夫",
+          "title": "大提琴奏鸣曲，作品119",
+          "confidence": "official"
+        },
+        {
+          "composer": "普罗科菲耶夫",
+          "title": "「柔板」，选自《灰姑娘》，作品97a",
+          "confidence": "official"
+        },
+        {
+          "composer": "普罗科菲耶夫",
+          "title": "「圆舞曲—尾声」，选自《灰姑娘》（罗斯特罗波维奇改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "随想曲，作品62",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "普罗科菲耶夫",
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21842",
+      "title": "华人贝多芬钢琴独奏全集 6：居觐丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-05-14T11:15:00.000Z",
+      "endTime": "2027-05-14T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "05/14",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21842&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21842&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "居觐丨上海交响乐团",
+      "performers": [
+        "居觐"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "C大调回旋曲，作品51之1",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "F大调变奏曲，作品34",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降B大调第十一钢琴奏鸣曲，作品22",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "G大调回旋曲，作品51之2",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降E大调第十三钢琴奏鸣曲，作品27之1「幻想曲风格的奏鸣曲」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "升c小调第十四钢琴奏鸣曲，作品27之2「月光」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21849",
+      "title": "迪尼斯·索萨、革命浪漫管弦乐团与蒙特威尔第合唱团丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-05-21T11:30:00.000Z",
+      "endTime": "2027-05-21T12:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "05/21",
+      "timeLabel": "19:30",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21849&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21849&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "革命浪漫管弦乐团与蒙特威尔第合唱团丨上海交响乐团",
+      "conductor": "迪尼斯·索萨",
+      "performers": [
+        "迪尼斯·索萨",
+        "革命浪漫管弦乐团"
+      ],
+      "composers": [
+        "贝多芬",
+        "勃拉姆斯"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "《平静的海与幸福的航行》，作品112",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "《命运之歌》，作品54",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "d小调第九交响曲，作品125「合唱」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "勃拉姆斯",
+        "交响",
+        "管弦",
+        "合唱"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21787",
+      "title": "迪欧帝玛四重奏演绎贝多芬（一）丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-05-28T11:15:00.000Z",
+      "endTime": "2027-05-28T13:15:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "05/28",
+      "timeLabel": "19:15",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21787&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21787&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "丨上海交响乐团",
+      "performers": [
+        "赵云鹏",
+        "莱奥·马里利耶",
+        "弗兰克·舍瓦利耶",
+        "亚历克西斯·德沙尔姆"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "降E大调第十二弦乐四重奏，作品127",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "a小调第十五弦乐四重奏，作品132",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21788",
+      "title": "迪欧帝玛四重奏演绎贝多芬（二）丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-05-29T07:00:00.000Z",
+      "endTime": "2027-05-29T09:00:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "05/29",
+      "timeLabel": "15:00",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21788&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21788&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "丨上海交响乐团",
+      "performers": [
+        "赵云鹏",
+        "莱奥·马里利耶",
+        "弗兰克·舍瓦利耶",
+        "亚历克西斯·德沙尔姆"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "降B大调第十三弦乐四重奏，作品130 及 降B大调弦乐四重奏「大赋格」，作品133",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "升c小调第十四弦乐四重奏，作品131",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21777",
+      "title": "波嘉、张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-05-29T11:30:00.000Z",
+      "endTime": "2027-05-29T13:30:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "05/29",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21777&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21777&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团",
+      "conductor": "安德里斯·波嘉",
+      "performers": [
+        "安德里斯·波嘉",
+        "张昊辰",
+        "演绎普罗科菲耶夫"
+      ],
+      "composers": [
+        "普罗科菲耶夫",
+        "柴可夫斯基"
+      ],
+      "program": [
+        {
+          "composer": "普罗科菲耶夫",
+          "title": "g小调第二钢琴协奏曲，作品16",
+          "confidence": "official"
+        },
+        {
+          "composer": "柴可夫斯基",
+          "title": "b小调第六交响曲，作品74「悲怆」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "普罗科菲耶夫",
+        "柴可夫斯基",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21789",
+      "title": "迪欧帝玛四重奏演绎贝多芬（三）丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-05-30T07:00:00.000Z",
+      "endTime": "2027-05-30T09:00:00.000Z",
+      "weekday": "周日",
+      "dateLabel": "05/30",
+      "timeLabel": "15:00",
+      "price": "¥80 - ¥380",
+      "priceTiers": [
+        80,
+        180,
+        280,
+        380
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21789&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21789&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "丨上海交响乐团",
+      "performers": [
+        "赵云鹏",
+        "莱奥·马里利耶",
+        "弗兰克·舍瓦利耶",
+        "亚历克西斯·德沙尔姆"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "F大调第十六弦乐四重奏，作品135",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "降B大调第十三弦乐四重奏，作品130（修订版终曲，1827）",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21778",
+      "title": "阿尔卑斯的号角—— 布里格尔、曾韵与上海交响乐团演绎格里埃尔和勃拉姆斯丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-06-04T11:30:00.000Z",
+      "endTime": "2027-06-04T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "06/04",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥880",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580,
+        880
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21778&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21778&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "曾韵与上海交响乐团演绎格里埃尔和勃拉姆斯丨上海交响乐团",
+      "conductor": "亚历山大·布里格尔",
+      "performers": [
+        "亚历山大·布里格尔",
+        "曾韵",
+        "乐团演绎格里埃尔"
+      ],
+      "composers": [
+        "勃拉姆斯",
+        "拉赫玛尼诺夫",
+        "格里埃尔"
+      ],
+      "program": [
+        {
+          "composer": "拉赫玛尼诺夫",
+          "title": "《练声曲》",
+          "confidence": "official"
+        },
+        {
+          "composer": "格里埃尔",
+          "title": "降B大调圆号协奏曲，作品91",
+          "confidence": "official"
+        },
+        {
+          "composer": "勃拉姆斯",
+          "title": "c小调第一交响曲，作品68",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "勃拉姆斯",
+        "拉赫玛尼诺夫",
+        "格里埃尔",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21810",
+      "title": "上交室内乐 7：管中日月——木管与铜管的时空对话丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-06-10T11:15:00.000Z",
+      "endTime": "2027-06-10T13:15:00.000Z",
+      "weekday": "周四",
+      "dateLabel": "06/10",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21810&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21810&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "木管与铜管的时空对话丨上海交响乐团",
+      "performers": [
+        "盛中原",
+        "张振超",
+        "木管"
+      ],
+      "composers": [
+        "普朗克",
+        "莫扎特",
+        "大管",
+        "巴赫",
+        "萨斯基亚·阿蓬",
+        "斯泰芬·韦尔赫尔斯特",
+        "克劳德-米歇尔·勋伯格",
+        "列侬-麦卡特尼",
+        "长号四重奏"
+      ],
+      "program": [
+        {
+          "composer": "普朗克",
+          "title": "双簧管、大管与钢琴三重奏",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "降E大调钢琴三重奏，KV 498 「九柱球」",
+          "confidence": "official"
+        },
+        {
+          "composer": "大管",
+          "title": "蓝英捷",
+          "confidence": "official"
+        },
+        {
+          "composer": "巴赫",
+          "title": "「恰空」，选自d小调第二无伴奏小提琴组曲，BWV 1004（菲尔·布林克改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "萨斯基亚·阿蓬",
+          "title": "第一长号四重奏",
+          "confidence": "official"
+        },
+        {
+          "composer": "斯泰芬·韦尔赫尔斯特",
+          "title": "《交响冒险》",
+          "confidence": "official"
+        },
+        {
+          "composer": "克劳德-米歇尔·勋伯格",
+          "title": "《悲惨世界》组曲（今村岳志改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "列侬-麦卡特尼",
+          "title": "Hey Jude （英戈·路易斯改编）",
+          "confidence": "official"
+        },
+        {
+          "composer": "长号四重奏",
+          "title": "林家贤，张华明，曹琛森，仇嘉珲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "普朗克",
+        "莫扎特",
+        "大管",
+        "巴赫",
+        "萨斯基亚·阿蓬",
+        "斯泰芬·韦尔赫尔斯特",
+        "克劳德-米歇尔·勋伯格",
+        "列侬-麦卡特尼"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21843",
+      "title": "华人贝多芬钢琴独奏全集 7：白立君丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "演艺厅",
+      "startTime": "2027-06-12T11:15:00.000Z",
+      "endTime": "2027-06-12T13:15:00.000Z",
+      "weekday": "周六",
+      "dateLabel": "06/12",
+      "timeLabel": "19:15",
+      "price": "免费",
+      "priceTiers": [
+        0
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21843&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21843&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "白立君丨上海交响乐团",
+      "performers": [
+        "白立君"
+      ],
+      "composers": [
+        "贝多芬"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "c小调变奏曲，WoO 80",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "C大调第三钢琴奏鸣曲，作品2之3",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "d小调第十七钢琴奏鸣曲，作品31之2「暴风雨」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "C大调第二十一钢琴奏鸣曲，作品53「华尔斯坦」",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "交响",
+        "钢琴",
+        "独奏"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21779",
+      "title": "余隆、卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团音乐季",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-06-18T11:30:00.000Z",
+      "endTime": "2027-06-18T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "06/18",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21779&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21779&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团",
+      "conductor": "余隆",
+      "performers": [
+        "余隆",
+        "列奥尼达斯·卡瓦科斯",
+        "卡瓦科斯",
+        "团演绎科恩戈尔德"
+      ],
+      "composers": [
+        "马勒",
+        "科恩戈尔德"
+      ],
+      "program": [
+        {
+          "composer": "科恩戈尔德",
+          "title": "D大调小提琴协奏曲，作品35",
+          "confidence": "official"
+        },
+        {
+          "composer": "马勒",
+          "title": "升c小调第五交响曲",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "马勒",
+        "科恩戈尔德",
+        "交响"
+      ],
+      "dataQuality": "scraped"
+    },
+    {
+      "id": "shsymphony_21780",
+      "title": "上海交响乐团2026-27音乐季闭幕音乐会 杨洋、卡瓦科斯与上海交响乐团纪念贝多芬逝世200周年",
+      "city": "上海",
+      "venue": "捷豹上海交响音乐厅",
+      "hall": "主厅",
+      "startTime": "2027-06-25T11:30:00.000Z",
+      "endTime": "2027-06-25T13:30:00.000Z",
+      "weekday": "周五",
+      "dateLabel": "06/25",
+      "timeLabel": "19:30",
+      "price": "¥80 - ¥580",
+      "priceTiers": [
+        80,
+        180,
+        380,
+        580
+      ],
+      "status": "scheduled",
+      "ticketUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21780&supportSeat=Y",
+      "sourceName": "上海交响乐团官网",
+      "sourceUrl": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21780&supportSeat=Y",
+      "scrapedAt": "2026-07-23T06:25:36.719Z",
+      "ensemble": "上海交响乐团",
+      "conductor": "杨洋",
+      "performers": [
+        "杨洋",
+        "列奥尼达斯·卡瓦科斯",
+        "卡瓦科斯"
+      ],
+      "composers": [
+        "贝多芬",
+        "莫扎特"
+      ],
+      "program": [
+        {
+          "composer": "贝多芬",
+          "title": "F大调第八交响曲，作品93",
+          "confidence": "official"
+        },
+        {
+          "composer": "莫扎特",
+          "title": "A大调第五小提琴协奏曲，作品219「土耳其」",
+          "confidence": "official"
+        },
+        {
+          "composer": "贝多芬",
+          "title": "D大调小提琴协奏曲，作品61",
+          "confidence": "official"
+        }
+      ],
+      "tags": [
+        "贝多芬",
+        "莫扎特",
+        "交响",
+        "音乐会"
+      ],
+      "dataQuality": "scraped"
+    }
+  ],
+  "sources": [
+    {
+      "id": "shsymphony-official",
+      "name": "上海交响乐团官网",
+      "url": "https://www.shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale",
+      "ok": true,
+      "eventCount": 81
+    }
+  ],
+  "stats": {
+    "rawEvents": 81,
+    "normalizedEvents": 81,
+    "aiEnhancedEvents": 0,
+    "errors": []
+  }
+}
