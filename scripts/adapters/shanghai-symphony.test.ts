@@ -3,10 +3,11 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { parseShanghaiSymphonyContent, parseShanghaiSymphonyPrices } from "./shanghai-symphony";
 
+const fixturePath = (id: string) =>
+  resolve(process.cwd(), "scripts/fixtures/shanghai-symphony", `shsymphony-official.${id}.json`);
+
 async function main() {
-  const snapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21756.json"), "utf8"),
-  );
+  const snapshot = JSON.parse(await readFile(fixturePath("21756"), "utf8"));
   const program = parseShanghaiSymphonyContent(snapshot.programInfo, snapshot.showContent).program;
 
   assert.equal(program.length, 3);
@@ -48,9 +49,7 @@ async function main() {
   assert.equal(composerInitials[1].composer, "C.P.E. 巴赫");
   assert.equal(composerInitials[1].title, "g小调双簧管奏鸣曲，H. 549");
 
-  const boundarySnapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21830.json"), "utf8"),
-  );
+  const boundarySnapshot = JSON.parse(await readFile(fixturePath("21830"), "utf8"));
   const boundaryContent = parseShanghaiSymphonyContent(
     boundarySnapshot.programInfo,
     boundarySnapshot.showContent,
@@ -75,9 +74,7 @@ async function main() {
     },
   );
 
-  const fragmentsSnapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21851.json"), "utf8"),
-  );
+  const fragmentsSnapshot = JSON.parse(await readFile(fixturePath("21851"), "utf8"));
   const fragments = parseShanghaiSymphonyContent(
     fragmentsSnapshot.programInfo,
     fragmentsSnapshot.showContent,
@@ -92,9 +89,7 @@ async function main() {
     "陈怡",
   ]);
 
-  const choirSnapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21782.json"), "utf8"),
-  );
+  const choirSnapshot = JSON.parse(await readFile(fixturePath("21782"), "utf8"));
   const choir = parseShanghaiSymphonyContent(choirSnapshot.programInfo, choirSnapshot.showContent);
   assert.equal(choir.program.length, 17);
   assert.equal(choir.program.some((item) => item.composer === "领唱"), false);
@@ -106,16 +101,12 @@ async function main() {
   });
   assert.equal(choir.program.find((item) => item.title === "月夜")?.composer, "舒曼");
 
-  const windSnapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21810.json"), "utf8"),
-  );
+  const windSnapshot = JSON.parse(await readFile(fixturePath("21810"), "utf8"));
   const wind = parseShanghaiSymphonyContent(windSnapshot.programInfo, windSnapshot.showContent);
   assert.equal(wind.program.some((item) => item.composer === "大管"), false);
   assert.equal(wind.program.some((item) => item.title === "蓝英捷"), false);
 
-  const operaSnapshot = JSON.parse(
-    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21776.json"), "utf8"),
-  );
+  const operaSnapshot = JSON.parse(await readFile(fixturePath("21776"), "utf8"));
   const opera = parseShanghaiSymphonyContent(operaSnapshot.programInfo, operaSnapshot.showContent);
   assert.equal(opera.program.length, 2);
   assert.equal(opera.program.some((item) => /齐格弗里德|布伦希尔德/.test(item.composer || "")), false);
