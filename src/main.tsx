@@ -300,9 +300,14 @@ function App() {
         <div className="header-status">
           <span className={dataset.stats.errors.length ? "warning" : ""}>
             {dataset.stats.errors.length ? <CircleAlert size={14} /> : <Check size={14} />}
-            {loadState}
+            {dataset.stats.errors.length ? "部分来源沿用上一版" : loadState}
           </span>
-          <small>{dataset.events.length} 场 · {dataset.sources.filter((source) => source.ok).length} 个来源</small>
+          <small>
+            {dataset.events.length} 场 · {dataset.sources.length} 个来源
+            {dataset.stats.errors.length
+              ? ` · ${dataset.sources.filter((source) => source.ok).length} 个本次成功`
+              : ""}
+          </small>
         </div>
       </header>
 

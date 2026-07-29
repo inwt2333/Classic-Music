@@ -23,6 +23,7 @@ import {
   parseSuzhouSymphonyContent,
   parseSuzhouSymphonyVenue,
 } from "./adapters/suzhou-symphony";
+import { formatChinaDateLabels, parseChinaDate } from "./china-time";
 import { prepareAndPersistDataset } from "./data-store";
 import { createLocalTesseract, type LocalOcr } from "./ocr/local-tesseract";
 
@@ -396,6 +397,7 @@ function normalizeShanghaiConcertHallEvent(
 ): ConcertEvent {
   const title = cleanText(project.mainTitle || project.projectName || "未命名演出");
   const start = new Date(Number(eventRow.startTime || project.startTime));
+  const labels = formatChinaDateLabels(start);
   const endTimestamp = Number(eventRow.endTime || project.endTime);
   const parsed = parseShanghaiConcertHallContent(project.detail || project.content || "");
   const pricing = parseShanghaiConcertHallPrices(project, eventRow);
@@ -423,9 +425,9 @@ function normalizeShanghaiConcertHallEvent(
     hall: cleanText(project.venueName || "") || undefined,
     startTime: start.toISOString(),
     endTime: Number.isFinite(endTimestamp) && endTimestamp > 0 ? new Date(endTimestamp).toISOString() : undefined,
-    weekday: weekday(start),
-    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
-    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
     price: pricing.price,
     priceTiers: pricing.priceTiers,
     description: parsed.description,
@@ -504,6 +506,7 @@ function normalizeSuzhouSymphonyEvent(
 ): ConcertEvent {
   const title = cleanText(item.title || "未命名演出").replace(/^[\u200b\u200c\u200d\ufeff]+/, "");
   const start = parseChinaDate(`${dateValue}:00`);
+  const labels = formatChinaDateLabels(start);
   const parsed = parseSuzhouSymphonyContent(item.content || "");
   const address =
     item.attributeMapMult?.address?.[0]?.value || item.attributeMapSingle?.address?.value || source.venue;
@@ -525,9 +528,9 @@ function normalizeSuzhouSymphonyEvent(
     venue: place.venue,
     hall: place.hall,
     startTime: start.toISOString(),
-    weekday: weekday(start),
-    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
-    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
     description: parsed.description,
     status: "scheduled",
     ticketUrl,
@@ -740,6 +743,7 @@ function normalizeLocalHubEvent(
   scrapedAt: string,
 ): ConcertEvent {
   const start = new Date(raw.startDate);
+  const labels = formatChinaDateLabels(start);
   const title = cleanText(raw.name ?? "未命名演出");
   const composers = inferComposers(title);
   const program = inferProgram(title, composers);
@@ -754,9 +758,9 @@ function normalizeLocalHubEvent(
     venue,
     startTime: start.toISOString(),
     endTime: raw.endDate ? new Date(raw.endDate).toISOString() : undefined,
-    weekday: weekday(start),
-    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
-    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
     price: raw.offers?.price ? `¥${raw.offers.price} 起` : undefined,
     status: raw.eventStatus?.includes("Cancelled") ? "cancelled" : "scheduled",
     ticketUrl: raw.url ?? raw.offers?.url,
@@ -780,6 +784,7 @@ function normalizeShanghaiSymphonyEvent(
 ): ConcertEvent {
   const title = cleanText(raw.fullCnName || raw.cnName || raw.briefName || "未命名演出");
   const start = parseChinaDate(raw.startTime);
+  const labels = formatChinaDateLabels(start);
   const end = raw.endTime ? parseChinaDate(raw.endTime) : undefined;
   const cast = parseShanghaiSymphonyCast(raw.castList || "");
   const content = parseShanghaiSymphonyContent(raw.programInfo || "", raw.showContent);
@@ -804,9 +809,9 @@ function normalizeShanghaiSymphonyEvent(
     hall: raw.venueName ? cleanText(raw.venueName) : undefined,
     startTime: start.toISOString(),
     endTime: end?.toISOString(),
-    weekday: weekday(start),
-    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
-    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
     price: pricing.price,
     priceTiers: pricing.priceTiers,
     description: content.description,
@@ -836,6 +841,7 @@ function normalizeOrientalArtCenterEvent(
 ): ConcertEvent {
   const title = cleanText(detail.productName || "未命名演出");
   const start = orientalArtCenterShowDate(show);
+  const labels = formatChinaDateLabels(start);
   const parsed = parseOrientalArtCenterContent(detail.projectDesp || detail.showDesc || "", {
     showDate: start,
   });
@@ -863,9 +869,9 @@ function normalizeOrientalArtCenterEvent(
     venue: source.venue,
     hall: cleanText(show.venueName || detail.showPlaceName || "") || undefined,
     startTime: start.toISOString(),
-    weekday: weekday(start),
-    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
-    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
     price: pricing.price,
     priceTiers: pricing.priceTiers,
     description: parsed.description,
@@ -1048,15 +1054,6 @@ function dedupeBy<T>(items: T[], getKey: (item: T) => string) {
 
 function cleanText(value: string) {
   return value.replace(/\s+/g, " ").trim();
-}
-
-function parseChinaDate(value: string) {
-  const normalized = value.includes("T") ? value : value.replace(" ", "T");
-  return new Date(`${normalized}+08:00`);
-}
-
-function weekday(date: Date) {
-  return `周${["日", "一", "二", "三", "四", "五", "六"][date.getDay()]}`;
 }
 
 function stableId(input: string) {

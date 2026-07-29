@@ -12,7 +12,8 @@
 
 ## 在线 Demo
 
-- GitHub Pages：<https://inwt2333.github.io/Classic-Music/>
+- GitHub Pages：<https://inwt233.cn/Classic-Music/>
+- GitHub 默认入口：<https://inwt2333.github.io/Classic-Music/>（自动跳转到上面的自定义域名）
 - 数据由 GitHub Actions 每天自动采集三次；任何来源采集失败或数据审计失败时，不会覆盖上一版线上数据。
 
 首次部署前，需要在仓库 `Settings > Pages` 中将 Source 设为 **GitHub Actions**。此后推送到 `main`、手动触发工作流或定时任务都会执行测试、采集、审计和部署。
