@@ -55,6 +55,29 @@ for (const event of dataset.events) {
   if (event.dataQuality === "scraped" && !event.program.length) {
     addIssue("error", event, "标记为 scraped 但节目单为空");
   }
+  if (event.dataQuality === "manual-reviewed") {
+    if (event.review?.status !== "approved") {
+      addIssue("error", event, "人工确认事件缺少 approved 审核记录");
+    }
+    if (!event.program.length || event.program.some((item) => item.confidence !== "manual")) {
+      addIssue("error", event, "人工确认事件的节目单或字段置信度异常");
+    }
+  }
+  if (event.dataQuality === "ocr-assisted") {
+    if (!event.program.length) {
+      addIssue("error", event, "标记为 ocr-assisted 但节目单为空");
+    }
+    if (!event.program.some((item) => item.confidence === "ocr")) {
+      addIssue("error", event, "OCR 辅助事件没有 OCR 来源的节目项");
+    }
+    if (event.extraction?.method !== "ocr" || !event.extraction.reviewRequired) {
+      addIssue("error", event, "OCR 辅助事件缺少待复核的提取元数据");
+    }
+    const confidence = event.extraction?.confidence;
+    if (confidence === undefined || confidence < 0 || confidence > 100) {
+      addIssue("error", event, "OCR 置信度缺失或超出 0-100");
+    }
+  }
   if (event.program.length > 30) addIssue("warning", event, `节目项异常偏多：${event.program.length}`);
 
   const tiers = event.priceTiers ?? [];

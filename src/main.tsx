@@ -12,24 +12,28 @@ import { createRoot, type Root } from "react-dom/client";
 import {
   CalendarDays,
   Check,
+  ChevronLeft,
   ChevronRight,
   CircleAlert,
+  Database,
   Filter,
   History,
   List as ListIcon,
   MapPin,
   Music,
   Search,
+  ScanText,
   SlidersHorizontal,
   Ticket,
   UserRound,
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
-import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import ReviewWorkspace from "./components/ReviewWorkspace";
+import SourcesWorkspace from "./components/SourcesWorkspace";
+import { loadEntities, loadEventDetail, loadEventIndex } from "./data";
 import "./styles.css";
 import type {
-  ChangeDataset,
   ConcertEvent,
   ConcertEventSummary,
   ConcertIndexDataset,
@@ -55,21 +59,42 @@ type ViewMode = "list" | "calendar";
 const emptyDataset: ConcertIndexDataset = {
   schemaVersion: 2,
   generatedAt: null,
-  city: "上海、苏州",
+  city: "北京、上海、苏州",
   events: [],
   sources: [],
   stats: { rawEvents: 0, normalizedEvents: 0, aiEnhancedEvents: 0, errors: [] },
 };
 const emptyEntities: EntityDataset = { generatedAt: "", entities: [] };
-const emptyChanges: ChangeDataset = { generatedAt: "", changes: [] };
 const genreOptions = ["全部类型", "交响", "室内乐", "钢琴", "独奏", "合唱", "歌剧"];
 const pageSize = 50;
+const coverSlides = [
+  {
+    src: `${import.meta.env.BASE_URL}images/concert-orchestra.webp`,
+    position: "center 46%",
+    eyebrow: "北京 · 上海 · 苏州演出日历",
+    title: "今夜，去听一场音乐会",
+    caption: "从乐团、场馆与曲目出发，发现下一次现场聆听。",
+  },
+  {
+    src: `${import.meta.env.BASE_URL}images/concert-violin.webp`,
+    position: "center 58%",
+    eyebrow: "独奏与室内乐",
+    title: "靠近舞台，也靠近音乐",
+    caption: "按日期梳理演出，让值得期待的现场不再错过。",
+  },
+  {
+    src: `${import.meta.env.BASE_URL}images/concert-piano-hall.webp`,
+    position: "center 55%",
+    eyebrow: "音乐厅现场",
+    title: "在城市里，留一段时间给音乐",
+    caption: "查看曲目、音乐家与场馆信息，再决定今晚去哪里。",
+  },
+] as const;
 
 function App() {
   const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
-  const [changes, setChanges] = useState(emptyChanges);
   const [loadState, setLoadState] = useState("正在加载演出索引");
   const [query, setQuery] = useState(initialParams.get("q") ?? "");
   const [scope, setScope] = useState<Scope>(initialParams.get("scope") === "past" ? "past" : "upcoming");
@@ -88,7 +113,20 @@ function App() {
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const [activeEntityId, setActiveEntityId] = useState(initialParams.get("entity") ?? "");
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
+  const [coverIndex, setCoverIndex] = useState(0);
+  const [coverPaused, setCoverPaused] = useState(false);
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase("zh-CN"));
+
+  useEffect(() => {
+    if (coverPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    const timer = window.setInterval(
+      () => setCoverIndex((current) => (current + 1) % coverSlides.length),
+      7000,
+    );
+    return () => window.clearInterval(timer);
+  }, [coverPaused]);
 
   useEffect(() => {
     loadEventIndex()
@@ -97,11 +135,9 @@ function App() {
         const first = data.events.find((event) => new Date(event.startTime).getTime() >= Date.now()) ?? data.events[0];
         setSelectedId((current) => current || first?.id || "");
         setCalendarMonth(getInitialCalendarMonth(data.events));
-        setLoadState("数据已更新");
       })
       .catch((error) => setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`));
     loadEntities().then(setEntities).catch(() => setEntities(emptyEntities));
-    loadChanges().then(setChanges).catch(() => setChanges(emptyChanges));
   }, []);
 
   useEffect(() => {
@@ -295,12 +331,24 @@ function App() {
       <header className="app-header">
         <div className="brand-block">
           <Music size={22} />
-          <div><strong>古典乐演出日历</strong><span>上海 · 苏州</span></div>
+          <div><strong>古典乐演出日历</strong><span>北京 · 上海 · 苏州</span></div>
         </div>
         <div className="header-status">
+          <a className="header-link" href="?sources=1">
+            <Database size={14} />
+            数据来源
+          </a>
+          {import.meta.env.DEV ? (
+            <a className="header-link" href="?review=1">
+              <ScanText size={14} />
+              审核
+            </a>
+          ) : null}
           <span className={dataset.stats.errors.length ? "warning" : ""}>
             {dataset.stats.errors.length ? <CircleAlert size={14} /> : <Check size={14} />}
-            {dataset.stats.errors.length ? "部分来源沿用上一版" : loadState}
+            {dataset.generatedAt
+              ? `数据更新时间：${formatDatasetTimestamp(dataset.generatedAt)}`
+              : loadState}
           </span>
           <small>
             {dataset.events.length} 场 · {dataset.sources.length} 个来源
@@ -310,6 +358,66 @@ function App() {
           </small>
         </div>
       </header>
+
+      <section
+        className="cover-banner"
+        aria-label="古典音乐现场图片轮播"
+        aria-roledescription="轮播"
+        onMouseEnter={() => setCoverPaused(true)}
+        onMouseLeave={() => setCoverPaused(false)}
+        onFocusCapture={() => setCoverPaused(true)}
+        onBlurCapture={() => setCoverPaused(false)}
+      >
+        <div className="cover-images" aria-hidden="true">
+          {coverSlides.map((slide, index) => (
+            <img
+              key={slide.src}
+              className={index === coverIndex ? "active" : ""}
+              src={slide.src}
+              style={{ objectPosition: slide.position }}
+              alt=""
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+        <div className="cover-shade" aria-hidden="true" />
+        <div className="cover-copy">
+          <span>{coverSlides[coverIndex].eyebrow}</span>
+          <strong>{coverSlides[coverIndex].title}</strong>
+          <small>{coverSlides[coverIndex].caption}</small>
+        </div>
+        <div className="cover-controls">
+          <button
+            type="button"
+            title="上一张"
+            aria-label="上一张封面"
+            onClick={() => setCoverIndex((coverIndex - 1 + coverSlides.length) % coverSlides.length)}
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <div className="cover-dots" aria-label="选择封面">
+            {coverSlides.map((slide, index) => (
+              <button
+                key={slide.src}
+                type="button"
+                className={index === coverIndex ? "active" : ""}
+                title={`第 ${index + 1} 张`}
+                aria-label={`显示第 ${index + 1} 张封面`}
+                aria-current={index === coverIndex ? "true" : undefined}
+                onClick={() => setCoverIndex(index)}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            title="下一张"
+            aria-label="下一张封面"
+            onClick={() => setCoverIndex((coverIndex + 1) % coverSlides.length)}
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+      </section>
 
       <section className="command-bar">
         <label className="global-search">
@@ -392,17 +500,6 @@ function App() {
           <button className="reset-button" onClick={resetFilters} disabled={!activeFilterCount && !activeEntity}>
             清除筛选
           </button>
-
-          <div className="source-list">
-            <span>数据来源</span>
-            {dataset.sources.map((source) => (
-              <a key={source.id} href={source.url} target="_blank" rel="noreferrer">
-                <i className={source.ok ? "ok" : ""} />
-                <span>{source.name}</span>
-                <small>{source.eventCount}</small>
-              </a>
-            ))}
-          </div>
         </aside>
 
         {viewMode === "list" ? (
@@ -447,10 +544,6 @@ function App() {
         />
       </section>
 
-      <footer className="app-footer">
-        <span>最近采集：{dataset.generatedAt ? new Date(dataset.generatedAt).toLocaleString("zh-CN") : "暂无"}</span>
-        <span>{changes.changes.length ? `最近检测到 ${changes.changes.length} 项变化` : "未检测到结构化变化"}</span>
-      </footer>
     </main>
   );
 }
@@ -537,7 +630,23 @@ function pushHistoryValue(key: string, value: string) {
   window.history.pushState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
 }
 
+function formatDatasetTimestamp(value: string) {
+  return new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(value));
+}
+
 const rootElement = document.getElementById("root")!;
 const appRoot = globalThis.__classicMusicRoot ?? createRoot(rootElement);
 if (import.meta.hot) globalThis.__classicMusicRoot = appRoot;
-appRoot.render(<App />);
+const rootParams = new URLSearchParams(window.location.search);
+appRoot.render(rootParams.get("review") === "1"
+  ? <ReviewWorkspace />
+  : rootParams.get("sources") === "1"
+    ? <SourcesWorkspace />
+    : <App />);

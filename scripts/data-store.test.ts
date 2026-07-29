@@ -32,6 +32,7 @@ const baseEvent: ConcertEvent = {
   program: [{
     composer: "贝多芬",
     title: "C小调第五交响曲",
+    alternateTitles: ["Symphony No. 5 in C Minor"],
     opus: "Op.67",
     confidence: "official",
   }],
@@ -71,6 +72,91 @@ const unrelated = mergeCrossSourceEvents([
 ], sources);
 assert.equal(unrelated.length, 2);
 
+const ncpaListing: ConcertEvent = {
+  ...baseEvent,
+  id: "ncpa-1",
+  title: "2026漫步经典闭幕：“少年的号角”俞峰、李晶晶与国家大剧院管弦乐团演绎马勒第四交响曲音乐会",
+  venue: "国家大剧院",
+  hall: "音乐厅",
+  conductor: "俞峰",
+  performers: ["李晶晶"],
+  composers: ["马勒"],
+  program: [{ composer: "马勒", title: "G大调第四号交响曲", confidence: "official" }],
+};
+const orchestraListing: ConcertEvent = {
+  ...ncpaListing,
+  id: "orchestra-1",
+  title: "“少年的号角”俞峰、李晶晶与国家大剧院管弦乐团音乐会",
+  venue: "国家大剧院音乐厅",
+  hall: undefined,
+  sourceName: "来源 B",
+  sourceUrl: "https://example.com/orchestra",
+  program: [{
+    composer: "马勒",
+    title: "G大调第四交响曲，作品第四号",
+    alternateTitles: ["Mahler: Symphony No. 4 in G Major"],
+    confidence: "official",
+  }],
+};
+const crossSourceDuplicate = mergeCrossSourceEvents([ncpaListing, orchestraListing], sources);
+assert.equal(crossSourceDuplicate.length, 1);
+assert.equal(crossSourceDuplicate[0].sources?.length, 2);
+assert.equal(crossSourceDuplicate[0].program.length, 1);
+
+const sameHallDifferentConcert = mergeCrossSourceEvents([
+  ncpaListing,
+  {
+    ...orchestraListing,
+    id: "different-program",
+    title: "另一场贝多芬室内乐音乐会",
+    conductor: "另一位指挥",
+    performers: ["另一位独奏家"],
+    composers: ["贝多芬"],
+    program: [{ composer: "贝多芬", title: "第七交响曲", confidence: "official" }],
+  },
+], sources);
+assert.equal(sameHallDifferentConcert.length, 2);
+
+const ocrEvent: ConcertEvent = {
+  ...baseEvent,
+  id: "ocr-event",
+  program: [{
+    composer: "贝多芬",
+    title: "第五交响曲",
+    confidence: "ocr",
+  }],
+  dataQuality: "ocr-assisted",
+  extraction: {
+    method: "ocr",
+    provider: "tesseract",
+    confidence: 88,
+    imageCount: 1,
+    reviewRequired: true,
+  },
+};
+const mergedOcr = mergeCrossSourceEvents([ocrEvent], sources);
+assert.equal(mergedOcr[0].dataQuality, "ocr-assisted");
+assert.equal(mergedOcr[0].extraction?.confidence, 88);
+
+const officialAndOcr = mergeCrossSourceEvents(
+  [
+    ocrEvent,
+    {
+      ...baseEvent,
+      id: "official-event",
+      program: [{
+        composer: "贝多芬",
+        title: "第五交响曲",
+        confidence: "official",
+      }],
+    },
+  ],
+  sources,
+);
+assert.equal(officialAndOcr.length, 1);
+assert.equal(officialAndOcr[0].dataQuality, "scraped");
+assert.equal(officialAndOcr[0].extraction, undefined);
+
 const dataset: ConcertDataset = {
   schemaVersion: 2,
   generatedAt: "2026-07-29T00:00:00.000Z",
@@ -83,11 +169,17 @@ const index = buildIndex(dataset);
 assert.equal(index.events.length, 1);
 assert.equal(index.events[0].hasProgram, true);
 assert.equal(index.events[0].programPreview[0].title, "C小调第五交响曲");
+assert.deepEqual(index.events[0].programPreview[0].alternateTitles, ["Symphony No. 5 in C Minor"]);
+assert.match(index.events[0].searchText, /symphony no\. 5 in c minor/);
 assert.equal("description" in index.events[0], false);
 
 const entities = buildEntities(dataset);
 assert.equal(entities.entities.some((entity) => entity.type === "person" && entity.name === "余隆"), true);
 assert.equal(entities.entities.some((entity) => entity.type === "work" && entity.name === "C小调第五交响曲"), true);
+assert.deepEqual(
+  entities.entities.find((entity) => entity.type === "work" && entity.name === "C小调第五交响曲")?.aliases,
+  ["Symphony No. 5 in C Minor"],
+);
 
 const nextDataset: ConcertDataset = {
   ...dataset,

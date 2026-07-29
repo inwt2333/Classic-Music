@@ -3,10 +3,12 @@ export type ProgramItem = {
   workId?: string;
   composer?: string;
   title: string;
+  alternateTitles?: string[];
   opus?: string;
   movements?: Array<{
     number?: string;
     title: string;
+    alternateTitles?: string[];
   }>;
   confidence: "title-inferred" | "official" | "ocr" | "ai" | "manual";
 };
@@ -18,6 +20,22 @@ export type EventSourceReference = {
   sourceUrl: string;
   ticketUrl?: string;
   scrapedAt: string;
+};
+
+export type EventExtraction = {
+  method: "ocr" | "ai";
+  provider?: string;
+  confidence?: number;
+  imageCount?: number;
+  accepted?: boolean;
+  reasons?: string[];
+  reviewRequired: boolean;
+};
+
+export type EventReview = {
+  status: "approved" | "rejected";
+  reviewedAt: string;
+  note?: string;
 };
 
 export type ConcertEvent = {
@@ -47,7 +65,14 @@ export type ConcertEvent = {
   composers: string[];
   program: ProgramItem[];
   tags: string[];
-  dataQuality: "scraped" | "ai-enhanced" | "needs-review";
+  dataQuality:
+    | "scraped"
+    | "manual-reviewed"
+    | "ocr-assisted"
+    | "ai-enhanced"
+    | "needs-review";
+  extraction?: EventExtraction;
+  review?: EventReview;
 };
 
 export type ConcertEventSummary = {
@@ -70,7 +95,7 @@ export type ConcertEventSummary = {
   dataQuality: ConcertEvent["dataQuality"];
   detailPath: string;
   hasProgram: boolean;
-  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "opus">>;
+  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "alternateTitles" | "opus">>;
   searchText: string;
   sourceCount: number;
 };
@@ -117,6 +142,30 @@ export type ConcertDataset = {
 export type ConcertIndexDataset = Omit<ConcertDataset, "events"> & {
   schemaVersion: 2;
   events: ConcertEventSummary[];
+};
+
+export type ManualReviewDecision = {
+  eventId: string;
+  sourceRecordIds: string[];
+  status: EventReview["status"];
+  program: ProgramItem[];
+  note?: string;
+  reviewedAt: string;
+};
+
+export type ReviewQueueItem = {
+  event: ConcertEvent;
+  reason: string;
+  sourceRecordIds: string[];
+  ocr?: {
+    projectId: string;
+    rawText: string;
+    reasons: string[];
+    images: string[];
+    confidence: number;
+    accepted: boolean;
+    program: ProgramItem[];
+  };
 };
 
 export type EntityDataset = {

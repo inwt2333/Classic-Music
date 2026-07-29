@@ -34,6 +34,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore OCR cache
+        uses: actions/cache@v5
+        with:
+          path: data/ocr-cache
+          key: ocr-v2-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.run_id }}
+          restore-keys: |
+            ocr-v2-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
       - name: Download the currently deployed dataset
         run: |
           mkdir -p .cache
@@ -54,6 +62,7 @@ jobs:
       - name: Scrape official sources
         env:
           PREVIOUS_DATASET_PATH: .cache/previous-events.json
+          SHOAC_OCR_MAX_IMAGES: "3"
         run: npm run scrape
 
       - name: Audit generated data

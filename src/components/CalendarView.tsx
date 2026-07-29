@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import type { ConcertEventSummary } from "../types";
 import {
   buildCalendarDays,
@@ -41,11 +41,19 @@ export default function CalendarView({
     [events, monthValue],
   );
   const [activeDay, setActiveDay] = useState(() => eventDateKey(monthEvents[0]?.startTime ?? month));
+  const [expandedDays, setExpandedDays] = useState<Set<string>>(() => new Set());
 
   useEffect(() => {
     const firstEventDay = monthEvents[0] ? eventDateKey(monthEvents[0].startTime) : `${monthValue}-01`;
     if (!activeDay.startsWith(monthValue)) setActiveDay(firstEventDay);
   }, [activeDay, monthEvents, monthValue]);
+
+  useEffect(() => {
+    setExpandedDays((current) => {
+      const next = new Set([...current].filter((day) => day.startsWith(monthValue)));
+      return next.size === current.size ? current : next;
+    });
+  }, [monthValue]);
 
   const activeDayEvents = eventsByDate.get(activeDay) ?? [];
   const todayKey = eventDateKey(new Date());
@@ -79,10 +87,12 @@ export default function CalendarView({
           const key = localDateKey(day);
           const inMonth = day.getMonth() === month.getMonth();
           const dayEvents = inMonth ? eventsByDate.get(key) ?? [] : [];
+          const isExpanded = expandedDays.has(key);
+          const visibleEvents = isExpanded ? dayEvents : dayEvents.slice(0, 3);
           return (
             <div
               key={key}
-              className={`calendar-cell ${inMonth ? "" : "outside"} ${key === todayKey ? "today" : ""} ${
+              className={`calendar-cell ${isExpanded ? "expanded" : ""} ${inMonth ? "" : "outside"} ${key === todayKey ? "today" : ""} ${
                 key === activeDay ? "active-day" : ""
               }`}
             >
@@ -96,7 +106,7 @@ export default function CalendarView({
               </button>
               {dayEvents.length ? <span className="calendar-count">{dayEvents.length}</span> : null}
               <div className="calendar-events">
-                {dayEvents.slice(0, 3).map((event) => (
+                {visibleEvents.map((event) => (
                   <button
                     key={event.id}
                     className={`calendar-event ${selectedId === event.id ? "active" : ""}`}
@@ -110,7 +120,33 @@ export default function CalendarView({
                     <strong>{event.title}</strong>
                   </button>
                 ))}
-                {dayEvents.length > 3 ? <small>另有 {dayEvents.length - 3} 场</small> : null}
+                {dayEvents.length > 3 ? (
+                  <button
+                    className="calendar-more-button"
+                    aria-expanded={isExpanded}
+                    onClick={() => {
+                      setActiveDay(key);
+                      setExpandedDays((current) => {
+                        const next = new Set(current);
+                        if (next.has(key)) next.delete(key);
+                        else next.add(key);
+                        return next;
+                      });
+                    }}
+                  >
+                    {isExpanded ? (
+                      <>
+                        <ChevronUp size={11} />
+                        收起
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown size={11} />
+                        另有 {dayEvents.length - 3} 场
+                      </>
+                    )}
+                  </button>
+                ) : null}
               </div>
             </div>
           );

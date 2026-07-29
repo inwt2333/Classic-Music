@@ -1,5 +1,5 @@
 {
-  "city": "上海、苏州",
+  "city": "北京、上海、苏州",
   "sources": [
     {
       "id": "shsymphony-official",
@@ -49,6 +49,48 @@
           "slug": "0",
           "index": 3
         }
+      ]
+    },
+    {
+      "id": "ncpa-official",
+      "name": "国家大剧院官网",
+      "adapter": "ncpa-api",
+      "url": "https://wticket.chncpa.org/",
+      "apiBase": "https://openapi.chncpa.org",
+      "city": "北京",
+      "venue": "国家大剧院",
+      "pageSize": 10
+    },
+    {
+      "id": "china-national-symphony-official",
+      "name": "中国交响乐团官网",
+      "adapter": "china-national-symphony-html",
+      "url": "https://www.cnso.com.cn/zgjxyt/ycrc/ycrc.shtml",
+      "city": "北京",
+      "venue": "北京音乐厅",
+      "maxPages": 12,
+      "seedUrls": [
+        "https://www.cnso.com.cn/zgjxyt/ycrc/202507/c6a2a9922a594803ab4fb3d95b846fbb.shtml"
+      ]
+    },
+    {
+      "id": "china-philharmonic-official",
+      "name": "中国爱乐乐团官网",
+      "adapter": "china-philharmonic-html",
+      "url": "http://www.cpolive.com/col/col1701/index.html",
+      "city": "北京",
+      "venue": "国家大剧院音乐厅"
+    },
+    {
+      "id": "shanghai-philharmonic-official",
+      "name": "上海爱乐乐团官网",
+      "adapter": "shanghai-philharmonic-html",
+      "url": "http://shphilharmonic.com/activity",
+      "city": "上海",
+      "venue": "上海东方艺术中心",
+      "maxPages": 10,
+      "seedUrls": [
+        "http://shphilharmonic.com/activity/6a62d59f29df199b78e1aa88?no=2&out=true"
       ]
     }
   ]

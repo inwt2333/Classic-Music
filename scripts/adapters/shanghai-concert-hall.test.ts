@@ -20,6 +20,8 @@ const numbered = parseShanghaiConcertHallContent(`
 `);
 assert.equal(numbered.program.length, 3);
 assert.equal(numbered.program[0].title, "水手致狄奥斯库里兄弟之歌");
+assert.deepEqual(numbered.program[0].alternateTitles, ["Lied eines Schiffers an die Dioskuren op.65 n.1, D.360"]);
+assert.deepEqual(numbered.program[1].alternateTitles, ["Nachtstück op.36 n.2, D.672"]);
 assert.match(numbered.program[0].opus || "", /Op\.65/);
 assert.deepEqual(numbered.performers, ["玛丽亚·克里斯蒂娜·基尔"]);
 assert.equal(numbered.description, "这是一段演出简介。");
@@ -48,6 +50,10 @@ assert.deepEqual(
     ["李斯特", "但丁读后感——奏鸣曲风幻想曲"],
     ["德彪西", "贝加莫组曲"],
   ],
+);
+assert.deepEqual(
+  bilingual.program.map((item) => item.alternateTitles),
+  [["4 Klavierstücke, Op.119"], ["Après une lecture de Dante"], ["Suite bergamasque"]],
 );
 
 const inlineAndCredit = parseShanghaiConcertHallContent(`

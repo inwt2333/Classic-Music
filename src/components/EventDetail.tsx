@@ -66,6 +66,8 @@ export default function EventDetail({
   );
   const qualityLabel = {
     scraped: "官网解析",
+    "manual-reviewed": "人工确认",
+    "ocr-assisted": "图片 OCR · 待复核",
     "ai-enhanced": "AI 辅助",
     "needs-review": "待复核",
   }[event.dataQuality];
@@ -119,6 +121,14 @@ export default function EventDetail({
       ) : null}
 
       <SectionTitle icon={<Music size={17} />} title={`节目单${event.program.length ? ` · ${event.program.length} 首` : ""}`} />
+      {event.dataQuality === "ocr-assisted" ? (
+        <p className="ocr-notice">
+          官网节目单来自图片，当前文字由本地 OCR 提取并等待复核
+          {event.extraction?.confidence !== undefined
+            ? ` · 置信度 ${event.extraction.confidence}`
+            : ""}
+        </p>
+      ) : null}
       <div className="program-list">
         {event.program.length ? (
           event.program.map((item, index) => (
@@ -174,17 +184,24 @@ function ProgramRow({
   entity?: EntityRecord;
   onExplore: (entity: EntityRecord) => void;
 }) {
-  const keyword = [item.composer, item.title, item.opus].filter(Boolean).join(" ");
+  const keyword = [item.composer, item.title, ...(item.alternateTitles ?? []), item.opus].filter(Boolean).join(" ");
   return (
     <article className="program-row">
       <div className="program-copy">
         {entity ? <button className="work-link" onClick={() => onExplore(entity)}>{item.title}</button> : <strong>{item.title}</strong>}
+        {item.alternateTitles?.length ? (
+          <small className="program-alternate-title">{item.alternateTitles.join(" / ")}</small>
+        ) : null}
         <span>{[item.composer, item.opus].filter(Boolean).join(" · ") || "曲目信息待补充"}</span>
         {item.movements?.length ? (
           <ol className="movement-list">
             {item.movements.map((movement, index) => (
               <li key={`${movement.number ?? index}-${movement.title}`}>
-                {movement.number ? <span>{movement.number}.</span> : null}{movement.title}
+                {movement.number ? <span>{movement.number}.</span> : null}
+                <div>
+                  {movement.title}
+                  {movement.alternateTitles?.length ? <small>{movement.alternateTitles.join(" / ")}</small> : null}
+                </div>
               </li>
             ))}
           </ol>

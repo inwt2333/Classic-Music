@@ -62,6 +62,17 @@ export function parseShanghaiConcertHallPrices(
 function parseProgram(blocks: ContentBlock[]) {
   const program: ProgramItem[] = [];
   let currentComposer: string | undefined;
+  let pendingAlternateTitle: string | undefined;
+  let lastWorkBlockIndex = -2;
+
+  const addProgramItem = (item: ProgramItem, blockIndex: number) => {
+    if (pendingAlternateTitle) {
+      item.alternateTitles = [pendingAlternateTitle];
+      pendingAlternateTitle = undefined;
+    }
+    program.push(item);
+    lastWorkBlockIndex = blockIndex;
+  };
 
   for (let index = 0; index < blocks.length; index += 1) {
     const block = blocks[index];
@@ -78,6 +89,14 @@ function parseProgram(blocks: ContentBlock[]) {
     }
 
     if (isEnglishLine(line)) {
+      if (block.bold) continue;
+      const alternateTitle = cleanAlternateTitle(line);
+      if (!alternateTitle) continue;
+      if (program.length && lastWorkBlockIndex === index - 1) {
+        addAlternateTitle(program[program.length - 1], alternateTitle);
+      } else {
+        pendingAlternateTitle = alternateTitle;
+      }
       continue;
     }
 
@@ -89,7 +108,7 @@ function parseProgram(blocks: ContentBlock[]) {
     if (/^民间乐曲\s*[：:]?$/.test(line)) continue;
     if (creditPattern.test(nextLine)) {
       const item = createProgramItem(stripProgramNumber(line), currentComposer);
-      if (item) program.push(item);
+      if (item) addProgramItem(item, index);
       continue;
     }
 
@@ -102,7 +121,7 @@ function parseProgram(blocks: ContentBlock[]) {
     const inline = splitInlineComposer(line);
     if (inline) {
       const item = createProgramItem(inline.title, inline.composer);
-      if (item) program.push(item);
+      if (item) addProgramItem(item, index);
       currentComposer = inline.composer;
       continue;
     }
@@ -111,7 +130,7 @@ function parseProgram(blocks: ContentBlock[]) {
     if (!isWorkLine(candidate, block.bold, currentComposer, program.length === 0, nextLine)) continue;
 
     const item = createProgramItem(candidate, currentComposer);
-    if (item) program.push(item);
+    if (item) addProgramItem(item, index);
   }
 
   return dedupeProgram(program);
@@ -277,9 +296,20 @@ function cleanComposerCredit(value: string) {
 }
 
 function isEnglishLine(value: string) {
-  const latin = (value.match(/[A-Za-zÀ-ž]/g) || []).length;
+  const letters = (value.match(/\p{L}/gu) || []).length;
   const chinese = (value.match(/[\u3400-\u9fff]/g) || []).length;
-  return latin > 4 && chinese === 0;
+  return letters > 4 && chinese === 0;
+}
+
+function cleanAlternateTitle(value: string) {
+  const title = cleanText(stripProgramNumber(value));
+  return title && title.length <= 180 ? title : undefined;
+}
+
+function addAlternateTitle(item: ProgramItem, value: string) {
+  if (!value || value === item.title) return;
+  item.alternateTitles ??= [];
+  if (!item.alternateTitles.includes(value)) item.alternateTitles.push(value);
 }
 
 function splitNames(value: string) {

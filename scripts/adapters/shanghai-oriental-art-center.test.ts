@@ -27,12 +27,18 @@ assert.equal(content.program.length, 3);
 assert.deepEqual(content.program[1], {
   composer: "门德尔松",
   title: "D小调第一钢琴三重奏，作品49",
-  movements: [{ number: "1", title: "激动的甚快板" }],
+  alternateTitles: ["Piano Trio No. 1 in D Minor, Op. 49"],
+  movements: [{
+    number: "1",
+    title: "激动的甚快板",
+    alternateTitles: ["Molto allegro ed agitato"],
+  }],
   confidence: "official",
 });
 assert.deepEqual(content.program[2], {
   composer: "巫中杰",
   title: "英剧主题曲，选自《神探夏洛克》配乐",
+  alternateTitles: ["“Mysteries from Sherlock”"],
   confidence: "official",
 });
 assert.match(content.description || "", /现任莫斯科国立柴科夫斯基音乐学院/);
@@ -86,6 +92,7 @@ assert.deepEqual(
     ["车尔尼", "引子、辉煌变奏曲与狩猎回旋曲"],
   ],
 );
+assert.deepEqual(bracketHeading.program[0].alternateTitles, ["Liszt: Consolations, S172/R12"]);
 
 const englishProgram = parseOrientalArtCenterContent(`
   <p>曲目单</p>
@@ -98,6 +105,14 @@ assert.deepEqual(
   englishProgram.program.map((item) => item.title),
   ["Think Fast", "Pole Star", "Spirit Fall"],
 );
+
+const multilingualProgram = parseOrientalArtCenterContent(`
+  <p>曲目单</p>
+  <p>柴科夫斯基 | 六月：船歌</p>
+  <p>Июнь: Баркарола</p>
+  <p>*曲目以现场演奏为准</p>
+`);
+assert.deepEqual(multilingualProgram.program[0].alternateTitles, ["Июнь: Баркарола"]);
 
 const alternatingCredits = parseOrientalArtCenterContent(`
   <p>曲目 Program</p>
@@ -112,6 +127,10 @@ const alternatingCredits = parseOrientalArtCenterContent(`
 assert.deepEqual(
   alternatingCredits.program.map((item) => item.title),
   ["冷澈之光", "云之河", "自由"],
+);
+assert.deepEqual(
+  alternatingCredits.program.map((item) => item.alternateTitles),
+  [["Fria Claridade"], ["Rio de Nuvens"], ["Liberdade"]],
 );
 
 const datedProgramHtml = `
@@ -179,6 +198,10 @@ assert.deepEqual(
     ["比才", "迷醉"],
   ],
 );
+assert.deepEqual(
+  composerHeadingProgram.program.map((item) => item.alternateTitles),
+  [["6 Songs Without Words, Op. 67"], ["Rondo Capriccioso, Op. 14"], ["Extase"]],
+);
 
 const groupedTranslations = parseOrientalArtCenterContent(`
   <p>曲目 Program</p>
@@ -192,6 +215,10 @@ assert.deepEqual(
   groupedTranslations.program.map((item) => item.title),
   ["理想佳人", "梦"],
 );
+assert.deepEqual(
+  groupedTranslations.program.map((item) => item.alternateTitles),
+  [["Ideale"], ["Sogno"]],
+);
 
 const organizerFooter = parseOrientalArtCenterContent(`
   <p>曲目 PROGRAM</p>
@@ -203,6 +230,10 @@ const organizerFooter = parseOrientalArtCenterContent(`
 assert.equal(organizerFooter.program.length, 1);
 assert.equal(organizerFooter.program[0].composer, "肖斯塔科维奇");
 assert.equal(organizerFooter.program[0].title, "芭蕾组曲《螺栓》，作品27a");
+assert.deepEqual(
+  organizerFooter.program[0].alternateTitles,
+  ["Dmitri Shostakovich: Ballet Suite The Bolt, Op.27a"],
+);
 assert.equal(organizerFooter.program.some((item) => item.title.includes("曾参与")), false);
 
 const numberedComposerProgram = parseOrientalArtCenterContent(`
@@ -240,6 +271,11 @@ assert.deepEqual(
   unnumberedMovements.program[0].movements?.map((movement) => movement.title),
   ["异国和异国人民", "奇异的故事"],
 );
+assert.deepEqual(unnumberedMovements.program[0].alternateTitles, ["Kinderszenen, Op. 15"]);
+assert.deepEqual(
+  unnumberedMovements.program[0].movements?.map((movement) => movement.alternateTitles),
+  [["Von fremden Ländern und Menschen"], ["Kuriose Geschichte"]],
+);
 assert.deepEqual(
   unnumberedMovements.program[1].movements?.map((movement) => movement.title),
   ["C小调即兴曲"],
@@ -263,6 +299,11 @@ assert.deepEqual(
   inlineBilingualMovements.program[0].movements?.map((movement) => movement.title),
   ["1900主题", "钢琴家的传奇", "爱的演奏"],
 );
+assert.deepEqual(inlineBilingualMovements.program[0].alternateTitles, ["Music From The Legend of 1900"]);
+assert.deepEqual(
+  inlineBilingualMovements.program[0].movements?.map((movement) => movement.alternateTitles),
+  [["1900's Theme"], ["The Legend of the Pianist"], ["Playing Love"]],
+);
 assert.equal(inlineBilingualMovements.program[1].composer, "舒伯特");
 
 const romanMovements = parseOrientalArtCenterContent(`
@@ -281,9 +322,10 @@ assert.equal(romanMovements.program.length, 2);
 assert.deepEqual(romanMovements.program[0], {
   composer: "普罗科菲耶夫",
   title: "《罗密欧与朱丽叶》选曲，作品75",
+  alternateTitles: ["Excerpts from Romeo and Juliet, Op. 75"],
   movements: [
-    { number: "I", title: "民间舞蹈" },
-    { number: "III", title: "小步舞曲（宾客到来）" },
+    { number: "I", title: "民间舞蹈", alternateTitles: ["Folk Dance"] },
+    { number: "III", title: "小步舞曲（宾客到来）", alternateTitles: ["Minuet"] },
   ],
   confidence: "official",
 });

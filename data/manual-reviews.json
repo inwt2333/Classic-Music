@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-29T14:53:24.283Z",
+  "decisions": [
+    {
+      "eventId": "perf_42465d6c123fa51b",
+      "sourceRecordIds": [
+        "shoac_1263492877948473344_16329300"
+      ],
+      "status": "approved",
+      "program": [
+        {
+          "title": "Wellerman",
+          "confidence": "manual"
+        },
+        {
+          "title": "Be What You Wanna Be",
+          "confidence": "manual"
+        },
+        {
+          "title": "披头士乐队曲目串烧",
+          "confidence": "manual"
+        },
+        {
+          "title": "爱之初体验",
+          "confidence": "manual"
+        },
+        {
+          "title": "甜蜜蜜",
+          "confidence": "manual"
+        },
+        {
+          "title": "我的小绿仙人掌",
+          "confidence": "manual"
+        }
+      ],
+      "note": "已对照官网节目单图片确认",
+      "reviewedAt": "2026-07-29T14:53:24.248Z"
+    }
+  ]
+}

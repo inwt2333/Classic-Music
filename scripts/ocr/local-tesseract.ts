@@ -7,6 +7,8 @@ type CachedOcr = {
   url: string;
   text: string;
   confidence: number;
+  imageHash: string;
+  cacheHit: boolean;
 };
 
 export type LocalOcr = {
@@ -36,22 +38,34 @@ export async function createLocalTesseract(cacheDirectory: string): Promise<Loca
 
   return {
     async recognizeUrl(url: string) {
-      const cacheName = `${createHash("sha256").update(url).digest("hex")}.json`;
-      const cachePath = resolve(cacheDirectory, cacheName);
+      const response = await fetch(url, {
+        headers: {
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+          accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        },
+        signal: AbortSignal.timeout(30_000),
+      });
+      if (!response.ok) throw new Error(`OCR image HTTP ${response.status}: ${url}`);
+      const image = Buffer.from(await response.arrayBuffer());
+      const imageHash = createHash("sha256").update(image).digest("hex");
+      const imageCacheDirectory = resolve(cacheDirectory, "images");
+      await mkdir(imageCacheDirectory, { recursive: true });
+      const cachePath = resolve(imageCacheDirectory, `${imageHash}.json`);
       try {
-        return JSON.parse(await readFile(cachePath, "utf8")) as CachedOcr;
+        const cached = JSON.parse(await readFile(cachePath, "utf8")) as CachedOcr;
+        return { ...cached, url, imageHash, cacheHit: true };
       } catch {
         // A cache miss is expected on the first scrape.
       }
 
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`OCR image HTTP ${response.status}: ${url}`);
-      const image = Buffer.from(await response.arrayBuffer());
       const result = await (await getWorker()).recognize(image, { rotateAuto: true });
       const cached: CachedOcr = {
         url,
         text: result.data.text.trim(),
         confidence: result.data.confidence,
+        imageHash,
+        cacheHit: false,
       };
       await writeFile(cachePath, JSON.stringify(cached, null, 2), "utf8");
       return cached;

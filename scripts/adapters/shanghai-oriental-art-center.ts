@@ -10,6 +10,11 @@ type ParseOptions = {
   confidence?: ProgramItem["confidence"];
 };
 
+type AlternateTitleTarget = {
+  title: string;
+  alternateTitles?: string[];
+};
+
 const boilerplatePattern =
   /请留意确认所购场次和票档|迟到或中途离场|曲目以现场为准|曲目及顺序以现场为准|programs? (?:is|are)? ?subject to change|开演无短信提醒服务/i;
 const programFooterPattern =
@@ -179,6 +184,7 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
   let currentComposer: string | undefined;
   let currentWork: ProgramItem | undefined;
   let previousSourceLine: string | undefined;
+  const untranslatedTargets: AlternateTitleTarget[] = [];
 
   for (let index = 0; index < blocks.length; index += 1) {
     const block = blocks[index];
@@ -191,17 +197,22 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentComposer = undefined;
       currentWork = undefined;
       previousSourceLine = undefined;
+      untranslatedTargets.length = 0;
       continue;
     }
     if (hasDateSections && targetDate && activeDate !== targetDate) continue;
 
     if (matchRoleLine(line) || isCastOrCreditLine(line)) continue;
-    if (
-      confidence !== "ocr" &&
-      previousSourceLine &&
-      /[\u3400-\u9fff]/.test(previousSourceLine) &&
-      isEnglishTranslation(line)
-    ) {
+    if (confidence !== "ocr" && isEnglishTranslation(line) && untranslatedTargets.length) {
+      const alternateTitle = extractStandaloneAlternateTitle(line);
+      if (alternateTitle) {
+        const groupedTranslations = /[|｜∣]/.test(line);
+        const followsChineseTitle = Boolean(previousSourceLine && /[\u3400-\u9fff]/.test(previousSourceLine));
+        const targetIndex = groupedTranslations || !followsChineseTitle ? 0 : untranslatedTargets.length - 1;
+        const [target] = untranslatedTargets.splice(targetIndex, 1);
+        addAlternateTitle(target, alternateTitle);
+      }
+      previousSourceLine = line;
       continue;
     }
     previousSourceLine = line;
@@ -211,6 +222,7 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentComposer = bracketWork.composer;
       currentWork = bracketWork;
       program.push(currentWork);
+      registerTranslationTarget(currentWork, line, untranslatedTargets);
       continue;
     }
 
@@ -219,6 +231,7 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentComposer = labeledWork.composer;
       currentWork = labeledWork;
       program.push(currentWork);
+      registerTranslationTarget(currentWork, line, untranslatedTargets);
       continue;
     }
     if (labeledProgramFormat) continue;
@@ -233,12 +246,14 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
         const composer = parseComposerFromCredit(right);
         currentComposer = composer;
         currentWork = { composer, title, confidence };
+        registerTranslationTarget(currentWork, left, untranslatedTargets);
       } else {
         const composer = cleanComposer(left);
         const title = cleanProgramTitle(right);
         if (!composer || !title) continue;
         currentComposer = composer;
         currentWork = { composer, title, confidence };
+        registerTranslationTarget(currentWork, right, untranslatedTargets);
       }
       program.push(currentWork);
       continue;
@@ -249,6 +264,7 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentComposer = colonWork.composer;
       currentWork = colonWork;
       program.push(currentWork);
+      registerTranslationTarget(currentWork, line, untranslatedTargets);
       continue;
     }
 
@@ -256,6 +272,9 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     if (currentWork && movements.length && isMovementParent(currentWork.title)) {
       currentWork.movements ??= [];
       currentWork.movements.push(...movements);
+      for (const movement of movements) {
+        registerTranslationTarget(movement, movements.length === 1 ? line : movement.title, untranslatedTargets);
+      }
       continue;
     }
 
@@ -268,6 +287,7 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     ) {
       currentComposer = composerHeading;
       currentWork = undefined;
+      untranslatedTargets.length = 0;
       continue;
     }
 
@@ -279,7 +299,9 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       isUnnumberedBilingualMovement(blocks, index, line)
     ) {
       currentWork.movements ??= [];
-      currentWork.movements.push({ title });
+      const movement = { title };
+      currentWork.movements.push(movement);
+      registerTranslationTarget(movement, line, untranslatedTargets);
       continue;
     }
     const plainTitles =
@@ -292,6 +314,11 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     for (const plainTitle of plainTitles) {
       currentWork = { composer: currentComposer, title: plainTitle, confidence };
       program.push(currentWork);
+      registerTranslationTarget(
+        currentWork,
+        plainTitles.length === 1 ? stripLeadingWorkNumber(line) : plainTitle,
+        untranslatedTargets,
+      );
     }
   }
 
@@ -414,7 +441,12 @@ function parseAlternatingTitleCreditProgram(
   const program: ProgramItem[] = [];
   for (let index = 0; index < lines.length; index += 2) {
     const title = cleanProgramTitle(lines[index]);
-    if (title) program.push({ title, confidence });
+    if (title) {
+      const item: ProgramItem = { title, confidence };
+      const alternateTitle = extractInlineAlternateTitle(lines[index]);
+      if (alternateTitle) item.alternateTitles = [alternateTitle];
+      program.push(item);
+    }
   }
   return dedupeConsecutiveProgram(program);
 }
@@ -527,6 +559,61 @@ function cleanProgramTitle(value: string) {
   return cleaned;
 }
 
+function registerTranslationTarget(
+  target: AlternateTitleTarget,
+  sourceLine: string,
+  untranslatedTargets: AlternateTitleTarget[],
+) {
+  const alternateTitle = extractInlineAlternateTitle(sourceLine);
+  if (alternateTitle) {
+    addAlternateTitle(target, alternateTitle);
+    return;
+  }
+  if (/[\u3400-\u9fff]/.test(target.title)) untranslatedTargets.push(target);
+}
+
+function extractInlineAlternateTitle(value: string) {
+  const line = cleanText(value);
+  if (!/[\u3400-\u9fff]/.test(line)) return undefined;
+  const lastCjkIndex = Array.from(line.matchAll(/[\u3400-\u9fff]/g)).at(-1)?.index;
+  if (lastCjkIndex === undefined) return undefined;
+
+  const alternateTitle = cleanText(line.slice(lastCjkIndex + 1))
+    .replace(/^[）》】\]}\s|｜∣:：—–-]+/, "")
+    .trim();
+  const letterCount = (alternateTitle.match(/\p{L}/gu) || []).length;
+  if (letterCount < 3) return undefined;
+  if (
+    /^(?:Op\.?|BWV|K(?:V)?\.?|D\.?|Hob\.?|WAB|TWV|M\.?|RV|S\.?)\s*\d[\dA-Za-z./-]*(?:\s+No\.?\s*\d+)?$/i.test(
+      alternateTitle,
+    )
+  ) {
+    return undefined;
+  }
+  return alternateTitle.length <= 180 ? alternateTitle : undefined;
+}
+
+function extractStandaloneAlternateTitle(value: string) {
+  let title = cleanText(stripLeadingWorkNumber(value)).replace(
+    /^(?:[IVXLCDM]+|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+)\s*[.、．)）:：]\s*/i,
+    "",
+  );
+  const split = title.match(/^[^|｜∣]{1,60}\s*[|｜∣]\s*(.+)$/);
+  if (split) title = cleanText(split[1]);
+  if (!title || title.length > 180 || !isEnglishTranslation(title)) return undefined;
+  return title;
+}
+
+function addAlternateTitle(target: AlternateTitleTarget, value: string) {
+  const title = cleanText(value);
+  if (!title || title === target.title) return;
+  if (target.title.endsWith(title)) {
+    target.title = cleanText(target.title.slice(0, -title.length)).replace(/[|｜∣:：—–-]+$/, "").trim();
+  }
+  target.alternateTitles ??= [];
+  if (!target.alternateTitles.includes(title)) target.alternateTitles.push(title);
+}
+
 function stripLeadingWorkNumber(value: string) {
   return cleanText(value).replace(/^\d{1,3}\s*[.、．)）:：]\s*/, "");
 }
@@ -541,8 +628,8 @@ function stripPerformerDetails(value: string) {
 
 function isEnglishTranslation(value: string) {
   const cjkCount = (value.match(/[\u3400-\u9fff]/g) || []).length;
-  const latinCount = (value.match(/[A-Za-zÀ-ž]/g) || []).length;
-  return cjkCount === 0 && latinCount >= 3;
+  const letterCount = (value.match(/\p{L}/gu) || []).length;
+  return cjkCount === 0 && letterCount >= 3;
 }
 
 function isAlternatingTitleCreditFormat(blocks: ContentBlock[]) {

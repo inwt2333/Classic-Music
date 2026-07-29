@@ -15,6 +15,7 @@ import type {
   ProgramItem,
 } from "../src/types";
 import { formatChinaDateLabels } from "./china-time";
+import { applyManualReviews, loadManualReviews } from "./review-store";
 
 type PreparedData = {
   dataset: ConcertDataset;
@@ -31,16 +32,50 @@ export async function prepareAndPersistDataset(
   const previous = await readPreviousDataset(outputPath);
   const recoveredDataset = restoreFailedSourceEvents(dataset, previous);
   const canonicalEvents = mergeCrossSourceEvents(recoveredDataset.events, recoveredDataset.sources);
+  const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
+  const reviews = await loadManualReviews(reviewPath);
+  const reviewedEvents = assignProgramIdentities(
+    applyManualReviews(canonicalEvents, reviews.decisions),
+  );
   const canonicalDataset: ConcertDataset = {
     ...recoveredDataset,
     schemaVersion: 2,
-    events: canonicalEvents,
-    stats: { ...recoveredDataset.stats, normalizedEvents: canonicalEvents.length },
+    events: reviewedEvents,
+    stats: { ...recoveredDataset.stats, normalizedEvents: reviewedEvents.length },
   };
   const entities = buildEntities(canonicalDataset);
   const changes = buildChanges(previous, canonicalDataset);
   const index = buildIndex(canonicalDataset);
   const prepared = { dataset: canonicalDataset, index, entities, changes };
+
+  await persistSqlite(prepared, databasePath);
+  await exportStaticData(prepared, outputPath);
+  return prepared;
+}
+
+export async function reapplyManualReviewsAndPersist(
+  outputPath: string,
+  databasePath: string,
+) {
+  const previous = await readPreviousDataset(outputPath);
+  if (!previous) throw new Error("当前数据集不存在，无法应用审核结果");
+  const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
+  const reviews = await loadManualReviews(reviewPath);
+  const reviewedDataset: ConcertDataset = {
+    ...previous,
+    events: assignProgramIdentities(
+      applyManualReviews(previous.events, reviews.decisions),
+    ),
+  };
+  const entities = buildEntities(reviewedDataset);
+  const changes = buildChanges(previous, reviewedDataset);
+  const index = buildIndex(reviewedDataset);
+  const prepared = {
+    dataset: reviewedDataset,
+    index,
+    entities,
+    changes,
+  };
 
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
@@ -150,10 +185,11 @@ export function buildEntities(dataset: ConcertDataset): EntityDataset {
         type: "work" as const,
         name: item.title,
         subtitle: [item.composer, item.opus].filter(Boolean).join(" · ") || undefined,
-        aliases: [],
+        aliases: item.alternateTitles ?? [],
         eventIds: [],
         upcomingEventCount: 0,
       };
+      current.aliases = unique([...current.aliases, ...(item.alternateTitles ?? [])]);
       current.eventIds.push(event.id);
       if (upcoming) current.upcomingEventCount += 1;
       entities.set(id, current);
@@ -357,6 +393,7 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
     const insertOrganization = database.prepare("INSERT OR IGNORE INTO organizations VALUES (?, ?, ?)");
     const insertEventOrganization = database.prepare("INSERT OR IGNORE INTO event_organizations VALUES (?, ?, ?)");
     const insertWork = database.prepare("INSERT OR IGNORE INTO works VALUES (?, ?, ?, ?)");
+    const insertWorkAlias = database.prepare("INSERT OR IGNORE INTO work_aliases VALUES (?, ?)");
     const insertProgram = database.prepare("INSERT OR REPLACE INTO program_items VALUES (?, ?, ?, ?, ?)");
     const insertMovement = database.prepare("INSERT OR REPLACE INTO movements VALUES (?, ?, ?, ?, ?)");
     const insertPrice = database.prepare("INSERT OR IGNORE INTO price_tiers VALUES (?, ?)");
@@ -397,7 +434,11 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
             source.sourceRecordId,
             fieldName,
             JSON.stringify(value),
-            fieldName === "program" && event.dataQuality !== "scraped" ? event.dataQuality : "official",
+            fieldName === "program" && event.dataQuality !== "scraped"
+              ? event.dataQuality === "manual-reviewed"
+                ? "manual"
+                : event.dataQuality
+              : "official",
             source.scrapedAt,
           );
         }
@@ -424,6 +465,7 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
         const itemWorkId = item.workId ?? workId(item);
         const programItemId = item.id ?? entityId("program", `${event.id}:${index}:${itemWorkId}`);
         insertWork.run(itemWorkId, item.composer ?? null, item.title, item.opus ?? null);
+        for (const alias of item.alternateTitles ?? []) insertWorkAlias.run(itemWorkId, alias);
         insertProgram.run(programItemId, event.id, itemWorkId, index, item.confidence);
         item.movements?.forEach((movement, movementIndex) => {
           insertMovement.run(
@@ -437,11 +479,34 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
       });
 
       for (const price of event.priceTiers ?? []) insertPrice.run(event.id, price);
-      if (event.dataQuality === "needs-review") {
+      if (
+        !event.review &&
+        (
+          event.dataQuality === "needs-review" ||
+          event.dataQuality === "ocr-assisted" ||
+          event.dataQuality === "ai-enhanced"
+        )
+      ) {
+        const ocrConfidence =
+          event.dataQuality === "ocr-assisted" && event.extraction?.confidence !== undefined
+            ? `（OCR 置信度 ${event.extraction.confidence}）`
+            : "";
         insertReview.run(
           entityId("review", event.id),
           event.id,
-          event.program.length ? "字段需要人工复核" : "缺少可确认节目单",
+          event.dataQuality === "ocr-assisted"
+            ? `图片节目单需要人工复核${ocrConfidence}`
+            : event.extraction?.method === "ocr" && event.extraction.accepted
+              ? `图片 OCR 候选需要人工确认${event.extraction.confidence !== undefined
+                ? `（置信度 ${event.extraction.confidence}）`
+                : ""}`
+            : event.extraction?.method === "ocr"
+              ? `图片 OCR 未通过自动门槛：${event.extraction.reasons?.join("；") || "未解析出可信节目单"}`
+            : event.dataQuality === "ai-enhanced"
+              ? "AI 辅助节目单需要人工复核"
+            : event.program.length
+              ? "字段需要人工复核"
+              : "缺少可确认节目单",
           prepared.dataset.generatedAt,
         );
       }
@@ -489,6 +554,17 @@ function mergeEventGroup(
       workId: itemWorkId,
     };
   });
+  const dataQuality = mergedProgramQuality(program);
+  const extraction =
+    dataQuality === "manual-reviewed"
+      ? ranked.find((event) => event.extraction)?.extraction
+      : dataQuality === "ocr-assisted"
+      ? ranked.find((event) => event.extraction?.method === "ocr")?.extraction
+      : dataQuality === "ai-enhanced"
+        ? ranked.find((event) => event.extraction?.method === "ai")?.extraction
+        : dataQuality === "needs-review"
+          ? ranked.find((event) => event.extraction)?.extraction
+          : undefined;
 
   return {
     ...base,
@@ -506,16 +582,27 @@ function mergeEventGroup(
     tags: unique(group.flatMap((event) => event.tags)),
     program,
     sources,
-    dataQuality: program.length
-      ? group.some((event) => event.dataQuality === "ai-enhanced")
-        ? "ai-enhanced"
-        : "scraped"
-      : "needs-review",
+    dataQuality,
+    extraction,
+    review: ranked.find((event) => event.review)?.review,
   };
 }
 
+function mergedProgramQuality(
+  program: ProgramItem[],
+): ConcertEvent["dataQuality"] {
+  if (!program.length) return "needs-review";
+  if (program.some((item) => item.confidence === "manual")) return "manual-reviewed";
+  if (program.some((item) => item.confidence === "official")) return "scraped";
+  if (program.some((item) => item.confidence === "ocr")) return "ocr-assisted";
+  if (program.some((item) => item.confidence === "ai")) return "ai-enhanced";
+  return "needs-review";
+}
+
 function toSummary(event: ConcertEvent): ConcertEventSummary {
-  const workLabels = event.program.map((item) => [item.composer, item.title, item.opus].filter(Boolean).join(" "));
+  const workLabels = event.program.map((item) =>
+    [item.composer, item.title, ...(item.alternateTitles ?? []), item.opus].filter(Boolean).join(" ")
+  );
   const knownGenres = ["交响", "室内乐", "钢琴", "独奏", "合唱", "歌剧"];
   const searchText = [
     event.title,
@@ -557,6 +644,7 @@ function toSummary(event: ConcertEvent): ConcertEventSummary {
       workId: item.workId,
       composer: item.composer,
       title: item.title,
+      alternateTitles: item.alternateTitles,
       opus: item.opus,
     })),
     searchText,
@@ -567,20 +655,26 @@ function toSummary(event: ConcertEvent): ConcertEventSummary {
 function shouldMerge(a: ConcertEvent, b: ConcertEvent) {
   if (minuteKey(a.startTime) !== minuteKey(b.startTime)) return false;
   if (normalizeVenue(a.venue) !== normalizeVenue(b.venue)) return false;
-  if (normalizeIdentity(a.hall ?? "") !== normalizeIdentity(b.hall ?? "")) return false;
+  const aHall = normalizeIdentity(a.hall ?? embeddedHall(a.venue));
+  const bHall = normalizeIdentity(b.hall ?? embeddedHall(b.venue));
+  if (aHall && bHall && aHall !== bHall) return false;
 
   const aTitle = normalizeIdentity(a.title);
   const bTitle = normalizeIdentity(b.title);
   if (aTitle === bTitle) return true;
   const similarity = diceCoefficient(aTitle, bTitle);
-  if (similarity < 0.9) return false;
+  if (
+    similarity >= 0.88 ||
+    (Math.min(aTitle.length, bTitle.length) >= 10 &&
+      (aTitle.includes(bTitle) || bTitle.includes(aTitle)))
+  ) {
+    return true;
+  }
 
   const peopleOverlap = intersects([a.conductor, ...a.performers], [b.conductor, ...b.performers]);
-  const workOverlap = intersects(
-    a.program.map((item) => `${item.composer ?? ""}:${item.title}`),
-    b.program.map((item) => `${item.composer ?? ""}:${item.title}`),
-  );
-  return peopleOverlap || workOverlap;
+  const workOverlap = programIntersects(a.program, b.program);
+  if (similarity >= 0.25 && peopleOverlap && workOverlap) return true;
+  return similarity >= 0.68 && (peopleOverlap || workOverlap);
 }
 
 function sourceReference(event: ConcertEvent, sourceId: string): EventSourceReference {
@@ -603,7 +697,31 @@ function dedupeSourceReferences(sources: EventSourceReference[]) {
 }
 
 function richness(event: ConcertEvent) {
-  return event.program.length * 20 + event.performers.length * 3 + (event.description?.length ?? 0) / 100;
+  const qualityWeight = {
+    "manual-reviewed": 10,
+    scraped: 8,
+    "ocr-assisted": 2,
+    "ai-enhanced": 1,
+    "needs-review": 0,
+  }[event.dataQuality];
+  return event.program.length * 20 +
+    event.performers.length * 3 +
+    (event.description?.length ?? 0) / 100 +
+    qualityWeight;
+}
+
+function assignProgramIdentities(events: ConcertEvent[]) {
+  return events.map((event) => ({
+    ...event,
+    program: event.program.map((item, index) => {
+      const itemWorkId = workId(item);
+      return {
+        ...item,
+        id: stableId("program", `${event.id}:${index}:${itemWorkId}`),
+        workId: itemWorkId,
+      };
+    }),
+  }));
 }
 
 function workId(item: ProgramItem) {
@@ -628,7 +746,14 @@ function normalizeIdentity(value: string) {
 function normalizeVenue(value: string) {
   return normalizeIdentity(value)
     .replace(/^捷豹/, "")
-    .replace(/^凯迪拉克/, "");
+    .replace(/^凯迪拉克/, "")
+    .replace(/^(国家大剧院)(?:音乐厅|歌剧院|戏剧场|小剧场)$/, "$1")
+    .replace(/^(北京艺术中心)(?:音乐厅|歌剧院|戏剧场|小剧场)$/, "$1")
+    .replace(/^(上海东方艺术中心)(?:音乐厅|歌剧厅|演奏厅)$/, "$1");
+}
+
+function embeddedHall(value: string) {
+  return value.match(/(音乐厅|歌剧院|戏剧场|小剧场|歌剧厅|演奏厅|主厅)$/)?.[1] ?? "";
 }
 
 function minuteKey(value: string) {
@@ -659,14 +784,69 @@ function intersects(a: Array<string | undefined>, b: Array<string | undefined>) 
   return b.some((value) => value && left.has(normalizeIdentity(value)));
 }
 
+function programIntersects(a: ProgramItem[], b: ProgramItem[]) {
+  return a.some((left) => b.some((right) => programItemsEquivalent(left, right)));
+}
+
+function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
+  const aComposer = normalizeIdentity(a.composer ?? "");
+  const bComposer = normalizeIdentity(b.composer ?? "");
+  if (aComposer && bComposer && aComposer !== bComposer) return false;
+  const similarityThreshold = aComposer && bComposer ? 0.65 : 0.8;
+  const aTitles = [a.title, ...(a.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
+  const bTitles = [b.title, ...(b.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
+  return aTitles.some((left) =>
+    bTitles.some(
+      (right) =>
+        left === right ||
+        (Math.min(left.length, right.length) >= 6 &&
+          (left.includes(right) ||
+            right.includes(left) ||
+            diceCoefficient(left, right) >= similarityThreshold)),
+    ),
+  );
+}
+
 function dedupeProgram(items: ProgramItem[]) {
-  const seen = new Set<string>();
-  return items.filter((item) => {
-    const key = `${normalizeIdentity(item.composer ?? "")}:${normalizeIdentity(item.title)}:${normalizeIdentity(item.opus ?? "")}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  const deduped: ProgramItem[] = [];
+  for (const item of items) {
+    const existing = deduped.find((candidate) => programItemsEquivalent(candidate, item));
+    if (!existing) {
+      deduped.push({ ...item });
+      continue;
+    }
+    const alternateTitles = unique([
+      ...(existing.alternateTitles ?? []),
+      ...(item.alternateTitles ?? []),
+      ...(normalizeIdentity(existing.title) === normalizeIdentity(item.title) ? [] : [item.title]),
+    ]);
+    if (programConfidenceRank(item.confidence) > programConfidenceRank(existing.confidence)) {
+      const previousTitle = existing.title;
+      Object.assign(existing, item);
+      existing.alternateTitles = unique([
+        ...alternateTitles,
+        ...(normalizeIdentity(previousTitle) === normalizeIdentity(item.title)
+          ? []
+          : [previousTitle]),
+      ]);
+    } else {
+      existing.alternateTitles = alternateTitles;
+      existing.movements = existing.movements?.length ? existing.movements : item.movements;
+      existing.opus = existing.opus || item.opus;
+      existing.composer = existing.composer || item.composer;
+    }
+  }
+  return deduped;
+}
+
+function programConfidenceRank(confidence: ProgramItem["confidence"]) {
+  return {
+    manual: 5,
+    official: 4,
+    ocr: 3,
+    ai: 2,
+    "title-inferred": 1,
+  }[confidence];
 }
 
 function unique(values: Array<string | undefined>) {
