@@ -1,13 +1,55 @@
 {
-  "city": "上海",
+  "city": "上海、苏州",
   "sources": [
     {
       "id": "shsymphony-official",
       "name": "上海交响乐团官网",
       "adapter": "shsymphony-api",
       "url": "https://www.shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale",
+      "city": "上海",
       "venue": "捷豹上海交响音乐厅",
       "pageSize": 20
+    },
+    {
+      "id": "shoac-official",
+      "name": "上海东方艺术中心官网",
+      "adapter": "shoac-api",
+      "url": "https://www.shoac.com.cn/#/toSearchView",
+      "city": "上海",
+      "venue": "上海东方艺术中心",
+      "pageSize": 100
+    },
+    {
+      "id": "shanghai-concert-hall-official",
+      "name": "凯迪拉克·上海音乐厅官网",
+      "adapter": "shanghai-concert-hall-api",
+      "url": "https://www.shanghaiconcerthall.com.cn/showList?activeType=0",
+      "apiBase": "http://www.shanghaiconcerthall.com.cn",
+      "city": "上海",
+      "venue": "凯迪拉克·上海音乐厅"
+    },
+    {
+      "id": "suzhou-symphony-official",
+      "name": "苏州交响乐团官网",
+      "adapter": "suzhou-symphony-api",
+      "url": "https://www.szsorch.com/2025-26musicseason.html",
+      "city": "苏州",
+      "venue": "苏州文化艺术中心",
+      "pageSize": 100,
+      "sections": [
+        {
+          "slug": "2025-26-music-season",
+          "index": 1
+        },
+        {
+          "slug": "specially-curated",
+          "index": 2
+        },
+        {
+          "slug": "0",
+          "index": 3
+        }
+      ]
     }
   ]
 }

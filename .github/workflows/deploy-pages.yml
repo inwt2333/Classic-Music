@@ -1,0 +1,82 @@
+name: Test, scrape, and deploy Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 22,4,10 * * *"
+      timezone: "Asia/Shanghai"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.14"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download the currently deployed dataset
+        continue-on-error: true
+        run: |
+          mkdir -p .cache
+          curl --fail --silent --show-error --location \
+            https://inwt2333.github.io/Classic-Music/data/events.json \
+            --output .cache/previous-events.json
+
+      - name: Run parser and storage tests
+        run: |
+          npm run test:parser
+          npm run test:data
+
+      - name: Scrape official sources
+        env:
+          PREVIOUS_DATASET_PATH: .cache/previous-events.json
+        run: npm run scrape
+
+      - name: Audit generated data
+        run: |
+          npm run audit:data:ci
+          npm run audit:storage
+
+      - name: Build
+        env:
+          VITE_BASE_PATH: /Classic-Music/
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

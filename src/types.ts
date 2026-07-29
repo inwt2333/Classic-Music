@@ -1,4 +1,6 @@
 export type ProgramItem = {
+  id?: string;
+  workId?: string;
   composer?: string;
   title: string;
   opus?: string;
@@ -6,11 +8,21 @@ export type ProgramItem = {
     number?: string;
     title: string;
   }>;
-  confidence: "title-inferred" | "official" | "ai" | "manual";
+  confidence: "title-inferred" | "official" | "ocr" | "ai" | "manual";
+};
+
+export type EventSourceReference = {
+  sourceId: string;
+  sourceName: string;
+  sourceRecordId: string;
+  sourceUrl: string;
+  ticketUrl?: string;
+  scrapedAt: string;
 };
 
 export type ConcertEvent = {
   id: string;
+  projectId?: string;
   title: string;
   city: string;
   venue: string;
@@ -28,6 +40,7 @@ export type ConcertEvent = {
   sourceName: string;
   sourceUrl: string;
   scrapedAt: string;
+  sources?: EventSourceReference[];
   ensemble?: string;
   conductor?: string;
   performers: string[];
@@ -37,7 +50,51 @@ export type ConcertEvent = {
   dataQuality: "scraped" | "ai-enhanced" | "needs-review";
 };
 
+export type ConcertEventSummary = {
+  id: string;
+  projectId?: string;
+  title: string;
+  city: string;
+  venue: string;
+  hall?: string;
+  startTime: string;
+  endTime?: string;
+  weekday: string;
+  dateLabel: string;
+  timeLabel: string;
+  price?: string;
+  status: ConcertEvent["status"];
+  ensemble?: string;
+  mainPerson?: string;
+  genres: string[];
+  dataQuality: ConcertEvent["dataQuality"];
+  detailPath: string;
+  hasProgram: boolean;
+  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "opus">>;
+  searchText: string;
+  sourceCount: number;
+};
+
+export type EntityRecord = {
+  id: string;
+  type: "person" | "work";
+  name: string;
+  subtitle?: string;
+  aliases: string[];
+  eventIds: string[];
+  upcomingEventCount: number;
+};
+
+export type DatasetChange = {
+  id: string;
+  eventId: string;
+  type: "added" | "removed" | "rescheduled" | "cancelled" | "lineup" | "program" | "price";
+  detectedAt: string;
+  summary: string;
+};
+
 export type ConcertDataset = {
+  schemaVersion?: number;
   generatedAt: string | null;
   city: string;
   events: ConcertEvent[];
@@ -55,4 +112,19 @@ export type ConcertDataset = {
     aiEnhancedEvents: number;
     errors: string[];
   };
+};
+
+export type ConcertIndexDataset = Omit<ConcertDataset, "events"> & {
+  schemaVersion: 2;
+  events: ConcertEventSummary[];
+};
+
+export type EntityDataset = {
+  generatedAt: string;
+  entities: EntityRecord[];
+};
+
+export type ChangeDataset = {
+  generatedAt: string;
+  changes: DatasetChange[];
 };

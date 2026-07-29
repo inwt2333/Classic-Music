@@ -9,6 +9,22 @@ import {
   parseShanghaiSymphonyContent,
   parseShanghaiSymphonyPrices,
 } from "./adapters/shanghai-symphony";
+import {
+  parseOrientalArtCenterContent,
+  parseOrientalArtCenterOcrText,
+  parseOrientalArtCenterPrices,
+} from "./adapters/shanghai-oriental-art-center";
+import {
+  parseShanghaiConcertHallContent,
+  parseShanghaiConcertHallPrices,
+} from "./adapters/shanghai-concert-hall";
+import {
+  extractSuzhouSymphonyDates,
+  parseSuzhouSymphonyContent,
+  parseSuzhouSymphonyVenue,
+} from "./adapters/suzhou-symphony";
+import { prepareAndPersistDataset } from "./data-store";
+import { createLocalTesseract, type LocalOcr } from "./ocr/local-tesseract";
 
 const sourceConfigSchema = z.object({
   city: z.string(),
@@ -19,6 +35,7 @@ const sourceConfigSchema = z.object({
         name: z.string(),
         adapter: z.literal("localhub-jsonld"),
         url: z.string().url(),
+        city: z.string().default("上海"),
         venue: z.string(),
       }),
       z.object({
@@ -26,8 +43,42 @@ const sourceConfigSchema = z.object({
         name: z.string(),
         adapter: z.literal("shsymphony-api"),
         url: z.string().url(),
+        city: z.string().default("上海"),
         venue: z.string(),
         pageSize: z.number().int().positive().default(20),
+      }),
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        adapter: z.literal("shoac-api"),
+        url: z.string().url(),
+        city: z.string().default("上海"),
+        venue: z.string(),
+        pageSize: z.number().int().positive().max(100).default(100),
+      }),
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        adapter: z.literal("shanghai-concert-hall-api"),
+        url: z.string().url(),
+        apiBase: z.string().url(),
+        city: z.string().default("上海"),
+        venue: z.string(),
+      }),
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        adapter: z.literal("suzhou-symphony-api"),
+        url: z.string().url(),
+        city: z.string().default("苏州"),
+        venue: z.string(),
+        pageSize: z.number().int().positive().max(100).default(100),
+        sections: z.array(
+          z.object({
+            slug: z.string(),
+            index: z.number().int().nonnegative(),
+          }),
+        ),
       }),
     ]),
   ),
@@ -36,10 +87,13 @@ const sourceConfigSchema = z.object({
 type SourceConfig = z.infer<typeof sourceConfigSchema>["sources"][number];
 
 const useAi = process.argv.includes("--ai");
+const useOcr = process.argv.includes("--ocr");
 const root = process.cwd();
 const sourceConfigPath = resolve(root, "sources/shanghai.sources.json");
 const outputPath = resolve(root, "public/data/events.json");
+const databasePath = resolve(root, "data/classic-music.db");
 const snapshotDir = resolve(root, "data/snapshots");
+const ocrCacheDir = resolve(root, "data/ocr-cache");
 
 const classicalKeywords = [
   "交响",
@@ -86,6 +140,24 @@ const composerMap = [
   ["Chopin", "肖邦"],
   ["舒曼", "舒曼"],
   ["Schumann", "舒曼"],
+  ["舒伯特", "舒伯特"],
+  ["Schubert", "舒伯特"],
+  ["拉威尔", "拉威尔"],
+  ["Ravel", "拉威尔"],
+  ["德彪西", "德彪西"],
+  ["Debussy", "德彪西"],
+  ["李斯特", "李斯特"],
+  ["Liszt", "李斯特"],
+  ["瓦格纳", "瓦格纳"],
+  ["Wagner", "瓦格纳"],
+  ["斯特拉文斯基", "斯特拉文斯基"],
+  ["Stravinsky", "斯特拉文斯基"],
+  ["肖斯塔科维奇", "肖斯塔科维奇"],
+  ["Shostakovich", "肖斯塔科维奇"],
+  ["德沃夏克", "德沃夏克"],
+  ["Dvořák", "德沃夏克"],
+  ["格里格", "格里格"],
+  ["Grieg", "格里格"],
   ["梁祝", "何占豪/陈钢"],
   ["久石让", "久石让"],
 ];
@@ -105,10 +177,7 @@ async function main() {
 
   for (const source of config.sources) {
     try {
-      const { rawCount, events } =
-        source.adapter === "shsymphony-api"
-          ? await scrapeShanghaiSymphony(source, startedAt)
-          : await scrapeLocalHub(source, startedAt);
+      const { rawCount, events } = await scrapeSource(source, startedAt);
 
       if (useAi && process.env.DEEPSEEK_API_KEY) {
         for (const event of events) {
@@ -146,17 +215,30 @@ async function main() {
     }
   }
 
-  dataset.events = dedupeEvents(dataset.events).sort(
-    (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime(),
-  );
+  dataset.events = sortEvents(dedupeEvents(dataset.events));
   dataset.stats.normalizedEvents = dataset.events.length;
 
   await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, `${JSON.stringify(dataset, null, 2)}\n`, "utf8");
+  const prepared = await prepareAndPersistDataset(dataset, outputPath, databasePath);
 
-  console.log(`Scraped ${dataset.events.length} events from ${dataset.sources.length} sources.`);
+  console.log(`Scraped ${prepared.dataset.events.length} events from ${dataset.sources.length} sources.`);
   if (dataset.stats.errors.length) {
     console.log(`Errors: ${dataset.stats.errors.join(" | ")}`);
+  }
+}
+
+function scrapeSource(source: SourceConfig, scrapedAt: string) {
+  switch (source.adapter) {
+    case "shsymphony-api":
+      return scrapeShanghaiSymphony(source, scrapedAt);
+    case "shoac-api":
+      return scrapeOrientalArtCenter(source, scrapedAt);
+    case "shanghai-concert-hall-api":
+      return scrapeShanghaiConcertHall(source, scrapedAt);
+    case "suzhou-symphony-api":
+      return scrapeSuzhouSymphony(source, scrapedAt);
+    case "localhub-jsonld":
+      return scrapeLocalHub(source, scrapedAt);
   }
 }
 
@@ -244,6 +326,377 @@ async function postShanghaiSymphonyApi(path: string, body: Record<string, string
   return response.json();
 }
 
+async function scrapeShanghaiConcertHall(
+  source: Extract<SourceConfig, { adapter: "shanghai-concert-hall-api" }>,
+  scrapedAt: string,
+) {
+  const calendarResponse = await requestShanghaiConcertHallApi(source, "/api/project/month_all");
+  const groups = Array.isArray(calendarResponse.data?.pcMonthProjectDTOS)
+    ? calendarResponse.data.pcMonthProjectDTOS
+    : [];
+  const projectsById = new Map<string, Record<string, any>>();
+  for (const group of groups) {
+    for (const project of Array.isArray(group.projects) ? group.projects : []) {
+      if (Number(project.category) === 0) projectsById.set(String(project.id), project);
+    }
+  }
+  const listItems = Array.from(projectsById.values());
+  await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(listItems, null, 2), "utf8");
+
+  const events: ConcertEvent[] = [];
+  for (const listItem of listItems) {
+    const projectId = String(listItem.id);
+    const detailResponse = await requestShanghaiConcertHallApi(source, `/api/project/${projectId}/detail`);
+    const project = detailResponse.data?.project;
+    if (!project) continue;
+    await writeFile(
+      resolve(snapshotDir, `${source.id}.${projectId}.json`),
+      JSON.stringify(detailResponse.data, null, 2),
+      "utf8",
+    );
+
+    const eventRows =
+      Array.isArray(detailResponse.data.eventDTOS) && detailResponse.data.eventDTOS.length
+        ? detailResponse.data.eventDTOS
+        : [{ startTime: project.startTime, endTime: project.endTime, eventPrices: [] }];
+    for (const eventRow of eventRows) {
+      events.push(normalizeShanghaiConcertHallEvent(project, eventRow, source, scrapedAt));
+    }
+  }
+
+  return { rawCount: listItems.length, events };
+}
+
+async function requestShanghaiConcertHallApi(
+  source: Extract<SourceConfig, { adapter: "shanghai-concert-hall-api" }>,
+  path: string,
+) {
+  const response = await fetch(`${source.apiBase}${path}`, {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+      accept: "application/json, text/plain, */*",
+      language: "zh-CN",
+      referer: source.url,
+    },
+  });
+  if (!response.ok) throw new Error(`Shanghai Concert Hall API ${path} HTTP ${response.status}`);
+  const data = await response.json();
+  if (data.code !== 20000) {
+    throw new Error(`Shanghai Concert Hall API ${path}: ${data.msg ?? data.code ?? "failed"}`);
+  }
+  return data;
+}
+
+function normalizeShanghaiConcertHallEvent(
+  project: Record<string, any>,
+  eventRow: Record<string, any>,
+  source: Extract<SourceConfig, { adapter: "shanghai-concert-hall-api" }>,
+  scrapedAt: string,
+): ConcertEvent {
+  const title = cleanText(project.mainTitle || project.projectName || "未命名演出");
+  const start = new Date(Number(eventRow.startTime || project.startTime));
+  const endTimestamp = Number(eventRow.endTime || project.endTime);
+  const parsed = parseShanghaiConcertHallContent(project.detail || project.content || "");
+  const pricing = parseShanghaiConcertHallPrices(project, eventRow);
+  const titleComposers = inferComposers(title);
+  const program = parsed.program.map((item) => ({
+    ...item,
+    composer: item.composer || (titleComposers.length === 1 ? titleComposers[0] : undefined),
+  }));
+  const composers = Array.from(
+    new Set([
+      ...titleComposers,
+      ...program.map((item) => item.composer).filter(Boolean),
+    ]),
+  ) as string[];
+  const performers = Array.from(
+    new Set([...parsed.performers, ...inferShanghaiConcertHallTitlePerformers(title)]),
+  );
+  const detailUrl = `https://www.shanghaiconcerthall.com.cn/showDetails?id=${project.id}&activeType=0`;
+
+  return {
+    id: `shch_${project.id}_${start.getTime()}`,
+    title,
+    city: source.city,
+    venue: source.venue,
+    hall: cleanText(project.venueName || "") || undefined,
+    startTime: start.toISOString(),
+    endTime: Number.isFinite(endTimestamp) && endTimestamp > 0 ? new Date(endTimestamp).toISOString() : undefined,
+    weekday: weekday(start),
+    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
+    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    price: pricing.price,
+    priceTiers: pricing.priceTiers,
+    description: parsed.description,
+    status: project.enabled === 0 ? "unknown" : "scheduled",
+    ticketUrl: detailUrl,
+    sourceName: source.name,
+    sourceUrl: detailUrl,
+    scrapedAt,
+    ensemble: inferEnsemble(title),
+    conductor: parsed.conductor,
+    performers,
+    composers,
+    program,
+    tags: inferTags(title, composers),
+    dataQuality: program.length ? "scraped" : "needs-review",
+  };
+}
+
+async function scrapeSuzhouSymphony(
+  source: Extract<SourceConfig, { adapter: "suzhou-symphony-api" }>,
+  scrapedAt: string,
+) {
+  const itemsById = new Map<string, Record<string, any>>();
+
+  for (const section of source.sections) {
+    const firstPage = await requestSuzhouSymphonyPage(source, section, 0);
+    const totalPages = Math.max(1, Number(firstPage.totalPages ?? 1));
+    for (const item of Array.isArray(firstPage.content) ? firstPage.content : []) {
+      itemsById.set(String(item.id), item);
+    }
+    for (let pageNum = 1; pageNum < totalPages; pageNum += 1) {
+      const page = await requestSuzhouSymphonyPage(source, section, pageNum);
+      for (const item of Array.isArray(page.content) ? page.content : []) {
+        itemsById.set(String(item.id), item);
+      }
+    }
+  }
+
+  const listItems = Array.from(itemsById.values());
+  await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(listItems, null, 2), "utf8");
+
+  const events = listItems.flatMap((item) => {
+    const fallbackTime = item.attributeMapMult?.time?.[0]?.value || item.attributeMapSingle?.time?.value;
+    const dates = extractSuzhouSymphonyDates(item.content || "", fallbackTime);
+    return dates.map((dateValue) => normalizeSuzhouSymphonyEvent(item, dateValue, source, scrapedAt));
+  });
+
+  return { rawCount: listItems.length, events };
+}
+
+async function requestSuzhouSymphonyPage(
+  source: Extract<SourceConfig, { adapter: "suzhou-symphony-api" }>,
+  section: { slug: string; index: number },
+  pageNum: number,
+) {
+  const endpoint = `/api/getMusicData/${encodeURIComponent(section.slug)}/${section.index}?pageNum=${pageNum}&pageSize=${
+    source.pageSize
+  }`;
+  const response = await fetch(new URL(endpoint, source.url), {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+      accept: "application/json, text/plain, */*",
+      referer: source.url,
+    },
+  });
+  if (!response.ok) throw new Error(`Suzhou Symphony API ${endpoint} HTTP ${response.status}`);
+  return response.json();
+}
+
+function normalizeSuzhouSymphonyEvent(
+  item: Record<string, any>,
+  dateValue: string,
+  source: Extract<SourceConfig, { adapter: "suzhou-symphony-api" }>,
+  scrapedAt: string,
+): ConcertEvent {
+  const title = cleanText(item.title || "未命名演出").replace(/^[\u200b\u200c\u200d\ufeff]+/, "");
+  const start = parseChinaDate(`${dateValue}:00`);
+  const parsed = parseSuzhouSymphonyContent(item.content || "");
+  const address =
+    item.attributeMapMult?.address?.[0]?.value || item.attributeMapSingle?.address?.value || source.venue;
+  const place = parseSuzhouSymphonyVenue(address, item.content || "");
+  const ticketUrl =
+    item.attributeMapMult?.buyTickets?.[0]?.value || item.attributeMapSingle?.buyTickets?.value || undefined;
+  const detailUrl = new URL(`/${item.sectionName || "2025-26-music-season"}/${item.id}.html`, source.url).href;
+  const composers = Array.from(
+    new Set([
+      ...inferComposers(title),
+      ...parsed.program.map((programItem) => programItem.composer).filter(Boolean),
+    ]),
+  ) as string[];
+
+  return {
+    id: `szsorch_${item.id}_${start.getTime()}`,
+    title,
+    city: source.city,
+    venue: place.venue,
+    hall: place.hall,
+    startTime: start.toISOString(),
+    weekday: weekday(start),
+    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
+    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    description: parsed.description,
+    status: "scheduled",
+    ticketUrl,
+    sourceName: source.name,
+    sourceUrl: detailUrl,
+    scrapedAt,
+    ensemble: parsed.ensemble || "苏州交响乐团",
+    conductor: parsed.conductor,
+    performers: parsed.performers,
+    composers,
+    program: parsed.program,
+    tags: inferTags(title, composers),
+    dataQuality: parsed.program.length ? "scraped" : "needs-review",
+  };
+}
+
+async function scrapeOrientalArtCenter(
+  source: Extract<SourceConfig, { adapter: "shoac-api" }>,
+  scrapedAt: string,
+) {
+  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  try {
+    return await scrapeOrientalArtCenterProjects(source, scrapedAt, localOcr);
+  } finally {
+    await localOcr?.terminate();
+  }
+}
+
+async function scrapeOrientalArtCenterProjects(
+  source: Extract<SourceConfig, { adapter: "shoac-api" }>,
+  scrapedAt: string,
+  localOcr?: LocalOcr,
+) {
+  const firstPage = await requestOrientalArtCenterApi("/good/theater/dongyi-products", {
+    method: "POST",
+    body: {
+      page: 1,
+      size: source.pageSize,
+      calendar: false,
+      timeSort: false,
+      venueId: "",
+    },
+  });
+  const total = Number(firstPage.data?.total ?? firstPage.data?.records?.length ?? 0);
+  const pageCount = Math.max(1, Math.ceil(total / source.pageSize));
+  const listItems = [...(firstPage.data?.records ?? [])];
+
+  for (let page = 2; page <= pageCount; page += 1) {
+    const response = await requestOrientalArtCenterApi("/good/theater/dongyi-products", {
+      method: "POST",
+      body: {
+        page,
+        size: source.pageSize,
+        calendar: false,
+        timeSort: false,
+        venueId: "",
+      },
+    });
+    listItems.push(...(response.data?.records ?? []));
+  }
+
+  await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(listItems, null, 2), "utf8");
+
+  const musicProjects = listItems.filter((item) => item.categoryName === "音乐会");
+  const events: ConcertEvent[] = [];
+  for (const item of musicProjects) {
+    const projectId = String(item.projectId);
+    const detailResponse = await requestOrientalArtCenterApi(`/good/project/detail/old/${projectId}`);
+    const showsResponse = await requestOrientalArtCenterApi(`/good/shows/old/${projectId}`);
+    if (!detailResponse.data || !Array.isArray(showsResponse.data?.showInfoDetailList)) continue;
+
+    await writeFile(
+      resolve(snapshotDir, `${source.id}.${projectId}.json`),
+      JSON.stringify(detailResponse.data, null, 2),
+      "utf8",
+    );
+    await writeFile(
+      resolve(snapshotDir, `${source.id}.${projectId}.shows.json`),
+      JSON.stringify(showsResponse.data, null, 2),
+      "utf8",
+    );
+
+    const shows = showsResponse.data.showInfoDetailList as Array<Record<string, any>>;
+    const html = detailResponse.data.projectDesp || detailResponse.data.showDesc || "";
+    const textProgram = parseOrientalArtCenterContent(html).program;
+    const ocrText =
+      localOcr && !textProgram.length && shouldOcrOrientalArtCenterProject(projectId)
+        ? await recognizeOrientalArtCenterImages(projectId, html, localOcr).catch((error) => {
+            console.warn(`OCR failed for SHOAC ${projectId}: ${error instanceof Error ? error.message : error}`);
+            return undefined;
+          })
+        : undefined;
+    for (const show of shows) {
+      events.push(
+        normalizeOrientalArtCenterEvent(
+          projectId,
+          detailResponse.data,
+          show,
+          shows,
+          source,
+          scrapedAt,
+          ocrText,
+        ),
+      );
+    }
+  }
+
+  return { rawCount: listItems.length, events };
+}
+
+function shouldOcrOrientalArtCenterProject(projectId: string) {
+  const configured = process.env.SHOAC_OCR_PROJECT_IDS
+    ?.split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  return !configured?.length || configured.includes(projectId);
+}
+
+async function recognizeOrientalArtCenterImages(
+  projectId: string,
+  html: string,
+  localOcr: LocalOcr,
+) {
+  const imageUrls = parseOrientalArtCenterContent(html).imageUrls;
+  const maxImages = Math.max(1, Number(process.env.SHOAC_OCR_MAX_IMAGES || 8));
+  const recognized: string[] = [];
+
+  for (const url of imageUrls.slice(0, maxImages)) {
+    console.log(`OCR SHOAC ${projectId}: ${recognized.length + 1}/${Math.min(imageUrls.length, maxImages)}`);
+    const result = await localOcr.recognizeUrl(url);
+    if (result.text) recognized.push(result.text);
+    const combined = recognized.join("\n");
+    if (parseOrientalArtCenterOcrText(combined).length >= 2) return combined;
+  }
+
+  return recognized.length ? recognized.join("\n") : undefined;
+}
+
+async function requestOrientalArtCenterApi(
+  path: string,
+  options: { method?: "GET" | "POST"; body?: Record<string, unknown> } = {},
+) {
+  const response = await fetch(`https://www.shoac.com.cn/platform-backend${path}`, {
+    method: options.method ?? "GET",
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+      accept: "application/json, text/plain, */*",
+      channel: "theatre_pc",
+      location: "121.458563,31.250315",
+      authorization: "",
+      theater: "1323",
+      "flagship-store": "true",
+      referer: "https://www.shoac.com.cn/",
+      ...(options.body ? { "content-type": "application/json" } : {}),
+    },
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  });
+  if (!response.ok) {
+    throw new Error(`Shanghai Oriental Art Center API ${path} HTTP ${response.status}`);
+  }
+
+  const data = await response.json();
+  if (data.state !== "SUCCESS") {
+    throw new Error(`Shanghai Oriental Art Center API ${path}: ${data.errors?.[0] ?? data.code ?? "failed"}`);
+  }
+  return data;
+}
+
 async function fetchText(url: string) {
   const response = await fetch(url, {
     headers: {
@@ -283,7 +736,7 @@ function extractLocalHubEvents(html: string) {
 
 function normalizeLocalHubEvent(
   raw: Record<string, any>,
-  source: { id: string; name: string; url: string; venue: string },
+  source: { id: string; name: string; url: string; city: string; venue: string },
   scrapedAt: string,
 ): ConcertEvent {
   const start = new Date(raw.startDate);
@@ -297,7 +750,7 @@ function normalizeLocalHubEvent(
   return {
     id: stableId(`${source.id}:${raw.url ?? title}:${raw.startDate}`),
     title,
-    city: "上海",
+    city: source.city,
     venue,
     startTime: start.toISOString(),
     endTime: raw.endDate ? new Date(raw.endDate).toISOString() : undefined,
@@ -332,7 +785,11 @@ function normalizeShanghaiSymphonyEvent(
   const content = parseShanghaiSymphonyContent(raw.programInfo || "", raw.showContent);
   const program = content.program;
   const pricing = parseShanghaiSymphonyPrices(raw, priceRows);
-  const composerSet = new Set([...inferComposers(title), ...program.map((item) => item.composer).filter(Boolean)]);
+  const composerSet = new Set([
+    ...inferComposers(title),
+    ...content.composers,
+    ...program.map((item) => item.composer).filter(Boolean),
+  ]);
   const composers = Array.from(composerSet) as string[];
   const performers = Array.from(new Set([...cast.performers, ...inferPerformers(title)]));
   const detailUrl = `https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=${raw.id}&supportSeat=${
@@ -342,7 +799,7 @@ function normalizeShanghaiSymphonyEvent(
   return {
     id: `shsymphony_${raw.id}`,
     title,
-    city: "上海",
+    city: source.city,
     venue: cleanText(raw.stadiumName || source.venue),
     hall: raw.venueName ? cleanText(raw.venueName) : undefined,
     startTime: start.toISOString(),
@@ -366,6 +823,76 @@ function normalizeShanghaiSymphonyEvent(
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
   };
+}
+
+function normalizeOrientalArtCenterEvent(
+  projectId: string,
+  detail: Record<string, any>,
+  show: Record<string, any>,
+  allShows: Array<Record<string, any>>,
+  source: Extract<SourceConfig, { adapter: "shoac-api" }>,
+  scrapedAt: string,
+  ocrText?: string,
+): ConcertEvent {
+  const title = cleanText(detail.productName || "未命名演出");
+  const start = orientalArtCenterShowDate(show);
+  const parsed = parseOrientalArtCenterContent(detail.projectDesp || detail.showDesc || "", {
+    showDate: start,
+  });
+  const ocrProgram = parsed.program.length || !ocrText
+    ? []
+    : parseOrientalArtCenterOcrText(ocrText, { showDate: start });
+  const inferredComposers = inferComposers(title);
+  const program = parsed.program.length
+    ? parsed.program
+    : ocrProgram.length
+      ? ocrProgram
+      : [];
+  const composers = Array.from(
+    new Set([...inferredComposers, ...program.map((item) => item.composer).filter(Boolean)]),
+  ) as string[];
+  const performers = parsed.performers;
+  const pricing = parseOrientalArtCenterPrices(allShows, detail);
+  const detailUrl = `https://www.shoac.com.cn/#/detail?projectId=${projectId}`;
+  const showStatus = cleanText(show.showStatusName || "");
+
+  return {
+    id: `shoac_${projectId}_${show.showId ?? start.getTime()}`,
+    title,
+    city: source.city,
+    venue: source.venue,
+    hall: cleanText(show.venueName || detail.showPlaceName || "") || undefined,
+    startTime: start.toISOString(),
+    weekday: weekday(start),
+    dateLabel: `${String(start.getMonth() + 1).padStart(2, "0")}/${String(start.getDate()).padStart(2, "0")}`,
+    timeLabel: `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`,
+    price: pricing.price,
+    priceTiers: pricing.priceTiers,
+    description: parsed.description,
+    status: /取消/.test(showStatus) ? "cancelled" : "scheduled",
+    ticketUrl: detailUrl,
+    sourceName: source.name,
+    sourceUrl: detailUrl,
+    scrapedAt,
+    ensemble: parsed.ensemble || inferEnsemble(title),
+    conductor: parsed.conductor,
+    performers,
+    composers,
+    program,
+    tags: inferTags(`${title} ${detail.productSubtypeName || ""}`, composers),
+    dataQuality: parsed.program.length || ocrProgram.length ? "scraped" : "needs-review",
+  };
+}
+
+function orientalArtCenterShowDate(show: Record<string, any>) {
+  const timestamp = Number(show.happenTime);
+  if (Number.isFinite(timestamp) && timestamp > 0) return new Date(timestamp);
+
+  const match = String(show.showTime || "").match(
+    /(\d{4})[./-](\d{1,2})[./-](\d{1,2}).*?(\d{1,2}):(\d{2})/,
+  );
+  if (!match) throw new Error(`Invalid Oriental Art Center show time: ${show.showTime || "missing"}`);
+  return parseChinaDate(`${match[1]}-${match[2]}-${match[3]} ${match[4]}:${match[5]}:00`);
 }
 
 function inferProgram(title: string, composers: string[]): ProgramItem[] {
@@ -403,6 +930,18 @@ function inferPerformers(title: string) {
   const names = Array.from(title.matchAll(/([\u4e00-\u9fa5·]{2,8})[与和]/g)).map((match) => match[1]);
   const western = Array.from(title.matchAll(/([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+){1,3})/g)).map((match) => match[1]);
   return Array.from(new Set([...names, ...western])).slice(0, 6);
+}
+
+function inferShanghaiConcertHallTitlePerformers(title: string) {
+  const subject = title.split("——").at(-1) || title;
+  if (!/演绎/.test(subject)) return [];
+  const match = subject.match(
+    /^(.{2,36}?)[与和](.{2,36}?)(?=演绎|大提琴|钢琴|小提琴|吉他|音乐会|作品|主题)/,
+  );
+  if (!match) return [];
+  return [match[1], match[2]]
+    .map((name) => cleanText(name).replace(/^(?:经典室内乐|民族印象)[：:\s]*/, ""))
+    .filter((name) => name.length >= 2 && name.length <= 36);
 }
 
 function inferEnsemble(title: string) {
@@ -483,6 +1022,18 @@ function dedupeEvents(events: ConcertEvent[]) {
     }
   }
   return Array.from(seen.values());
+}
+
+function sortEvents(events: ConcertEvent[]) {
+  const now = Date.now();
+  return events.sort((a, b) => {
+    const aTime = new Date(a.startTime).getTime();
+    const bTime = new Date(b.startTime).getTime();
+    const aPast = aTime < now;
+    const bPast = bTime < now;
+    if (aPast !== bPast) return aPast ? 1 : -1;
+    return aPast ? bTime - aTime : aTime - bTime;
+  });
 }
 
 function dedupeBy<T>(items: T[], getKey: (item: T) => string) {

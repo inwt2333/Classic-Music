@@ -1,405 +1,538 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { createRoot } from "react-dom/client";
 import {
-  BookOpenText,
+  lazy,
+  memo,
+  Suspense,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import { createRoot, type Root } from "react-dom/client";
+import {
   CalendarDays,
-  Clock,
-  Database,
-  ExternalLink,
+  Check,
+  ChevronRight,
+  CircleAlert,
+  Filter,
+  History,
+  List as ListIcon,
   MapPin,
   Music,
   Search,
-  Sparkles,
+  SlidersHorizontal,
   Ticket,
   UserRound,
+  X,
 } from "lucide-react";
+import EventDetail from "./components/EventDetail";
+import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
 import "./styles.css";
-import type { ConcertDataset, ConcertEvent, ProgramItem } from "./types";
+import type {
+  ChangeDataset,
+  ConcertEvent,
+  ConcertEventSummary,
+  ConcertIndexDataset,
+  EntityDataset,
+  EntityRecord,
+} from "./types";
+import {
+  dateMatchesPreset,
+  formatEventVenue,
+  getInitialCalendarMonth,
+} from "./utils";
 
-const fallbackDataset: ConcertDataset = {
+const CalendarView = lazy(() => import("./components/CalendarView"));
+
+declare global {
+  var __classicMusicRoot: Root | undefined;
+}
+
+type Scope = "upcoming" | "past";
+type DatePreset = "all" | "week" | "weekend" | "month";
+type ViewMode = "list" | "calendar";
+
+const emptyDataset: ConcertIndexDataset = {
+  schemaVersion: 2,
   generatedAt: null,
-  city: "上海",
+  city: "上海、苏州",
   events: [],
   sources: [],
   stats: { rawEvents: 0, normalizedEvents: 0, aiEnhancedEvents: 0, errors: [] },
 };
-
-const quickFilters = ["本周", "本月", "东方艺术中心", "上海音乐厅", "交响", "钢琴", "贝多芬", "马勒"];
+const emptyEntities: EntityDataset = { generatedAt: "", entities: [] };
+const emptyChanges: ChangeDataset = { generatedAt: "", changes: [] };
+const genreOptions = ["全部类型", "交响", "室内乐", "钢琴", "独奏", "合唱", "歌剧"];
+const pageSize = 50;
 
 function App() {
-  const [dataset, setDataset] = useState<ConcertDataset>(fallbackDataset);
-  const [query, setQuery] = useState("");
-  const [venue, setVenue] = useState("全部场馆");
-  const [selected, setSelected] = useState<ConcertEvent | null>(null);
-  const [loadState, setLoadState] = useState("读取本地采集数据中");
+  const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  const [dataset, setDataset] = useState(emptyDataset);
+  const [entities, setEntities] = useState(emptyEntities);
+  const [changes, setChanges] = useState(emptyChanges);
+  const [loadState, setLoadState] = useState("正在加载演出索引");
+  const [query, setQuery] = useState(initialParams.get("q") ?? "");
+  const [scope, setScope] = useState<Scope>(initialParams.get("scope") === "past" ? "past" : "upcoming");
+  const [datePreset, setDatePreset] = useState<DatePreset>((initialParams.get("date") as DatePreset) || "all");
+  const [city, setCity] = useState(initialParams.get("city") ?? "全部城市");
+  const [venue, setVenue] = useState(initialParams.get("venue") ?? "全部场馆");
+  const [ensemble, setEnsemble] = useState(initialParams.get("ensemble") ?? "全部乐团");
+  const [genre, setGenre] = useState(initialParams.get("genre") ?? "全部类型");
+  const [hasProgram, setHasProgram] = useState(initialParams.get("program") === "1");
+  const [viewMode, setViewMode] = useState<ViewMode>(initialParams.get("view") === "calendar" ? "calendar" : "list");
+  const [selectedId, setSelectedId] = useState(initialParams.get("event") ?? "");
+  const [selectedDetail, setSelectedDetail] = useState<ConcertEvent | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(pageSize);
+  const [activeEntityId, setActiveEntityId] = useState(initialParams.get("entity") ?? "");
+  const [calendarMonth, setCalendarMonth] = useState(() => new Date());
+  const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase("zh-CN"));
 
   useEffect(() => {
-    fetch("/data/events.json", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((data: ConcertDataset) => {
+    loadEventIndex()
+      .then((data) => {
         setDataset(data);
-        setSelected(data.events[0] ?? null);
-        setLoadState(data.generatedAt ? "已加载自动采集数据" : "还没有采集数据");
+        const first = data.events.find((event) => new Date(event.startTime).getTime() >= Date.now()) ?? data.events[0];
+        setSelectedId((current) => current || first?.id || "");
+        setCalendarMonth(getInitialCalendarMonth(data.events));
+        setLoadState("数据已更新");
       })
-      .catch(() => setLoadState("数据文件未生成，请先运行 npm run scrape"));
+      .catch((error) => setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`));
+    loadEntities().then(setEntities).catch(() => setEntities(emptyEntities));
+    loadChanges().then(setChanges).catch(() => setChanges(emptyChanges));
   }, []);
 
-  const venues = useMemo(
-    () => ["全部场馆", ...Array.from(new Set(dataset.events.map((event) => event.venue))).sort()],
+  useEffect(() => {
+    const restoreFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setQuery(params.get("q") ?? "");
+      setScope(params.get("scope") === "past" ? "past" : "upcoming");
+      setDatePreset((params.get("date") as DatePreset) || "all");
+      setCity(params.get("city") ?? "全部城市");
+      setVenue(params.get("venue") ?? "全部场馆");
+      setEnsemble(params.get("ensemble") ?? "全部乐团");
+      setGenre(params.get("genre") ?? "全部类型");
+      setHasProgram(params.get("program") === "1");
+      setViewMode(params.get("view") === "calendar" ? "calendar" : "list");
+      setSelectedId(params.get("event") ?? "");
+      setActiveEntityId(params.get("entity") ?? "");
+      setDetailOpen(Boolean(params.get("event")));
+    };
+    window.addEventListener("popstate", restoreFromUrl);
+    return () => window.removeEventListener("popstate", restoreFromUrl);
+  }, []);
+
+  const selectedSummary = useMemo(
+    () => dataset.events.find((event) => event.id === selectedId) ?? null,
+    [dataset.events, selectedId],
+  );
+
+  useEffect(() => {
+    if (!selectedSummary) {
+      setSelectedDetail(null);
+      return;
+    }
+    let cancelled = false;
+    setDetailLoading(true);
+    loadEventDetail(selectedSummary.id, selectedSummary.detailPath)
+      .then((event) => {
+        if (!cancelled) setSelectedDetail(event);
+      })
+      .catch(() => {
+        if (!cancelled) setSelectedDetail(null);
+      })
+      .finally(() => {
+        if (!cancelled) setDetailLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedSummary]);
+
+  const cities = useMemo(
+    () => ["全部城市", ...Array.from(new Set(dataset.events.map((event) => event.city))).sort()],
     [dataset.events],
+  );
+  const venues = useMemo(
+    () => [
+      "全部场馆",
+      ...Array.from(
+        new Set(dataset.events.filter((event) => city === "全部城市" || event.city === city).map((event) => event.venue)),
+      ).sort(),
+    ],
+    [city, dataset.events],
+  );
+  const ensembles = useMemo(
+    () => [
+      "全部乐团",
+      ...Array.from(
+        new Set(
+          dataset.events
+            .map((event) => normalizeEnsembleLabel(event.ensemble))
+            .filter((value): value is string => Boolean(value)),
+        ),
+      ).sort(),
+    ],
+    [dataset.events],
+  );
+  const activeEntity = useMemo(
+    () => entities.entities.find((entity) => entity.id === activeEntityId) ?? null,
+    [activeEntityId, entities.entities],
+  );
+  const activeEntityEvents = useMemo(
+    () => activeEntity ? new Set(activeEntity.eventIds) : null,
+    [activeEntity],
   );
 
   const filteredEvents = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+    const now = Date.now();
     return dataset.events.filter((event) => {
-      const venueMatched = venue === "全部场馆" || event.venue === venue;
-      const haystack = [
-        event.title,
-        event.venue,
-        event.ensemble,
-        event.conductor,
-        event.description,
-        ...event.performers,
-        ...event.composers,
-        ...event.tags,
-        ...event.program.map(
-          (item) =>
-            `${item.composer ?? ""} ${item.title} ${item.opus ?? ""} ${item.movements
-              ?.map((movement) => `${movement.number ?? ""} ${movement.title}`)
-              .join(" ") ?? ""}`,
-        ),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return venueMatched && (!normalizedQuery || haystack.includes(normalizedQuery));
+      const eventTime = new Date(event.startTime).getTime();
+      if (scope === "upcoming" ? eventTime < now : eventTime >= now) return false;
+      if (!dateMatchesPreset(event.startTime, datePreset)) return false;
+      if (city !== "全部城市" && event.city !== city) return false;
+      if (venue !== "全部场馆" && event.venue !== venue) return false;
+      if (ensemble !== "全部乐团" && normalizeEnsembleLabel(event.ensemble) !== ensemble) return false;
+      if (genre !== "全部类型" && !event.genres.includes(genre)) return false;
+      if (hasProgram && !event.hasProgram) return false;
+      if (activeEntityEvents && !activeEntityEvents.has(event.id)) return false;
+      return !deferredQuery || event.searchText.includes(deferredQuery);
     });
-  }, [dataset.events, query, venue]);
+  }, [
+    activeEntityEvents,
+    city,
+    dataset.events,
+    datePreset,
+    deferredQuery,
+    ensemble,
+    genre,
+    hasProgram,
+    scope,
+    venue,
+  ]);
 
-  const stats = useMemo(() => {
-    const works = new Set(dataset.events.flatMap((event) => event.program.map((item) => item.title)));
-    const people = new Set(
-      dataset.events.flatMap((event) => [event.conductor, ...event.performers].filter(Boolean) as string[]),
-    );
-    return {
-      eventCount: dataset.events.length,
-      venueCount: venues.length - 1,
-      workCount: works.size,
-      peopleCount: people.size,
-    };
-  }, [dataset.events, venues.length]);
+  useEffect(() => {
+    setVisibleCount(pageSize);
+  }, [activeEntityId, city, datePreset, deferredQuery, ensemble, genre, hasProgram, scope, venue]);
+
+  useEffect(() => {
+    if (!filteredEvents.length) return;
+    if (!filteredEvents.some((event) => event.id === selectedId)) setSelectedId(filteredEvents[0].id);
+  }, [filteredEvents, selectedId]);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (scope === "past") params.set("scope", scope);
+    if (datePreset !== "all") params.set("date", datePreset);
+    if (city !== "全部城市") params.set("city", city);
+    if (venue !== "全部场馆") params.set("venue", venue);
+    if (ensemble !== "全部乐团") params.set("ensemble", ensemble);
+    if (genre !== "全部类型") params.set("genre", genre);
+    if (hasProgram) params.set("program", "1");
+    if (viewMode === "calendar") params.set("view", viewMode);
+    if (selectedId) params.set("event", selectedId);
+    if (activeEntityId) params.set("entity", activeEntityId);
+    window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
+  }, [activeEntityId, city, datePreset, ensemble, genre, hasProgram, query, scope, selectedId, venue, viewMode]);
+
+  const entitiesByKey = useMemo(() => {
+    const map = new Map<string, EntityRecord>();
+    for (const entity of entities.entities) {
+      map.set(`${entity.type}:${entity.type === "work" ? entity.id : entity.name}`, entity);
+    }
+    return map;
+  }, [entities.entities]);
+
+  const activeFilterCount = [
+    datePreset !== "all",
+    city !== "全部城市",
+    venue !== "全部场馆",
+    ensemble !== "全部乐团",
+    genre !== "全部类型",
+    hasProgram,
+  ].filter(Boolean).length;
+
+  const resetFilters = () => {
+    setDatePreset("all");
+    setCity("全部城市");
+    setVenue("全部场馆");
+    setEnsemble("全部乐团");
+    setGenre("全部类型");
+    setHasProgram(false);
+    setActiveEntityId("");
+  };
+
+  const selectEvent = (event: ConcertEventSummary) => {
+    pushHistoryValue("event", event.id);
+    setSelectedId(event.id);
+    setDetailOpen(true);
+  };
+
+  const exploreEntity = (entity: EntityRecord) => {
+    pushHistoryValue("entity", entity.id);
+    setActiveEntityId(entity.id);
+    setQuery("");
+    setDatePreset("all");
+    setScope(entity.upcomingEventCount ? "upcoming" : "past");
+    setDetailOpen(false);
+  };
+
+  const clearEntity = () => {
+    pushHistoryValue("entity", "");
+    setActiveEntityId("");
+  };
+
+  const changeScope = (nextScope: Scope) => {
+    setScope(nextScope);
+    setDatePreset("all");
+  };
 
   return (
     <main className="app-shell">
-      <section className="hero-band">
-        <div>
-          <div className="eyebrow">
-            <Database size={16} />
-            上海 demo · 自动采集实验
-          </div>
-          <h1>上海古典乐历</h1>
-          <p>
-            聚合上海音乐厅、乐团和演出场馆信息，按时间、场馆、曲目和音乐家检索。当前版本从公开页面自动采集，
-            DeepSeek 抽取接口已预留。
-          </p>
+      <header className="app-header">
+        <div className="brand-block">
+          <Music size={22} />
+          <div><strong>古典乐演出日历</strong><span>上海 · 苏州</span></div>
         </div>
-        <div className="pipeline-panel">
-          <div className="pipeline-title">采集状态</div>
-          <strong>{loadState}</strong>
-          <span>{dataset.generatedAt ? `生成时间：${formatDateTime(dataset.generatedAt)}` : "等待首次采集"}</span>
-          <span>
-            来源 {dataset.sources.filter((source) => source.ok).length}/{dataset.sources.length || 0} · 原始事件{" "}
-            {dataset.stats.rawEvents} · 入库 {dataset.stats.normalizedEvents}
+        <div className="header-status">
+          <span className={dataset.stats.errors.length ? "warning" : ""}>
+            {dataset.stats.errors.length ? <CircleAlert size={14} /> : <Check size={14} />}
+            {loadState}
           </span>
+          <small>{dataset.events.length} 场 · {dataset.sources.filter((source) => source.ok).length} 个来源</small>
         </div>
+      </header>
+
+      <section className="command-bar">
+        <label className="global-search">
+          <Search size={19} />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索曲目、作曲家、音乐家、乐团或场馆" />
+          {query ? <button onClick={() => setQuery("")} aria-label="清空搜索"><X size={16} /></button> : null}
+        </label>
+        <div className="scope-tabs" role="tablist" aria-label="演出时间范围">
+          <button className={scope === "upcoming" ? "active" : ""} onClick={() => changeScope("upcoming")}>即将演出</button>
+          <button className={scope === "past" ? "active" : ""} onClick={() => changeScope("past")}><History size={15} />历史</button>
+        </div>
+        <button className="mobile-filter-button" onClick={() => setFiltersOpen(true)}>
+          <Filter size={17} />筛选{activeFilterCount ? ` ${activeFilterCount}` : ""}
+        </button>
       </section>
 
-      <section className="stat-row">
-        <Stat icon={<CalendarDays size={18} />} label="演出" value={stats.eventCount} />
-        <Stat icon={<MapPin size={18} />} label="场馆" value={stats.venueCount} />
-        <Stat icon={<Music size={18} />} label="曲目候选" value={stats.workCount} />
-        <Stat icon={<UserRound size={18} />} label="人物候选" value={stats.peopleCount} />
-      </section>
+      <nav className="view-bar" aria-label="浏览方式">
+        <div className="view-tabs" role="tablist">
+          <button className={viewMode === "list" ? "active" : ""} onClick={() => setViewMode("list")}>
+            <ListIcon size={16} />列表
+          </button>
+          <button className={viewMode === "calendar" ? "active" : ""} onClick={() => setViewMode("calendar")}>
+            <CalendarDays size={16} />日历
+          </button>
+        </div>
+        <span>{filteredEvents.length} 场匹配</span>
+      </nav>
 
-      <section className="workspace">
-        <aside className="control-panel">
-          <label className="search-box">
-            <Search size={18} />
-            <input
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="搜贝多芬、马勒、钢琴、乐团、场馆..."
-            />
-          </label>
+      {activeEntity ? (
+        <section className="entity-context">
+          <div>
+            {activeEntity.type === "person" ? <UserRound size={18} /> : <Music size={18} />}
+            <span><small>{activeEntity.type === "person" ? "音乐家" : "作品"}</small><strong>{activeEntity.name}</strong></span>
+            {activeEntity.subtitle ? <em>{activeEntity.subtitle}</em> : null}
+          </div>
+          <button onClick={clearEntity}><X size={16} />退出关联页</button>
+        </section>
+      ) : null}
 
-          <div className="filter-block">
-            <span>快速筛选</span>
-            <div className="chip-grid">
-              {quickFilters.map((filter) => (
-                <button key={filter} onClick={() => setQuery(filter)}>
-                  {filter}
+      <section className={`workspace ${viewMode === "calendar" ? "calendar-mode" : ""}`}>
+        <aside className={`control-panel ${filtersOpen ? "open" : ""}`}>
+          <header className="filter-header">
+            <span><SlidersHorizontal size={17} />筛选</span>
+            <button className="filter-close" onClick={() => setFiltersOpen(false)} aria-label="关闭筛选"><X size={19} /></button>
+          </header>
+
+          <FilterGroup label="日期">
+            <div className="date-presets">
+              {([
+                ["all", scope === "upcoming" ? "全部未来" : "全部历史"],
+                ["week", "本周"],
+                ["weekend", "周末"],
+                ["month", "本月"],
+              ] as Array<[DatePreset, string]>).map(([value, label]) => (
+                <button
+                  key={value}
+                  className={datePreset === value ? "active" : ""}
+                  disabled={scope === "past" && value !== "all"}
+                  onClick={() => setDatePreset(datePreset === value && value !== "all" ? "all" : value)}
+                >
+                  {label}
                 </button>
               ))}
             </div>
-          </div>
+          </FilterGroup>
 
-          <label className="filter-block">
-            <span>场馆</span>
-            <select value={venue} onChange={(event) => setVenue(event.target.value)}>
-              {venues.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </select>
+          <SelectFilter label="城市" value={city} options={cities} onChange={(value) => {
+            setCity(value);
+            setVenue("全部场馆");
+          }} />
+          <SelectFilter label="场馆" value={venue} options={venues} onChange={setVenue} />
+          <SelectFilter label="乐团" value={ensemble} options={ensembles} onChange={setEnsemble} />
+          <SelectFilter label="类型" value={genre} options={genreOptions} onChange={setGenre} />
+
+          <label className="check-filter">
+            <input type="checkbox" checked={hasProgram} onChange={(event) => setHasProgram(event.target.checked)} />
+            <span><Check size={14} />只看有节目单</span>
           </label>
+
+          <button className="reset-button" onClick={resetFilters} disabled={!activeFilterCount && !activeEntity}>
+            清除筛选
+          </button>
 
           <div className="source-list">
             <span>数据来源</span>
             {dataset.sources.map((source) => (
               <a key={source.id} href={source.url} target="_blank" rel="noreferrer">
-                <span className={source.ok ? "source-dot ok" : "source-dot"} />
-                {source.name}
-                <small>{source.eventCount} 场</small>
+                <i className={source.ok ? "ok" : ""} />
+                <span>{source.name}</span>
+                <small>{source.eventCount}</small>
               </a>
             ))}
           </div>
         </aside>
 
-        <section className="event-list" aria-label="演出列表">
-          <div className="list-heading">
-            <h2>演出列表</h2>
-            <span>{filteredEvents.length} 场匹配</span>
-          </div>
-          {filteredEvents.map((event) => (
-            <button
-              key={event.id}
-              className={`event-card ${selected?.id === event.id ? "active" : ""}`}
-              onClick={() => setSelected(event)}
-            >
-              <div className="date-block">
-                <strong>{event.dateLabel}</strong>
-                <span>{event.weekday}</span>
+        {viewMode === "list" ? (
+          <section className="event-list" aria-label="演出列表">
+            {filteredEvents.length ? (
+              <>
+                {filteredEvents.slice(0, visibleCount).map((event) => (
+                  <EventListRow key={event.id} event={event} active={selectedId === event.id} onSelect={selectEvent} />
+                ))}
+                {visibleCount < filteredEvents.length ? (
+                  <button className="load-more" onClick={() => setVisibleCount((count) => count + pageSize)}>
+                    显示更多 <span>{filteredEvents.length - visibleCount}</span>
+                  </button>
+                ) : null}
+              </>
+            ) : (
+              <div className="empty-results">
+                <Search size={28} /><h2>没有匹配的演出</h2><p>调整日期或筛选条件后再试。</p>
+                <button onClick={resetFilters}>清除筛选</button>
               </div>
-              <div className="event-main">
-                <h3>{event.title}</h3>
-                <div className="event-meta">
-                  <span>
-                    <Clock size={14} />
-                    {event.timeLabel}
-                  </span>
-                  <span>
-                    <MapPin size={14} />
-                    {event.venue}
-                  </span>
-                </div>
-                <div className="tag-line">
-                  {event.tags.slice(0, 4).map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </button>
-          ))}
-        </section>
+            )}
+          </section>
+        ) : (
+          <Suspense fallback={<section className="calendar-panel loading">正在加载日历</section>}>
+            <CalendarView
+              events={filteredEvents}
+              selectedId={selectedId}
+              month={calendarMonth}
+              onMonthChange={setCalendarMonth}
+              onSelect={selectEvent}
+            />
+          </Suspense>
+        )}
 
-        <EventDetail event={selected} />
+        <EventDetail
+          event={selectedDetail}
+          loading={detailLoading}
+          open={detailOpen}
+          entitiesByKey={entitiesByKey}
+          onClose={() => setDetailOpen(false)}
+          onExplore={exploreEntity}
+        />
       </section>
+
+      <footer className="app-footer">
+        <span>最近采集：{dataset.generatedAt ? new Date(dataset.generatedAt).toLocaleString("zh-CN") : "暂无"}</span>
+        <span>{changes.changes.length ? `最近检测到 ${changes.changes.length} 项变化` : "未检测到结构化变化"}</span>
+      </footer>
     </main>
   );
 }
 
-function EventDetail({ event }: { event: ConcertEvent | null }) {
-  if (!event) {
-    return (
-      <section className="detail-panel empty">
-        <Music size={28} />
-        <p>运行采集脚本后，这里会展示音乐会详情。</p>
-      </section>
-    );
-  }
-
-  const entities = Array.from(
-    new Set(
-      [event.ensemble, event.conductor, ...event.performers, ...event.composers, ...event.tags].filter(
-        (entity): entity is string => Boolean(entity),
-      ),
-    ),
-  );
-
+const EventListRow = memo(function EventListRow({
+  event,
+  active,
+  onSelect,
+}: {
+  event: ConcertEventSummary;
+  active: boolean;
+  onSelect: (event: ConcertEventSummary) => void;
+}) {
+  const mainPerson = event.mainPerson;
   return (
-    <section className="detail-panel">
-      <div className="detail-kicker">
-        <span>{event.dataQuality}</span>
-        <span>{event.sourceName}</span>
-      </div>
-      <h2>{event.title}</h2>
-      <div className="detail-meta">
-        <span>
-          <CalendarDays size={16} />
-          {formatDateTime(event.startTime)}
-        </span>
-        <span>
-          <MapPin size={16} />
-          {event.venue}
-        </span>
-        {event.price && (
-          <span>
-            <Ticket size={16} />
-            {event.price}
-          </span>
-        )}
-      </div>
-
-      <div className="action-row">
-        {event.ticketUrl && (
-          <a className="primary-link" href={event.ticketUrl} target="_blank" rel="noreferrer">
-            <Ticket size={16} />
-            购票/来源
-          </a>
-        )}
-        <a href={event.sourceUrl} target="_blank" rel="noreferrer">
-          <ExternalLink size={16} />
-          原始页面
-        </a>
-      </div>
-
-      {event.priceTiers?.length ? (
-        <div className="price-tier-list" aria-label="票价档位">
-          <span>票价档位</span>
-          <div>
-            {event.priceTiers.map((price) => (
-              <strong key={price}>{formatTicketPrice(price)}</strong>
-            ))}
-          </div>
+    <button className={`event-card ${active ? "active" : ""}`} onClick={() => onSelect(event)}>
+      <div className="date-block"><strong>{event.dateLabel}</strong><span>{event.weekday}</span><time>{event.timeLabel}</time></div>
+      <div className="event-main">
+        <div className="event-title-row">
+          <h2>{event.title}</h2>
+          <ChevronRight size={18} />
         </div>
-      ) : null}
-
-      {event.description ? (
-        <>
-          <div className="section-title">
-            <BookOpenText size={17} />
-            演出简介
-          </div>
-          <div className="event-description">
-            {event.description.split(/\n{2,}/).map((paragraph, index) => (
-              <p key={`${index}-${paragraph.slice(0, 16)}`}>{paragraph}</p>
+        <div className="event-meta">
+          <span><MapPin size={14} />{formatEventVenue(event)}</span>
+          {event.price ? <span><Ticket size={14} />{event.price}</span> : null}
+          {mainPerson ? <span><UserRound size={14} />{mainPerson}</span> : null}
+        </div>
+        {event.programPreview.length ? (
+          <div className="program-preview">
+            {event.programPreview.map((item) => (
+              <span key={`${item.workId}-${item.title}`}>{item.composer ? `${item.composer} · ` : ""}{item.title}</span>
             ))}
           </div>
-        </>
-      ) : null}
-
-      <div className="section-title">
-        <Music size={17} />
-        节目单候选
+        ) : <span className="program-pending">节目单待公布</span>}
       </div>
-      <div className="program-list">
-        {event.program.length ? (
-          event.program.map((item, index) => <ProgramRow key={`${item.title}-${index}`} item={item} />)
-        ) : (
-          <p className="muted">当前来源没有节目单正文。后续可用 DeepSeek 从详情页补全。</p>
-        )}
-      </div>
-
-      <div className="section-title">
-        <Sparkles size={17} />
-        人物与标签
-      </div>
-      <div className="entity-list">
-        {entities.map((entity) => (
-          <a key={entity} href={bilibiliSearchUrl(entity)} target="_blank" rel="noreferrer">
-            {entity}
-          </a>
-        ))}
-      </div>
-    </section>
+    </button>
   );
+});
+
+function FilterGroup({ label, children }: { label: string; children: ReactNode }) {
+  return <div className="filter-group"><label>{label}</label>{children}</div>;
 }
 
-function ProgramRow({ item }: { item: ProgramItem }) {
-  const keyword = [item.composer, item.title, item.opus].filter(Boolean).join(" ");
+function SelectFilter({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+}) {
   return (
-    <div className="program-row">
-      <div>
-        <strong>{item.title}</strong>
-        <span>{[item.composer, item.opus].filter(Boolean).join(" · ") || item.confidence}</span>
-        {item.movements?.length ? (
-          <ol className="movement-list">
-            {item.movements.map((movement, index) => (
-              <li key={`${movement.number ?? index}-${movement.title}`}>
-                {movement.number && <span>{movement.number}.</span>}
-                {movement.title}
-              </li>
-            ))}
-          </ol>
-        ) : null}
-      </div>
-      <div className="music-links">
-        <a href={neteaseSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          网易云
-        </a>
-        <a href={qqMusicSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          QQ音乐
-        </a>
-        <a href={bilibiliSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          B站
-        </a>
-        <a href={resourceSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          资料检索
-        </a>
-        <a href={imslpSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          IMSLP
-        </a>
-        <a href={musicBrainzWorkSearchUrl(keyword)} target="_blank" rel="noreferrer">
-          MusicBrainz
-        </a>
-      </div>
-    </div>
-  );
-}
-
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: number }) {
-  return (
-    <div className="stat-card">
-      {icon}
+    <label className="filter-group">
       <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
+      <select value={value} onChange={(event) => onChange(event.target.value)}>
+        {options.map((option) => <option key={option}>{option}</option>)}
+      </select>
+    </label>
   );
 }
 
-function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(value));
+function normalizeEnsembleLabel(value?: string) {
+  if (!value) return undefined;
+  if (value.includes("上海交响乐团")) return "上海交响乐团";
+  if (value.includes("苏州交响乐团")) return "苏州交响乐团";
+  const cleaned = (value.includes("与") ? value.split("与").at(-1) : value)?.replace(/^与/, "").trim() ?? "";
+  if (
+    cleaned.length <= 24 &&
+    !/[丨|]/.test(cleaned) &&
+    /(?:交响乐团|爱乐乐团|管弦乐团|室内乐团|合唱团|四重奏)$/.test(cleaned)
+  ) {
+    return cleaned;
+  }
+  return undefined;
 }
 
-function formatTicketPrice(price: number) {
-  return price === 0 ? "免费" : `¥${Number.isInteger(price) ? price : price.toFixed(2)}`;
+function pushHistoryValue(key: string, value: string) {
+  const params = new URLSearchParams(window.location.search);
+  if (value) params.set(key, value);
+  else params.delete(key);
+  window.history.pushState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
 }
 
-function neteaseSearchUrl(keyword: string) {
-  return `https://music.163.com/#/search/m/?s=${encodeURIComponent(keyword)}&type=1`;
-}
-
-function qqMusicSearchUrl(keyword: string) {
-  return `https://y.qq.com/n/ryqq/search?w=${encodeURIComponent(keyword)}`;
-}
-
-function bilibiliSearchUrl(keyword: string) {
-  return `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
-}
-
-function resourceSearchUrl(keyword: string) {
-  return `https://cn.bing.com/search?q=${encodeURIComponent(`${keyword} 古典音乐 作品介绍`)}`;
-}
-
-function imslpSearchUrl(keyword: string) {
-  return `https://imslp.org/wiki/Special:Search?search=${encodeURIComponent(keyword)}`;
-}
-
-function musicBrainzWorkSearchUrl(keyword: string) {
-  return `https://musicbrainz.org/search?query=${encodeURIComponent(keyword)}&type=work&method=indexed`;
-}
-
-createRoot(document.getElementById("root")!).render(<App />);
+const rootElement = document.getElementById("root")!;
+const appRoot = globalThis.__classicMusicRoot ?? createRoot(rootElement);
+if (import.meta.hot) globalThis.__classicMusicRoot = appRoot;
+appRoot.render(<App />);

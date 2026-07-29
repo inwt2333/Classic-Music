@@ -55,7 +55,7 @@ async function main() {
     boundarySnapshot.programInfo,
     boundarySnapshot.showContent,
   );
-  assert.equal(boundaryContent.program.length, 7);
+  assert.equal(boundaryContent.program.length, 8);
   assert.equal(boundaryContent.program[0].composer, "泰勒曼");
   assert.equal(boundaryContent.program[0].title, "E大调第八无伴奏小提琴幻想曲，TWV 40:21");
   assert.equal(boundaryContent.program.some((item) => item.title.includes("购票")), false);
@@ -74,6 +74,51 @@ async function main() {
       priceTiers: [180, 580, 1080],
     },
   );
+
+  const fragmentsSnapshot = JSON.parse(
+    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21851.json"), "utf8"),
+  );
+  const fragments = parseShanghaiSymphonyContent(
+    fragmentsSnapshot.programInfo,
+    fragmentsSnapshot.showContent,
+  );
+  assert.equal(fragments.program.length, 0);
+  assert.deepEqual(fragments.composers, [
+    "阿利森·洛金斯-赫尔",
+    "吉利·施瓦茨曼",
+    "琼·陶尔",
+    "约翰·塞巴斯蒂安·巴赫",
+    "雷纳尔多·莫亚",
+    "陈怡",
+  ]);
+
+  const choirSnapshot = JSON.parse(
+    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21782.json"), "utf8"),
+  );
+  const choir = parseShanghaiSymphonyContent(choirSnapshot.programInfo, choirSnapshot.showContent);
+  assert.equal(choir.program.length, 17);
+  assert.equal(choir.program.some((item) => item.composer === "领唱"), false);
+  assert.equal(choir.program.some((item) => /^【.+合唱】$/.test(item.title)), false);
+  assert.deepEqual(choir.program[0], {
+    composer: "斯坦福",
+    title: "蓝鸟",
+    confidence: "official",
+  });
+  assert.equal(choir.program.find((item) => item.title === "月夜")?.composer, "舒曼");
+
+  const windSnapshot = JSON.parse(
+    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21810.json"), "utf8"),
+  );
+  const wind = parseShanghaiSymphonyContent(windSnapshot.programInfo, windSnapshot.showContent);
+  assert.equal(wind.program.some((item) => item.composer === "大管"), false);
+  assert.equal(wind.program.some((item) => item.title === "蓝英捷"), false);
+
+  const operaSnapshot = JSON.parse(
+    await readFile(resolve(process.cwd(), "data/snapshots/shsymphony-official.21776.json"), "utf8"),
+  );
+  const opera = parseShanghaiSymphonyContent(operaSnapshot.programInfo, operaSnapshot.showContent);
+  assert.equal(opera.program.length, 2);
+  assert.equal(opera.program.some((item) => /齐格弗里德|布伦希尔德/.test(item.composer || "")), false);
 
   console.log("Shanghai Symphony adapter tests passed.");
 }

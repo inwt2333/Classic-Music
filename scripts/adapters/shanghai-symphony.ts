@@ -7,7 +7,7 @@ type ContentBlock = {
 };
 
 const performerRolePattern =
-  /^(?:指挥|小提琴|中提琴|大提琴|低音提琴|钢琴|羽管键琴|管风琴|马林巴|琵琶|古琴|长笛|短笛|单簧管|双簧管|巴松|圆号|小号|长号|大号|打击乐|竖琴|吉他|女高音|女中音|男高音|男中音|男低音|独奏|演奏|演唱|合唱|乐团|首席|旁白|主持|艺术指导)\s*[：:]/;
+  /^(?:指挥|小提琴|中提琴|大提琴|低音提琴|钢琴|羽管键琴|管风琴|马林巴|琵琶|古琴|长笛|短笛|单簧管|双簧管|巴松|大管|圆号|小号|长号|大号|打击乐|竖琴|吉他|女高音|女中音|男高音|男中音|男低音|领唱|独唱|独奏|演奏|演唱|合唱|乐团|首席|旁白|主持|艺术指导)\s*[：:]/;
 
 const programFooterPattern =
   /本场音乐会|中场休息|演出时长|具体曲目|以现场为准|谢幕|导赏|返场|儿童全票|儿童谢绝入场|身高.*入场/;
@@ -15,11 +15,13 @@ const programFooterPattern =
 export function parseShanghaiSymphonyContent(programInfo: string, showContent?: string | null) {
   const blocks = htmlToBlocks(programInfo);
   const headingIndex = blocks.findIndex((block) => /^(?:曲目|节目单)\s*[：:]?$/.test(block.text));
+  const composers = extractMentionedComposers(blocks);
 
   if (headingIndex < 0) {
     return {
       program: [] as ProgramItem[],
       description: htmlToDescription(showContent || ""),
+      composers,
     };
   }
 
@@ -32,6 +34,7 @@ export function parseShanghaiSymphonyContent(programInfo: string, showContent?: 
   return {
     program: parseProgramBlocks(programBlocks),
     description: htmlToDescription(showContent || "") || inlineDescription,
+    composers,
   };
 }
 
@@ -49,7 +52,7 @@ export function parseShanghaiSymphonyCast(html: string) {
     const names = splitNames(match[2]);
     if (/指挥/.test(role)) conductor = names[0];
     if (
-      /指挥|小提琴|钢琴|大提琴|中提琴|长笛|单簧管|双簧管|圆号|女高音|男高音|男中音|合唱|表演|策划/.test(
+      /指挥|小提琴|钢琴|大提琴|中提琴|长笛|单簧管|双簧管|圆号|女高音|男高音|男中音|领唱|独唱|合唱|表演|策划/.test(
         role,
       )
     ) {
@@ -88,7 +91,24 @@ function parseProgramBlocks(blocks: ContentBlock[]): ProgramItem[] {
   for (const block of blocks) {
     const normalized = block.text;
     if (!normalized || /^(?:--+|——+)$/.test(normalized)) continue;
-    if (performerRolePattern.test(normalized)) continue;
+    if (
+      performerRolePattern.test(normalized) ||
+      (/^[^：:]{2,14}[：:]/.test(normalized) &&
+        currentWork &&
+        /歌剧|第.+幕|第.+场/.test(currentWork.title)) ||
+      /^作曲家\s*[：:]/.test(normalized) ||
+      /^【[^】]*合唱】$/.test(normalized)
+    ) {
+      continue;
+    }
+
+    const creditedTitle = parseCreditedTitle(normalized, currentComposer);
+    if (creditedTitle) {
+      currentComposer = undefined;
+      currentWork = creditedTitle;
+      program.push(currentWork);
+      continue;
+    }
 
     const composer = extractComposerHeading(normalized);
     if (composer) {
@@ -202,6 +222,38 @@ function isMovementParent(title: string) {
   return /组曲|交响曲|协奏曲|奏鸣曲|四重奏|五重奏|六重奏|七重奏|八重奏|九重奏|变奏曲|清唱剧|芭蕾|选曲|选段/.test(
     title,
   );
+}
+
+function parseCreditedTitle(line: string, fallbackComposer?: string): ProgramItem | undefined {
+  const match = line.match(/^《([^》]+)》\s*[（(](.+)[）)]$/);
+  if (!match) return undefined;
+
+  const creditSegments = Array.from(
+    match[2].matchAll(/(?:^|[，,])\s*([^，,（）]{1,30}?)(?:词曲|曲)(?=[，,）)]|$)/g),
+  );
+  const composer = creditSegments.length
+    ? cleanComposer(creditSegments[creditSegments.length - 1][1])
+    : fallbackComposer;
+  return {
+    composer: composer || undefined,
+    title: cleanProgramTitle(match[1]),
+    confidence: "official",
+  };
+}
+
+function extractMentionedComposers(blocks: ContentBlock[]) {
+  const composers: string[] = [];
+  for (const block of blocks) {
+    const match = block.text.match(/^作曲家\s*[：:]\s*(.+)$/);
+    if (!match) continue;
+    composers.push(
+      ...match[1]
+        .split(/[、，,；;]/)
+        .map((composer) => cleanComposer(composer))
+        .filter(Boolean),
+    );
+  }
+  return Array.from(new Set(composers));
 }
 
 function extractComposerHeading(line: string) {
