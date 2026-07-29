@@ -14,6 +14,7 @@ import type {
   EventSourceReference,
   ProgramItem,
 } from "../src/types";
+import { formatChinaDateLabels } from "./china-time";
 
 type PreparedData = {
   dataset: ConcertDataset;
@@ -474,6 +475,7 @@ function mergeEventGroup(
   );
   const normalizedTitle = normalizeIdentity(base.title);
   const venueKey = normalizeVenue(base.venue);
+  const dateLabels = formatChinaDateLabels(new Date(base.startTime));
   const performanceId = stableId("perf", `${normalizedTitle}|${base.startTime}|${venueKey}|${base.hall ?? ""}`);
   const projectId = stableId(
     "event",
@@ -492,6 +494,9 @@ function mergeEventGroup(
     ...base,
     id: performanceId,
     projectId,
+    weekday: dateLabels.weekday,
+    dateLabel: dateLabels.dateLabel,
+    timeLabel: dateLabels.timeLabel,
     description: ranked.find((event) => event.description)?.description,
     price: ranked.find((event) => event.price)?.price,
     priceTiers: Array.from(new Set(group.flatMap((event) => event.priceTiers ?? []))).sort((a, b) => a - b),

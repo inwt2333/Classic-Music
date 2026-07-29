@@ -117,6 +117,9 @@ assert.deepEqual(
 
 const recoveredMerged = mergeCrossSourceEvents(recoveredDataset.events, recoveredDataset.sources);
 assert.equal(recoveredMerged.length, 1);
+assert.equal(recoveredMerged[0].dateLabel, "09/11");
+assert.equal(recoveredMerged[0].weekday, "周五");
+assert.equal(recoveredMerged[0].timeLabel, "19:30");
 assert.deepEqual(
   recoveredMerged[0].sources?.map((source) => source.sourceId),
   ["source-a"],
