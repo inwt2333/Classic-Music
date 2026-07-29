@@ -120,6 +120,7 @@ npm run dev
 | `npm run test:data` | 测试跨来源合并、稳定 ID 和变更检测 |
 | `npm run audit:data` | 检查重复演出、节目单、人物和票价异常 |
 | `npm run audit:data:ci` | 严格检查所有来源，任一来源失败则退出 |
+| `npm run audit:data:deploy` | 部署审计；仅允许有上一版数据可恢复的来源失败 |
 | `npm run audit:storage` | 校验 SQLite、索引、实体和详情导出的一致性 |
 
 建议在提交采集或解析相关修改前运行：
@@ -250,7 +251,7 @@ LocalHub 已退出正式数据源。它可以用于发现演出线索，但缺�
 1. 安装锁定依赖并运行 adapter、存储层测试。
 2. 下载当前线上完整数据作为变更比较基线。
 3. 从四个官网重新采集。
-4. 运行严格数据审计和 SQLite/静态导出一致性审计。
+4. 运行数据审计和 SQLite/静态导出一致性审计；失败来源必须有上一版数据可恢复，否则停止部署。
 5. 使用 `/Classic-Music/` 基路径构建并部署到 GitHub Pages。
 
 本地验证 Pages 构建：

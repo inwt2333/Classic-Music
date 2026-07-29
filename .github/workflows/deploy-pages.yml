@@ -35,12 +35,16 @@ jobs:
         run: npm ci
 
       - name: Download the currently deployed dataset
-        continue-on-error: true
         run: |
           mkdir -p .cache
-          curl --fail --silent --show-error --location \
+          cp public/data/events.json .cache/previous-events.json
+          if curl --fail --silent --show-error --location \
             https://inwt2333.github.io/Classic-Music/data/events.json \
-            --output .cache/previous-events.json
+            --output .cache/deployed-events.json; then
+            mv .cache/deployed-events.json .cache/previous-events.json
+          else
+            echo "::warning::No deployed dataset available; using the committed dataset as baseline."
+          fi
 
       - name: Run parser and storage tests
         run: |
@@ -54,7 +58,7 @@ jobs:
 
       - name: Audit generated data
         run: |
-          npm run audit:data:ci
+          npm run audit:data:deploy
           npm run audit:storage
 
       - name: Build

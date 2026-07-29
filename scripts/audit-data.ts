@@ -16,6 +16,8 @@ const datasetPath = resolve(process.cwd(), datasetArgument || "public/data/event
 const dataset = JSON.parse(await readFile(datasetPath, "utf8")) as ConcertDataset;
 const issues: Issue[] = [];
 const strictSources = process.argv.includes("--strict-sources");
+const allowStaleSources = process.argv.includes("--allow-stale-sources");
+let sourceFailure = false;
 const eventKeys = new Set<string>();
 const eventIds = new Set<string>();
 const knownComposers = new Set(dataset.events.flatMap((event) => event.composers));
@@ -25,8 +27,12 @@ const roleOnlyPattern =
 if (strictSources) {
   for (const source of dataset.sources) {
     if (!source.ok) {
-      console.error(`[ERROR] 来源采集失败：${source.name}${source.message ? `：${source.message}` : ""}`);
-      process.exitCode = 1;
+      const recovered = allowStaleSources && source.eventCount > 0;
+      const level = recovered ? "WARN" : "ERROR";
+      console.error(
+        `[${level}] 来源采集失败${recovered ? "，已保留上一版数据" : ""}：${source.name}${source.message ? `：${source.message}` : ""}`,
+      );
+      if (!recovered) sourceFailure = true;
     }
   }
 }
@@ -102,7 +108,7 @@ for (const issue of issues.slice(0, 80)) {
   );
 }
 if (issues.length > 80) console.log(`其余 ${issues.length - 80} 项未显示`);
-if (errors.length) process.exitCode = 1;
+if (errors.length || sourceFailure) process.exitCode = 1;
 
 function addIssue(severity: Severity, event: ConcertEvent, message: string) {
   issues.push({ severity, event, message });

@@ -5,6 +5,7 @@ import {
   buildEntities,
   buildIndex,
   mergeCrossSourceEvents,
+  restoreFailedSourceEvents,
 } from "./data-store";
 
 const baseEvent: ConcertEvent = {
@@ -98,8 +99,27 @@ assert.deepEqual(buildChanges(dataset, nextDataset).changes.map((item) => item.t
 const failedDataset: ConcertDataset = {
   ...nextDataset,
   events: [],
+  sources: sources.map((source) =>
+    source.id === "source-a" ? { ...source, ok: false, eventCount: 0, message: "timeout" } : source,
+  ),
   stats: { ...nextDataset.stats, errors: ["来源 A: timeout"] },
 };
 assert.equal(buildChanges(dataset, failedDataset).changes.some((item) => item.type === "removed"), false);
+
+const recoveredDataset = restoreFailedSourceEvents(failedDataset, dataset);
+assert.equal(recoveredDataset.events.length, 1);
+assert.equal(recoveredDataset.sources.find((source) => source.id === "source-a")?.eventCount, 1);
+assert.equal(recoveredDataset.sources.find((source) => source.id === "source-a")?.ok, false);
+assert.deepEqual(
+  recoveredDataset.events[0].sources?.map((source) => source.sourceId),
+  ["source-a"],
+);
+
+const recoveredMerged = mergeCrossSourceEvents(recoveredDataset.events, recoveredDataset.sources);
+assert.equal(recoveredMerged.length, 1);
+assert.deepEqual(
+  recoveredMerged[0].sources?.map((source) => source.sourceId),
+  ["source-a"],
+);
 
 console.log("Data store tests passed.");

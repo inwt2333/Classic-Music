@@ -28,12 +28,13 @@ export async function prepareAndPersistDataset(
   databasePath: string,
 ) {
   const previous = await readPreviousDataset(outputPath);
-  const canonicalEvents = mergeCrossSourceEvents(dataset.events, dataset.sources);
+  const recoveredDataset = restoreFailedSourceEvents(dataset, previous);
+  const canonicalEvents = mergeCrossSourceEvents(recoveredDataset.events, recoveredDataset.sources);
   const canonicalDataset: ConcertDataset = {
-    ...dataset,
+    ...recoveredDataset,
     schemaVersion: 2,
     events: canonicalEvents,
-    stats: { ...dataset.stats, normalizedEvents: canonicalEvents.length },
+    stats: { ...recoveredDataset.stats, normalizedEvents: canonicalEvents.length },
   };
   const entities = buildEntities(canonicalDataset);
   const changes = buildChanges(previous, canonicalDataset);
@@ -43,6 +44,53 @@ export async function prepareAndPersistDataset(
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
   return prepared;
+}
+
+export function restoreFailedSourceEvents(
+  current: ConcertDataset,
+  previous: ConcertDataset | null,
+): ConcertDataset {
+  if (!previous || previous.schemaVersion !== 2) return current;
+
+  const failedSources = current.sources.filter((source) => !source.ok);
+  if (!failedSources.length) return current;
+
+  const failedIds = new Set(failedSources.map((source) => source.id));
+  const failedNames = new Set(failedSources.map((source) => source.name));
+  const retainedEvents: ConcertEvent[] = [];
+  const retainedCountBySource = new Map<string, number>();
+
+  for (const event of previous.events) {
+    const retainedReferences = (event.sources ?? []).filter((source) => failedIds.has(source.sourceId));
+    const belongsToLegacySource = !event.sources?.length && failedNames.has(event.sourceName);
+    if (!retainedReferences.length && !belongsToLegacySource) continue;
+
+    const primaryReference = retainedReferences[0];
+    retainedEvents.push({
+      ...event,
+      sourceName: primaryReference?.sourceName ?? event.sourceName,
+      sourceUrl: primaryReference?.sourceUrl ?? event.sourceUrl,
+      ticketUrl: primaryReference?.ticketUrl ?? event.ticketUrl,
+      sources: retainedReferences.length ? retainedReferences : event.sources,
+    });
+
+    if (retainedReferences.length) {
+      for (const sourceId of new Set(retainedReferences.map((source) => source.sourceId))) {
+        retainedCountBySource.set(sourceId, (retainedCountBySource.get(sourceId) ?? 0) + 1);
+      }
+    } else {
+      const sourceId = failedSources.find((source) => source.name === event.sourceName)?.id;
+      if (sourceId) retainedCountBySource.set(sourceId, (retainedCountBySource.get(sourceId) ?? 0) + 1);
+    }
+  }
+
+  return {
+    ...current,
+    events: [...current.events, ...retainedEvents],
+    sources: current.sources.map((source) =>
+      source.ok ? source : { ...source, eventCount: retainedCountBySource.get(source.id) ?? 0 },
+    ),
+  };
 }
 
 export function mergeCrossSourceEvents(
@@ -417,7 +465,13 @@ function mergeEventGroup(
 ): ConcertEvent {
   const ranked = [...group].sort((a, b) => richness(b) - richness(a));
   const base = ranked[0];
-  const sources = group.map((event) => sourceReference(event, sourceIdByName.get(event.sourceName) ?? "unknown"));
+  const sources = dedupeSourceReferences(
+    group.flatMap((event) =>
+      event.sources?.length
+        ? event.sources
+        : [sourceReference(event, sourceIdByName.get(event.sourceName) ?? "unknown")],
+    ),
+  );
   const normalizedTitle = normalizeIdentity(base.title);
   const venueKey = normalizeVenue(base.venue);
   const performanceId = stableId("perf", `${normalizedTitle}|${base.startTime}|${venueKey}|${base.hall ?? ""}`);
@@ -533,6 +587,14 @@ function sourceReference(event: ConcertEvent, sourceId: string): EventSourceRefe
     ticketUrl: event.ticketUrl,
     scrapedAt: event.scrapedAt,
   };
+}
+
+function dedupeSourceReferences(sources: EventSourceReference[]) {
+  const byRecord = new Map<string, EventSourceReference>();
+  for (const source of sources) {
+    byRecord.set(`${source.sourceId}:${source.sourceRecordId}`, source);
+  }
+  return Array.from(byRecord.values());
 }
 
 function richness(event: ConcertEvent) {
