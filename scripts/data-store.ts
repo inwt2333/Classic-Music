@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type {
@@ -12,6 +12,7 @@ import type {
   EntityDataset,
   EntityRecord,
   EventSourceReference,
+  ProgramCredit,
   ProgramItem,
 } from "../src/types";
 import { formatChinaDateLabels } from "./china-time";
@@ -22,6 +23,8 @@ type PreparedData = {
   index: ConcertIndexDataset;
   entities: EntityDataset;
   changes: ChangeDataset;
+  publishedDataset: ConcertDataset;
+  publishedEntities: EntityDataset;
 };
 
 export async function prepareAndPersistDataset(
@@ -45,8 +48,10 @@ export async function prepareAndPersistDataset(
   };
   const entities = buildEntities(canonicalDataset);
   const changes = buildChanges(previous, canonicalDataset);
-  const index = buildIndex(canonicalDataset);
-  const prepared = { dataset: canonicalDataset, index, entities, changes };
+  const publishedDataset = toPublishedDataset(canonicalDataset);
+  const index = buildIndex(publishedDataset);
+  const publishedEntities = buildEntities(publishedDataset);
+  const prepared = { dataset: canonicalDataset, index, entities, changes, publishedDataset, publishedEntities };
 
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
@@ -69,12 +74,16 @@ export async function reapplyManualReviewsAndPersist(
   };
   const entities = buildEntities(reviewedDataset);
   const changes = buildChanges(previous, reviewedDataset);
-  const index = buildIndex(reviewedDataset);
+  const publishedDataset = toPublishedDataset(reviewedDataset);
+  const index = buildIndex(publishedDataset);
+  const publishedEntities = buildEntities(publishedDataset);
   const prepared = {
     dataset: reviewedDataset,
     index,
     entities,
     changes,
+    publishedDataset,
+    publishedEntities,
   };
 
   await persistSqlite(prepared, databasePath);
@@ -153,6 +162,33 @@ export function buildIndex(dataset: ConcertDataset): ConcertIndexDataset {
     sources: dataset.sources,
     stats: dataset.stats,
     events: dataset.events.map(toSummary),
+  };
+}
+
+export function toPublishedDataset(dataset: ConcertDataset, now = Date.now()): ConcertDataset {
+  const events = dataset.events.filter((event) => new Date(event.startTime).getTime() >= now);
+  const countBySource = new Map<string, number>();
+  for (const event of events) {
+    for (const source of event.sources ?? []) {
+      countBySource.set(source.sourceId, (countBySource.get(source.sourceId) ?? 0) + 1);
+    }
+    if (!event.sources?.length) {
+      const source = dataset.sources.find((item) => item.name === event.sourceName);
+      if (source) countBySource.set(source.id, (countBySource.get(source.id) ?? 0) + 1);
+    }
+  }
+
+  return {
+    ...dataset,
+    events,
+    sources: dataset.sources.map((source) => ({
+      ...source,
+      eventCount: countBySource.get(source.id) ?? 0,
+    })),
+    stats: {
+      ...dataset.stats,
+      normalizedEvents: events.length,
+    },
   };
 }
 
@@ -252,14 +288,15 @@ export function buildChanges(
 async function exportStaticData(prepared: PreparedData, outputPath: string) {
   const dataDir = dirname(outputPath);
   const detailDir = resolve(dataDir, "events");
+  await rm(detailDir, { recursive: true, force: true });
   await mkdir(detailDir, { recursive: true });
 
   await writeFile(outputPath, `${JSON.stringify(prepared.dataset, null, 2)}\n`, "utf8");
   await writeFile(resolve(dataDir, "events-index.json"), JSON.stringify(prepared.index), "utf8");
-  await writeFile(resolve(dataDir, "entities.json"), JSON.stringify(prepared.entities), "utf8");
+  await writeFile(resolve(dataDir, "entities.json"), JSON.stringify(prepared.publishedEntities), "utf8");
   await writeFile(resolve(dataDir, "changes.json"), JSON.stringify(prepared.changes), "utf8");
   await Promise.all(
-    prepared.dataset.events.map((event) =>
+    prepared.publishedDataset.events.map((event) =>
       writeFile(resolve(detailDir, `${event.id}.json`), JSON.stringify(event), "utf8"),
     ),
   );
@@ -546,7 +583,7 @@ function mergeEventGroup(
     "event",
     `${normalizedTitle}|${venueKey}|${new Date(base.startTime).getFullYear()}`,
   );
-  const program = dedupeProgram(group.flatMap((event) => event.program)).map((item, index) => {
+  const program = dedupeProgram(group.flatMap((event) => event.program).map(normalizeProgramItemCredits)).map((item, index) => {
     const itemWorkId = workId(item);
     return {
       ...item,
@@ -600,9 +637,12 @@ function mergedProgramQuality(
 }
 
 function toSummary(event: ConcertEvent): ConcertEventSummary {
-  const workLabels = event.program.map((item) =>
-    [item.composer, item.title, ...(item.alternateTitles ?? []), item.opus].filter(Boolean).join(" ")
-  );
+  const workLabels = event.program.map((item) => {
+    const creditLabels = item.credits?.map(formatProgramCredit) ?? [];
+    return [item.composer, item.title, ...(item.alternateTitles ?? []), item.opus, ...creditLabels]
+      .filter(Boolean)
+      .join(" ");
+  });
   const knownGenres = ["交响", "室内乐", "钢琴", "独奏", "合唱", "歌剧"];
   const searchText = [
     event.title,
@@ -646,6 +686,7 @@ function toSummary(event: ConcertEvent): ConcertEventSummary {
       title: item.title,
       alternateTitles: item.alternateTitles,
       opus: item.opus,
+      credits: item.credits,
     })),
     searchText,
     sourceCount: event.sources?.length ?? 1,
@@ -714,9 +755,10 @@ function assignProgramIdentities(events: ConcertEvent[]) {
   return events.map((event) => ({
     ...event,
     program: event.program.map((item, index) => {
-      const itemWorkId = workId(item);
+      const normalizedItem = normalizeProgramItemCredits(item);
+      const itemWorkId = workId(normalizedItem);
       return {
-        ...item,
+        ...normalizedItem,
         id: stableId("program", `${event.id}:${index}:${itemWorkId}`),
         workId: itemWorkId,
       };
@@ -726,6 +768,87 @@ function assignProgramIdentities(events: ConcertEvent[]) {
 
 function workId(item: ProgramItem) {
   return entityId("work", `${item.composer ?? ""}:${item.title}:${item.opus ?? ""}`);
+}
+
+export function normalizeProgramItemCredits(item: ProgramItem): ProgramItem {
+  let title = normalizeProgramTitle(item.title);
+  let composer = item.composer;
+  const credits = [...(item.credits ?? [])];
+  const extractedCredits: ProgramCredit[] = [];
+
+  for (let pass = 0; pass < 8; pass += 1) {
+    const match = title.match(/^(.*\S)\s+([\u3400-\u9fffA-Za-z【（(][\u3400-\u9fffA-Za-z·.\-、,，（）()【】\s]{0,32}?)\s+(作词|词|编曲|改编[\u3400-\u9fff]{0,10}|编配[\u3400-\u9fff]{0,12}|配器|原曲|创作|曲)$/u)
+      ?? title.match(/^(.*?)([\u3400-\u9fff]{2,6}[（(][^）)]+[）)])\s+(作词|词)$/u);
+    if (!match) break;
+
+    const [, remaining, rawName, rawRole] = match;
+    const nextTitle = normalizeProgramTitle(remaining);
+    const name = normalizeCreditName(rawName);
+    const role = normalizeCreditRole(rawRole);
+    if (!nextTitle || !name || isLikelyWholeTitleCredit(title, nextTitle)) break;
+
+    title = nextTitle;
+    if (role === "曲") {
+      if (!composer) composer = name;
+      else if (normalizeIdentity(composer) !== normalizeIdentity(name)) addProgramCredit(extractedCredits, { name, role });
+      continue;
+    }
+    addProgramCredit(extractedCredits, { name, role });
+  }
+
+  const sourceMatch = title.match(/^(.*\S)\s+(新疆民歌|温州民歌|畲族民歌|山东沂蒙民间小调|河南豫西南民间曲调改编|俄罗斯歌曲连唱|红军革命歌曲)$/u);
+  if (sourceMatch) {
+    const nextTitle = normalizeProgramTitle(sourceMatch[1]);
+    if (nextTitle) {
+      title = nextTitle;
+      addProgramCredit(extractedCredits, { name: sourceMatch[2], role: "来源" });
+    }
+  }
+
+  const normalizedCredits = [...credits, ...extractedCredits.reverse()];
+  return {
+    ...item,
+    composer,
+    title,
+    credits: normalizedCredits.length ? normalizedCredits : undefined,
+  };
+}
+
+function normalizeProgramTitle(value: string) {
+  return value
+    .replace(/\s+/g, " ")
+    .replace(/\s+([：:，,。；;])/g, "$1")
+    .trim();
+}
+
+function normalizeCreditName(value: string) {
+  return value
+    .replace(/^【[^】]+】\s*/, "")
+    .replace(/^\([^)]*\)\s*/, "")
+    .replace(/^（[^）]*）\s*/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeCreditRole(value: string) {
+  return value === "作词" ? "词" : value.trim();
+}
+
+function isLikelyWholeTitleCredit(fullTitle: string, remainingTitle: string) {
+  return remainingTitle.length < 2 || normalizeIdentity(fullTitle) === normalizeIdentity(remainingTitle);
+}
+
+function addProgramCredit(credits: ProgramCredit[], credit: ProgramCredit) {
+  if (!credits.some((item) =>
+    normalizeIdentity(item.name) === normalizeIdentity(credit.name) &&
+    normalizeIdentity(item.role) === normalizeIdentity(credit.role)
+  )) {
+    credits.push(credit);
+  }
+}
+
+function formatProgramCredit(credit: ProgramCredit) {
+  return `${credit.name} ${credit.role}`;
 }
 
 function entityId(type: string, value: string) {

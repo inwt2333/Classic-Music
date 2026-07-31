@@ -1,3 +1,8 @@
+export type ProgramCredit = {
+  name: string;
+  role: string;
+};
+
 export type ProgramItem = {
   id?: string;
   workId?: string;
@@ -5,6 +10,7 @@ export type ProgramItem = {
   title: string;
   alternateTitles?: string[];
   opus?: string;
+  credits?: ProgramCredit[];
   movements?: Array<{
     number?: string;
     title: string;
@@ -95,7 +101,7 @@ export type ConcertEventSummary = {
   dataQuality: ConcertEvent["dataQuality"];
   detailPath: string;
   hasProgram: boolean;
-  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "alternateTitles" | "opus">>;
+  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "alternateTitles" | "opus" | "credits">>;
   searchText: string;
   sourceCount: number;
 };

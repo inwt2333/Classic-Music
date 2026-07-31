@@ -5,7 +5,9 @@ import {
   buildEntities,
   buildIndex,
   mergeCrossSourceEvents,
+  normalizeProgramItemCredits,
   restoreFailedSourceEvents,
+  toPublishedDataset,
 } from "./data-store";
 
 const baseEvent: ConcertEvent = {
@@ -173,6 +175,27 @@ assert.deepEqual(index.events[0].programPreview[0].alternateTitles, ["Symphony N
 assert.match(index.events[0].searchText, /symphony no\. 5 in c minor/);
 assert.equal("description" in index.events[0], false);
 
+const folkArrangement = normalizeProgramItemCredits({
+  title: "青春舞曲 新疆民歌 王世光 编曲 杨鸿年 改编童声合唱 赵琳 编配钢琴四手联弹",
+  confidence: "official",
+});
+assert.equal(folkArrangement.title, "青春舞曲");
+assert.deepEqual(folkArrangement.credits, [
+  { name: "新疆民歌", role: "来源" },
+  { name: "王世光", role: "编曲" },
+  { name: "杨鸿年", role: "改编童声合唱" },
+  { name: "赵琳", role: "编配钢琴四手联弹" },
+]);
+
+const arrangedOverture = normalizeProgramItemCredits({
+  composer: "莫扎特",
+  title: "魔笛序曲 【德】莫扎特 曲 阿卡迪·瑟佩尔 改编",
+  confidence: "official",
+});
+assert.equal(arrangedOverture.title, "魔笛序曲");
+assert.equal(arrangedOverture.composer, "莫扎特");
+assert.deepEqual(arrangedOverture.credits, [{ name: "阿卡迪·瑟佩尔", role: "改编" }]);
+
 const entities = buildEntities(dataset);
 assert.equal(entities.entities.some((entity) => entity.type === "person" && entity.name === "余隆"), true);
 assert.equal(entities.entities.some((entity) => entity.type === "work" && entity.name === "C小调第五交响曲"), true);
@@ -180,6 +203,16 @@ assert.deepEqual(
   entities.entities.find((entity) => entity.type === "work" && entity.name === "C小调第五交响曲")?.aliases,
   ["Symphony No. 5 in C Minor"],
 );
+
+const publishedDataset = toPublishedDataset({
+  ...dataset,
+  events: [
+    { ...merged[0], id: "past", startTime: "2026-01-01T11:30:00.000Z" },
+    { ...merged[0], id: "future", startTime: "2026-09-11T11:30:00.000Z" },
+  ],
+}, new Date("2026-07-31T00:00:00.000Z").getTime());
+assert.deepEqual(publishedDataset.events.map((event) => event.id), ["future"]);
+assert.equal(publishedDataset.stats.normalizedEvents, 1);
 
 const nextDataset: ConcertDataset = {
   ...dataset,

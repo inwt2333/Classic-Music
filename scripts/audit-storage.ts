@@ -10,10 +10,25 @@ async function main() {
   const databasePath = resolve(root, "data/classic-music.db");
   const index = JSON.parse(await readFile(indexPath, "utf8")) as ConcertIndexDataset;
   const entities = JSON.parse(await readFile(entityPath, "utf8")) as EntityDataset;
+  try {
+    await access(databasePath);
+  } catch {
+    console.error(`[ERROR] 缺少本地 SQLite 数据库：${databasePath}`);
+    console.error("请先运行 `npm run scrape` 重新采集，或运行 `npm run reviews:apply` 从现有审核记录重建本地数据库。");
+    process.exitCode = 1;
+    return;
+  }
   const database = new DatabaseSync(databasePath, { readOnly: true });
 
   const performanceCount = Number(
     (database.prepare("SELECT COUNT(*) AS count FROM performances").get() as { count: number }).count,
+  );
+  const futurePerformanceCount = Number(
+    (
+      database
+        .prepare("SELECT COUNT(*) AS count FROM performances WHERE start_time >= ?")
+        .get(new Date().toISOString()) as { count: number }
+    ).count,
   );
   const workCount = Number(
     (database.prepare("SELECT COUNT(*) AS count FROM works").get() as { count: number }).count,
@@ -25,8 +40,8 @@ async function main() {
 
   const failures: string[] = [];
   if (index.schemaVersion !== 2) failures.push(`索引 schemaVersion=${index.schemaVersion}`);
-  if (performanceCount !== index.events.length) {
-    failures.push(`SQLite performances=${performanceCount}，index events=${index.events.length}`);
+  if (futurePerformanceCount !== index.events.length) {
+    failures.push(`SQLite future performances=${futurePerformanceCount}，index events=${index.events.length}`);
   }
   if (!workCount) failures.push("SQLite works 为空");
   if (!personCount) failures.push("SQLite people 为空");

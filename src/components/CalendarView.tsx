@@ -57,13 +57,16 @@ export default function CalendarView({
 
   const activeDayEvents = eventsByDate.get(activeDay) ?? [];
   const todayKey = eventDateKey(new Date());
+  const matchCountLabel = monthEvents.length === events.length
+    ? `${monthEvents.length} 场匹配`
+    : `本月 ${monthEvents.length} 场 / 共 ${events.length} 场`;
 
   return (
     <section className="calendar-panel" aria-label={`${formatMonth(month)}演出日历`}>
       <header className="calendar-header">
         <div>
           <h2>{formatMonth(month)}</h2>
-          <p>{monthEvents.length} 场匹配</p>
+          <p>{matchCountLabel}</p>
         </div>
         <div className="month-nav">
           <button title="上个月" aria-label="上个月" onClick={() => onMonthChange(new Date(month.getFullYear(), month.getMonth() - 1, 1))}>

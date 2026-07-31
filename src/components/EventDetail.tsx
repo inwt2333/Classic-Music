@@ -1,6 +1,10 @@
 import {
   BookOpenText,
   CalendarDays,
+  Check,
+  Clock,
+  Copy,
+  Download,
   ExternalLink,
   MapPin,
   Music,
@@ -9,8 +13,9 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import type { ReactNode } from "react";
-import type { ConcertEvent, EntityRecord, ProgramItem } from "../types";
+import type { ReactNode, RefObject } from "react";
+import type { ConcertEvent, EntityRecord, ProgramCredit, ProgramItem } from "../types";
+import type { PersonalEventStatus } from "../product-features";
 import {
   bilibiliSearchUrl,
   formatDateTime,
@@ -27,20 +32,34 @@ export default function EventDetail({
   loading,
   open,
   entitiesByKey,
+  panelRef,
+  closeButtonRef,
   onClose,
   onExplore,
+  onExploreVenue,
+  onCopy,
+  onDownloadIcs,
+  personalStatus,
+  onSetPersonalStatus,
 }: {
   event: ConcertEvent | null;
   loading: boolean;
   open: boolean;
   entitiesByKey: Map<string, EntityRecord>;
+  panelRef?: RefObject<HTMLElement | null>;
+  closeButtonRef?: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
   onExplore: (entity: EntityRecord) => void;
+  onExploreVenue: (venue: string) => void;
+  onCopy: (event: ConcertEvent) => void;
+  onDownloadIcs: (event: ConcertEvent) => void;
+  personalStatus?: PersonalEventStatus;
+  onSetPersonalStatus: (eventId: string, status: PersonalEventStatus | null) => void;
 }) {
   if (loading) {
     return (
-      <section className={`detail-panel ${open ? "open" : ""}`} aria-live="polite">
-        <DetailClose onClose={onClose} />
+      <section ref={panelRef} className={`detail-panel ${open ? "open" : ""}`} aria-live="polite">
+        <DetailClose buttonRef={closeButtonRef} onClose={onClose} />
         <div className="detail-skeleton">
           <span />
           <strong />
@@ -53,8 +72,8 @@ export default function EventDetail({
 
   if (!event) {
     return (
-      <section className={`detail-panel empty ${open ? "open" : ""}`}>
-        <DetailClose onClose={onClose} />
+      <section ref={panelRef} className={`detail-panel empty ${open ? "open" : ""}`}>
+        <DetailClose buttonRef={closeButtonRef} onClose={onClose} />
         <Music size={28} />
         <p>选择一场演出查看节目单和购票信息</p>
       </section>
@@ -73,8 +92,14 @@ export default function EventDetail({
   }[event.dataQuality];
 
   return (
-    <section className={`detail-panel ${open ? "open" : ""}`} aria-label="演出详情">
-      <DetailClose onClose={onClose} />
+    <section
+      ref={panelRef}
+      className={`detail-panel ${open ? "open" : ""}`}
+      role={open ? "dialog" : undefined}
+      aria-modal={open ? "true" : undefined}
+      aria-label="演出详情"
+    >
+      <DetailClose buttonRef={closeButtonRef} onClose={onClose} />
       <div className="detail-kicker">
         <span>{qualityLabel}</span>
         <span>{event.sources?.length ?? 1} 个来源</span>
@@ -83,7 +108,9 @@ export default function EventDetail({
 
       <div className="detail-meta">
         <span><CalendarDays size={16} />{formatDateTime(event.startTime)}</span>
-        <span><MapPin size={16} />{formatEventVenue(event)}</span>
+        <button type="button" onClick={() => onExploreVenue(event.venue)}>
+          <MapPin size={16} />{formatEventVenue(event)}
+        </button>
         {event.price ? <span><Ticket size={16} />{event.price}</span> : null}
       </div>
 
@@ -96,6 +123,29 @@ export default function EventDetail({
         <a href={event.sourceUrl} target="_blank" rel="noreferrer">
           <ExternalLink size={16} />官网详情
         </a>
+        <button type="button" onClick={() => onDownloadIcs(event)}>
+          <Download size={16} />加入日历
+        </button>
+        <button type="button" onClick={() => onCopy(event)}>
+          <Copy size={16} />复制信息
+        </button>
+      </div>
+
+      <div className="personal-actions" aria-label="个人标记">
+        <button
+          type="button"
+          className={personalStatus === "interested" ? "active" : ""}
+          onClick={() => onSetPersonalStatus(event.id, personalStatus === "interested" ? null : "interested")}
+        >
+          <Clock size={15} />想去
+        </button>
+        <button
+          type="button"
+          className={personalStatus === "attended" ? "active" : ""}
+          onClick={() => onSetPersonalStatus(event.id, personalStatus === "attended" ? null : "attended")}
+        >
+          <Check size={15} />已去
+        </button>
       </div>
 
       {event.priceTiers?.length ? (
@@ -184,7 +234,13 @@ function ProgramRow({
   entity?: EntityRecord;
   onExplore: (entity: EntityRecord) => void;
 }) {
-  const keyword = [item.composer, item.title, ...(item.alternateTitles ?? []), item.opus].filter(Boolean).join(" ");
+  const keyword = [
+    item.composer,
+    item.title,
+    ...(item.alternateTitles ?? []),
+    item.opus,
+    ...(item.credits?.map(formatProgramCredit) ?? []),
+  ].filter(Boolean).join(" ");
   return (
     <article className="program-row">
       <div className="program-copy">
@@ -193,6 +249,9 @@ function ProgramRow({
           <small className="program-alternate-title">{item.alternateTitles.join(" / ")}</small>
         ) : null}
         <span>{[item.composer, item.opus].filter(Boolean).join(" · ") || "曲目信息待补充"}</span>
+        {item.credits?.length ? (
+          <small className="program-credits">{item.credits.map(formatProgramCredit).join(" / ")}</small>
+        ) : null}
         {item.movements?.length ? (
           <ol className="movement-list">
             {item.movements.map((movement, index) => (
@@ -222,13 +281,23 @@ function ProgramRow({
   );
 }
 
+function formatProgramCredit(credit: ProgramCredit) {
+  return `${credit.name} ${credit.role}`;
+}
+
 function SectionTitle({ icon, title }: { icon: ReactNode; title: string }) {
   return <div className="section-title">{icon}{title}</div>;
 }
 
-function DetailClose({ onClose }: { onClose: () => void }) {
+function DetailClose({
+  onClose,
+  buttonRef,
+}: {
+  onClose: () => void;
+  buttonRef?: RefObject<HTMLButtonElement | null>;
+}) {
   return (
-    <button className="detail-close" onClick={onClose} aria-label="关闭详情" title="关闭详情">
+    <button ref={buttonRef} className="detail-close" onClick={onClose} aria-label="关闭详情" title="关闭详情">
       <X size={20} />
     </button>
   );

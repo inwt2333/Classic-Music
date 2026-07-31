@@ -5,6 +5,7 @@ import {
   useDeferredValue,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -15,23 +16,36 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleAlert,
+  Building2,
   Database,
+  Download,
   Filter,
-  History,
   List as ListIcon,
   MapPin,
   Music,
   Search,
   ScanText,
   SlidersHorizontal,
+  Star,
   Ticket,
   UserRound,
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
+import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
 import { loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import {
+  copyEventText,
+  downloadEventsIcs,
+  expandSearchQuery,
+  matchesExpandedSearch,
+  readPersonalEvents,
+  setPersonalEventStatus,
+  type PersonalEventMap,
+  type PersonalEventStatus,
+} from "./product-features";
 import "./styles.css";
 import type {
   ConcertEvent,
@@ -52,9 +66,9 @@ declare global {
   var __classicMusicRoot: Root | undefined;
 }
 
-type Scope = "upcoming" | "past";
 type DatePreset = "all" | "week" | "weekend" | "month";
 type ViewMode = "list" | "calendar";
+type PersonalFilter = "all" | PersonalEventStatus;
 
 const emptyDataset: ConcertIndexDataset = {
   schemaVersion: 2,
@@ -97,13 +111,17 @@ function App() {
   const [entities, setEntities] = useState(emptyEntities);
   const [loadState, setLoadState] = useState("正在加载演出索引");
   const [query, setQuery] = useState(initialParams.get("q") ?? "");
-  const [scope, setScope] = useState<Scope>(initialParams.get("scope") === "past" ? "past" : "upcoming");
   const [datePreset, setDatePreset] = useState<DatePreset>((initialParams.get("date") as DatePreset) || "all");
   const [city, setCity] = useState(initialParams.get("city") ?? "全部城市");
   const [venue, setVenue] = useState(initialParams.get("venue") ?? "全部场馆");
   const [ensemble, setEnsemble] = useState(initialParams.get("ensemble") ?? "全部乐团");
   const [genre, setGenre] = useState(initialParams.get("genre") ?? "全部类型");
   const [hasProgram, setHasProgram] = useState(initialParams.get("program") === "1");
+  const [personalFilter, setPersonalFilter] = useState<PersonalFilter>(
+    initialParams.get("personal") === "interested" || initialParams.get("personal") === "attended"
+      ? (initialParams.get("personal") as PersonalEventStatus)
+      : "all",
+  );
   const [viewMode, setViewMode] = useState<ViewMode>(initialParams.get("view") === "calendar" ? "calendar" : "list");
   const [selectedId, setSelectedId] = useState(initialParams.get("event") ?? "");
   const [selectedDetail, setSelectedDetail] = useState<ConcertEvent | null>(null);
@@ -112,10 +130,24 @@ function App() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const [activeEntityId, setActiveEntityId] = useState(initialParams.get("entity") ?? "");
+  const [activeVenue, setActiveVenue] = useState(initialParams.get("venuePage") ?? "");
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
   const [coverIndex, setCoverIndex] = useState(0);
   const [coverPaused, setCoverPaused] = useState(false);
+  const [personalEvents, setPersonalEvents] = useState<PersonalEventMap>(() => readPersonalEvents());
+  const [copyState, setCopyState] = useState("");
+  const filterButtonRef = useRef<HTMLButtonElement | null>(null);
+  const filterCloseRef = useRef<HTMLButtonElement | null>(null);
+  const filterPanelRef = useRef<HTMLElement | null>(null);
+  const detailPanelRef = useRef<HTMLElement | null>(null);
+  const detailCloseRef = useRef<HTMLButtonElement | null>(null);
+  const detailTriggerRef = useRef<HTMLElement | null>(null);
+  const filtersWereOpenRef = useRef(false);
+  const filterIsModal = useMediaQuery("(max-width: 760px)");
+  const detailIsModal = useMediaQuery("(max-width: 1200px)");
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase("zh-CN"));
+  const filterModalActive = filtersOpen && filterIsModal;
+  const detailModalActive = detailOpen && detailIsModal;
 
   useEffect(() => {
     if (coverPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -127,6 +159,52 @@ function App() {
     );
     return () => window.clearInterval(timer);
   }, [coverPaused]);
+
+  useEffect(() => {
+    if (!filterModalActive) return;
+    window.requestAnimationFrame(() => filterCloseRef.current?.focus());
+  }, [filterModalActive]);
+
+  useEffect(() => {
+    if (filtersWereOpenRef.current && !filtersOpen) filterButtonRef.current?.focus();
+    filtersWereOpenRef.current = filtersOpen;
+  }, [filtersOpen]);
+
+  useEffect(() => {
+    if (detailModalActive) {
+      window.requestAnimationFrame(() => detailCloseRef.current?.focus());
+      return;
+    }
+    if (!detailOpen) detailTriggerRef.current?.focus();
+  }, [detailModalActive, detailOpen]);
+
+  useEffect(() => {
+    const backgroundElements = document.querySelectorAll<HTMLElement>("[data-app-background]");
+    const activeModal = filterModalActive ? filterPanelRef.current : detailModalActive ? detailPanelRef.current : null;
+    const active = filterModalActive || detailModalActive;
+    for (const element of backgroundElements) {
+      const shouldHide = active && element !== activeModal && !activeModal?.contains(element);
+      element.toggleAttribute("inert", shouldHide);
+      if (shouldHide) element.setAttribute("aria-hidden", "true");
+      else element.removeAttribute("aria-hidden");
+    }
+    return () => {
+      for (const element of backgroundElements) {
+        element.removeAttribute("inert");
+        element.removeAttribute("aria-hidden");
+      }
+    };
+  }, [detailModalActive, filterModalActive]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (filterModalActive) setFiltersOpen(false);
+      else if (detailModalActive) setDetailOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [detailModalActive, filterModalActive]);
 
   useEffect(() => {
     loadEventIndex()
@@ -144,16 +222,21 @@ function App() {
     const restoreFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
       setQuery(params.get("q") ?? "");
-      setScope(params.get("scope") === "past" ? "past" : "upcoming");
       setDatePreset((params.get("date") as DatePreset) || "all");
       setCity(params.get("city") ?? "全部城市");
       setVenue(params.get("venue") ?? "全部场馆");
       setEnsemble(params.get("ensemble") ?? "全部乐团");
       setGenre(params.get("genre") ?? "全部类型");
       setHasProgram(params.get("program") === "1");
+      setPersonalFilter(
+        params.get("personal") === "interested" || params.get("personal") === "attended"
+          ? (params.get("personal") as PersonalEventStatus)
+          : "all",
+      );
       setViewMode(params.get("view") === "calendar" ? "calendar" : "list");
       setSelectedId(params.get("event") ?? "");
       setActiveEntityId(params.get("entity") ?? "");
+      setActiveVenue(params.get("venuePage") ?? "");
       setDetailOpen(Boolean(params.get("event")));
     };
     window.addEventListener("popstate", restoreFromUrl);
@@ -221,23 +304,27 @@ function App() {
     () => activeEntity ? new Set(activeEntity.eventIds) : null,
     [activeEntity],
   );
+  const expandedQueries = useMemo(() => expandSearchQuery(query), [query]);
 
   const filteredEvents = useMemo(() => {
     const now = Date.now();
     return dataset.events.filter((event) => {
       const eventTime = new Date(event.startTime).getTime();
-      if (scope === "upcoming" ? eventTime < now : eventTime >= now) return false;
+      if (eventTime < now) return false;
       if (!dateMatchesPreset(event.startTime, datePreset)) return false;
       if (city !== "全部城市" && event.city !== city) return false;
       if (venue !== "全部场馆" && event.venue !== venue) return false;
       if (ensemble !== "全部乐团" && normalizeEnsembleLabel(event.ensemble) !== ensemble) return false;
       if (genre !== "全部类型" && !event.genres.includes(genre)) return false;
       if (hasProgram && !event.hasProgram) return false;
+      if (personalFilter !== "all" && personalEvents[event.id] !== personalFilter) return false;
       if (activeEntityEvents && !activeEntityEvents.has(event.id)) return false;
-      return !deferredQuery || event.searchText.includes(deferredQuery);
+      if (activeVenue && event.venue !== activeVenue) return false;
+      return !deferredQuery || matchesExpandedSearch(event.searchText, expandedQueries);
     });
   }, [
     activeEntityEvents,
+    activeVenue,
     city,
     dataset.events,
     datePreset,
@@ -245,13 +332,15 @@ function App() {
     ensemble,
     genre,
     hasProgram,
-    scope,
+    personalEvents,
+    personalFilter,
     venue,
+    expandedQueries,
   ]);
 
   useEffect(() => {
     setVisibleCount(pageSize);
-  }, [activeEntityId, city, datePreset, deferredQuery, ensemble, genre, hasProgram, scope, venue]);
+  }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, venue]);
 
   useEffect(() => {
     if (!filteredEvents.length) return;
@@ -261,18 +350,19 @@ function App() {
   useEffect(() => {
     const params = new URLSearchParams();
     if (query) params.set("q", query);
-    if (scope === "past") params.set("scope", scope);
     if (datePreset !== "all") params.set("date", datePreset);
     if (city !== "全部城市") params.set("city", city);
     if (venue !== "全部场馆") params.set("venue", venue);
     if (ensemble !== "全部乐团") params.set("ensemble", ensemble);
     if (genre !== "全部类型") params.set("genre", genre);
     if (hasProgram) params.set("program", "1");
+    if (personalFilter !== "all") params.set("personal", personalFilter);
     if (viewMode === "calendar") params.set("view", viewMode);
     if (selectedId) params.set("event", selectedId);
     if (activeEntityId) params.set("entity", activeEntityId);
+    if (activeVenue) params.set("venuePage", activeVenue);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeEntityId, city, datePreset, ensemble, genre, hasProgram, query, scope, selectedId, venue, viewMode]);
+  }, [activeEntityId, activeVenue, city, datePreset, ensemble, genre, hasProgram, personalFilter, query, selectedId, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
@@ -289,6 +379,7 @@ function App() {
     ensemble !== "全部乐团",
     genre !== "全部类型",
     hasProgram,
+    personalFilter !== "all",
   ].filter(Boolean).length;
 
   const resetFilters = () => {
@@ -298,10 +389,31 @@ function App() {
     setEnsemble("全部乐团");
     setGenre("全部类型");
     setHasProgram(false);
+    setPersonalFilter("all");
     setActiveEntityId("");
+    setActiveVenue("");
+  };
+
+  const updatePersonalStatus = (eventId: string, status: PersonalEventStatus | null) => {
+    setPersonalEvents((current) => setPersonalEventStatus(current, eventId, status));
+  };
+
+  const copySelectedEvent = async (event: ConcertEvent) => {
+    await navigator.clipboard.writeText(copyEventText(event));
+    setCopyState("已复制演出信息");
+    window.setTimeout(() => setCopyState(""), 1800);
+  };
+
+  const downloadSelectedEventIcs = (event: ConcertEvent) => {
+    downloadEventsIcs([event], `${event.dateLabel.replace("/", "")}-${event.title.slice(0, 24)}`);
+  };
+
+  const downloadFilteredIcs = () => {
+    downloadEventsIcs(filteredEvents, "classic-music-filtered-events");
   };
 
   const selectEvent = (event: ConcertEventSummary) => {
+    detailTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     pushHistoryValue("event", event.id);
     setSelectedId(event.id);
     setDetailOpen(true);
@@ -310,9 +422,9 @@ function App() {
   const exploreEntity = (entity: EntityRecord) => {
     pushHistoryValue("entity", entity.id);
     setActiveEntityId(entity.id);
+    setActiveVenue("");
     setQuery("");
     setDatePreset("all");
-    setScope(entity.upcomingEventCount ? "upcoming" : "past");
     setDetailOpen(false);
   };
 
@@ -321,14 +433,25 @@ function App() {
     setActiveEntityId("");
   };
 
-  const changeScope = (nextScope: Scope) => {
-    setScope(nextScope);
+  const exploreVenue = (nextVenue: string) => {
+    pushHistoryValue("venuePage", nextVenue);
+    setActiveVenue(nextVenue);
+    setActiveEntityId("");
+    setVenue("全部场馆");
+    setQuery("");
     setDatePreset("all");
+    setPersonalFilter("all");
+    setDetailOpen(false);
+  };
+
+  const clearVenue = () => {
+    pushHistoryValue("venuePage", "");
+    setActiveVenue("");
   };
 
   return (
     <main className="app-shell">
-      <header className="app-header">
+      <header className="app-header" data-app-background>
         <div className="brand-block">
           <Music size={22} />
           <div><strong>古典乐演出日历</strong><span>北京 · 上海 · 苏州</span></div>
@@ -337,6 +460,10 @@ function App() {
           <a className="header-link" href="?sources=1">
             <Database size={14} />
             数据来源
+          </a>
+          <a className="header-link" href="?changes=1">
+            <CircleAlert size={14} />
+            最近变化
           </a>
           {import.meta.env.DEV ? (
             <a className="header-link" href="?review=1">
@@ -361,6 +488,7 @@ function App() {
 
       <section
         className="cover-banner"
+        data-app-background
         aria-label="古典音乐现场图片轮播"
         aria-roledescription="轮播"
         onMouseEnter={() => setCoverPaused(true)}
@@ -419,22 +547,18 @@ function App() {
         </div>
       </section>
 
-      <section className="command-bar">
+      <section className="command-bar" data-app-background>
         <label className="global-search">
           <Search size={19} />
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索曲目、作曲家、音乐家、乐团或场馆" />
           {query ? <button onClick={() => setQuery("")} aria-label="清空搜索"><X size={16} /></button> : null}
         </label>
-        <div className="scope-tabs" role="tablist" aria-label="演出时间范围">
-          <button className={scope === "upcoming" ? "active" : ""} onClick={() => changeScope("upcoming")}>即将演出</button>
-          <button className={scope === "past" ? "active" : ""} onClick={() => changeScope("past")}><History size={15} />历史</button>
-        </div>
-        <button className="mobile-filter-button" onClick={() => setFiltersOpen(true)}>
+        <button ref={filterButtonRef} className="mobile-filter-button" onClick={() => setFiltersOpen(true)}>
           <Filter size={17} />筛选{activeFilterCount ? ` ${activeFilterCount}` : ""}
         </button>
       </section>
 
-      <nav className="view-bar" aria-label="浏览方式">
+      <nav className="view-bar" aria-label="浏览方式" data-app-background>
         <div className="view-tabs" role="tablist">
           <button className={viewMode === "list" ? "active" : ""} onClick={() => setViewMode("list")}>
             <ListIcon size={16} />列表
@@ -446,8 +570,29 @@ function App() {
         <span>{filteredEvents.length} 场匹配</span>
       </nav>
 
+      <section className="quick-actions" data-app-background aria-label="快捷操作">
+        <button type="button" onClick={downloadFilteredIcs} disabled={!filteredEvents.length}>
+          <Download size={15} />导出当前结果
+        </button>
+        <button
+          type="button"
+          className={personalFilter === "interested" ? "active" : ""}
+          onClick={() => setPersonalFilter(personalFilter === "interested" ? "all" : "interested")}
+        >
+          <Star size={15} />想去 {Object.values(personalEvents).filter((status) => status === "interested").length}
+        </button>
+        <button
+          type="button"
+          className={personalFilter === "attended" ? "active" : ""}
+          onClick={() => setPersonalFilter(personalFilter === "attended" ? "all" : "attended")}
+        >
+          <Check size={15} />已去 {Object.values(personalEvents).filter((status) => status === "attended").length}
+        </button>
+        {copyState ? <span role="status">{copyState}</span> : null}
+      </section>
+
       {activeEntity ? (
-        <section className="entity-context">
+        <section className="entity-context" data-app-background>
           <div>
             {activeEntity.type === "person" ? <UserRound size={18} /> : <Music size={18} />}
             <span><small>{activeEntity.type === "person" ? "音乐家" : "作品"}</small><strong>{activeEntity.name}</strong></span>
@@ -457,17 +602,35 @@ function App() {
         </section>
       ) : null}
 
+      {activeVenue ? (
+        <section className="entity-context venue-context" data-app-background>
+          <div>
+            <Building2 size={18} />
+            <span><small>场馆</small><strong>{activeVenue}</strong></span>
+            <em>{dataset.events.filter((event) => event.venue === activeVenue).length} 场已收录</em>
+          </div>
+          <button onClick={clearVenue}><X size={16} />退出场馆页</button>
+        </section>
+      ) : null}
+
       <section className={`workspace ${viewMode === "calendar" ? "calendar-mode" : ""}`}>
-        <aside className={`control-panel ${filtersOpen ? "open" : ""}`}>
+        <aside
+          ref={filterPanelRef}
+          className={`control-panel ${filtersOpen ? "open" : ""}`}
+          data-app-background
+          role={filterModalActive ? "dialog" : undefined}
+          aria-modal={filterModalActive ? "true" : undefined}
+          aria-label="筛选演出"
+        >
           <header className="filter-header">
             <span><SlidersHorizontal size={17} />筛选</span>
-            <button className="filter-close" onClick={() => setFiltersOpen(false)} aria-label="关闭筛选"><X size={19} /></button>
+            <button ref={filterCloseRef} className="filter-close" onClick={() => setFiltersOpen(false)} aria-label="关闭筛选"><X size={19} /></button>
           </header>
 
           <FilterGroup label="日期">
             <div className="date-presets">
               {([
-                ["all", scope === "upcoming" ? "全部未来" : "全部历史"],
+                ["all", "全部未来"],
                 ["week", "本周"],
                 ["weekend", "周末"],
                 ["month", "本月"],
@@ -475,7 +638,6 @@ function App() {
                 <button
                   key={value}
                   className={datePreset === value ? "active" : ""}
-                  disabled={scope === "past" && value !== "all"}
                   onClick={() => setDatePreset(datePreset === value && value !== "all" ? "all" : value)}
                 >
                   {label}
@@ -503,11 +665,17 @@ function App() {
         </aside>
 
         {viewMode === "list" ? (
-          <section className="event-list" aria-label="演出列表">
+          <section className="event-list" aria-label="演出列表" data-app-background>
             {filteredEvents.length ? (
               <>
                 {filteredEvents.slice(0, visibleCount).map((event) => (
-                  <EventListRow key={event.id} event={event} active={selectedId === event.id} onSelect={selectEvent} />
+                  <EventListRow
+                    key={event.id}
+                    event={event}
+                    active={selectedId === event.id}
+                    personalStatus={personalEvents[event.id]}
+                    onSelect={selectEvent}
+                  />
                 ))}
                 {visibleCount < filteredEvents.length ? (
                   <button className="load-more" onClick={() => setVisibleCount((count) => count + pageSize)}>
@@ -523,15 +691,17 @@ function App() {
             )}
           </section>
         ) : (
-          <Suspense fallback={<section className="calendar-panel loading">正在加载日历</section>}>
-            <CalendarView
-              events={filteredEvents}
-              selectedId={selectedId}
-              month={calendarMonth}
-              onMonthChange={setCalendarMonth}
-              onSelect={selectEvent}
-            />
-          </Suspense>
+          <section data-app-background>
+            <Suspense fallback={<section className="calendar-panel loading">正在加载日历</section>}>
+              <CalendarView
+                events={filteredEvents}
+                selectedId={selectedId}
+                month={calendarMonth}
+                onMonthChange={setCalendarMonth}
+                onSelect={selectEvent}
+              />
+            </Suspense>
+          </section>
         )}
 
         <EventDetail
@@ -539,8 +709,15 @@ function App() {
           loading={detailLoading}
           open={detailOpen}
           entitiesByKey={entitiesByKey}
+          panelRef={detailPanelRef}
+          closeButtonRef={detailCloseRef}
           onClose={() => setDetailOpen(false)}
           onExplore={exploreEntity}
+          onExploreVenue={exploreVenue}
+          onCopy={copySelectedEvent}
+          onDownloadIcs={downloadSelectedEventIcs}
+          personalStatus={selectedDetail ? personalEvents[selectedDetail.id] : undefined}
+          onSetPersonalStatus={updatePersonalStatus}
         />
       </section>
 
@@ -552,18 +729,35 @@ const EventListRow = memo(function EventListRow({
   event,
   active,
   onSelect,
+  personalStatus,
 }: {
   event: ConcertEventSummary;
   active: boolean;
+  personalStatus?: PersonalEventStatus;
   onSelect: (event: ConcertEventSummary) => void;
 }) {
   const mainPerson = event.mainPerson;
+  const eventLabel = [
+    "查看演出详情",
+    `${event.dateLabel} ${event.weekday}`,
+    event.timeLabel,
+    event.title,
+    formatEventVenue(event),
+  ].filter(Boolean).join("，");
   return (
-    <button className={`event-card ${active ? "active" : ""}`} onClick={() => onSelect(event)}>
+    <button
+      className={`event-card ${active ? "active" : ""}`}
+      aria-label={eventLabel}
+      aria-current={active ? "true" : undefined}
+      onClick={() => onSelect(event)}
+    >
       <div className="date-block"><strong>{event.dateLabel}</strong><span>{event.weekday}</span><time>{event.timeLabel}</time></div>
       <div className="event-main">
         <div className="event-title-row">
           <h2>{event.title}</h2>
+          {personalStatus ? (
+            <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已去"}</span>
+          ) : null}
           <ChevronRight size={18} />
         </div>
         <div className="event-meta">
@@ -623,6 +817,20 @@ function normalizeEnsembleLabel(value?: string) {
   return undefined;
 }
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const update = () => setMatches(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [query]);
+
+  return matches;
+}
+
 function pushHistoryValue(key: string, value: string) {
   const params = new URLSearchParams(window.location.search);
   if (value) params.set(key, value);
@@ -647,6 +855,8 @@ if (import.meta.hot) globalThis.__classicMusicRoot = appRoot;
 const rootParams = new URLSearchParams(window.location.search);
 appRoot.render(rootParams.get("review") === "1"
   ? <ReviewWorkspace />
+  : rootParams.get("changes") === "1"
+    ? <ChangesWorkspace />
   : rootParams.get("sources") === "1"
     ? <SourcesWorkspace />
     : <App />);
