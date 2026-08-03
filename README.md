@@ -1,6 +1,6 @@
 # 古典乐演出日历 Demo
 
-一个聚合城市未来古典音乐演出的本地 Demo。当前覆盖北京、上海和苏州，项目从场馆和乐团官网自动采集演出数据，按统一结构展示列表、日历、节目单、票价、简介和外部检索入口。
+一个聚合国内城市未来古典音乐演出的 Demo。当前覆盖上海、北京、苏州、广州、深圳、杭州和西安，项目从场馆和乐团官网自动采集演出数据，按统一结构展示列表、日历、节目单、票价、简介和外部检索入口。
 
 当前重点是验证三件事：
 
@@ -34,7 +34,7 @@
 - 点击场馆进入场馆视图，查看该场馆收录的相关演出。
 - 支持单场演出加入日历、当前筛选结果导出 `.ics`、一键复制演出信息。
 - 支持本地“想去”和“已去”标记，并可按个人标记筛选。
-- 提供最近变化页，展示采集产生的新增、下架、延期、取消、换人、换曲和票价变化，并可展开查看对应演出的时间、场馆、票价和节目单预览。
+- 提供变化历史页，持续保存采集产生的新增、下架、延期、取消、换人、换曲和票价变化，并展示字段、人员和曲目变更前后的具体差异。
 - 从曲目跳转到网易云音乐、QQ 音乐、B 站、IMSLP、MusicBrainz 和中文资料搜索。
 - 桌面端筛选栏、列表和详情栏独立滚动；移动端使用筛选抽屉和全屏详情。
 - 首页只读取轻量索引，详情按需加载；日历代码按视图懒加载。
@@ -100,7 +100,7 @@
 | `public/data/events-index.json` | 首页轻量索引，仅包含未来演出 |
 | `public/data/events/{id}.json` | 单场未来演出详情，按需请求 |
 | `public/data/entities.json` | 作品和人物关联索引，仅关联未来演出 |
-| `public/data/changes.json` | 最近一次采集的结构化变更 |
+| `public/data/changes.json` | 按采集批次累积的结构化变更历史与演出快照 |
 | `public/data/events.json` | 完整数据集和下一次变更比较基线，可包含历史演出，不直接用于前台列表 |
 
 ## 快速开始
@@ -134,12 +134,12 @@ npm run dev
 | --- | --- |
 | `npm run dev` | 启动本地开发服务器 |
 | `npm run build` | TypeScript 检查并构建前端 |
-| `npm run scrape` | 采集全部来源；初扫全部“正文无曲目且含图片”的东方艺术中心项目 |
+| `npm run scrape` | 采集全部来源；对“正文无曲目且含详情图片”的候选项目执行轻量 OCR 初扫 |
 | `npm run scrape:ocr` | 对候选项目最多检查 8 张图片，适合深度回填 |
 | `npm run scrape:no-ocr` | 完全关闭 OCR，仅运行规则解析器 |
 | `npm run scrape:ai` | 启用实验性的 DeepSeek 结构化兜底 |
 | `npm run reviews:apply` | 重新应用人工审核文件并重建静态数据与 SQLite |
-| `npm run test:parser` | 运行八个站点 adapter 的回归测试 |
+| `npm run test:parser` | 运行全部来源 adapter 与 OCR 提取器的回归测试 |
 | `npm run test:data` | 测试跨来源合并、稳定 ID 和变更检测 |
 | `npm run audit:data` | 检查重复演出、节目单、人物和票价异常 |
 | `npm run audit:data:ci` | 严格检查所有来源，任一来源失败则退出 |
@@ -165,14 +165,7 @@ sources/shanghai.sources.json
         v
 scripts/scrape.ts
         |
-        +-- scripts/adapters/shanghai-symphony.ts
-        +-- scripts/adapters/shanghai-oriental-art-center.ts
-        +-- scripts/adapters/shanghai-concert-hall.ts
-        +-- scripts/adapters/suzhou-symphony.ts
-        +-- scripts/adapters/national-centre-performing-arts.ts
-        +-- scripts/adapters/china-national-symphony.ts
-        +-- scripts/adapters/china-philharmonic.ts
-        +-- scripts/adapters/shanghai-philharmonic.ts
+        +-- scripts/adapters/       各来源独立 adapter 与回归测试
         |
         +-- data/snapshots/        原始响应快照，不提交
         +-- data/ocr-cache/        OCR 模型与识别缓存，不提交
@@ -196,6 +189,18 @@ React 前端（静态托管）
 来源配置位于 `sources/shanghai.sources.json`。新增来源时，应增加独立 adapter、配置类型和真实页面回归测试，不应把上海交响乐团或东方艺术中心的节目单规则直接用于其他网站。
 
 统一数据结构定义在 `src/types.ts`。SQLite 将来源记录、演出、场次、场馆、人物、组织、作品、节目单、票价、字段观察和审核项拆分存储；静态导出仍保留前端需要的聚合结构。
+
+### 变更历史
+
+每次采集先对比上一份完整数据集，再把新增、下架、改期、取消、阵容、曲目和票价变化合并到 `public/data/changes.json`。文件不会再被最新一批结果覆盖；同一变更 ID 会自动去重，并记录每次采集的时间和变更 ID。变更条目保存当时的演出摘要及变更前后快照，因此演出下架后仍可查询标题、时间、场馆、票价、阵容和完整节目单。前台会直接显示旧值到新值，以及曲目或人员的删除项和新增项。
+
+“变化历史”页面支持按关键词、变化类型、起止日期和本次采集筛选，结果按检测日期倒序并分批渲染。旧版仅包含 `generatedAt` 和 `changes` 的文件会在下次采集时自动迁移到历史格式。SQLite 的 `changes` 与 `scrape_runs` 表继续保留完整本地记录。
+
+旧变更记录如能在 Git 中找到前后两版演出详情，可补录快照：
+
+```bash
+npm run changes:backfill -- <before-revision> <after-revision> [detected-at]
+```
 
 - 标题、日期、时间、城市、场馆和厅堂。
 - 票价、状态、购票链接、来源链接和采集时间。
@@ -322,7 +327,7 @@ LocalHub 已退出正式数据源。它可以用于发现演出线索，但缺�
 
 1. 安装锁定依赖并运行 adapter、存储层测试。
 2. 下载当前线上完整数据作为变更比较基线。
-3. 从八个官网重新采集。
+3. 从全部已配置来源重新采集。
 4. 运行数据审计和 SQLite/静态导出一致性审计；失败来源必须有上一版数据可恢复，否则停止部署。
 5. 使用 `/Classic-Music/` 基路径构建并部署到 GitHub Pages。
 

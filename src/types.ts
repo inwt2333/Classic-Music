@@ -122,6 +122,28 @@ export type DatasetChange = {
   type: "added" | "removed" | "rescheduled" | "cancelled" | "lineup" | "program" | "price";
   detectedAt: string;
   summary: string;
+  before?: ChangeEventSnapshot;
+  after?: ChangeEventSnapshot;
+};
+
+export type ChangeEventSnapshot = {
+  title: string;
+  city: string;
+  venue: string;
+  hall?: string;
+  startTime: string;
+  endTime?: string;
+  status: ConcertEvent["status"];
+  price?: string;
+  conductor?: string;
+  performers: string[];
+  sourceName: string;
+  programPreview: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>;
+};
+
+export type ChangeRun = {
+  generatedAt: string;
+  changeIds: string[];
 };
 
 export type ConcertDataset = {
@@ -180,6 +202,9 @@ export type EntityDataset = {
 };
 
 export type ChangeDataset = {
+  schemaVersion?: 2;
   generatedAt: string;
+  latestChangeIds?: string[];
+  runs?: ChangeRun[];
   changes: DatasetChange[];
 };

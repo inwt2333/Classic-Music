@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import type { ConcertDataset, ConcertEvent } from "../src/types";
 import {
   buildChanges,
+  buildChangeEventSnapshot,
   buildEntities,
   buildIndex,
+  mergeChangeHistory,
   mergeCrossSourceEvents,
   normalizeProgramItemCredits,
   restoreFailedSourceEvents,
@@ -219,7 +221,54 @@ const nextDataset: ConcertDataset = {
   generatedAt: "2026-07-30T00:00:00.000Z",
   events: [{ ...merged[0], price: "¥100 - ¥680" }],
 };
-assert.deepEqual(buildChanges(dataset, nextDataset).changes.map((item) => item.type), ["price"]);
+const priceChanges = buildChanges(dataset, nextDataset);
+assert.deepEqual(priceChanges.changes.map((item) => item.type), ["price"]);
+assert.equal(priceChanges.changes[0].before?.price, merged[0].price);
+assert.equal(priceChanges.changes[0].after?.price, "¥100 - ¥680");
+assert.equal(priceChanges.changes[0].after?.programPreview.length, 1);
+assert.equal(buildChangeEventSnapshot({
+  ...merged[0],
+  program: Array.from({ length: 12 }, (_, index) => ({ title: `Work ${index + 1}`, confidence: "official" as const })),
+}).programPreview.length, 12);
+const creditChangeDataset: ConcertDataset = {
+  ...dataset,
+  generatedAt: "2026-07-31T00:00:00.000Z",
+  events: [{
+    ...merged[0],
+    program: [{ ...merged[0].program[0], credits: [{ name: "Test Arranger", role: "改编" }] }],
+  }],
+};
+assert.deepEqual(buildChanges(dataset, creditChangeDataset).changes.map((item) => item.type), ["program"]);
+const rescheduledDataset: ConcertDataset = {
+  ...dataset,
+  generatedAt: "2026-08-01T00:00:00.000Z",
+  events: [{
+    ...merged[0],
+    id: "new-performance-id",
+    startTime: "2026-09-12T11:30:00.000Z",
+  }],
+};
+const rescheduledChanges = buildChanges(dataset, rescheduledDataset).changes;
+assert.deepEqual(rescheduledChanges.map((item) => item.type), ["rescheduled"]);
+assert.equal(rescheduledChanges[0].before?.startTime, merged[0].startTime);
+assert.equal(rescheduledChanges[0].after?.startTime, "2026-09-12T11:30:00.000Z");
+
+const legacyHistory = {
+  generatedAt: "2026-07-29T12:00:00.000Z",
+  changes: [{
+    id: "legacy-change",
+    eventId: merged[0].id,
+    type: "program" as const,
+    detectedAt: "2026-07-29T12:00:00.000Z",
+    summary: "节目单变化",
+  }],
+};
+const changeHistory = mergeChangeHistory(legacyHistory, priceChanges);
+assert.equal(changeHistory.schemaVersion, 2);
+assert.deepEqual(changeHistory.latestChangeIds, [priceChanges.changes[0].id]);
+assert.deepEqual(changeHistory.changes.map((item) => item.id), [priceChanges.changes[0].id, "legacy-change"]);
+assert.equal(changeHistory.runs?.length, 2);
+assert.equal(mergeChangeHistory(changeHistory, priceChanges).changes.length, 2);
 
 const failedDataset: ConcertDataset = {
   ...nextDataset,

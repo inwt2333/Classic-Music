@@ -73,7 +73,7 @@ type PersonalFilter = "all" | PersonalEventStatus;
 const emptyDataset: ConcertIndexDataset = {
   schemaVersion: 2,
   generatedAt: null,
-  city: "北京、上海、苏州",
+  city: "全国",
   events: [],
   sources: [],
   stats: { rawEvents: 0, normalizedEvents: 0, aiEnhancedEvents: 0, errors: [] },
@@ -85,7 +85,7 @@ const coverSlides = [
   {
     src: `${import.meta.env.BASE_URL}images/concert-orchestra.webp`,
     position: "center 46%",
-    eyebrow: "北京 · 上海 · 苏州演出日历",
+    eyebrow: "全国古典乐演出日历",
     title: "今夜，去听一场音乐会",
     caption: "从乐团、场馆与曲目出发，发现下一次现场聆听。",
   },
@@ -454,7 +454,7 @@ function App() {
       <header className="app-header" data-app-background>
         <div className="brand-block">
           <Music size={22} />
-          <div><strong>古典乐演出日历</strong><span>北京 · 上海 · 苏州</span></div>
+          <div><strong>古典乐演出日历</strong><span>全国演出 · 持续更新</span></div>
         </div>
         <div className="header-status">
           <a className="header-link" href="?sources=1">
@@ -463,7 +463,7 @@ function App() {
           </a>
           <a className="header-link" href="?changes=1">
             <CircleAlert size={14} />
-            最近变化
+            变化历史
           </a>
           {import.meta.env.DEV ? (
             <a className="header-link" href="?review=1">

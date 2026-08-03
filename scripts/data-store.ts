@@ -47,7 +47,11 @@ export async function prepareAndPersistDataset(
     stats: { ...recoveredDataset.stats, normalizedEvents: reviewedEvents.length },
   };
   const entities = buildEntities(canonicalDataset);
-  const changes = buildChanges(previous, canonicalDataset);
+  const latestChanges = buildChanges(previous, canonicalDataset);
+  const changes = mergeChangeHistory(
+    await readPreviousChangeHistory(resolve(dirname(outputPath), "changes.json")),
+    latestChanges,
+  );
   const publishedDataset = toPublishedDataset(canonicalDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
@@ -73,7 +77,11 @@ export async function reapplyManualReviewsAndPersist(
     ),
   };
   const entities = buildEntities(reviewedDataset);
-  const changes = buildChanges(previous, reviewedDataset);
+  const latestChanges = buildChanges(previous, reviewedDataset);
+  const changes = mergeChangeHistory(
+    await readPreviousChangeHistory(resolve(dirname(outputPath), "changes.json")),
+    latestChanges,
+  );
   const publishedDataset = toPublishedDataset(reviewedDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
@@ -248,41 +256,138 @@ export function buildChanges(
   if (!previous || previous.schemaVersion !== 2) return { generatedAt: detectedAt, changes: [] };
 
   const changes: DatasetChange[] = [];
-  const previousById = new Map(previous.events.map((event) => [event.id, event]));
-  const currentById = new Map(current.events.map((event) => [event.id, event]));
+  const previousMatches = matchPreviousEvents(previous.events, current.events);
+  const matchedPreviousIds = new Set(Array.from(previousMatches.values(), (event) => event.id));
 
   for (const event of current.events) {
-    const old = previousById.get(event.id);
+    const old = previousMatches.get(event.id);
     if (!old) {
-      changes.push(change(event.id, "added", detectedAt, `新增演出：${event.title}`));
+      changes.push(change(event.id, "added", detectedAt, `新增演出：${event.title}`, undefined, event));
       continue;
     }
     if (old.startTime !== event.startTime) {
-      changes.push(change(event.id, "rescheduled", detectedAt, `演出时间变化：${event.title}`));
+      changes.push(change(event.id, "rescheduled", detectedAt, `演出时间变化：${event.title}`, old, event));
     }
     if (old.status !== "cancelled" && event.status === "cancelled") {
-      changes.push(change(event.id, "cancelled", detectedAt, `演出取消：${event.title}`));
+      changes.push(change(event.id, "cancelled", detectedAt, `演出取消：${event.title}`, old, event));
     }
     if (old.price !== event.price || JSON.stringify(old.priceTiers) !== JSON.stringify(event.priceTiers)) {
-      changes.push(change(event.id, "price", detectedAt, `票价变化：${event.title}`));
+      changes.push(change(event.id, "price", detectedAt, `票价变化：${event.title}`, old, event));
     }
     if (signature(old.performers) !== signature(event.performers)) {
-      changes.push(change(event.id, "lineup", detectedAt, `演出人员变化：${event.title}`));
+      changes.push(change(event.id, "lineup", detectedAt, `演出人员变化：${event.title}`, old, event));
     }
     if (programSignature(old.program) !== programSignature(event.program)) {
-      changes.push(change(event.id, "program", detectedAt, `节目单变化：${event.title}`));
+      changes.push(change(event.id, "program", detectedAt, `节目单变化：${event.title}`, old, event));
     }
   }
 
   if (!current.stats.errors.length) {
     for (const event of previous.events) {
-      if (!currentById.has(event.id)) {
-        changes.push(change(event.id, "removed", detectedAt, `官网不再返回：${event.title}`));
+      if (!matchedPreviousIds.has(event.id)) {
+        changes.push(change(event.id, "removed", detectedAt, `官网不再返回：${event.title}`, event));
       }
     }
   }
 
   return { generatedAt: detectedAt, changes };
+}
+
+function matchPreviousEvents(previous: ConcertEvent[], current: ConcertEvent[]) {
+  const matches = new Map<string, ConcertEvent>();
+  const previousById = new Map(previous.map((event) => [event.id, event]));
+  const usedPreviousIds = new Set<string>();
+
+  for (const event of current) {
+    const direct = previousById.get(event.id);
+    if (!direct) continue;
+    matches.set(event.id, direct);
+    usedPreviousIds.add(direct.id);
+  }
+
+  const previousBySourceRecord = new Map<string, ConcertEvent[]>();
+  for (const event of previous) {
+    if (usedPreviousIds.has(event.id)) continue;
+    for (const key of sourceRecordKeys(event)) {
+      previousBySourceRecord.set(key, [...(previousBySourceRecord.get(key) ?? []), event]);
+    }
+  }
+  for (const event of current) {
+    if (matches.has(event.id)) continue;
+    const candidates = new Map<string, ConcertEvent>();
+    for (const key of sourceRecordKeys(event)) {
+      for (const candidate of previousBySourceRecord.get(key) ?? []) {
+        if (!usedPreviousIds.has(candidate.id)) candidates.set(candidate.id, candidate);
+      }
+    }
+    if (candidates.size !== 1) continue;
+    const candidate = Array.from(candidates.values())[0];
+    matches.set(event.id, candidate);
+    usedPreviousIds.add(candidate.id);
+  }
+
+  const unmatchedCurrentByProject = new Map<string, ConcertEvent[]>();
+  const unmatchedPreviousByProject = new Map<string, ConcertEvent[]>();
+  for (const event of current) {
+    if (!matches.has(event.id) && event.projectId) {
+      unmatchedCurrentByProject.set(event.projectId, [...(unmatchedCurrentByProject.get(event.projectId) ?? []), event]);
+    }
+  }
+  for (const event of previous) {
+    if (!usedPreviousIds.has(event.id) && event.projectId) {
+      unmatchedPreviousByProject.set(event.projectId, [...(unmatchedPreviousByProject.get(event.projectId) ?? []), event]);
+    }
+  }
+  for (const [projectId, currentEvents] of unmatchedCurrentByProject) {
+    const previousEvents = unmatchedPreviousByProject.get(projectId) ?? [];
+    if (currentEvents.length !== 1 || previousEvents.length !== 1) continue;
+    matches.set(currentEvents[0].id, previousEvents[0]);
+  }
+  return matches;
+}
+
+function sourceRecordKeys(event: ConcertEvent) {
+  return (event.sources ?? []).map((source) => `${source.sourceId}:${source.sourceRecordId}`);
+}
+
+export function mergeChangeHistory(
+  previous: ChangeDataset | null,
+  latest: ChangeDataset,
+): ChangeDataset {
+  const previousChanges = previous?.changes ?? [];
+  const changesById = new Map(previousChanges.map((item) => [item.id, item]));
+  for (const item of latest.changes) changesById.set(item.id, item);
+
+  const runsByTime = new Map<string, Set<string>>();
+  const previousRuns = previous?.runs?.length
+    ? previous.runs
+    : legacyChangeRuns(previousChanges);
+  for (const run of previousRuns) {
+    runsByTime.set(run.generatedAt, new Set(run.changeIds));
+  }
+  const currentRun = runsByTime.get(latest.generatedAt) ?? new Set<string>();
+  for (const id of latest.changes.map((item) => item.id)) currentRun.add(id);
+  runsByTime.set(latest.generatedAt, currentRun);
+
+  return {
+    schemaVersion: 2,
+    generatedAt: latest.generatedAt,
+    latestChangeIds: latest.changes.map((item) => item.id),
+    runs: Array.from(runsByTime, ([generatedAt, ids]) => ({
+      generatedAt,
+      changeIds: Array.from(ids),
+    })).sort((a, b) => b.generatedAt.localeCompare(a.generatedAt)),
+    changes: Array.from(changesById.values())
+      .sort((a, b) => b.detectedAt.localeCompare(a.detectedAt) || a.id.localeCompare(b.id)),
+  };
+}
+
+function legacyChangeRuns(changes: DatasetChange[]) {
+  const byTime = new Map<string, string[]>();
+  for (const item of changes) {
+    byTime.set(item.detectedAt, [...(byTime.get(item.detectedAt) ?? []), item.id]);
+  }
+  return Array.from(byTime, ([generatedAt, changeIds]) => ({ generatedAt, changeIds }));
 }
 
 async function exportStaticData(prepared: PreparedData, outputPath: string) {
@@ -981,7 +1086,14 @@ function signature(values: string[]) {
 }
 
 function programSignature(program: ProgramItem[]) {
-  return program.map((item) => `${item.composer ?? ""}:${item.title}:${item.opus ?? ""}`).join("|");
+  return JSON.stringify(program.map((item) => ({
+    composer: item.composer ?? "",
+    title: item.title,
+    opus: item.opus ?? "",
+    alternateTitles: item.alternateTitles ?? [],
+    credits: item.credits ?? [],
+    movements: item.movements ?? [],
+  })));
 }
 
 function change(
@@ -989,6 +1101,8 @@ function change(
   type: DatasetChange["type"],
   detectedAt: string,
   summary: string,
+  before?: ConcertEvent,
+  after?: ConcertEvent,
 ): DatasetChange {
   return {
     id: stableId("change", `${eventId}:${type}:${detectedAt}:${summary}`),
@@ -996,7 +1110,42 @@ function change(
     type,
     detectedAt,
     summary,
+    before: before ? buildChangeEventSnapshot(before) : undefined,
+    after: after ? buildChangeEventSnapshot(after) : undefined,
   };
+}
+
+export function buildChangeEventSnapshot(event: ConcertEvent) {
+  return {
+    title: event.title,
+    city: event.city,
+    venue: event.venue,
+    hall: event.hall,
+    startTime: event.startTime,
+    endTime: event.endTime,
+    status: event.status,
+    price: event.price,
+    conductor: event.conductor,
+    performers: event.performers,
+    sourceName: event.sourceName,
+    programPreview: event.program.map((item) => ({
+      composer: item.composer,
+      title: item.title,
+      opus: item.opus,
+      alternateTitles: item.alternateTitles,
+      credits: item.credits,
+      movements: item.movements,
+    })),
+  };
+}
+
+async function readPreviousChangeHistory(path: string) {
+  try {
+    const parsed = JSON.parse(await readFile(path, "utf8")) as ChangeDataset;
+    return Array.isArray(parsed.changes) ? parsed : null;
+  } catch {
+    return null;
+  }
 }
 
 async function readPreviousDataset(path: string) {

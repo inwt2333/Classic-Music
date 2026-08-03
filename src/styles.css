@@ -306,6 +306,110 @@ summary:focus-visible {
   border-radius: 6px;
 }
 
+.change-filters {
+  display: grid;
+  padding: 14px 0;
+  grid-template-columns: minmax(240px, 1.8fr) minmax(132px, .75fr) minmax(132px, .75fr) minmax(132px, .75fr) auto 36px;
+  align-items: end;
+  gap: 10px;
+  border-block: 1px solid var(--line);
+}
+
+.change-filters > label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.change-filters > label > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.change-filters input,
+.change-filters select {
+  width: 100%;
+  height: 36px;
+  min-width: 0;
+  padding: 0 9px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #ccd8d4;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.change-search {
+  position: relative;
+}
+
+.change-search svg {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  color: var(--teal);
+  pointer-events: none;
+}
+
+.change-search input {
+  padding-left: 34px;
+}
+
+.change-filters .change-latest-toggle {
+  display: flex;
+  height: 36px;
+  padding: 0 9px;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  border: 1px solid #ccd8d4;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.change-latest-toggle input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--wine);
+}
+
+.change-latest-toggle span {
+  color: var(--ink) !important;
+  font-size: 11px !important;
+}
+
+.change-reset {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  place-items: center;
+  color: var(--forest);
+  background: transparent;
+  border: 1px solid #ccd8d4;
+  border-radius: 4px;
+}
+
+.change-reset:disabled {
+  color: #aeb8b4;
+  cursor: default;
+}
+
+.change-result-summary {
+  display: flex;
+  margin-top: -12px;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.change-result-summary span {
+  color: var(--forest);
+  font-weight: 750;
+}
+
 .change-group {
   display: grid;
   gap: 10px;
@@ -357,6 +461,28 @@ summary:focus-visible {
   gap: 4px;
 }
 
+.change-row-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.change-row-heading em {
+  padding: 2px 6px;
+  color: var(--forest);
+  background: #e5eeeb;
+  border-radius: 3px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.change-added { border-left-color: #5a927d; }
+.change-removed,
+.change-cancelled { border-left-color: var(--wine); }
+.change-rescheduled,
+.change-price { border-left-color: #b18a48; }
+
 .change-row time,
 .change-row small {
   color: var(--muted);
@@ -406,6 +532,155 @@ summary:focus-visible {
   overflow-wrap: anywhere;
   font-size: 12px;
   line-height: 1.45;
+}
+
+.change-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid #dde5e2;
+}
+
+.change-comparison section {
+  min-width: 0;
+  padding: 11px 12px 11px 0;
+}
+
+.change-comparison section + section {
+  padding-inline: 12px 0;
+  border-left: 1px solid #dde5e2;
+}
+
+.change-comparison section > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.change-comparison p,
+.change-comparison ol {
+  margin: 0;
+  color: #43514c;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.change-comparison ol {
+  display: grid;
+  padding-left: 18px;
+  gap: 3px;
+}
+
+.change-value-difference {
+  display: grid;
+  padding-block: 10px;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  border-block: 1px solid #dde5e2;
+}
+
+.change-value-difference > svg {
+  color: var(--teal);
+}
+
+.change-value-difference section {
+  min-width: 0;
+}
+
+.change-value-difference span,
+.change-list-difference section > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.change-value-difference p,
+.change-list-difference p {
+  margin: 0;
+  color: #43514c;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.change-list-difference {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid #dde5e2;
+}
+
+.change-list-difference section {
+  min-width: 0;
+  padding: 11px 12px 11px 0;
+}
+
+.change-list-difference section + section {
+  padding-inline: 12px 0;
+  border-left: 1px solid #dde5e2;
+}
+
+.change-list-difference ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 5px;
+  list-style: none;
+}
+
+.change-list-difference ol {
+  display: grid;
+  margin: 0;
+  padding-left: 20px;
+  gap: 5px;
+}
+
+.change-list-difference ol li {
+  padding-left: 2px;
+}
+
+.change-list-difference li {
+  position: relative;
+  padding-left: 17px;
+  color: #43514c;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.change-list-difference li::before {
+  position: absolute;
+  left: 2px;
+  font-weight: 800;
+}
+
+.change-removed-items > span,
+.change-removed-items li::before {
+  color: var(--wine);
+}
+
+.change-removed-items li::before {
+  content: "−";
+}
+
+.change-added-items > span,
+.change-added-items li::before {
+  color: #34705d;
+}
+
+.change-added-items li::before {
+  content: "+";
+}
+
+.change-no-field-difference {
+  margin: 0;
+  padding: 10px 0;
+  color: var(--muted);
+  border-block: 1px solid #dde5e2;
+  font-size: 11px;
 }
 
 .change-event-meta {
@@ -463,6 +738,19 @@ summary:focus-visible {
 
 .change-open-event svg {
   color: currentColor;
+}
+
+.change-load-more {
+  width: fit-content;
+  min-height: 36px;
+  padding: 7px 14px;
+  justify-self: center;
+  color: var(--forest);
+  background: #fff;
+  border: 1px solid #b9cbc5;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .source-message {
@@ -2923,6 +3211,36 @@ summary:focus-visible {
 
   .source-row > a {
     justify-self: end;
+  }
+
+  .change-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .change-search {
+    grid-column: 1 / -1;
+  }
+
+  .change-latest-toggle {
+    justify-content: center;
+  }
+
+  .change-detail dl,
+  .change-comparison,
+  .change-list-difference {
+    grid-template-columns: 1fr;
+  }
+
+  .change-comparison section + section {
+    padding: 11px 0;
+    border-top: 1px solid #dde5e2;
+    border-left: 0;
+  }
+
+  .change-list-difference section + section {
+    padding: 11px 0;
+    border-top: 1px solid #dde5e2;
+    border-left: 0;
   }
 
 }

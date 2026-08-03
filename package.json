@@ -1,7 +1,7 @@
 {
   "name": "classic-music",
   "version": "1.0.0",
-  "description": "Classical concert discovery demo for Shanghai and nearby cities.",
+  "description": "Classical concert discovery demo covering major cities across China.",
   "type": "commonjs",
   "engines": {
     "node": ">=22.14"
@@ -15,6 +15,7 @@
     "scrape:no-ocr": "tsx scripts/scrape.ts --no-ocr",
     "scrape:ai": "tsx scripts/scrape.ts --ai",
     "reviews:apply": "tsx scripts/apply-reviews.ts",
+    "changes:backfill": "tsx scripts/backfill-change-snapshots.ts",
     "audit:data": "tsx scripts/audit-data.ts",
     "audit:data:ci": "tsx scripts/audit-data.ts --strict-sources",
     "audit:data:deploy": "tsx scripts/audit-data.ts --strict-sources --allow-stale-sources",
