@@ -15,27 +15,45 @@ const workKeywordPattern =
   /交响曲|协奏曲|奏鸣曲|三重奏|四重奏|五重奏|六重奏|组曲|序曲|圆舞曲|波尔卡|幻想曲|变奏曲|狂想曲|小夜曲|赋格|练习曲|前奏曲|叙事曲|歌曲|咏叹调|进行曲|舞曲|小品|选段|选曲|乐章|随想曲|托卡塔|即兴曲/i;
 const creditPattern = /^(?:原曲|作曲|作曲家|曲|改编|创编)\s*[：:]?\s*(.+)$/i;
 
-export function parseShanghaiConcertHallContent(html: string) {
+export function parseShanghaiConcertHallContent(html: string, options: { showDate?: Date } = {}) {
   const blocks = htmlToBlocks(html);
   const headingIndex = blocks.findIndex((block) => programHeadingPattern.test(block.text));
-  const cast = parseCast(blocks);
+  let castBlocks = blocks;
 
   if (headingIndex < 0) {
     return {
       program: [] as ProgramItem[],
       description: buildDescription(blocks),
-      ...cast,
+      ...parseCast(castBlocks),
     };
   }
 
   const afterHeading = blocks.slice(headingIndex + 1);
   const footerIndex = afterHeading.findIndex((block) => programFooterPattern.test(block.text));
-  const programBlocks = footerIndex >= 0 ? afterHeading.slice(0, footerIndex) : afterHeading;
+  let programBlocks = footerIndex >= 0 ? afterHeading.slice(0, footerIndex) : afterHeading;
+  if (options.showDate) {
+    const targetDate = chinaDateKey(options.showDate);
+    const dateMarkers = programBlocks
+      .map((block, index) => ({ index, date: extractDateKey(block.text) }))
+      .filter((marker): marker is { index: number; date: string } => Boolean(marker.date));
+    if (dateMarkers.length > 1) {
+      const markerIndex = dateMarkers.findIndex((marker) => marker.date === targetDate);
+      if (markerIndex < 0) {
+        programBlocks = [];
+        castBlocks = [];
+      } else {
+        const start = dateMarkers[markerIndex].index + 1;
+        const end = dateMarkers[markerIndex + 1]?.index ?? programBlocks.length;
+        programBlocks = programBlocks.slice(start, end);
+        castBlocks = programBlocks;
+      }
+    }
+  }
 
   return {
     program: parseProgram(programBlocks),
     description: buildDescription(blocks.slice(0, headingIndex)),
-    ...cast,
+    ...parseCast(castBlocks),
   };
 }
 
@@ -336,4 +354,17 @@ function formatPrice(price: number) {
 
 function cleanText(value: string) {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function extractDateKey(value: string) {
+  const match = value.match(/(20\d{2})[./年](\d{1,2})[./月](\d{1,2})(?:日)?/);
+  return match ? `${match[1]}-${String(Number(match[2])).padStart(2, "0")}-${String(Number(match[3])).padStart(2, "0")}` : undefined;
+}
+
+function chinaDateKey(value: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(value);
+  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? "";
+  return `${get("year")}-${get("month")}-${get("day")}`;
 }

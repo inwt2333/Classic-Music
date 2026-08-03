@@ -18,7 +18,7 @@ const parsed = parseNcpaDetail({
       }],
     },
   ],
-});
+}, "2026-08-01 周六 19:30");
 
 assert.equal(parsed.program.length, 2);
 assert.equal(parsed.program[0].composer, "马勒");
@@ -30,5 +30,55 @@ assert.deepEqual(
   }),
   [80, 380, 480],
 );
+
+const multiDateDetail = {
+  introduce: [
+    {
+      type: "70",
+      contents: [{
+        content: `
+          <p>指挥：安东尼奥·帕帕诺</p>
+          <b>9月16日安东尼奥·帕帕诺与伦敦交响乐团音乐会</b><br />
+          小提琴与中提琴协奏交响曲　莫扎特 曲<br />
+          小提琴独奏：本杰明·马奎斯·吉尔摩<br />
+          第九交响曲　布鲁克纳 曲<br />
+          <b>9月17日安东尼奥·帕帕诺、刘晓禹与伦敦交响乐团音乐会</b><br />
+          第三钢琴协奏曲　贝多芬 曲<br />
+          钢琴独奏：刘晓禹<br />
+          第五交响曲　肖斯塔科维奇 曲<br />
+          <b>9月18日安东尼奥·帕帕诺、刘晓禹与伦敦交响乐团音乐会</b><br />
+          魔法湖　利亚多夫 曲<br />
+          第三钢琴协奏曲　普罗科菲耶夫 曲<br />
+          钢琴独奏：刘晓禹<br />
+          第五交响曲　柴科夫斯基 曲<br />
+          *以上内容可能变更
+        `,
+      }],
+    },
+  ],
+};
+
+const september16 = parseNcpaDetail(multiDateDetail, "2026-09-16 周三 19:30");
+const september17 = parseNcpaDetail(multiDateDetail, "2026-09-17 周四 19:30");
+const september18 = parseNcpaDetail(multiDateDetail, "2026-09-18 周五 19:30");
+
+assert.deepEqual(
+  september16.program.map((item) => item.title),
+  ["小提琴与中提琴协奏交响曲", "第九交响曲"],
+);
+assert.equal(september16.conductor, "安东尼奥·帕帕诺");
+assert.deepEqual(september16.performers, ["安东尼奥·帕帕诺", "本杰明·马奎斯·吉尔摩"]);
+assert.deepEqual(
+  september17.program.map((item) => item.title),
+  ["第三钢琴协奏曲", "第五交响曲"],
+);
+assert.deepEqual(september17.performers, ["安东尼奥·帕帕诺", "刘晓禹"]);
+assert.deepEqual(
+  september18.program.map((item) => item.title),
+  ["魔法湖", "第三钢琴协奏曲", "第五交响曲"],
+);
+assert.deepEqual(september18.performers, ["安东尼奥·帕帕诺", "刘晓禹"]);
+assert.equal(parseNcpaDetail(multiDateDetail).program.length, 7);
+assert.equal(parseNcpaDetail(multiDateDetail, "2026-09-19 周六 19:30").program.length, 7);
 
 console.log("NCPA parser tests passed.");

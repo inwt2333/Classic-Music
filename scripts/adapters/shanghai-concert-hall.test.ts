@@ -107,4 +107,17 @@ assert.deepEqual(
 const noProgram = parseShanghaiConcertHallContent("<p>本场详情暂未公布节目单。</p>");
 assert.equal(noProgram.program.length, 0);
 
+const datedSeries = parseShanghaiConcertHallContent(
+  `
+    <p>演出曲目</p>
+    <p><strong>2026/8/3 作曲家系列——巴赫专场</strong></p>
+    <p>巴赫</p><p>《D小调托卡塔与赋格》BWV 565</p>
+    <p><strong>2026/8/4 作曲家系列——莫扎特专场</strong></p>
+    <p>莫扎特</p><p>《A大调单簧管协奏曲》K. 622</p>
+  `,
+  { showDate: new Date("2026-08-04T19:30:00+08:00") },
+);
+assert.deepEqual(datedSeries.program.map((item) => item.composer), ["莫扎特"]);
+assert.equal(datedSeries.program[0].title, "A大调单簧管协奏曲");
+
 console.log("Shanghai Concert Hall adapter tests passed.");

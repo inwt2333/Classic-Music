@@ -1,5 +1,5 @@
 {
-  "city": "北京、上海、苏州",
+  "city": "全国",
   "sources": [
     {
       "id": "shsymphony-official",
@@ -92,6 +92,86 @@
       "seedUrls": [
         "http://shphilharmonic.com/activity/6a62d59f29df199b78e1aa88?no=2&out=true"
       ]
+    },
+    {
+      "id": "shanghai-grand-theatre-official",
+      "name": "上海大剧院官网",
+      "adapter": "shanghai-grand-theatre-api",
+      "url": "https://www.shgtheatre.com",
+      "city": "上海",
+      "venue": "上海大剧院",
+      "cmpAppKey": "grandtheatrepc"
+    },
+    {
+      "id": "beijing-concert-hall-official",
+      "name": "北京音乐厅官网",
+      "adapter": "beijing-concert-hall-api",
+      "url": "https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml",
+      "apiBase": "https://www.bjconcerthall.cn/yjzd-webapp",
+      "city": "北京",
+      "venue": "北京音乐厅"
+    },
+    {
+      "id": "zhongshan-music-hall-xhmpw",
+      "name": "中山公园音乐堂（小红帽票务）",
+      "adapter": "zhongshan-music-hall-html",
+      "url": "https://xhmpw.com/zsyyt",
+      "city": "北京",
+      "venue": "中山公园音乐堂",
+      "seedUrls": ["https://xhmpw.com/t48086.html"]
+    },
+    {
+      "id": "guangzhou-symphony-official",
+      "name": "广州交响乐团官网",
+      "adapter": "guangzhou-symphony-html",
+      "url": "https://www.gso.org.cn/",
+      "city": "广州",
+      "venue": "星海音乐厅",
+      "seedUrls": ["https://www.gso.org.cn/portfolio/concert-2026-07-12/index.html"]
+    },
+    {
+      "id": "xinghai-concert-hall-official",
+      "name": "星海音乐厅官网",
+      "adapter": "xinghai-concert-hall-html",
+      "url": "https://www.concerthall.com.cn/events/newindex.php",
+      "city": "广州",
+      "venue": "星海音乐厅",
+      "seedUrls": ["https://www.concerthall.com.cn/events/neweventdetail.php?id=5056"]
+    },
+    {
+      "id": "shenzhen-symphony-official",
+      "name": "深圳交响乐团官网",
+      "adapter": "shenzhen-symphony-html",
+      "url": "http://www.sso.org.cn/infolist.action?pid=305&tid=314",
+      "city": "深圳",
+      "venue": "深圳音乐厅",
+      "defaultTime": "19:30"
+    },
+    {
+      "id": "shenzhen-concert-hall-official",
+      "name": "深圳音乐厅官网",
+      "adapter": "shenzhen-concert-hall-html",
+      "url": "https://szyyt.com/performance",
+      "city": "深圳",
+      "venue": "深圳音乐厅",
+      "seedUrls": ["https://szyyt.com/performance/show_100001006641353.html"]
+    },
+    {
+      "id": "zhejiang-symphony-official",
+      "name": "浙江交响乐团官网",
+      "adapter": "zhejiang-symphony-ical",
+      "url": "https://www.zjso.org/yugao/?ical=1",
+      "city": "杭州",
+      "venue": "浙江音乐厅"
+    },
+    {
+      "id": "xian-concert-hall-official",
+      "name": "西安音乐厅官网",
+      "adapter": "xian-concert-hall-api",
+      "url": "https://www.snpac.com",
+      "city": "西安",
+      "venue": "西安音乐厅",
+      "cmpAppKey": "SXtheatre"
     }
   ]
 }

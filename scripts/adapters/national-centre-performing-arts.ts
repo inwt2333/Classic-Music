@@ -11,13 +11,14 @@ type NcpaIntroduction = {
   contents?: NcpaContent[];
 };
 
-export function parseNcpaDetail(detail: Record<string, any>) {
+export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: string) {
   const programIntroduction = (detail.introduce as NcpaIntroduction[] | undefined)?.find(
     (item) => item.type === "70",
   );
-  const lines = (programIntroduction?.contents ?? []).flatMap((content) =>
+  const allProgramLines = (programIntroduction?.contents ?? []).flatMap((content) =>
     htmlLines(content.content ?? ""),
   );
+  const lines = selectNcpaProgramLines(allProgramLines, sessionDate);
   const performers: string[] = [];
   let conductor: string | undefined;
   const program: ProgramItem[] = [];
@@ -66,6 +67,50 @@ export function parseNcpaDetail(detail: Record<string, any>) {
     program: dedupeProgram(program),
     description: description || undefined,
   };
+}
+
+function selectNcpaProgramLines(lines: string[], sessionDate?: string) {
+  const targetDate = sessionDate?.match(/(20\d{2})-(\d{1,2})-(\d{1,2})/);
+  if (!targetDate) return lines;
+
+  const commonLines: string[] = [];
+  const sections: Array<{
+    year?: number;
+    month: number;
+    day: number;
+    lines: string[];
+  }> = [];
+  let currentSection: (typeof sections)[number] | undefined;
+
+  for (const line of lines) {
+    const heading = line.match(/^(?:(20\d{2})年)?(\d{1,2})月(\d{1,2})日/);
+    if (heading) {
+      currentSection = {
+        year: heading[1] ? Number(heading[1]) : undefined,
+        month: Number(heading[2]),
+        day: Number(heading[3]),
+        lines: [],
+      };
+      sections.push(currentSection);
+      continue;
+    }
+
+    if (currentSection) currentSection.lines.push(line);
+    else commonLines.push(line);
+  }
+
+  if (!sections.length) return lines;
+  const year = Number(targetDate[1]);
+  const month = Number(targetDate[2]);
+  const day = Number(targetDate[3]);
+  const selected = sections.find(
+    (section) =>
+      section.month === month &&
+      section.day === day &&
+      (section.year === undefined || section.year === year),
+  );
+
+  return selected ? [...commonLines, ...selected.lines] : lines;
 }
 
 export function parseNcpaPriceTiers(session: Record<string, any>) {
