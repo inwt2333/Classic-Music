@@ -12,6 +12,7 @@ import {
 import { createRoot, type Root } from "react-dom/client";
 import {
   CalendarDays,
+  Bell,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -32,10 +33,33 @@ import {
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
+import NotificationCenter from "./components/NotificationCenter";
+import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
-import { loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import { createEventShareCard } from "./share-card";
+import {
+  buildFollowNotifications,
+  buildSavedFilterName,
+  detectDataIssues,
+  latestChangesByEvent,
+  makeFollowTarget,
+  readFollows,
+  readReadNotificationIds,
+  readSavedFilters,
+  recentChangeLabel,
+  removeSavedFilter,
+  saveFilter,
+  sortConcerts,
+  toggleFollow,
+  writeReadNotificationIds,
+  type FollowTarget,
+  type SavedFilter,
+  type SavedFilterState,
+  type SortMode,
+} from "./discovery-features";
 import {
   copyEventText,
   downloadEventsIcs,
@@ -51,6 +75,7 @@ import type {
   ConcertEvent,
   ConcertEventSummary,
   ConcertIndexDataset,
+  ChangeDataset,
   EntityDataset,
   EntityRecord,
 } from "./types";
@@ -109,6 +134,7 @@ function App() {
   const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
+  const [changes, setChanges] = useState<ChangeDataset | null>(null);
   const [loadState, setLoadState] = useState("正在加载演出索引");
   const [query, setQuery] = useState(initialParams.get("q") ?? "");
   const [datePreset, setDatePreset] = useState<DatePreset>((initialParams.get("date") as DatePreset) || "all");
@@ -122,6 +148,7 @@ function App() {
       ? (initialParams.get("personal") as PersonalEventStatus)
       : "all",
   );
+  const [sortMode, setSortMode] = useState<SortMode>((initialParams.get("sort") as SortMode) || "time");
   const [viewMode, setViewMode] = useState<ViewMode>(initialParams.get("view") === "calendar" ? "calendar" : "list");
   const [selectedId, setSelectedId] = useState(initialParams.get("event") ?? "");
   const [selectedDetail, setSelectedDetail] = useState<ConcertEvent | null>(null);
@@ -135,6 +162,10 @@ function App() {
   const [coverIndex, setCoverIndex] = useState(0);
   const [coverPaused, setCoverPaused] = useState(false);
   const [personalEvents, setPersonalEvents] = useState<PersonalEventMap>(() => readPersonalEvents());
+  const [follows, setFollows] = useState(() => readFollows());
+  const [readNotificationIds, setReadNotificationIds] = useState(() => readReadNotificationIds());
+  const [savedFilters, setSavedFilters] = useState(() => readSavedFilters());
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const [copyState, setCopyState] = useState("");
   const filterButtonRef = useRef<HTMLButtonElement | null>(null);
   const filterCloseRef = useRef<HTMLButtonElement | null>(null);
@@ -216,6 +247,7 @@ function App() {
       })
       .catch((error) => setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`));
     loadEntities().then(setEntities).catch(() => setEntities(emptyEntities));
+    loadChanges().then(setChanges).catch(() => setChanges(null));
   }, []);
 
   useEffect(() => {
@@ -233,6 +265,7 @@ function App() {
           ? (params.get("personal") as PersonalEventStatus)
           : "all",
       );
+      setSortMode((params.get("sort") as SortMode) || "time");
       setViewMode(params.get("view") === "calendar" ? "calendar" : "list");
       setSelectedId(params.get("event") ?? "");
       setActiveEntityId(params.get("entity") ?? "");
@@ -296,9 +329,25 @@ function App() {
     ],
     [dataset.events],
   );
+  const allEntities = useMemo(() => {
+    const syntheticEnsembles: EntityRecord[] = ensembles.slice(1).map((name) => {
+      const eventIds = dataset.events
+        .filter((event) => normalizeEnsembleLabel(event.ensemble) === name)
+        .map((event) => event.id);
+      return {
+        id: `ensemble:${name}`,
+        type: "ensemble",
+        name,
+        aliases: [],
+        eventIds,
+        upcomingEventCount: eventIds.length,
+      };
+    });
+    return [...entities.entities, ...syntheticEnsembles];
+  }, [dataset.events, ensembles, entities.entities]);
   const activeEntity = useMemo(
-    () => entities.entities.find((entity) => entity.id === activeEntityId) ?? null,
-    [activeEntityId, entities.entities],
+    () => allEntities.find((entity) => entity.id === activeEntityId) ?? null,
+    [activeEntityId, allEntities],
   );
   const activeEntityEvents = useMemo(
     () => activeEntity ? new Set(activeEntity.eventIds) : null,
@@ -338,9 +387,19 @@ function App() {
     expandedQueries,
   ]);
 
+  const changesByEvent = useMemo(() => latestChangesByEvent(changes), [changes]);
+  const displayedEvents = useMemo(
+    () => sortConcerts(filteredEvents, sortMode, changesByEvent),
+    [changesByEvent, filteredEvents, sortMode],
+  );
+  const notifications = useMemo(
+    () => buildFollowNotifications(changes, dataset.events, follows, readNotificationIds),
+    [changes, dataset.events, follows, readNotificationIds],
+  );
+  const unreadNotificationCount = notifications.filter((notification) => !notification.read).length;
   useEffect(() => {
     setVisibleCount(pageSize);
-  }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, venue]);
+  }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, sortMode, venue]);
 
   useEffect(() => {
     if (!filteredEvents.length) return;
@@ -357,20 +416,27 @@ function App() {
     if (genre !== "全部类型") params.set("genre", genre);
     if (hasProgram) params.set("program", "1");
     if (personalFilter !== "all") params.set("personal", personalFilter);
+    if (sortMode !== "time") params.set("sort", sortMode);
     if (viewMode === "calendar") params.set("view", viewMode);
     if (selectedId) params.set("event", selectedId);
     if (activeEntityId) params.set("entity", activeEntityId);
     if (activeVenue) params.set("venuePage", activeVenue);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeEntityId, activeVenue, city, datePreset, ensemble, genre, hasProgram, personalFilter, query, selectedId, venue, viewMode]);
+  }, [activeEntityId, activeVenue, city, datePreset, ensemble, genre, hasProgram, personalFilter, query, selectedId, sortMode, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
-    for (const entity of entities.entities) {
+    for (const entity of allEntities) {
       map.set(`${entity.type}:${entity.type === "work" ? entity.id : entity.name}`, entity);
     }
+    for (const event of dataset.events) {
+      if (!event.ensemble) continue;
+      const normalized = normalizeEnsembleLabel(event.ensemble);
+      const entity = normalized ? map.get(`ensemble:${normalized}`) : undefined;
+      if (entity) map.set(`ensemble:${event.ensemble}`, entity);
+    }
     return map;
-  }, [entities.entities]);
+  }, [allEntities, dataset.events]);
 
   const activeFilterCount = [
     datePreset !== "all",
@@ -409,7 +475,72 @@ function App() {
   };
 
   const downloadFilteredIcs = () => {
-    downloadEventsIcs(filteredEvents, "classic-music-filtered-events");
+    downloadEventsIcs(displayedEvents, "classic-music-filtered-events");
+  };
+
+  const updateFollow = (target: FollowTarget) => {
+    setFollows((current) => toggleFollow(current, target));
+  };
+
+  const markAllNotificationsRead = () => {
+    const next = Array.from(new Set([...readNotificationIds, ...notifications.map((item) => item.id)]));
+    writeReadNotificationIds(next);
+    setReadNotificationIds(next);
+  };
+
+  const saveCurrentFilter = () => {
+    const state: SavedFilterState = { query, datePreset, city, venue, ensemble, genre, hasProgram, sortMode };
+    setSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state)));
+    setCopyState("筛选方案已保存");
+    window.setTimeout(() => setCopyState(""), 1800);
+  };
+
+  const applySavedFilter = (filter: SavedFilter) => {
+    setQuery(filter.query);
+    setDatePreset(filter.datePreset);
+    setCity(filter.city);
+    setVenue(filter.venue);
+    setEnsemble(filter.ensemble);
+    setGenre(filter.genre);
+    setHasProgram(filter.hasProgram);
+    setSortMode(filter.sortMode);
+    setActiveEntityId("");
+    setActiveVenue("");
+  };
+
+  const shareSelectedEvent = async (event: ConcertEvent) => {
+    try {
+      const eventUrl = new URL(window.location.href);
+      eventUrl.search = new URLSearchParams({ event: event.id }).toString();
+      const blob = await createEventShareCard(event, eventUrl.toString());
+      const filename = `${event.dateLabel.replace("/", "")}-${event.title.slice(0, 24)}.png`;
+      if (navigator.clipboard?.write && typeof ClipboardItem !== "undefined") {
+        try {
+          await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+          setCopyState("分享卡片已复制到剪贴板");
+          window.setTimeout(() => setCopyState(""), 2200);
+          return;
+        } catch {
+          // Some browsers expose the API but block image clipboard writes.
+        }
+      }
+
+      {
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = filename;
+        document.body.append(anchor);
+        anchor.click();
+        anchor.remove();
+        URL.revokeObjectURL(url);
+      }
+      setCopyState("浏览器不支持复制图片，已下载卡片");
+      window.setTimeout(() => setCopyState(""), 2600);
+    } catch (error) {
+      setCopyState("分享卡片生成失败");
+      window.setTimeout(() => setCopyState(""), 2200);
+    }
   };
 
   const selectEvent = (event: ConcertEventSummary) => {
@@ -449,6 +580,11 @@ function App() {
     setActiveVenue("");
   };
 
+  const activeEntityTarget = activeEntity
+    ? makeFollowTarget(activeEntity.type === "ensemble" ? "ensemble" : activeEntity.type, activeEntity.name, activeEntity.id)
+    : null;
+  const activeVenueTarget = activeVenue ? makeFollowTarget("venue", activeVenue) : null;
+
   return (
     <main className="app-shell">
       <header className="app-header" data-app-background>
@@ -465,6 +601,11 @@ function App() {
             <CircleAlert size={14} />
             变化历史
           </a>
+          <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)}>
+            <Bell size={14} />
+            我的关注
+            {unreadNotificationCount ? <b>{unreadNotificationCount}</b> : null}
+          </button>
           {import.meta.env.DEV ? (
             <a className="header-link" href="?review=1">
               <ScanText size={14} />
@@ -567,7 +708,18 @@ function App() {
             <CalendarDays size={16} />日历
           </button>
         </div>
-        <span>{filteredEvents.length} 场匹配</span>
+        <div className="view-summary">
+          <label className="sort-control">
+            <span>排序</span>
+            <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
+              <option value="time">演出时间</option>
+              <option value="updated">最近更新</option>
+              <option value="price">最低票价</option>
+              <option value="program">节目单完整度</option>
+            </select>
+          </label>
+          <span>{filteredEvents.length} 场匹配</span>
+        </div>
       </nav>
 
       <section className="quick-actions" data-app-background aria-label="快捷操作">
@@ -588,17 +740,31 @@ function App() {
         >
           <Check size={15} />已去 {Object.values(personalEvents).filter((status) => status === "attended").length}
         </button>
+        <SavedFilterMenu
+          filters={savedFilters}
+          onSave={saveCurrentFilter}
+          onApply={applySavedFilter}
+          onRemove={(id) => setSavedFilters((current) => removeSavedFilter(current, id))}
+        />
         {copyState ? <span role="status">{copyState}</span> : null}
       </section>
 
       {activeEntity ? (
         <section className="entity-context" data-app-background>
           <div>
-            {activeEntity.type === "person" ? <UserRound size={18} /> : <Music size={18} />}
-            <span><small>{activeEntity.type === "person" ? "音乐家" : "作品"}</small><strong>{activeEntity.name}</strong></span>
+            {activeEntity.type === "person" ? <UserRound size={18} /> : activeEntity.type === "ensemble" ? <Building2 size={18} /> : <Music size={18} />}
+            <span><small>{activeEntity.type === "person" ? "音乐家" : activeEntity.type === "ensemble" ? "乐团" : "作品"}</small><strong>{activeEntity.name}</strong></span>
             {activeEntity.subtitle ? <em>{activeEntity.subtitle}</em> : null}
+            <em>{activeEntity.upcomingEventCount} 场未来演出{activeEntity.aliases.length ? ` · 别名 ${activeEntity.aliases.slice(0, 3).join("、")}` : ""}</em>
           </div>
-          <button onClick={clearEntity}><X size={16} />退出关联页</button>
+          <div className="entity-context-actions">
+            {activeEntityTarget ? (
+              <button className={follows[activeEntityTarget.key] ? "active" : ""} onClick={() => updateFollow(activeEntityTarget)}>
+                <Bell size={16} />{follows[activeEntityTarget.key] ? "已关注" : "关注"}
+              </button>
+            ) : null}
+            <button onClick={clearEntity}><X size={16} />退出关联页</button>
+          </div>
         </section>
       ) : null}
 
@@ -609,7 +775,15 @@ function App() {
             <span><small>场馆</small><strong>{activeVenue}</strong></span>
             <em>{dataset.events.filter((event) => event.venue === activeVenue).length} 场已收录</em>
           </div>
-          <button onClick={clearVenue}><X size={16} />退出场馆页</button>
+          <div className="entity-context-actions">
+            <a href={`https://uri.amap.com/search?keyword=${encodeURIComponent(activeVenue)}`} target="_blank" rel="noreferrer"><MapPin size={16} />地图交通</a>
+            {activeVenueTarget ? (
+              <button className={follows[activeVenueTarget.key] ? "active" : ""} onClick={() => updateFollow(activeVenueTarget)}>
+                <Bell size={16} />{follows[activeVenueTarget.key] ? "已关注" : "关注"}
+              </button>
+            ) : null}
+            <button onClick={clearVenue}><X size={16} />退出场馆页</button>
+          </div>
         </section>
       ) : null}
 
@@ -668,18 +842,20 @@ function App() {
           <section className="event-list" aria-label="演出列表" data-app-background>
             {filteredEvents.length ? (
               <>
-                {filteredEvents.slice(0, visibleCount).map((event) => (
+                {displayedEvents.slice(0, visibleCount).map((event) => (
                   <EventListRow
                     key={event.id}
                     event={event}
                     active={selectedId === event.id}
                     personalStatus={personalEvents[event.id]}
                     onSelect={selectEvent}
+                    changeLabel={recentChangeLabel(changesByEvent.get(event.id), dataset.generatedAt)}
+                    hasDataIssue={detectDataIssues(event).length > 0}
                   />
                 ))}
-                {visibleCount < filteredEvents.length ? (
+                {visibleCount < displayedEvents.length ? (
                   <button className="load-more" onClick={() => setVisibleCount((count) => count + pageSize)}>
-                    显示更多 <span>{filteredEvents.length - visibleCount}</span>
+                    显示更多 <span>{displayedEvents.length - visibleCount}</span>
                   </button>
                 ) : null}
               </>
@@ -694,7 +870,7 @@ function App() {
           <section data-app-background>
             <Suspense fallback={<section className="calendar-panel loading">正在加载日历</section>}>
               <CalendarView
-                events={filteredEvents}
+                events={displayedEvents}
                 selectedId={selectedId}
                 month={calendarMonth}
                 onMonthChange={setCalendarMonth}
@@ -716,11 +892,27 @@ function App() {
           onExploreVenue={exploreVenue}
           onCopy={copySelectedEvent}
           onDownloadIcs={downloadSelectedEventIcs}
+          onShare={shareSelectedEvent}
+          follows={follows}
+          onToggleFollow={updateFollow}
           personalStatus={selectedDetail ? personalEvents[selectedDetail.id] : undefined}
           onSetPersonalStatus={updatePersonalStatus}
         />
       </section>
 
+      <NotificationCenter
+        open={notificationOpen}
+        notifications={notifications}
+        follows={follows}
+        onClose={() => setNotificationOpen(false)}
+        onReadAll={markAllNotificationsRead}
+        onOpenEvent={(eventId) => {
+          const event = dataset.events.find((item) => item.id === eventId);
+          if (event) selectEvent(event);
+          setNotificationOpen(false);
+        }}
+        onRemoveFollow={updateFollow}
+      />
     </main>
   );
 }
@@ -730,10 +922,14 @@ const EventListRow = memo(function EventListRow({
   active,
   onSelect,
   personalStatus,
+  changeLabel,
+  hasDataIssue,
 }: {
   event: ConcertEventSummary;
   active: boolean;
   personalStatus?: PersonalEventStatus;
+  changeLabel?: string;
+  hasDataIssue: boolean;
   onSelect: (event: ConcertEventSummary) => void;
 }) {
   const mainPerson = event.mainPerson;
@@ -745,35 +941,41 @@ const EventListRow = memo(function EventListRow({
     formatEventVenue(event),
   ].filter(Boolean).join("，");
   return (
-    <button
-      className={`event-card ${active ? "active" : ""}`}
-      aria-label={eventLabel}
-      aria-current={active ? "true" : undefined}
-      onClick={() => onSelect(event)}
-    >
-      <div className="date-block"><strong>{event.dateLabel}</strong><span>{event.weekday}</span><time>{event.timeLabel}</time></div>
-      <div className="event-main">
-        <div className="event-title-row">
-          <h2>{event.title}</h2>
-          {personalStatus ? (
-            <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已去"}</span>
-          ) : null}
-          <ChevronRight size={18} />
-        </div>
-        <div className="event-meta">
-          <span><MapPin size={14} />{formatEventVenue(event)}</span>
-          {event.price ? <span><Ticket size={14} />{event.price}</span> : null}
-          {mainPerson ? <span><UserRound size={14} />{mainPerson}</span> : null}
-        </div>
-        {event.programPreview.length ? (
-          <div className="program-preview">
-            {event.programPreview.map((item) => (
-              <span key={`${item.workId}-${item.title}`}>{item.composer ? `${item.composer} · ` : ""}{item.title}</span>
-            ))}
+    <article className={`event-card-shell ${active ? "active" : ""}`}>
+      <button
+        className="event-card"
+        aria-label={eventLabel}
+        aria-current={active ? "true" : undefined}
+        onClick={() => onSelect(event)}
+      >
+        <div className="date-block"><strong>{event.dateLabel}</strong><span>{event.weekday}</span><time>{event.timeLabel}</time></div>
+        <div className="event-main">
+          <div className="event-title-row">
+            <h2>{event.title}</h2>
+            <div className="event-badges">
+              {changeLabel ? <span className="change-pill">{changeLabel}</span> : null}
+              {hasDataIssue ? <span className="quality-pill">需核对</span> : null}
+              {personalStatus ? (
+                <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已去"}</span>
+              ) : null}
+            </div>
+            <ChevronRight size={18} />
           </div>
-        ) : <span className="program-pending">节目单待公布</span>}
-      </div>
-    </button>
+          <div className="event-meta">
+            <span><MapPin size={14} />{formatEventVenue(event)}</span>
+            {event.price ? <span><Ticket size={14} />{event.price}</span> : null}
+            {mainPerson ? <span><UserRound size={14} />{mainPerson}</span> : null}
+          </div>
+          {event.programPreview.length ? (
+            <div className="program-preview">
+              {event.programPreview.map((item) => (
+                <span key={`${item.workId}-${item.title}`}>{item.composer ? `${item.composer} · ` : ""}{item.title}</span>
+              ))}
+            </div>
+          ) : <span className="program-pending">节目单待公布</span>}
+        </div>
+      </button>
+    </article>
   );
 });
 

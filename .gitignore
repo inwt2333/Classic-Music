@@ -4,6 +4,7 @@ dist/
 data/snapshots/
 data/ocr-cache/
 data/ocr-inspect/
+data/wechat-inbox.json
 data/*.db
 data/*.db-shm
 data/*.db-wal

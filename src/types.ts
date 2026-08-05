@@ -108,7 +108,7 @@ export type ConcertEventSummary = {
 
 export type EntityRecord = {
   id: string;
-  type: "person" | "work";
+  type: "person" | "work" | "ensemble" | "venue";
   name: string;
   subtitle?: string;
   aliases: string[];
@@ -194,6 +194,48 @@ export type ReviewQueueItem = {
     accepted: boolean;
     program: ProgramItem[];
   };
+};
+
+export type WechatImportEventDraft = {
+  title: string;
+  city: string;
+  venue: string;
+  hall?: string;
+  startTime: string;
+  endTime?: string;
+  price?: string;
+  ticketUrl?: string;
+  description?: string;
+  ensemble?: string;
+  conductor?: string;
+  performers: string[];
+  program: ProgramItem[];
+  tags: string[];
+};
+
+export type WechatImportCandidate = {
+  id: string;
+  status: "pending" | "approved" | "rejected";
+  event: WechatImportEventDraft;
+  reasons: string[];
+  reviewedAt?: string;
+};
+
+export type WechatImportRecord = {
+  id: string;
+  articleUrl?: string;
+  articleTitle?: string;
+  accountName?: string;
+  publishedAt?: string;
+  rawText: string;
+  importedAt: string;
+  extractionMethod: "rules" | "deepseek";
+  candidates: WechatImportCandidate[];
+};
+
+export type WechatImportState = {
+  aiAvailable: boolean;
+  imports: WechatImportRecord[];
 };
 
 export type EntityDataset = {

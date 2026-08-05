@@ -239,6 +239,90 @@ const creditChangeDataset: ConcertDataset = {
   }],
 };
 assert.deepEqual(buildChanges(dataset, creditChangeDataset).changes.map((item) => item.type), ["program"]);
+
+const formattingOnlyBefore: ConcertDataset = {
+  ...dataset,
+  events: [{
+    ...merged[0],
+    program: [{
+      composer: "理查德 · 施特劳斯",
+      title: "《蒂尔·艾伦施皮格尔的恶作剧》，Op. 28",
+      opus: "Op. 28",
+      alternateTitles: ["Till Eulenspiegel's Merry Pranks", "Till Eulenspiegels lustige Streiche"],
+      credits: [{ name: "理查德·施特劳斯", role: "作 曲" }],
+      movements: [{ number: "Ⅰ.", title: "Sehr lebhaft  und lustig" }],
+      confidence: "ocr",
+    }],
+  }],
+};
+const formattingOnlyAfter: ConcertDataset = {
+  ...formattingOnlyBefore,
+  generatedAt: "2026-08-01T00:00:00.000Z",
+  events: [{
+    ...formattingOnlyBefore.events[0],
+    program: [{
+      composer: "理查德·施特劳斯",
+      title: "蒂尔·艾伦施皮格尔的恶作剧, Op.28",
+      opus: "Op.28",
+      alternateTitles: ["Till Eulenspiegels lustige Streiche", "Till Eulenspiegels Merry Pranks"],
+      credits: [{ name: "理查德 · 施特劳斯", role: "作曲" }],
+      movements: [{ number: "I", title: "Sehr lebhaft und lustig" }],
+      confidence: "official",
+    }],
+  }],
+};
+assert.deepEqual(buildChanges(formattingOnlyBefore, formattingOnlyAfter).changes, []);
+
+const substantiveProgramChange: ConcertDataset = {
+  ...formattingOnlyAfter,
+  events: [{
+    ...formattingOnlyAfter.events[0],
+    program: [{ ...formattingOnlyAfter.events[0].program[0], title: "蒂尔·艾伦施皮格尔的恶作剧, Op.29" }],
+  }],
+};
+assert.deepEqual(
+  buildChanges(formattingOnlyBefore, substantiveProgramChange).changes.map((item) => item.type),
+  ["program"],
+);
+
+const numericRangeChange: ConcertDataset = {
+  ...formattingOnlyAfter,
+  events: [{
+    ...formattingOnlyAfter.events[0],
+    program: [{ ...formattingOnlyAfter.events[0].program[0], title: "交响曲第13乐章" }],
+  }],
+};
+const numericRangeBefore: ConcertDataset = {
+  ...formattingOnlyBefore,
+  events: [{
+    ...formattingOnlyBefore.events[0],
+    program: [{ ...formattingOnlyBefore.events[0].program[0], title: "交响曲第1-3乐章" }],
+  }],
+};
+assert.deepEqual(
+  buildChanges(numericRangeBefore, numericRangeChange).changes.map((item) => item.type),
+  ["program"],
+);
+
+const formattingOnlyHistoryChange = {
+  id: "formatting-only-program-change",
+  eventId: merged[0].id,
+  type: "program" as const,
+  detectedAt: "2026-07-30T00:00:00.000Z",
+  summary: "节目单变化",
+  before: buildChangeEventSnapshot(formattingOnlyBefore.events[0]),
+  after: buildChangeEventSnapshot(formattingOnlyAfter.events[0]),
+};
+const cleanedFormattingHistory = mergeChangeHistory({
+  schemaVersion: 2,
+  generatedAt: formattingOnlyHistoryChange.detectedAt,
+  latestChangeIds: [formattingOnlyHistoryChange.id],
+  runs: [{ generatedAt: formattingOnlyHistoryChange.detectedAt, changeIds: [formattingOnlyHistoryChange.id] }],
+  changes: [formattingOnlyHistoryChange],
+}, { generatedAt: "2026-08-01T00:00:00.000Z", changes: [] });
+assert.deepEqual(cleanedFormattingHistory.changes, []);
+assert.deepEqual(cleanedFormattingHistory.runs?.[1]?.changeIds, []);
+
 const rescheduledDataset: ConcertDataset = {
   ...dataset,
   generatedAt: "2026-08-01T00:00:00.000Z",

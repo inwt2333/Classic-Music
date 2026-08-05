@@ -9,6 +9,18 @@ import {
   manualReviewDecisionSchema,
   saveManualReview,
 } from "./review-store";
+import { buildWechatManualEvent, saveManualEvent } from "./manual-event-store";
+import {
+  enhanceWechatImportWithDeepSeek,
+  parseWechatArticle,
+  readWechatArticle,
+} from "./wechat-import";
+import {
+  loadWechatInbox,
+  saveWechatImport,
+  updateWechatCandidate,
+  wechatImportEventDraftSchema,
+} from "./wechat-import-store";
 
 type OcrInspectFile = {
   projectId: string;
@@ -27,6 +39,89 @@ export function reviewApiPlugin(root = process.cwd()): Plugin {
   return {
     name: "classic-music-review-api",
     configureServer(server) {
+      server.middlewares.use("/api/wechat-imports", async (request, response) => {
+        try {
+          if (request.method === "GET") {
+            return sendJson(response, 200, await readWechatImportState(root));
+          }
+          if (request.method === "POST") {
+            const body = await readJsonBody(request) as Record<string, unknown>;
+            const inboxPath = resolve(root, "data/wechat-inbox.json");
+            if (body.action === "create") {
+              const article = await readWechatArticle({
+                articleUrl: typeof body.articleUrl === "string" ? body.articleUrl : undefined,
+                rawText: typeof body.rawText === "string" ? body.rawText : undefined,
+              });
+              let record = parseWechatArticle(article);
+              let message = `已生成 ${record.candidates.length} 个规则解析候选`;
+              if (body.useAi === true) {
+                try {
+                  record = await enhanceWechatImportWithDeepSeek(record);
+                  message = `DeepSeek 已生成 ${record.candidates.length} 个结构化候选`;
+                } catch (error) {
+                  message = `${error instanceof Error ? error.message : String(error)}；已保留规则解析候选`;
+                }
+              }
+              await saveWechatImport(inboxPath, record);
+              return sendJson(response, 200, {
+                ...(await readWechatImportState(root)),
+                message,
+              });
+            }
+
+            const importId = requireString(body.importId, "缺少导入记录 ID");
+            const candidateId = requireString(body.candidateId, "缺少候选 ID");
+            const inbox = await loadWechatInbox(inboxPath);
+            const record = inbox.imports.find((item) => item.id === importId);
+            const candidate = record?.candidates.find((item) => item.id === candidateId);
+            if (!record || !candidate) throw new Error("导入候选不存在，请刷新页面");
+            const reviewedAt = new Date().toISOString();
+
+            if (body.action === "approve") {
+              const event = wechatImportEventDraftSchema.parse(body.event);
+              const reviewedCandidate = { ...candidate, event };
+              const manualEvent = buildWechatManualEvent(record, reviewedCandidate, reviewedAt);
+              writeQueue = writeQueue.catch(() => undefined).then(async () => {
+                await saveManualEvent(resolve(root, "data/manual-events.json"), manualEvent);
+                await updateWechatCandidate(inboxPath, importId, candidateId, {
+                  status: "approved",
+                  event,
+                  reviewedAt,
+                });
+                await reapplyManualReviewsAndPersist(
+                  resolve(root, "public/data/events.json"),
+                  resolve(root, "data/classic-music.db"),
+                );
+              });
+              await writeQueue;
+              return sendJson(response, 200, {
+                ...(await readWechatImportState(root)),
+                message: "已确认并写入正式演出数据",
+              });
+            }
+
+            if (body.action === "reject") {
+              await updateWechatCandidate(inboxPath, importId, candidateId, {
+                status: "rejected",
+                event: candidate.event,
+                reviewedAt,
+              });
+              return sendJson(response, 200, {
+                ...(await readWechatImportState(root)),
+                message: "已驳回候选",
+              });
+            }
+            throw new Error("不支持的公众号导入操作");
+          }
+          response.setHeader("allow", "GET, POST");
+          return sendJson(response, 405, { error: "不支持的请求方法" });
+        } catch (error) {
+          return sendJson(response, 400, {
+            error: error instanceof Error ? error.message : String(error),
+          });
+        }
+      });
+
       server.middlewares.use("/api/reviews", async (request, response) => {
         try {
           if (request.method === "GET") {
@@ -72,6 +167,14 @@ export function reviewApiPlugin(root = process.cwd()): Plugin {
         }
       });
     },
+  };
+}
+
+async function readWechatImportState(root: string) {
+  const inbox = await loadWechatInbox(resolve(root, "data/wechat-inbox.json"));
+  return {
+    aiAvailable: Boolean(process.env.DEEPSEEK_API_KEY),
+    imports: inbox.imports,
   };
 }
 
@@ -197,4 +300,9 @@ function sendJson(response: ServerResponse, status: number, value: unknown) {
   response.statusCode = status;
   response.setHeader("content-type", "application/json; charset=utf-8");
   response.end(JSON.stringify(value));
+}
+
+function requireString(value: unknown, message: string) {
+  if (typeof value !== "string" || !value) throw new Error(message);
+  return value;
 }

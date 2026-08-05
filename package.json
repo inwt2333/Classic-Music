@@ -15,12 +15,13 @@
     "scrape:no-ocr": "tsx scripts/scrape.ts --no-ocr",
     "scrape:ai": "tsx scripts/scrape.ts --ai",
     "reviews:apply": "tsx scripts/apply-reviews.ts",
+    "wechat:import": "tsx scripts/wechat-import-cli.ts",
     "changes:backfill": "tsx scripts/backfill-change-snapshots.ts",
     "audit:data": "tsx scripts/audit-data.ts",
     "audit:data:ci": "tsx scripts/audit-data.ts --strict-sources",
     "audit:data:deploy": "tsx scripts/audit-data.ts --strict-sources --allow-stale-sources",
     "audit:storage": "tsx scripts/audit-storage.ts",
-    "test:data": "tsx scripts/china-time.test.ts && tsx scripts/data-store.test.ts && tsx scripts/review-store.test.ts",
+    "test:data": "tsx scripts/china-time.test.ts && tsx scripts/data-store.test.ts && tsx scripts/review-store.test.ts && tsx scripts/wechat-import.test.ts && tsx scripts/discovery-features.test.ts",
     "test:parser": "tsx scripts/adapters/shanghai-symphony.test.ts && tsx scripts/adapters/shanghai-oriental-art-center.test.ts && tsx scripts/adapters/shanghai-concert-hall.test.ts && tsx scripts/adapters/suzhou-symphony.test.ts && tsx scripts/adapters/national-centre-performing-arts.test.ts && tsx scripts/adapters/china-national-symphony.test.ts && tsx scripts/adapters/china-philharmonic.test.ts && tsx scripts/adapters/shanghai-philharmonic.test.ts && tsx scripts/adapters/new-sources.test.ts && tsx scripts/ocr/program-extraction.test.ts"
   },
   "repository": {
@@ -38,6 +39,7 @@
     "cheerio": "^1.2.0",
     "dotenv": "^17.4.2",
     "lucide-react": "^1.25.0",
+    "qrcode": "^1.5.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tesseract.js": "^7.0.0",
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",

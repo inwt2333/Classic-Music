@@ -6,6 +6,7 @@ import {
   ExternalLink,
   Image as ImageIcon,
   LoaderCircle,
+  MessageSquareText,
   Plus,
   ScanText,
   Trash2,
@@ -14,6 +15,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import type { ProgramItem, ReviewQueueItem } from "../types";
 import { formatDateTime, formatEventVenue } from "../utils";
+import WechatImportWorkspace from "./WechatImportWorkspace";
 
 type EditableProgramItem = {
   composer: string;
@@ -23,6 +25,7 @@ type EditableProgramItem = {
 };
 
 export default function ReviewWorkspace() {
+  const [workspace, setWorkspace] = useState<"program" | "wechat">("program");
   const [items, setItems] = useState<ReviewQueueItem[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [program, setProgram] = useState<EditableProgramItem[]>([]);
@@ -116,17 +119,29 @@ export default function ReviewWorkspace() {
         <div className="brand-block">
           <ScanText size={22} />
           <div>
-            <strong>节目单审核</strong>
-            <span>{status}</span>
+            <strong>数据审核</strong>
+            <span>{workspace === "program" ? status : "公众号文章半自动导入"}</span>
           </div>
         </div>
-        <a href="/">
-          <ArrowLeft size={16} />
-          返回演出日历
-        </a>
+        <div className="review-header-actions">
+          <div className="review-workspace-tabs" aria-label="审核类型">
+            <button className={workspace === "program" ? "active" : ""} onClick={() => setWorkspace("program")}>
+              <ScanText size={15} />
+              节目单审核
+            </button>
+            <button className={workspace === "wechat" ? "active" : ""} onClick={() => setWorkspace("wechat")}>
+              <MessageSquareText size={15} />
+              公众号导入
+            </button>
+          </div>
+          <a href="/">
+            <ArrowLeft size={16} />
+            返回演出日历
+          </a>
+        </div>
       </header>
 
-      <section className="review-layout">
+      {workspace === "wechat" ? <WechatImportWorkspace /> : <section className="review-layout">
         <aside className="review-queue" aria-label="待审核演出">
           <div className="review-pane-title">
             <span>待审核</span>
@@ -333,7 +348,7 @@ export default function ReviewWorkspace() {
             <p>当前没有需要人工处理的节目单。</p>
           </section>
         )}
-      </section>
+      </section>}
     </main>
   );
 }

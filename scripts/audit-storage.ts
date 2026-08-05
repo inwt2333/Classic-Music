@@ -29,7 +29,7 @@ async function main() {
     (
       database
         .prepare("SELECT COUNT(*) AS count FROM performances WHERE start_time >= ?")
-        .get(new Date().toISOString()) as { count: number }
+        .get(index.generatedAt ?? new Date().toISOString()) as { count: number }
     ).count,
   );
   const workCount = Number(

@@ -16,6 +16,7 @@ import type {
   ProgramItem,
 } from "../src/types";
 import { formatChinaDateLabels } from "./china-time";
+import { addManualEventsToDataset, loadManualEvents } from "./manual-event-store";
 import { applyManualReviews, loadManualReviews } from "./review-store";
 
 type PreparedData = {
@@ -34,14 +35,20 @@ export async function prepareAndPersistDataset(
 ) {
   const previous = await readPreviousDataset(outputPath);
   const recoveredDataset = restoreFailedSourceEvents(dataset, previous);
-  const canonicalEvents = mergeCrossSourceEvents(recoveredDataset.events, recoveredDataset.sources);
+  const manualEventPath = resolve(dirname(databasePath), "manual-events.json");
+  const manualEvents = await loadManualEvents(manualEventPath);
+  const datasetWithManualEvents = addManualEventsToDataset(recoveredDataset, manualEvents.events);
+  const canonicalEvents = mergeCrossSourceEvents(
+    datasetWithManualEvents.events,
+    datasetWithManualEvents.sources,
+  );
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
   const reviewedEvents = assignProgramIdentities(
     applyManualReviews(canonicalEvents, reviews.decisions),
   );
   const canonicalDataset: ConcertDataset = {
-    ...recoveredDataset,
+    ...datasetWithManualEvents,
     schemaVersion: 2,
     events: reviewedEvents,
     stats: { ...recoveredDataset.stats, normalizedEvents: reviewedEvents.length },
@@ -68,13 +75,27 @@ export async function reapplyManualReviewsAndPersist(
 ) {
   const previous = await readPreviousDataset(outputPath);
   if (!previous) throw new Error("当前数据集不存在，无法应用审核结果");
+  const manualEventPath = resolve(dirname(databasePath), "manual-events.json");
+  const manualEvents = await loadManualEvents(manualEventPath);
+  const datasetWithManualEvents = addManualEventsToDataset(previous, manualEvents.events);
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
-  const reviewedDataset: ConcertDataset = {
-    ...previous,
-    events: assignProgramIdentities(
-      applyManualReviews(previous.events, reviews.decisions),
+  const reviewedEvents = assignProgramIdentities(
+    applyManualReviews(
+      mergeCrossSourceEvents(
+        datasetWithManualEvents.events,
+        datasetWithManualEvents.sources,
+      ),
+      reviews.decisions,
     ),
+  );
+  const reviewedDataset: ConcertDataset = {
+    ...datasetWithManualEvents,
+    events: reviewedEvents,
+    stats: {
+      ...datasetWithManualEvents.stats,
+      normalizedEvents: reviewedEvents.length,
+    },
   };
   const entities = buildEntities(reviewedDataset);
   const latestChanges = buildChanges(previous, reviewedDataset);
@@ -354,31 +375,51 @@ export function mergeChangeHistory(
   previous: ChangeDataset | null,
   latest: ChangeDataset,
 ): ChangeDataset {
-  const previousChanges = previous?.changes ?? [];
+  const cleanedPrevious = previous ? cleanChangeHistory(previous) : null;
+  const cleanedLatest = cleanChangeHistory(latest);
+  const previousChanges = cleanedPrevious?.changes ?? [];
+  const latestChanges = cleanedLatest.changes;
   const changesById = new Map(previousChanges.map((item) => [item.id, item]));
-  for (const item of latest.changes) changesById.set(item.id, item);
+  for (const item of latestChanges) changesById.set(item.id, item);
 
   const runsByTime = new Map<string, Set<string>>();
-  const previousRuns = previous?.runs?.length
-    ? previous.runs
+  const previousRuns = cleanedPrevious?.runs?.length
+    ? cleanedPrevious.runs
     : legacyChangeRuns(previousChanges);
   for (const run of previousRuns) {
-    runsByTime.set(run.generatedAt, new Set(run.changeIds));
+    runsByTime.set(
+      run.generatedAt,
+      new Set(run.changeIds.filter((id) => changesById.has(id))),
+    );
   }
   const currentRun = runsByTime.get(latest.generatedAt) ?? new Set<string>();
-  for (const id of latest.changes.map((item) => item.id)) currentRun.add(id);
+  for (const id of latestChanges.map((item) => item.id)) currentRun.add(id);
   runsByTime.set(latest.generatedAt, currentRun);
 
   return {
     schemaVersion: 2,
     generatedAt: latest.generatedAt,
-    latestChangeIds: latest.changes.map((item) => item.id),
+    latestChangeIds: latestChanges.map((item) => item.id),
     runs: Array.from(runsByTime, ([generatedAt, ids]) => ({
       generatedAt,
       changeIds: Array.from(ids),
     })).sort((a, b) => b.generatedAt.localeCompare(a.generatedAt)),
     changes: Array.from(changesById.values())
       .sort((a, b) => b.detectedAt.localeCompare(a.detectedAt) || a.id.localeCompare(b.id)),
+  };
+}
+
+export function cleanChangeHistory(history: ChangeDataset): ChangeDataset {
+  const changes = history.changes.filter(isMeaningfulStoredChange);
+  const retainedIds = new Set(changes.map((item) => item.id));
+  return {
+    ...history,
+    latestChangeIds: history.latestChangeIds?.filter((id) => retainedIds.has(id)),
+    runs: history.runs?.map((run) => ({
+      ...run,
+      changeIds: run.changeIds.filter((id) => retainedIds.has(id)),
+    })),
+    changes,
   };
 }
 
@@ -1085,15 +1126,45 @@ function signature(values: string[]) {
   return [...values].sort().join("|");
 }
 
-function programSignature(program: ProgramItem[]) {
+function programSignature(
+  program: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
+) {
   return JSON.stringify(program.map((item) => ({
-    composer: item.composer ?? "",
-    title: item.title,
-    opus: item.opus ?? "",
-    alternateTitles: item.alternateTitles ?? [],
-    credits: item.credits ?? [],
-    movements: item.movements ?? [],
+    composer: normalizeChangeText(item.composer),
+    title: normalizeChangeText(item.title),
+    opus: normalizeChangeText(item.opus),
+    alternateTitles: normalizedTextSet(item.alternateTitles),
+    credits: (item.credits ?? [])
+      .map((credit) => `${normalizeChangeText(credit.name)}:${normalizeChangeText(credit.role)}`)
+      .filter((credit) => credit !== ":")
+      .sort(),
+    movements: (item.movements ?? []).map((movement) => ({
+      number: normalizeChangeText(movement.number),
+      title: normalizeChangeText(movement.title),
+      alternateTitles: normalizedTextSet(movement.alternateTitles),
+    })),
   })));
+}
+
+function normalizeChangeText(value?: string) {
+  return (value ?? "")
+    .normalize("NFKC")
+    .toLocaleLowerCase("zh-CN")
+    .replace(/[\p{Z}\p{Cf}]/gu, "")
+    .replace(/[‐‑‒–—―]/g, "-")
+    .replace(/(?<=\p{N})([\p{P}])(?=\p{N})/gu, (_, punctuation: string) => (
+      `\uE000${punctuation.codePointAt(0)?.toString(16)}\uE001`
+    ))
+    .replace(/[\p{P}]/gu, "");
+}
+
+function normalizedTextSet(values?: string[]) {
+  return Array.from(new Set((values ?? []).map(normalizeChangeText).filter(Boolean))).sort();
+}
+
+function isMeaningfulStoredChange(item: DatasetChange) {
+  if (item.type !== "program" || !item.before || !item.after) return true;
+  return programSignature(item.before.programPreview) !== programSignature(item.after.programPreview);
 }
 
 function change(

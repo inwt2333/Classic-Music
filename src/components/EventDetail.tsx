@@ -1,4 +1,5 @@
 import {
+  BellPlus,
   BookOpenText,
   CalendarDays,
   Check,
@@ -6,14 +7,26 @@ import {
   Copy,
   Download,
   ExternalLink,
+  Flag,
   MapPin,
+  LoaderCircle,
   Music,
   Search,
+  Share2,
+  ShieldCheck,
+  Star,
   Ticket,
   UserRound,
   X,
 } from "lucide-react";
-import type { ReactNode, RefObject } from "react";
+import { useState, type ReactNode, type RefObject } from "react";
+import CorrectionDialog from "./CorrectionDialog";
+import {
+  detectDataIssues,
+  makeFollowTarget,
+  type FollowMap,
+  type FollowTarget,
+} from "../discovery-features";
 import type { ConcertEvent, EntityRecord, ProgramCredit, ProgramItem } from "../types";
 import type { PersonalEventStatus } from "../product-features";
 import {
@@ -39,6 +52,9 @@ export default function EventDetail({
   onExploreVenue,
   onCopy,
   onDownloadIcs,
+  onShare,
+  follows,
+  onToggleFollow,
   personalStatus,
   onSetPersonalStatus,
 }: {
@@ -53,9 +69,14 @@ export default function EventDetail({
   onExploreVenue: (venue: string) => void;
   onCopy: (event: ConcertEvent) => void;
   onDownloadIcs: (event: ConcertEvent) => void;
+  onShare: (event: ConcertEvent) => Promise<void>;
+  follows: FollowMap;
+  onToggleFollow: (target: FollowTarget) => void;
   personalStatus?: PersonalEventStatus;
   onSetPersonalStatus: (eventId: string, status: PersonalEventStatus | null) => void;
 }) {
+  const [correctionOpen, setCorrectionOpen] = useState(false);
+  const [sharing, setSharing] = useState(false);
   if (loading) {
     return (
       <section ref={panelRef} className={`detail-panel ${open ? "open" : ""}`} aria-live="polite">
@@ -90,6 +111,7 @@ export default function EventDetail({
     "ai-enhanced": "AI 辅助",
     "needs-review": "待复核",
   }[event.dataQuality];
+  const dataIssues = detectDataIssues(event);
 
   return (
     <section
@@ -129,6 +151,17 @@ export default function EventDetail({
         <button type="button" onClick={() => onCopy(event)}>
           <Copy size={16} />复制信息
         </button>
+        <button type="button" disabled={sharing} onClick={async () => {
+          setSharing(true);
+          try {
+            await onShare(event);
+          } finally {
+            setSharing(false);
+          }
+        }}>
+          {sharing ? <LoaderCircle className="spin" size={16} /> : <Share2 size={16} />}
+          {sharing ? "正在生成" : "复制分享卡片"}
+        </button>
       </div>
 
       <div className="personal-actions" aria-label="个人标记">
@@ -148,6 +181,16 @@ export default function EventDetail({
         </button>
       </div>
 
+      <div className={`quality-card ${dataIssues.length ? "warning" : ""}`}>
+        {dataIssues.length ? <Flag size={18} /> : <ShieldCheck size={18} />}
+        <div>
+          <strong>{dataIssues.length ? "这条信息可能需要核对" : "数据来源清晰"}</strong>
+          <span>{qualityLabel} · {event.sources?.length ?? 1} 个来源 · 最后采集 {formatDateTime(event.scrapedAt)}</span>
+          {dataIssues.map((issue) => <small key={issue}>{issue}</small>)}
+        </div>
+        <button type="button" onClick={() => setCorrectionOpen(true)}><Flag size={14} />信息有误</button>
+      </div>
+
       {event.priceTiers?.length ? (
         <div className="price-tier-list" aria-label="票价档位">
           <span>票价档位</span>
@@ -159,12 +202,27 @@ export default function EventDetail({
         <>
           <SectionTitle icon={<UserRound size={17} />} title="人物与乐团" />
           <div className="entity-list">
-            {event.ensemble ? <span>{event.ensemble}</span> : null}
+            {event.ensemble ? (
+              <EntityChip
+                name={event.ensemble}
+                entity={entitiesByKey.get(`ensemble:${event.ensemble}`)}
+                follows={follows}
+                onExplore={onExplore}
+                onToggleFollow={onToggleFollow}
+              />
+            ) : null}
             {people.map((person) => {
               const entity = entitiesByKey.get(`person:${person}`);
-              return entity ? (
-                <button key={person} onClick={() => onExplore(entity)}>{person}</button>
-              ) : <span key={person}>{person}</span>;
+              return (
+                <EntityChip
+                  key={person}
+                  name={person}
+                  entity={entity}
+                  follows={follows}
+                  onExplore={onExplore}
+                  onToggleFollow={onToggleFollow}
+                />
+              );
             })}
           </div>
         </>
@@ -187,6 +245,8 @@ export default function EventDetail({
               item={item}
               entity={item.workId ? entitiesByKey.get(`work:${item.workId}`) : undefined}
               onExplore={onExplore}
+              follows={follows}
+              onToggleFollow={onToggleFollow}
             />
           ))
         ) : (
@@ -221,6 +281,7 @@ export default function EventDetail({
           </a>
         ))}
       </div>
+      <CorrectionDialog event={event} issues={dataIssues} open={correctionOpen} onClose={() => setCorrectionOpen(false)} />
     </section>
   );
 }
@@ -229,10 +290,14 @@ function ProgramRow({
   item,
   entity,
   onExplore,
+  follows,
+  onToggleFollow,
 }: {
   item: ProgramItem;
   entity?: EntityRecord;
   onExplore: (entity: EntityRecord) => void;
+  follows: FollowMap;
+  onToggleFollow: (target: FollowTarget) => void;
 }) {
   const keyword = [
     item.composer,
@@ -241,10 +306,23 @@ function ProgramRow({
     item.opus,
     ...(item.credits?.map(formatProgramCredit) ?? []),
   ].filter(Boolean).join(" ");
+  const target = entity ? makeFollowTarget("work", entity.name, entity.id) : undefined;
+  const followed = target ? Boolean(follows[target.key]) : false;
   return (
     <article className="program-row">
       <div className="program-copy">
         {entity ? <button className="work-link" onClick={() => onExplore(entity)}>{item.title}</button> : <strong>{item.title}</strong>}
+        {target ? (
+          <button
+            type="button"
+            className={`work-follow-button ${followed ? "active" : ""}`}
+            title={followed ? "取消关注作品" : "关注作品"}
+            aria-label={`${followed ? "取消关注" : "关注"}${entity?.name}`}
+            onClick={() => onToggleFollow(target)}
+          >
+            <Star size={13} />
+          </button>
+        ) : null}
         {item.alternateTitles?.length ? (
           <small className="program-alternate-title">{item.alternateTitles.join(" / ")}</small>
         ) : null}
@@ -278,6 +356,38 @@ function ProgramRow({
         </div>
       </details>
     </article>
+  );
+}
+
+function EntityChip({
+  name,
+  entity,
+  follows,
+  onExplore,
+  onToggleFollow,
+}: {
+  name: string;
+  entity?: EntityRecord;
+  follows: FollowMap;
+  onExplore: (entity: EntityRecord) => void;
+  onToggleFollow: (target: FollowTarget) => void;
+}) {
+  const type = entity?.type === "ensemble" ? "ensemble" : "person";
+  const target = makeFollowTarget(type, name, entity?.id);
+  const followed = Boolean(follows[target.key]);
+  return (
+    <span className="entity-chip">
+      {entity ? <button type="button" onClick={() => onExplore(entity)}>{name}</button> : <em>{name}</em>}
+      <button
+        type="button"
+        className={followed ? "active" : ""}
+        title={followed ? "取消关注" : "关注"}
+        aria-label={`${followed ? "取消关注" : "关注"}${name}`}
+        onClick={() => onToggleFollow(target)}
+      >
+        <BellPlus size={13} />
+      </button>
+    </span>
   );
 }
 
