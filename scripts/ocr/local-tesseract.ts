@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createWorker, PSM, type Worker } from "tesseract.js";
+import { fetchWithRetry } from "../fetch-retry";
 
 type CachedOcr = {
   url: string;
@@ -38,14 +39,14 @@ export async function createLocalTesseract(cacheDirectory: string): Promise<Loca
 
   return {
     async recognizeUrl(url: string) {
-      const response = await fetch(url, {
+      const response = await fetchWithRetry(url, () => ({
         headers: {
           "user-agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
           accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
         },
         signal: AbortSignal.timeout(30_000),
-      });
+      }));
       if (!response.ok) throw new Error(`OCR image HTTP ${response.status}: ${url}`);
       const image = Buffer.from(await response.arrayBuffer());
       const imageHash = createHash("sha256").update(image).digest("hex");

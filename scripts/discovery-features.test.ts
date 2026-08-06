@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildFollowNotifications,
   detectDataIssues,
+  mergeFollowNotificationHistory,
   recentChangeLabel,
   sortConcerts,
   type FollowMap,
@@ -80,6 +81,11 @@ const changeDataset: ChangeDataset = {
 const notifications = buildFollowNotifications(changeDataset, [followedEvent], follows, []);
 assert.equal(notifications.length, 1);
 assert.deepEqual(notifications[0].targets.map((target) => target.type).sort(), ["ensemble", "work"]);
+
+const retainedNotifications = mergeFollowNotificationHistory(notifications, [], [], []);
+assert.equal(retainedNotifications.length, 1, "unfollowing must not remove notification history");
+assert.equal(mergeFollowNotificationHistory(notifications, [], [programChange.id], [])[0].read, true);
+assert.equal(mergeFollowNotificationHistory(notifications, notifications, [], [programChange.id]).length, 0);
 
 const issues = detectDataIssues(summary({
   dataQuality: "needs-review",

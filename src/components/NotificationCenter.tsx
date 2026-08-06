@@ -25,6 +25,8 @@ export default function NotificationCenter({
   follows,
   onClose,
   onReadAll,
+  onRead,
+  onDelete,
   onOpenEvent,
   onRemoveFollow,
 }: {
@@ -33,6 +35,8 @@ export default function NotificationCenter({
   follows: FollowMap;
   onClose: () => void;
   onReadAll: () => void;
+  onRead: (id: string) => void;
+  onDelete: (id: string) => void;
   onOpenEvent: (eventId: string) => void;
   onRemoveFollow: (target: FollowTarget) => void;
 }) {
@@ -56,20 +60,35 @@ export default function NotificationCenter({
         </div>
         <div className="notification-list">
           {notifications.length ? notifications.slice(0, 30).map((item) => (
-            <button
+            <div
               key={item.id}
-              type="button"
-              className={item.read ? "" : "unread"}
-              onClick={() => item.event && onOpenEvent(item.event.id)}
-              disabled={!item.event}
+              className={`notification-item ${item.read ? "" : "unread"}`}
             >
-              <i />
-              <span>
-                <small>{changeLabels[item.change.type]} · {item.targets.map((target) => target.name).join("、")}</small>
-                <strong>{item.event?.title ?? item.change.summary}</strong>
-                <em>{new Intl.DateTimeFormat("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(item.change.detectedAt))}</em>
-              </span>
-            </button>
+              <button
+                className="notification-open"
+                type="button"
+                onClick={() => {
+                  onRead(item.id);
+                  if (item.event) onOpenEvent(item.event.id);
+                }}
+              >
+                <i />
+                <span>
+                  <small>{changeLabels[item.change.type]} · {item.targets.map((target) => target.name).join("、")}</small>
+                  <strong>{item.event?.title ?? item.change.summary}</strong>
+                  <em>{new Intl.DateTimeFormat("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(item.change.detectedAt))}</em>
+                </span>
+              </button>
+              <button
+                className="notification-delete"
+                type="button"
+                title="删除提醒"
+                aria-label={`删除提醒：${item.event?.title ?? item.change.summary}`}
+                onClick={() => onDelete(item.id)}
+              >
+                <Trash2 size={15} />
+              </button>
+            </div>
           )) : (
             <div className="feature-empty"><Music size={24} /><strong>暂无相关变化</strong><span>关注音乐家、作品、乐团或场馆后，变化会出现在这里。</span></div>
           )}

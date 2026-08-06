@@ -298,7 +298,7 @@ export function buildChanges(
     if (signature(old.performers) !== signature(event.performers)) {
       changes.push(change(event.id, "lineup", detectedAt, `演出人员变化：${event.title}`, old, event));
     }
-    if (programSignature(old.program) !== programSignature(event.program)) {
+    if (!programsEquivalent(old.program, event.program)) {
       changes.push(change(event.id, "program", detectedAt, `节目单变化：${event.title}`, old, event));
     }
   }
@@ -1146,6 +1146,36 @@ function programSignature(
   })));
 }
 
+function programSemanticSignature(
+  program: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
+) {
+  return JSON.stringify(program.map((item) => ({
+    composer: normalizeChangeText(item.composer),
+    // Parsers may move trailing credits such as "集体 创作" out of the title.
+    titleWithCredits: [
+      normalizeChangeText(item.title),
+      ...(item.credits ?? []).map((credit) => (
+        `${normalizeChangeText(credit.name)}${normalizeChangeText(credit.role)}`
+      )),
+    ].filter(Boolean).join(""),
+    opus: normalizeChangeText(item.opus),
+    alternateTitles: normalizedTextSet(item.alternateTitles),
+    movements: (item.movements ?? []).map((movement) => ({
+      number: normalizeChangeText(movement.number),
+      title: normalizeChangeText(movement.title),
+      alternateTitles: normalizedTextSet(movement.alternateTitles),
+    })),
+  })));
+}
+
+function programsEquivalent(
+  before: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
+  after: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
+) {
+  return programSignature(before) === programSignature(after)
+    || programSemanticSignature(before) === programSemanticSignature(after);
+}
+
 function normalizeChangeText(value?: string) {
   return (value ?? "")
     .normalize("NFKC")
@@ -1164,7 +1194,7 @@ function normalizedTextSet(values?: string[]) {
 
 function isMeaningfulStoredChange(item: DatasetChange) {
   if (item.type !== "program" || !item.before || !item.after) return true;
-  return programSignature(item.before.programPreview) !== programSignature(item.after.programPreview);
+  return !programsEquivalent(item.before.programPreview, item.after.programPreview);
 }
 
 function change(

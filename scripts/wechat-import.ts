@@ -8,6 +8,7 @@ import type {
   WechatImportRecord,
 } from "../src/types";
 import { parseChinaDate } from "./china-time";
+import { fetchWithRetry } from "./fetch-retry";
 
 export type WechatArticle = {
   articleUrl?: string;
@@ -61,13 +62,13 @@ export async function fetchWechatArticle(articleUrl: string): Promise<WechatArti
   if (url.protocol !== "https:" || url.hostname !== "mp.weixin.qq.com") {
     throw new Error("目前只允许读取 https://mp.weixin.qq.com 的公众号文章链接");
   }
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, () => ({
     headers: {
       "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/136 Safari/537.36",
       accept: "text/html,application/xhtml+xml",
     },
     signal: AbortSignal.timeout(12_000),
-  });
+  }));
   if (!response.ok) throw new Error(`公众号文章读取失败（HTTP ${response.status}），请同时粘贴正文`);
   const html = await response.text();
   if (html.length > 4_000_000) throw new Error("公众号文章页面超过 4 MB，请改为粘贴正文");
@@ -135,7 +136,7 @@ export async function enhanceWechatImportWithDeepSeek(record: WechatImportRecord
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) throw new Error("未配置 DEEPSEEK_API_KEY，已保留规则解析结果");
   const prompt = `请从下面的微信公众号文章中提取古典音乐演出。文章可能包含多场日期或不同节目单。只返回 JSON，不要 Markdown。不要猜测文章中没有的信息。时间使用带 +08:00 的 ISO 8601。\nSchema:\n{"events":[{"title":"","city":"","venue":"","hall":"","startTime":"","endTime":"","price":"","ticketUrl":"","description":"不超过500字的演出简介","ensemble":"","conductor":"","performers":[""],"program":[{"composer":"","title":"","alternateTitles":[""],"opus":"","movements":[{"number":"","title":"","alternateTitles":[""]}],"confidence":"ai"}],"tags":[""]}]}\n文章标题：${record.articleTitle ?? ""}\n公众号：${record.accountName ?? ""}\n正文：\n${record.rawText.slice(0, 30_000)}`;
-  const response = await fetch("https://api.deepseek.com/chat/completions", {
+  const response = await fetchWithRetry("https://api.deepseek.com/chat/completions", () => ({
     method: "POST",
     headers: {
       authorization: `Bearer ${apiKey}`,
@@ -148,7 +149,7 @@ export async function enhanceWechatImportWithDeepSeek(record: WechatImportRecord
       response_format: { type: "json_object" },
     }),
     signal: AbortSignal.timeout(60_000),
-  });
+  }));
   if (!response.ok) throw new Error(`DeepSeek 请求失败（HTTP ${response.status}）`);
   const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
   const content = data.choices?.[0]?.message?.content;

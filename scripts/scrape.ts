@@ -72,6 +72,7 @@ import {
 } from "./adapters/xian-concert-hall";
 import { formatChinaDateLabels, parseChinaDate } from "./china-time";
 import { prepareAndPersistDataset } from "./data-store";
+import { fetchWithRetry } from "./fetch-retry";
 import { createLocalTesseract, type LocalOcr } from "./ocr/local-tesseract";
 import {
   evaluateOcrProgram,
@@ -466,7 +467,7 @@ async function scrapeShanghaiSymphony(
 }
 
 async function postShanghaiSymphonyApi(path: string, body: Record<string, string>) {
-  const response = await fetch(`https://www.shsymphony.cn${path}`, {
+  const response = await fetchWithRetry(`https://www.shsymphony.cn${path}`, {
     method: "POST",
     headers: {
       "user-agent":
@@ -530,7 +531,7 @@ async function requestShanghaiConcertHallApi(
   source: Extract<SourceConfig, { adapter: "shanghai-concert-hall-api" }>,
   path: string,
 ) {
-  const response = await fetch(`${source.apiBase}${path}`, {
+  const response = await fetchWithRetry(`${source.apiBase}${path}`, {
     headers: {
       "user-agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
@@ -644,7 +645,7 @@ async function requestSuzhouSymphonyPage(
   const endpoint = `/api/getMusicData/${encodeURIComponent(section.slug)}/${section.index}?pageNum=${pageNum}&pageSize=${
     source.pageSize
   }`;
-  const response = await fetch(new URL(endpoint, source.url), {
+  const response = await fetchWithRetry(new URL(endpoint, source.url), {
     headers: {
       "user-agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
@@ -951,7 +952,7 @@ async function requestOrientalArtCenterApi(
   path: string,
   options: { method?: "GET" | "POST"; body?: Record<string, unknown> } = {},
 ) {
-  const response = await fetch(`https://www.shoac.com.cn/platform-backend${path}`, {
+  const response = await fetchWithRetry(`https://www.shoac.com.cn/platform-backend${path}`, {
     method: options.method ?? "GET",
     headers: {
       "user-agent":
@@ -1004,7 +1005,7 @@ async function scrapeNationalCentreForPerformingArts(
   const events: ConcertEvent[] = [];
   for (const listItem of classicalItems) {
     const productId = String(listItem.productId);
-    const response = await fetch(
+    const response = await fetchWithRetry(
       `${source.apiBase}/product/detail?productId=${encodeURIComponent(productId)}&channel=pc`,
       {
         headers: {
@@ -1039,7 +1040,7 @@ async function requestNcpaApi(
   pageNo: number,
 ) {
   const url = `${source.apiBase}/product/list?pageNo=${pageNo}&pageSize=${source.pageSize}`;
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     method: "POST",
     headers: {
       "user-agent":
@@ -1632,12 +1633,12 @@ function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
 }
 
 async function postTheatreVendor(baseUrl: string, cmpAppKey: string, path: string, body: Record<string, unknown>) {
-  const response = await fetch(`${baseUrl.replace(/\/$/, "")}/thvendor/ticket/${path}`, {
+  const response = await fetchWithRetry(`${baseUrl.replace(/\/$/, "")}/thvendor/ticket/${path}`, () => ({
     method: "POST",
     headers: { cmpappkey: cmpAppKey, "content-type": "application/x-www-form-urlencoded", "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" },
     body: new URLSearchParams(Object.entries(body).map(([key, value]) => [key, String(value)])),
     signal: AbortSignal.timeout(30_000),
-  });
+  }));
   if (!response.ok) throw new Error(`Theatre vendor HTTP ${response.status}`);
   return response.json() as Promise<Record<string, any>>;
 }
@@ -1646,7 +1647,7 @@ async function getTheatreVendorSchedules(baseUrl: string, cmpAppKey: string, det
   if (!detail.programKey) return [{ id: detail.id, playTime: detail.startTime, playEndTime: detail.endTime, venueName: detail.venueName }];
   const url = new URL(`${baseUrl.replace(/\/$/, "")}/thvendor/ticket/listScheduleByDate.xhtml`);
   url.search = new URLSearchParams({ programId: String(detail.id), date: "", action: "commit" }).toString();
-  const response = await fetch(url, { headers: { cmpappkey: cmpAppKey, programkey: detail.programKey, "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) });
+  const response = await fetchWithRetry(url, () => ({ headers: { cmpappkey: cmpAppKey, programkey: detail.programKey, "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) }));
   const data = await response.json() as Record<string, any>;
   return Array.isArray(data.data) && data.data.length ? data.data : [{ id: detail.id, playTime: detail.startTime, playEndTime: detail.endTime, venueName: detail.venueName }];
 }
@@ -1666,13 +1667,13 @@ async function recognizeSourceImages(
 }
 
 async function fetchJson(url: string) {
-  const response = await fetch(url, { headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1", accept: "application/json" }, signal: AbortSignal.timeout(30_000) });
+  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1", accept: "application/json" }, signal: AbortSignal.timeout(30_000) }));
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json() as Promise<Record<string, any>>;
 }
 
 async function fetchLegacyChineseText(url: string) {
-  const response = await fetch(url, { headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) });
+  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) }));
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return new TextDecoder("gb18030").decode(await response.arrayBuffer());
 }
@@ -1686,7 +1687,7 @@ function parseIcalChinaDate(value: string) {
 function absolutizeImages(urls: string[], baseUrl: string) { return urls.map((url) => new URL(url, baseUrl).href); }
 
 async function fetchText(url: string) {
-  const response = await fetch(url, {
+  const response = await fetchWithRetry(url, {
     headers: {
       "user-agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
@@ -2025,7 +2026,7 @@ Schema:
 标题：${event.title}
 场馆：${event.venue}`;
 
-  const response = await fetch("https://api.deepseek.com/chat/completions", {
+  const response = await fetchWithRetry("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: {
       authorization: `Bearer ${apiKey}`,

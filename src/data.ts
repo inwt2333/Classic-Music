@@ -6,15 +6,27 @@ import type {
 } from "./types";
 
 const detailCache = new Map<string, ConcertEvent>();
+const jsonRequests = new Map<string, Promise<unknown>>();
 
 function dataUrl(path: string) {
   return `${import.meta.env.BASE_URL}data/${path}`.replace(/([^:]\/)\/+/g, "$1");
 }
 
-async function fetchJson<T>(path: string): Promise<T> {
-  const response = await fetch(dataUrl(path));
-  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
-  return response.json() as Promise<T>;
+function fetchJson<T>(path: string): Promise<T> {
+  const existing = jsonRequests.get(path);
+  if (existing) return existing as Promise<T>;
+
+  const request = fetch(dataUrl(path))
+    .then((response) => {
+      if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+      return response.json() as Promise<T>;
+    })
+    .catch((error) => {
+      jsonRequests.delete(path);
+      throw error;
+    });
+  jsonRequests.set(path, request);
+  return request;
 }
 
 export function loadEventIndex() {
@@ -36,4 +48,15 @@ export function loadEntities() {
 
 export function loadChanges() {
   return fetchJson<ChangeDataset>("changes.json");
+}
+
+export function registerRuntimeCache() {
+  if (!import.meta.env.PROD || !("serviceWorker" in navigator)) return;
+
+  const basePath = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(`${basePath}sw.js`, { scope: basePath }).catch(() => undefined);
+  }, { once: true });
 }

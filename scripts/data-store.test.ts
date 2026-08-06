@@ -273,6 +273,29 @@ const formattingOnlyAfter: ConcertDataset = {
 };
 assert.deepEqual(buildChanges(formattingOnlyBefore, formattingOnlyAfter).changes, []);
 
+const creditLayoutBefore: ConcertDataset = {
+  ...formattingOnlyBefore,
+  events: [{
+    ...formattingOnlyBefore.events[0],
+    program: [{
+      title: "合奏红色娘子军组曲 集体 创作",
+      confidence: "official",
+    }],
+  }],
+};
+const creditLayoutAfter: ConcertDataset = {
+  ...formattingOnlyAfter,
+  events: [{
+    ...formattingOnlyAfter.events[0],
+    program: [{
+      title: "合奏红色娘子军组曲；",
+      credits: [{ name: "集体", role: "（创作）" }],
+      confidence: "official",
+    }],
+  }],
+};
+assert.deepEqual(buildChanges(creditLayoutBefore, creditLayoutAfter).changes, []);
+
 const substantiveProgramChange: ConcertDataset = {
   ...formattingOnlyAfter,
   events: [{
@@ -322,6 +345,24 @@ const cleanedFormattingHistory = mergeChangeHistory({
 }, { generatedAt: "2026-08-01T00:00:00.000Z", changes: [] });
 assert.deepEqual(cleanedFormattingHistory.changes, []);
 assert.deepEqual(cleanedFormattingHistory.runs?.[1]?.changeIds, []);
+
+const creditLayoutHistoryChange = {
+  id: "credit-layout-only-program-change",
+  eventId: merged[0].id,
+  type: "program" as const,
+  detectedAt: "2026-07-30T00:00:00.000Z",
+  summary: "节目单变化",
+  before: buildChangeEventSnapshot(creditLayoutBefore.events[0]),
+  after: buildChangeEventSnapshot(creditLayoutAfter.events[0]),
+};
+const cleanedCreditLayoutHistory = mergeChangeHistory({
+  schemaVersion: 2,
+  generatedAt: creditLayoutHistoryChange.detectedAt,
+  latestChangeIds: [creditLayoutHistoryChange.id],
+  runs: [{ generatedAt: creditLayoutHistoryChange.detectedAt, changeIds: [creditLayoutHistoryChange.id] }],
+  changes: [creditLayoutHistoryChange],
+}, { generatedAt: "2026-08-01T00:00:00.000Z", changes: [] });
+assert.deepEqual(cleanedCreditLayoutHistory.changes, []);
 
 const rescheduledDataset: ConcertDataset = {
   ...dataset,

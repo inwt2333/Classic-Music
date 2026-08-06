@@ -38,7 +38,7 @@ import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
-import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import { loadChanges, loadEntities, loadEventDetail, loadEventIndex, registerRuntimeCache } from "./data";
 import { createEventShareCard } from "./share-card";
 import {
   buildFollowNotifications,
@@ -46,7 +46,10 @@ import {
   detectDataIssues,
   latestChangesByEvent,
   makeFollowTarget,
+  mergeFollowNotificationHistory,
+  readDismissedNotificationIds,
   readFollows,
+  readFollowNotificationHistory,
   readReadNotificationIds,
   readSavedFilters,
   recentChangeLabel,
@@ -54,6 +57,8 @@ import {
   saveFilter,
   sortConcerts,
   toggleFollow,
+  writeDismissedNotificationIds,
+  writeFollowNotificationHistory,
   writeReadNotificationIds,
   type FollowTarget,
   type SavedFilter,
@@ -109,6 +114,7 @@ const pageSize = 50;
 const coverSlides = [
   {
     src: `${import.meta.env.BASE_URL}images/concert-orchestra.webp`,
+    smallSrc: `${import.meta.env.BASE_URL}images/concert-orchestra-small.webp`,
     position: "center 46%",
     eyebrow: "全国古典乐演出日历",
     title: "今夜，去听一场音乐会",
@@ -116,6 +122,7 @@ const coverSlides = [
   },
   {
     src: `${import.meta.env.BASE_URL}images/concert-violin.webp`,
+    smallSrc: `${import.meta.env.BASE_URL}images/concert-violin-small.webp`,
     position: "center 58%",
     eyebrow: "独奏与室内乐",
     title: "靠近舞台，也靠近音乐",
@@ -123,6 +130,7 @@ const coverSlides = [
   },
   {
     src: `${import.meta.env.BASE_URL}images/concert-piano-hall.webp`,
+    smallSrc: `${import.meta.env.BASE_URL}images/concert-piano-hall-small.webp`,
     position: "center 55%",
     eyebrow: "音乐厅现场",
     title: "在城市里，留一段时间给音乐",
@@ -153,17 +161,20 @@ function App() {
   const [selectedId, setSelectedId] = useState(initialParams.get("event") ?? "");
   const [selectedDetail, setSelectedDetail] = useState<ConcertEvent | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
-  const [detailOpen, setDetailOpen] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(Boolean(initialParams.get("event")));
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const [activeEntityId, setActiveEntityId] = useState(initialParams.get("entity") ?? "");
   const [activeVenue, setActiveVenue] = useState(initialParams.get("venuePage") ?? "");
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
   const [coverIndex, setCoverIndex] = useState(0);
+  const [loadedCoverIndexes, setLoadedCoverIndexes] = useState(() => new Set([0]));
   const [coverPaused, setCoverPaused] = useState(false);
   const [personalEvents, setPersonalEvents] = useState<PersonalEventMap>(() => readPersonalEvents());
   const [follows, setFollows] = useState(() => readFollows());
   const [readNotificationIds, setReadNotificationIds] = useState(() => readReadNotificationIds());
+  const [notificationHistory, setNotificationHistory] = useState(() => readFollowNotificationHistory());
+  const [dismissedNotificationIds, setDismissedNotificationIds] = useState(() => readDismissedNotificationIds());
   const [savedFilters, setSavedFilters] = useState(() => readSavedFilters());
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [copyState, setCopyState] = useState("");
@@ -190,6 +201,32 @@ function App() {
     );
     return () => window.clearInterval(timer);
   }, [coverPaused]);
+
+  useEffect(() => {
+    const nextIndex = (coverIndex + 1) % coverSlides.length;
+    if (loadedCoverIndexes.has(nextIndex)) return;
+
+    let image: HTMLImageElement | null = null;
+    const timer = window.setTimeout(() => {
+      image = new Image();
+      image.srcset = `${coverSlides[nextIndex].smallSrc} 960w, ${coverSlides[nextIndex].src} 2000w`;
+      image.sizes = "100vw";
+      image.onload = () => {
+        setLoadedCoverIndexes((current) => {
+          if (current.has(nextIndex)) return current;
+          const next = new Set(current);
+          next.add(nextIndex);
+          return next;
+        });
+      };
+      image.src = coverSlides[nextIndex].src;
+    }, 1800);
+
+    return () => {
+      window.clearTimeout(timer);
+      if (image) image.onload = null;
+    };
+  }, [coverIndex, loadedCoverIndexes]);
 
   useEffect(() => {
     if (!filterModalActive) return;
@@ -238,16 +275,51 @@ function App() {
   }, [detailModalActive, filterModalActive]);
 
   useEffect(() => {
+    let cancelled = false;
+    let supplementalTimer = 0;
+
+    const loadSupplementalData = async () => {
+      const loadEntityData = () => loadEntities()
+        .then((data) => {
+          if (!cancelled) setEntities(data);
+        })
+        .catch(() => {
+          if (!cancelled) setEntities(emptyEntities);
+        });
+      const loadChangeData = () => loadChanges()
+        .then((data) => {
+          if (!cancelled) setChanges(data);
+        })
+        .catch(() => {
+          if (!cancelled) setChanges(null);
+        });
+
+      if (activeEntityId) {
+        await loadEntityData();
+        await loadChangeData();
+      } else {
+        await loadChangeData();
+        await loadEntityData();
+      }
+    };
+
     loadEventIndex()
       .then((data) => {
+        if (cancelled) return;
         setDataset(data);
         const first = data.events.find((event) => new Date(event.startTime).getTime() >= Date.now()) ?? data.events[0];
         setSelectedId((current) => current || first?.id || "");
         setCalendarMonth(getInitialCalendarMonth(data.events));
+        supplementalTimer = window.setTimeout(() => void loadSupplementalData(), 200);
       })
-      .catch((error) => setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`));
-    loadEntities().then(setEntities).catch(() => setEntities(emptyEntities));
-    loadChanges().then(setChanges).catch(() => setChanges(null));
+      .catch((error) => {
+        if (!cancelled) setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`);
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(supplementalTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -286,6 +358,10 @@ function App() {
       setSelectedDetail(null);
       return;
     }
+    if (detailIsModal && !detailOpen) {
+      setDetailLoading(false);
+      return;
+    }
     let cancelled = false;
     setDetailLoading(true);
     loadEventDetail(selectedSummary.id, selectedSummary.detailPath)
@@ -301,7 +377,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedSummary]);
+  }, [detailIsModal, detailOpen, selectedSummary]);
 
   const cities = useMemo(
     () => ["全部城市", ...Array.from(new Set(dataset.events.map((event) => event.city))).sort()],
@@ -392,11 +468,25 @@ function App() {
     () => sortConcerts(filteredEvents, sortMode, changesByEvent),
     [changesByEvent, filteredEvents, sortMode],
   );
-  const notifications = useMemo(
+  const generatedNotifications = useMemo(
     () => buildFollowNotifications(changes, dataset.events, follows, readNotificationIds),
     [changes, dataset.events, follows, readNotificationIds],
   );
+  const notifications = useMemo(
+    () => mergeFollowNotificationHistory(
+      notificationHistory,
+      generatedNotifications,
+      readNotificationIds,
+      dismissedNotificationIds,
+    ),
+    [dismissedNotificationIds, generatedNotifications, notificationHistory, readNotificationIds],
+  );
   const unreadNotificationCount = notifications.filter((notification) => !notification.read).length;
+  useEffect(() => {
+    if (JSON.stringify(notificationHistory) === JSON.stringify(notifications)) return;
+    writeFollowNotificationHistory(notifications);
+    setNotificationHistory(notifications);
+  }, [notificationHistory, notifications]);
   useEffect(() => {
     setVisibleCount(pageSize);
   }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, sortMode, venue]);
@@ -488,6 +578,26 @@ function App() {
     setReadNotificationIds(next);
   };
 
+  const markNotificationRead = (id: string) => {
+    if (readNotificationIds.includes(id)) return;
+    const next = [...readNotificationIds, id];
+    writeReadNotificationIds(next);
+    setReadNotificationIds(next);
+  };
+
+  const deleteNotification = (id: string) => {
+    setDismissedNotificationIds((current) => {
+      const next = Array.from(new Set([...current, id]));
+      writeDismissedNotificationIds(next);
+      return next;
+    });
+    setNotificationHistory((current) => {
+      const next = current.filter((item) => item.id !== id);
+      writeFollowNotificationHistory(next);
+      return next;
+    });
+  };
+
   const saveCurrentFilter = () => {
     const state: SavedFilterState = { query, datePreset, city, venue, ensemble, genre, hasProgram, sortMode };
     setSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state)));
@@ -510,8 +620,8 @@ function App() {
 
   const shareSelectedEvent = async (event: ConcertEvent) => {
     try {
-      const eventUrl = new URL(window.location.href);
-      eventUrl.search = new URLSearchParams({ event: event.id }).toString();
+      const eventUrl = new URL(import.meta.env.BASE_URL, window.location.origin);
+      eventUrl.searchParams.set("event", event.id);
       const blob = await createEventShareCard(event, eventUrl.toString());
       const filename = `${event.dateLabel.replace("/", "")}-${event.title.slice(0, 24)}.png`;
       if (navigator.clipboard?.write && typeof ClipboardItem !== "undefined") {
@@ -638,16 +748,20 @@ function App() {
         onBlurCapture={() => setCoverPaused(false)}
       >
         <div className="cover-images" aria-hidden="true">
-          {coverSlides.map((slide, index) => (
+          {coverSlides.map((slide, index) => loadedCoverIndexes.has(index) || index === coverIndex ? (
             <img
               key={slide.src}
               className={index === coverIndex ? "active" : ""}
               src={slide.src}
+              srcSet={`${slide.smallSrc} 960w, ${slide.src} 2000w`}
+              sizes="100vw"
               style={{ objectPosition: slide.position }}
               alt=""
-              loading={index === 0 ? "eager" : "lazy"}
+              loading={index === coverIndex ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
+              decoding="async"
             />
-          ))}
+          ) : null)}
         </div>
         <div className="cover-shade" aria-hidden="true" />
         <div className="cover-copy">
@@ -906,6 +1020,8 @@ function App() {
         follows={follows}
         onClose={() => setNotificationOpen(false)}
         onReadAll={markAllNotificationsRead}
+        onRead={markNotificationRead}
+        onDelete={deleteNotification}
         onOpenEvent={(eventId) => {
           const event = dataset.events.find((item) => item.id === eventId);
           if (event) selectEvent(event);
@@ -1062,3 +1178,4 @@ appRoot.render(rootParams.get("review") === "1"
   : rootParams.get("sources") === "1"
     ? <SourcesWorkspace />
     : <App />);
+registerRuntimeCache();

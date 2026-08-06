@@ -53,7 +53,7 @@ export type CorrectionReport = {
 export type FollowNotification = {
   id: string;
   change: DatasetChange;
-  event?: ConcertEventSummary;
+  event?: Pick<ConcertEventSummary, "id" | "title">;
   targets: FollowTarget[];
   read: boolean;
 };
@@ -61,6 +61,8 @@ export type FollowNotification = {
 const storageKeys = {
   follows: "classic-music.follows.v1",
   readNotifications: "classic-music.read-notifications.v1",
+  notificationHistory: "classic-music.follow-notifications.v1",
+  dismissedNotifications: "classic-music.dismissed-notifications.v1",
   savedFilters: "classic-music.saved-filters.v1",
   corrections: "classic-music.correction-reports.v1",
 } as const;
@@ -111,6 +113,63 @@ export function readReadNotificationIds() {
 
 export function writeReadNotificationIds(ids: string[]) {
   writeStorage(storageKeys.readNotifications, Array.from(new Set(ids)).slice(-1000));
+}
+
+export function readFollowNotificationHistory() {
+  return readStorage<FollowNotification[]>(storageKeys.notificationHistory, []);
+}
+
+export function writeFollowNotificationHistory(notifications: FollowNotification[]) {
+  const compact = notifications.slice(0, 300).map((item) => ({
+    ...item,
+    change: {
+      id: item.change.id,
+      eventId: item.change.eventId,
+      type: item.change.type,
+      detectedAt: item.change.detectedAt,
+      summary: item.change.summary,
+    },
+    event: item.event ? { id: item.event.id, title: item.event.title } : undefined,
+  }));
+  writeStorage(storageKeys.notificationHistory, compact);
+}
+
+export function readDismissedNotificationIds() {
+  return readStorage<string[]>(storageKeys.dismissedNotifications, []);
+}
+
+export function writeDismissedNotificationIds(ids: string[]) {
+  writeStorage(storageKeys.dismissedNotifications, Array.from(new Set(ids)).slice(-1000));
+}
+
+export function mergeFollowNotificationHistory(
+  history: FollowNotification[],
+  incoming: FollowNotification[],
+  readIds: string[],
+  dismissedIds: string[],
+) {
+  const dismissed = new Set(dismissedIds);
+  const read = new Set(readIds);
+  const merged = new Map<string, FollowNotification>();
+
+  for (const item of [...history, ...incoming]) {
+    if (dismissed.has(item.id)) continue;
+    const previous = merged.get(item.id);
+    const targets = new Map(
+      [...(previous?.targets ?? []), ...item.targets].map((target) => [target.key, target]),
+    );
+    merged.set(item.id, {
+      ...previous,
+      ...item,
+      event: item.event ?? previous?.event,
+      targets: Array.from(targets.values()),
+      read: read.has(item.id) || Boolean(previous?.read) || item.read,
+    });
+  }
+
+  return Array.from(merged.values())
+    .sort((left, right) => right.change.detectedAt.localeCompare(left.change.detectedAt))
+    .slice(0, 300);
 }
 
 export function readSavedFilters() {

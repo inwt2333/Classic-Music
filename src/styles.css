@@ -3749,7 +3749,7 @@ summary:focus-visible {
 .notification-button {
   position: relative;
   cursor: pointer;
-  font: inherit;
+  font-family: inherit;
 }
 
 .notification-button b {
@@ -4259,7 +4259,14 @@ summary:focus-visible {
   overflow-y: auto;
 }
 
-.notification-list > button {
+.notification-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  border-bottom: 1px solid #e6ebe8;
+}
+
+.notification-open {
   display: grid;
   min-height: 76px;
   padding: 11px 8px;
@@ -4269,15 +4276,14 @@ summary:focus-visible {
   text-align: left;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #e6ebe8;
   cursor: pointer;
 }
 
-.notification-list > button.unread {
+.notification-item.unread {
   background: #fbf4f6;
 }
 
-.notification-list > button > i {
+.notification-open > i {
   width: 7px;
   height: 7px;
   margin-top: 5px;
@@ -4285,13 +4291,32 @@ summary:focus-visible {
   border-radius: 50%;
 }
 
-.notification-list > button.unread > i {
+.notification-item.unread .notification-open > i {
   background: var(--wine);
 }
 
-.notification-list > button > span {
+.notification-open > span {
   display: grid;
   gap: 3px;
+}
+
+.notification-delete {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin: 8px 8px 0 0;
+  padding: 0;
+  place-items: center;
+  color: #7d8883;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notification-delete:hover {
+  color: var(--wine);
+  background: #f3e6e9;
 }
 
 .notification-list small,
