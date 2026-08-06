@@ -39,7 +39,6 @@ import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
 import { loadChanges, loadEntities, loadEventDetail, loadEventIndex, registerRuntimeCache } from "./data";
-import { createEventShareCard } from "./share-card";
 import {
   buildFollowNotifications,
   buildSavedFilterName,
@@ -620,6 +619,7 @@ function App() {
 
   const shareSelectedEvent = async (event: ConcertEvent) => {
     try {
+      const { createEventShareCard } = await import("./share-card");
       const eventUrl = new URL(import.meta.env.BASE_URL, window.location.origin);
       eventUrl.searchParams.set("event", event.id);
       const blob = await createEventShareCard(event, eventUrl.toString());

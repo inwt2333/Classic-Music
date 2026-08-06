@@ -1,4 +1,4 @@
-const CACHE_NAME = "classic-music-runtime-v1";
+const CACHE_NAME = "classic-music-runtime-v2";
 const DATA_TIMEOUT_MS = 1200;
 const FRESH_DATA_CACHE_MS = 30 * 60 * 1000;
 
@@ -25,7 +25,7 @@ self.addEventListener("fetch", (event) => {
 
   const scopePath = new URL(self.registration.scope).pathname;
   const isDataRequest = url.pathname.startsWith(`${scopePath}data/`);
-  const isStaticAsset = ["image", "script", "style", "font"].includes(request.destination);
+  const isStaticAsset = ["image", "font"].includes(request.destination);
 
   if (isDataRequest) {
     event.respondWith(networkFirstWithCache(request, event));
