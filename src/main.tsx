@@ -38,7 +38,7 @@ import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
-import { loadChanges, loadEntities, loadEventDetail, loadEventIndex, registerRuntimeCache } from "./data";
+import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
 import {
   buildFollowNotifications,
   buildSavedFilterName,
@@ -507,11 +507,11 @@ function App() {
     if (personalFilter !== "all") params.set("personal", personalFilter);
     if (sortMode !== "time") params.set("sort", sortMode);
     if (viewMode === "calendar") params.set("view", viewMode);
-    if (selectedId) params.set("event", selectedId);
+    if (detailOpen && selectedId) params.set("event", selectedId);
     if (activeEntityId) params.set("entity", activeEntityId);
     if (activeVenue) params.set("venuePage", activeVenue);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeEntityId, activeVenue, city, datePreset, ensemble, genre, hasProgram, personalFilter, query, selectedId, sortMode, venue, viewMode]);
+  }, [activeEntityId, activeVenue, city, datePreset, detailOpen, ensemble, genre, hasProgram, personalFilter, query, selectedId, sortMode, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
@@ -1178,4 +1178,3 @@ appRoot.render(rootParams.get("review") === "1"
   : rootParams.get("sources") === "1"
     ? <SourcesWorkspace />
     : <App />);
-registerRuntimeCache();

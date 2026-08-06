@@ -49,14 +49,3 @@ export function loadEntities() {
 export function loadChanges() {
   return fetchJson<ChangeDataset>("changes.json");
 }
-
-export function registerRuntimeCache() {
-  if (!import.meta.env.PROD || !("serviceWorker" in navigator)) return;
-
-  const basePath = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register(`${basePath}sw.js`, { scope: basePath }).catch(() => undefined);
-  }, { once: true });
-}

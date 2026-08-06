@@ -3104,6 +3104,10 @@ summary:focus-visible {
     box-shadow: none;
   }
 
+  .detail-panel:not(.open) {
+    display: none;
+  }
+
   .detail-panel.open {
     display: block;
   }

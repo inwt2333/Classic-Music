@@ -67,6 +67,41 @@
         </section>
       </main>
     </div>
+    <script>
+      (() => {
+        if (!("serviceWorker" in navigator)) return;
+        const appBase = "%BASE_URL%";
+        const cleanupKey = `classic-music-cache-cleanup:${appBase}`;
+        navigator.serviceWorker.getRegistrations().then(async (registrations) => {
+          const owned = registrations.filter((registration) => {
+            try {
+              return new URL(registration.scope).pathname === appBase;
+            } catch {
+              return false;
+            }
+          });
+          if (!owned.length) return;
+
+          const wasControlled = Boolean(navigator.serviceWorker.controller);
+          await Promise.all(owned.map((registration) => registration.unregister()));
+          if ("caches" in window) {
+            const names = await caches.keys();
+            await Promise.all(
+              names.filter((name) => name.startsWith("classic-music-")).map((name) => caches.delete(name)),
+            );
+          }
+
+          if (!wasControlled) return;
+          try {
+            if (sessionStorage.getItem(cleanupKey)) return;
+            sessionStorage.setItem(cleanupKey, "1");
+            window.location.reload();
+          } catch {
+            // The current page remains usable if private browsing blocks storage.
+          }
+        }).catch(() => undefined);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
