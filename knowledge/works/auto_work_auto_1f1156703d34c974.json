@@ -1,0 +1,173 @@
+{
+  "id": "work_auto_1f1156703d34c974",
+  "composerId": "composer_000002",
+  "title": "g小调第四弦乐五重奏",
+  "originalTitle": "String Quintet No. 4 in G minor",
+  "aliases": [
+    "g小调第四弦乐五重奏，KV 516",
+    "g小调弦乐五重奏，KV 516"
+  ],
+  "opus": "KV 516",
+  "key": "g小调",
+  "genre": "室内乐",
+  "period": "古典主义",
+  "composedYears": "1787",
+  "durationMinutes": 32,
+  "instrumentation": "两把小提琴、两把中提琴、一把大提琴",
+  "difficulty": "适合深入",
+  "tags": [
+    "弦乐五重奏",
+    "莫扎特",
+    "室内乐",
+    "g小调",
+    "古典主义",
+    "中提琴"
+  ],
+  "summary": "莫扎特晚期室内乐杰作，以两把中提琴营造丰富中声部，情感深邃，结构精妙。",
+  "whyListen": "莫扎特在弦乐四重奏基础上加入第二把中提琴，使中声部层次更丰富，作品情感从忧郁到明朗，展现晚期创作的精湛技艺。",
+  "firstListen": "建议先听第一乐章，感受其深沉的开场；再听第四乐章，体验从悲怆到光明的转变。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章的开场主题",
+      "description": "g小调主题由第一小提琴奏出，旋律忧郁而富有歌唱性，奠定全曲基调。",
+      "movement": 1
+    },
+    {
+      "title": "第二乐章的抒情旋律",
+      "description": "慢板乐章中，中提琴与大提琴的对话营造温暖氛围，展现室内乐的亲密感。",
+      "movement": 2
+    },
+    {
+      "title": "第三乐章的小步舞曲",
+      "description": "小步舞曲节奏优雅，中段转为大调，形成明暗对比。",
+      "movement": 3
+    },
+    {
+      "title": "第四乐章的终曲",
+      "description": "以慢板引子开始，随后转入快板，情绪由悲转喜，结束于辉煌的G大调。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Allegro",
+      "tempo": "快板",
+      "description": "奏鸣曲式，g小调，主题忧郁，发展部充满戏剧性。"
+    },
+    {
+      "number": 2,
+      "title": "Menuetto: Allegretto",
+      "tempo": "小快板",
+      "description": "小步舞曲，g小调，中段为G大调，对比鲜明。"
+    },
+    {
+      "number": 3,
+      "title": "Adagio ma non troppo",
+      "tempo": "不太慢的柔板",
+      "description": "E大调，抒情如歌，中提琴与大提琴的对话尤为动人。"
+    },
+    {
+      "number": 4,
+      "title": "Adagio - Allegro",
+      "tempo": "柔板转快板",
+      "description": "以慢板引子开始，随后转为快板，g小调转G大调，结束于光明。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Jascha Heifetz, Israel Baker, Virginia Majewski, William Primrose, Gregor Piatigorsky",
+      "year": 1964,
+      "note": "海菲茨领衔的明星阵容，演绎充满张力，适合第一次听。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=g%E5%B0%8F%E8%B0%83%E7%AC%AC%E5%9B%9B%E5%BC%A6%E4%B9%90%E4%BA%94%E9%87%8D%E5%A5%8F%20Jascha%20Heifetz%2C%20Israel%20Baker%2C%20Virginia%20Majewski%2C%20William%20Primrose%2C%20Gregor%20Piatigorsky",
+      "sourceId": "apple_music_463319082"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Jascha Heifetz",
+      "year": 2016,
+      "note": "海菲茨的录音室版本，音质经过修复，另一种理解。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=g%E5%B0%8F%E8%B0%83%E7%AC%AC%E5%9B%9B%E5%BC%A6%E4%B9%90%E4%BA%94%E9%87%8D%E5%A5%8F%20Jascha%20Heifetz",
+      "sourceId": "apple_music_1130865016"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000004",
+    "work_000005",
+    "work_000006"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.3",
+    "promptHash": "9aa05e296a75164a57af56dd645d1f3cf07905fc27d819e5767ac5b8412817c0",
+    "generatedAt": "2026-08-08T16:18:23.991Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_02ba0048b11fb7b1",
+      "perf_9a143ba172dafb03"
+    ],
+    "evidenceIds": [
+      "official_9efe76728cc5",
+      "official_a07a5d7289a5",
+      "apple_music_1130865016",
+      "apple_music_463319082"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-08T16:18:23.991Z",
+  "sources": [
+    {
+      "id": "official_9efe76728cc5",
+      "title": "斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21781&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "composer",
+        "title",
+        "opus",
+        "genre",
+        "instrumentation"
+      ]
+    },
+    {
+      "id": "official_a07a5d7289a5",
+      "title": "上交室内乐 2：北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21805&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "composer",
+        "title",
+        "opus",
+        "genre",
+        "instrumentation"
+      ]
+    },
+    {
+      "id": "apple_music_1130865016",
+      "title": "Mozart: String Quintets No. 3 in C Major, K. 515 & No. 4 in G Minor, K. 516 (Heifetz Remastered)",
+      "url": "https://music.apple.com/us/album/mozart-string-quintets-no-3-in-c-major-k-515-no-4-in/1130865016?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.1"
+      ]
+    },
+    {
+      "id": "apple_music_463319082",
+      "title": "Mendelssohn: Octet, Op. 20, in E-Flat, Mozart: Quintet, K. 516 in G Minor",
+      "url": "https://music.apple.com/us/album/mendelssohn-octet-op-20-in-e-flat-mozart-quintet-k/463319082?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.0"
+      ]
+    }
+  ]
+}

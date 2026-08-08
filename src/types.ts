@@ -3,9 +3,17 @@ export type ProgramCredit = {
   role: string;
 };
 
+export type KnowledgeMappingReference = {
+  ruleId: string;
+  method: "reviewed-exact" | "automated-exact";
+  reviewedAt: string;
+};
+
 export type ProgramItem = {
   id?: string;
   workId?: string;
+  knowledgeWorkId?: string;
+  knowledgeMapping?: KnowledgeMappingReference;
   composer?: string;
   title: string;
   alternateTitles?: string[];
@@ -101,7 +109,7 @@ export type ConcertEventSummary = {
   dataQuality: ConcertEvent["dataQuality"];
   detailPath: string;
   hasProgram: boolean;
-  programPreview: Array<Pick<ProgramItem, "workId" | "composer" | "title" | "alternateTitles" | "opus" | "credits">>;
+  programPreview: Array<Pick<ProgramItem, "workId" | "knowledgeWorkId" | "composer" | "title" | "alternateTitles" | "opus" | "credits">>;
   searchText: string;
   sourceCount: number;
 };

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "enabled": true,
+  "model": "deepseek-v4-flash",
+  "skillVersion": "2.0.3",
+  "maxCandidatesPerRun": 5,
+  "basicPublishScore": 70,
+  "completePublishScore": 90,
+  "trustedSources": [
+    {
+      "id": "shsymphony-official",
+      "name": "上海交响乐团官网",
+      "score": 20
+    },
+    {
+      "id": "china-national-symphony-official",
+      "name": "中国交响乐团官网",
+      "score": 20
+    },
+    {
+      "id": "china-philharmonic-official",
+      "name": "中国爱乐乐团官网",
+      "score": 20
+    }
+  ]
+}

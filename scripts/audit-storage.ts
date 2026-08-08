@@ -4,6 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import type { ChangeDataset, ConcertIndexDataset, EntityDataset } from "../src/types";
 
 async function main() {
+  const auditStartedAt = new Date().toISOString();
   const root = process.cwd();
   const indexPath = resolve(root, "public/data/events-index.json");
   const entityPath = resolve(root, "public/data/entities.json");
@@ -29,7 +30,7 @@ async function main() {
     (
       database
         .prepare("SELECT COUNT(*) AS count FROM performances WHERE start_time >= ?")
-        .get(index.generatedAt ?? new Date().toISOString()) as { count: number }
+        .get(auditStartedAt) as { count: number }
     ).count,
   );
   const workCount = Number(

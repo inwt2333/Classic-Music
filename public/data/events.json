@@ -61,7 +61,13 @@
             }
           ],
           "id": "program_97fa432b29955ad7",
-          "workId": "work_d324cc89b130a3cb"
+          "workId": "work_d324cc89b130a3cb",
+          "knowledgeWorkId": "work_000017",
+          "knowledgeMapping": {
+            "ruleId": "mapping_tchaikovsky_piano_concerto_1",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "西贝柳斯",
@@ -433,14 +439,26 @@
           "title": "蒂尔·艾伦施皮格尔的恶作剧",
           "confidence": "official",
           "id": "program_7652b46a97cb71a0",
-          "workId": "work_24d52789265b25e5"
+          "workId": "work_24d52789265b25e5",
+          "knowledgeWorkId": "work_000031",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_till",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "理查·施特劳斯",
           "title": "死与净化",
           "confidence": "official",
           "id": "program_17529e359172e506",
-          "workId": "work_c40ac512dfcfe5d4"
+          "workId": "work_c40ac512dfcfe5d4",
+          "knowledgeWorkId": "work_000032",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_death_transfiguration",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -671,14 +689,26 @@
           "title": "蒂尔·艾伦施皮格尔的恶作剧",
           "confidence": "official",
           "id": "program_1c980efdadb75bf5",
-          "workId": "work_24d52789265b25e5"
+          "workId": "work_24d52789265b25e5",
+          "knowledgeWorkId": "work_000031",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_till",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "理查·施特劳斯",
           "title": "死与净化",
           "confidence": "official",
           "id": "program_baa831115d0b7328",
-          "workId": "work_c40ac512dfcfe5d4"
+          "workId": "work_c40ac512dfcfe5d4",
+          "knowledgeWorkId": "work_000032",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_death_transfiguration",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -746,11 +776,11 @@
       ]
     },
     {
-      "id": "perf_ab92a572ba3bde84",
-      "projectId": "event_4f9cbffdf2ab43c3",
+      "id": "perf_f9dfe0e7c77bcffc",
+      "projectId": "event_8e90879697fbfb7e",
       "title": "第二十四届中外艺术精品演出季 “跟着音乐去旅行”暑期亲子音乐会",
       "city": "深圳",
-      "venue": "深圳音乐厅五楼小剧场",
+      "venue": "深圳音乐厅",
       "startTime": "2026-08-07T11:30:00.000Z",
       "weekday": "周五",
       "dateLabel": "08/07",
@@ -785,91 +815,91 @@
           "composer": "圣·桑",
           "title": "动物狂欢节",
           "confidence": "official",
-          "id": "program_6ed6f66781735dfe",
+          "id": "program_299a8510e4f78db8",
           "workId": "work_5bbdb4f08b21d92c"
         },
         {
           "composer": "马斯奈",
           "title": "沉思曲",
           "confidence": "official",
-          "id": "program_00d8a75b03468448",
+          "id": "program_c52d0cf48ad0f221",
           "workId": "work_f762c5a778c5aaae"
         },
         {
           "composer": "帕格尼尼",
           "title": "柔美如歌",
           "confidence": "official",
-          "id": "program_7b97a2f73f9d9308",
+          "id": "program_50847c9e2cee95ba",
           "workId": "work_26927083827e7fb7"
         },
         {
           "composer": "帕格尼尼",
           "title": "A大调第12号吉他奏鸣曲",
           "confidence": "official",
-          "id": "program_42cf189c4a6e77e6",
+          "id": "program_3aec4825e11c2dfc",
           "workId": "work_91a15949dcb28052"
         },
         {
           "composer": "加布里埃尔·福雷",
           "title": "浪漫曲",
           "confidence": "official",
-          "id": "program_84d094549afa14cd",
+          "id": "program_f472533e51ac17aa",
           "workId": "work_dc254d57a0ad0e3b"
         },
         {
           "composer": "弗里茨·克莱斯勒",
           "title": "爱之悲伤",
           "confidence": "official",
-          "id": "program_db32f3f23a3cc483",
+          "id": "program_b7a0a8a7b3f50b6a",
           "workId": "work_d9a22e17b6ebdc87"
         },
         {
           "composer": "弗里茨·克莱斯勒",
           "title": "爱之喜悦",
           "confidence": "official",
-          "id": "program_b73a8e74cb3c760a",
+          "id": "program_156a801c97096551",
           "workId": "work_f08f3e671d26f72b"
         },
         {
           "composer": "克莱斯勒",
           "title": "维也纳小进行曲",
           "confidence": "official",
-          "id": "program_6e7d19c06d5e75b8",
+          "id": "program_b83ce41e0f594442",
           "workId": "work_88be73429c5fce61"
         },
         {
           "composer": "波切利尼",
           "title": "小步舞曲",
           "confidence": "official",
-          "id": "program_b8eb5550e7c4dcda",
+          "id": "program_9ff332b01a147cc4",
           "workId": "work_ca16e300c23ac781"
         },
         {
           "composer": "皮亚佐拉",
           "title": "鲨鱼",
           "confidence": "official",
-          "id": "program_ef8694fd90c6c1e8",
+          "id": "program_04cf12f566b1f286",
           "workId": "work_804a30905854b54e"
         },
         {
           "composer": "柴可夫斯基",
           "title": "圆舞曲诙谐曲",
           "confidence": "official",
-          "id": "program_73bd2e9ecdbad384",
+          "id": "program_6db694fc2f43bcb0",
           "workId": "work_27b29535407e8a41"
         },
         {
           "composer": "柴可夫斯基",
           "title": "旋律",
           "confidence": "official",
-          "id": "program_51ecb6bf8c66d184",
+          "id": "program_056e5ae1e874bc7a",
           "workId": "work_e3d1994f67e5b54e"
         },
         {
           "composer": "德彪西",
           "title": "月光",
           "confidence": "official",
-          "id": "program_ffe003a0d288675f",
+          "id": "program_c52ea649afcfafda",
           "workId": "work_6b527aecafbc9c12"
         },
         {
@@ -893,7 +923,7 @@
             }
           ],
           "confidence": "official",
-          "id": "program_50c66e2155efe61a",
+          "id": "program_646ab482bb4b7b88",
           "workId": "work_bcca99156c1633e0"
         }
       ],
@@ -917,7 +947,8 @@
           "ticketUrl": "https://szyyt.com/performance/show_100001006641353.html",
           "scrapedAt": "2026-08-03T14:42:07.385Z"
         }
-      ]
+      ],
+      "hall": "五楼小剧场"
     },
     {
       "id": "perf_a99ab60fa52e23a0",
@@ -2321,11 +2352,11 @@
       ]
     },
     {
-      "id": "perf_879d2131079bd3bb",
-      "projectId": "event_023f2f8f2a5008cc",
+      "id": "perf_6df1b32f3a028568",
+      "projectId": "event_eebef8a1652868d0",
       "title": "漫步古典夜 风与琴的诗行——肖赫-迈斯特二重奏2026中国巡演",
       "city": "深圳",
-      "venue": "深圳音乐厅、吴氏国际演出（北京）有限公司",
+      "venue": "深圳音乐厅",
       "startTime": "2026-08-14T11:30:00.000Z",
       "weekday": "周五",
       "dateLabel": "08/14",
@@ -2363,105 +2394,105 @@
           "composer": "罗伯特•舒曼",
           "title": "幻想曲，Op. 73",
           "confidence": "official",
-          "id": "program_4bdfa4f9c74f1f89",
+          "id": "program_a0fa44327a3f9358",
           "workId": "work_272105aa086acd1a"
         },
         {
           "composer": "弗雷德里克•肖邦",
           "title": "f小调练习曲“蜜蜂”，Op. 25，No. 2",
           "confidence": "official",
-          "id": "program_319774e5a2d2d0cc",
+          "id": "program_ccb67c1e8b940b2e",
           "workId": "work_5e8e5944fb19b23f"
         },
         {
           "composer": "弗雷德里克•肖邦",
           "title": "升c小调练习曲“大提琴”，Op. 25，No. 7",
           "confidence": "official",
-          "id": "program_750c9a4968de02ad",
+          "id": "program_f18334c9a2af956b",
           "workId": "work_8ce040313db94ede"
         },
         {
           "composer": "弗雷德里克•肖邦",
           "title": "c小调练习曲“革命”，Op. 10，No. 12",
           "confidence": "official",
-          "id": "program_0557d5ab8d612be7",
+          "id": "program_b93e5d178b175524",
           "workId": "work_a20646e4e65e7d45"
         },
         {
           "composer": "亚历山大•格拉祖诺夫",
           "title": "纪念册的一页",
           "confidence": "official",
-          "id": "program_5b79263cf7aae8c4",
+          "id": "program_d97bd41ccc74d9f0",
           "workId": "work_590fd8295e3e27dd"
         },
         {
           "composer": "乔治•埃内斯库",
           "title": "传奇曲",
           "confidence": "official",
-          "id": "program_94851caf42bcca78",
+          "id": "program_3ae4002982581fee",
           "workId": "work_16873af1683dbc34"
         },
         {
           "composer": "提奥•查利尔",
           "title": "竞赛独奏曲（为小号和钢琴而作）",
           "confidence": "official",
-          "id": "program_c2640ee42daa163a",
+          "id": "program_f7fc6519759f423e",
           "workId": "work_8b7a798598a508a8"
         },
         {
           "composer": "哈里•詹姆斯",
           "title": "小号协奏曲",
           "confidence": "official",
-          "id": "program_a18e99ed82856196",
+          "id": "program_a0fdfcbc022f376c",
           "workId": "work_338fc340e7023180"
         },
         {
           "composer": "弗兰克•马丁",
           "title": "弗拉门戈节奏幻想曲",
           "confidence": "official",
-          "id": "program_2e4ae46bf9926547",
+          "id": "program_372c19112c102a3c",
           "workId": "work_a18d4fe19a6096f7"
         },
         {
           "composer": "菲利普•斯帕克",
           "title": "花谷",
           "confidence": "official",
-          "id": "program_ea5ae1b882fca9ca",
+          "id": "program_c0538ddd3579eef4",
           "workId": "work_def12689612ebdb0"
         },
         {
           "composer": "乔治•格什温",
           "title": "守护我的那个人",
           "confidence": "official",
-          "id": "program_1c7bd563c9d57545",
+          "id": "program_c8b9c4448819eec9",
           "workId": "work_8faac185e9d42c1b"
         },
         {
           "composer": "乔治•格什温",
           "title": "新事曲/我正为你意乱情迷/我有节奏（钢琴独奏）",
           "confidence": "official",
-          "id": "program_e6f9cea27806982f",
+          "id": "program_a7aad7dd1e0318ec",
           "workId": "work_8bbe41e9e4fc55c1"
         },
         {
           "composer": "格里高拉斯•迪尼库",
           "title": "霍拉舞曲",
           "confidence": "official",
-          "id": "program_7a5672bbdb1bf6da",
+          "id": "program_4410edee506ba0d9",
           "workId": "work_ee738d9d4259f05e"
         },
         {
           "composer": "阿诺•巴巴贾尼安",
           "title": "挽歌",
           "confidence": "official",
-          "id": "program_a829b2874d41406c",
+          "id": "program_2d3d67d9249c0aa8",
           "workId": "work_5326e7d4e5c29294"
         },
         {
           "composer": "罗季翁•谢德林",
           "title": "模仿阿尔贝尼兹",
           "confidence": "official",
-          "id": "program_f0a1c79cc7376f7a",
+          "id": "program_5181deebc3f55fcb",
           "workId": "work_3a7c7388701a0a5e"
         }
       ],
@@ -4952,11 +4983,11 @@
       ]
     },
     {
-      "id": "perf_3d943bd624d888ea",
-      "projectId": "event_227be4fc691207b0",
+      "id": "perf_ec2e2c167dc48918",
+      "projectId": "event_dc4d5e3074f8bdae",
       "title": "奥斯卡·罗曼耶卓钢琴独奏音乐会-深圳站",
       "city": "深圳",
-      "venue": "深圳音乐厅二楼演奏大厅",
+      "venue": "深圳音乐厅",
       "startTime": "2026-08-22T12:00:00.000Z",
       "weekday": "周六",
       "dateLabel": "08/22",
@@ -4993,7 +5024,8 @@
           "ticketUrl": "https://szyyt.com/performance/show_100000978687645.html",
           "scrapedAt": "2026-08-03T14:42:07.385Z"
         }
-      ]
+      ],
+      "hall": "二楼演奏大厅"
     },
     {
       "id": "perf_73a933bb509d8146",
@@ -5641,11 +5673,11 @@
       ]
     },
     {
-      "id": "perf_98890b72a5847a0b",
-      "projectId": "event_f90ca7d5d8779c22",
+      "id": "perf_61d5f06c398e3603",
+      "projectId": "event_fe9e6dcaf95e9e14",
       "title": "芭比与室内乐之梦 刘一诺Noral＆她的朋友们",
       "city": "深圳",
-      "venue": "深圳音乐厅五楼小剧场",
+      "venue": "深圳音乐厅",
       "startTime": "2026-08-23T11:30:00.000Z",
       "weekday": "周日",
       "dateLabel": "08/23",
@@ -5674,7 +5706,7 @@
           "composer": "柴可夫斯基",
           "title": "胡桃夹子-花之圆舞曲",
           "confidence": "official",
-          "id": "program_1392a7723ed4c4dc",
+          "id": "program_33ada59bd20027bd",
           "workId": "work_9020415c7d785c13"
         }
       ],
@@ -5692,7 +5724,8 @@
           "ticketUrl": "https://szyyt.com/performance/show_100001010898277.html",
           "scrapedAt": "2026-08-03T14:42:07.385Z"
         }
-      ]
+      ],
+      "hall": "五楼小剧场"
     },
     {
       "id": "perf_bc7c029d5b73664d",
@@ -6249,11 +6282,11 @@
       ]
     },
     {
-      "id": "perf_4557902427af4889",
-      "projectId": "event_a51f808903f55488",
+      "id": "perf_b0f40f9d303fa406",
+      "projectId": "event_b77b946be026a5a7",
       "title": "魅之回响——远古与大地多民族童声合唱音乐会",
       "city": "深圳",
-      "venue": "深圳音乐厅“小金树”多民族童声合唱团、深圳飞越彩虹童声合唱",
+      "venue": "深圳音乐厅",
       "startTime": "2026-08-28T12:00:00.000Z",
       "weekday": "周五",
       "dateLabel": "08/28",
@@ -6294,51 +6327,45 @@
           "alternateTitles": [
             "深圳音乐厅“小金树”多民族童声合唱团、广西群众艺术馆小桂花少儿合唱团",
             "广西群众艺术馆小桂花少儿合唱团",
-            "深圳音乐厅“小金树”多民族童声合唱团、深圳飞越彩虹童声合唱团"
+            "深圳音乐厅“小金树”多民族童声合唱团、深圳飞越彩虹童声合唱团",
+            "深圳飞越彩虹童声合唱团"
           ],
-          "id": "program_2b62127ca3a72889",
+          "id": "program_4ebcc030a822c517",
           "workId": "work_b3070d95062d1001"
         },
         {
           "composer": "演出",
           "title": "梁柄麒、滕英秀、李春建、梁洲利",
           "confidence": "official",
-          "id": "program_41a01ea7917bc237",
+          "id": "program_17a5d572245c07d2",
           "workId": "work_e224d2c7792808d3"
-        },
-        {
-          "composer": "演出",
-          "title": "深圳飞越彩虹童声合唱团",
-          "confidence": "official",
-          "id": "program_9e082490c8183e8d",
-          "workId": "work_49c4a37a8959a07c"
         },
         {
           "composer": "演出",
           "title": "和金花、金甲劲松、李蕙雯、李学高",
           "confidence": "official",
-          "id": "program_4fc4edcab1060dad",
+          "id": "program_0e98f71cae1bfb76",
           "workId": "work_bcf66b37b6dbfe5c"
         },
         {
           "composer": "演出",
           "title": "甘肃阿克塞县飞越彩虹哈萨克族童声合唱团",
           "confidence": "official",
-          "id": "program_8e72d4190dbca671",
+          "id": "program_4fb712f02f40a62f",
           "workId": "work_33b772ae396997a7"
         },
         {
           "composer": "伴奏",
           "title": "罗诗祺、李东南",
           "confidence": "official",
-          "id": "program_575f56d171b46fa2",
+          "id": "program_24c463effb57881d",
           "workId": "work_12f7d05431d4abb4"
         },
         {
           "composer": "演出",
           "title": "全体",
           "confidence": "official",
-          "id": "program_aafe5b7c270438c1",
+          "id": "program_919b663eddb17661",
           "workId": "work_77ea0f3618941f38"
         }
       ],
@@ -7111,11 +7138,11 @@
       ]
     },
     {
-      "id": "perf_f221033f18a89bd1",
-      "projectId": "event_82aa8c8fb5452ed5",
+      "id": "perf_46e96e010bae8358",
+      "projectId": "event_d0206dc0b11b24ee",
       "title": "深圳交响乐团2026-2027乐季开幕：布鲁克纳的苍穹",
       "city": "深圳",
-      "venue": "深圳音乐厅演奏大厅",
+      "venue": "深圳音乐厅",
       "startTime": "2026-09-04T12:00:00.000Z",
       "weekday": "周五",
       "dateLabel": "09/04",
@@ -7145,7 +7172,7 @@
           "composer": "安东·布鲁克纳",
           "title": "c小调第八交响曲",
           "confidence": "official",
-          "id": "program_c305360b03e50e5f",
+          "id": "program_6844ff88fd5c5c83",
           "workId": "work_076682a2284d7910"
         }
       ],
@@ -7164,7 +7191,8 @@
           "ticketUrl": "https://szyyt.com/performance/show_100000987069388.html",
           "scrapedAt": "2026-08-03T14:42:07.385Z"
         }
-      ]
+      ],
+      "hall": "演奏大厅"
     },
     {
       "id": "perf_dafacbc62c2e4b94",
@@ -7780,11 +7808,11 @@
       ]
     },
     {
-      "id": "perf_14911052192465f8",
-      "projectId": "event_ff7cd08fe1840ca9",
+      "id": "perf_49c7f6133918f877",
+      "projectId": "event_e262eb3807779d9c",
       "title": "深圳交响乐团×深圳音乐厅特别呈现 漫游室内乐系列音乐会V 炽夜探戈",
       "city": "深圳",
-      "venue": "深圳音乐厅特别呈现 漫游室内乐系列音乐会V 炽夜探戈",
+      "venue": "深圳音乐厅",
       "startTime": "2026-09-06T11:30:00.000Z",
       "weekday": "周日",
       "dateLabel": "09/06",
@@ -7817,70 +7845,70 @@
           "composer": "罗琳娜•麦肯尼特（洛德",
           "title": "金 改编）：艾维拉探戈",
           "confidence": "official",
-          "id": "program_fd509dc0a5f7c4e4",
+          "id": "program_deab6d0440c82dcc",
           "workId": "work_5a41054b7787cef4"
         },
         {
           "composer": "尼诺•罗塔（洛德",
           "title": "罗密欧与朱丽叶",
           "confidence": "official",
-          "id": "program_4da9744f3966eff5",
+          "id": "program_1d6b2dfea5ba3e25",
           "workId": "work_7394a3b7262cb26e"
         },
         {
           "composer": "阿斯托尔•皮亚佐拉（洛德",
           "title": "金 改编）：布宜诺斯艾利斯午夜零时",
           "confidence": "official",
-          "id": "program_ae38cc2c7d589362",
+          "id": "program_fc755d2bd1aaddc3",
           "workId": "work_d5470c78c227416d"
         },
         {
           "composer": "胡安•卡洛斯•科维安（洛德",
           "title": "金 改编）：怀旧",
           "confidence": "official",
-          "id": "program_61f1652bb82ca014",
+          "id": "program_1dee0723727c515e",
           "workId": "work_e4d75c8e7ed4fafa"
         },
         {
           "composer": "雅各布•加德（洛德",
           "title": "金 改编）：嫉妒",
           "confidence": "official",
-          "id": "program_ca9bb9790f64c557",
+          "id": "program_aca4a69776d03da3",
           "workId": "work_8fb3462b992ce424"
         },
         {
           "composer": "克劳德•弗朗索瓦/雅克·赫霍（洛德",
           "title": "金 改编）：我的路",
           "confidence": "official",
-          "id": "program_19f1c6f6e11b8f04",
+          "id": "program_03403cc22deef877",
           "workId": "work_ee9f0860c6509b51"
         },
         {
           "composer": "卡洛斯•加德尔（洛德",
           "title": "金 改编）：一步之遥",
           "confidence": "official",
-          "id": "program_878c8128c6feb2ff",
+          "id": "program_fb7d2f3ae9d33e23",
           "workId": "work_8a7488db5a9fa92e"
         },
         {
           "composer": "阿斯托尔•皮亚佐拉（洛德",
           "title": "金 改编）：遗忘",
           "confidence": "official",
-          "id": "program_b1792ae1dcd99cf5",
+          "id": "program_4890f0f0d6df5c23",
           "workId": "work_b2453e811a3d5a6e"
         },
         {
           "composer": "鲍勃•希尔/乔治•大卫•魏斯（洛德",
           "title": "金 改编）：多么美好的世界",
           "confidence": "official",
-          "id": "program_5c56d841550a477d",
+          "id": "program_9c81489728f30039",
           "workId": "work_b119cabb686250f6"
         },
         {
           "composer": "尼科洛•帕格尼尼（洛德",
           "title": "金 改编）：24首随想曲，Op. 1，No. 24",
           "confidence": "official",
-          "id": "program_e370a112bdace9c4",
+          "id": "program_1b264f6586473dc8",
           "workId": "work_d54b6f1963856d50"
         }
       ],
@@ -8571,14 +8599,26 @@
           "title": "f小调第一交响曲，作品10",
           "confidence": "official",
           "id": "program_2caa400a5c6a4bff",
-          "workId": "work_500843e2bf38e05a"
+          "workId": "work_500843e2bf38e05a",
+          "knowledgeWorkId": "work_auto_51ce39034f97cc91",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_4676abeee49d94e6",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:45:43.189Z"
+          }
         },
         {
           "composer": "肖斯塔科维奇",
           "title": "a小调第一小提琴协奏曲，作品77",
           "confidence": "official",
           "id": "program_841b53f3f2941e4f",
-          "workId": "work_1c7e53fcc2885556"
+          "workId": "work_1c7e53fcc2885556",
+          "knowledgeWorkId": "work_auto_3bbf1bec7bedb655",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_0f44f17ff7886c42",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:18:23.991Z"
+          }
         }
       ],
       "tags": [
@@ -9099,7 +9139,13 @@
           "title": "查拉图斯特拉如是说",
           "confidence": "official",
           "id": "program_0da8b8a929fba151",
-          "workId": "work_05d86ab6da56fb85"
+          "workId": "work_05d86ab6da56fb85",
+          "knowledgeWorkId": "work_000033",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_zarathustra",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "格里格",
@@ -9253,7 +9299,13 @@
           "title": "C小调托卡塔, BWV 911",
           "confidence": "official",
           "id": "program_f959b6b6d21dcf3e",
-          "workId": "work_002b027d32b9f7db"
+          "workId": "work_002b027d32b9f7db",
+          "knowledgeWorkId": "work_auto_958f678568a3fb7b",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_851fe21b9c166aae",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:18:23.991Z"
+          }
         },
         {
           "composer": "舒曼",
@@ -9545,14 +9597,26 @@
           "title": "G大调第三小提琴协奏曲，作品216",
           "confidence": "official",
           "id": "program_b991d98876e88889",
-          "workId": "work_069c1e45a223db4b"
+          "workId": "work_069c1e45a223db4b",
+          "knowledgeWorkId": "work_auto_c8f4679b2d254f5f",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_8e106fc1cc144fdb",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:21:56.089Z"
+          }
         },
         {
           "composer": "肖斯塔科维奇",
           "title": "e小调第十交响曲，作品93",
           "confidence": "official",
           "id": "program_f23e97d10c071f15",
-          "workId": "work_292ca9584506b8ac"
+          "workId": "work_292ca9584506b8ac",
+          "knowledgeWorkId": "work_000014",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_829f6249b9c734ba",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -9731,7 +9795,13 @@
           "title": "第五交响曲",
           "confidence": "official",
           "id": "program_fb62376b73ec9d8e",
-          "workId": "work_f4a6ac74e9d2d082"
+          "workId": "work_f4a6ac74e9d2d082",
+          "knowledgeWorkId": "work_000013",
+          "knowledgeMapping": {
+            "ruleId": "mapping_shostakovich_5",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -9812,21 +9882,39 @@
             }
           ],
           "id": "program_01672a7904736be8",
-          "workId": "work_884c30367079abb1"
+          "workId": "work_884c30367079abb1",
+          "knowledgeWorkId": "work_000029",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_45d4269625e612ba",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "门德尔松",
           "title": "e小调小提琴协奏曲，作品64",
           "confidence": "official",
           "id": "program_79651a6034f4b5a6",
-          "workId": "work_4ba9b87282a6cac1"
+          "workId": "work_4ba9b87282a6cac1",
+          "knowledgeWorkId": "work_000028",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_c601c268b0d9f9eb",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "勃拉姆斯",
           "title": "D大调小提琴协奏曲，作品77",
           "confidence": "official",
           "id": "program_8193d9735a56fc02",
-          "workId": "work_c2d708e3b81a9a9b"
+          "workId": "work_c2d708e3b81a9a9b",
+          "knowledgeWorkId": "work_000027",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_18653dcbf09d6e5d",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -9895,14 +9983,26 @@
           "title": "第三钢琴协奏曲",
           "confidence": "official",
           "id": "program_a9012b0f44067a93",
-          "workId": "work_60cabcf59b7b04f3"
+          "workId": "work_60cabcf59b7b04f3",
+          "knowledgeWorkId": "work_000035",
+          "knowledgeMapping": {
+            "ruleId": "mapping_prokofiev_piano_concerto_3",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "柴科夫斯基",
           "title": "第五交响曲",
           "confidence": "official",
           "id": "program_cf5165b94ce386b2",
-          "workId": "work_b1240400b5aae867"
+          "workId": "work_b1240400b5aae867",
+          "knowledgeWorkId": "work_000016",
+          "knowledgeMapping": {
+            "ruleId": "mapping_tchaikovsky_5",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -10495,11 +10595,11 @@
       ]
     },
     {
-      "id": "perf_eb9f4e43f734a97e",
-      "projectId": "event_f2a0faaf9d5455e1",
+      "id": "perf_3c02fd05767f8b80",
+      "projectId": "event_0f6ae04c01f580a4",
       "title": "漫步古典夜 在水一方——肖玛中外艺术歌曲音乐会",
       "city": "深圳",
-      "venue": "深圳音乐厅、奕奕声荟艺术文化",
+      "venue": "深圳音乐厅",
       "startTime": "2026-09-19T11:30:00.000Z",
       "weekday": "周六",
       "dateLabel": "09/19",
@@ -10534,105 +10634,105 @@
           "composer": "G.卡契尼",
           "title": "阿玛丽莉",
           "confidence": "official",
-          "id": "program_606596816f9aff77",
+          "id": "program_da0c394fe096b5ce",
           "workId": "work_50a585363e2efeba"
         },
         {
           "composer": "G.帕伊谢洛",
           "title": "在我的心里不再感到",
           "confidence": "official",
-          "id": "program_fb478a192c40982d",
+          "id": "program_6b0ea4a7c5b727bd",
           "workId": "work_c43846290ca7278b"
         },
         {
           "composer": "维瓦尔第",
           "title": "与我的挚爱相伴",
           "confidence": "official",
-          "id": "program_1acfdeb31d726f87",
+          "id": "program_52799a075a3281aa",
           "workId": "work_248708a3ddb98a0d"
         },
         {
           "composer": "亨德尔",
           "title": "悄然前行，暗中观察",
           "confidence": "official",
-          "id": "program_7974cefb470012bf",
+          "id": "program_75fb605f73ffc596",
           "workId": "work_52d1262a440795aa"
         },
         {
           "composer": "亨德尔",
           "title": "我的爱，你在哪里？",
           "confidence": "official",
-          "id": "program_827713eeaade42d2",
+          "id": "program_527558c694864ead",
           "workId": "work_2c169866da7492b6"
         },
         {
           "composer": "亨德尔",
           "title": "活下去吧，暴君",
           "confidence": "official",
-          "id": "program_e5cbb6c35ec3f3a6",
+          "id": "program_052565b30049ce74",
           "workId": "work_2cf2f2f744eecdf8"
         },
         {
           "composer": "陈田鹤",
           "title": "山中",
           "confidence": "official",
-          "id": "program_d60ddca1c906dbc6",
+          "id": "program_39c7d521dbd8f3cb",
           "workId": "work_0ceb0dbcbb71dcf7"
         },
         {
           "composer": "黄自",
           "title": "思乡",
           "confidence": "official",
-          "id": "program_b26b5d64b4309e25",
+          "id": "program_5a320f383e7fe54a",
           "workId": "work_05a64e68ab70f34c"
         },
         {
           "composer": "黄自",
           "title": "玫瑰三愿",
           "confidence": "official",
-          "id": "program_55926be47e7df884",
+          "id": "program_58aefcc9a20bf25c",
           "workId": "work_8e7a33740a18c1b4"
         },
         {
           "composer": "赵季平",
           "title": "峨眉山月歌",
           "confidence": "official",
-          "id": "program_f7eb062128e91ceb",
+          "id": "program_faedacc52b40bbc3",
           "workId": "work_f1cc34a7c5f04bfd"
         },
         {
           "composer": "赵季平",
           "title": "唐多令•惜别",
           "confidence": "official",
-          "id": "program_a101ef3bae343156",
+          "id": "program_df4695bf8603470f",
           "workId": "work_d9ad2f047a77bb6b"
         },
         {
           "composer": "赵季平",
           "title": "幽兰操",
           "confidence": "official",
-          "id": "program_3b51ea44e35fc893",
+          "id": "program_f7c3860eda6c1d85",
           "workId": "work_0e7f52722deb5908"
         },
         {
           "composer": "张瑞",
           "title": "歌",
           "confidence": "official",
-          "id": "program_7caac330e1bb4707",
+          "id": "program_ebe2e97752ae7597",
           "workId": "work_d8eaaca4a6c04f92"
         },
         {
           "composer": "张瑞（改编）",
           "title": "送别",
           "confidence": "official",
-          "id": "program_54e2606b18b6bada",
+          "id": "program_e6107e9e23061729",
           "workId": "work_538f62d8d70c598d"
         },
         {
           "composer": "张瑞（改编）",
           "title": "在水一方",
           "confidence": "official",
-          "id": "program_3a02b4e279773d62",
+          "id": "program_fe337a04e8828a35",
           "workId": "work_fcb18f079202f8f2"
         }
       ],
@@ -10853,7 +10953,13 @@
           "title": "d小调第二无伴奏小提琴组曲，BWV 1004",
           "confidence": "official",
           "id": "program_753042cd5f6a9f95",
-          "workId": "work_bef95866f8ce7b28"
+          "workId": "work_bef95866f8ce7b28",
+          "knowledgeWorkId": "work_000009",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_c726e23e294cae2b",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -11019,21 +11125,39 @@
           "title": "F大调第二十三弦乐四重奏，KV 590",
           "confidence": "official",
           "id": "program_866033a8a6c034df",
-          "workId": "work_079a37ed0e940a78"
+          "workId": "work_079a37ed0e940a78",
+          "knowledgeWorkId": "work_auto_e47397200c6d8e54",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_5bceb9c302667db6",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:21:56.089Z"
+          }
         },
         {
           "composer": "莫扎特",
           "title": "g小调第四弦乐五重奏，KV 516",
           "confidence": "official",
           "id": "program_09be9efdafc870b7",
-          "workId": "work_e3d6d9097ff87322"
+          "workId": "work_e3d6d9097ff87322",
+          "knowledgeWorkId": "work_auto_1f1156703d34c974",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_1fcd6e9238e87243",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:18:23.991Z"
+          }
         },
         {
           "composer": "门德尔松",
           "title": "f小调第六弦乐四重奏，作品80",
           "confidence": "official",
           "id": "program_df213a36bb9742db",
-          "workId": "work_d1ed20a6338ee1a4"
+          "workId": "work_d1ed20a6338ee1a4",
+          "knowledgeWorkId": "work_auto_44ced29ce961d011",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_a6b38b87ed28d0ae",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:21:56.089Z"
+          }
         }
       ],
       "tags": [
@@ -11717,7 +11841,13 @@
           "title": "第五交响曲",
           "confidence": "official",
           "id": "program_ced6eb6c2407de24",
-          "workId": "work_e4ab4fa3e383b0ef"
+          "workId": "work_e4ab4fa3e383b0ef",
+          "knowledgeWorkId": "work_000016",
+          "knowledgeMapping": {
+            "ruleId": "mapping_tchaikovsky_5",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -11918,7 +12048,13 @@
             "D大调第六无伴奏大提琴组曲，BWV 1012"
           ],
           "id": "program_2edc27734a852a28",
-          "workId": "work_086edff66f479d8e"
+          "workId": "work_086edff66f479d8e",
+          "knowledgeWorkId": "work_auto_9fbe9b19325042ac",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_e3cac7c2acd3486b",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:21:56.089Z"
+          }
         }
       ],
       "tags": [
@@ -13400,7 +13536,13 @@
             "D大调第四小提琴协奏曲，作品218"
           ],
           "id": "program_e5ad2b0d57f5aea4",
-          "workId": "work_069c1e45a223db4b"
+          "workId": "work_069c1e45a223db4b",
+          "knowledgeWorkId": "work_auto_c8f4679b2d254f5f",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_8e106fc1cc144fdb",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:21:56.089Z"
+          }
         },
         {
           "composer": "莫扎特",
@@ -13481,7 +13623,13 @@
           "title": "e小调小提琴协奏曲，作品64",
           "confidence": "official",
           "id": "program_1adacd1df0fc0f88",
-          "workId": "work_4ba9b87282a6cac1"
+          "workId": "work_4ba9b87282a6cac1",
+          "knowledgeWorkId": "work_000028",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_c601c268b0d9f9eb",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "马勒",
@@ -14199,7 +14347,13 @@
           "title": "「很快的快板」，选自《g小调第四十交响曲》，KV 550",
           "confidence": "official",
           "id": "program_124d559a80dd9fdf",
-          "workId": "work_68f399ccd0f948c9"
+          "workId": "work_68f399ccd0f948c9",
+          "knowledgeWorkId": "work_000004",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_95abfcbfaca22cfc",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "海顿",
@@ -15847,7 +16001,13 @@
           "title": "g小调第四弦乐五重奏，KV 516",
           "confidence": "official",
           "id": "program_0fe9c213d1bedc4b",
-          "workId": "work_e3d6d9097ff87322"
+          "workId": "work_e3d6d9097ff87322",
+          "knowledgeWorkId": "work_auto_1f1156703d34c974",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_1fcd6e9238e87243",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T16:18:23.991Z"
+          }
         },
         {
           "composer": "德沃夏克",
@@ -16492,7 +16652,13 @@
           "title": "第五交响曲",
           "confidence": "official",
           "id": "program_969bf73dcd3644cd",
-          "workId": "work_f4a6ac74e9d2d082"
+          "workId": "work_f4a6ac74e9d2d082",
+          "knowledgeWorkId": "work_000013",
+          "knowledgeMapping": {
+            "ruleId": "mapping_shostakovich_5",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -16607,7 +16773,13 @@
           "title": "《A大调第四交响曲》，作品90「意大利」（第一乐章）",
           "confidence": "official",
           "id": "program_dd5076f3921f751b",
-          "workId": "work_dda8bb79550d6d59"
+          "workId": "work_dda8bb79550d6d59",
+          "knowledgeWorkId": "work_000030",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_7cd4aabfd5eb4c4f",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "李斯特",
@@ -18358,7 +18530,13 @@
           "title": "第一交响曲",
           "confidence": "official",
           "id": "program_d7c24027c8430e9e",
-          "workId": "work_9458d1afd4ccbd8d"
+          "workId": "work_9458d1afd4ccbd8d",
+          "knowledgeWorkId": "work_000025",
+          "knowledgeMapping": {
+            "ruleId": "mapping_brahms_1",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -18716,7 +18894,13 @@
             "Overture to The Marriage of Figaro"
           ],
           "id": "program_5edba3b06977608a",
-          "workId": "work_120b0d8560c1256e"
+          "workId": "work_120b0d8560c1256e",
+          "knowledgeWorkId": "work_000006",
+          "knowledgeMapping": {
+            "ruleId": "mapping_mozart_figaro_overture",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "肖斯塔科维奇",
@@ -19654,7 +19838,13 @@
           "title": "《哥德堡变奏曲》，BWV 988（选段）",
           "confidence": "official",
           "id": "program_494ae3ff9511c406",
-          "workId": "work_37ed01265a8c5c12"
+          "workId": "work_37ed01265a8c5c12",
+          "knowledgeWorkId": "work_000008",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_485f47a30275b406",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "巴赫",
@@ -20552,7 +20742,13 @@
           "title": "古典交响曲（第一交响曲），作品25",
           "confidence": "official",
           "id": "program_71805045c8c24107",
-          "workId": "work_b01f2b45c5bcc311"
+          "workId": "work_b01f2b45c5bcc311",
+          "knowledgeWorkId": "work_000034",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_fe5840a55b5d3e8d",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "米亚斯科夫斯基",
@@ -20566,7 +20762,13 @@
           "title": "D大调小提琴协奏曲，作品35",
           "confidence": "official",
           "id": "program_0ea63194a3f3e9c7",
-          "workId": "work_200aad61c8f98de4"
+          "workId": "work_200aad61c8f98de4",
+          "knowledgeWorkId": "work_000018",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_e0530fc4cb370cba",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -21010,7 +21212,13 @@
           "title": "《费加罗的婚礼》序曲",
           "confidence": "official",
           "id": "program_ffa3c3df3a198ff8",
-          "workId": "work_120b0d8560c1256e"
+          "workId": "work_120b0d8560c1256e",
+          "knowledgeWorkId": "work_000006",
+          "knowledgeMapping": {
+            "ruleId": "mapping_mozart_figaro_overture",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "普契尼",
@@ -21243,7 +21451,13 @@
           "title": "F大调弦乐四重奏，M. 35",
           "confidence": "official",
           "id": "program_c9a191f4b73f3a48",
-          "workId": "work_e2a0a5376ebbd7e8"
+          "workId": "work_e2a0a5376ebbd7e8",
+          "knowledgeWorkId": "work_000024",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_2d20a5288dcdfb84",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -22095,7 +22309,13 @@
           "title": "d小调第九交响曲，作品125「合唱」",
           "confidence": "official",
           "id": "program_d630e8fb36258d7b",
-          "workId": "work_bfa0290e530409a7"
+          "workId": "work_bfa0290e530409a7",
+          "knowledgeWorkId": "work_000002",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_67606bd3e8e98f31",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -22441,7 +22661,13 @@
           "title": "c小调第一交响曲，作品68",
           "confidence": "official",
           "id": "program_43f4a4b9058291fa",
-          "workId": "work_66fb1cbbf61b0b24"
+          "workId": "work_66fb1cbbf61b0b24",
+          "knowledgeWorkId": "work_000025",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_113c0392ec0d73c8",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -22779,7 +23005,13 @@
           "title": "D大调小提琴协奏曲，作品61",
           "confidence": "official",
           "id": "program_8a4cfa5828617bbe",
-          "workId": "work_4f1b4d6c1c2fd576"
+          "workId": "work_4f1b4d6c1c2fd576",
+          "knowledgeWorkId": "work_000003",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_57aa5506b661763c",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -22843,7 +23075,13 @@
           "opus": "BWV 988",
           "confidence": "official",
           "id": "program_776066fb06d86b38",
-          "workId": "work_f7819635cb14407f"
+          "workId": "work_f7819635cb14407f",
+          "knowledgeWorkId": "work_000008",
+          "knowledgeMapping": {
+            "ruleId": "mapping_bach_goldberg",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "J. S. 巴赫",
@@ -22966,7 +23204,13 @@
             "Johannes Brahms: Symphony No.1 in C Minor, Op.68"
           ],
           "id": "program_d3d106490bcaccab",
-          "workId": "work_f574cb8e9d534582"
+          "workId": "work_f574cb8e9d534582",
+          "knowledgeWorkId": "work_000025",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_8e5b8ae21d342fe2",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -23621,7 +23865,13 @@
           "title": "波莱罗舞曲",
           "confidence": "official",
           "id": "program_b4e7ccdf99c7ee86",
-          "workId": "work_a274246b0c4c6859"
+          "workId": "work_a274246b0c4c6859",
+          "knowledgeWorkId": "work_000022",
+          "knowledgeMapping": {
+            "ruleId": "mapping_ravel_bolero",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "皮亚佐拉",
@@ -23806,7 +24056,13 @@
           "opus": "Op. 107",
           "confidence": "official",
           "id": "program_db78baf314a0aa85",
-          "workId": "work_6c49063639e5283b"
+          "workId": "work_6c49063639e5283b",
+          "knowledgeWorkId": "work_000015",
+          "knowledgeMapping": {
+            "ruleId": "mapping_shostakovich_cello_concerto_1",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "肖斯塔科维奇",
@@ -25198,7 +25454,13 @@
           "title": "第八交响曲“未完成”",
           "confidence": "official",
           "id": "program_cf6cb6f752326448",
-          "workId": "work_10ccb47448c79c23"
+          "workId": "work_10ccb47448c79c23",
+          "knowledgeWorkId": "work_000010",
+          "knowledgeMapping": {
+            "ruleId": "mapping_schubert_unfinished",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -27079,7 +27341,13 @@
           "opus": "Op. 18",
           "confidence": "official",
           "id": "program_3b84e132b9c789ee",
-          "workId": "work_13e54b2ebdf0cbd8"
+          "workId": "work_13e54b2ebdf0cbd8",
+          "knowledgeWorkId": "work_000019",
+          "knowledgeMapping": {
+            "ruleId": "mapping_rachmaninoff_piano_concerto_2",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "拉赫玛尼诺夫",
@@ -27087,7 +27355,13 @@
           "opus": "Op. 27",
           "confidence": "official",
           "id": "program_4539f9f7a23eabde",
-          "workId": "work_4dc63b994c7f1e26"
+          "workId": "work_4dc63b994c7f1e26",
+          "knowledgeWorkId": "work_000021",
+          "knowledgeMapping": {
+            "ruleId": "mapping_rachmaninoff_2",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -27389,7 +27663,13 @@
           "opus": "Op. 23",
           "confidence": "official",
           "id": "program_acdbc7ccb1d77a9b",
-          "workId": "work_88e8eab283d1a1ef"
+          "workId": "work_88e8eab283d1a1ef",
+          "knowledgeWorkId": "work_000017",
+          "knowledgeMapping": {
+            "ruleId": "mapping_tchaikovsky_piano_concerto_1",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "勃拉姆斯",
@@ -27465,7 +27745,13 @@
             "Prokofiev: Piano Concerto No. 3 in C Major, Op. 26"
           ],
           "id": "program_c9aef97f7e068033",
-          "workId": "work_f194cdb65f0866c2"
+          "workId": "work_f194cdb65f0866c2",
+          "knowledgeWorkId": "work_000035",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_5208345460bc20a9",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "凯文·普茨",
@@ -28299,7 +28585,13 @@
             "Pyotr Ilyich Tchaikovsky: Symphony No.5 in E minor, Op. 64"
           ],
           "id": "program_034314a98f9c78ef",
-          "workId": "work_019de3f5edb61cd7"
+          "workId": "work_019de3f5edb61cd7",
+          "knowledgeWorkId": "work_000016",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_b0f8ee303a75be82",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -29239,7 +29531,13 @@
           "opus": "M. 35",
           "confidence": "official",
           "id": "program_ba1fb7def6500071",
-          "workId": "work_e2a0a5376ebbd7e8"
+          "workId": "work_e2a0a5376ebbd7e8",
+          "knowledgeWorkId": "work_000024",
+          "knowledgeMapping": {
+            "ruleId": "mapping_ravel_string_quartet",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "拉威尔",
@@ -29304,7 +29602,13 @@
           "opus": "M. 35",
           "confidence": "official",
           "id": "program_ca585014ee786d53",
-          "workId": "work_e2a0a5376ebbd7e8"
+          "workId": "work_e2a0a5376ebbd7e8",
+          "knowledgeWorkId": "work_000024",
+          "knowledgeMapping": {
+            "ruleId": "mapping_ravel_string_quartet",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "拉威尔",
@@ -29967,7 +30271,13 @@
             "Ravel: String Quartet in F Major"
           ],
           "id": "program_2da75fc77a6616c8",
-          "workId": "work_2c01e42f751df4af"
+          "workId": "work_2c01e42f751df4af",
+          "knowledgeWorkId": "work_000024",
+          "knowledgeMapping": {
+            "ruleId": "mapping_ravel_string_quartet",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "肖斯塔科维奇",
@@ -30469,7 +30779,13 @@
             "Johannes Brahms: Violin Concerto in D Major, Op. 77"
           ],
           "id": "program_fc4f2d553042039d",
-          "workId": "work_90a0bf4026ff81af"
+          "workId": "work_90a0bf4026ff81af",
+          "knowledgeWorkId": "work_000027",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_103a2026928dca1d",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -30590,7 +30906,13 @@
           "title": "波莱罗",
           "confidence": "official",
           "id": "program_97a59e425feef04c",
-          "workId": "work_62456f8724f96b30"
+          "workId": "work_62456f8724f96b30",
+          "knowledgeWorkId": "work_000022",
+          "knowledgeMapping": {
+            "ruleId": "mapping_ravel_bolero",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         }
       ],
       "tags": [
@@ -30749,7 +31071,13 @@
             "Pyotr Ilyich Tchaikovsky: Piano Concerto No. 1 in B-flat Minor, Op. 23"
           ],
           "id": "program_22ce77b7a313ee5a",
-          "workId": "work_b13ab8888d1e8d0c"
+          "workId": "work_b13ab8888d1e8d0c",
+          "knowledgeWorkId": "work_000017",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_5f5a49ce8709f9b9",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         },
         {
           "composer": "德米特里·肖斯塔科维奇",
@@ -30760,7 +31088,13 @@
             "Dimitri Shostakovich: Symphony No. 5 in D Minor, Op. 47"
           ],
           "id": "program_2c56c700dbb36bc2",
-          "workId": "work_7ce28e5450a42c1c"
+          "workId": "work_7ce28e5450a42c1c",
+          "knowledgeWorkId": "work_000013",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_3226888dd4740c39",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -31016,7 +31350,13 @@
             "Johannes Brahms: Symphony No. 1 in C minor, Op. 68"
           ],
           "id": "program_bece33452acfc605",
-          "workId": "work_f574cb8e9d534582"
+          "workId": "work_f574cb8e9d534582",
+          "knowledgeWorkId": "work_000025",
+          "knowledgeMapping": {
+            "ruleId": "mapping_auto_8e5b8ae21d342fe2",
+            "method": "automated-exact",
+            "reviewedAt": "2026-08-08T14:41:05.043Z"
+          }
         }
       ],
       "tags": [
@@ -31071,7 +31411,13 @@
           "opus": "Op. 30",
           "confidence": "official",
           "id": "program_b462166f3be72566",
-          "workId": "work_28b640daa3be928c"
+          "workId": "work_28b640daa3be928c",
+          "knowledgeWorkId": "work_000033",
+          "knowledgeMapping": {
+            "ruleId": "mapping_strauss_zarathustra",
+            "method": "reviewed-exact",
+            "reviewedAt": "2026-08-08T00:00:00.000Z"
+          }
         },
         {
           "composer": "瓦格纳",

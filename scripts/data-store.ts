@@ -17,6 +17,14 @@ import type {
 } from "../src/types";
 import { formatChinaDateLabels } from "./china-time";
 import { addManualEventsToDataset, loadManualEvents } from "./manual-event-store";
+import { normalizeIdentity } from "./identity";
+import {
+  loadKnowledgeRegistry,
+  mapProgramItemToKnowledge,
+  prepareKnowledge,
+  type KnowledgeRegistry,
+  type PreparedKnowledge,
+} from "./knowledge-store";
 import { applyManualReviews, loadManualReviews } from "./review-store";
 
 type PreparedData = {
@@ -26,6 +34,7 @@ type PreparedData = {
   changes: ChangeDataset;
   publishedDataset: ConcertDataset;
   publishedEntities: EntityDataset;
+  knowledge: PreparedKnowledge;
 };
 
 export async function prepareAndPersistDataset(
@@ -39,13 +48,15 @@ export async function prepareAndPersistDataset(
   const manualEvents = await loadManualEvents(manualEventPath);
   const datasetWithManualEvents = addManualEventsToDataset(recoveredDataset, manualEvents.events);
   const canonicalEvents = mergeCrossSourceEvents(
-    datasetWithManualEvents.events,
+    normalizeKnownSourceFields(datasetWithManualEvents.events),
     datasetWithManualEvents.sources,
   );
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
+  const knowledgeRegistry = await loadKnowledgeRegistry(resolve(dirname(databasePath), ".."));
   const reviewedEvents = assignProgramIdentities(
     applyManualReviews(canonicalEvents, reviews.decisions),
+    knowledgeRegistry,
   );
   const canonicalDataset: ConcertDataset = {
     ...datasetWithManualEvents,
@@ -62,7 +73,8 @@ export async function prepareAndPersistDataset(
   const publishedDataset = toPublishedDataset(canonicalDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
-  const prepared = { dataset: canonicalDataset, index, entities, changes, publishedDataset, publishedEntities };
+  const knowledge = prepareKnowledge(knowledgeRegistry, publishedDataset);
+  const prepared = { dataset: canonicalDataset, index, entities, changes, publishedDataset, publishedEntities, knowledge };
 
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
@@ -80,14 +92,16 @@ export async function reapplyManualReviewsAndPersist(
   const datasetWithManualEvents = addManualEventsToDataset(previous, manualEvents.events);
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
+  const knowledgeRegistry = await loadKnowledgeRegistry(resolve(dirname(databasePath), ".."));
   const reviewedEvents = assignProgramIdentities(
     applyManualReviews(
       mergeCrossSourceEvents(
-        datasetWithManualEvents.events,
+        normalizeKnownSourceFields(datasetWithManualEvents.events),
         datasetWithManualEvents.sources,
       ),
       reviews.decisions,
     ),
+    knowledgeRegistry,
   );
   const reviewedDataset: ConcertDataset = {
     ...datasetWithManualEvents,
@@ -106,6 +120,7 @@ export async function reapplyManualReviewsAndPersist(
   const publishedDataset = toPublishedDataset(reviewedDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
+  const knowledge = prepareKnowledge(knowledgeRegistry, publishedDataset);
   const prepared = {
     dataset: reviewedDataset,
     index,
@@ -113,6 +128,7 @@ export async function reapplyManualReviewsAndPersist(
     changes,
     publishedDataset,
     publishedEntities,
+    knowledge,
   };
 
   await persistSqlite(prepared, databasePath);
@@ -434,18 +450,33 @@ function legacyChangeRuns(changes: DatasetChange[]) {
 async function exportStaticData(prepared: PreparedData, outputPath: string) {
   const dataDir = dirname(outputPath);
   const detailDir = resolve(dataDir, "events");
+  const knowledgeDir = resolve(dataDir, "knowledge");
+  const knowledgeWorkDir = resolve(knowledgeDir, "works");
+  const knowledgeComposerDir = resolve(knowledgeDir, "composers");
   await rm(detailDir, { recursive: true, force: true });
-  await mkdir(detailDir, { recursive: true });
+  await rm(knowledgeDir, { recursive: true, force: true });
+  await Promise.all([
+    mkdir(detailDir, { recursive: true }),
+    mkdir(knowledgeWorkDir, { recursive: true }),
+    mkdir(knowledgeComposerDir, { recursive: true }),
+  ]);
 
   await writeFile(outputPath, `${JSON.stringify(prepared.dataset, null, 2)}\n`, "utf8");
   await writeFile(resolve(dataDir, "events-index.json"), JSON.stringify(prepared.index), "utf8");
   await writeFile(resolve(dataDir, "entities.json"), JSON.stringify(prepared.publishedEntities), "utf8");
   await writeFile(resolve(dataDir, "changes.json"), JSON.stringify(prepared.changes), "utf8");
-  await Promise.all(
-    prepared.publishedDataset.events.map((event) =>
+  await writeFile(resolve(knowledgeDir, "index.json"), JSON.stringify(prepared.knowledge.index), "utf8");
+  await Promise.all([
+    ...prepared.publishedDataset.events.map((event) =>
       writeFile(resolve(detailDir, `${event.id}.json`), JSON.stringify(event), "utf8"),
     ),
-  );
+    ...prepared.knowledge.works.map((work) =>
+      writeFile(resolve(knowledgeWorkDir, `${work.id}.json`), JSON.stringify(work), "utf8"),
+    ),
+    ...prepared.knowledge.composers.map((composer) =>
+      writeFile(resolve(knowledgeComposerDir, `${composer.id}.json`), JSON.stringify(composer), "utf8"),
+    ),
+  ]);
 }
 
 async function persistSqlite(prepared: PreparedData, databasePath: string) {
@@ -828,6 +859,7 @@ function toSummary(event: ConcertEvent): ConcertEventSummary {
     hasProgram: event.program.length > 0,
     programPreview: event.program.slice(0, 3).map((item) => ({
       workId: item.workId,
+      knowledgeWorkId: item.knowledgeWorkId,
       composer: item.composer,
       title: item.title,
       alternateTitles: item.alternateTitles,
@@ -897,14 +929,19 @@ function richness(event: ConcertEvent) {
     qualityWeight;
 }
 
-function assignProgramIdentities(events: ConcertEvent[]) {
+function assignProgramIdentities(
+  events: ConcertEvent[],
+  knowledgeRegistry: KnowledgeRegistry,
+) {
   return events.map((event) => ({
     ...event,
     program: event.program.map((item, index) => {
       const normalizedItem = normalizeProgramItemCredits(item);
       const itemWorkId = workId(normalizedItem);
+      const knowledgeMapping = mapProgramItemToKnowledge(normalizedItem, knowledgeRegistry);
       return {
         ...normalizedItem,
+        ...knowledgeMapping,
         id: stableId("program", `${event.id}:${index}:${itemWorkId}`),
         workId: itemWorkId,
       };
@@ -1005,13 +1042,6 @@ function stableId(prefix: string, value: string) {
   return `${prefix}_${createHash("sha1").update(value).digest("hex").slice(0, 16)}`;
 }
 
-function normalizeIdentity(value: string) {
-  return value
-    .normalize("NFKC")
-    .toLocaleLowerCase("zh-CN")
-    .replace(/[·・•—–\-_|｜:：,，。.!！?？"'“”‘’《》【】()[\]（）\s]/g, "");
-}
-
 function normalizeVenue(value: string) {
   return normalizeIdentity(value)
     .replace(/^捷豹/, "")
@@ -1019,6 +1049,14 @@ function normalizeVenue(value: string) {
     .replace(/^(国家大剧院)(?:音乐厅|歌剧院|戏剧场|小剧场)$/, "$1")
     .replace(/^(北京艺术中心)(?:音乐厅|歌剧院|戏剧场|小剧场)$/, "$1")
     .replace(/^(上海东方艺术中心)(?:音乐厅|歌剧厅|演奏厅)$/, "$1");
+}
+
+function normalizeKnownSourceFields(events: ConcertEvent[]) {
+  return events.map((event) => {
+    if (event.sourceName !== "深圳音乐厅官网") return event;
+    const hall = event.hall ?? event.venue.match(/深圳音乐厅\s*(二楼演奏大厅|五楼小剧场|演奏大厅)/)?.[1];
+    return { ...event, venue: "深圳音乐厅", hall };
+  });
 }
 
 function embeddedHall(value: string) {

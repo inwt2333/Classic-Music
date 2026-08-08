@@ -1549,7 +1549,7 @@ async function scrapeShenzhenConcertHall(
       const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
-        venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program,
+        venue: parsed.venue || source.venue, hall: parsed.hall, priceTiers: parsed.priceTiers, program,
         performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
     }
   } finally { await localOcr?.terminate(); }

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "id": "mapping_beethoven_5_zh",
+      "workId": "work_000001",
+      "composers": ["贝多芬", "路德维希·范·贝多芬", "Ludwig van Beethoven", "Beethoven"],
+      "titles": ["C小调第五交响曲", "c小调第五交响曲", "C小调第五号交响曲", "c小调第五号交响曲", "第五交响曲", "第五号交响曲", "贝多芬第五交响曲", "命运交响曲", "Symphony No. 5 in C Minor", "Symphony No. 5"],
+      "opus": ["Op. 67", "Op.67", "Opus 67", "作品67号", "作品第67号", "67"],
+      "method": "reviewed-exact",
+      "reviewedAt": "2026-08-07T00:00:00.000Z"
+    }
+  ]
+}

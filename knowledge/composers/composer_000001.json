@@ -1,0 +1,25 @@
+{
+  "id": "composer_000001",
+  "name": "路德维希·范·贝多芬",
+  "originalName": "Ludwig van Beethoven",
+  "aliases": ["贝多芬", "路德维希·凡·贝多芬"],
+  "birthYear": 1770,
+  "deathYear": 1827,
+  "nationality": "德国",
+  "period": "古典主义至浪漫主义过渡时期",
+  "introduction": "贝多芬以九部交响曲、钢琴奏鸣曲和室内乐作品，扩展了古典主义形式的表达尺度，也深刻影响了十九世纪音乐。",
+  "styleSummary": "清晰的动机发展、强烈的结构张力，以及从冲突走向开阔终局的戏剧进程，是理解其成熟期作品的重要线索。",
+  "status": "published",
+  "reviewedAt": "2026-08-07T00:00:00.000Z",
+  "updatedAt": "2026-08-07T00:00:00.000Z",
+  "sources": [
+    {
+      "id": "beethoven-haus-biography",
+      "title": "Ludwig van Beethoven: Biography",
+      "url": "https://www.beethoven.de/en/g/beethoven",
+      "publisher": "Beethoven-Haus Bonn",
+      "accessedAt": "2026-08-07",
+      "supports": ["name", "originalName", "birthYear", "deathYear", "introduction"]
+    }
+  ]
+}

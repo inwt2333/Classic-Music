@@ -1,0 +1,118 @@
+{
+  "id": "work_auto_e47397200c6d8e54",
+  "composerId": "composer_000002",
+  "title": "F大调第二十三弦乐四重奏",
+  "originalTitle": "String Quartet No. 23 in F major",
+  "aliases": [
+    "F大调第二十三弦乐四重奏，KV 590",
+    "莫扎特F大调弦乐四重奏 KV 590",
+    "普鲁士四重奏第三首"
+  ],
+  "opus": "KV 590",
+  "key": "F大调",
+  "genre": "弦乐四重奏",
+  "period": "古典主义",
+  "composedYears": "1790年",
+  "durationMinutes": 24,
+  "instrumentation": "两把小提琴、一把中提琴、一把大提琴",
+  "difficulty": "容易进入",
+  "tags": [
+    "莫扎特",
+    "弦乐四重奏",
+    "古典主义",
+    "室内乐",
+    "普鲁士四重奏",
+    "晚期作品"
+  ],
+  "summary": "莫扎特最后一首弦乐四重奏，属于三首“普鲁士”四重奏之一，作于1790年，旋律优美，结构精巧。",
+  "whyListen": "这是莫扎特在弦乐四重奏领域的绝笔之作，融合了成熟的作曲技巧与优雅的旋律，是古典室内乐的典范。",
+  "firstListen": "建议从第一乐章开始，感受其明快的主题和精致的对位；随后留意第二乐章的抒情旋律，体会莫扎特晚期的内省情感。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章的优雅主题",
+      "description": "开篇由第一小提琴奏出明亮而优雅的主题，随后各声部依次进入，展现对话般的织体。",
+      "movement": 1
+    },
+    {
+      "title": "第二乐章的抒情性",
+      "description": "慢板乐章旋律宽广，带有深沉的歌唱性，中提琴与大提琴的伴奏营造温暖氛围。",
+      "movement": 2
+    },
+    {
+      "title": "小步舞曲的节奏律动",
+      "description": "第三乐章为小步舞曲，节奏清晰，三拍子舞曲风格，中段三重奏部分音色更为柔和。",
+      "movement": 3
+    },
+    {
+      "title": "终曲的活力与对位",
+      "description": "第四乐章快速而充满活力，主题在四个声部间灵活传递，展现莫扎特对位技巧的娴熟。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Allegro",
+      "tempo": "快板",
+      "description": "奏鸣曲式，主题明亮，发展部有丰富的对位。"
+    },
+    {
+      "number": 2,
+      "title": "Andante",
+      "tempo": "行板",
+      "description": "抒情如歌，旋律优美，带有忧郁色彩。"
+    },
+    {
+      "number": 3,
+      "title": "Menuetto: Allegretto",
+      "tempo": "小快板",
+      "description": "小步舞曲，节奏明快，中段三重奏更柔和。"
+    },
+    {
+      "number": 4,
+      "title": "Allegro",
+      "tempo": "快板",
+      "description": "回旋奏鸣曲式，充满活力，主题在各声部间交替。"
+    }
+  ],
+  "recordings": [],
+  "relatedWorkIds": [
+    "work_000005",
+    "work_auto_c8f4679b2d254f5f",
+    "work_000004"
+  ],
+  "completeness": "basic",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.3",
+    "promptHash": "9aa05e296a75164a57af56dd645d1f3cf07905fc27d819e5767ac5b8412817c0",
+    "generatedAt": "2026-08-08T16:21:56.089Z",
+    "score": 75,
+    "sourceEventIds": [
+      "perf_02ba0048b11fb7b1"
+    ],
+    "evidenceIds": [
+      "official_9efe76728cc5"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-08T16:21:56.089Z",
+  "sources": [
+    {
+      "id": "official_9efe76728cc5",
+      "title": "斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21781&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "composer",
+        "title",
+        "opus",
+        "genre",
+        "period",
+        "composedYears"
+      ]
+    }
+  ]
+}

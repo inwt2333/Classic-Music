@@ -49,6 +49,7 @@ export default function EventDetail({
   closeButtonRef,
   onClose,
   onExplore,
+  onExploreWork,
   onExploreVenue,
   onCopy,
   onDownloadIcs,
@@ -66,6 +67,7 @@ export default function EventDetail({
   closeButtonRef?: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
   onExplore: (entity: EntityRecord) => void;
+  onExploreWork: (workId: string) => void;
   onExploreVenue: (venue: string) => void;
   onCopy: (event: ConcertEvent) => void;
   onDownloadIcs: (event: ConcertEvent) => void;
@@ -245,6 +247,7 @@ export default function EventDetail({
               item={item}
               entity={item.workId ? entitiesByKey.get(`work:${item.workId}`) : undefined}
               onExplore={onExplore}
+              onExploreWork={onExploreWork}
               follows={follows}
               onToggleFollow={onToggleFollow}
             />
@@ -290,12 +293,14 @@ function ProgramRow({
   item,
   entity,
   onExplore,
+  onExploreWork,
   follows,
   onToggleFollow,
 }: {
   item: ProgramItem;
   entity?: EntityRecord;
   onExplore: (entity: EntityRecord) => void;
+  onExploreWork: (workId: string) => void;
   follows: FollowMap;
   onToggleFollow: (target: FollowTarget) => void;
 }) {
@@ -311,7 +316,21 @@ function ProgramRow({
   return (
     <article className="program-row">
       <div className="program-copy">
-        {entity ? <button className="work-link" onClick={() => onExplore(entity)}>{item.title}</button> : <strong>{item.title}</strong>}
+        {item.knowledgeWorkId ? (
+          <button className="work-link" onClick={() => onExploreWork(item.knowledgeWorkId!)}>{item.title}</button>
+        ) : entity ? (
+          <button className="work-link" onClick={() => onExplore(entity)}>{item.title}</button>
+        ) : <strong>{item.title}</strong>}
+        {item.knowledgeWorkId ? (
+          <button
+            className="knowledge-work-link"
+            type="button"
+            data-knowledge-work-id={item.knowledgeWorkId}
+            onClick={() => onExploreWork(item.knowledgeWorkId!)}
+          >
+            <BookOpenText size={13} />了解作品
+          </button>
+        ) : null}
         {target ? (
           <button
             type="button"

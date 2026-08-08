@@ -46,6 +46,14 @@ const szyyt = parseShenzhenConcertHallDetail(`
   <div class="tabContent2"><p>演出曲目</p><p>巴赫：《意大利协奏曲》</p><p>拉威尔：《水之嬉戏》《夜之幽灵》</p></div>
 `);
 assert.equal(szyyt.program.length, 3);
+assert.equal(szyyt.venue, "深圳音乐厅");
+assert.equal(szyyt.hall, "五楼小剧场");
+const szyytOrganizer = parseShenzhenConcertHallDetail(`
+  <h1>深圳音乐厅特别呈现 室内乐音乐会</h1>
+  <div>2026年08月14日 19:30 深圳音乐厅、吴氏国际演出（北京）有限公司</div>
+`);
+assert.equal(szyytOrganizer.venue, "深圳音乐厅");
+assert.equal(szyytOrganizer.hall, undefined);
 
 const zhongshan = parseZhongshanMusicHallDetail(`
   <div class="pp_l"><img class="pp_pic" src="/concert-poster.jpg"></div>

@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "candidates": {
+    "6f77e5e35c753a27f8165327": {
+      "status": "mapped",
+      "workId": "work_000014",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_68276ae3dc49e5a3"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "215553821514664b1c0bf2aa": {
+      "status": "mapped",
+      "workId": "work_000029",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_ba27c8aeef435537"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "ca892f368b7ee9db4851d181": {
+      "status": "mapped",
+      "workId": "work_000028",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_ba27c8aeef435537",
+        "perf_7085cde220c70441"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "0f6210045cf914b3e0b8b70f": {
+      "status": "mapped",
+      "workId": "work_000027",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_ba27c8aeef435537"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "ead1a2ec12c53add7d1f6e29": {
+      "status": "mapped",
+      "workId": "work_000009",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_91e3136286910fa8",
+        "perf_4a77af4d9cc0aa7c"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "bcd282d4ac1c5ef956333db1": {
+      "status": "mapped",
+      "workId": "work_000004",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_83c7e8762fb75d0e"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "6030cbe650b2c06c0bd4492f": {
+      "status": "mapped",
+      "workId": "work_000030",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_898cdf4c7306782a"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "a75f4659cb16fad61150c6a9": {
+      "status": "mapped",
+      "workId": "work_000008",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_9b27938aca3a65b2",
+        "perf_1706eab8781de6f5"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "380d4c78011f13e5e3a214bd": {
+      "status": "mapped",
+      "workId": "work_000034",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_a2158511b6229a44"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "e82246122d684ec4fea90d93": {
+      "status": "mapped",
+      "workId": "work_000018",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_a2158511b6229a44"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "abdd9f4748ed239769a9f861": {
+      "status": "mapped",
+      "workId": "work_000024",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_bdff4278b7a05043"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "93657fe9e8b17ba63266aa0f": {
+      "status": "mapped",
+      "workId": "work_000002",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_e6bfb19e75c10ad6"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "0dbec714c54cb2c37d03e722": {
+      "status": "mapped",
+      "workId": "work_000025",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_220c793f79d3dd83"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "28a12ba81435f0b019c99a0d": {
+      "status": "mapped",
+      "workId": "work_000003",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_dab333c088dbd936"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "4f8659cdd24203dbafbf85c0": {
+      "status": "mapped",
+      "workId": "work_000035",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_2e5d99161cfa5a3d"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "9e1c82dea246ede0dcd6d549": {
+      "status": "mapped",
+      "workId": "work_000016",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_96e7e0647b4ac6ab"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "ea778624d01f5c1ac6cc0e01": {
+      "status": "mapped",
+      "workId": "work_000027",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_ff93f36e273bc7ee"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "f2890de84b04a64366241a87": {
+      "status": "mapped",
+      "workId": "work_000017",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_8607e82ce53863ab"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "ee7adbceaab207a1a84a3eb4": {
+      "status": "mapped",
+      "workId": "work_000013",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_8607e82ce53863ab"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "7eefa8310f7498f744bee4e8": {
+      "status": "mapped",
+      "workId": "work_000025",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T14:41:05.043Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_d152957e952f8290"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:1.0.0"
+    },
+    "a5e28781588a9a274c538157": {
+      "status": "published",
+      "workId": "work_auto_51ce39034f97cc91",
+      "attempts": 11,
+      "updatedAt": "2026-08-08T15:36:13.474Z",
+      "reason": "score-95",
+      "sourceEventIds": [
+        "perf_c669952a6b02d398"
+      ],
+      "pipelineVersion": "deepseek-v4-pro:2.0.3"
+    },
+    "879227420286c418070ec169": {
+      "status": "mapped",
+      "workId": "work_auto_958f678568a3fb7b",
+      "attempts": 3,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_2a203fb9aad9c7ff"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "f131d65eaa6401a87fef6d89": {
+      "status": "published",
+      "workId": "work_auto_3bbf1bec7bedb655",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T16:18:23.991Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_c669952a6b02d398"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "4aadbe984a60642a1ddf313f": {
+      "status": "needs_completion",
+      "workId": "work_auto_c8f4679b2d254f5f",
+      "attempts": 2,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "score-95",
+      "sourceEventIds": [
+        "perf_68276ae3dc49e5a3"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3",
+      "nextRetryAt": "2026-08-15T16:21:56.089Z"
+    },
+    "6aa26124c11b3d25717e17f4": {
+      "status": "needs_completion",
+      "workId": "work_auto_e47397200c6d8e54",
+      "attempts": 2,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "score-75",
+      "sourceEventIds": [
+        "perf_02ba0048b11fb7b1"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3",
+      "nextRetryAt": "2026-08-15T16:21:56.089Z"
+    },
+    "428644be5a99c3d34305b007": {
+      "status": "mapped",
+      "workId": "work_auto_1f1156703d34c974",
+      "attempts": 2,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_02ba0048b11fb7b1",
+        "perf_9a143ba172dafb03"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "5fc96d3e031c679ff52b2a66": {
+      "status": "published",
+      "workId": "work_auto_44ced29ce961d011",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_02ba0048b11fb7b1"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "27823860c8e4eb2baaa7fc87": {
+      "status": "published",
+      "workId": "work_auto_9fbe9b19325042ac",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_6c5118620d8cb67a",
+        "perf_9b27938aca3a65b2"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "671ddf6bcbecb3e67b566b6f": {
+      "status": "skipped",
+      "attempts": 1,
+      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "reason": "The proposed work 'C大调弦乐小夜曲，KV 648' is a newly discovered work, but the provided evidence does not confirm its identity or structure; the official source mentions it but lacks details on movements and duration.；The proposal includes a movement structure (single movement) and duration (12 minutes) that are not supported by any supplied evidence, violating the rule that objective facts must be cited from evidence.；The recording evidence provided (apple_music_6795295401) is a general album and does not specifically reference KV 648, so it cannot support any recording recommendation.；The proposal's instrumentation '两把小提琴、低音提琴' is mentioned in the official source, but the source does not confirm the exact number of violin parts or the absence of viola, so it may be incomplete or inaccurate.；The composition years '约1766-1769' are not explicitly stated in the evidence; the official source only says '约10至13岁', which could correspond to a range but not exact years.；The work is a recent discovery, and the official source does not provide a complete movement list or detailed structure, making it impossible to confirm the proposed single-movement structure.",
+      "sourceEventIds": [
+        "perf_2465218ef2febb27"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "work_auto_3bbf1bec7bedb655",
+  "composerId": "composer_000005",
+  "title": "a小调第一小提琴协奏曲，作品77",
+  "originalTitle": "Концерт для скрипки с оркестром № 1 ля минор, соч. 77",
+  "aliases": [
+    "Violin Concerto No. 1 in A minor, Op. 77"
+  ],
+  "opus": "Op. 77",
+  "key": "a小调",
+  "genre": "协奏曲",
+  "period": "20世纪",
+  "composedYears": "1947-1948",
+  "durationMinutes": 35,
+  "instrumentation": "小提琴独奏、2支长笛、2支双簧管、2支单簧管、2支大管、4支圆号、大鼓、竖琴、弦乐组",
+  "difficulty": "需要专注",
+  "tags": [
+    "小提琴协奏曲",
+    "肖斯塔科维奇",
+    "20世纪音乐",
+    "苏联",
+    "纪念肖斯塔科维奇诞辰120周年",
+    "音乐会"
+  ],
+  "summary": "肖斯塔科维奇a小调第一小提琴协奏曲，作品77，作于1947-48年，融合抒情与尖锐，展现作曲家晚期风格。",
+  "whyListen": "这部协奏曲是肖斯塔科维奇最具个人色彩的作品之一，既有深沉的抒情，也有尖锐的讽刺，适合感受作曲家复杂的情感世界。",
+  "firstListen": "建议先听第一乐章的宁静主题，再感受第四乐章的狂烈节奏，体会从内省到爆发的戏剧性转变。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章的沉思主题",
+      "description": "开篇由独奏小提琴奏出悠长而略带忧郁的旋律，奠定全曲基调。",
+      "movement": 1
+    },
+    {
+      "title": "第二乐章的谐谑曲风格",
+      "description": "快速而节奏感强烈的段落，展现小提琴的技巧与乐队的对话。",
+      "movement": 2
+    },
+    {
+      "title": "第三乐章的帕萨卡利亚",
+      "description": "基于固定低音主题的变奏，深沉而庄严，是情感的高潮。",
+      "movement": 3
+    },
+    {
+      "title": "第四乐章的终曲",
+      "description": "急速而充满活力的回旋曲，以辉煌的结尾收束全曲。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "夜曲",
+      "tempo": "Moderato",
+      "description": "宁静而略带忧郁的慢板，独奏小提琴奏出沉思主题。"
+    },
+    {
+      "number": 2,
+      "title": "谐谑曲",
+      "tempo": "Allegro",
+      "description": "快速而节奏感强烈，展现技巧与活力。"
+    },
+    {
+      "number": 3,
+      "title": "帕萨卡利亚",
+      "tempo": "Andante",
+      "description": "基于固定低音主题的变奏，深沉而庄严。"
+    },
+    {
+      "number": 4,
+      "title": "布尔莱斯克",
+      "tempo": "Allegro con brio",
+      "description": "急速而充满活力的回旋曲，以辉煌的结尾收束。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Alina Ibragimova, Russian State Symphony Orchestra, Vladimir Jurowski",
+      "year": 2020,
+      "note": "现代录音，音色清晰，适合第一次听。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=a%E5%B0%8F%E8%B0%83%E7%AC%AC%E4%B8%80%E5%B0%8F%E6%8F%90%E7%90%B4%E5%8D%8F%E5%A5%8F%E6%9B%B2%EF%BC%8C%E4%BD%9C%E5%93%8177%20Alina%20Ibragimova%2C%20Russian%20State%20Symphony%20Orchestra%2C%20Vladimir%20Jurowski",
+      "sourceId": "apple_music_1697997565"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Hilary Hahn, Oslo Philharmonic, Hugh Wolff",
+      "year": 2002,
+      "note": "演奏细腻，另一种理解。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=a%E5%B0%8F%E8%B0%83%E7%AC%AC%E4%B8%80%E5%B0%8F%E6%8F%90%E7%90%B4%E5%8D%8F%E5%A5%8F%E6%9B%B2%EF%BC%8C%E4%BD%9C%E5%93%8177%20Hilary%20Hahn%2C%20Oslo%20Philharmonic%2C%20Hugh%20Wolff",
+      "sourceId": "apple_music_309259273"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000014",
+    "work_000015",
+    "work_000013"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.3",
+    "promptHash": "9aa05e296a75164a57af56dd645d1f3cf07905fc27d819e5767ac5b8412817c0",
+    "generatedAt": "2026-08-08T16:18:23.991Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_c669952a6b02d398"
+    ],
+    "evidenceIds": [
+      "official_2d823d5e9bfc",
+      "apple_music_1697997565",
+      "apple_music_309259273"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-08T16:18:23.991Z",
+  "sources": [
+    {
+      "id": "official_2d823d5e9bfc",
+      "title": "上海交响乐团2026-27音乐季开幕音乐会（一） 余隆与卡瓦科斯纪念肖斯塔科维奇诞辰120周年",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21754&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "composer",
+        "title",
+        "opus"
+      ]
+    },
+    {
+      "id": "apple_music_1697997565",
+      "title": "Shostakovich: Violin Concertos 1 & 2",
+      "url": "https://music.apple.com/us/album/shostakovich-violin-concertos-1-2/1697997565?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_309259273",
+      "title": "Mendelssohn & Shostakovich: Violin Concertos",
+      "url": "https://music.apple.com/us/album/mendelssohn-shostakovich-violin-concertos/309259273?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.1"
+      ]
+    }
+  ]
+}

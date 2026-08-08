@@ -1,0 +1,94 @@
+name: Auto-enrich knowledge base
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum new works to ask DeepSeek to process
+        required: false
+        default: "5"
+      dry_run:
+        description: Discover candidates without writing knowledge files
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: "37 22 * * *"
+      timezone: "Asia/Shanghai"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: knowledge-enrichment-main
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.14"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download latest deployed dataset
+        run: |
+          mkdir -p .cache
+          if ! curl --fail --silent --show-error --location \
+            https://inwt2333.github.io/Classic-Music/data/events.json \
+            --output .cache/deployed-events.json; then
+            echo "::warning::Unable to download deployed data; using the committed dataset."
+            cp public/data/events.json .cache/deployed-events.json
+          fi
+
+      - name: Run knowledge automation tests
+        run: npm run test:data
+
+      - name: Discover or publish knowledge
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
+          DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL }}
+          INPUT_LIMIT: ${{ inputs.limit }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          LIMIT="${INPUT_LIMIT:-5}"
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
+            npm run knowledge:enrich -- --dataset .cache/deployed-events.json --limit "$LIMIT" --dry-run
+          else
+            npm run knowledge:enrich -- --dataset .cache/deployed-events.json --limit "$LIMIT"
+          fi
+
+      - name: Validate generated knowledge
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          npm run reviews:apply
+          npm run test:data
+          npm run audit:data
+          npm run audit:storage
+          npm run build
+
+      - name: Commit source knowledge changes
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          git add knowledge/
+          if git diff --cached --quiet; then
+            echo "No knowledge source changes to commit."
+            exit 0
+          fi
+          git config user.name "classic-music-knowledge-bot"
+          git config user.email "classic-music-knowledge-bot@users.noreply.github.com"
+          git commit -m "chore(knowledge): auto-enrich works"
+          git push origin HEAD:main

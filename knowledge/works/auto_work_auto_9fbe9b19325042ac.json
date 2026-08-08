@@ -1,0 +1,200 @@
+{
+  "id": "work_auto_9fbe9b19325042ac",
+  "composerId": "composer_000003",
+  "title": "G大调第一无伴奏大提琴组曲",
+  "originalTitle": "Suite für Violoncello solo Nr. 1 G-Dur",
+  "aliases": [
+    "G大调第一无伴奏大提琴组曲，BWV 1007",
+    "Cello Suite No. 1 in G major",
+    "BWV 1007"
+  ],
+  "opus": "BWV 1007",
+  "key": "G大调",
+  "genre": "组曲",
+  "period": "巴洛克",
+  "composedYears": "约1720年",
+  "durationMinutes": 18,
+  "instrumentation": "大提琴",
+  "difficulty": "第一次听",
+  "tags": [
+    "巴赫",
+    "大提琴",
+    "巴洛克",
+    "组曲",
+    "无伴奏",
+    "经典"
+  ],
+  "summary": "巴赫《G大调第一无伴奏大提琴组曲》是六首组曲中最著名的一首，以优雅的前奏曲开启，展现大提琴的独奏魅力。",
+  "whyListen": "这首组曲是巴赫无伴奏大提琴作品的巅峰，前奏曲的旋律深入人心，适合初次接触古典音乐的听众。",
+  "firstListen": "建议从第一首前奏曲开始，感受大提琴纯净的音色和流动的旋律，随后依次聆听各舞曲，体会巴洛克舞曲的节奏变化。",
+  "listeningPoints": [
+    {
+      "title": "前奏曲的流动感",
+      "description": "前奏曲以分解和弦构成，旋律如流水般连绵不断，展现大提琴的歌唱性。",
+      "movement": 1
+    },
+    {
+      "title": "阿勒曼德的优雅",
+      "description": "阿勒曼德舞曲节奏平稳，旋律线条优雅，体现巴洛克宫廷舞曲的庄重。",
+      "movement": 2
+    },
+    {
+      "title": "库朗特的跳跃",
+      "description": "库朗特舞曲以三拍子快速跳跃，充满活力，与阿勒曼德形成对比。",
+      "movement": 3
+    },
+    {
+      "title": "萨拉班德的深沉",
+      "description": "萨拉班德舞曲缓慢庄重，旋律富有表现力，是组曲的情感核心。",
+      "movement": 4
+    },
+    {
+      "title": "小步舞曲的轻快",
+      "description": "两首小步舞曲旋律轻快，节奏清晰，展现巴洛克舞曲的典雅。",
+      "movement": 5
+    },
+    {
+      "title": "吉格的活力",
+      "description": "吉格舞曲以快速的六八拍节奏结束组曲，充满动力和欢快感。",
+      "movement": 7
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "前奏曲",
+      "tempo": "无标记",
+      "description": "以分解和弦构成，旋律流动，奠定组曲基调。"
+    },
+    {
+      "number": 2,
+      "title": "阿勒曼德",
+      "tempo": "中速",
+      "description": "四拍子舞曲，节奏平稳，旋律优雅。"
+    },
+    {
+      "number": 3,
+      "title": "库朗特",
+      "tempo": "快速",
+      "description": "三拍子舞曲，节奏跳跃，充满活力。"
+    },
+    {
+      "number": 4,
+      "title": "萨拉班德",
+      "tempo": "慢速",
+      "description": "三拍子舞曲，庄重缓慢，情感深沉。"
+    },
+    {
+      "number": 5,
+      "title": "小步舞曲I",
+      "tempo": "中速",
+      "description": "三拍子舞曲，轻快典雅。"
+    },
+    {
+      "number": 6,
+      "title": "小步舞曲II",
+      "tempo": "中速",
+      "description": "与第一首小步舞曲形成对比，旋律更柔和。"
+    },
+    {
+      "number": 7,
+      "title": "吉格",
+      "tempo": "快速",
+      "description": "六八拍舞曲，节奏活泼，结束组曲。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "马友友",
+      "year": 1983,
+      "note": "马友友的演绎温暖流畅，是第一次听的理想选择。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=G%E5%A4%A7%E8%B0%83%E7%AC%AC%E4%B8%80%E6%97%A0%E4%BC%B4%E5%A5%8F%E5%A4%A7%E6%8F%90%E7%90%B4%E7%BB%84%E6%9B%B2%20%E9%A9%AC%E5%8F%8B%E5%8F%8B",
+      "sourceId": "apple_music_381515547"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Anastasia Kobekina",
+      "year": 2025,
+      "note": "Kobekina的诠释清新现代，提供另一种理解。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=G%E5%A4%A7%E8%B0%83%E7%AC%AC%E4%B8%80%E6%97%A0%E4%BC%B4%E5%A5%8F%E5%A4%A7%E6%8F%90%E7%90%B4%E7%BB%84%E6%9B%B2%20Anastasia%20Kobekina",
+      "sourceId": "apple_music_1820958433"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_auto_958f678568a3fb7b",
+    "work_000007",
+    "work_000008"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.3",
+    "promptHash": "9aa05e296a75164a57af56dd645d1f3cf07905fc27d819e5767ac5b8412817c0",
+    "generatedAt": "2026-08-08T16:21:56.089Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_6c5118620d8cb67a",
+      "perf_9b27938aca3a65b2"
+    ],
+    "evidenceIds": [
+      "official_6dbbc8ae94ef",
+      "official_a89b7b635ca7",
+      "apple_music_381515547",
+      "apple_music_1820958433"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-08T16:21:56.089Z",
+  "sources": [
+    {
+      "id": "official_6dbbc8ae94ef",
+      "title": "凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21790&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "title",
+        "composer",
+        "opus",
+        "aliases"
+      ]
+    },
+    {
+      "id": "official_a89b7b635ca7",
+      "title": "晚高峰音乐会3：巴赫的N次方丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21813&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "title",
+        "composer",
+        "opus",
+        "aliases"
+      ]
+    },
+    {
+      "id": "apple_music_381515547",
+      "title": "Bach: Cello Suites Nos. 1-6, BWV 1007-1012 (2009 Remaster)",
+      "url": "https://music.apple.com/us/album/bach-cello-suites-nos-1-6-bwv-1007-1012-2009-remaster/381515547?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1820958433",
+      "title": "Bach: Cello Suites",
+      "url": "https://music.apple.com/us/album/bach-cello-suites/1820958433?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recordings",
+        "recordings.1"
+      ]
+    }
+  ]
+}

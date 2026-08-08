@@ -1,0 +1,138 @@
+{
+  "id": "work_auto_44ced29ce961d011",
+  "composerId": "composer_000010",
+  "title": "f小调第六弦乐四重奏，作品80",
+  "originalTitle": "String Quartet No. 6 in F minor, Op. 80",
+  "aliases": [
+    "f小调第六弦乐四重奏",
+    "作品80"
+  ],
+  "opus": "Op. 80",
+  "key": "f小调",
+  "genre": "弦乐四重奏",
+  "period": "浪漫主义",
+  "composedYears": "1847",
+  "durationMinutes": 25,
+  "instrumentation": "两把小提琴、一把中提琴、一把大提琴",
+  "difficulty": "需要专注",
+  "tags": [
+    "弦乐四重奏",
+    "浪漫主义",
+    "门德尔松",
+    "晚期作品",
+    "室内乐",
+    "f小调"
+  ],
+  "summary": "门德尔松最后一首弦乐四重奏，创作于1847年，情感激烈，充满悲剧性。",
+  "whyListen": "这是门德尔松的绝笔之作，展现了他晚期风格的深刻与激情，是浪漫主义室内乐的杰作。",
+  "firstListen": "建议先听第一乐章，感受其紧张的开场和戏剧性的对比。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章的激烈主题",
+      "description": "开篇即呈现不安的动机，贯穿全曲，体现悲剧色彩。",
+      "movement": 1
+    },
+    {
+      "title": "第二乐章的抒情对比",
+      "description": "慢板乐章旋律优美，与第一乐章的紧张形成对比。",
+      "movement": 2
+    },
+    {
+      "title": "第三乐章的谐谑曲",
+      "description": "轻快的节奏中暗藏不安，展现门德尔松的独特幽默。",
+      "movement": 3
+    },
+    {
+      "title": "第四乐章的爆发",
+      "description": "终曲以狂暴的力度收尾，情感达到顶点。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Allegro vivace assai",
+      "tempo": "活泼的快板",
+      "description": "奏鸣曲式，主题充满动力与不安。"
+    },
+    {
+      "number": 2,
+      "title": "Andante",
+      "tempo": "行板",
+      "description": "抒情而略带忧郁，旋律宽广。"
+    },
+    {
+      "number": 3,
+      "title": "Scherzo: Allegro assai",
+      "tempo": "极快的谐谑曲",
+      "description": "节奏轻快，但带有紧张感。"
+    },
+    {
+      "number": 4,
+      "title": "Finale: Allegro molto",
+      "tempo": "很快的快板",
+      "description": "终曲激烈，以悲剧性收尾。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Simply Quartet",
+      "year": 2025,
+      "note": "现代演绎，音色清晰，适合第一次听。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=f%E5%B0%8F%E8%B0%83%E7%AC%AC%E5%85%AD%E5%BC%A6%E4%B9%90%E5%9B%9B%E9%87%8D%E5%A5%8F%EF%BC%8C%E4%BD%9C%E5%93%8180%20Simply%20Quartet",
+      "sourceId": "apple_music_1790158306"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000028",
+    "work_000029",
+    "work_000030"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.3",
+    "promptHash": "9aa05e296a75164a57af56dd645d1f3cf07905fc27d819e5767ac5b8412817c0",
+    "generatedAt": "2026-08-08T16:21:56.089Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_02ba0048b11fb7b1"
+    ],
+    "evidenceIds": [
+      "official_9efe76728cc5",
+      "apple_music_1790158306"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-08T16:21:56.089Z",
+  "sources": [
+    {
+      "id": "official_9efe76728cc5",
+      "title": "斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21781&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "composer",
+        "title",
+        "opus",
+        "genre",
+        "period",
+        "movement structure"
+      ]
+    },
+    {
+      "id": "apple_music_1790158306",
+      "title": "Mendelssohn: String Quartet No. 6 in F Minor, Op. 80, MWV R 37 - Dvořak: String Quartet No. 13 in G Major, Op. 106, B. 192",
+      "url": "https://music.apple.com/us/album/mendelssohn-string-quartet-no-6-in-f-minor-op-80-mwv/1790158306?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-08",
+      "supports": [
+        "recording",
+        "recordings.0"
+      ]
+    }
+  ]
+}

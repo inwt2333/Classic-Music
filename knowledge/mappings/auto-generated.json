@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "id": "mapping_auto_0f44f17ff7886c42",
+      "workId": "work_auto_3bbf1bec7bedb655",
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "titles": [
+        "a小调第一小提琴协奏曲，作品77"
+      ],
+      "opus": [
+        "作品77"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:18:23.991Z"
+    },
+    {
+      "id": "mapping_auto_103a2026928dca1d",
+      "workId": "work_000027",
+      "composers": [
+        "约翰内斯·勃拉姆斯"
+      ],
+      "titles": [
+        "D 大调小提琴协奏曲，作品 77"
+      ],
+      "opus": [
+        "作品 77"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_113c0392ec0d73c8",
+      "workId": "work_000025",
+      "composers": [
+        "勃拉姆斯"
+      ],
+      "titles": [
+        "c小调第一交响曲，作品68"
+      ],
+      "opus": [
+        "作品68"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_18653dcbf09d6e5d",
+      "workId": "work_000027",
+      "composers": [
+        "勃拉姆斯"
+      ],
+      "titles": [
+        "D大调小提琴协奏曲，作品77"
+      ],
+      "opus": [
+        "作品77"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_1fcd6e9238e87243",
+      "workId": "work_auto_1f1156703d34c974",
+      "composers": [
+        "莫扎特"
+      ],
+      "titles": [
+        "g小调第四弦乐五重奏，KV 516"
+      ],
+      "opus": [
+        "KV 516"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:18:23.991Z"
+    },
+    {
+      "id": "mapping_auto_2d20a5288dcdfb84",
+      "workId": "work_000024",
+      "composers": [
+        "拉威尔"
+      ],
+      "titles": [
+        "F大调弦乐四重奏，M. 35"
+      ],
+      "opus": [
+        "M. 35"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_3226888dd4740c39",
+      "workId": "work_000013",
+      "composers": [
+        "德米特里·肖斯塔科维奇"
+      ],
+      "titles": [
+        "D 小调第五交响曲，作品 47"
+      ],
+      "opus": [
+        "作品 47"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_45d4269625e612ba",
+      "workId": "work_000029",
+      "composers": [
+        "门德尔松"
+      ],
+      "titles": [
+        "《仲夏夜之梦》组曲，作品61"
+      ],
+      "opus": [
+        "作品61"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_4676abeee49d94e6",
+      "workId": "work_auto_51ce39034f97cc91",
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "titles": [
+        "f小调第一交响曲，作品10"
+      ],
+      "opus": [
+        "作品10"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:45:43.189Z"
+    },
+    {
+      "id": "mapping_auto_485f47a30275b406",
+      "workId": "work_000008",
+      "composers": [
+        "巴赫"
+      ],
+      "titles": [
+        "《哥德堡变奏曲》，BWV 988（选段）"
+      ],
+      "opus": [
+        "BWV 988"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_5208345460bc20a9",
+      "workId": "work_000035",
+      "composers": [
+        "普罗科菲耶夫"
+      ],
+      "titles": [
+        "C大调第三钢琴协奏曲，作品26号"
+      ],
+      "opus": [
+        "作品26"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_57aa5506b661763c",
+      "workId": "work_000003",
+      "composers": [
+        "贝多芬"
+      ],
+      "titles": [
+        "D大调小提琴协奏曲，作品61"
+      ],
+      "opus": [
+        "作品61"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_5bceb9c302667db6",
+      "workId": "work_auto_e47397200c6d8e54",
+      "composers": [
+        "莫扎特"
+      ],
+      "titles": [
+        "F大调第二十三弦乐四重奏，KV 590"
+      ],
+      "opus": [
+        "KV 590"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_5f5a49ce8709f9b9",
+      "workId": "work_000017",
+      "composers": [
+        "彼得·伊里奇·柴可夫斯基"
+      ],
+      "titles": [
+        "降 B 小调第一钢琴协奏曲，作品 23"
+      ],
+      "opus": [
+        "作品 23"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_67606bd3e8e98f31",
+      "workId": "work_000002",
+      "composers": [
+        "贝多芬"
+      ],
+      "titles": [
+        "d小调第九交响曲，作品125「合唱」"
+      ],
+      "opus": [
+        "作品125"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_7cd4aabfd5eb4c4f",
+      "workId": "work_000030",
+      "composers": [
+        "门德尔松"
+      ],
+      "titles": [
+        "《A大调第四交响曲》，作品90「意大利」（第一乐章）"
+      ],
+      "opus": [
+        "作品90"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_829f6249b9c734ba",
+      "workId": "work_000014",
+      "composers": [
+        "肖斯塔科维奇"
+      ],
+      "titles": [
+        "e小调第十交响曲，作品93"
+      ],
+      "opus": [
+        "作品93"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_851fe21b9c166aae",
+      "workId": "work_auto_958f678568a3fb7b",
+      "composers": [
+        "巴赫"
+      ],
+      "titles": [
+        "C小调托卡塔, BWV 911"
+      ],
+      "opus": [
+        "BWV 911"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:18:23.991Z"
+    },
+    {
+      "id": "mapping_auto_8e106fc1cc144fdb",
+      "workId": "work_auto_c8f4679b2d254f5f",
+      "composers": [
+        "莫扎特"
+      ],
+      "titles": [
+        "G大调第三小提琴协奏曲，作品216"
+      ],
+      "opus": [
+        "作品216"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_8e5b8ae21d342fe2",
+      "workId": "work_000025",
+      "composers": [
+        "约翰内斯·勃拉姆斯"
+      ],
+      "titles": [
+        "C 小调第一交响曲， 作品 68"
+      ],
+      "opus": [
+        "作品 68"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_95abfcbfaca22cfc",
+      "workId": "work_000004",
+      "composers": [
+        "莫扎特"
+      ],
+      "titles": [
+        "「很快的快板」，选自《g小调第四十交响曲》，KV 550"
+      ],
+      "opus": [
+        "KV 550"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_a6b38b87ed28d0ae",
+      "workId": "work_auto_44ced29ce961d011",
+      "composers": [
+        "门德尔松"
+      ],
+      "titles": [
+        "f小调第六弦乐四重奏，作品80"
+      ],
+      "opus": [
+        "作品80"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_b0f8ee303a75be82",
+      "workId": "work_000016",
+      "composers": [
+        "彼得·伊里奇·柴可夫斯基"
+      ],
+      "titles": [
+        "E 小调第五交响曲，作品 64"
+      ],
+      "opus": [
+        "作品 64"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_c601c268b0d9f9eb",
+      "workId": "work_000028",
+      "composers": [
+        "门德尔松"
+      ],
+      "titles": [
+        "e小调小提琴协奏曲，作品64"
+      ],
+      "opus": [
+        "作品64"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_c726e23e294cae2b",
+      "workId": "work_000009",
+      "composers": [
+        "巴赫"
+      ],
+      "titles": [
+        "d小调第二无伴奏小提琴组曲，BWV 1004"
+      ],
+      "opus": [
+        "BWV 1004"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_e0530fc4cb370cba",
+      "workId": "work_000018",
+      "composers": [
+        "柴可夫斯基"
+      ],
+      "titles": [
+        "D大调小提琴协奏曲，作品35"
+      ],
+      "opus": [
+        "作品35"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_e3cac7c2acd3486b",
+      "workId": "work_auto_9fbe9b19325042ac",
+      "composers": [
+        "巴赫"
+      ],
+      "titles": [
+        "G大调第一无伴奏大提琴组曲，BWV 1007"
+      ],
+      "opus": [
+        "BWV 1007"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_fe5840a55b5d3e8d",
+      "workId": "work_000034",
+      "composers": [
+        "普罗科菲耶夫"
+      ],
+      "titles": [
+        "古典交响曲（第一交响曲），作品25"
+      ],
+      "opus": [
+        "作品25"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-08T14:41:05.043Z"
+    }
+  ]
+}

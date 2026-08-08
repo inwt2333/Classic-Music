@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { ConcertDataset, ConcertEvent } from "../src/types";
+import { loadKnowledgeRegistry } from "./knowledge-store";
 
 type Severity = "error" | "warning";
 
@@ -14,6 +15,9 @@ async function main() {
 const datasetArgument = process.argv.slice(2).find((argument) => !argument.startsWith("--"));
 const datasetPath = resolve(process.cwd(), datasetArgument || "public/data/events.json");
 const dataset = JSON.parse(await readFile(datasetPath, "utf8")) as ConcertDataset;
+const knowledgeRegistry = await loadKnowledgeRegistry(process.cwd());
+const knowledgeWorks = new Map(knowledgeRegistry.works.map((work) => [work.id, work]));
+const knowledgeMappings = new Map(knowledgeRegistry.mappings.map((rule) => [rule.id, rule]));
 const issues: Issue[] = [];
 const strictSources = process.argv.includes("--strict-sources");
 const allowStaleSources = process.argv.includes("--allow-stale-sources");
@@ -94,6 +98,20 @@ for (const event of dataset.events) {
   }
   for (const item of event.program) {
     if (dataset.schemaVersion === 2 && !item.workId) addIssue("error", event, `节目项缺少作品 ID：${item.title}`);
+    if (item.knowledgeWorkId) {
+      const work = knowledgeWorks.get(item.knowledgeWorkId);
+      if (!work) addIssue("error", event, `节目项引用未知知识作品：${item.knowledgeWorkId}`);
+      else if (work.status !== "published") addIssue("error", event, `节目项引用未发布知识作品：${item.knowledgeWorkId}`);
+      const rule = item.knowledgeMapping && knowledgeMappings.get(item.knowledgeMapping.ruleId);
+      if (!item.knowledgeMapping || !rule || rule.workId !== item.knowledgeWorkId) {
+        addIssue("error", event, `节目项知识映射元数据无效：${item.title}`);
+      }
+      if (item.confidence === "ocr" || item.confidence === "ai" || item.confidence === "title-inferred") {
+        addIssue("error", event, `低置信节目项不应自动关联知识作品：${item.title}`);
+      }
+    } else if (item.knowledgeMapping) {
+      addIssue("error", event, `节目项仅有知识映射元数据而无作品 ID：${item.title}`);
+    }
     if (item.composer && roleOnlyPattern.test(item.composer)) {
       addIssue("error", event, `节目项含异常作曲家：${item.composer}`);
     }

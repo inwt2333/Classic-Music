@@ -1,0 +1,123 @@
+{
+  "id": "work_000001",
+  "composerId": "composer_000001",
+  "title": "C 小调第五交响曲",
+  "originalTitle": "Symphony No. 5 in C minor",
+  "aliases": ["第五交响曲", "贝多芬第五交响曲", "命运交响曲", "贝五"],
+  "opus": "Op. 67",
+  "key": "C 小调",
+  "genre": "交响曲",
+  "period": "古典主义至浪漫主义过渡时期",
+  "composedYears": "1804–1808",
+  "durationMinutes": 33,
+  "instrumentation": "短笛、长笛、双簧管、单簧管、大管、低音大管、圆号、小号、长号、定音鼓与弦乐",
+  "difficulty": "第一次听",
+  "tags": ["动机鲜明", "戏剧张力", "现场优势明显", "宏大音响"],
+  "summary": "四个音的短短动机贯穿全曲，把紧张的 C 小调一路推向明亮而开阔的 C 大调终章。",
+  "whyListen": "这部作品让人直接听见音乐如何从极少的材料生长出宏大的结构。第一乐章的核心动机不断变形、转移和叠加；第三、第四乐章又以连续过渡把压抑的暗色推向明亮终局。现场聆听时，铜管、定音鼓与弦乐共同累积的能量尤其鲜明。",
+  "firstListen": "第一次听不必追踪每个主题。先记住开头四音，留意它何时藏进伴奏、低声部或新的旋律；到第三乐章后半保持注意，感受音乐如何几乎不停顿地冲入终章。",
+  "listeningPoints": [
+    {
+      "title": "四音动机第一次出现",
+      "description": "开头两句短促陈述提供了全曲最重要的节奏细胞。",
+      "movement": 1
+    },
+    {
+      "title": "双簧管短暂独白",
+      "description": "激烈推进忽然停住，双簧管像自由宣叙调般独奏，随后乐队重新卷入。",
+      "movement": 1
+    },
+    {
+      "title": "谐谑曲的幽暗问答",
+      "description": "低音弦乐与圆号交替提出材料，熟悉的短短短长节奏以另一种面貌返回。",
+      "movement": 3
+    },
+    {
+      "title": "从暗处进入终章",
+      "description": "第三乐章末尾持续压低音量和张力，随后 C 大调与新增的短笛、长号、低音大管一起迸发。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "有活力的快板",
+      "tempo": "Allegro con brio",
+      "description": "以高度集中的四音动机构成紧张而持续推进的奏鸣曲式乐章。"
+    },
+    {
+      "number": 2,
+      "title": "流动的行板",
+      "tempo": "Andante con moto",
+      "description": "两组主题交替变奏，在抒情行进与庄严扩张之间转换。"
+    },
+    {
+      "number": 3,
+      "title": "谐谑曲：快板",
+      "tempo": "Scherzo. Allegro",
+      "description": "幽暗主题、圆号信号与快速赋格式中段交替，末尾直接连接终章。"
+    },
+    {
+      "number": 4,
+      "title": "快板",
+      "tempo": "Allegro",
+      "description": "C 大调的宽阔终章扩充铜管音色，并在尾声中反复确认明亮结局。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "卡洛斯·克莱伯／维也纳爱乐乐团",
+      "year": 1975,
+      "note": "线条清楚、推进紧凑，适合先把握动机发展和四个乐章的整体方向。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=贝多芬第五交响曲卡洛斯克莱伯",
+      "sourceId": "apple-music-kleiber-beethoven-5-7"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "约翰·艾略特·加德纳／革命与浪漫乐团",
+      "year": 1994,
+      "note": "更轻捷锐利的音响能帮助听见织体层次，以及铜管和定音鼓的节奏冲击。",
+      "searchUrl": "https://music.163.com/#/search/m/?s=贝多芬第五交响曲加德纳",
+      "sourceId": "apple-music-gardiner-beethoven-5-6"
+    }
+  ],
+  "relatedWorkIds": ["work_000002", "work_000003"],
+  "status": "published",
+  "reviewedAt": "2026-08-07T00:00:00.000Z",
+  "updatedAt": "2026-08-07T00:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-beethoven-symphony-5",
+      "title": "Symphony No. 5 (Beethoven)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._5_(Beethoven)",
+      "publisher": "Wikipedia contributors",
+      "accessedAt": "2026-08-07",
+      "supports": ["title", "originalTitle", "opus", "key", "composedYears", "movements"]
+    },
+    {
+      "id": "imslp-beethoven-symphony-5",
+      "title": "Symphony No.5, Op.67 (Beethoven, Ludwig van)",
+      "url": "https://imslp.org/wiki/Symphony_No.5%2C_Op.67_(Beethoven%2C_Ludwig_van)",
+      "publisher": "IMSLP",
+      "accessedAt": "2026-08-07",
+      "supports": ["instrumentation", "movements", "genre"]
+    },
+    {
+      "id": "apple-music-kleiber-beethoven-5-7",
+      "title": "Beethoven: Symphonies Nos. 5 & 7 — Vienna Philharmonic & Carlos Kleiber",
+      "url": "https://music.apple.com/us/album/beethoven-symphonies-nos-5-7/1644892939",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-07",
+      "supports": ["recordings.0"]
+    },
+    {
+      "id": "apple-music-gardiner-beethoven-5-6",
+      "title": "Beethoven: Symphonies Nos. 5 & 6 — John Eliot Gardiner & Orchestre Révolutionnaire et Romantique",
+      "url": "https://music.apple.com/us/album/beethoven-symhonies-nos-5-6/1452231975",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-07",
+      "supports": ["recordings.1"]
+    }
+  ]
+}

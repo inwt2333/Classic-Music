@@ -13,6 +13,7 @@ import { createRoot, type Root } from "react-dom/client";
 import {
   CalendarDays,
   Bell,
+  BookOpenText,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -33,12 +34,22 @@ import {
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
+import ComposerPage from "./knowledge/components/ComposerPage";
+import KnowledgeLibraryPage from "./knowledge/components/KnowledgeLibraryPage";
+import WorkPage from "./knowledge/components/WorkPage";
 import NotificationCenter from "./components/NotificationCenter";
 import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
-import { loadChanges, loadEntities, loadEventDetail, loadEventIndex } from "./data";
+import {
+  loadChanges,
+  loadEntities,
+  loadEventDetail,
+  loadEventIndex,
+  loadKnowledgeComposer,
+  loadKnowledgeWork,
+} from "./data";
 import {
   buildFollowNotifications,
   buildSavedFilterName,
@@ -83,6 +94,7 @@ import type {
   EntityDataset,
   EntityRecord,
 } from "./types";
+import type { PublishedKnowledgeComposer, PublishedKnowledgeWork } from "./knowledge/types";
 import {
   dateMatchesPreset,
   formatEventVenue,
@@ -165,6 +177,15 @@ function App() {
   const [visibleCount, setVisibleCount] = useState(pageSize);
   const [activeEntityId, setActiveEntityId] = useState(initialParams.get("entity") ?? "");
   const [activeVenue, setActiveVenue] = useState(initialParams.get("venuePage") ?? "");
+  const [activeWorkId, setActiveWorkId] = useState(initialParams.get("work") ?? "");
+  const [activeWork, setActiveWork] = useState<PublishedKnowledgeWork | null>(null);
+  const [workLoading, setWorkLoading] = useState(Boolean(initialParams.get("work")));
+  const [workError, setWorkError] = useState("");
+  const [knowledgeLibraryOpen, setKnowledgeLibraryOpen] = useState(initialParams.get("knowledge") === "works");
+  const [activeComposerId, setActiveComposerId] = useState(initialParams.get("composer") ?? "");
+  const [activeComposer, setActiveComposer] = useState<PublishedKnowledgeComposer | null>(null);
+  const [composerLoading, setComposerLoading] = useState(Boolean(initialParams.get("composer")));
+  const [composerError, setComposerError] = useState("");
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
   const [coverIndex, setCoverIndex] = useState(0);
   const [loadedCoverIndexes, setLoadedCoverIndexes] = useState(() => new Set([0]));
@@ -183,6 +204,10 @@ function App() {
   const detailPanelRef = useRef<HTMLElement | null>(null);
   const detailCloseRef = useRef<HTMLButtonElement | null>(null);
   const detailTriggerRef = useRef<HTMLElement | null>(null);
+  const detailReturnWorkIdRef = useRef("");
+  const workTriggerRef = useRef<HTMLElement | null>(null);
+  const workReturnEventIdRef = useRef("");
+  const restoreWorkTriggerRef = useRef(false);
   const filtersWereOpenRef = useRef(false);
   const filterIsModal = useMediaQuery("(max-width: 760px)");
   const detailIsModal = useMediaQuery("(max-width: 1200px)");
@@ -242,8 +267,20 @@ function App() {
       window.requestAnimationFrame(() => detailCloseRef.current?.focus());
       return;
     }
-    if (!detailOpen) detailTriggerRef.current?.focus();
+    if (!detailOpen && !detailReturnWorkIdRef.current) detailTriggerRef.current?.focus();
   }, [detailModalActive, detailOpen]);
+
+  useEffect(() => {
+    if (activeWorkId || !restoreWorkTriggerRef.current) return;
+    restoreWorkTriggerRef.current = false;
+    window.requestAnimationFrame(() => {
+      const workId = workTriggerRef.current?.dataset.knowledgeWorkId;
+      const currentTrigger = workId
+        ? document.querySelector<HTMLElement>(`[data-knowledge-work-id="${workId}"]`)
+        : workTriggerRef.current;
+      currentTrigger?.focus();
+    });
+  }, [activeWorkId]);
 
   useEffect(() => {
     const backgroundElements = document.querySelectorAll<HTMLElement>("[data-app-background]");
@@ -267,7 +304,7 @@ function App() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
       if (filterModalActive) setFiltersOpen(false);
-      else if (detailModalActive) setDetailOpen(false);
+      else if (detailModalActive) closeDetail();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -338,10 +375,18 @@ function App() {
       );
       setSortMode((params.get("sort") as SortMode) || "time");
       setViewMode(params.get("view") === "calendar" ? "calendar" : "list");
-      setSelectedId(params.get("event") ?? "");
+      const nextEventId = params.get("event") ?? "";
+      const nextWorkId = params.get("work") ?? "";
+      detailReturnWorkIdRef.current = "";
+      workReturnEventIdRef.current = "";
+      restoreWorkTriggerRef.current = false;
+      setSelectedId(nextEventId);
       setActiveEntityId(params.get("entity") ?? "");
       setActiveVenue(params.get("venuePage") ?? "");
-      setDetailOpen(Boolean(params.get("event")));
+      setActiveWorkId(nextWorkId);
+      setKnowledgeLibraryOpen(params.get("knowledge") === "works");
+      setActiveComposerId(params.get("composer") ?? "");
+      setDetailOpen(Boolean(nextEventId));
     };
     window.addEventListener("popstate", restoreFromUrl);
     return () => window.removeEventListener("popstate", restoreFromUrl);
@@ -377,6 +422,60 @@ function App() {
       cancelled = true;
     };
   }, [detailIsModal, detailOpen, selectedSummary]);
+
+  useEffect(() => {
+    if (!activeWorkId) {
+      setActiveWork(null);
+      setWorkLoading(false);
+      setWorkError("");
+      return;
+    }
+    let cancelled = false;
+    setWorkLoading(true);
+    setWorkError("");
+    loadKnowledgeWork(activeWorkId)
+      .then((work) => {
+        if (!cancelled) setActiveWork(work);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setActiveWork(null);
+        setWorkError("作品资料暂时无法载入，请返回演出列表后重试。");
+      })
+      .finally(() => {
+        if (!cancelled) setWorkLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeWorkId]);
+
+  useEffect(() => {
+    if (!activeComposerId) {
+      setActiveComposer(null);
+      setComposerLoading(false);
+      setComposerError("");
+      return;
+    }
+    let cancelled = false;
+    setComposerLoading(true);
+    setComposerError("");
+    loadKnowledgeComposer(activeComposerId)
+      .then((composer) => {
+        if (!cancelled) setActiveComposer(composer);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setActiveComposer(null);
+        setComposerError("作曲家资料暂时无法载入，请返回作品库后重试。");
+      })
+      .finally(() => {
+        if (!cancelled) setComposerLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeComposerId]);
 
   const cities = useMemo(
     () => ["全部城市", ...Array.from(new Set(dataset.events.map((event) => event.city))).sort()],
@@ -510,8 +609,11 @@ function App() {
     if (detailOpen && selectedId) params.set("event", selectedId);
     if (activeEntityId) params.set("entity", activeEntityId);
     if (activeVenue) params.set("venuePage", activeVenue);
+    if (activeWorkId) params.set("work", activeWorkId);
+    if (knowledgeLibraryOpen) params.set("knowledge", "works");
+    if (activeComposerId) params.set("composer", activeComposerId);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeEntityId, activeVenue, city, datePreset, detailOpen, ensemble, genre, hasProgram, personalFilter, query, selectedId, sortMode, venue, viewMode]);
+  }, [activeComposerId, activeEntityId, activeVenue, activeWorkId, city, datePreset, detailOpen, ensemble, genre, hasProgram, knowledgeLibraryOpen, personalFilter, query, selectedId, sortMode, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
@@ -654,16 +756,155 @@ function App() {
   };
 
   const selectEvent = (event: ConcertEventSummary) => {
+    detailReturnWorkIdRef.current = "";
     detailTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     pushHistoryValue("event", event.id);
     setSelectedId(event.id);
     setDetailOpen(true);
   };
 
+  const exploreWork = (workId: string) => {
+    workTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    workReturnEventIdRef.current = detailOpen ? selectedId : "";
+    restoreWorkTriggerRef.current = false;
+    const params = new URLSearchParams(window.location.search);
+    params.delete("event");
+    params.delete("entity");
+    params.delete("venuePage");
+    params.delete("knowledge");
+    params.delete("composer");
+    params.set("work", workId);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveWorkId(workId);
+    setActiveEntityId("");
+    setActiveVenue("");
+    setKnowledgeLibraryOpen(false);
+    setActiveComposerId("");
+    setDetailOpen(false);
+  };
+
+  const closeWork = () => {
+    const returnEventId = workReturnEventIdRef.current;
+    workReturnEventIdRef.current = "";
+    restoreWorkTriggerRef.current = true;
+    if (returnEventId) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete("work");
+      params.set("event", returnEventId);
+      window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+      setActiveWorkId("");
+      setSelectedId(returnEventId);
+      setDetailOpen(true);
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    params.delete("work");
+    params.set("knowledge", "works");
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveWorkId("");
+    setKnowledgeLibraryOpen(true);
+  };
+
+  const openKnowledgeLibrary = () => {
+    const params = new URLSearchParams(window.location.search);
+    for (const key of ["event", "entity", "venuePage", "work", "composer"]) params.delete(key);
+    params.set("knowledge", "works");
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setKnowledgeLibraryOpen(true);
+    setActiveComposerId("");
+    setActiveWorkId("");
+    setActiveEntityId("");
+    setActiveVenue("");
+    setDetailOpen(false);
+  };
+
+  const closeKnowledgeLibrary = () => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("knowledge");
+    window.history.pushState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
+    setKnowledgeLibraryOpen(false);
+  };
+
+  const openLibraryWork = (workId: string) => {
+    workReturnEventIdRef.current = "";
+    const params = new URLSearchParams(window.location.search);
+    params.delete("knowledge");
+    params.delete("composer");
+    params.set("work", workId);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setKnowledgeLibraryOpen(false);
+    setActiveComposerId("");
+    setActiveWorkId(workId);
+  };
+
+  const openComposer = (composerId: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("knowledge");
+    params.delete("work");
+    params.delete("event");
+    params.set("composer", composerId);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setKnowledgeLibraryOpen(false);
+    setActiveWorkId("");
+    setActiveComposerId(composerId);
+    setDetailOpen(false);
+  };
+
+  const closeComposer = () => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("composer");
+    params.set("knowledge", "works");
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveComposerId("");
+    setKnowledgeLibraryOpen(true);
+  };
+
+  const openComposerEvent = (event: ConcertEventSummary) => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("composer");
+    params.set("event", event.id);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveComposerId("");
+    setSelectedId(event.id);
+    setDetailOpen(true);
+  };
+
+  const openWorkEvent = (event: ConcertEventSummary) => {
+    detailReturnWorkIdRef.current = activeWorkId;
+    detailTriggerRef.current = null;
+    restoreWorkTriggerRef.current = false;
+    const params = new URLSearchParams(window.location.search);
+    params.delete("work");
+    params.set("event", event.id);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveWorkId("");
+    setSelectedId(event.id);
+    setDetailOpen(true);
+  };
+
+  const closeDetail = () => {
+    const returnWorkId = detailReturnWorkIdRef.current;
+    if (!returnWorkId) {
+      setDetailOpen(false);
+      return;
+    }
+
+    detailReturnWorkIdRef.current = "";
+    const params = new URLSearchParams(window.location.search);
+    params.delete("event");
+    params.set("work", returnWorkId);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setDetailOpen(false);
+    setActiveWorkId(returnWorkId);
+  };
+
   const exploreEntity = (entity: EntityRecord) => {
     pushHistoryValue("entity", entity.id);
     setActiveEntityId(entity.id);
     setActiveVenue("");
+    setActiveWorkId("");
+    setActiveComposerId("");
+    setKnowledgeLibraryOpen(false);
     setQuery("");
     setDatePreset("all");
     setDetailOpen(false);
@@ -678,6 +919,9 @@ function App() {
     pushHistoryValue("venuePage", nextVenue);
     setActiveVenue(nextVenue);
     setActiveEntityId("");
+    setActiveWorkId("");
+    setActiveComposerId("");
+    setKnowledgeLibraryOpen(false);
     setVenue("全部场馆");
     setQuery("");
     setDatePreset("all");
@@ -703,21 +947,25 @@ function App() {
           <div><strong>古典乐演出日历</strong><span>全国演出 · 持续更新</span></div>
         </div>
         <div className="header-status">
-          <a className="header-link" href="?sources=1">
+          <button className="header-link" type="button" onClick={openKnowledgeLibrary} title="作品库" aria-label="作品库">
+            <BookOpenText size={14} />
+            作品库
+          </button>
+          <a className="header-link" href="?sources=1" title="数据来源" aria-label="数据来源">
             <Database size={14} />
             数据来源
           </a>
-          <a className="header-link" href="?changes=1">
+          <a className="header-link" href="?changes=1" title="变化历史" aria-label="变化历史">
             <CircleAlert size={14} />
             变化历史
           </a>
-          <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)}>
+          <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)} title="我的关注" aria-label="我的关注">
             <Bell size={14} />
             我的关注
             {unreadNotificationCount ? <b>{unreadNotificationCount}</b> : null}
           </button>
           {import.meta.env.DEV ? (
-            <a className="header-link" href="?review=1">
+            <a className="header-link" href="?review=1" title="数据审核" aria-label="数据审核">
               <ScanText size={14} />
               审核
             </a>
@@ -737,6 +985,34 @@ function App() {
         </div>
       </header>
 
+      {activeWorkId ? (
+        <WorkPage
+          work={activeWork}
+          loading={workLoading}
+          error={workError}
+          events={dataset.events.filter((event) => activeWork?.upcomingEventIds.includes(event.id))}
+          onBack={closeWork}
+          onOpenEvent={openWorkEvent}
+          onOpenComposer={openComposer}
+        />
+      ) : activeComposerId ? (
+        <ComposerPage
+          composer={activeComposer}
+          loading={composerLoading}
+          error={composerError}
+          events={dataset.events.filter((event) => activeComposer?.upcomingEventIds.includes(event.id))}
+          onBack={closeComposer}
+          onOpenWork={openLibraryWork}
+          onOpenEvent={openComposerEvent}
+        />
+      ) : knowledgeLibraryOpen ? (
+        <KnowledgeLibraryPage
+          onOpenWork={openLibraryWork}
+          onOpenComposer={openComposer}
+          onBack={closeKnowledgeLibrary}
+        />
+      ) : (
+        <>
       <section
         className="cover-banner"
         data-app-background
@@ -1001,8 +1277,9 @@ function App() {
           entitiesByKey={entitiesByKey}
           panelRef={detailPanelRef}
           closeButtonRef={detailCloseRef}
-          onClose={() => setDetailOpen(false)}
+          onClose={closeDetail}
           onExplore={exploreEntity}
+          onExploreWork={exploreWork}
           onExploreVenue={exploreVenue}
           onCopy={copySelectedEvent}
           onDownloadIcs={downloadSelectedEventIcs}
@@ -1013,6 +1290,8 @@ function App() {
           onSetPersonalStatus={updatePersonalStatus}
         />
       </section>
+        </>
+      )}
 
       <NotificationCenter
         open={notificationOpen}

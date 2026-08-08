@@ -11,7 +11,8 @@ export function parseShenzhenConcertHallDetail(html: string, pageUrl = "https://
   const title = cleanText($("h1, .detailTitle, .title").filter((_, element) => cleanText($(element).text()).length > 6).first().text()) || cleanText($("title").text());
   const bodyText = $("body").text().replace(/\r/g, "");
   const dateTime = bodyText.match(/(20\d{2}年\d{1,2}月\d{1,2}日[^\d]{0,16}\d{1,2}:\d{2})/)?.[1];
-  const venue = bodyText.match(/(深圳音乐厅[^\n\r]{0,24}(?:音乐厅|剧场|空间|大厅)?)/)?.[1]?.trim();
+  const hall = bodyText.match(/深圳音乐厅\s*(二楼演奏大厅|五楼小剧场|演奏大厅)/)?.[1];
+  const venue = bodyText.includes("深圳音乐厅") ? "深圳音乐厅" : undefined;
   const priceText = bodyText.match(/(?:票价|演出票价)[：:]?\s*([^\n\r]+)/)?.[1];
   const priceTiers = unique(Array.from((priceText ?? "").matchAll(/\d+/g)).map((match) => Number(match[0]))).sort((a, b) => a - b);
   const candidates = $(".tabContent2, .tab_content")
@@ -23,7 +24,7 @@ export function parseShenzhenConcertHallDetail(html: string, pageUrl = "https://
   const program = parseProgram(content);
   const content$ = cheerio.load(content);
   const imageUrls = content$("img[src]").map((_, element) => content$(element).attr("src") || "").get().filter(Boolean).map((url) => new URL(url, pageUrl).href);
-  return { title, dateTime, venue, priceTiers, program, imageUrls };
+  return { title, dateTime, venue, hall, priceTiers, program, imageUrls };
 }
 
 export function parseShenzhenConcertHallProgramText(

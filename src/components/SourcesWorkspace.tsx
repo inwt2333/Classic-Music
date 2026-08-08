@@ -24,7 +24,7 @@ export default function SourcesWorkspace() {
           <Music size={22} />
           <div><strong>古典乐演出日历</strong><span>数据来源</span></div>
         </div>
-        <a className="header-link" href={import.meta.env.BASE_URL}>
+        <a className="header-link" href={import.meta.env.BASE_URL} title="返回演出日历" aria-label="返回演出日历">
           <ArrowLeft size={15} />
           返回演出日历
         </a>

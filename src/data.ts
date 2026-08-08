@@ -4,8 +4,15 @@ import type {
   ConcertIndexDataset,
   EntityDataset,
 } from "./types";
+import type {
+  KnowledgeIndex,
+  PublishedKnowledgeComposer,
+  PublishedKnowledgeWork,
+} from "./knowledge/types";
 
 const detailCache = new Map<string, ConcertEvent>();
+const knowledgeWorkCache = new Map<string, PublishedKnowledgeWork>();
+const knowledgeComposerCache = new Map<string, PublishedKnowledgeComposer>();
 const jsonRequests = new Map<string, Promise<unknown>>();
 
 function dataUrl(path: string) {
@@ -48,4 +55,26 @@ export function loadEntities() {
 
 export function loadChanges() {
   return fetchJson<ChangeDataset>("changes.json");
+}
+
+export function loadKnowledgeIndex() {
+  return fetchJson<KnowledgeIndex>("knowledge/index.json");
+}
+
+export async function loadKnowledgeWork(id: string) {
+  const cached = knowledgeWorkCache.get(id);
+  if (cached) return cached;
+
+  const work = await fetchJson<PublishedKnowledgeWork>(`knowledge/works/${id}.json`);
+  knowledgeWorkCache.set(id, work);
+  return work;
+}
+
+export async function loadKnowledgeComposer(id: string) {
+  const cached = knowledgeComposerCache.get(id);
+  if (cached) return cached;
+
+  const composer = await fetchJson<PublishedKnowledgeComposer>(`knowledge/composers/${id}.json`);
+  knowledgeComposerCache.set(id, composer);
+  return composer;
 }
