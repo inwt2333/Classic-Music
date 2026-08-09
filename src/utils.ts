@@ -91,16 +91,22 @@ export function dateMatchesPreset(
   return inWeek && [0, 6].includes(eventDate.getDay());
 }
 
-export function neteaseSearchUrl(keyword: string) {
-  return `https://music.163.com/#/search/m/?s=${encodeURIComponent(keyword)}&type=1`;
-}
-
-export function qqMusicSearchUrl(keyword: string) {
-  return `https://y.qq.com/n/ryqq/search?w=${encodeURIComponent(keyword)}`;
-}
-
 export function bilibiliSearchUrl(keyword: string) {
   return `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+}
+
+export function localizedMusicSourceUrl(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.hostname !== "music.apple.com") return value;
+    const segments = url.pathname.split("/").filter(Boolean);
+    if (segments.length && /^[a-z]{2}$/i.test(segments[0])) segments[0] = "cn";
+    else segments.unshift("cn");
+    url.pathname = `/${segments.join("/")}`;
+    return url.toString();
+  } catch {
+    return value;
+  }
 }
 
 export function resourceSearchUrl(keyword: string) {

@@ -8,10 +8,11 @@ import {
   Headphones,
   MapPin,
   Music2,
+  Video,
 } from "lucide-react";
 import type { ConcertEventSummary } from "../../types";
 import type { PublishedKnowledgeWork } from "../types";
-import { formatEventVenue } from "../../utils";
+import { bilibiliSearchUrl, formatEventVenue, localizedMusicSourceUrl } from "../../utils";
 
 export default function WorkPage({
   work,
@@ -164,20 +165,29 @@ export default function WorkPage({
           {work.recordings.length ? <section className="work-side-section">
             <span>录音建议</span>
             <div className="work-recordings">
-              {work.recordings.map((recording) => (
-                <a key={recording.label} href={recording.searchUrl} target="_blank" rel="noreferrer">
+              {work.recordings.map((recording, index) => {
+                const source = work.sources.find((item) => item.id === recording.sourceId);
+                const searchKeyword = `${work.composer.name} ${work.title} ${recording.performers}`;
+                return <div className="work-recording" key={`${recording.sourceId}-${index}`}>
                   <strong>{recording.label}</strong>
                   <small>{recording.performers}{recording.year ? ` · ${recording.year}` : ""}</small>
                   <p>{recording.note}</p>
-                  <ExternalLink size={14} />
-                </a>
-              ))}
+                  <div className="work-recording-actions">
+                    {source ? <a className="primary" href={localizedMusicSourceUrl(source.url)} target="_blank" rel="noreferrer">
+                      <ExternalLink size={12} />查看来源
+                    </a> : null}
+                    <a href={bilibiliSearchUrl(searchKeyword)} target="_blank" rel="noreferrer">
+                      <Video size={12} />B 站搜索
+                    </a>
+                  </div>
+                </div>;
+              })}
             </div>
           </section> : null}
           <section className="work-side-section work-sources">
             <span>资料来源</span>
             {work.sources.map((source) => (
-              <a key={source.id} href={source.url} target="_blank" rel="noreferrer">
+              <a key={source.id} href={localizedMusicSourceUrl(source.url)} target="_blank" rel="noreferrer">
                 {source.publisher} · {source.title}<ExternalLink size={12} />
               </a>
             ))}

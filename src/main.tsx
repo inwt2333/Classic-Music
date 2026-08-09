@@ -24,12 +24,14 @@ import {
   Filter,
   List as ListIcon,
   MapPin,
+  MoreHorizontal,
   Music,
   Search,
   ScanText,
   SlidersHorizontal,
   Star,
   Ticket,
+  History,
   UserRound,
   X,
 } from "lucide-react";
@@ -42,6 +44,7 @@ import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
 import SourcesWorkspace from "./components/SourcesWorkspace";
+import UpdatesWorkspace from "./components/UpdatesWorkspace";
 import {
   loadChanges,
   loadEntities,
@@ -94,7 +97,7 @@ import type {
   EntityDataset,
   EntityRecord,
 } from "./types";
-import type { PublishedKnowledgeComposer, PublishedKnowledgeWork } from "./knowledge/types";
+import type { KnowledgeLibraryView, PublishedKnowledgeComposer, PublishedKnowledgeWork } from "./knowledge/types";
 import {
   dateMatchesPreset,
   formatEventVenue,
@@ -182,6 +185,10 @@ function App() {
   const [workLoading, setWorkLoading] = useState(Boolean(initialParams.get("work")));
   const [workError, setWorkError] = useState("");
   const [knowledgeLibraryOpen, setKnowledgeLibraryOpen] = useState(initialParams.get("knowledge") === "works");
+  const [knowledgeLibraryView, setKnowledgeLibraryView] = useState<KnowledgeLibraryView>(() => {
+    const value = initialParams.get("library");
+    return value === "composers" || value === "works" ? value : "explore";
+  });
   const [activeComposerId, setActiveComposerId] = useState(initialParams.get("composer") ?? "");
   const [activeComposer, setActiveComposer] = useState<PublishedKnowledgeComposer | null>(null);
   const [composerLoading, setComposerLoading] = useState(Boolean(initialParams.get("composer")));
@@ -610,10 +617,13 @@ function App() {
     if (activeEntityId) params.set("entity", activeEntityId);
     if (activeVenue) params.set("venuePage", activeVenue);
     if (activeWorkId) params.set("work", activeWorkId);
-    if (knowledgeLibraryOpen) params.set("knowledge", "works");
+    if (knowledgeLibraryOpen) {
+      params.set("knowledge", "works");
+      if (knowledgeLibraryView !== "explore") params.set("library", knowledgeLibraryView);
+    }
     if (activeComposerId) params.set("composer", activeComposerId);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeComposerId, activeEntityId, activeVenue, activeWorkId, city, datePreset, detailOpen, ensemble, genre, hasProgram, knowledgeLibraryOpen, personalFilter, query, selectedId, sortMode, venue, viewMode]);
+  }, [activeComposerId, activeEntityId, activeVenue, activeWorkId, city, datePreset, detailOpen, ensemble, genre, hasProgram, knowledgeLibraryOpen, knowledgeLibraryView, personalFilter, query, selectedId, sortMode, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
@@ -807,10 +817,11 @@ function App() {
 
   const openKnowledgeLibrary = () => {
     const params = new URLSearchParams(window.location.search);
-    for (const key of ["event", "entity", "venuePage", "work", "composer"]) params.delete(key);
+    for (const key of ["event", "entity", "venuePage", "work", "composer", "library"]) params.delete(key);
     params.set("knowledge", "works");
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     setKnowledgeLibraryOpen(true);
+    setKnowledgeLibraryView("explore");
     setActiveComposerId("");
     setActiveWorkId("");
     setActiveEntityId("");
@@ -821,6 +832,7 @@ function App() {
   const closeKnowledgeLibrary = () => {
     const params = new URLSearchParams(window.location.search);
     params.delete("knowledge");
+    params.delete("library");
     window.history.pushState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
     setKnowledgeLibraryOpen(false);
   };
@@ -951,13 +963,17 @@ function App() {
             <BookOpenText size={14} />
             作品库
           </button>
-          <a className="header-link" href="?sources=1" title="数据来源" aria-label="数据来源">
+          <a className="header-link header-aux-link" href="?sources=1" title="数据来源" aria-label="数据来源">
             <Database size={14} />
             数据来源
           </a>
-          <a className="header-link" href="?changes=1" title="变化历史" aria-label="变化历史">
+          <a className="header-link header-aux-link" href="?changes=1" title="变化历史" aria-label="变化历史">
             <CircleAlert size={14} />
             变化历史
+          </a>
+          <a className="header-link header-aux-link" href="?updates=1" title="更新日志" aria-label="更新日志">
+            <History size={14} />
+            更新日志
           </a>
           <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)} title="我的关注" aria-label="我的关注">
             <Bell size={14} />
@@ -970,6 +986,14 @@ function App() {
               审核
             </a>
           ) : null}
+          <details className="header-more">
+            <summary className="header-link" title="更多页面" aria-label="更多页面"><MoreHorizontal size={17} /><span>更多</span></summary>
+            <nav>
+              <a href="?sources=1"><Database size={15} />数据来源</a>
+              <a href="?changes=1"><CircleAlert size={15} />变化历史</a>
+              <a href="?updates=1"><History size={15} />更新日志</a>
+            </nav>
+          </details>
           <span className={dataset.stats.errors.length ? "warning" : ""}>
             {dataset.stats.errors.length ? <CircleAlert size={14} /> : <Check size={14} />}
             {dataset.generatedAt
@@ -1007,6 +1031,8 @@ function App() {
         />
       ) : knowledgeLibraryOpen ? (
         <KnowledgeLibraryPage
+          view={knowledgeLibraryView}
+          onViewChange={setKnowledgeLibraryView}
           onOpenWork={openLibraryWork}
           onOpenComposer={openComposer}
           onBack={closeKnowledgeLibrary}
@@ -1452,6 +1478,8 @@ if (import.meta.hot) globalThis.__classicMusicRoot = appRoot;
 const rootParams = new URLSearchParams(window.location.search);
 appRoot.render(rootParams.get("review") === "1"
   ? <ReviewWorkspace />
+  : rootParams.get("updates") === "1"
+    ? <UpdatesWorkspace />
   : rootParams.get("changes") === "1"
     ? <ChangesWorkspace />
   : rootParams.get("sources") === "1"

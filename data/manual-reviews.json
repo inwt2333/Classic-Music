@@ -1,7 +1,132 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-29T14:53:24.283Z",
+  "updatedAt": "2026-08-09T02:01:09.194Z",
   "decisions": [
+    {
+      "eventId": "perf_0fec5ad3dfc8b223",
+      "sourceRecordIds": [
+        "shoac_1263452079236567040_16325400"
+      ],
+      "status": "approved",
+      "program": [
+        {
+          "title": "《钢铁洪流进行曲 》一一作曲: 李旭吴",
+          "alternateTitles": [],
+          "confidence": "manual"
+        },
+        {
+          "title": "《燃情岁月 》一一 作曲:",
+          "alternateTitles": [
+            "James Horner"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《Victory 》一一 作曲:",
+          "alternateTitles": [
+            "Thomas Bergersen"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《乡村骑士 》一一作曲:",
+          "alternateTitles": [
+            "Pietro Mascagni"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《帝国进行曲 》一一作曲:",
+          "alternateTitles": [
+            "John Wiliams"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《Pacific Rim (环太平洋) 》一一作曲:",
+          "alternateTitles": [
+            "Ramin Dijawadi"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《权力的游戏主题曲》一一作曲:",
+          "alternateTitles": [
+            "Ramin Djawadi"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《歌剧魅影》一一作曲:",
+          "alternateTitles": [
+            "Andrew Lloyd Webber"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《亡灵序曲》一一作曲:",
+          "alternateTitles": [
+            "Hans Zimmer"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《复仇者联盟主题曲 》一一作曲:",
+          "alternateTitles": [
+            "Alan Silvestri"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《Honor (太平洋战争) 》一一作曲:",
+          "alternateTitles": [
+            "Hans Zimmer"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《Exodus(出埃及记)》一一作曲:Ernest",
+          "alternateTitles": [
+            "Ernest Gold"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《The Rains of Castamere (权利的游戏) 》一一作曲:",
+          "alternateTitles": [
+            "Ramin"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "Djawadi",
+          "alternateTitles": [],
+          "confidence": "manual"
+        },
+        {
+          "title": "《泰坦尼克号》一一作曲:",
+          "alternateTitles": [
+            "James Horner"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《Star Sky》一一作曲:",
+          "alternateTitles": [
+            "Thomas Bergersen"
+          ],
+          "confidence": "manual"
+        },
+        {
+          "title": "《加勒比海盗》一一作曲:",
+          "alternateTitles": [
+            "Hans Zimmer"
+          ],
+          "confidence": "manual"
+        }
+      ],
+      "reviewedAt": "2026-08-09T02:01:09.167Z"
+    },
     {
       "eventId": "perf_42465d6c123fa51b",
       "sourceRecordIds": [

@@ -6,6 +6,7 @@ import {
   mapProgramItemToKnowledge,
   prepareKnowledge,
 } from "./knowledge-store";
+import { classifyKnowledgeGenre, classifyKnowledgePeriod } from "../src/knowledge/taxonomy";
 
 async function main() {
 const root = resolve(process.cwd());
@@ -111,6 +112,15 @@ assert.equal(prepared.index.works.find((work) => work.id === "work_000001")?.upc
 assert.equal(prepared.composers.find((composer) => composer.id === "composer_000001")?.works.length, 3);
 assert.deepEqual(prepared.composers.find((composer) => composer.id === "composer_000001")?.upcomingEventIds, [eventId]);
 assert.equal(prepared.index.composers.find((composer) => composer.id === "composer_000001")?.workCount, 3);
+assert.equal(prepared.index.composers.find((composer) => composer.id === "composer_000001")?.periodKey, "classical");
+assert.equal(prepared.index.works.find((work) => work.id === "work_000001")?.genreFamily, "orchestral");
+assert.equal(prepared.index.works.find((work) => work.id === "work_000002")?.genreFamily, "orchestral");
+assert.equal(prepared.index.works.find((work) => work.id === "work_000009")?.genreFamily, "solo");
+assert.equal(prepared.index.works.find((work) => work.id === "work_000003")?.genreFamily, "concerto");
+assert.equal(prepared.index.works.find((work) => work.id === "work_000029")?.genreFamily, "stage");
+assert.equal(classifyKnowledgePeriod("二十世纪早期"), "modern");
+assert.equal(classifyKnowledgePeriod("古典主义至浪漫主义过渡时期", 1797), "romantic");
+assert.equal(classifyKnowledgeGenre({ title: "F 大调弦乐四重奏", genre: "弦乐四重奏", tags: [], instrumentation: undefined }), "chamber");
 
 const empty = prepareKnowledge(registry, { ...dataset, events: [] });
 assert.equal(empty.works.length, prepared.works.length);

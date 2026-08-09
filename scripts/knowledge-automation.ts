@@ -55,6 +55,14 @@ const optionalDifficulty = z.preprocess(
   (value) => value === null || value === "" ? undefined : value,
   difficultySchema.optional().catch(undefined),
 );
+const generatedRecordingLabel = z.preprocess(
+  (value) => typeof value === "string" ? value.trim().slice(0, 80) || undefined : value,
+  z.string().min(1).max(80).optional(),
+);
+const generatedWarning = z.preprocess(
+  (value) => typeof value === "string" ? value.trim().slice(0, 300) : value,
+  z.string().min(1).max(300),
+);
 
 export const generatedIdentitySchema = z.object({
   decision: z.enum(["research", "skip"]),
@@ -76,7 +84,7 @@ export const generatedIdentitySchema = z.object({
     opus: optionalText(),
   }).strict().nullish().transform((value) => value ?? undefined),
   searchQueries: z.array(z.string().min(2)).min(1).max(6),
-  warnings: z.array(z.string().min(1).max(300)).default([]),
+  warnings: z.array(generatedWarning).default([]),
 }).strict();
 
 export const generatedKnowledgeSchema = z.preprocess(normalizeGeneratedKnowledgePayload, z.object({
@@ -127,7 +135,7 @@ export const generatedKnowledgeSchema = z.preprocess(normalizeGeneratedKnowledge
       description: z.string().min(1).max(240),
     }).strict()).max(20).default([]),
     recordings: z.array(z.object({
-      label: optionalText(80),
+      label: generatedRecordingLabel,
       performers: z.string().min(1).max(180),
       year: optionalInteger({ min: 1900, max: 2100 }),
       note: z.string().min(1).max(240),
@@ -138,12 +146,12 @@ export const generatedKnowledgeSchema = z.preprocess(normalizeGeneratedKnowledge
     evidenceId: z.string().min(1),
     supports: z.array(z.string().min(1)).min(1),
   }).strict()),
-  warnings: z.array(z.string().min(1).max(300)).default([]),
+  warnings: z.array(generatedWarning).default([]),
 }).strict());
 
 export const generatedAuditSchema = z.object({
   verdict: z.enum(["pass", "skip"]),
-  warnings: z.array(z.string().min(1).max(300)),
+  warnings: z.array(generatedWarning),
 }).strict();
 
 export type GeneratedKnowledge = z.infer<typeof generatedKnowledgeSchema>;
@@ -268,7 +276,7 @@ export function discoverKnowledgeCandidates(
     }
   }
 
-  return [...candidates.values()].sort((left, right) => right.firstSeenAt.localeCompare(left.firstSeenAt));
+  return [...candidates.values()].sort((left, right) => left.firstSeenAt.localeCompare(right.firstSeenAt));
 }
 
 export function discoverIncompleteGeneratedWorks(
@@ -307,7 +315,7 @@ function persistedWorkIsComplete(work: KnowledgeWork) {
     && work.firstListen
     && work.movements.length
     && work.listeningPoints.length
-    && work.recordings.length,
+    && hasUsefulRecordings(work.recordings),
   );
 }
 
@@ -318,6 +326,13 @@ function hasUsefulInstrumentation(value?: string) {
   if (/^[\p{Script=Han}]{1,8}独奏$/u.test(normalized)) return true;
   if (normalized.length < 6) return false;
   return !/^(管弦乐团|交响乐团|室内乐团|弦乐团)$/.test(normalized);
+}
+
+function hasUsefulRecordings(recordings: Array<{ label?: string; note: string }>) {
+  return recordings.length > 0 && recordings.every((recording) => {
+    const note = recording.note.trim();
+    return note.length >= 8 && normalizeIdentity(note) !== normalizeIdentity(recording.label ?? "");
+  });
 }
 
 function matchesGeneratedWork(item: ProgramItem, work: KnowledgeWork, registry: KnowledgeRegistry) {
@@ -362,13 +377,17 @@ export function resolveExistingWork(candidate: KnowledgeCandidate, registry: Kno
     : null;
 }
 
-export function candidatePriorityScore(candidate: KnowledgeCandidate, registry: KnowledgeRegistry) {
+export function candidatePriorityScore(candidate: KnowledgeCandidate) {
   let score = candidate.sourceScore;
   if (normalizeCatalogue(candidate.opus ?? extractCatalogue(candidate.title))) score += 25;
-  if (registry.composers.some((composer) => [composer.name, composer.originalName, ...composer.aliases]
-    .filter(Boolean).some((value) => normalizeIdentity(value!) === normalizeIdentity(candidate.composer)))) score += 15;
   if (!/(?:第[一二三四五六七八九十\d]+乐章|选段|选自|\(第.+乐章\)|（第.+乐章）)/.test(candidate.title)) score += 10;
   return score;
+}
+
+export function compareKnowledgeCandidates(left: KnowledgeCandidate, right: KnowledgeCandidate) {
+  return candidatePriorityScore(right) - candidatePriorityScore(left)
+    || left.firstSeenAt.localeCompare(right.firstSeenAt)
+    || left.fingerprint.localeCompare(right.fingerprint);
 }
 
 export function findKnownComposer(name: string, registry: KnowledgeRegistry) {
@@ -396,6 +415,7 @@ export async function collectKnowledgeEvidence(
   candidate: KnowledgeCandidate,
   fetchImpl: typeof fetch = globalThis.fetch,
   identity?: GeneratedIdentity,
+  knownComposer?: KnowledgeComposer,
 ): Promise<KnowledgeEvidence[]> {
   const evidence: KnowledgeEvidence[] = candidate.sourceUrls.map((url, index) => ({
     id: `official_${hash(url).slice(0, 12)}`,
@@ -427,6 +447,11 @@ export async function collectKnowledgeEvidence(
     title: identity.work.originalTitle ?? identity.work.title,
     opus: identity.work.opus ?? candidate.opus,
   };
+  const composerQueries = uniqueStrings([
+    identity.composer.originalName,
+    identity.composer.name,
+    candidate.composer,
+  ].filter((value): value is string => Boolean(value?.trim())));
   const [englishWikipedia, chineseWikipedia, wikidata, musicbrainz, recordings] = await Promise.all([
     fetchWikipediaEvidence(queries, "en", fetchImpl).catch(() => []),
     fetchWikipediaEvidence(queries, "zh", fetchImpl).catch(() => []),
@@ -434,6 +459,14 @@ export async function collectKnowledgeEvidence(
     fetchMusicBrainzEvidence(researchCandidate, fetchImpl).catch(() => []),
     fetchRecordingEvidence(queries, fetchImpl).catch(() => []),
   ]);
+  let composerEvidence: KnowledgeEvidence[] = [];
+  if (!knownComposer) {
+    composerEvidence = await collectComposerEvidence(composerQueries, fetchImpl);
+    if (!composerEvidence.length) {
+      await new Promise<void>((done) => setTimeout(done, 2_000));
+      composerEvidence = await collectComposerEvidence(composerQueries, fetchImpl);
+    }
+  }
   return dedupeEvidence([
     ...evidence,
     ...englishWikipedia,
@@ -441,7 +474,17 @@ export async function collectKnowledgeEvidence(
     ...wikidata,
     ...musicbrainz,
     ...recordings,
+    ...composerEvidence,
   ]);
+}
+
+async function collectComposerEvidence(queries: string[], fetchImpl: typeof fetch) {
+  const [englishWikipedia, chineseWikipedia, wikidata] = await Promise.all([
+    fetchWikipediaEvidence(queries, "en", fetchImpl).catch(() => []),
+    fetchWikipediaEvidence(queries, "zh", fetchImpl).catch(() => []),
+    fetchWikidataEvidence(queries, fetchImpl).catch(() => []),
+  ]);
+  return dedupeEvidence([...englishWikipedia, ...chineseWikipedia, ...wikidata]);
 }
 
 export function scoreGeneratedKnowledge(
@@ -455,9 +498,10 @@ export function scoreGeneratedKnowledge(
   let score = candidate.sourceScore;
   const knownComposer = registry.composers.some((composer) => [composer.name, composer.originalName, ...composer.aliases]
     .filter(Boolean).some((value) => normalizeIdentity(value!) === normalizeIdentity(generated.composer.name)));
-  if (knownComposer) score += 15;
-  if (normalizeCatalogue(candidate.opus ?? generated.work.opus)) score += 25;
   const used = new Set(generated.sourcesUsed.map((source) => source.evidenceId));
+  const supportedNewComposer = hasIndependentComposerEvidence(generated, evidence);
+  if (knownComposer || supportedNewComposer) score += 15;
+  if (normalizeCatalogue(candidate.opus ?? generated.work.opus)) score += 25;
   const independentPublishers = new Set(evidence.filter((item) => used.has(item.id)).map((item) => item.publisher));
   if (independentPublishers.size >= 2) score += 20;
   if (generated.entityLevel === "complete_work" || generated.entityLevel === "suite") score += 15;
@@ -465,12 +509,25 @@ export function scoreGeneratedKnowledge(
   return Math.min(score, 100);
 }
 
-export function validateGeneratedEvidence(generated: GeneratedKnowledge, evidence: KnowledgeEvidence[]) {
+function hasIndependentComposerEvidence(generated: GeneratedKnowledge, evidence: KnowledgeEvidence[]) {
+  return generated.sourcesUsed.some((source) =>
+    /(?:composer|作曲家|birth|death|nationality|period|生卒|国籍|时期)/i.test(source.supports.join(" "))
+    && evidence.some((item) => item.id === source.evidenceId && item.kind !== "official"));
+}
+
+export function validateGeneratedEvidence(
+  generated: GeneratedKnowledge,
+  evidence: KnowledgeEvidence[],
+  options: { requireComposerEvidence?: boolean } = {},
+) {
   const evidenceIds = new Set(evidence.map((item) => item.id));
   const unknown = generated.sourcesUsed.filter((source) => !evidenceIds.has(source.evidenceId));
   if (unknown.length) throw new Error(`DeepSeek 引用了未知证据：${unknown.map((item) => item.evidenceId).join(", ")}`);
   if (generated.decision === "publish" && !generated.work) throw new Error("DeepSeek 决定发布但没有返回作品内容");
   if (generated.decision === "publish" && !generated.sourcesUsed.length) throw new Error("DeepSeek 决定发布但没有引用证据");
+  if (generated.decision === "publish" && options.requireComposerEvidence && !hasIndependentComposerEvidence(generated, evidence)) {
+    throw new Error("新作曲家缺少独立人物证据");
+  }
   if (generated.entityLevel !== "complete_work" && generated.entityLevel !== "suite") {
     throw new Error(`不能把 ${generated.entityLevel} 自动发布为独立作品`);
   }
@@ -488,6 +545,28 @@ export function discardUnsupportedRecordings(generated: GeneratedKnowledge, evid
   };
 }
 
+export function repairRecordingNotes(generated: GeneratedKnowledge, evidence: KnowledgeEvidence[]) {
+  if (!generated.work?.recordings.length) return generated;
+  const recordings = generated.work.recordings.map((recording) => {
+    if (hasUsefulRecordings([recording])) return recording;
+    const source = evidence.find((item) => item.id === recording.evidenceId && item.kind === "recording");
+    if (!source) return recording;
+    try {
+      const metadata = JSON.parse(source.content) as { album?: string; performers?: string; releaseDate?: string };
+      const year = metadata.releaseDate?.match(/^\d{4}/)?.[0];
+      const details = [
+        year ? `${year}年发行` : "",
+        metadata.performers ? `由${metadata.performers}演奏` : "",
+        metadata.album ? `收录于《${metadata.album}》` : "",
+      ].filter(Boolean);
+      return details.length ? { ...recording, note: `${details.join("，")}。` } : recording;
+    } catch {
+      return recording;
+    }
+  });
+  return { ...generated, work: { ...generated.work, recordings } };
+}
+
 export function materializeGeneratedKnowledge(input: {
   candidate: KnowledgeCandidate;
   generated: GeneratedKnowledge;
@@ -500,7 +579,9 @@ export function materializeGeneratedKnowledge(input: {
   existingWork?: KnowledgeWork;
 }) {
   const { candidate, generated, audit, evidence, registry, config, skillText, generatedAt, existingWork } = input;
-  validateGeneratedEvidence(generated, evidence);
+  const existingComposer = registry.composers.find((composer) => [composer.name, composer.originalName, ...composer.aliases]
+    .filter(Boolean).some((value) => normalizeIdentity(value!) === normalizeIdentity(generated.composer.name)));
+  validateGeneratedEvidence(generated, evidence, { requireComposerEvidence: !existingComposer });
   if (!generated.work) throw new Error("缺少作品内容");
   const score = scoreGeneratedKnowledge(candidate, generated, evidence, registry, audit);
   if (score < config.basicPublishScore) throw new Error(`自动发布评分不足：${score}/${config.basicPublishScore}`);
@@ -521,8 +602,6 @@ export function materializeGeneratedKnowledge(input: {
     accessedAt: generatedAt.slice(0, 10),
     supports: usedEvidence.get(item.id)!,
   }));
-  const existingComposer = registry.composers.find((composer) => [composer.name, composer.originalName, ...composer.aliases]
-    .filter(Boolean).some((value) => normalizeIdentity(value!) === normalizeIdentity(generated.composer.name)));
   const composerId = existingComposer?.id ?? `composer_auto_${hash(normalizeIdentity(generated.composer.originalName ?? generated.composer.name)).slice(0, 16)}`;
   const workIdentity = `${composerId}:${normalizeCatalogue(generated.work.opus) || normalizeWorkTitle(generated.work.originalTitle ?? generated.work.title)}`;
   const workId = existingWork?.id ?? `work_auto_${hash(workIdentity).slice(0, 16)}`;
@@ -550,7 +629,6 @@ export function materializeGeneratedKnowledge(input: {
   const recordings = generatedRecordings.map(({ evidenceId, ...recording }, index) => ({
     ...recording,
     label: index === 0 ? "第一次听" : "另一种理解",
-    searchUrl: `https://music.163.com/#/search/m/?s=${encodeURIComponent(`${generated.work!.title} ${recording.performers}`)}`,
     sourceId: evidenceId,
   }));
   const work: KnowledgeWork = {
@@ -685,11 +763,11 @@ export function buildGenerationPrompt(
     work: { title: "", originalTitle: "optional", aliases: [], opus: "optional", key: "optional", genre: "optional", period: "optional", composedYears: "optional", durationMinutes: "optional integer", instrumentation: "optional", difficulty: "optional enum", tags: [], summary: "", whyListen: "optional", firstListen: "optional", listeningPoints: [{ title: "", description: "", movement: "optional positive integer" }], movements: [{ number: 1, title: "", tempo: "optional", description: "" }], recordings: [{ label: "", performers: "", year: "optional integer", note: "", evidenceId: "recording evidence id" }] },
     sourcesUsed: [{ evidenceId: "", supports: [""] }],
     warnings: [],
-  })}\n\nRESOLVED_IDENTITY\n${JSON.stringify(identity)}\n\nKNOWN_COMPOSER_FROM_CURATED_REGISTRY\n${knownComposer ? JSON.stringify({ id: knownComposer.id, name: knownComposer.name, originalName: knownComposer.originalName, aliases: knownComposer.aliases }) : "null"}\n\nOFFICIAL_CANDIDATE\n${JSON.stringify(candidate)}\n\nUNTRUSTED_EVIDENCE\n${JSON.stringify(evidence)}`;
+  })}\n\nWhen KNOWN_COMPOSER_FROM_CURATED_REGISTRY is null, cite independent non-official evidence for composer identity and every biographical field. Omit unsupported biography instead of guessing.\n\nRESOLVED_IDENTITY\n${JSON.stringify(identity)}\n\nKNOWN_COMPOSER_FROM_CURATED_REGISTRY\n${knownComposer ? JSON.stringify({ id: knownComposer.id, name: knownComposer.name, originalName: knownComposer.originalName, aliases: knownComposer.aliases }) : "null"}\n\nOFFICIAL_CANDIDATE\n${JSON.stringify(candidate)}\n\nUNTRUSTED_EVIDENCE\n${JSON.stringify(evidence)}`;
 }
 
 export function buildAuditPrompt(candidate: KnowledgeCandidate, generated: GeneratedKnowledge, evidence: KnowledgeEvidence[], knownComposer?: KnowledgeComposer) {
-  return `Audit the proposed knowledge object against the official candidate and evidence. Return JSON only: {"verdict":"pass|skip","warnings":[""]}. Use skip for identity ambiguity, unsupported work facts, movement-as-work errors, or conflicting catalogue numbers. The supplied KNOWN_COMPOSER_FROM_CURATED_REGISTRY is trusted and does not require new biographical evidence.\nKNOWN_COMPOSER_FROM_CURATED_REGISTRY\n${knownComposer ? JSON.stringify({ id: knownComposer.id, name: knownComposer.name, originalName: knownComposer.originalName, aliases: knownComposer.aliases }) : "null"}\nOFFICIAL_CANDIDATE\n${JSON.stringify(candidate)}\nPROPOSAL\n${JSON.stringify(generated)}\nUNTRUSTED_EVIDENCE\n${JSON.stringify(evidence)}`;
+  return `Audit the proposed knowledge object against the official candidate and evidence. Return JSON only: {"verdict":"pass|skip","warnings":[""]}. Use skip for identity ambiguity, unsupported work or composer facts, movement-as-work errors, or conflicting catalogue numbers. The supplied KNOWN_COMPOSER_FROM_CURATED_REGISTRY is trusted and does not require new biographical evidence. When it is null, require independent non-official evidence for the composer identity and every supplied biographical field.\nKNOWN_COMPOSER_FROM_CURATED_REGISTRY\n${knownComposer ? JSON.stringify({ id: knownComposer.id, name: knownComposer.name, originalName: knownComposer.originalName, aliases: knownComposer.aliases }) : "null"}\nOFFICIAL_CANDIDATE\n${JSON.stringify(candidate)}\nPROPOSAL\n${JSON.stringify(generated)}\nUNTRUSTED_EVIDENCE\n${JSON.stringify(evidence)}`;
 }
 
 export function missingCompleteFields(generated: GeneratedKnowledge) {
@@ -705,7 +783,7 @@ export function missingCompleteFields(generated: GeneratedKnowledge) {
     ["firstListen", generated.work.firstListen],
     ["movements", generated.work.movements.length],
     ["listeningPoints", generated.work.listeningPoints.length],
-    ["recordings", generated.work.recordings.length],
+    ["recordings", hasUsefulRecordings(generated.work.recordings)],
   ];
   return fields.filter(([, value]) => !value).map(([field]) => field);
 }

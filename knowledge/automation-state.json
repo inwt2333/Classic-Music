@@ -227,94 +227,95 @@
     "a5e28781588a9a274c538157": {
       "status": "published",
       "workId": "work_auto_51ce39034f97cc91",
-      "attempts": 11,
-      "updatedAt": "2026-08-08T15:36:13.474Z",
-      "reason": "score-95",
+      "attempts": 12,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
+      "reason": "score-100",
       "sourceEventIds": [
         "perf_c669952a6b02d398"
       ],
-      "pipelineVersion": "deepseek-v4-pro:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "879227420286c418070ec169": {
-      "status": "mapped",
+      "status": "needs_completion",
       "workId": "work_auto_958f678568a3fb7b",
-      "attempts": 3,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
-      "reason": "matched-by-title",
+      "attempts": 5,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
+      "reason": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_big\",\n    \"maximum\": 300,\n    \"inclusive\": true,\n    \"path\": [\n      \"warnings\",\n      0\n    ],\n    \"message\": \"Too big: expected string to have <=300 characters\"\n  }\n]",
       "sourceEventIds": [
         "perf_2a203fb9aad9c7ff"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-16T01:14:53.875Z"
     },
     "f131d65eaa6401a87fef6d89": {
       "status": "published",
       "workId": "work_auto_3bbf1bec7bedb655",
-      "attempts": 1,
-      "updatedAt": "2026-08-08T16:18:23.991Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
       "reason": "score-100",
       "sourceEventIds": [
         "perf_c669952a6b02d398"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "4aadbe984a60642a1ddf313f": {
       "status": "needs_completion",
       "workId": "work_auto_c8f4679b2d254f5f",
-      "attempts": 2,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "attempts": 3,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
       "reason": "score-95",
       "sourceEventIds": [
         "perf_68276ae3dc49e5a3"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3",
-      "nextRetryAt": "2026-08-15T16:21:56.089Z"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-16T01:14:53.875Z"
     },
     "6aa26124c11b3d25717e17f4": {
       "status": "needs_completion",
       "workId": "work_auto_e47397200c6d8e54",
-      "attempts": 2,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "attempts": 3,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
       "reason": "score-75",
       "sourceEventIds": [
         "perf_02ba0048b11fb7b1"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3",
-      "nextRetryAt": "2026-08-15T16:21:56.089Z"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-16T01:14:53.875Z"
     },
     "428644be5a99c3d34305b007": {
-      "status": "mapped",
+      "status": "published",
       "workId": "work_auto_1f1156703d34c974",
-      "attempts": 2,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
-      "reason": "matched-by-title",
+      "attempts": 3,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
+      "reason": "score-100",
       "sourceEventIds": [
         "perf_02ba0048b11fb7b1",
         "perf_9a143ba172dafb03"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "5fc96d3e031c679ff52b2a66": {
       "status": "published",
       "workId": "work_auto_44ced29ce961d011",
-      "attempts": 1,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
       "reason": "score-100",
       "sourceEventIds": [
         "perf_02ba0048b11fb7b1"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "27823860c8e4eb2baaa7fc87": {
       "status": "published",
       "workId": "work_auto_9fbe9b19325042ac",
-      "attempts": 1,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
       "reason": "score-100",
       "sourceEventIds": [
         "perf_6c5118620d8cb67a",
         "perf_9b27938aca3a65b2"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "671ddf6bcbecb3e67b566b6f": {
       "status": "skipped",
@@ -325,6 +326,48 @@
         "perf_2465218ef2febb27"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.3"
+    },
+    "00af96ce7654aa379b3720e2": {
+      "status": "skipped",
+      "attempts": 3,
+      "updatedAt": "2026-08-09T01:20:43.120Z",
+      "reason": "Official candidate lists '作品 582' but proposal uses 'BWV 582' without supporting evidence; catalogue number conflict.；No recording evidence provided; proposal lacks required recording recommendations for complete record.；Arrangement attribution to Respighi is not supported by official evidence; only title mentions '雷斯皮吉改编'.",
+      "sourceEventIds": [
+        "perf_256310ede4280ea1"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "061c44e08c23e13f18d8df38": {
+      "status": "published",
+      "workId": "work_auto_a3178276f4e3b353",
+      "attempts": 2,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_9e54d7ee1453e5d5"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "099ce1603c21e22105a64fb6": {
+      "status": "skipped",
+      "attempts": 2,
+      "updatedAt": "2026-08-09T01:14:53.875Z",
+      "reason": "Composer identity not in curated registry and no independent non-official evidence provided for composer biographical fields.；Work identity ambiguous: '回忆' is a movement (No. 4) of Op. 29, not a standalone work; proposal treats it as complete work.；Catalogue number conflict: official candidate lists opus as '作品29' (Op. 29) but proposal uses 'Op. 29, No. 4' without clarifying parent work.；Duration and composition years are unsupported by evidence.",
+      "sourceEventIds": [
+        "perf_2a5456d21e46e8e5"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "0c20b855bd6e0c2a9b0d18e4": {
+      "status": "published",
+      "workId": "work_auto_6d4dbac5b0715b89",
+      "attempts": 5,
+      "updatedAt": "2026-08-09T01:24:36.448Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_9a143ba172dafb03"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     }
   }
 }

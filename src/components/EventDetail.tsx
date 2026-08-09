@@ -35,8 +35,6 @@ import {
   formatEventVenue,
   imslpSearchUrl,
   musicBrainzWorkSearchUrl,
-  neteaseSearchUrl,
-  qqMusicSearchUrl,
   resourceSearchUrl,
 } from "../utils";
 
@@ -366,8 +364,6 @@ function ProgramRow({
       <details className="listen-menu">
         <summary><Search size={14} />查找录音</summary>
         <div>
-          <a href={neteaseSearchUrl(keyword)} target="_blank" rel="noreferrer">网易云</a>
-          <a href={qqMusicSearchUrl(keyword)} target="_blank" rel="noreferrer">QQ 音乐</a>
           <a href={bilibiliSearchUrl(keyword)} target="_blank" rel="noreferrer">B 站</a>
           <a href={resourceSearchUrl(keyword)} target="_blank" rel="noreferrer">资料</a>
           <a href={imslpSearchUrl(keyword)} target="_blank" rel="noreferrer">IMSLP</a>

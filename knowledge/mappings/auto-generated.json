@@ -107,6 +107,21 @@
       "reviewedAt": "2026-08-08T14:41:05.043Z"
     },
     {
+      "id": "mapping_auto_40e7b575e1dffe5d",
+      "workId": "work_auto_a3178276f4e3b353",
+      "composers": [
+        "谢尔盖·普罗科菲耶夫"
+      ],
+      "titles": [
+        "G 小调第二小提琴协奏曲，作品 63"
+      ],
+      "opus": [
+        "作品 63"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T01:10:46.964Z"
+    },
+    {
       "id": "mapping_auto_45d4269625e612ba",
       "workId": "work_000029",
       "composers": [
@@ -195,6 +210,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_5f3b03622b29f53e",
+      "workId": "work_auto_6d4dbac5b0715b89",
+      "composers": [
+        "德沃夏克"
+      ],
+      "titles": [
+        "降E大调第三弦乐五重奏，作品97"
+      ],
+      "opus": [
+        "作品97"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T01:20:43.120Z"
     },
     {
       "id": "mapping_auto_5f5a49ce8709f9b9",

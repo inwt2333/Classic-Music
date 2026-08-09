@@ -1,5 +1,8 @@
 export type KnowledgePublicationStatus = "draft" | "reviewed" | "published";
 export type KnowledgeCompleteness = "basic" | "complete";
+export type KnowledgePeriodKey = "baroque" | "classical" | "romantic" | "modern" | "twentieth" | "contemporary" | "other";
+export type KnowledgeGenreFamily = "orchestral" | "concerto" | "chamber" | "solo" | "vocal" | "stage" | "other";
+export type KnowledgeLibraryView = "explore" | "composers" | "works";
 
 export type KnowledgeGeneration = {
   method: "deepseek";
@@ -58,7 +61,6 @@ export type KnowledgeRecording = {
   performers: string;
   year?: number;
   note: string;
-  searchUrl: string;
   sourceId: string;
 };
 
@@ -111,13 +113,16 @@ export type KnowledgeWorkSummary = Pick<KnowledgeWork,
   "id" | "composerId" | "title" | "originalTitle" | "opus" | "genre" | "durationMinutes" | "difficulty" | "tags" | "summary"
 > & {
   composerName: string;
+  periodKey: KnowledgePeriodKey;
+  genreFamily: KnowledgeGenreFamily;
   upcomingEventIds: string[];
   upcomingEventCount: number;
 };
 
 export type KnowledgeComposerSummary = Pick<KnowledgeComposer,
-  "id" | "name" | "originalName" | "period"
+  "id" | "name" | "originalName" | "period" | "birthYear" | "deathYear"
 > & {
+  periodKey: KnowledgePeriodKey;
   workCount: number;
   upcomingEventCount: number;
 };

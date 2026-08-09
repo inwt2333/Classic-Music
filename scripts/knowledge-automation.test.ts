@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import type { ConcertDataset, ConcertEvent, ProgramItem } from "../src/types";
 import type { KnowledgeComposer, KnowledgeWork } from "../src/knowledge/types";
 import {
+  candidatePriorityScore,
+  compareKnowledgeCandidates,
   discardUnsupportedRecordings,
   discoverKnowledgeCandidates,
   generatedIdentitySchema,
@@ -11,6 +13,7 @@ import {
   missingCompleteFields,
   parseAutomationConfig,
   requestDeepSeekJson,
+  repairRecordingNotes,
   resolveExistingWork,
   validateGeneratedEvidence,
   type GeneratedAudit,
@@ -116,6 +119,35 @@ assert.equal(resolveExistingWork(existingCandidate, registry)?.workId, "work_tes
 assert.equal(resolveExistingWork(existingCandidate, registry)?.reason, "title");
 assert.equal(resolveExistingWork(newCandidate, registry), null);
 
+const sourceBoundaryDataset: ConcertDataset = {
+  ...dataset,
+  events: [
+    event("trusted-guest", [{ ...newItem, title: "客座乐团新作品，作品100", opus: "作品100" }], {
+      sourceId: "trusted",
+      ensemble: "来访室内乐团",
+      scrapedAt: "2026-08-01T00:00:00.000Z",
+    }),
+    event("untrusted-host", [{ ...newItem, title: "不可信来源作品，作品101", opus: "作品101" }], {
+      sourceId: "other-source",
+      ensemble: "上海交响乐团",
+      scrapedAt: "2026-07-01T00:00:00.000Z",
+    }),
+  ],
+};
+const sourceBoundaryCandidates = discoverKnowledgeCandidates(sourceBoundaryDataset, registry, config);
+assert.equal(sourceBoundaryCandidates.length, 1);
+assert.equal(sourceBoundaryCandidates[0].title, "客座乐团新作品，作品100");
+assert.equal(sourceBoundaryCandidates[0].sourceIds[0], "trusted");
+
+const unknownComposerCandidate = {
+  ...newCandidate,
+  fingerprint: "unknown-composer-candidate",
+  composer: "测试新作曲家",
+  firstSeenAt: "2026-08-01T00:00:00.000Z",
+};
+assert.equal(candidatePriorityScore(newCandidate), candidatePriorityScore(unknownComposerCandidate));
+assert.equal(compareKnowledgeCandidates(unknownComposerCandidate, newCandidate), -1);
+
 const evidence: KnowledgeEvidence[] = [
   { id: "official-one", title: "官网", url: "https://example.com/event", publisher: "可信官网", content: "贝多芬：G大调新作品，作品99", kind: "official" },
   { id: "wiki-one", title: "资料", url: "https://example.org/work", publisher: "百科", content: "测试资料", kind: "wikipedia" },
@@ -159,6 +191,42 @@ assert.equal(materialized.work.completeness, "basic");
 assert.equal(materialized.work.generation?.method, "deepseek");
 assert.equal(materialized.mapping.method, "automated-exact");
 assert.equal(materialized.composer, undefined);
+
+const unknownComposerEvidence: KnowledgeEvidence[] = [
+  ...evidence,
+  { id: "composer-wiki", title: "测试新作曲家", url: "https://example.org/composer", publisher: "人物百科", content: "测试人物资料", kind: "wikipedia" },
+];
+const unknownComposerGenerated: GeneratedKnowledge = {
+  ...generated,
+  composer: {
+    name: "测试新作曲家",
+    originalName: "Test New Composer",
+    aliases: [],
+    birthYear: 1900,
+    deathYear: 1980,
+    nationality: "测试国籍",
+    period: "20世纪",
+    introduction: "用于验证陌生作曲家自动建档。",
+    styleSummary: "用于验证自动补充人物资料。",
+  },
+  sourcesUsed: [
+    ...generated.sourcesUsed,
+    { evidenceId: "composer-wiki", supports: ["composer identity", "birth", "death", "nationality", "period"] },
+  ],
+};
+const unknownComposerMaterialized = materializeGeneratedKnowledge({
+  candidate: unknownComposerCandidate,
+  generated: unknownComposerGenerated,
+  audit,
+  evidence: unknownComposerEvidence,
+  registry,
+  config,
+  skillText: "test skill",
+  generatedAt: "2026-08-08T12:00:00.000Z",
+});
+assert.equal(unknownComposerMaterialized.score, 100);
+assert.equal(unknownComposerMaterialized.composer?.name, "测试新作曲家");
+assert.equal(unknownComposerMaterialized.work.composerId, unknownComposerMaterialized.composer?.id);
 const { recordings: misplacedRecordings, ...workWithoutRecordings } = generated.work!;
 const relocatedGenerated = generatedKnowledgeSchema.parse({
   ...generated,
@@ -179,6 +247,24 @@ const generatedWithEmptyRecordingLabel = generatedKnowledgeSchema.parse({
   },
 });
 assert.equal(generatedWithEmptyRecordingLabel.work?.recordings[0]?.label, undefined);
+const generatedWithLongRecordingLabel = generatedKnowledgeSchema.parse({
+  ...generated,
+  work: {
+    ...generated.work,
+    recordings: [{
+      label: "用于验证模型偶发生成冗长录音标签时不会阻断整个知识条目发布流程。".repeat(4),
+      performers: "测试乐团",
+      note: "用于验证长标签由系统统一截断。",
+      evidenceId: "wiki-one",
+    }],
+  },
+});
+assert.equal(generatedWithLongRecordingLabel.work?.recordings[0]?.label?.length, 80);
+const generatedWithLongWarning = generatedKnowledgeSchema.parse({
+  ...generated,
+  warnings: ["用于验证模型偶发生成冗长警告时不会阻断知识条目。".repeat(20)],
+});
+assert.equal(generatedWithLongWarning.warnings[0].length, 300);
 const generatedWithUnsupportedRecording = discardUnsupportedRecordings(generatedKnowledgeSchema.parse({
   ...generated,
   work: {
@@ -189,6 +275,21 @@ const generatedWithUnsupportedRecording = discardUnsupportedRecordings(generated
 }), evidence);
 assert.deepEqual(generatedWithUnsupportedRecording.work?.recordings, []);
 assert.ok(generatedWithUnsupportedRecording.warnings.some((warning) => warning.includes("移除")));
+const generatedWithRepairedRecording = repairRecordingNotes(generatedKnowledgeSchema.parse({
+  ...generated,
+  work: {
+    ...generated.work,
+    recordings: [{ performers: "测试乐团", note: "第一次听", evidenceId: "recording-one" }],
+  },
+}), [{
+  id: "recording-one",
+  title: "测试专辑",
+  url: "https://example.com/recording",
+  publisher: "测试录音库",
+  kind: "recording",
+  content: JSON.stringify({ album: "测试作品录音", performers: "测试乐团", releaseDate: "2020-05-01T00:00:00Z" }),
+}]);
+assert.equal(generatedWithRepairedRecording.work?.recordings[0]?.note, "2020年发行，由测试乐团演奏，收录于《测试作品录音》。");
 assert.ok(!missingCompleteFields({
   ...generated,
   work: { ...generated.work!, instrumentation: "两把小提琴、两把中提琴与一把大提琴" },
@@ -201,6 +302,20 @@ assert.ok(!missingCompleteFields({
   ...generated,
   work: { ...generated.work!, instrumentation: "大提琴" },
 }).includes("instrumentation"));
+assert.ok(missingCompleteFields({
+  ...generated,
+  work: {
+    ...generated.work!,
+    recordings: [{ label: "第一次听", performers: "测试乐团", note: "第一次听", evidenceId: "wiki-one" }],
+  },
+}).includes("recordings"));
+assert.ok(!missingCompleteFields({
+  ...generated,
+  work: {
+    ...generated.work!,
+    recordings: [{ label: "第一次听", performers: "测试乐团", note: "音色清晰，适合辨认各声部之间的呼应。", evidenceId: "wiki-one" }],
+  },
+}).includes("recordings"));
 assert.deepEqual(missingCompleteFields(generated).sort(), [
   "difficulty",
   "durationMinutes",
@@ -240,7 +355,7 @@ const strongWork = {
   ...work("work_auto_merge", "测试交响曲", "Op. 1", []),
   instrumentation: "长笛、双簧管、单簧管、大管、圆号、小号、定音鼓与弦乐",
   movements: [{ number: 1, title: "第一乐章", description: "完整结构" }],
-  recordings: [{ label: "第一次听", performers: "测试乐团", note: "清晰。", searchUrl: "https://example.com/search", sourceId: "recording" }],
+  recordings: [{ label: "第一次听", performers: "测试乐团", note: "清晰。", sourceId: "recording" }],
   generation: { method: "deepseek" as const, model: "test", skillVersion: "2", promptHash: "a".repeat(64), generatedAt: "2026-08-08T00:00:00.000Z", score: 95, sourceEventIds: ["event"], evidenceIds: ["source"] },
 };
 const weakWork = {
@@ -265,6 +380,11 @@ assert.throws(() => validateGeneratedEvidence(
   { ...generated, entityLevel: "movement" },
   evidence,
 ), /不能把 movement/);
+assert.throws(() => validateGeneratedEvidence(
+  { ...generated, composer: { name: "测试新作曲家", aliases: [] } },
+  evidence,
+  { requireComposerEvidence: true },
+), /缺少独立人物证据/);
 
 async function testDeepSeekRetry() {
   let calls = 0;
@@ -301,7 +421,13 @@ testDeepSeekRetry()
     process.exitCode = 1;
   });
 
-function event(id: string, program: ProgramItem[]): ConcertEvent {
+function event(
+  id: string,
+  program: ProgramItem[],
+  options: { sourceId?: string; ensemble?: string; scrapedAt?: string } = {},
+): ConcertEvent {
+  const sourceId = options.sourceId ?? "trusted";
+  const scrapedAt = options.scrapedAt ?? "2026-08-08T00:00:00.000Z";
   return {
     id,
     title: "测试音乐会",
@@ -314,8 +440,9 @@ function event(id: string, program: ProgramItem[]): ConcertEvent {
     status: "scheduled",
     sourceName: "可信官网",
     sourceUrl: "https://example.com/event",
-    scrapedAt: "2026-08-08T00:00:00.000Z",
-    sources: [{ sourceId: "trusted", sourceName: "可信官网", sourceRecordId: id, sourceUrl: "https://example.com/event", scrapedAt: "2026-08-08T00:00:00.000Z" }],
+    scrapedAt,
+    sources: [{ sourceId, sourceName: "可信官网", sourceRecordId: id, sourceUrl: "https://example.com/event", scrapedAt }],
+    ensemble: options.ensemble,
     performers: [],
     composers: ["贝多芬"],
     program,

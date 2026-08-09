@@ -10,7 +10,7 @@ import {
   buildCompletionPrompt,
   buildGenerationPrompt,
   buildIdentityPrompt,
-  candidatePriorityScore,
+  compareKnowledgeCandidates,
   collectKnowledgeEvidence,
   discardUnsupportedRecordings,
   discoverKnowledgeCandidates,
@@ -23,6 +23,7 @@ import {
   materializeGeneratedKnowledge,
   missingCompleteFields,
   parseAutomationConfig,
+  repairRecordingNotes,
   requestDeepSeekJson,
   resolveExistingWork,
   saveJson,
@@ -71,8 +72,7 @@ async function main() {
   const resolvedFingerprints = new Set(mappingResolutions.map((item) => item.candidate.fingerprint));
   const unresolved = pending
     .filter((candidate) => !resolvedFingerprints.has(candidate.fingerprint))
-    .sort((left, right) => candidatePriorityScore(right, registry) - candidatePriorityScore(left, registry)
-      || right.firstSeenAt.localeCompare(left.firstSeenAt));
+    .sort(compareKnowledgeCandidates);
   const now = Date.now();
   const dueUpgrades = upgrades.filter(({ candidate }) => {
     const entry = state.candidates[candidate.fingerprint];
@@ -165,7 +165,7 @@ async function main() {
         continue;
       }
       console.log(`[research] ${identity.composer.originalName ?? identity.composer.name} / ${identity.work.originalTitle ?? identity.work.title}`);
-      const evidence = await collectKnowledgeEvidence(candidate, globalThis.fetch, identity);
+      const evidence = await collectKnowledgeEvidence(candidate, globalThis.fetch, identity, knownComposer);
       console.log(`[generate] collected ${evidence.length} evidence records`);
       let generated = await requestDeepSeekJson({
         apiKey: apiKey!,
@@ -186,7 +186,7 @@ async function main() {
           },
         };
       }
-      generated = discardUnsupportedRecordings(generated, evidence);
+      generated = repairRecordingNotes(discardUnsupportedRecordings(generated, evidence), evidence);
       const missingFields = missingCompleteFields(generated);
       if (generated.decision === "publish" && missingFields.length) {
         console.log(`[complete-fields] ${missingFields.join(", ")}`);
@@ -209,7 +209,7 @@ async function main() {
             },
           };
         }
-        generated = discardUnsupportedRecordings(generated, evidence);
+        generated = repairRecordingNotes(discardUnsupportedRecordings(generated, evidence), evidence);
       }
       if (generated.decision === "skip") {
         const status = existingWork ? "needs_completion" : "skipped";

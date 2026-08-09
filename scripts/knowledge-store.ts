@@ -12,6 +12,7 @@ import type {
   PublishedKnowledgeComposer,
   PublishedKnowledgeWork,
 } from "../src/knowledge/types";
+import { classifyKnowledgeGenre, classifyKnowledgePeriod } from "../src/knowledge/taxonomy";
 import { normalizeIdentity } from "./identity";
 
 const publicationStatusSchema = z.enum(["draft", "reviewed", "published"]);
@@ -88,7 +89,6 @@ const workSchema: z.ZodType<KnowledgeWork> = z.object({
     performers: z.string().min(1),
     year: z.number().int().optional(),
     note: z.string().min(1),
-    searchUrl: z.string().url(),
     sourceId: z.string().min(1),
   })),
   relatedWorkIds: z.array(z.string().regex(/^work_[a-z0-9_]+$/)),
@@ -300,6 +300,9 @@ function toComposerSummary(
     name: composer.name,
     originalName: composer.originalName,
     period: composer.period,
+    birthYear: composer.birthYear,
+    deathYear: composer.deathYear,
+    periodKey: classifyKnowledgePeriod(composer.period, composer.birthYear),
     workCount,
     upcomingEventCount,
   };
@@ -314,6 +317,8 @@ function toWorkSummary(work: PublishedKnowledgeWork) {
     originalTitle: work.originalTitle,
     opus: work.opus,
     genre: work.genre,
+    periodKey: work.composer.periodKey,
+    genreFamily: classifyKnowledgeGenre(work),
     durationMinutes: work.durationMinutes,
     difficulty: work.difficulty,
     tags: work.tags,
