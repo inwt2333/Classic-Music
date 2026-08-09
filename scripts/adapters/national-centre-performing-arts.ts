@@ -27,6 +27,7 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
     if (
       !line ||
       /中场休息|以上内容|节目及演出票价|subject to change/i.test(line) ||
+      /^(?:注|说明|备注|曲目说明|温馨提示)\s*[：:]/.test(line) ||
       /^[-—–\s]+$/.test(line)
     ) {
       continue;

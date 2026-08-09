@@ -26,6 +26,7 @@ import {
   type PreparedKnowledge,
 } from "./knowledge-store";
 import { applyManualReviews, loadManualReviews } from "./review-store";
+import { attachOcrEvidence, loadOcrEvidence } from "./ocr/evidence";
 
 type PreparedData = {
   dataset: ConcertDataset;
@@ -44,11 +45,18 @@ export async function prepareAndPersistDataset(
 ) {
   const previous = await readPreviousDataset(outputPath);
   const recoveredDataset = restoreFailedSourceEvents(dataset, previous);
+  const retainedDataset = restoreUnavailableSourceEvents(
+    recoveredDataset,
+    previous,
+    ["harbin-music-hall-maitix"],
+  );
   const manualEventPath = resolve(dirname(databasePath), "manual-events.json");
   const manualEvents = await loadManualEvents(manualEventPath);
-  const datasetWithManualEvents = addManualEventsToDataset(recoveredDataset, manualEvents.events);
+  const datasetWithManualEvents = addManualEventsToDataset(retainedDataset, manualEvents.events);
+  const ocrEvidence = await loadOcrEvidence(resolve(dirname(databasePath), "ocr-inspect"));
+  const eventsWithOcrEvidence = attachOcrEvidence(datasetWithManualEvents.events, ocrEvidence);
   const canonicalEvents = mergeCrossSourceEvents(
-    normalizeKnownSourceFields(datasetWithManualEvents.events),
+    normalizeKnownSourceFields(eventsWithOcrEvidence),
     datasetWithManualEvents.sources,
   );
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
@@ -62,7 +70,7 @@ export async function prepareAndPersistDataset(
     ...datasetWithManualEvents,
     schemaVersion: 2,
     events: reviewedEvents,
-    stats: { ...recoveredDataset.stats, normalizedEvents: reviewedEvents.length },
+    stats: { ...retainedDataset.stats, normalizedEvents: reviewedEvents.length },
   };
   const entities = buildEntities(canonicalDataset);
   const latestChanges = buildChanges(previous, canonicalDataset);
@@ -90,13 +98,15 @@ export async function reapplyManualReviewsAndPersist(
   const manualEventPath = resolve(dirname(databasePath), "manual-events.json");
   const manualEvents = await loadManualEvents(manualEventPath);
   const datasetWithManualEvents = addManualEventsToDataset(previous, manualEvents.events);
+  const ocrEvidence = await loadOcrEvidence(resolve(dirname(databasePath), "ocr-inspect"));
+  const eventsWithOcrEvidence = attachOcrEvidence(datasetWithManualEvents.events, ocrEvidence);
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
   const knowledgeRegistry = await loadKnowledgeRegistry(resolve(dirname(databasePath), ".."));
   const reviewedEvents = assignProgramIdentities(
     applyManualReviews(
       mergeCrossSourceEvents(
-        normalizeKnownSourceFields(datasetWithManualEvents.events),
+        normalizeKnownSourceFields(eventsWithOcrEvidence),
         datasetWithManualEvents.sources,
       ),
       reviews.decisions,
@@ -180,6 +190,77 @@ export function restoreFailedSourceEvents(
     sources: current.sources.map((source) =>
       source.ok ? source : { ...source, eventCount: retainedCountBySource.get(source.id) ?? 0 },
     ),
+  };
+}
+
+export function restoreUnavailableSourceEvents(
+  current: ConcertDataset,
+  previous: ConcertDataset | null,
+  sourceIds: string[],
+  now = Date.now(),
+): ConcertDataset {
+  if (!previous || previous.schemaVersion !== 2 || !sourceIds.length) return current;
+
+  const retainedSourceIds = new Set(sourceIds);
+  const sourceNameById = new Map(current.sources.map((source) => [source.id, source.name]));
+  const eligibleSourceIds = new Set(
+    current.sources
+      .filter((source) => source.ok && retainedSourceIds.has(source.id))
+      .map((source) => source.id),
+  );
+  if (!eligibleSourceIds.size) return current;
+
+  const belongsToSource = (event: ConcertEvent, sourceId: string) =>
+    event.sources?.some((reference) => reference.sourceId === sourceId)
+    || event.sourceName === sourceNameById.get(sourceId);
+  const isSameOccurrence = (left: ConcertEvent, right: ConcertEvent) =>
+    left.startTime === right.startTime
+    && normalizeIdentity(left.title) === normalizeIdentity(right.title);
+
+  const retainedEvents: ConcertEvent[] = [];
+  const retainedCountBySource = new Map<string, number>();
+  for (const event of previous.events) {
+    if (new Date(event.startTime).getTime() < now) continue;
+    const references = (event.sources ?? []).filter((reference) => eligibleSourceIds.has(reference.sourceId));
+    const legacySourceId = references.length
+      ? undefined
+      : Array.from(eligibleSourceIds).find((sourceId) => event.sourceName === sourceNameById.get(sourceId));
+    const eventSourceIds = references.length ? references.map((reference) => reference.sourceId) : legacySourceId ? [legacySourceId] : [];
+    if (!eventSourceIds.length) continue;
+
+    const missingSourceIds = eventSourceIds.filter((sourceId) =>
+      !current.events.some((candidate) => belongsToSource(candidate, sourceId) && isSameOccurrence(candidate, event)),
+    );
+    if (!missingSourceIds.length) continue;
+
+    const retainedReferences = references.filter((reference) => missingSourceIds.includes(reference.sourceId));
+    const primaryReference = retainedReferences[0];
+    retainedEvents.push({
+      ...event,
+      sourceName: primaryReference?.sourceName ?? event.sourceName,
+      sourceUrl: primaryReference?.sourceUrl ?? event.sourceUrl,
+      ticketUrl: primaryReference?.ticketUrl ?? event.ticketUrl,
+      sources: retainedReferences.length ? retainedReferences : event.sources,
+    });
+    for (const sourceId of missingSourceIds) {
+      retainedCountBySource.set(sourceId, (retainedCountBySource.get(sourceId) ?? 0) + 1);
+    }
+  }
+
+  if (!retainedEvents.length) return current;
+  return {
+    ...current,
+    events: [...current.events, ...retainedEvents],
+    sources: current.sources.map((source) => {
+      const retainedCount = retainedCountBySource.get(source.id) ?? 0;
+      if (!retainedCount) return source;
+      const retainedMessage = `保留 ${retainedCount} 场此前已发现、但当前列表暂不可见的演出`;
+      return {
+        ...source,
+        eventCount: source.eventCount + retainedCount,
+        message: source.message ? `${source.message}；${retainedMessage}` : retainedMessage,
+      };
+    }),
   };
 }
 
@@ -1052,11 +1133,82 @@ function normalizeVenue(value: string) {
 }
 
 function normalizeKnownSourceFields(events: ConcertEvent[]) {
-  return events.map((event) => {
-    if (event.sourceName !== "深圳音乐厅官网") return event;
-    const hall = event.hall ?? event.venue.match(/深圳音乐厅\s*(二楼演奏大厅|五楼小剧场|演奏大厅)/)?.[1];
-    return { ...event, venue: "深圳音乐厅", hall };
+  return events.map(normalizeKnownSourceEvent);
+}
+
+export function normalizeKnownSourceEvent(event: ConcertEvent): ConcertEvent {
+  const sanitized = sanitizeKnownSourceProgram(event);
+  if (isXinghaiDetailEvent(sanitized)) {
+    const hall = sanitized.hall
+      ?? (sanitized.venue === "星海音乐厅"
+        ? undefined
+        : sanitized.venue.replace(/^星海音乐厅\s*/, "").trim() || undefined);
+    return {
+      ...sanitized,
+      title: sanitized.title.replace(/\s*[-—–－]+\s*星海音乐厅\s*$/, "").trim(),
+      venue: "星海音乐厅",
+      hall,
+    };
+  }
+  if (sanitized.sourceName !== "深圳音乐厅官网") return sanitized;
+  const hall = sanitized.hall ?? sanitized.venue.match(/深圳音乐厅\s*(二楼演奏大厅|五楼小剧场|演奏大厅)/)?.[1];
+  return { ...sanitized, venue: "深圳音乐厅", hall };
+}
+
+function isXinghaiDetailEvent(event: ConcertEvent) {
+  return /concerthall\.com\.cn\/events\/neweventdetail\.php/i.test(event.sourceUrl)
+    || event.sources?.some((source) => /concerthall\.com\.cn\/events\/neweventdetail\.php/i.test(source.sourceUrl));
+}
+
+export function sanitizeKnownSourceProgram(event: ConcertEvent): ConcertEvent {
+  const keptProgram = event.program.filter((item) => (
+    item.confidence === "manual" || !isUnmistakablyNonProgramItem(item, event.sourceName)
+  ));
+  if (keptProgram.length === event.program.length) return event;
+
+  const keptComposers = new Set(
+    keptProgram.map((item) => normalizeIdentity(item.composer ?? "")).filter(Boolean),
+  );
+  const rejectedComposers = new Set(
+    event.program
+      .filter((item) => !keptProgram.includes(item))
+      .map((item) => normalizeIdentity(item.composer ?? ""))
+      .filter(Boolean),
+  );
+  const composers = unique([
+    ...event.composers.filter((composer) => {
+      const key = normalizeIdentity(composer);
+      return !rejectedComposers.has(key) || keptComposers.has(key);
+    }),
+    ...keptProgram.map((item) => item.composer),
+  ]);
+  const tags = event.tags.filter((tag) => {
+    const key = normalizeIdentity(tag);
+    return !rejectedComposers.has(key) || keptComposers.has(key);
   });
+
+  return {
+    ...event,
+    program: keptProgram,
+    composers,
+    tags,
+    dataQuality: mergedProgramQuality(keptProgram),
+  };
+}
+
+function isUnmistakablyNonProgramItem(item: ProgramItem, sourceName: string) {
+  const title = normalizeProgramTitle(item.title);
+  const composer = normalizeProgramTitle(item.composer ?? "");
+  if (/^(?:注|说明|备注|曲目说明|温馨提示)\s*[：:]/.test(title)) return true;
+  if (/^(?:演出|演奏|伴奏|领唱|合唱|独唱|指挥|艺术指导|钢琴伴奏)$/.test(composer)) return true;
+  if (/[\[【（(]\s*20\d{2}-\d{1,2}-\d{1,2}\s+\d{1,2}:\d{2}\s*[\]】）)]/.test(title)) return true;
+
+  if (sourceName === "星海音乐厅官网") {
+    const sentenceCount = (title.match(/[。！？]/g) ?? []).length;
+    if (title.length >= 32 && sentenceCount > 0) return true;
+    if (composer.length > 32 || /[。！？；，,]$/.test(composer)) return true;
+  }
+  return false;
 }
 
 function embeddedHall(value: string) {
@@ -1099,6 +1251,7 @@ function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
   const aComposer = normalizeIdentity(a.composer ?? "");
   const bComposer = normalizeIdentity(b.composer ?? "");
   if (aComposer && bComposer && aComposer !== bComposer) return false;
+  if (workNumberIdentityConflicts(a.title, b.title)) return false;
   const similarityThreshold = aComposer && bComposer ? 0.65 : 0.8;
   const aTitles = [a.title, ...(a.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
   const bTitles = [b.title, ...(b.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
@@ -1112,6 +1265,34 @@ function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
             diceCoefficient(left, right) >= similarityThreshold)),
     ),
   );
+}
+
+function workNumberIdentityConflicts(a: string, b: string) {
+  const left = workNumberTokens(a);
+  const right = workNumberTokens(b);
+  return left.length > 0 && right.length > 0 && !left.some((token) => right.includes(token));
+}
+
+function workNumberTokens(value: string) {
+  const tokens = Array.from(value.matchAll(/\d+/g), (match) => String(Number(match[0])));
+  const chineseOrdinals = Array.from(
+    value.matchAll(/(?:第|曲)([一二三四五六七八九十]+)(?=\p{L}|$)|([一二三四五六七八九十]+)$/gu),
+    (match) => chineseNumber(match[1] || match[2]),
+  ).filter((token): token is string => Boolean(token));
+  return unique([...tokens, ...chineseOrdinals]);
+}
+
+function chineseNumber(value: string) {
+  const digits: Record<string, number> = {
+    一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10,
+  };
+  if (value.length === 1) return String(digits[value] ?? "");
+  if (value.startsWith("十")) return String(10 + (digits[value[1]] ?? 0));
+  if (value.includes("十")) {
+    const [tens, ones] = value.split("十");
+    return String((digits[tens] ?? 0) * 10 + (digits[ones] ?? 0));
+  }
+  return undefined;
 }
 
 function dedupeProgram(items: ProgramItem[]) {

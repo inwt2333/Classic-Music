@@ -32,21 +32,21 @@
       "id": "suzhou-symphony-official",
       "name": "苏州交响乐团官网",
       "adapter": "suzhou-symphony-api",
-      "url": "https://www.szsorch.com/2025-26musicseason.html",
+      "url": "https://www.szsorch.com/",
       "city": "苏州",
       "venue": "苏州文化艺术中心",
       "pageSize": 100,
       "sections": [
         {
-          "slug": "2025-26-music-season",
+          "slug": "2026-27-Music-Season",
           "index": 1
         },
         {
-          "slug": "specially-curated",
+          "slug": "specially-curated-26-27",
           "index": 2
         },
         {
-          "slug": "0",
+          "slug": "Special-scheme-26-27",
           "index": 3
         }
       ]
@@ -68,10 +68,7 @@
       "url": "https://www.cnso.com.cn/zgjxyt/ycrc/ycrc.shtml",
       "city": "北京",
       "venue": "北京音乐厅",
-      "maxPages": 12,
-      "seedUrls": [
-        "https://www.cnso.com.cn/zgjxyt/ycrc/202507/c6a2a9922a594803ab4fb3d95b846fbb.shtml"
-      ]
+      "maxPages": 12
     },
     {
       "id": "china-philharmonic-official",
@@ -88,10 +85,7 @@
       "url": "http://shphilharmonic.com/activity",
       "city": "上海",
       "venue": "上海东方艺术中心",
-      "maxPages": 10,
-      "seedUrls": [
-        "http://shphilharmonic.com/activity/6a62d59f29df199b78e1aa88?no=2&out=true"
-      ]
+      "maxPages": 10
     },
     {
       "id": "shanghai-grand-theatre-official",
@@ -117,8 +111,7 @@
       "adapter": "zhongshan-music-hall-html",
       "url": "https://xhmpw.com/zsyyt",
       "city": "北京",
-      "venue": "中山公园音乐堂",
-      "seedUrls": ["https://xhmpw.com/t48086.html"]
+      "venue": "中山公园音乐堂"
     },
     {
       "id": "guangzhou-symphony-official",
@@ -127,7 +120,9 @@
       "url": "https://www.gso.org.cn/",
       "city": "广州",
       "venue": "星海音乐厅",
-      "seedUrls": ["https://www.gso.org.cn/portfolio/concert-2026-07-12/index.html"]
+      "supplementalIndexUrls": [
+        "https://www.concerthall.com.cn/events/newindexhm_gso.php"
+      ]
     },
     {
       "id": "xinghai-concert-hall-official",
@@ -135,8 +130,7 @@
       "adapter": "xinghai-concert-hall-html",
       "url": "https://www.concerthall.com.cn/events/newindex.php",
       "city": "广州",
-      "venue": "星海音乐厅",
-      "seedUrls": ["https://www.concerthall.com.cn/events/neweventdetail.php?id=5056"]
+      "venue": "星海音乐厅"
     },
     {
       "id": "shenzhen-symphony-official",
@@ -145,7 +139,9 @@
       "url": "http://www.sso.org.cn/infolist.action?pid=305&tid=314",
       "city": "深圳",
       "venue": "深圳音乐厅",
-      "defaultTime": "19:30"
+      "defaultTime": "19:30",
+      "supplementalIndexUrl": "https://szyyt.com/performance",
+      "supplementalMaxPages": 4
     },
     {
       "id": "shenzhen-concert-hall-official",
@@ -154,7 +150,7 @@
       "url": "https://szyyt.com/performance",
       "city": "深圳",
       "venue": "深圳音乐厅",
-      "seedUrls": ["https://szyyt.com/performance/show_100001006641353.html"]
+      "maxPages": 4
     },
     {
       "id": "zhejiang-symphony-official",
@@ -172,6 +168,20 @@
       "city": "西安",
       "venue": "西安音乐厅",
       "cmpAppKey": "SXtheatre"
+    },
+    {
+      "id": "harbin-music-hall-maitix",
+      "name": "哈尔滨音乐厅票务（麦座）",
+      "adapter": "harbin-maitix-api",
+      "url": "https://hrbso.maitix.com/h5",
+      "apiBase": "https://client.maitix.com",
+      "siteOrigin": "https://hrbso.maitix.com/",
+      "city": "哈尔滨",
+      "venue": "哈尔滨音乐厅",
+      "pageSize": 50,
+      "projectIds": ["238906060", "239249002", "239358001"],
+      "seedFile": "data/source-seeds/harbin-maitix.json",
+      "allowEmpty": true
     }
   ]
 }

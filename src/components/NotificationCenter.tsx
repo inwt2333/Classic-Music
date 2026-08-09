@@ -13,6 +13,7 @@ const changeLabels: Record<FollowNotification["change"]["type"], string> = {
 
 const targetLabels: Record<FollowTarget["type"], string> = {
   person: "音乐家",
+  composer: "作曲家",
   work: "作品",
   ensemble: "乐团",
   venue: "场馆",
@@ -90,7 +91,7 @@ export default function NotificationCenter({
               </button>
             </div>
           )) : (
-            <div className="feature-empty"><Music size={24} /><strong>暂无相关变化</strong><span>关注音乐家、作品、乐团或场馆后，变化会出现在这里。</span></div>
+            <div className="feature-empty"><Music size={24} /><strong>暂无相关变化</strong><span>关注作曲家、音乐家、作品、乐团或场馆后，变化会出现在这里。</span></div>
           )}
         </div>
 

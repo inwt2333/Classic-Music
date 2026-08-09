@@ -24,6 +24,20 @@ assert.equal(parsed.program.length, 2);
 assert.equal(parsed.program[0].composer, "马勒");
 assert.equal(parsed.program[1].movements?.[0].title, "从容地；非常闲适地");
 assert.deepEqual(parsed.performers, ["李晶晶", "崔璨", "王欢"]);
+
+const noteAfterWork = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>前奏曲</p>
+        <p>前奏曲集 第二册 德彪西 曲</p>
+        <p>注：德彪西前奏曲第二册，共演奏11首。演奏者将省略其中一首。</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(noteAfterWork.program.map((item) => item.title), ["前奏曲", "前奏曲集 第二册"]);
 assert.deepEqual(
   parseNcpaPriceTiers({
     sessionPrices: [{ name: "480" }, { name: "380(满3张打8折)" }, { name: "80" }],

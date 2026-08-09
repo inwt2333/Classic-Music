@@ -2,7 +2,7 @@ export type KnowledgePublicationStatus = "draft" | "reviewed" | "published";
 export type KnowledgeCompleteness = "basic" | "complete";
 export type KnowledgePeriodKey = "baroque" | "classical" | "romantic" | "modern" | "twentieth" | "contemporary" | "other";
 export type KnowledgeGenreFamily = "orchestral" | "concerto" | "chamber" | "solo" | "vocal" | "stage" | "other";
-export type KnowledgeLibraryView = "explore" | "composers" | "works";
+export type KnowledgeLibraryView = "explore" | "collections" | "composers" | "works";
 
 export type KnowledgeGeneration = {
   method: "deepseek";

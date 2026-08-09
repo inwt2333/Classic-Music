@@ -51,6 +51,7 @@ import {
   loadEventDetail,
   loadEventIndex,
   loadKnowledgeComposer,
+  loadKnowledgeIndex,
   loadKnowledgeWork,
 } from "./data";
 import {
@@ -97,7 +98,8 @@ import type {
   EntityDataset,
   EntityRecord,
 } from "./types";
-import type { KnowledgeLibraryView, PublishedKnowledgeComposer, PublishedKnowledgeWork } from "./knowledge/types";
+import type { KnowledgeIndex, KnowledgeLibraryView, PublishedKnowledgeComposer, PublishedKnowledgeWork } from "./knowledge/types";
+import { isKnowledgeCollectionKey, type KnowledgeCollectionKey } from "./knowledge/collections";
 import {
   dateMatchesPreset,
   formatEventVenue,
@@ -187,8 +189,13 @@ function App() {
   const [knowledgeLibraryOpen, setKnowledgeLibraryOpen] = useState(initialParams.get("knowledge") === "works");
   const [knowledgeLibraryView, setKnowledgeLibraryView] = useState<KnowledgeLibraryView>(() => {
     const value = initialParams.get("library");
-    return value === "composers" || value === "works" ? value : "explore";
+    return value === "collections" || value === "composers" || value === "works" ? value : "explore";
   });
+  const [knowledgeCollectionKey, setKnowledgeCollectionKey] = useState<KnowledgeCollectionKey | "">(() => {
+    const value = initialParams.get("collection");
+    return isKnowledgeCollectionKey(value) ? value : "";
+  });
+  const [knowledgeIndex, setKnowledgeIndex] = useState<KnowledgeIndex | null>(null);
   const [activeComposerId, setActiveComposerId] = useState(initialParams.get("composer") ?? "");
   const [activeComposer, setActiveComposer] = useState<PublishedKnowledgeComposer | null>(null);
   const [composerLoading, setComposerLoading] = useState(Boolean(initialParams.get("composer")));
@@ -214,6 +221,7 @@ function App() {
   const detailReturnWorkIdRef = useRef("");
   const workTriggerRef = useRef<HTMLElement | null>(null);
   const workReturnEventIdRef = useRef("");
+  const workReturnLibraryRef = useRef<{ view: KnowledgeLibraryView; collectionKey: KnowledgeCollectionKey | "" } | null>(null);
   const restoreWorkTriggerRef = useRef(false);
   const filtersWereOpenRef = useRef(false);
   const filterIsModal = useMediaQuery("(max-width: 760px)");
@@ -386,12 +394,17 @@ function App() {
       const nextWorkId = params.get("work") ?? "";
       detailReturnWorkIdRef.current = "";
       workReturnEventIdRef.current = "";
+      workReturnLibraryRef.current = null;
       restoreWorkTriggerRef.current = false;
       setSelectedId(nextEventId);
       setActiveEntityId(params.get("entity") ?? "");
       setActiveVenue(params.get("venuePage") ?? "");
       setActiveWorkId(nextWorkId);
       setKnowledgeLibraryOpen(params.get("knowledge") === "works");
+      const nextLibraryView = params.get("library");
+      setKnowledgeLibraryView(nextLibraryView === "collections" || nextLibraryView === "composers" || nextLibraryView === "works" ? nextLibraryView : "explore");
+      const nextCollection = params.get("collection");
+      setKnowledgeCollectionKey(isKnowledgeCollectionKey(nextCollection) ? nextCollection : "");
       setActiveComposerId(params.get("composer") ?? "");
       setDetailOpen(Boolean(nextEventId));
     };
@@ -483,6 +496,20 @@ function App() {
       cancelled = true;
     };
   }, [activeComposerId]);
+
+  useEffect(() => {
+    const selectedHasKnowledge = selectedDetail?.program.some((item) => item.knowledgeWorkId) ?? false;
+    if (knowledgeIndex || (!activeWorkId && !activeComposerId && !knowledgeLibraryOpen && !selectedHasKnowledge)) return;
+    let cancelled = false;
+    loadKnowledgeIndex()
+      .then((index) => {
+        if (!cancelled) setKnowledgeIndex(index);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [activeComposerId, activeWorkId, knowledgeIndex, knowledgeLibraryOpen, selectedDetail]);
 
   const cities = useMemo(
     () => ["全部城市", ...Array.from(new Set(dataset.events.map((event) => event.city))).sort()],
@@ -620,10 +647,11 @@ function App() {
     if (knowledgeLibraryOpen) {
       params.set("knowledge", "works");
       if (knowledgeLibraryView !== "explore") params.set("library", knowledgeLibraryView);
+      if (knowledgeLibraryView === "collections" && knowledgeCollectionKey) params.set("collection", knowledgeCollectionKey);
     }
     if (activeComposerId) params.set("composer", activeComposerId);
     window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
-  }, [activeComposerId, activeEntityId, activeVenue, activeWorkId, city, datePreset, detailOpen, ensemble, genre, hasProgram, knowledgeLibraryOpen, knowledgeLibraryView, personalFilter, query, selectedId, sortMode, venue, viewMode]);
+  }, [activeComposerId, activeEntityId, activeVenue, activeWorkId, city, datePreset, detailOpen, ensemble, genre, hasProgram, knowledgeCollectionKey, knowledgeLibraryOpen, knowledgeLibraryView, personalFilter, query, selectedId, sortMode, venue, viewMode]);
 
   const entitiesByKey = useMemo(() => {
     const map = new Map<string, EntityRecord>();
@@ -638,6 +666,11 @@ function App() {
     }
     return map;
   }, [allEntities, dataset.events]);
+
+  const knowledgeWorksById = useMemo(
+    () => new Map((knowledgeIndex?.works ?? []).map((work) => [work.id, work])),
+    [knowledgeIndex],
+  );
 
   const activeFilterCount = [
     datePreset !== "all",
@@ -776,6 +809,7 @@ function App() {
   const exploreWork = (workId: string) => {
     workTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     workReturnEventIdRef.current = detailOpen ? selectedId : "";
+    workReturnLibraryRef.current = null;
     restoreWorkTriggerRef.current = false;
     const params = new URLSearchParams(window.location.search);
     params.delete("event");
@@ -798,6 +832,7 @@ function App() {
     workReturnEventIdRef.current = "";
     restoreWorkTriggerRef.current = true;
     if (returnEventId) {
+      workReturnLibraryRef.current = null;
       const params = new URLSearchParams(window.location.search);
       params.delete("work");
       params.set("event", returnEventId);
@@ -807,21 +842,30 @@ function App() {
       setDetailOpen(true);
       return;
     }
+    const libraryReturn = workReturnLibraryRef.current;
+    workReturnLibraryRef.current = null;
     const params = new URLSearchParams(window.location.search);
     params.delete("work");
     params.set("knowledge", "works");
+    if (libraryReturn && libraryReturn.view !== "explore") params.set("library", libraryReturn.view);
+    if (libraryReturn?.view === "collections" && libraryReturn.collectionKey) params.set("collection", libraryReturn.collectionKey);
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     setActiveWorkId("");
     setKnowledgeLibraryOpen(true);
+    if (libraryReturn) {
+      setKnowledgeLibraryView(libraryReturn.view);
+      setKnowledgeCollectionKey(libraryReturn.collectionKey);
+    }
   };
 
   const openKnowledgeLibrary = () => {
     const params = new URLSearchParams(window.location.search);
-    for (const key of ["event", "entity", "venuePage", "work", "composer", "library"]) params.delete(key);
+    for (const key of ["event", "entity", "venuePage", "work", "composer", "library", "collection"]) params.delete(key);
     params.set("knowledge", "works");
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     setKnowledgeLibraryOpen(true);
     setKnowledgeLibraryView("explore");
+    setKnowledgeCollectionKey("");
     setActiveComposerId("");
     setActiveWorkId("");
     setActiveEntityId("");
@@ -833,15 +877,22 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     params.delete("knowledge");
     params.delete("library");
+    params.delete("collection");
     window.history.pushState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`);
     setKnowledgeLibraryOpen(false);
   };
 
   const openLibraryWork = (workId: string) => {
+    if (knowledgeLibraryOpen) {
+      workReturnLibraryRef.current = { view: knowledgeLibraryView, collectionKey: knowledgeCollectionKey };
+    } else if (activeComposerId) {
+      workReturnLibraryRef.current = { view: "composers", collectionKey: "" };
+    }
     workReturnEventIdRef.current = "";
     const params = new URLSearchParams(window.location.search);
     params.delete("knowledge");
     params.delete("composer");
+    params.delete("collection");
     params.set("work", workId);
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     setKnowledgeLibraryOpen(false);
@@ -854,6 +905,7 @@ function App() {
     params.delete("knowledge");
     params.delete("work");
     params.delete("event");
+    params.delete("collection");
     params.set("composer", composerId);
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
     setKnowledgeLibraryOpen(false);
@@ -876,6 +928,19 @@ function App() {
     params.delete("composer");
     params.set("event", event.id);
     window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setActiveComposerId("");
+    setSelectedId(event.id);
+    setDetailOpen(true);
+  };
+
+  const openKnowledgeEvent = (event: ConcertEventSummary) => {
+    const params = new URLSearchParams(window.location.search);
+    for (const key of ["knowledge", "library", "collection", "work", "composer"]) params.delete(key);
+    params.set("event", event.id);
+    window.history.pushState(null, "", `${window.location.pathname}?${params}`);
+    setKnowledgeLibraryOpen(false);
+    setKnowledgeCollectionKey("");
+    setActiveWorkId("");
     setActiveComposerId("");
     setSelectedId(event.id);
     setDetailOpen(true);
@@ -950,6 +1015,13 @@ function App() {
     ? makeFollowTarget(activeEntity.type === "ensemble" ? "ensemble" : activeEntity.type, activeEntity.name, activeEntity.id)
     : null;
   const activeVenueTarget = activeVenue ? makeFollowTarget("venue", activeVenue) : null;
+  const activeWorkTarget = activeWork ? makeFollowTarget("work", activeWork.title, activeWork.id) : null;
+  const activeComposerTarget = activeComposer
+    ? makeFollowTarget("composer", activeComposer.name, activeComposer.id, activeComposer.aliases)
+    : null;
+  const relatedWorks = activeWork?.relatedWorkIds
+    .map((id) => knowledgeWorksById.get(id))
+    .filter((work): work is NonNullable<typeof work> => Boolean(work)) ?? [];
 
   return (
     <main className="app-shell">
@@ -1016,8 +1088,15 @@ function App() {
           error={workError}
           events={dataset.events.filter((event) => activeWork?.upcomingEventIds.includes(event.id))}
           onBack={closeWork}
+          backLabel={workReturnEventIdRef.current ? "返回演出" : workReturnLibraryRef.current?.view === "collections" ? "返回精选专题" : "返回作品库"}
           onOpenEvent={openWorkEvent}
           onOpenComposer={openComposer}
+          onOpenRelatedWork={openLibraryWork}
+          relatedWorks={relatedWorks}
+          followed={activeWorkTarget ? Boolean(follows[activeWorkTarget.key]) : false}
+          onToggleFollow={() => {
+            if (activeWorkTarget) updateFollow(activeWorkTarget);
+          }}
         />
       ) : activeComposerId ? (
         <ComposerPage
@@ -1028,13 +1107,24 @@ function App() {
           onBack={closeComposer}
           onOpenWork={openLibraryWork}
           onOpenEvent={openComposerEvent}
+          followed={activeComposerTarget ? Boolean(follows[activeComposerTarget.key]) : false}
+          onToggleFollow={() => {
+            if (activeComposerTarget) updateFollow(activeComposerTarget);
+          }}
         />
       ) : knowledgeLibraryOpen ? (
         <KnowledgeLibraryPage
           view={knowledgeLibraryView}
-          onViewChange={setKnowledgeLibraryView}
+          collectionKey={knowledgeCollectionKey}
+          events={dataset.events}
+          onViewChange={(nextView) => {
+            setKnowledgeLibraryView(nextView);
+            if (nextView !== "collections") setKnowledgeCollectionKey("");
+          }}
+          onCollectionChange={setKnowledgeCollectionKey}
           onOpenWork={openLibraryWork}
           onOpenComposer={openComposer}
+          onOpenEvent={openKnowledgeEvent}
           onBack={closeKnowledgeLibrary}
         />
       ) : (
@@ -1301,6 +1391,7 @@ function App() {
           loading={detailLoading}
           open={detailOpen}
           entitiesByKey={entitiesByKey}
+          knowledgeWorksById={knowledgeWorksById}
           panelRef={detailPanelRef}
           closeButtonRef={detailCloseRef}
           onClose={closeDetail}
@@ -1482,6 +1573,6 @@ appRoot.render(rootParams.get("review") === "1"
     ? <UpdatesWorkspace />
   : rootParams.get("changes") === "1"
     ? <ChangesWorkspace />
-  : rootParams.get("sources") === "1"
+  : rootParams.has("sources")
     ? <SourcesWorkspace />
     : <App />);

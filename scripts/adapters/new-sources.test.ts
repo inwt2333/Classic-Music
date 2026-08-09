@@ -1,11 +1,20 @@
 import assert from "node:assert/strict";
 import { isShanghaiGrandTheatreClassical, parseShanghaiGrandTheatreDetail } from "./shanghai-grand-theatre";
 import { parseBeijingConcertHallDetail } from "./beijing-concert-hall";
-import { parseGuangzhouSymphonyDetail } from "./guangzhou-symphony";
-import { parseShenzhenConcertHallDetail } from "./shenzhen-concert-hall";
+import {
+  discoverGuangzhouSymphonySeasonUrls,
+  discoverGuangzhouSymphonySupplementalUrls,
+  parseGuangzhouSymphonyDetail,
+} from "./guangzhou-symphony";
+import {
+  buildShenzhenConcertHallListUrl,
+  discoverShenzhenConcertHallDetailUrls,
+  parseShenzhenConcertHallDetail,
+} from "./shenzhen-concert-hall";
 import { parseZhongshanMusicHallDetail } from "./zhongshan-music-hall";
 import { parseZhejiangSymphonyCalendar, parseZhejiangSymphonyProgram } from "./zhejiang-symphony";
 import { isXianConcertHallClassical } from "./xian-concert-hall";
+import { parseXinghaiConcertHallDetail } from "./xinghai-concert-hall";
 
 assert.equal(isShanghaiGrandTheatreClassical({ category: "音乐剧 MUSICAL", fullCnName: "摇滚音乐剧" }), false);
 assert.equal(isShanghaiGrandTheatreClassical({ category: "音乐会 CONCERT", fullCnName: "肖邦钢琴独奏音乐会" }), true);
@@ -39,6 +48,39 @@ const gso = parseGuangzhouSymphonyDetail(`
 `);
 assert.equal(gso.program.length, 2);
 assert.equal(gso.program[0].composer, "柴科夫斯基");
+assert.deepEqual(
+  discoverGuangzhouSymphonySeasonUrls(
+    `
+      <a href="/music-season-2025-26-subscription/index.html">旧乐季</a>
+      <a href="/music-season-2026-27-subscription/index.html">新乐季</a>
+      <a href="/music-season-2026-27-pops/index.html">新乐季流行</a>
+    `,
+    "https://www.gso.org.cn/",
+  ),
+  [
+    "https://www.gso.org.cn/music-season-2026-27-subscription/index.html",
+    "https://www.gso.org.cn/music-season-2026-27-pops/index.html",
+  ],
+);
+assert.deepEqual(
+  discoverGuangzhouSymphonySupplementalUrls(
+    '<a href="/events/neweventdetail.php?id=5101">new season</a>',
+    "https://www.concerthall.com.cn/events/newindexhm_gso.php",
+  ),
+  ["https://www.concerthall.com.cn/events/neweventdetail.php?id=5101"],
+);
+
+assert.equal(
+  buildShenzhenConcertHallListUrl("https://szyyt.com/performance", 3),
+  "https://szyyt.com/performance/0/0000-00-00/0000-00-00/0/0/key%5E/3",
+);
+assert.deepEqual(
+  discoverShenzhenConcertHallDetailUrls(
+    '<a href="/performance/show_1000001.html">concert</a>',
+    "https://szyyt.com/performance",
+  ),
+  ["https://szyyt.com/performance/show_1000001.html"],
+);
 
 const szyyt = parseShenzhenConcertHallDetail(`
   <h1>青年钢琴家古典独奏音乐会</h1><div>2026年08月07日 19:30 深圳音乐厅五楼小剧场</div>
@@ -54,6 +96,34 @@ const szyytOrganizer = parseShenzhenConcertHallDetail(`
 `);
 assert.equal(szyytOrganizer.venue, "深圳音乐厅");
 assert.equal(szyytOrganizer.hall, undefined);
+
+const szyytCredits = parseShenzhenConcertHallDetail(`
+  <h1>多民族童声合唱音乐会</h1><div>2026年08月28日 20:00 深圳音乐厅二楼演奏大厅</div>
+  <div class="tabContent2"><p>演出曲目</p>
+    <p>《大山小事》</p><p>黄摩崖 词，张阿雅 曲</p>
+    <p>演出：深圳音乐厅“小金树”多民族童声合唱团</p>
+    <p>《茉莉花》（江苏民歌）</p><p>何崇志 改编合唱</p>
+    <p>伴奏：罗诗祺、李东南</p><p>（曲目以演出当日为准）</p>
+  </div>
+`);
+assert.deepEqual(szyytCredits.program.map((item) => item.title), ["大山小事", "茉莉花（江苏民歌）"]);
+assert.equal(szyytCredits.program[0].composer, "张阿雅");
+assert.deepEqual(szyytCredits.program[0].credits, [{ name: "黄摩崖", role: "词" }]);
+assert.deepEqual(szyytCredits.performers, ["深圳音乐厅“小金树”多民族童声合唱团", "罗诗祺", "李东南"]);
+
+const xinghai = parseXinghaiConcertHallDetail(`
+  <h1>石进钢琴音乐会---星海音乐厅</h1>
+  <div class="fl fblack lh21">演出地点：交响乐演奏大厅</div>
+  <div id="artists">钢琴：石进</div>
+  <div id="program">一个人的时光<br>1981<br>夜的钢琴曲五<br>* 曲目以演出现场为准</div>
+  <div>如果有，那一定少不了石进的《夜的钢琴曲五》，这首作品陪伴了许多听众。</div>
+  <div>年度音乐大赏 某乐团《四季》[2026-11-13 20:00]</div>
+`, "https://www.concerthall.com.cn/events/neweventdetail.php?id=4989");
+assert.deepEqual(xinghai.program.map((item) => item.title), ["一个人的时光", "1981", "夜的钢琴曲五"]);
+assert.deepEqual(xinghai.performers, ["石进"]);
+assert.equal(xinghai.title, "石进钢琴音乐会");
+assert.equal(xinghai.venue, "星海音乐厅");
+assert.equal(xinghai.hall, "交响乐演奏大厅");
 
 const zhongshan = parseZhongshanMusicHallDetail(`
   <div class="pp_l"><img class="pp_pic" src="/concert-poster.jpg"></div>

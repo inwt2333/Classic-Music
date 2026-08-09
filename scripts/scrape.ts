@@ -20,6 +20,8 @@ import {
   parseShanghaiConcertHallPrices,
 } from "./adapters/shanghai-concert-hall";
 import {
+  discoverSuzhouSymphonySeasonUrl,
+  discoverSuzhouSymphonySections,
   extractSuzhouSymphonyDates,
   parseSuzhouSymphonyContent,
   parseSuzhouSymphonyVenue,
@@ -39,7 +41,11 @@ import {
   isBeijingConcertHallClassical,
   parseBeijingConcertHallDetail,
 } from "./adapters/beijing-concert-hall";
-import { parseGuangzhouSymphonyDetail } from "./adapters/guangzhou-symphony";
+import {
+  discoverGuangzhouSymphonySeasonUrls,
+  discoverGuangzhouSymphonySupplementalUrls,
+  parseGuangzhouSymphonyDetail,
+} from "./adapters/guangzhou-symphony";
 import {
   isXinghaiConcertHallClassical,
   parseXinghaiConcertHallDetail,
@@ -51,6 +57,8 @@ import {
   parseShenzhenSymphonyProgramText,
 } from "./adapters/shenzhen-symphony";
 import {
+  buildShenzhenConcertHallListUrl,
+  discoverShenzhenConcertHallDetailUrls,
   isShenzhenConcertHallClassical,
   parseShenzhenConcertHallDetail,
   parseShenzhenConcertHallProgramText,
@@ -70,9 +78,16 @@ import {
   parseXianConcertHallDetail,
   parseXianConcertHallProgramText,
 } from "./adapters/xian-concert-hall";
+import {
+  getHarbinMaitixPriceTiers,
+  parseHarbinMaitixDetail,
+  parseHarbinMaitixSeedFile,
+  type HarbinMaitixProject,
+} from "./adapters/harbin-maitix";
 import { formatChinaDateLabels, parseChinaDate } from "./china-time";
 import { prepareAndPersistDataset } from "./data-store";
 import { fetchWithRetry } from "./fetch-retry";
+import { assertSourceCollectionHealthy } from "./source-health";
 import { createLocalTesseract, type LocalOcr } from "./ocr/local-tesseract";
 import {
   evaluateOcrProgram,
@@ -182,6 +197,7 @@ const sourceConfigSchema = z.object({
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("guangzhou-symphony-html"),
         url: z.string().url(), city: z.string(), venue: z.string(), seedUrls: z.array(z.string().url()).default([]),
+        supplementalIndexUrls: z.array(z.string().url()).default([]),
       }),
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("xinghai-concert-hall-html"),
@@ -190,10 +206,12 @@ const sourceConfigSchema = z.object({
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("shenzhen-symphony-html"),
         url: z.string().url(), city: z.string(), venue: z.string(), defaultTime: z.string().default("19:30"),
+        supplementalIndexUrl: z.string().url().optional(), supplementalMaxPages: z.number().int().positive().max(20).default(4),
       }),
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("shenzhen-concert-hall-html"),
         url: z.string().url(), city: z.string(), venue: z.string(), seedUrls: z.array(z.string().url()).default([]),
+        maxPages: z.number().int().positive().max(20).default(4),
       }),
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("zhongshan-music-hall-html"),
@@ -207,6 +225,13 @@ const sourceConfigSchema = z.object({
         id: z.string(), name: z.string(), adapter: z.literal("xian-concert-hall-api"),
         url: z.string().url(), city: z.string(), venue: z.string(), cmpAppKey: z.string(),
       }),
+      z.object({
+        id: z.string(), name: z.string(), adapter: z.literal("harbin-maitix-api"),
+        url: z.string().url(), apiBase: z.string().url(), siteOrigin: z.string().url(),
+        city: z.string(), venue: z.string(), pageSize: z.number().int().positive().max(100).default(50),
+        projectIds: z.array(z.string()).default([]), seedFile: z.string().default("data/source-seeds/harbin-maitix.json"),
+        allowEmpty: z.boolean().default(true),
+      }),
     ]),
   ),
 });
@@ -218,9 +243,9 @@ const explicitOcr = process.argv.includes("--ocr");
 const useOcr = !process.argv.includes("--no-ocr");
 const root = process.cwd();
 const sourceConfigPath = resolve(root, "sources/shanghai.sources.json");
-const outputPath = resolve(root, "public/data/events.json");
-const databasePath = resolve(root, "data/classic-music.db");
-const snapshotDir = resolve(root, "data/snapshots");
+const outputPath = resolve(root, process.env.SCRAPE_OUTPUT_PATH || "public/data/events.json");
+const databasePath = resolve(root, process.env.SCRAPE_DATABASE_PATH || "data/classic-music.db");
+const snapshotDir = resolve(root, process.env.SCRAPE_SNAPSHOT_DIR || "data/snapshots");
 const ocrCacheDir = resolve(root, "data/ocr-cache");
 const ocrInspectDir = resolve(root, "data/ocr-inspect");
 
@@ -310,8 +335,19 @@ async function main() {
   await mkdir(snapshotDir, { recursive: true });
 
   for (const source of config.sources) {
+    let rawCount: number | undefined;
+    let normalizedCount: number | undefined;
     try {
-      const { rawCount, events } = await scrapeSource(source, startedAt);
+      const result = await scrapeSource(source, startedAt);
+      rawCount = result.rawCount;
+      normalizedCount = result.events.length;
+      assertSourceCollectionHealthy({
+        sourceName: source.name,
+        rawCount,
+        normalizedCount,
+        allowEmpty: "allowEmpty" in source ? source.allowEmpty : false,
+      });
+      const events = result.events;
 
       if (useAi && process.env.DEEPSEEK_API_KEY) {
         for (const event of events) {
@@ -334,7 +370,10 @@ async function main() {
         url: source.url,
         ok: true,
         eventCount: events.length,
+        rawCount,
+        normalizedCount,
       });
+      console.log(`[source] ${source.name}: discovered ${rawCount}, normalized ${normalizedCount}`);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       dataset.stats.errors.push(`${source.name}: ${message}`);
@@ -344,10 +383,19 @@ async function main() {
         url: source.url,
         ok: false,
         eventCount: 0,
+        rawCount,
+        normalizedCount,
         message,
       });
+      console.error(`[source] ${source.name}: failed - ${message}`);
     }
   }
+
+  await writeFile(
+    resolve(snapshotDir, "source-health.json"),
+    JSON.stringify({ generatedAt: startedAt, sources: dataset.sources }, null, 2),
+    "utf8",
+  );
 
   dataset.events = sortEvents(dedupeEvents(dataset.events));
   dataset.stats.normalizedEvents = dataset.events.length;
@@ -397,6 +445,8 @@ function scrapeSource(source: SourceConfig, scrapedAt: string) {
       return scrapeZhejiangSymphony(source, scrapedAt);
     case "xian-concert-hall-api":
       return scrapeXianConcertHall(source, scrapedAt);
+    case "harbin-maitix-api":
+      return scrapeHarbinMaitix(source, scrapedAt);
     case "localhub-jsonld":
       return scrapeLocalHub(source, scrapedAt);
   }
@@ -610,22 +660,42 @@ async function scrapeSuzhouSymphony(
   scrapedAt: string,
 ) {
   const itemsById = new Map<string, Record<string, any>>();
+  const homeResponse = await fetchWithRetry(source.url, {
+    headers: {
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+      accept: "text/html,application/xhtml+xml",
+    },
+  });
+  if (!homeResponse.ok) throw new Error(`Suzhou Symphony home page HTTP ${homeResponse.status}`);
+  const homeHtml = await homeResponse.text();
+  const seasonUrl = discoverSuzhouSymphonySeasonUrl(homeHtml, source.url) || source.url;
+  const seasonResponse = seasonUrl === source.url ? undefined : await fetchWithRetry(seasonUrl);
+  if (seasonResponse && !seasonResponse.ok) {
+    throw new Error(`Suzhou Symphony season page HTTP ${seasonResponse.status}`);
+  }
+  const seasonHtml = seasonResponse ? await seasonResponse.text() : homeHtml;
+  const discoveredSections = discoverSuzhouSymphonySections(seasonHtml);
+  const sections = discoveredSections.length ? discoveredSections : source.sections;
 
-  for (const section of source.sections) {
-    const firstPage = await requestSuzhouSymphonyPage(source, section, 0);
+  for (const section of sections) {
+    const firstPage = await requestSuzhouSymphonyPage(source, section, 0, seasonUrl);
     const totalPages = Math.max(1, Number(firstPage.totalPages ?? 1));
     for (const item of Array.isArray(firstPage.content) ? firstPage.content : []) {
-      itemsById.set(String(item.id), item);
+      itemsById.set(String(item.id), { ...item, _discoveredSectionSlug: section.slug });
     }
     for (let pageNum = 1; pageNum < totalPages; pageNum += 1) {
-      const page = await requestSuzhouSymphonyPage(source, section, pageNum);
+      const page = await requestSuzhouSymphonyPage(source, section, pageNum, seasonUrl);
       for (const item of Array.isArray(page.content) ? page.content : []) {
-        itemsById.set(String(item.id), item);
+        itemsById.set(String(item.id), { ...item, _discoveredSectionSlug: section.slug });
       }
     }
   }
 
   const listItems = Array.from(itemsById.values());
+  if (!listItems.length && discoveredSections.length) {
+    throw new Error(`Suzhou Symphony returned 0 items from ${discoveredSections.length} discovered sections`);
+  }
   await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(listItems, null, 2), "utf8");
 
   const events = listItems.flatMap((item) => {
@@ -641,6 +711,7 @@ async function requestSuzhouSymphonyPage(
   source: Extract<SourceConfig, { adapter: "suzhou-symphony-api" }>,
   section: { slug: string; index: number },
   pageNum: number,
+  referer: string,
 ) {
   const endpoint = `/api/getMusicData/${encodeURIComponent(section.slug)}/${section.index}?pageNum=${pageNum}&pageSize=${
     source.pageSize
@@ -650,7 +721,7 @@ async function requestSuzhouSymphonyPage(
       "user-agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
       accept: "application/json, text/plain, */*",
-      referer: source.url,
+      referer,
     },
   });
   if (!response.ok) throw new Error(`Suzhou Symphony API ${endpoint} HTTP ${response.status}`);
@@ -672,7 +743,8 @@ function normalizeSuzhouSymphonyEvent(
   const place = parseSuzhouSymphonyVenue(address, item.content || "");
   const ticketUrl =
     item.attributeMapMult?.buyTickets?.[0]?.value || item.attributeMapSingle?.buyTickets?.value || undefined;
-  const detailUrl = new URL(`/${item.sectionName || "2025-26-music-season"}/${item.id}.html`, source.url).href;
+  const detailSection = item.sectionName || item._discoveredSectionSlug || "music-season";
+  const detailUrl = new URL(`/${detailSection}/${item.id}.html`, source.url).href;
   const composers = Array.from(
     new Set([
       ...inferComposers(title),
@@ -1117,6 +1189,7 @@ async function scrapeChinaNationalSymphony(
   source: Extract<SourceConfig, { adapter: "china-national-symphony-html" }>,
   scrapedAt: string,
 ) {
+  const discoveredUrls = new Set<string>();
   const detailUrls = new Set(source.seedUrls);
   for (let page = 1; page <= source.maxPages; page += 1) {
     const pageUrl =
@@ -1125,7 +1198,11 @@ async function scrapeChinaNationalSymphony(
     const $ = cheerio.load(html);
     $('a[href*="/zgjxyt/ycrc/"][href$=".shtml"]').each((_, element) => {
       const href = $(element).attr("href");
-      if (href && /\/ycrc\/20\d{4}\//.test(href)) detailUrls.add(new URL(href, source.url).href);
+      if (href && /\/ycrc\/20\d{4}\//.test(href)) {
+        const detailUrl = new URL(href, source.url).href;
+        discoveredUrls.add(detailUrl);
+        detailUrls.add(detailUrl);
+      }
     });
   }
   await writeFile(
@@ -1182,7 +1259,7 @@ async function scrapeChinaNationalSymphony(
       dataQuality: program.length ? "scraped" : "needs-review",
     });
   }
-  return { rawCount: detailUrls.size, events };
+  return { rawCount: discoveredUrls.size, events };
 }
 
 async function scrapeChinaPhilharmonic(
@@ -1276,13 +1353,18 @@ async function scrapeShanghaiPhilharmonic(
   );
   const pageCount = Math.min(source.maxPages, Math.max(1, Math.ceil(totalItems / 4)));
   const detailUrls = new Set(source.seedUrls);
+  const discoveredUrls = new Set<string>();
 
   for (let page = 1; page <= pageCount; page += 1) {
     const html = page === 1 ? firstPage : await fetchText(`${source.url}?page=${page}`);
     const $ = cheerio.load(html);
     $('a[href^="/activity/"]').each((_, element) => {
       const href = $(element).attr("href");
-      if (href) detailUrls.add(new URL(href, source.url).href);
+      if (href) {
+        const detailUrl = new URL(href, source.url).href;
+        discoveredUrls.add(detailUrl);
+        detailUrls.add(detailUrl);
+      }
     });
   }
   await writeFile(
@@ -1338,7 +1420,7 @@ async function scrapeShanghaiPhilharmonic(
       dataQuality: program.length ? "scraped" : "needs-review",
     });
   }
-  return { rawCount: detailUrls.size, events };
+  return { rawCount: discoveredUrls.size, events };
 }
 
 async function scrapeShanghaiGrandTheatre(
@@ -1452,10 +1534,26 @@ async function scrapeGuangzhouSymphony(
   scrapedAt: string,
 ) {
   const detailUrls = new Set(source.seedUrls);
-  for (const indexUrl of [source.url, "https://www.gso.org.cn/", "https://www.gso.org.cn/music-season-2025-26-subscription/index.html", "https://www.gso.org.cn/music-season-2025-26-pops/index.html", "https://www.gso.org.cn/music-season-2025-26-happy-hour/index.html"]) {
-    const html = await fetchText(indexUrl).catch(() => "");
+  const discoveredUrls = new Set<string>();
+  const homeHtml = await fetchText(source.url);
+  const indexUrls = [source.url, ...discoverGuangzhouSymphonySeasonUrls(homeHtml, source.url)];
+  for (const indexUrl of indexUrls) {
+    const html = indexUrl === source.url ? homeHtml : await fetchText(indexUrl).catch(() => "");
     const $ = cheerio.load(html);
-    $('a[href*="/portfolio/concert-"]').each((_, element) => { const href = $(element).attr("href"); if (href) detailUrls.add(new URL(href, indexUrl).href); });
+    $('a[href*="/portfolio/concert-"]').each((_, element) => {
+      const href = $(element).attr("href");
+      if (!href) return;
+      const detailUrl = new URL(href, indexUrl).href;
+      discoveredUrls.add(detailUrl);
+      detailUrls.add(detailUrl);
+    });
+  }
+  const supplementalUrls = new Set<string>();
+  for (const indexUrl of source.supplementalIndexUrls) {
+    const html = await fetchLegacyChineseText(indexUrl);
+    for (const detailUrl of discoverGuangzhouSymphonySupplementalUrls(html, indexUrl)) {
+      supplementalUrls.add(detailUrl);
+    }
   }
   const events: ConcertEvent[] = [];
   for (const detailUrl of detailUrls) {
@@ -1467,7 +1565,23 @@ async function scrapeGuangzhouSymphony(
       venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program: parsed.program,
       ensemble: "广州交响乐团", performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl }));
   }
-  return { rawCount: detailUrls.size, events };
+  for (const detailUrl of supplementalUrls) {
+    const html = await fetchLegacyChineseText(detailUrl);
+    const parsed = parseXinghaiConcertHallDetail(html, detailUrl);
+    const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
+    if (!start || !/广州交响乐团|广交/.test(parsed.title)) continue;
+    discoveredUrls.add(detailUrl);
+      events.push(createSimpleEvent({
+        source, scrapedAt, sourceRecordId: detailUrl,
+        projectId: `gso_xinghai_${detailUrl.match(/[?&]id=(\d+)/)?.[1] ?? stableId(detailUrl)}`,
+        title: parsed.title, start, venue: parsed.venue || source.venue, hall: parsed.hall,
+        priceTiers: parsed.priceTiers, program: parsed.program, ensemble: "广州交响乐团",
+        conductor: parsed.conductor,
+        performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
+        sourceUrl: detailUrl, ticketUrl: detailUrl,
+      }));
+  }
+  return { rawCount: discoveredUrls.size, events: dedupeEvents(events) };
 }
 
 async function scrapeXinghaiConcertHall(
@@ -1477,7 +1591,14 @@ async function scrapeXinghaiConcertHall(
   const listHtml = await fetchLegacyChineseText(source.url);
   const $ = cheerio.load(listHtml);
   const detailUrls = new Set(source.seedUrls);
-  $('a[href*="neweventdetail.php?id="]').each((_, element) => { const href = $(element).attr("href"); if (href) detailUrls.add(new URL(href, source.url).href); });
+  const discoveredUrls = new Set<string>();
+  $('a[href*="neweventdetail.php?id="]').each((_, element) => {
+    const href = $(element).attr("href");
+    if (!href) return;
+    const detailUrl = new URL(href, source.url).href;
+    discoveredUrls.add(detailUrl);
+    detailUrls.add(detailUrl);
+  });
   const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
   const events: ConcertEvent[] = [];
   try {
@@ -1493,11 +1614,13 @@ async function scrapeXinghaiConcertHall(
       const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
-        venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program,
-        performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
+        venue: parsed.venue || source.venue, hall: parsed.hall, priceTiers: parsed.priceTiers, program,
+        conductor: parsed.conductor,
+        performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
+        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
     }
   } finally { await localOcr?.terminate(); }
-  return { rawCount: detailUrls.size, events };
+  return { rawCount: discoveredUrls.size, events };
 }
 
 async function scrapeShenzhenSymphony(
@@ -1506,9 +1629,28 @@ async function scrapeShenzhenSymphony(
 ) {
   const listHtml = await fetchText(source.url);
   const items = parseShenzhenSymphonyList(listHtml, source.url);
+  const supplementalUrls = source.supplementalIndexUrl
+    ? await discoverShenzhenConcertHallPages(source.supplementalIndexUrl, source.supplementalMaxPages)
+    : [];
   const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
   const events: ConcertEvent[] = [];
   try {
+    for (const detailUrl of supplementalUrls) {
+      const html = await fetchText(detailUrl);
+      const parsed = parseShenzhenConcertHallDetail(html, detailUrl);
+      if (!/深圳交响乐团|深交/.test(parsed.title)) continue;
+      const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
+      if (!start) continue;
+      events.push(createSimpleEvent({
+        source, scrapedAt, sourceRecordId: detailUrl,
+        projectId: `sso_szyyt_${detailUrl.match(/show_(\d+)/)?.[1] ?? stableId(detailUrl)}`,
+        title: parsed.title, start, venue: parsed.venue || source.venue, hall: parsed.hall,
+        priceTiers: parsed.priceTiers, program: parsed.program, ensemble: "深圳交响乐团",
+        performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
+        sourceUrl: detailUrl, ticketUrl: detailUrl,
+      }));
+    }
+    const supplementalDates = new Set(events.map((event) => event.startTime.slice(0, 10)));
     for (const item of items) {
       const html = await fetchText(item.url);
       const parsed = parseShenzhenSymphonyDetail(html, item.url);
@@ -1519,21 +1661,21 @@ async function scrapeShenzhenSymphony(
       const program = parsed.program;
       const start = parseFlexibleChinaDate(`${item.date} ${parsed.time || source.defaultTime}`);
       if (!start) continue;
+      if (supplementalDates.has(start.toISOString().slice(0, 10))) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: item.url, projectId: key, title: item.title, start,
         venue: source.venue, program, ensemble: "深圳交响乐团", sourceUrl: item.url, ticketUrl: item.url, extraction }));
     }
   } finally { await localOcr?.terminate(); }
-  return { rawCount: items.length, events };
+  return { rawCount: items.length + supplementalUrls.length, events: dedupeEvents(events) };
 }
 
 async function scrapeShenzhenConcertHall(
   source: Extract<SourceConfig, { adapter: "shenzhen-concert-hall-html" }>,
   scrapedAt: string,
 ) {
-  const listHtml = await fetchText(source.url);
-  const $ = cheerio.load(listHtml);
   const detailUrls = new Set(source.seedUrls);
-  $('a[href*="/performance/show_"]').each((_, element) => { const href = $(element).attr("href"); if (href) detailUrls.add(new URL(href, source.url).href); });
+  const discoveredUrls = new Set(await discoverShenzhenConcertHallPages(source.url, source.maxPages));
+  for (const detailUrl of discoveredUrls) detailUrls.add(detailUrl);
   const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
   const events: ConcertEvent[] = [];
   try {
@@ -1550,10 +1692,25 @@ async function scrapeShenzhenConcertHall(
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
         venue: parsed.venue || source.venue, hall: parsed.hall, priceTiers: parsed.priceTiers, program,
-        performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
+        performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
+        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
     }
   } finally { await localOcr?.terminate(); }
-  return { rawCount: detailUrls.size, events };
+  return { rawCount: discoveredUrls.size, events };
+}
+
+async function discoverShenzhenConcertHallPages(indexUrl: string, maxPages: number) {
+  const detailUrls = new Set<string>();
+  for (let page = 1; page <= maxPages; page += 1) {
+    const pageUrl = buildShenzhenConcertHallListUrl(indexUrl, page);
+    const html = await fetchText(pageUrl);
+    const pageUrls = discoverShenzhenConcertHallDetailUrls(html, pageUrl);
+    if (!pageUrls.length) break;
+    const sizeBefore = detailUrls.size;
+    for (const detailUrl of pageUrls) detailUrls.add(detailUrl);
+    if (page > 1 && detailUrls.size === sizeBefore) break;
+  }
+  return Array.from(detailUrls);
 }
 
 async function scrapeZhongshanMusicHall(
@@ -1601,6 +1758,124 @@ async function scrapeZhejiangSymphony(
   return { rawCount: calendar.length, events };
 }
 
+async function scrapeHarbinMaitix(
+  source: Extract<SourceConfig, { adapter: "harbin-maitix-api" }>,
+  scrapedAt: string,
+) {
+  const projects = new Map<string, Record<string, any>>();
+  const seedProjects = new Map(
+    parseHarbinMaitixSeedFile(JSON.parse(await readFile(resolve(root, source.seedFile), "utf8")))
+      .map((project) => [String(project.projectToken), project]),
+  );
+  let page = 1;
+  let totalPages = 1;
+  do {
+    const list = await fetchHarbinMaitixJson(source, "/api/pro/projects", {
+      page: String(page),
+      pageSize: String(source.pageSize),
+    });
+    const data = list.data || {};
+    for (const item of Array.isArray(data.dataList) ? data.dataList : []) {
+      if (item?.projectToken) projects.set(String(item.projectToken), item);
+    }
+    totalPages = Math.max(1, Math.min(20, Number(data.totalPage) || 1));
+    page += 1;
+  } while (page <= totalPages);
+
+  for (const projectId of source.projectIds) {
+    if (!projects.has(projectId)) projects.set(projectId, { projectToken: projectId, manuallySeeded: true });
+  }
+  for (const projectId of seedProjects.keys()) {
+    if (!projects.has(projectId)) projects.set(projectId, { projectToken: projectId, snapshotSeeded: true });
+  }
+
+  const events: ConcertEvent[] = [];
+  const activeProjects: HarbinMaitixProject[] = [];
+  for (const [projectId] of projects) {
+    const response = await fetchHarbinMaitixJson(source, "/api/pro/project", {
+      projectToken: projectId,
+      reqType: "1",
+    });
+    const detail = (response.data as HarbinMaitixProject | null) ?? seedProjects.get(projectId) ?? null;
+    if (!detail) continue;
+    activeProjects.push(detail);
+    const parsed = parseHarbinMaitixDetail(detail);
+    if (!isHarbinMaitixClassical(parsed.title, parsed.program)) continue;
+    const detailUrl = `${source.url.replace(/#.*$/, "")}#/pages-order/projectDetail/index?projectId=${encodeURIComponent(projectId)}`;
+
+    for (const event of parsed.events) {
+      const showTime = Number(event.showTime);
+      if (!Number.isFinite(showTime) || showTime <= 0) continue;
+      const start = new Date(showTime);
+      const endTime = Number(event.showEndTime);
+      events.push(createSimpleEvent({
+        source,
+        scrapedAt,
+        sourceRecordId: String(event.eventToken || `${projectId}:${showTime}`),
+        projectId,
+        title: parsed.title,
+        start,
+        end: Number.isFinite(endTime) && endTime > 0 ? new Date(endTime) : undefined,
+        venue: source.venue,
+        hall: cleanHarbinHall(event.siteName || detail.siteName, source.venue),
+        priceTiers: getHarbinMaitixPriceTiers(event),
+        description: parsed.description,
+        program: parsed.program,
+        ensemble: parsed.ensemble || inferEnsemble(`${parsed.title} ${detail.projectDetail || ""}`),
+        conductor: parsed.conductor,
+        performers: uniqueStrings(parsed.performers),
+        sourceUrl: detailUrl,
+        ticketUrl: detailUrl,
+      }));
+    }
+  }
+
+  await writeFile(
+    resolve(snapshotDir, `${source.id}.list.json`),
+    JSON.stringify({ discovered: Array.from(projects.values()), activeProjects }, null, 2),
+    "utf8",
+  );
+  const discoveredActiveCount = activeProjects.length;
+  return { rawCount: discoveredActiveCount, events };
+}
+
+async function fetchHarbinMaitixJson(
+  source: Extract<SourceConfig, { adapter: "harbin-maitix-api" }>,
+  path: string,
+  params: Record<string, string>,
+) {
+  const url = new URL(path, source.apiBase);
+  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+  url.searchParams.set("__sr", source.siteOrigin);
+  const response = await fetchWithRetry(url, () => ({
+    headers: {
+      "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1",
+      accept: "application/json",
+      origin: source.siteOrigin.replace(/\/$/, ""),
+      referer: source.siteOrigin,
+    },
+    signal: AbortSignal.timeout(30_000),
+  }));
+  if (!response.ok) throw new Error(`Harbin Maitix HTTP ${response.status}`);
+  const data = await response.json() as Record<string, any>;
+  if (String(data.code) !== "200" || data.fail === true) {
+    throw new Error(`Harbin Maitix API ${data.code || "unknown"}: ${data.msg || data.detailMsg || "request failed"}`);
+  }
+  return data;
+}
+
+function isHarbinMaitixClassical(title: string, program: ProgramItem[]) {
+  if (program.length) return true;
+  if (/音乐剧|话剧|儿童剧|相声|脱口秀|演唱会|舞蹈|杂技|魔术/.test(title)) return false;
+  return /交响|管弦|室内乐|独奏|重奏|钢琴|小提琴|大提琴|古典|协奏曲|奏鸣曲/.test(title);
+}
+
+function cleanHarbinHall(value: string | undefined, venue: string) {
+  const normalized = cleanText(value || "");
+  if (!normalized || normalized === venue) return undefined;
+  return normalized.replace(new RegExp(`^${venue}`), "").trim() || undefined;
+}
+
 type SimpleEventInput = {
   source: { id: string; name: string; city: string; venue: string };
   scrapedAt: string; sourceRecordId: string; projectId?: string; title: string; start: Date; end?: Date;
@@ -1628,6 +1903,7 @@ function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
       method: "ocr", provider: input.extraction.provider, confidence: input.extraction.confidence,
       imageCount: input.extraction.imageCount, accepted: input.extraction.accepted,
       reasons: input.extraction.reasons, reviewRequired: true,
+      images: input.extraction.pages.map((page) => ({ url: page.url, confidence: page.confidence })),
     } : undefined,
   };
 }
@@ -1997,7 +2273,7 @@ function splitVenueAndHall(value: string, fallbackVenue: string) {
 }
 
 function isBeijingVenue(value: string) {
-  return /北京|国家大剧院|中央歌剧院|中山公园音乐堂|保利剧院|中央音乐学院|清华大学|北京大学/.test(
+  return /北京|国家大剧院|中央歌剧院|中山公园音乐堂|保利剧院|中央音乐学院|清华大学|北京大学|Beijing|National Centre for the Performing Arts|\bNCPA\b|Central Conservatory|Tsinghua|Peking University|Poly Theatre/i.test(
     value,
   );
 }

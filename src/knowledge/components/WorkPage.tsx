@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import {
   ArrowLeft,
+  ArrowRight,
+  Bell,
   BookOpenText,
   CalendarDays,
   Clock3,
@@ -11,7 +13,7 @@ import {
   Video,
 } from "lucide-react";
 import type { ConcertEventSummary } from "../../types";
-import type { PublishedKnowledgeWork } from "../types";
+import type { KnowledgeWorkSummary, PublishedKnowledgeWork } from "../types";
 import { bilibiliSearchUrl, formatEventVenue, localizedMusicSourceUrl } from "../../utils";
 
 export default function WorkPage({
@@ -23,6 +25,10 @@ export default function WorkPage({
   backLabel = "返回演出",
   onOpenEvent,
   onOpenComposer,
+  onOpenRelatedWork,
+  relatedWorks,
+  followed,
+  onToggleFollow,
 }: {
   work: PublishedKnowledgeWork | null;
   loading: boolean;
@@ -32,6 +38,10 @@ export default function WorkPage({
   backLabel?: string;
   onOpenEvent: (event: ConcertEventSummary) => void;
   onOpenComposer: (composerId: string) => void;
+  onOpenRelatedWork: (workId: string) => void;
+  relatedWorks: KnowledgeWorkSummary[];
+  followed: boolean;
+  onToggleFollow: () => void;
 }) {
   const backButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -82,6 +92,9 @@ export default function WorkPage({
             {work.difficulty ? <div><dt>入门提示</dt><dd>{work.difficulty}</dd></div> : null}
           </dl>
         </div>
+        <button type="button" className={`knowledge-follow-action${followed ? " active" : ""}`} onClick={onToggleFollow}>
+          <Bell size={15} />{followed ? "已关注这部作品" : "关注这部作品"}
+        </button>
         <div className="work-tags" aria-label="作品标签">
           {work.genre ? <span>{work.genre}</span> : null}
           {work.key ? <span>{work.key}</span> : null}
@@ -114,6 +127,21 @@ export default function WorkPage({
           </div>
         )}
       </section>
+
+      {relatedWorks.length ? <section className="work-related-section" aria-labelledby="work-related-title">
+        <div className="work-section-heading">
+          <div><span>继续探索</span><h2 id="work-related-title">相关作品</h2></div>
+          <strong>{relatedWorks.length}</strong>
+        </div>
+        <div className="work-related-grid">
+          {relatedWorks.map((related) => <button key={related.id} type="button" onClick={() => onOpenRelatedWork(related.id)}>
+            <span>{related.composerName}{related.genre ? ` · ${related.genre}` : ""}</span>
+            <h3>{related.title}</h3>
+            <p>{related.summary}</p>
+            <footer>{related.upcomingEventCount ? `${related.upcomingEventCount} 场近期演出` : "继续阅读作品指南"}<ArrowRight size={14} /></footer>
+          </button>)}
+        </div>
+      </section> : null}
 
       <div className={`work-reading-grid${hasMainReading ? "" : " basic"}`}>
         {hasMainReading ? <main>

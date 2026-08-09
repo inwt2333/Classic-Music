@@ -1,9 +1,36 @@
 import assert from "node:assert/strict";
 import {
+  discoverSuzhouSymphonySeasonUrl,
+  discoverSuzhouSymphonySections,
   extractSuzhouSymphonyDates,
   parseSuzhouSymphonyContent,
   parseSuzhouSymphonyVenue,
 } from "./suzhou-symphony";
+
+const seasonHome = `
+  <a href="/2025-26musicseason.html">2025-26音乐季</a>
+  <a href="https://www.szsorch.com/26-27-music-season.html">2026-27音乐季</a>
+`;
+assert.equal(
+  discoverSuzhouSymphonySeasonUrl(seasonHome, "https://www.szsorch.com/"),
+  "https://www.szsorch.com/26-27-music-season.html",
+);
+
+const seasonSections = `
+  <!-- getMusicDataList("obsolete-season",0,0) -->
+  <li onclick="getMusicDataList(&quot;2026-27-Music-Season&quot;,1,0)">音乐季</li>
+  <li onclick="getMusicDataList(&quot;specially-curated-26-27&quot;,2,0)">格调室内乐</li>
+  <li onclick="getMusicDataList(&quot;Special-scheme-26-27&quot;,3,0)">特别策划</li>
+  <script>
+    // getMusicDataList("obsolete-season", 0, 0)
+    getMusicDataList("2026-27-Music-Season", 1, 0)
+  </script>
+`;
+assert.deepEqual(discoverSuzhouSymphonySections(seasonSections), [
+  { slug: "2026-27-Music-Season", index: 1 },
+  { slug: "specially-curated-26-27", index: 2 },
+  { slug: "Special-scheme-26-27", index: 3 },
+]);
 
 const openingConcert = parseSuzhouSymphonyContent(`
   <p><strong>炽热</strong></p>

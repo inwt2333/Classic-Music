@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  Bell,
   BookOpenText,
   CalendarDays,
   MapPin,
@@ -19,6 +20,8 @@ export default function ComposerPage({
   onBack,
   onOpenWork,
   onOpenEvent,
+  followed,
+  onToggleFollow,
 }: {
   composer: PublishedKnowledgeComposer | null;
   loading: boolean;
@@ -27,6 +30,8 @@ export default function ComposerPage({
   onBack: () => void;
   onOpenWork: (workId: string) => void;
   onOpenEvent: (event: ConcertEventSummary) => void;
+  followed: boolean;
+  onToggleFollow: () => void;
 }) {
   const backButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -57,6 +62,9 @@ export default function ComposerPage({
         <h1>{composer.name}</h1>
         {composer.originalName ? <p className="composer-original-name">{composer.originalName}</p> : null}
         <p>{composer.introduction}</p>
+        <button type="button" className={`knowledge-follow-action${followed ? " active" : ""}`} onClick={onToggleFollow}>
+          <Bell size={15} />{followed ? "已关注这位作曲家" : "关注这位作曲家"}
+        </button>
         <dl>
           {composer.birthYear || composer.deathYear ? <div><dt>生卒</dt><dd>{composer.birthYear ?? "?"}–{composer.deathYear ?? ""}</dd></div> : null}
           <div><dt>已发布作品</dt><dd>{composer.works.length} 部</dd></div>

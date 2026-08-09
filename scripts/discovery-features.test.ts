@@ -57,7 +57,7 @@ assert.equal(recentChangeLabel(programChange, "2026-09-05T10:00:00.000Z"), undef
 const followedEvent = summary({
   id: "followed-event",
   ensemble: "指挥与示例交响乐团",
-  programPreview: [{ workId: "work-beethoven-5", composer: "贝多芬", title: "第五交响曲" }],
+  programPreview: [{ workId: "work-beethoven-5", knowledgeWorkId: "work_000001", composer: "贝多芬", title: "第五交响曲" }],
 });
 const follows: FollowMap = {
   "ensemble:example": {
@@ -81,6 +81,26 @@ const changeDataset: ChangeDataset = {
 const notifications = buildFollowNotifications(changeDataset, [followedEvent], follows, []);
 assert.equal(notifications.length, 1);
 assert.deepEqual(notifications[0].targets.map((target) => target.type).sort(), ["ensemble", "work"]);
+
+const knowledgeFollows: FollowMap = {
+  "work:work_000001": {
+    key: "work:work_000001",
+    type: "work",
+    name: "C 小调第五交响曲",
+    entityId: "work_000001",
+    createdAt: "2026-08-01T00:00:00.000Z",
+  },
+  "composer:composer_000001": {
+    key: "composer:composer_000001",
+    type: "composer",
+    name: "路德维希·凡·贝多芬",
+    entityId: "composer_000001",
+    aliases: ["贝多芬"],
+    createdAt: "2026-08-01T00:00:00.000Z",
+  },
+};
+const knowledgeNotifications = buildFollowNotifications(changeDataset, [followedEvent], knowledgeFollows, []);
+assert.deepEqual(knowledgeNotifications[0].targets.map((target) => target.type).sort(), ["composer", "work"]);
 
 const retainedNotifications = mergeFollowNotificationHistory(notifications, [], [], []);
 assert.equal(retainedNotifications.length, 1, "unfollowing must not remove notification history");

@@ -8,8 +8,10 @@ import {
   Download,
   ExternalLink,
   Flag,
+  ImageIcon,
   MapPin,
   LoaderCircle,
+  Maximize2,
   Music,
   Search,
   Share2,
@@ -19,7 +21,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { useState, type ReactNode, type RefObject } from "react";
+import { useEffect, useState, type ReactNode, type RefObject } from "react";
 import CorrectionDialog from "./CorrectionDialog";
 import {
   detectDataIssues,
@@ -27,7 +29,8 @@ import {
   type FollowMap,
   type FollowTarget,
 } from "../discovery-features";
-import type { ConcertEvent, EntityRecord, ProgramCredit, ProgramItem } from "../types";
+import type { ConcertEvent, EntityRecord, EventEvidenceImage, ProgramCredit, ProgramItem } from "../types";
+import type { KnowledgeWorkSummary } from "../knowledge/types";
 import type { PersonalEventStatus } from "../product-features";
 import {
   bilibiliSearchUrl,
@@ -43,6 +46,7 @@ export default function EventDetail({
   loading,
   open,
   entitiesByKey,
+  knowledgeWorksById,
   panelRef,
   closeButtonRef,
   onClose,
@@ -61,6 +65,7 @@ export default function EventDetail({
   loading: boolean;
   open: boolean;
   entitiesByKey: Map<string, EntityRecord>;
+  knowledgeWorksById: Map<string, KnowledgeWorkSummary>;
   panelRef?: RefObject<HTMLElement | null>;
   closeButtonRef?: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
@@ -77,6 +82,16 @@ export default function EventDetail({
 }) {
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [sharing, setSharing] = useState(false);
+  const [evidenceImage, setEvidenceImage] = useState<EventEvidenceImage>();
+  useEffect(() => setEvidenceImage(undefined), [event?.id]);
+  useEffect(() => {
+    if (!evidenceImage) return undefined;
+    const closeOnEscape = (keyboardEvent: KeyboardEvent) => {
+      if (keyboardEvent.key === "Escape") setEvidenceImage(undefined);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [evidenceImage]);
   if (loading) {
     return (
       <section ref={panelRef} className={`detail-panel ${open ? "open" : ""}`} aria-live="polite">
@@ -112,6 +127,10 @@ export default function EventDetail({
     "needs-review": "待复核",
   }[event.dataQuality];
   const dataIssues = detectDataIssues(event);
+  const evidenceImages = event.extraction?.images ?? [];
+  const showEvidenceImages = evidenceImages.length > 0
+    && event.dataQuality !== "manual-reviewed"
+    && (event.program.length === 0 || event.dataQuality === "ocr-assisted" || event.extraction?.accepted === false);
 
   return (
     <section
@@ -244,6 +263,7 @@ export default function EventDetail({
               key={item.id ?? `${item.title}-${index}`}
               item={item}
               entity={item.workId ? entitiesByKey.get(`work:${item.workId}`) : undefined}
+              knowledge={item.knowledgeWorkId ? knowledgeWorksById.get(item.knowledgeWorkId) : undefined}
               onExplore={onExplore}
               onExploreWork={onExploreWork}
               follows={follows}
@@ -254,6 +274,41 @@ export default function EventDetail({
           <p className="muted">官网暂未提供可确认的文字节目单，已标记等待复核。</p>
         )}
       </div>
+
+      {showEvidenceImages ? (
+        <details className="ocr-evidence-disclosure">
+          <summary>
+            <ImageIcon size={17} />
+            <span>原始节目单图片</span>
+            <small>{evidenceImages.length} 张</small>
+          </summary>
+          <div className="ocr-evidence-content">
+            <p>以下图片来自演出官方页面，OCR 尚未完整识别其中的曲目信息，可展开原图核对。</p>
+            {event.extraction?.reasons?.length ? (
+              <div className="ocr-evidence-reasons">
+                {event.extraction.reasons.map((reason) => <span key={reason}>{reason}</span>)}
+              </div>
+            ) : null}
+            <div className="ocr-evidence-gallery">
+              {evidenceImages.map((image, index) => (
+                <button key={image.url} type="button" onClick={() => setEvidenceImage(image)}>
+                  <img
+                    src={image.url}
+                    alt={`官方节目单原图 ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span><Maximize2 size={13} />查看第 {index + 1} 张大图</span>
+                </button>
+              ))}
+            </div>
+            <a href={event.sourceUrl} target="_blank" rel="noreferrer">
+              <ExternalLink size={14} />查看官方演出页面
+            </a>
+          </div>
+        </details>
+      ) : null}
 
       {event.description ? (
         <details className="description-disclosure">
@@ -283,6 +338,26 @@ export default function EventDetail({
         ))}
       </div>
       <CorrectionDialog event={event} issues={dataIssues} open={correctionOpen} onClose={() => setCorrectionOpen(false)} />
+      {evidenceImage ? (
+        <div
+          className="ocr-evidence-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="原始节目单大图"
+          onClick={(clickEvent) => {
+            if (clickEvent.target === clickEvent.currentTarget) setEvidenceImage(undefined);
+          }}
+        >
+          <div>
+            <header>
+              <strong>原始节目单图片</strong>
+              <button type="button" aria-label="关闭大图" onClick={() => setEvidenceImage(undefined)}><X size={19} /></button>
+            </header>
+            <img src={evidenceImage.url} alt="官方节目单原图" referrerPolicy="no-referrer" />
+            <a href={evidenceImage.url} target="_blank" rel="noreferrer"><ExternalLink size={14} />在新窗口打开原图</a>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -290,6 +365,7 @@ export default function EventDetail({
 function ProgramRow({
   item,
   entity,
+  knowledge,
   onExplore,
   onExploreWork,
   follows,
@@ -297,6 +373,7 @@ function ProgramRow({
 }: {
   item: ProgramItem;
   entity?: EntityRecord;
+  knowledge?: KnowledgeWorkSummary;
   onExplore: (entity: EntityRecord) => void;
   onExploreWork: (workId: string) => void;
   follows: FollowMap;
@@ -309,7 +386,9 @@ function ProgramRow({
     item.opus,
     ...(item.credits?.map(formatProgramCredit) ?? []),
   ].filter(Boolean).join(" ");
-  const target = entity ? makeFollowTarget("work", entity.name, entity.id) : undefined;
+  const target = knowledge
+    ? makeFollowTarget("work", knowledge.title, knowledge.id)
+    : entity ? makeFollowTarget("work", entity.name, entity.id) : undefined;
   const followed = target ? Boolean(follows[target.key]) : false;
   return (
     <article className="program-row">
@@ -334,7 +413,7 @@ function ProgramRow({
             type="button"
             className={`work-follow-button ${followed ? "active" : ""}`}
             title={followed ? "取消关注作品" : "关注作品"}
-            aria-label={`${followed ? "取消关注" : "关注"}${entity?.name}`}
+            aria-label={`${followed ? "取消关注" : "关注"}${knowledge?.title ?? entity?.name}`}
             onClick={() => onToggleFollow(target)}
           >
             <Star size={13} />
@@ -344,6 +423,16 @@ function ProgramRow({
           <small className="program-alternate-title">{item.alternateTitles.join(" / ")}</small>
         ) : null}
         <span>{[item.composer, item.opus].filter(Boolean).join(" · ") || "曲目信息待补充"}</span>
+        {knowledge ? (
+          <div className="program-knowledge-preview">
+            <p>{knowledge.summary}</p>
+            <div>
+              {knowledge.durationMinutes ? <span><Clock size={11} />约 {knowledge.durationMinutes} 分钟</span> : null}
+              {knowledge.difficulty ? <span>{knowledge.difficulty}</span> : null}
+              {knowledge.tags.slice(0, 2).map((tag) => <span key={tag}>{tag}</span>)}
+            </div>
+          </div>
+        ) : null}
         {item.credits?.length ? (
           <small className="program-credits">{item.credits.map(formatProgramCredit).join(" / ")}</small>
         ) : null}

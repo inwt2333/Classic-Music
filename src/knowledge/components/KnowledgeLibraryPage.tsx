@@ -6,12 +6,21 @@ import {
   Clock3,
   Compass,
   Filter,
+  GalleryVerticalEnd,
   ListMusic,
+  MapPin,
   Music2,
   Search,
   UserRound,
 } from "lucide-react";
 import { loadKnowledgeIndex } from "../../data";
+import type { ConcertEventSummary } from "../../types";
+import { formatEventVenue } from "../../utils";
+import {
+  buildKnowledgeCollections,
+  type KnowledgeCollection,
+  type KnowledgeCollectionKey,
+} from "../collections";
 import {
   genreFamilyDefinition,
   knowledgeGenreFamilies,
@@ -44,15 +53,23 @@ let preservedLibraryState = {
 
 export default function KnowledgeLibraryPage({
   view,
+  collectionKey,
+  events,
   onViewChange,
+  onCollectionChange,
   onOpenWork,
   onOpenComposer,
+  onOpenEvent,
   onBack,
 }: {
   view: KnowledgeLibraryView;
+  collectionKey: KnowledgeCollectionKey | "";
+  events: ConcertEventSummary[];
   onViewChange: (view: KnowledgeLibraryView) => void;
+  onCollectionChange: (key: KnowledgeCollectionKey | "") => void;
   onOpenWork: (workId: string) => void;
   onOpenComposer: (composerId: string) => void;
+  onOpenEvent: (event: ConcertEventSummary) => void;
   onBack: () => void;
 }) {
   const [index, setIndex] = useState<KnowledgeIndex | null>(null);
@@ -182,6 +199,10 @@ export default function KnowledgeLibraryPage({
     .filter((work) => work.difficulty === "第一次听" || work.difficulty === "容易进入")
     .sort(sortWorks)
     .slice(0, 6), [index]);
+  const collections = useMemo(
+    () => index ? buildKnowledgeCollections(index, events) : [],
+    [events, index],
+  );
 
   const openWork = (work: KnowledgeWorkSummary) => {
     preservedLibraryState.focusedWorkId = work.id;
@@ -252,10 +273,11 @@ export default function KnowledgeLibraryPage({
       <nav className="library-view-tabs" aria-label="知识库视图">
         <div role="tablist">
           <ViewTab active={view === "explore"} icon={<Compass size={16} />} label="探索" onClick={() => onViewChange("explore")} />
+          <ViewTab active={view === "collections"} icon={<GalleryVerticalEnd size={16} />} label="精选" onClick={() => onViewChange("collections")} />
           <ViewTab active={view === "composers"} icon={<UserRound size={16} />} label="作曲家" onClick={() => onViewChange("composers")} />
           <ViewTab active={view === "works"} icon={<ListMusic size={16} />} label="作品" onClick={() => onViewChange("works")} />
         </div>
-        <span>{view === "explore" ? "从现场与聆听路线开始" : view === "composers" ? "按音乐史时期排列" : "按时期与体裁浏览"}</span>
+        <span>{view === "explore" ? "从现场与聆听路线开始" : view === "collections" ? "由当前真实演出驱动" : view === "composers" ? "按音乐史时期排列" : "按时期与体裁浏览"}</span>
       </nav>
 
       {view === "explore" ? (
@@ -288,6 +310,16 @@ export default function KnowledgeLibraryPage({
         />
       ) : null}
 
+      {view === "collections" ? (
+        <CollectionDirectory
+          collections={collections}
+          activeKey={collectionKey}
+          onCollectionChange={onCollectionChange}
+          onOpenWork={(work) => openWork(work)}
+          onOpenEvent={onOpenEvent}
+        />
+      ) : null}
+
       {view === "works" ? (
         <WorkDirectory
           works={filteredWorks}
@@ -315,6 +347,93 @@ export default function KnowledgeLibraryPage({
       ) : null}
     </section>
   );
+}
+
+function CollectionDirectory({
+  collections,
+  activeKey,
+  onCollectionChange,
+  onOpenWork,
+  onOpenEvent,
+}: {
+  collections: KnowledgeCollection[];
+  activeKey: KnowledgeCollectionKey | "";
+  onCollectionChange: (key: KnowledgeCollectionKey | "") => void;
+  onOpenWork: (work: KnowledgeWorkSummary) => void;
+  onOpenEvent: (event: ConcertEventSummary) => void;
+}) {
+  const active = collections.find((collection) => collection.key === activeKey);
+  const [city, setCity] = useState("全部城市");
+  const [dateWindow, setDateWindow] = useState<"all" | "30" | "90">("all");
+
+  useEffect(() => {
+    setCity("全部城市");
+    setDateWindow("all");
+  }, [activeKey]);
+
+  if (!active) {
+    return <div className="library-collections">
+      <section className="library-section collection-intro">
+        <div><span>CURATED FROM LIVE DATA</span><h2>从作品指南回到真实现场</h2></div>
+        <p>专题不是固定榜单。只有完成知识映射且当前确有未来场次的作品才会出现，采集更新后内容会自动变化。</p>
+      </section>
+      <div className="collection-grid">
+        {collections.map((collection, index) => <article key={collection.key}>
+          <span>{String(index + 1).padStart(2, "0")} · {collection.eyebrow}</span>
+          <h2>{collection.title}</h2>
+          <p>{collection.description}</p>
+          <div><strong>{collection.works.length}</strong><span>部作品</span><strong>{collection.events.length}</strong><span>场演出</span></div>
+          <small>{collection.works.slice(0, 3).map((work) => work.title).join(" / ")}</small>
+          <button type="button" onClick={() => onCollectionChange(collection.key)}>进入专题<ArrowRight size={14} /></button>
+        </article>)}
+      </div>
+    </div>;
+  }
+
+  const cities = ["全部城市", ...Array.from(new Set(active.events.map((event) => event.city))).sort((left, right) => left.localeCompare(right, "zh-CN"))];
+  const deadline = dateWindow === "all" ? Number.POSITIVE_INFINITY : Date.now() + Number(dateWindow) * 24 * 60 * 60 * 1000;
+  const filteredEvents = active.events.filter((event) => (
+    (city === "全部城市" || event.city === city) && new Date(event.startTime).getTime() <= deadline
+  ));
+  const filteredEventIds = new Set(filteredEvents.map((event) => event.id));
+  const filteredWorks = active.works.filter((work) => work.upcomingEventIds.some((id) => filteredEventIds.has(id)));
+
+  return <div className="library-collection-detail">
+    <section className="collection-hero">
+      <button type="button" onClick={() => onCollectionChange("")}>返回全部精选</button>
+      <span>{active.eyebrow}</span>
+      <h2>{active.title}</h2>
+      <p>{active.description}</p>
+      <small>{active.reason}</small>
+    </section>
+    <div className="collection-filters" aria-label="筛选专题演出">
+      <label><span>城市</span><select value={city} onChange={(event) => setCity(event.target.value)}>{cities.map((value) => <option key={value}>{value}</option>)}</select></label>
+      <div role="group" aria-label="日期范围">
+        <button className={dateWindow === "all" ? "active" : ""} type="button" onClick={() => setDateWindow("all")}>全部日期</button>
+        <button className={dateWindow === "30" ? "active" : ""} type="button" onClick={() => setDateWindow("30")}>未来 30 天</button>
+        <button className={dateWindow === "90" ? "active" : ""} type="button" onClick={() => setDateWindow("90")}>未来 90 天</button>
+      </div>
+      <span>{filteredWorks.length} 部作品 · {filteredEvents.length} 场演出</span>
+    </div>
+    {filteredEvents.length ? <>
+      <section className="library-section collection-works" aria-labelledby="collection-works-title">
+        <SectionHeading eyebrow="听前了解" title="专题作品" id="collection-works-title" meta={`${filteredWorks.length} 部`} />
+        <div className="library-starter-grid">
+          {filteredWorks.map((work, index) => <LibraryWorkCard key={work.id} work={work} index={index} compact onOpen={() => onOpenWork(work)} />)}
+        </div>
+      </section>
+      <section className="library-section collection-events" aria-labelledby="collection-events-title">
+        <SectionHeading eyebrow="真实现场" title="近期演出" id="collection-events-title" meta={`${filteredEvents.length} 场`} />
+        <div className="collection-event-list">
+          {filteredEvents.map((event) => <button key={event.id} type="button" onClick={() => onOpenEvent(event)}>
+            <time dateTime={event.startTime}>{event.dateLabel}<small>{event.timeLabel}</small></time>
+            <div><strong>{event.title}</strong><span><MapPin size={12} />{event.city} · {formatEventVenue(event)}</span></div>
+            <ArrowRight size={15} />
+          </button>)}
+        </div>
+      </section>
+    </> : <LibraryEmpty title="当前筛选下暂无演出" onClear={() => { setCity("全部城市"); setDateWindow("all"); }} />}
+  </div>;
 }
 
 function ExploreView({

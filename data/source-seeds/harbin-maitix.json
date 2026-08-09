@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-09T09:12:00.000Z",
+  "projects": [
+    {
+      "projectToken": "238906060",
+      "projectName": "【8.15】“经典永恒” — 李心草与哈尔滨交响乐团",
+      "siteName": "哈尔滨音乐厅",
+      "projectDetail": "<p>指挥：李心草</p><p>乐团：哈尔滨交响乐团</p><p>贝多芬：C大调第一钢琴协奏曲，作品15</p><p>Beethoven: Piano Concerto No.1 in C major, Op.15</p><p>莱尼克：D大调长笛协奏曲，作品283</p><p>Reinecke: Flute Concerto in D major, Op.283</p><p>柴可夫斯基：幻想序曲“罗密欧与朱丽叶”，作品17</p><p>Tchaikovsky: Fantasy-Overture “Romeo and Juliet”, Op.17</p>",
+      "eventVoList": [
+        {
+          "eventToken": "238906060-20260815-1900",
+          "eventCaption": "2026-08-15 星期六 19:00",
+          "showTime": 1786791600000,
+          "siteName": "哈尔滨音乐厅",
+          "priceVoList": [
+            { "price": 80, "priceType": 0 },
+            { "price": 120, "priceType": 0 },
+            { "price": 180, "priceType": 0 },
+            { "price": 280, "priceType": 0 },
+            { "price": 380, "priceType": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "projectToken": "239358001",
+      "projectName": "【8.28】印象、浪漫与现代的交响音乐会",
+      "siteName": "哈尔滨音乐厅",
+      "projectDetail": "<p>指挥：陈琳</p><p>小提琴：玛丽安娜·特切里安</p><p>乐团：哈尔滨交响乐团</p><p>克劳德·德彪西：《小组曲》</p><p>Claude Debussy: Petite Suite</p><p>I. En bateau. Andantino</p><p>I. 在船上</p><p>II. Cortège. Moderato</p><p>II. 游行</p><p>III. Menuet. Moderato</p><p>III. 小步舞曲</p><p>IV. Ballet. Allegro giusto</p><p>IV. 芭蕾</p><p>马克斯·布鲁赫：g小调第一小提琴协奏曲，作品26</p><p>Max Bruch: Violin Concerto No. 1 in G minor, Op. 26</p><p>I. Prelude, Allegro moderato</p><p>I. 前奏曲，快板</p><p>II. Adagio</p><p>II. 柔板</p><p>III. Finale, Allegro energico</p><p>III. 终曲，有活力的快板</p><p>谢尔盖·普罗科菲耶夫：《罗密欧与朱丽叶》第二组曲，作品64</p><p>Sergei Prokofiev: Romeo and Juliet Suite No. 2, Op. 64</p><p>I. Montagues and Capulets</p><p>I. 蒙太古与凯普莱特</p><p>II. The Young Juliet</p><p>II. 少女朱丽叶</p><p>III. Friar Laurence</p><p>III. 劳伦斯神父</p><p>IV. Dance</p><p>IV. 舞曲</p><p>V. Romeo and Juliet Before Parting</p><p>V. 离别与重逢</p><p>VI. Dance of the Girls</p><p>VI. 少女之舞</p><p>VII. Romeo at Juliet's Tomb</p><p>VII. 罗密欧在朱丽叶墓旁</p>",
+      "eventVoList": [
+        {
+          "eventToken": "239358001-20260828-1900",
+          "eventCaption": "2026-08-28 星期五 19:00",
+          "showTime": 1787914800000,
+          "siteName": "哈尔滨音乐厅",
+          "priceVoList": [
+            { "price": 80, "priceType": 0 },
+            { "price": 120, "priceType": 0 },
+            { "price": 180, "priceType": 0 },
+            { "price": 280, "priceType": 0 },
+            { "price": 380, "priceType": 0 }
+          ]
+        }
+      ]
+    }
+  ]
+}

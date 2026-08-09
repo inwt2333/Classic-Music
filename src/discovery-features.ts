@@ -6,13 +6,14 @@ import type {
   ProgramItem,
 } from "./types";
 
-export type FollowTargetType = "person" | "work" | "ensemble" | "venue" | "city";
+export type FollowTargetType = "person" | "composer" | "work" | "ensemble" | "venue" | "city";
 
 export type FollowTarget = {
   key: string;
   type: FollowTargetType;
   name: string;
   entityId?: string;
+  aliases?: string[];
   createdAt: string;
 };
 
@@ -84,6 +85,7 @@ export function makeFollowTarget(
   type: FollowTargetType,
   name: string,
   entityId?: string,
+  aliases: string[] = [],
 ): FollowTarget {
   const identity = entityId || name.trim().toLocaleLowerCase("zh-CN");
   return {
@@ -91,6 +93,7 @@ export function makeFollowTarget(
     type,
     name: name.trim(),
     entityId,
+    aliases: Array.from(new Set(aliases.map((alias) => alias.trim()).filter(Boolean))),
     createdAt: new Date().toISOString(),
   };
 }
@@ -331,9 +334,19 @@ function eventMatchesFollow(
     ].filter(Boolean).join(" ").toLocaleLowerCase("zh-CN");
     return people.includes(normalizedName);
   }
+  if (target.type === "composer") {
+    const program = event?.programPreview ?? snapshot?.programPreview ?? [];
+    const names = [target.name, ...(target.aliases ?? [])].map((name) => name.toLocaleLowerCase("zh-CN"));
+    return program.some((item) => {
+      const composer = item.composer?.toLocaleLowerCase("zh-CN") ?? "";
+      if (!composer) return false;
+      return names.some((name) => composer.includes(name) || name.includes(composer));
+    });
+  }
   const program = event?.programPreview ?? snapshot?.programPreview ?? [];
   return program.some((item) => (
-    (target.entityId && "workId" in item && item.workId === target.entityId)
+    (target.entityId && "knowledgeWorkId" in item && item.knowledgeWorkId === target.entityId)
+    || (target.entityId && "workId" in item && item.workId === target.entityId)
     || [item.composer, item.title, ...(item.alternateTitles ?? [])]
       .filter(Boolean).join(" ").toLocaleLowerCase("zh-CN").includes(normalizedName)
   ));

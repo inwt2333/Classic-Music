@@ -8,27 +8,67 @@ export function isXinghaiConcertHallClassical(title: string) {
 
 export function parseXinghaiConcertHallDetail(html: string, pageUrl: string) {
   const $ = cheerio.load(html || "");
-  const title = cleanText($("h1, .event_title, .title").first().text()) || cleanText($("title").text());
+  const rawTitle = cleanText($("h1, .event_title, .title").first().text()) || cleanText($("title").text());
+  const title = cleanXinghaiTitle(rawTitle);
   const text = $("body").text().replace(/\r/g, "\n");
   const metaLines = $(".fl.fblack.lh21").map((_, element) => cleanText($(element).text())).get();
   const dateTime = metaLines.find((line) => /^演出时间/.test(line))?.replace(/^演出时间[：:]?/, "");
-  const venue = metaLines.find((line) => /^演出地点/.test(line))?.replace(/^演出地点[：:]?/, "");
+  const rawHall = metaLines.find((line) => /^演出地点/.test(line))?.replace(/^演出地点[：:]?/, "");
+  const hall = cleanText(rawHall || "").replace(/^星海音乐厅\s*/, "") || undefined;
+  const venue = "星海音乐厅";
   const priceLabel = $(".fl.fblack.lh21").filter((_, element) => /^演出票价/.test(cleanText($(element).text()))).first();
   const priceLine = cleanText(priceLabel.next(".fl.fblack").find(".lh21").first().text()).split(/限时|学生|长者|会员/)[0] ?? "";
   const priceTiers = unique(Array.from(priceLine.matchAll(/\d+/g)).map((match) => Number(match[0]))).sort((a, b) => a - b);
-  const program = parseProgram(text);
+  const programHtml = $("#program").first().html();
+  const program = programHtml ? parseProgramBlock(programHtml) : parseMarkedProgram(text);
+  const artistLines = htmlLines($("#artists").first().html() || "");
+  const performers = unique(artistLines.flatMap(parseArtistNames));
+  const conductor = artistLines
+    .map((line) => line.match(/^指挥[：:]\s*(.+)$/)?.[1])
+    .filter((name): name is string => Boolean(name))
+    .map(cleanText)[0];
   const imageUrls = $(".bxslider img[src]").map((_, element) => $(element).attr("src") || "").get().filter(Boolean).map((url) => new URL(url, pageUrl).href);
-  return { title, dateTime, venue, priceTiers, program, imageUrls };
+  return { title, dateTime, venue, hall, priceTiers, program, performers, conductor, imageUrls };
 }
 
 export function parseXinghaiConcertHallProgramText(text: string, confidence: ProgramItem["confidence"] = "ocr") {
-  return parseProgram(text, confidence);
+  return parseMarkedProgram(text, confidence, true);
 }
 
-function parseProgram(text: string, confidence: ProgramItem["confidence"] = "official") {
+function parseProgramBlock(html: string, confidence: ProgramItem["confidence"] = "official") {
+  const lines = htmlLines(html);
+  return dedupeProgram(lines.flatMap((raw) => {
+    const line = cleanText(raw.replace(/^\d+[.、]\s*/, ""));
+    if (!line || /中场休息|曲目.*为准|演出现场为准|节目.*为准/.test(line)) return [];
+    if (/^(?:注|说明|备注|主办|承办|协办|演出|演奏|伴奏|指挥)[：:]/.test(line)) return [];
+
+    const colon = line.match(/^([^：:—－]{2,32})[：:—－]\s*(.+)$/);
+    if (colon) {
+      return [{ composer: cleanText(colon[1]), title: stripBookTitle(colon[2]), confidence } satisfies ProgramItem];
+    }
+
+    const bookTitle = line.match(/^([^《》：:]{2,32})《([^》]{2,120})》(.*)$/);
+    if (bookTitle && !/(?:长笛|小提琴|中提琴|大提琴|钢琴|竖琴|指挥)$/.test(bookTitle[1])) {
+      return [{
+        composer: cleanText(bookTitle[1]),
+        title: cleanText(`${bookTitle[2]}${bookTitle[3]}`),
+        confidence,
+      } satisfies ProgramItem];
+    }
+
+    return [{ title: stripBookTitle(line), confidence } satisfies ProgramItem];
+  }));
+}
+
+function parseMarkedProgram(
+  text: string,
+  confidence: ProgramItem["confidence"] = "official",
+  allowUnmarkedOcr = false,
+) {
   const lines = text.split(/\n|\r/).map(cleanText).filter(Boolean);
   const marker = lines.findIndex((line) => /^(?:(?:演出)?曲目(?:单)?|节目单)[：:]?$/.test(line));
   if (marker < 0) {
+    if (!allowUnmarkedOcr) return [];
     return lines.flatMap((line) => {
       const match = line.match(/^([^《》：:]{2,36})《([^》]{2,120})》(.*)$/);
       if (!match || /(?:长笛|小提琴|中提琴|大提琴|钢琴|竖琴|指挥)$/.test(match[1])) return [];
@@ -49,6 +89,41 @@ function parseProgram(text: string, confidence: ProgramItem["confidence"] = "off
     }
   }
   return program;
+}
+
+function parseArtistNames(line: string) {
+  const match = line.match(/^[^：:]{1,16}[：:]\s*(.+)$/);
+  if (!match) return [];
+  return match[1]
+    .split(/[、，,\/]/)
+    .map(cleanText)
+    .filter((name) => name && name !== "全体");
+}
+
+function htmlLines(html: string) {
+  const withBreaks = (html || "")
+    .replace(/<br\s*\/?\s*>/gi, "\n")
+    .replace(/<\/(?:p|li|div)>/gi, (tag) => `${tag}\n`);
+  const $ = cheerio.load(withBreaks);
+  return $("body").text().split(/\n|\r/).map(cleanText).filter(Boolean);
+}
+
+function stripBookTitle(value: string) {
+  return cleanText(value.replace(/[《》]/g, ""));
+}
+
+function cleanXinghaiTitle(value: string) {
+  return cleanText(value.replace(/\s*[-—–－]+\s*星海音乐厅\s*$/, ""));
+}
+
+function dedupeProgram(items: ProgramItem[]) {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const key = `${item.composer ?? ""}:${item.title}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function unique<T>(values: T[]) { return Array.from(new Set(values)); }

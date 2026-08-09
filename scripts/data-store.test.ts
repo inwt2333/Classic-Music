@@ -7,8 +7,11 @@ import {
   buildIndex,
   mergeChangeHistory,
   mergeCrossSourceEvents,
+  normalizeKnownSourceEvent,
   normalizeProgramItemCredits,
   restoreFailedSourceEvents,
+  restoreUnavailableSourceEvents,
+  sanitizeKnownSourceProgram,
   toPublishedDataset,
 } from "./data-store";
 
@@ -121,6 +124,16 @@ const sameHallDifferentConcert = mergeCrossSourceEvents([
 ], sources);
 assert.equal(sameHallDifferentConcert.length, 2);
 
+const numberedWorks = mergeCrossSourceEvents([{
+  ...baseEvent,
+  id: "numbered-works",
+  program: [
+    { title: "夜的钢琴曲五", confidence: "official" },
+    { title: "夜的钢琴曲六", confidence: "official" },
+  ],
+}], sources);
+assert.deepEqual(numberedWorks[0].program.map((item) => item.title), ["夜的钢琴曲五", "夜的钢琴曲六"]);
+
 const ocrEvent: ConcertEvent = {
   ...baseEvent,
   id: "ocr-event",
@@ -197,6 +210,59 @@ const arrangedOverture = normalizeProgramItemCredits({
 assert.equal(arrangedOverture.title, "魔笛序曲");
 assert.equal(arrangedOverture.composer, "莫扎特");
 assert.deepEqual(arrangedOverture.credits, [{ name: "阿卡迪·瑟佩尔", role: "改编" }]);
+
+const sanitizedNcpa = sanitizeKnownSourceProgram({
+  ...baseEvent,
+  sourceName: "国家大剧院官网",
+  program: [
+    ...baseEvent.program,
+    { composer: "贝多芬", title: "注：本场将省略其中一个乐章。", confidence: "official" },
+  ],
+});
+assert.equal(sanitizedNcpa.program.length, 1);
+assert.deepEqual(sanitizedNcpa.composers, ["贝多芬"]);
+
+const sanitizedPersonnel = sanitizeKnownSourceProgram({
+  ...baseEvent,
+  sourceName: "深圳音乐厅官网",
+  composers: ["演出", "伴奏"],
+  tags: ["演出", "伴奏", "合唱"],
+  program: [
+    { composer: "演出", title: "某童声合唱团", confidence: "official" },
+    { composer: "伴奏", title: "某钢琴家", confidence: "official" },
+  ],
+});
+assert.deepEqual(sanitizedPersonnel.program, []);
+assert.deepEqual(sanitizedPersonnel.composers, []);
+assert.deepEqual(sanitizedPersonnel.tags, ["合唱"]);
+assert.equal(sanitizedPersonnel.dataQuality, "needs-review");
+
+const sanitizedXinghai = sanitizeKnownSourceProgram({
+  ...baseEvent,
+  sourceName: "星海音乐厅官网",
+  composers: ["如果有，那一定少不了石进的", "推荐演出"],
+  program: [
+    {
+      composer: "如果有，那一定少不了石进的",
+      title: "夜的钢琴曲五，这首旋律没有华丽的技巧，却凭借纯粹的温柔成为许多人的深夜陪伴。",
+      confidence: "official",
+    },
+    { composer: "推荐演出", title: "四季[2026-11-13 20:00]", confidence: "official" },
+  ],
+});
+assert.deepEqual(sanitizedXinghai.program, []);
+
+const normalizedXinghaiVenue = normalizeKnownSourceEvent({
+  ...baseEvent,
+  title: "广州交响乐团音乐会---星海音乐厅",
+  venue: "交响乐演奏大厅",
+  hall: undefined,
+  sourceName: "广州交响乐团官网",
+  sourceUrl: "https://www.concerthall.com.cn/events/neweventdetail.php?id=5083",
+});
+assert.equal(normalizedXinghaiVenue.title, "广州交响乐团音乐会");
+assert.equal(normalizedXinghaiVenue.venue, "星海音乐厅");
+assert.equal(normalizedXinghaiVenue.hall, "交响乐演奏大厅");
 
 const entities = buildEntities(dataset);
 assert.equal(entities.entities.some((entity) => entity.type === "person" && entity.name === "余隆"), true);
@@ -423,5 +489,50 @@ assert.deepEqual(
   recoveredMerged[0].sources?.map((source) => source.sourceId),
   ["source-a"],
 );
+
+const harbinSource = {
+  id: "harbin-music-hall-maitix",
+  name: "哈尔滨音乐厅票务（麦座）",
+  url: "https://hrbso.maitix.com/h5",
+  ok: true,
+  eventCount: 0,
+};
+const previousHarbinDataset: ConcertDataset = {
+  ...dataset,
+  sources: [harbinSource],
+  events: [{
+    ...baseEvent,
+    id: "previous-harbin-event",
+    title: "四重奏回响：贝多芬与舒曼",
+    city: "哈尔滨",
+    venue: "哈尔滨音乐厅",
+    startTime: "2026-09-20T11:00:00.000Z",
+    sourceName: harbinSource.name,
+    sourceUrl: harbinSource.url,
+    sources: [{
+      sourceId: harbinSource.id,
+      sourceName: harbinSource.name,
+      sourceRecordId: "harbin-event-1",
+      sourceUrl: harbinSource.url,
+      scrapedAt: "2026-08-08T00:00:00.000Z",
+    }],
+  }],
+};
+const retainedHarbin = restoreUnavailableSourceEvents({
+  ...previousHarbinDataset,
+  events: [],
+  sources: [harbinSource],
+}, previousHarbinDataset, [harbinSource.id], new Date("2026-08-09T00:00:00.000Z").getTime());
+assert.equal(retainedHarbin.events.length, 1);
+assert.equal(retainedHarbin.sources[0].eventCount, 1);
+assert.match(retainedHarbin.sources[0].message || "", /此前已发现/);
+
+const noDuplicateHarbin = restoreUnavailableSourceEvents({
+  ...previousHarbinDataset,
+  events: [{ ...previousHarbinDataset.events[0], id: "fresh-harbin-event", sources: undefined }],
+  sources: [{ ...harbinSource, eventCount: 1 }],
+}, previousHarbinDataset, [harbinSource.id], new Date("2026-08-09T00:00:00.000Z").getTime());
+assert.equal(noDuplicateHarbin.events.length, 1);
+assert.equal(noDuplicateHarbin.sources[0].eventCount, 1);
 
 console.log("Data store tests passed.");

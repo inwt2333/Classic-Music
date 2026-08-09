@@ -1,6 +1,46 @@
 import * as cheerio from "cheerio";
 import type { ProgramItem } from "../../src/types";
 
+export function discoverGuangzhouSymphonySeasonUrls(html: string, baseUrl: string) {
+  const $ = cheerio.load(html || "");
+  const candidates = $("a[href]")
+    .map((_, element) => {
+      const href = $(element).attr("href") || "";
+      const match = href.match(/music-season-(20\d{2})-?\d{2}[^"'?#]*\/index\.html/i);
+      if (!match) return undefined;
+      try {
+        return { year: Number(match[1]), url: new URL(href, baseUrl).href };
+      } catch {
+        return undefined;
+      }
+    })
+    .get()
+    .filter((item): item is { year: number; url: string } => Boolean(item));
+  const latestYear = Math.max(...candidates.map((item) => item.year));
+  if (!Number.isFinite(latestYear)) return [];
+  return Array.from(
+    new Set(candidates.filter((item) => item.year === latestYear).map((item) => item.url)),
+  );
+}
+
+export function discoverGuangzhouSymphonySupplementalUrls(html: string, baseUrl: string) {
+  const $ = cheerio.load(html || "");
+  return Array.from(new Set(
+    $('a[href*="neweventdetail.php?id="]')
+      .map((_, element) => {
+        const href = $(element).attr("href");
+        if (!href) return undefined;
+        try {
+          return new URL(href, baseUrl).href;
+        } catch {
+          return undefined;
+        }
+      })
+      .get()
+      .filter((url): url is string => Boolean(url)),
+  ));
+}
+
 export function parseGuangzhouSymphonyDetail(html: string) {
   const $ = cheerio.load(html || "");
   const title = (cleanText($("h1.post-title, .av-special-heading-tag").first().text()) || cleanText($("title").text()).split("|").at(-1) || "").replace(/^广州交响乐团\s*/, "").trim();

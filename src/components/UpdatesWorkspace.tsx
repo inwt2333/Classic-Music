@@ -32,6 +32,19 @@ const categoryMeta: Record<UpdateCategory, { label: string; icon: typeof Sparkle
 const productUpdates: ProductUpdate[] = [
   {
     date: "2026-08-09",
+    title: "来源覆盖与节目单质量",
+    summary: "扩充场馆来源展示和换季发现能力，并集中清理节目单中的注释、正文与人员误判。",
+    items: [
+      { category: "feature", title: "乐团与场馆资料页", description: "数据来源改为乐团、场馆两个视图，以真实封面展示场次数、详细介绍和官网入口。" },
+      { category: "feature", title: "哈尔滨音乐厅", description: "接入经确认的麦座项目详情，当前保守收录 3 场演出，不通过连续编号猜测项目。" },
+      { category: "improvement", title: "换季自动发现", description: "苏州、广州和深圳等来源会动态发现当前乐季栏目与分页，降低官网换季后采集归零的风险。" },
+      { category: "feature", title: "原始节目单图片", description: "正文与 OCR 信息仍不足时，详情页可按需展开官网原图核对；已有可信文字节目单时不会显示。" },
+      { category: "fix", title: "注释不再充当曲目", description: "国家大剧院、星海音乐厅和深圳音乐厅分别排除注释、介绍正文、推荐演出、演出及伴奏人员。" },
+      { category: "fix", title: "作品编号与场馆层级", description: "编号不同的相似作品不再误合并；星海演出标题去除重复场馆名，地点统一显示场馆与具体厅堂。" },
+    ],
+  },
+  {
+    date: "2026-08-09",
     title: "知识库进入分层浏览",
     summary: "作品知识从平铺目录升级为以音乐史、作曲家和体裁组织的独立内容体系。",
     items: [
@@ -39,6 +52,8 @@ const productUpdates: ProductUpdate[] = [
       { category: "feature", title: "自动扩充作品知识", description: "高质量官网出现陌生作品时，自动检索证据、补建作曲家、调用 DeepSeek 整理并经过规则审计后发布。" },
       { category: "improvement", title: "标准分类体系", description: "所有作品和作曲家统一获得稳定的时期和体裁大类，筛选状态可以通过 URL 恢复。" },
       { category: "improvement", title: "更可靠的录音入口", description: "录音建议优先打开经过核实的直接来源，同时保留 B 站搜索，不再提供效果不稳定的流媒体搜索入口。" },
+      { category: "feature", title: "真实演出精选", description: "知识库新增精选视图，专题仅由已映射作品和当前未来演出生成，并支持城市、日期范围与稳定链接。" },
+      { category: "feature", title: "听前摘要与知识关注", description: "演出节目单展示作品摘要、时长和标签；作品页补充相关作品，作品与作曲家可直接加入关注。" },
     ],
   },
   {

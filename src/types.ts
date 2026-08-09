@@ -36,6 +36,11 @@ export type EventSourceReference = {
   scrapedAt: string;
 };
 
+export type EventEvidenceImage = {
+  url: string;
+  confidence?: number;
+};
+
 export type EventExtraction = {
   method: "ocr" | "ai";
   provider?: string;
@@ -44,6 +49,7 @@ export type EventExtraction = {
   accepted?: boolean;
   reasons?: string[];
   reviewRequired: boolean;
+  images?: EventEvidenceImage[];
 };
 
 export type EventReview = {
@@ -165,6 +171,8 @@ export type ConcertDataset = {
     url: string;
     ok: boolean;
     eventCount: number;
+    rawCount?: number;
+    normalizedCount?: number;
     message?: string;
   }>;
   stats: {

@@ -6,6 +6,55 @@ type ContentBlock = {
   bold: boolean;
 };
 
+export type SuzhouSymphonySection = {
+  slug: string;
+  index: number;
+};
+
+export function discoverSuzhouSymphonySeasonUrl(html: string, baseUrl: string) {
+  const $ = cheerio.load(html || "");
+  const candidates = $("a[href]")
+    .map((_, element) => {
+      const href = $(element).attr("href") || "";
+      const label = cleanText($(element).text());
+      const season = `${label} ${href}`.match(/(20\d{2})\s*-\s*\d{2}/);
+      if (!season || !/music-season/i.test(href)) return undefined;
+      try {
+        return { url: new URL(href, baseUrl).href, year: Number(season[1]) };
+      } catch {
+        return undefined;
+      }
+    })
+    .get()
+    .filter((candidate): candidate is { url: string; year: number } => Boolean(candidate));
+
+  return candidates.sort((left, right) => right.year - left.year)[0]?.url;
+}
+
+export function discoverSuzhouSymphonySections(html: string): SuzhouSymphonySection[] {
+  const sections = new Map<string, SuzhouSymphonySection>();
+  const $ = cheerio.load(html || "");
+  const calls = [
+    ...$("[onclick*='getMusicDataList']")
+      .map((_, element) => $(element).attr("onclick") || "")
+      .get(),
+    ...$("script")
+      .map((_, element) =>
+        ($(element).html() || "")
+          .replace(/\/\*[\s\S]*?\*\//g, "")
+          .replace(/^\s*\/\/.*$/gm, ""),
+      )
+      .get(),
+  ];
+  for (const call of calls) {
+    for (const match of call.matchAll(/getMusicDataList\s*\(\s*["']([^"']+)["']\s*,\s*(\d+)/gi)) {
+      const section = { slug: match[1], index: Number(match[2]) };
+      sections.set(`${section.slug.toLowerCase()}:${section.index}`, section);
+    }
+  }
+  return Array.from(sections.values());
+}
+
 const rolePattern =
   /^(指挥|演奏|演唱|特邀主演|贾宝玉\/男高音|钢琴|小提琴|中提琴|大提琴|低音提琴|长笛|双簧管|单簧管|大管|圆号|小号|长号|大号|竖琴|打击乐|女高音|女中音|假声男高音|男高音|男中音|低男中音|男低音|独奏|合唱|乐团)\s*(?:[|｜:：]\s*|\s+)?(.*)$/;
 const programFooterPattern = /^(?:观演须知|温馨提示|购票须知)/;
