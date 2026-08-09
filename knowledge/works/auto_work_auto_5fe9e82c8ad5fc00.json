@@ -1,0 +1,135 @@
+{
+  "id": "work_auto_5fe9e82c8ad5fc00",
+  "composerId": "composer_000003",
+  "title": "d小调托卡塔与赋格",
+  "originalTitle": "Toccata und Fuge in d-Moll",
+  "aliases": [
+    "d小调托卡塔与赋格，BWV 565"
+  ],
+  "opus": "BWV 565",
+  "key": "d小调",
+  "genre": "管风琴曲",
+  "period": "巴洛克",
+  "composedYears": "约1703-1707",
+  "durationMinutes": 9,
+  "instrumentation": "管风琴",
+  "difficulty": "第一次听",
+  "tags": [
+    "管风琴",
+    "巴洛克",
+    "托卡塔",
+    "赋格",
+    "经典",
+    "BWV 565"
+  ],
+  "summary": "巴赫最著名的管风琴作品，以戏剧性的托卡塔开篇，接续严谨的赋格，展现巴洛克音乐的辉煌与深度。",
+  "whyListen": "这首作品是巴赫最广为人知的代表作，开篇的托卡塔段落极具冲击力，赋格部分则展现了对位法的精妙，是体验巴洛克音乐魅力的绝佳入门。",
+  "firstListen": "建议先完整聆听，感受开篇的震撼与赋格的层层推进。可关注托卡塔的即兴风格与赋格主题的多次出现，体会音乐的结构之美。",
+  "listeningPoints": [
+    {
+      "title": "开篇的托卡塔",
+      "description": "以快速的音阶和和弦开始，充满戏剧性和即兴感，是作品最著名的段落。",
+      "movement": 1
+    },
+    {
+      "title": "赋格主题",
+      "description": "赋格部分以简洁的主题开始，随后在不同声部中模仿、发展，形成复杂的对位织体。",
+      "movement": 2
+    },
+    {
+      "title": "结尾的再现",
+      "description": "赋格结束后，托卡塔的动机再次出现，形成首尾呼应，以辉煌的和弦结束。",
+      "movement": 2
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "托卡塔",
+      "tempo": "自由速度",
+      "description": "以快速的音阶和和弦开始，充满戏剧性和即兴感。"
+    },
+    {
+      "number": 2,
+      "title": "赋格",
+      "tempo": "中速",
+      "description": "以简洁的主题开始，通过多声部模仿发展，形成复杂的对位结构。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Hannes Kästner & Gabor Lehotka",
+      "year": 1988,
+      "note": "管风琴演奏，适合第一次听，感受原汁原味的管风琴音色。",
+      "sourceId": "apple_music_389168578"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Walter Rinaldi",
+      "year": 2013,
+      "note": "钢琴改编版，提供另一种理解，适合对比聆听。",
+      "sourceId": "apple_music_774072924"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_auto_958f678568a3fb7b",
+    "work_auto_9fbe9b19325042ac",
+    "work_000007"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.4",
+    "promptHash": "3c0223659c9a9907dd289637430c7c0dce9ee2e763b1d4a1a5a8822ffc042ef6",
+    "generatedAt": "2026-08-09T15:05:02.910Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_9b27938aca3a65b2"
+    ],
+    "evidenceIds": [
+      "official_a89b7b635ca7",
+      "apple_music_389168578",
+      "apple_music_774072924"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-09T15:05:02.910Z",
+  "sources": [
+    {
+      "id": "official_a89b7b635ca7",
+      "title": "晚高峰音乐会3：巴赫的N次方丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21813&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-09",
+      "supports": [
+        "composer",
+        "work title",
+        "opus"
+      ]
+    },
+    {
+      "id": "apple_music_389168578",
+      "title": "J. S. Bach: Organ Music, Preludes and Fugues, Toccata and Fugue in D Minor & Chorale Preludes",
+      "url": "https://music.apple.com/us/album/j-s-bach-organ-music-preludes-and-fugues-toccata/389168578?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-09",
+      "supports": [
+        "recording",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_774072924",
+      "title": "Beethoven: Fur Elise & Moonlight Sonata - Mozart: Turkish March - Bach: Toccata and Fugue in D Minor - Chopin: Waltzes & Impromptu - Pachelbel: Canon in D - Liszt: Love Dream - Paradisi: Toccata - Mendelssohn: Wedding March - Wagner: Bridal Chorus",
+      "url": "https://music.apple.com/us/album/beethoven-fur-elise-moonlight-sonata-mozart-turkish/774072924?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-09",
+      "supports": [
+        "recording",
+        "recordings.1"
+      ]
+    }
+  ]
+}

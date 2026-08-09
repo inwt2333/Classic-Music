@@ -368,6 +368,73 @@
         "perf_9a143ba172dafb03"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "16e452e72af0223f7d73cc9b": {
+      "status": "mapped",
+      "workId": "work_000026",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_6a43cabe5a6f05a4"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "1389e79547412347789951eb": {
+      "status": "published",
+      "workId": "work_auto_cda55d6bf3fdccfc",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_64f2a582e787d8f2"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "1576caba5700700ef8043866": {
+      "status": "published",
+      "workId": "work_auto_5fe9e82c8ad5fc00",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_9b27938aca3a65b2"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "1598e95fc9f0e58ec3770ef2": {
+      "status": "needs_completion",
+      "workId": "work_auto_8525ce5fc3fc5912",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "score-95",
+      "sourceEventIds": [
+        "perf_e6bfb19e75c10ad6"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-16T15:05:02.910Z"
+    },
+    "15b9d3c405d65b9a5cb4ed24": {
+      "status": "skipped",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "Recording evidence apple_music_1697983412 is for 'Moonlight Sonata', not Op. 26; unsupported recording recommendation.；Official candidate lists no movements; proposal includes movements from Wikipedia, but official source does not confirm movement structure.；Proposal claims complete record with movements and listening points; official candidate lacks movement data, causing identity/structure ambiguity.",
+      "sourceEventIds": [
+        "perf_09bdd5648f5b8406"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "190ababb41c7fc6641b99d5e": {
+      "status": "needs_completion",
+      "workId": "work_auto_2b591c49e84d88f1",
+      "attempts": 1,
+      "updatedAt": "2026-08-09T15:05:02.910Z",
+      "reason": "score-95",
+      "sourceEventIds": [
+        "perf_f37b58229e25494c"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-16T15:05:02.910Z"
     }
   }
 }

@@ -2,6 +2,36 @@
   "schemaVersion": 1,
   "rules": [
     {
+      "id": "mapping_auto_0d839f17693ac26d",
+      "workId": "work_auto_2b591c49e84d88f1",
+      "composers": [
+        "柴可夫斯基"
+      ],
+      "titles": [
+        "G大调第二钢琴协奏曲，作品44"
+      ],
+      "opus": [
+        "作品44"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T15:05:02.910Z"
+    },
+    {
+      "id": "mapping_auto_0dfb1c3765894b9b",
+      "workId": "work_000026",
+      "composers": [
+        "约翰内斯·勃拉姆斯"
+      ],
+      "titles": [
+        "D 小调第一钢琴协奏曲，作品 15"
+      ],
+      "opus": [
+        "作品 15"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T15:05:02.910Z"
+    },
+    {
       "id": "mapping_auto_0f44f17ff7886c42",
       "workId": "work_auto_3bbf1bec7bedb655",
       "composers": [
@@ -90,6 +120,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_30f09a5c2dbba9ef",
+      "workId": "work_auto_5fe9e82c8ad5fc00",
+      "composers": [
+        "巴赫"
+      ],
+      "titles": [
+        "d小调托卡塔与赋格，BWV 565"
+      ],
+      "opus": [
+        "BWV 565"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T15:05:02.910Z"
     },
     {
       "id": "mapping_auto_3226888dd4740c39",
@@ -255,6 +300,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_736948918119af51",
+      "workId": "work_auto_8525ce5fc3fc5912",
+      "composers": [
+        "勃拉姆斯"
+      ],
+      "titles": [
+        "《命运之歌》，作品54"
+      ],
+      "opus": [
+        "作品54"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T15:05:02.910Z"
     },
     {
       "id": "mapping_auto_7cd4aabfd5eb4c4f",
@@ -435,6 +495,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T16:21:56.089Z"
+    },
+    {
+      "id": "mapping_auto_ebdd70fa1a6b06a9",
+      "workId": "work_auto_cda55d6bf3fdccfc",
+      "composers": [
+        "勃拉姆斯"
+      ],
+      "titles": [
+        "f小调第三钢琴奏鸣曲，作品5"
+      ],
+      "opus": [
+        "作品5"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-09T15:05:02.910Z"
     },
     {
       "id": "mapping_auto_fe5840a55b5d3e8d",
