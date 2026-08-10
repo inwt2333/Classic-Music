@@ -46,6 +46,7 @@ const productUpdates: ProductUpdate[] = [
     summary: "接入独立身份服务，为每位用户的个人数据同步建立账号边界，并先收紧审核工作台访问权限。",
     items: [
       { category: "feature", title: "邮箱免密码登录", description: "新增邮箱登录、会话恢复、账号状态和退出登录；Supabase 客户端按需加载，不增加首页主包体积。" },
+      { category: "fix", title: "邮箱链接登录", description: "静态站改用适合纯浏览器应用的登录回调流程，邮箱链接在新浏览器中打开时也能建立并保存会话；回调失败会直接显示原因。" },
       { category: "feature", title: "管理员角色", description: "用户资料与管理员角色分表保存并启用 RLS，普通用户不能读取他人资料或修改自己的角色。" },
       { category: "fix", title: "审核入口收紧", description: "审核入口只向管理员显示，直接访问审核地址仍会检查登录状态和后端角色；正式站点继续关闭尚无远程写入接口的审核操作。" },
       { category: "improvement", title: "部署与后端自检", description: "GitHub Pages 构建支持公开 Supabase 变量，并增加账号表、匿名隔离和管理员函数权限的一键检查。" },

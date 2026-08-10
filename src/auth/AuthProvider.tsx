@@ -20,6 +20,7 @@ export type AccountProfile = {
 type AuthContextValue = {
   configured: boolean;
   loading: boolean;
+  authError: string;
   profileLoading: boolean;
   profileError: string;
   session: Session | null;
@@ -28,6 +29,7 @@ type AuthContextValue = {
   isAdmin: boolean;
   signInWithEmail: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
+  clearAuthError: () => void;
   refreshProfile: () => Promise<void>;
 };
 
@@ -36,6 +38,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(supabaseConfigured);
+  const [authError, setAuthError] = useState(consumeAuthCallbackError);
   const [profile, setProfile] = useState<AccountProfile | null>(null);
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileError, setProfileError] = useState("");
@@ -52,19 +55,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!active || !client) return;
       const { data, error } = await client.auth.getSession();
       if (!active) return;
-      if (error) setProfileError(error.message);
+      if (error) setAuthError(error.message);
       setSession(data.session);
       setLoading(false);
 
       const { data: { subscription } } = client.auth.onAuthStateChange((_event, nextSession) => {
         if (!active) return;
         setSession(nextSession);
+        if (nextSession) setAuthError("");
         setLoading(false);
       });
       unsubscribe = () => subscription.unsubscribe();
     }).catch((reason) => {
       if (!active) return;
-      setProfileError(reason instanceof Error ? reason.message : String(reason));
+      setAuthError(reason instanceof Error ? reason.message : String(reason));
       setLoading(false);
     });
 
@@ -114,6 +118,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadProfile]);
 
   const signInWithEmail = useCallback(async (email: string) => {
+    setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
     const redirectTo = new URL(import.meta.env.BASE_URL, window.location.origin).toString();
@@ -133,12 +138,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { error } = await client.auth.signOut();
     if (error) throw error;
     setProfile(null);
+    setAuthError("");
     setProfileError("");
   }, []);
 
   const value = useMemo<AuthContextValue>(() => ({
     configured: supabaseConfigured,
     loading,
+    authError,
     profileLoading,
     profileError,
     session,
@@ -147,10 +154,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAdmin: profile?.role === "admin",
     signInWithEmail,
     signOut,
+    clearAuthError: () => setAuthError(""),
     refreshProfile: loadProfile,
-  }), [loadProfile, loading, profile, profileError, profileLoading, session, signInWithEmail, signOut]);
+  }), [authError, loadProfile, loading, profile, profileError, profileLoading, session, signInWithEmail, signOut]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+function consumeAuthCallbackError() {
+  const query = new URLSearchParams(window.location.search);
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const message = hash.get("error_description") || query.get("error_description") || hash.get("error") || query.get("error");
+  if (!message) return "";
+
+  ["error", "error_code", "error_description"].forEach((key) => query.delete(key));
+  const nextQuery = query.toString();
+  window.history.replaceState({}, "", `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ""}`);
+  return message;
 }
 
 export function useAuth() {

@@ -3,6 +3,11 @@
 The browser only uses `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`.
 Never expose a secret or service-role key through a `VITE_` variable.
 
+The static SPA uses Supabase's implicit browser flow. Magic links therefore
+carry the session in the URL fragment, which the JavaScript client consumes
+and persists without requiring the link to return to the browser that started
+the login. PKCE is reserved for a future server-side callback or native app.
+
 ## Apply the identity migration
 
 Open the Supabase SQL Editor, paste the complete contents of

@@ -4,7 +4,7 @@ import { useAuth } from "../auth/AuthProvider";
 
 export default function AccountControl() {
   const auth = useAuth();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(() => Boolean(auth.authError && !auth.user));
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -18,6 +18,10 @@ export default function AccountControl() {
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [open]);
+
+  useEffect(() => {
+    if (auth.authError && !auth.user) setOpen(true);
+  }, [auth.authError, auth.user]);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -45,6 +49,7 @@ export default function AccountControl() {
         aria-label={auth.user ? `打开账号菜单，当前用户${displayName}` : "登录账号"}
         onClick={() => {
           setOpen(true);
+          auth.clearAuthError();
           setError("");
           setSent(false);
         }}
@@ -86,7 +91,7 @@ export default function AccountControl() {
             ) : !auth.configured ? (
               <div className="account-message warning"><strong>账号服务尚未配置</strong><span>当前仍可使用本机关注和观演标记。</span></div>
             ) : sent ? (
-              <div className="account-message success"><Mail size={24} /><strong>登录邮件已经发送</strong><span>请在当前设备打开邮件中的登录链接。</span><button type="button" onClick={() => setSent(false)}>更换邮箱</button></div>
+              <div className="account-message success"><Mail size={24} /><strong>登录邮件已经发送</strong><span>打开邮件中的链接即可完成登录。</span><button type="button" onClick={() => setSent(false)}>更换邮箱</button></div>
             ) : (
               <form className="account-login-form" onSubmit={submit}>
                 <p>使用邮箱登录后，账号会在本设备保持登录状态。</p>
@@ -94,7 +99,7 @@ export default function AccountControl() {
                 <button type="submit" disabled={sending}>{sending ? <LoaderCircle className="spin" size={16} /> : <Mail size={16} />}{sending ? "正在发送" : "发送登录邮件"}</button>
               </form>
             )}
-            {error ? <p className="account-error" role="alert">{error}</p> : null}
+            {error || (!auth.user && auth.authError) ? <p className="account-error" role="alert">{error || auth.authError}</p> : null}
           </section>
         </div>
       ) : null}

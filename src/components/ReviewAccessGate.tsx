@@ -41,6 +41,7 @@ export default function ReviewAccessGate({ children }: { children: ReactNode }) 
           </form>
         )}
         {error ? <p className="account-error" role="alert">{error}</p> : null}
+        {!error && auth.authError ? <p className="account-error" role="alert">{auth.authError}</p> : null}
       </AccessPage>
     );
   }
