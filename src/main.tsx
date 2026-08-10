@@ -26,6 +26,7 @@ import {
   MapPin,
   MoreHorizontal,
   Music,
+  Piano,
   Search,
   ScanText,
   SlidersHorizontal,
@@ -36,6 +37,7 @@ import {
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
+import AccountControl from "./components/AccountControl";
 import ComposerPage from "./knowledge/components/ComposerPage";
 import KnowledgeLibraryPage from "./knowledge/components/KnowledgeLibraryPage";
 import WorkPage from "./knowledge/components/WorkPage";
@@ -43,8 +45,10 @@ import NotificationCenter from "./components/NotificationCenter";
 import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
+import ReviewAccessGate from "./components/ReviewAccessGate";
 import SourcesWorkspace from "./components/SourcesWorkspace";
 import UpdatesWorkspace from "./components/UpdatesWorkspace";
+import { AuthProvider, useAuth } from "./auth/AuthProvider";
 import {
   loadChanges,
   loadEntities,
@@ -155,6 +159,7 @@ const coverSlides = [
 ] as const;
 
 function App() {
+  const { isAdmin } = useAuth();
   const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
@@ -1047,12 +1052,13 @@ function App() {
             <History size={14} />
             更新日志
           </a>
+          <AccountControl />
           <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)} title="我的关注" aria-label="我的关注">
             <Bell size={14} />
             我的关注
             {unreadNotificationCount ? <b>{unreadNotificationCount}</b> : null}
           </button>
-          {import.meta.env.DEV ? (
+          {import.meta.env.DEV && isAdmin ? (
             <a className="header-link" href="?review=1" title="数据审核" aria-label="数据审核">
               <ScanText size={14} />
               审核
@@ -1156,6 +1162,14 @@ function App() {
           ) : null)}
         </div>
         <div className="cover-shade" aria-hidden="true" />
+        <div className="cover-musical-motif" aria-hidden="true">
+          <span className="motif-ring motif-ring-outer" />
+          <span className="motif-ring motif-ring-middle" />
+          <span className="motif-ring motif-ring-inner" />
+          <span className="motif-staff" />
+          <Piano className="motif-instrument" size={44} strokeWidth={1.25} />
+          <span className="motif-note">♪</span>
+        </div>
         <div className="cover-copy">
           <span>{coverSlides[coverIndex].eyebrow}</span>
           <strong>{coverSlides[coverIndex].title}</strong>
@@ -1566,13 +1580,16 @@ function formatDatasetTimestamp(value: string) {
 const rootElement = document.getElementById("root")!;
 const appRoot = globalThis.__classicMusicRoot ?? createRoot(rootElement);
 if (import.meta.hot) globalThis.__classicMusicRoot = appRoot;
-const rootParams = new URLSearchParams(window.location.search);
-appRoot.render(rootParams.get("review") === "1"
-  ? <ReviewWorkspace />
-  : rootParams.get("updates") === "1"
-    ? <UpdatesWorkspace />
-  : rootParams.get("changes") === "1"
-    ? <ChangesWorkspace />
-  : rootParams.has("sources")
-    ? <SourcesWorkspace />
-    : <App />);
+
+function AppRouter() {
+  const rootParams = new URLSearchParams(window.location.search);
+  if (rootParams.get("review") === "1") {
+    return <ReviewAccessGate><ReviewWorkspace /></ReviewAccessGate>;
+  }
+  if (rootParams.get("updates") === "1") return <UpdatesWorkspace />;
+  if (rootParams.get("changes") === "1") return <ChangesWorkspace />;
+  if (rootParams.has("sources")) return <SourcesWorkspace />;
+  return <App />;
+}
+
+appRoot.render(<AuthProvider><AppRouter /></AuthProvider>);

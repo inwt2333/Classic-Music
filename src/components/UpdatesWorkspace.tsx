@@ -31,6 +31,27 @@ const categoryMeta: Record<UpdateCategory, { label: string; icon: typeof Sparkle
 
 const productUpdates: ProductUpdate[] = [
   {
+    date: "2026-08-10",
+    title: "音乐主题视觉更新",
+    summary: "在保持信息密度与简约布局的基础上，加入更接近音乐会节目册的色彩、字体层次和克制音乐纹样。",
+    items: [
+      { category: "improvement", title: "节目册式视觉层次", description: "统一墨绿、酒红、纸张白和铜色点缀，强化标题、分隔线、选中状态与详情阅读层级。" },
+      { category: "improvement", title: "音乐元素", description: "在封面、筛选、演出卡片、详情和知识库中加入低透明度谱线、音符与乐器图案，避免装饰遮挡信息。" },
+      { category: "fix", title: "窄屏适配", description: "手机端压缩装饰尺寸和透明度，顶部导航保持单行，登录面板与更新日志不产生横向溢出。" },
+    ],
+  },
+  {
+    date: "2026-08-10",
+    title: "用户账号与审核权限",
+    summary: "接入独立身份服务，为每位用户的个人数据同步建立账号边界，并先收紧审核工作台访问权限。",
+    items: [
+      { category: "feature", title: "邮箱免密码登录", description: "新增邮箱登录、会话恢复、账号状态和退出登录；Supabase 客户端按需加载，不增加首页主包体积。" },
+      { category: "feature", title: "管理员角色", description: "用户资料与管理员角色分表保存并启用 RLS，普通用户不能读取他人资料或修改自己的角色。" },
+      { category: "fix", title: "审核入口收紧", description: "审核入口只向管理员显示，直接访问审核地址仍会检查登录状态和后端角色；正式站点继续关闭尚无远程写入接口的审核操作。" },
+      { category: "improvement", title: "部署与后端自检", description: "GitHub Pages 构建支持公开 Supabase 变量，并增加账号表、匿名隔离和管理员函数权限的一键检查。" },
+    ],
+  },
+  {
     date: "2026-08-09",
     title: "来源覆盖与节目单质量",
     summary: "扩充场馆来源展示和换季发现能力，并集中清理节目单中的注释、正文与人员误判。",
