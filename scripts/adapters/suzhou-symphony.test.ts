@@ -118,4 +118,15 @@ assert.deepEqual(parseSuzhouSymphonyVenue("苏州文化艺术中心大剧院"), 
   hall: "大剧院",
 });
 
+const operaExcerpts = parseSuzhouSymphonyContent(`
+  <p><strong>罗西尼</strong></p>
+  <p>《序曲》选自《塞维利亚的理发师》</p>
+  <p>《快给大忙人让路》选自《塞维利亚的理发师》</p>
+  <p>观演须知</p>
+`);
+assert.deepEqual(operaExcerpts.program.map((item) => [item.composer, item.title]), [
+  ["罗西尼", "序曲选自《塞维利亚的理发师》"],
+  ["罗西尼", "快给大忙人让路选自《塞维利亚的理发师》"],
+]);
+
 console.log("Suzhou Symphony adapter tests passed.");

@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Session, User } from "@supabase/supabase-js";
+import { withAuthNetworkRetry } from "./auth-request";
 import { getSupabase, supabaseConfigured } from "./supabase";
 
 export type AppRole = "user" | "admin";
@@ -144,10 +145,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const { error } = await client.auth.signInWithPassword({
+    const { error } = await withAuthNetworkRetry(() => client.auth.signInWithPassword({
       email: normalizeEmail(email),
       password,
-    });
+    }));
     if (error) throw error;
   }, []);
 
@@ -155,14 +156,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const { data, error } = await client.auth.signUp({
+    const { data, error } = await withAuthNetworkRetry(() => client.auth.signUp({
       email: normalizeEmail(email),
       password,
       options: {
         data: { display_name: displayName.trim() },
         emailRedirectTo: getAuthRedirectUrl(),
       },
-    });
+    }));
     if (error) throw error;
     return { requiresEmailConfirmation: !data.session };
   }, []);
@@ -171,11 +172,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const { error } = await client.auth.resend({
+    const { error } = await withAuthNetworkRetry(() => client.auth.resend({
       type: "signup",
       email: normalizeEmail(email),
       options: { emailRedirectTo: getAuthRedirectUrl() },
-    });
+    }));
     if (error) throw error;
   }, []);
 
@@ -183,9 +184,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const { error } = await client.auth.resetPasswordForEmail(normalizeEmail(email), {
+    const { error } = await withAuthNetworkRetry(() => client.auth.resetPasswordForEmail(normalizeEmail(email), {
       redirectTo: getAuthRedirectUrl(),
-    });
+    }));
     if (error) throw error;
   }, []);
 
@@ -193,7 +194,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const { error } = await client.auth.updateUser({ password });
+    const { error } = await withAuthNetworkRetry(() => client.auth.updateUser({ password }));
     if (error) throw error;
     setPasswordRecovery(false);
   }, []);

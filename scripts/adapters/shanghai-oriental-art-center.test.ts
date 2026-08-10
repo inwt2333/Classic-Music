@@ -369,4 +369,35 @@ assert.deepEqual(
   ["莫斯科郊外的晚上", "喀秋莎"],
 );
 
+const russianRomances = parseOrientalArtCenterContent(`
+  <p>曲目 Program</p>
+  <p>在船上 | 曲：塔涅耶夫 词：波隆斯基</p>
+  <p>在幽暗的森林里 | 编曲：斯韦什尼科夫</p>
+  <p>鹤群 | 曲：弗伦克尔，词：加姆扎托夫 编曲：波捷延科</p>
+  <p>*曲目以现场为准</p>
+`);
+assert.deepEqual(russianRomances.program, [
+  {
+    composer: "塔涅耶夫",
+    title: "在船上",
+    credits: [{ name: "波隆斯基", role: "词" }],
+    confidence: "official",
+  },
+  {
+    composer: undefined,
+    title: "在幽暗的森林里",
+    credits: [{ name: "斯韦什尼科夫", role: "编曲" }],
+    confidence: "official",
+  },
+  {
+    composer: "弗伦克尔",
+    title: "鹤群",
+    credits: [
+      { name: "加姆扎托夫", role: "词" },
+      { name: "波捷延科", role: "编曲" },
+    ],
+    confidence: "official",
+  },
+]);
+
 console.log("Shanghai Oriental Art Center adapter tests passed.");

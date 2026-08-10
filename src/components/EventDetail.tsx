@@ -405,7 +405,9 @@ function ProgramRow({
         {item.alternateTitles?.length ? (
           <small className="program-alternate-title">{item.alternateTitles.join(" / ")}</small>
         ) : null}
-        <span>{[item.composer, item.opus].filter(Boolean).join(" · ") || "曲目信息待补充"}</span>
+        {[item.composer, item.opus].some(Boolean) ? (
+          <span>{[item.composer, item.opus].filter(Boolean).join(" · ")}</span>
+        ) : null}
         {knowledge ? (
           <div className="program-knowledge-preview">
             <p>{knowledge.summary}</p>

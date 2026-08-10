@@ -239,6 +239,34 @@ assert.equal(xinghaiBilingualProgram[0].alternateTitles, undefined);
 assert.deepEqual(xinghaiBilingualProgram[2].alternateTitles, ["Free"]);
 assert.deepEqual(xinghaiBilingualProgram[3].alternateTitles, ["If you love me for me"]);
 
+const xinghaiComposerHeading = parseXinghaiConcertHallDetail(`
+  <h1>柴科夫斯基作品音乐会---星海音乐厅</h1>
+  <div id="program">
+    柴科夫斯基：<br>
+    弗兰切斯卡·达·里米尼，作品32<br>
+    洛可可主题变奏曲，作品33<br>
+    E小调第五交响曲，作品64
+  </div>
+`, "https://www.concerthall.com.cn/events/neweventdetail.php?id=5080");
+assert.deepEqual(xinghaiComposerHeading.program.map((item) => item.title), [
+  "弗兰切斯卡·达·里米尼，作品32",
+  "洛可可主题变奏曲，作品33",
+  "E小调第五交响曲，作品64",
+]);
+assert.deepEqual(xinghaiComposerHeading.program.map((item) => item.composer), Array(3).fill("柴科夫斯基"));
+
+const xinghaiMozart = parseXinghaiConcertHallDetail(`
+  <h1>杨洋演绎莫扎特---星海音乐厅</h1>
+  <div id="program">
+    莫扎特：<br>
+    歌剧《女人心》序曲，K. 588<br>
+    降E大调交响协奏曲，K. 297b<br>
+    C大调第四十一交响曲“朱庇特”，K. 551
+  </div>
+`, "https://www.concerthall.com.cn/events/neweventdetail.php?id=5081");
+assert.deepEqual(xinghaiMozart.program.map((item) => item.composer), Array(3).fill("莫扎特"));
+assert.equal(xinghaiMozart.program[0].title, "歌剧女人心序曲，K. 588");
+
 const zhongshan = parseZhongshanMusicHallDetail(`
   <div class="pp_l"><img class="pp_pic" src="/concert-poster.jpg"></div>
   <div class="wz2"><img src="/unrelated-recommendation.jpg"></div>

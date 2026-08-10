@@ -31,7 +31,8 @@ const changeLabels: Record<DatasetChange["type"], string> = {
   price: "票价变化",
 };
 
-const changeTypes = Object.entries(changeLabels) as Array<[DatasetChange["type"], string]>;
+const changeTypes = (Object.entries(changeLabels) as Array<[DatasetChange["type"], string]>)
+  .filter(([type]) => type !== "program");
 const PAGE_SIZE = 80;
 
 export default function ChangesWorkspace() {
@@ -63,18 +64,23 @@ export default function ChangesWorkspace() {
     () => new Map(dataset?.events.map((event) => [event.id, event])),
     [dataset],
   );
+  const storedChanges = useMemo(
+    () => (changes?.changes ?? []).filter((change) => change.type !== "program"),
+    [changes],
+  );
   const latestIds = useMemo(() => {
     if (!changes) return new Set<string>();
-    if (changes.latestChangeIds) return new Set(changes.latestChangeIds);
+    const storedIds = new Set(storedChanges.map((item) => item.id));
+    if (changes.latestChangeIds) return new Set(changes.latestChangeIds.filter((id) => storedIds.has(id)));
     return new Set(
-      changes.changes
+      storedChanges
         .filter((item) => item.detectedAt === changes.generatedAt)
         .map((item) => item.id),
     );
-  }, [changes]);
+  }, [changes, storedChanges]);
   const filteredChanges = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
-    return (changes?.changes ?? []).filter((change) => {
+    return storedChanges.filter((change) => {
       if (latestOnly && !latestIds.has(change.id)) return false;
       if (typeFilter !== "all" && change.type !== typeFilter) return false;
       const dateKey = localDateKey(change.detectedAt);
@@ -97,7 +103,7 @@ export default function ChangesWorkspace() {
         ...program.flatMap((item) => [item.composer, item.title, item.opus]),
       ].filter(Boolean).join(" ").toLocaleLowerCase("zh-CN").includes(normalizedQuery);
     });
-  }, [changes, eventsById, fromDate, latestIds, latestOnly, query, toDate, typeFilter]);
+  }, [eventsById, fromDate, latestIds, latestOnly, query, storedChanges, toDate, typeFilter]);
   const visibleChanges = filteredChanges.slice(0, visibleCount);
   const grouped = useMemo(() => {
     const map = new Map<string, DatasetChange[]>();
@@ -108,7 +114,7 @@ export default function ChangesWorkspace() {
     return [...map.entries()];
   }, [visibleChanges]);
   const hasFilters = Boolean(query || fromDate || toDate || latestOnly || typeFilter !== "all");
-  const changeTypeCount = new Set(changes?.changes.map((item) => item.type)).size;
+  const changeTypeCount = new Set(storedChanges.map((item) => item.type)).size;
   function resetFilters() {
     setQuery("");
     setTypeFilter("all");
@@ -132,7 +138,7 @@ export default function ChangesWorkspace() {
           <div>
             <span>CHANGELOG</span>
             <h1>演出数据变更历史</h1>
-            <p>新增、下架、改期、取消、阵容、曲目与票价</p>
+            <p>新增、下架、改期、取消、阵容与票价</p>
           </div>
           <dl>
             <div>
@@ -141,7 +147,7 @@ export default function ChangesWorkspace() {
             </div>
             <div>
               <dt>历史变更</dt>
-              <dd>{changes?.changes.length ?? 0}</dd>
+              <dd>{storedChanges.length}</dd>
             </div>
             <div>
               <dt>变化类型</dt>
@@ -156,7 +162,7 @@ export default function ChangesWorkspace() {
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="搜索演出、场馆、曲目或来源"
+              placeholder="搜索演出、场馆或来源"
             />
           </label>
           <label>
@@ -189,14 +195,14 @@ export default function ChangesWorkspace() {
         </div>
 
         {error ? <p className="muted">{error}</p> : null}
-        {!error && changes && !changes.changes.length ? (
+        {!error && changes && !storedChanges.length ? (
           <div className="empty-results changes-empty">
             <CalendarClock size={30} />
             <h2>尚无历史变更</h2>
-            <p>演出时间、阵容、曲目或票价发生变化后，会记录在这里。</p>
+            <p>演出时间、阵容或票价发生变化后，会记录在这里。</p>
           </div>
         ) : null}
-        {!error && changes?.changes.length && !filteredChanges.length ? (
+        {!error && storedChanges.length > 0 && !filteredChanges.length ? (
           <div className="empty-results changes-empty">
             <Search size={30} />
             <h2>没有符合条件的记录</h2>

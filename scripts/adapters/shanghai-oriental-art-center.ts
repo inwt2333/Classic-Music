@@ -251,9 +251,9 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       if (inlineTitleCreditFormat || looksLikeWorkCredits(right)) {
         const title = cleanProgramTitle(left);
         if (!title) continue;
-        const composer = parseComposerFromCredit(right);
+        const { composer, credits } = parseWorkCredits(right);
         currentComposer = composer;
-        currentWork = { composer, title, confidence };
+        currentWork = { composer, title, credits: credits.length ? credits : undefined, confidence };
         registerTranslationTarget(currentWork, left, untranslatedTargets);
       } else {
         const composer = cleanComposer(left);
@@ -703,6 +703,18 @@ function parseComposerFromCredit(value: string) {
     return composer || undefined;
   }
   return undefined;
+}
+
+function parseWorkCredits(value: string) {
+  const line = cleanText(value);
+  const composer = parseComposerFromCredit(line);
+  const credits: NonNullable<ProgramItem["credits"]> = [];
+  const pattern = /(?:^|[，,\s]+)(作词|词|编曲|改编)\s*[:：]\s*(.+?)(?=[，,\s]+(?:曲|作曲|作词|词|编曲|改编)\s*[:：]|$)/g;
+  for (const match of line.matchAll(pattern)) {
+    const name = cleanText(match[2].replace(/[，,；;]+$/, ""));
+    if (name) credits.push({ name, role: match[1] });
+  }
+  return { composer, credits };
 }
 
 function isUnnumberedBilingualMovement(blocks: ContentBlock[], index: number, line: string) {

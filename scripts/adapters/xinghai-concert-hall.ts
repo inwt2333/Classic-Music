@@ -37,28 +37,46 @@ export function parseXinghaiConcertHallProgramText(text: string, confidence: Pro
 
 function parseProgramBlock(html: string, confidence: ProgramItem["confidence"] = "official") {
   const lines = htmlLines(html);
-  const items = lines.flatMap((raw) => {
+  const items: ProgramItem[] = [];
+  let currentComposer: string | undefined;
+  for (const raw of lines) {
     const line = cleanText(raw.replace(/^\d+[.、]\s*/, ""));
-    if (!line || /中场休息|曲目.*为准|演出现场为准|节目.*为准/.test(line)) return [];
-    if (/^(?:注|说明|备注|主办|承办|协办|演出|演奏|伴奏|指挥)[：:]/.test(line)) return [];
-    if (/^芭比之[^：:《》]{2,24}$/.test(line)) return [{ title: "", confidence } satisfies ProgramItem];
+    if (!line || /中场休息|曲目.*为准|演出现场为准|节目.*为准/.test(line)) continue;
+    if (/^(?:注|说明|备注|主办|承办|协办|演出|演奏|伴奏|指挥)[：:]/.test(line)) continue;
+    if (/^芭比之[^：:《》]{2,24}$/.test(line)) {
+      items.push({ title: "", confidence });
+      currentComposer = undefined;
+      continue;
+    }
+
+    const composerHeading = line.match(/^([^：:]{2,32})[：:]$/);
+    if (composerHeading) {
+      currentComposer = cleanText(composerHeading[1]);
+      continue;
+    }
 
     const colon = line.match(/^([^：:—－]{2,32})[：:—－]\s*(.+)$/);
     if (colon) {
-      return [{ composer: cleanText(colon[1]), title: stripBookTitle(colon[2]), confidence } satisfies ProgramItem];
+      currentComposer = cleanText(colon[1]);
+      items.push({ composer: currentComposer, title: stripBookTitle(colon[2]), confidence });
+      continue;
     }
 
     const bookTitle = line.match(/^([^《》：:]{2,32})《([^》]{2,120})》(.*)$/);
-    if (bookTitle && !/(?:长笛|小提琴|中提琴|大提琴|钢琴|竖琴|指挥)$/.test(bookTitle[1])) {
-      return [{
+    if (
+      bookTitle &&
+      !/(?:长笛|小提琴|中提琴|大提琴|钢琴|竖琴|指挥|歌剧|舞剧|芭蕾舞剧|音乐剧|清唱剧|交响诗)$/.test(bookTitle[1])
+    ) {
+      items.push({
         composer: cleanText(bookTitle[1]),
         title: cleanText(`${bookTitle[2]}${bookTitle[3]}`),
         confidence,
-      } satisfies ProgramItem];
+      });
+      continue;
     }
 
-    return [{ title: stripBookTitle(line), confidence } satisfies ProgramItem];
-  });
+    items.push({ composer: currentComposer, title: stripBookTitle(line), confidence });
+  }
   return dedupeProgram(mergeAdjacentAlternateTitles(items));
 }
 

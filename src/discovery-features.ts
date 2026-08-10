@@ -168,6 +168,7 @@ export function mergeFollowNotificationHistory(
   const merged = new Map<string, FollowNotification>();
 
   for (const item of [...history, ...incoming]) {
+    if (item.change.type === "program") continue;
     if (dismissed.has(item.id)) continue;
     const previous = merged.get(item.id);
     const targets = new Map(
@@ -258,6 +259,7 @@ export function buildGithubCorrectionUrl(report: CorrectionReport) {
 export function latestChangesByEvent(changes: ChangeDataset | null) {
   const map = new Map<string, DatasetChange>();
   for (const change of changes?.changes ?? []) {
+    if (change.type === "program") continue;
     const current = map.get(change.eventId);
     if (!current || new Date(change.detectedAt) > new Date(current.detectedAt)) map.set(change.eventId, change);
   }
@@ -266,6 +268,7 @@ export function latestChangesByEvent(changes: ChangeDataset | null) {
 
 export function recentChangeLabel(change: DatasetChange | undefined, generatedAt: string | null) {
   if (!change || !generatedAt) return undefined;
+  if (change.type === "program") return undefined;
   const age = new Date(generatedAt).getTime() - new Date(change.detectedAt).getTime();
   if (age > 14 * 24 * 60 * 60 * 1000) return undefined;
   if (change.type === "added") return "新收录";
@@ -321,6 +324,7 @@ export function buildFollowNotifications(
   const targets = Object.values(follows);
   if (!targets.length) return [];
   return (changes?.changes ?? [])
+    .filter((change) => change.type !== "program")
     .flatMap<FollowNotification>((change) => {
       const event = eventMap.get(change.eventId);
       const matching = targets.filter((target) => eventMatchesFollow(event, change, target));

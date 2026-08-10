@@ -395,9 +395,6 @@ export function buildChanges(
     if (signature(old.performers) !== signature(event.performers)) {
       changes.push(change(event.id, "lineup", detectedAt, `演出人员变化：${event.title}`, old, event));
     }
-    if (!programsEquivalent(old.program, event.program)) {
-      changes.push(change(event.id, "program", detectedAt, `节目单变化：${event.title}`, old, event));
-    }
   }
 
   if (!current.stats.errors.length) {
@@ -507,7 +504,7 @@ export function mergeChangeHistory(
 }
 
 export function cleanChangeHistory(history: ChangeDataset): ChangeDataset {
-  const changes = history.changes.filter(isMeaningfulStoredChange);
+  const changes = history.changes.filter((item) => item.type !== "program");
   const retainedIds = new Set(changes.map((item) => item.id));
   return {
     ...history,
@@ -640,6 +637,7 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
   database.exec("BEGIN");
   try {
     for (const table of [
+      "changes",
       "review_items",
       "price_tiers",
       "movements",
@@ -1041,7 +1039,7 @@ export function normalizeProgramItemCredits(item: ProgramItem): ProgramItem {
   const extractedCredits: ProgramCredit[] = [];
 
   for (let pass = 0; pass < 8; pass += 1) {
-    const match = title.match(/^(.*\S)\s+([\u3400-\u9fffA-Za-z【（(][\u3400-\u9fffA-Za-z·.\-、,，（）()【】\s]{0,32}?)\s+(作词|词|编曲|改编[\u3400-\u9fff]{0,10}|编配[\u3400-\u9fff]{0,12}|配器|原曲|创作|曲)$/u)
+    const match = title.match(/^(.*\S)\s+([\u3400-\u9fffA-Za-z【（(][\u3400-\u9fffA-Za-z·.\-、,，（）()【】\s]{0,32}?)\s+(作词|词|传谱|编曲|改编[\u3400-\u9fff]{0,10}|编配[\u3400-\u9fff]{0,12}|配器|原曲|创作|曲)$/u)
       ?? title.match(/^(.*?)([\u3400-\u9fff]{2,6}[（(][^）)]+[）)])\s+(作词|词)$/u);
     if (!match) break;
 
@@ -1252,6 +1250,7 @@ function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
   const bComposer = normalizeIdentity(b.composer ?? "");
   if (aComposer && bComposer && aComposer !== bComposer) return false;
   if (workNumberIdentityConflicts(a.title, b.title)) return false;
+  if (selectedExcerptIdentityConflicts(a.title, b.title)) return false;
   const similarityThreshold = aComposer && bComposer ? 0.65 : 0.8;
   const aTitles = [a.title, ...(a.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
   const bTitles = [b.title, ...(b.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
@@ -1264,6 +1263,20 @@ function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
             right.includes(left) ||
             diceCoefficient(left, right) >= similarityThreshold)),
     ),
+  );
+}
+
+function selectedExcerptIdentityConflicts(a: string, b: string) {
+  const excerpt = (value: string) => {
+    const match = value.normalize("NFKC").match(/^(.+?)选自(.+)$/);
+    return match
+      ? { title: normalizeIdentity(match[1]), source: normalizeIdentity(match[2]) }
+      : undefined;
+  };
+  const left = excerpt(a);
+  const right = excerpt(b);
+  return Boolean(
+    left && right && left.source === right.source && left.title && right.title && left.title !== right.title,
   );
 }
 
@@ -1343,77 +1356,6 @@ function unique(values: Array<string | undefined>) {
 
 function signature(values: string[]) {
   return [...values].sort().join("|");
-}
-
-function programSignature(
-  program: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
-) {
-  return JSON.stringify(program.map((item) => ({
-    composer: normalizeChangeText(item.composer),
-    title: normalizeChangeText(item.title),
-    opus: normalizeChangeText(item.opus),
-    alternateTitles: normalizedTextSet(item.alternateTitles),
-    credits: (item.credits ?? [])
-      .map((credit) => `${normalizeChangeText(credit.name)}:${normalizeChangeText(credit.role)}`)
-      .filter((credit) => credit !== ":")
-      .sort(),
-    movements: (item.movements ?? []).map((movement) => ({
-      number: normalizeChangeText(movement.number),
-      title: normalizeChangeText(movement.title),
-      alternateTitles: normalizedTextSet(movement.alternateTitles),
-    })),
-  })));
-}
-
-function programSemanticSignature(
-  program: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
-) {
-  return JSON.stringify(program.map((item) => ({
-    composer: normalizeChangeText(item.composer),
-    // Parsers may move trailing credits such as "集体 创作" out of the title.
-    titleWithCredits: [
-      normalizeChangeText(item.title),
-      ...(item.credits ?? []).map((credit) => (
-        `${normalizeChangeText(credit.name)}${normalizeChangeText(credit.role)}`
-      )),
-    ].filter(Boolean).join(""),
-    opus: normalizeChangeText(item.opus),
-    alternateTitles: normalizedTextSet(item.alternateTitles),
-    movements: (item.movements ?? []).map((movement) => ({
-      number: normalizeChangeText(movement.number),
-      title: normalizeChangeText(movement.title),
-      alternateTitles: normalizedTextSet(movement.alternateTitles),
-    })),
-  })));
-}
-
-function programsEquivalent(
-  before: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
-  after: Array<Pick<ProgramItem, "composer" | "title" | "opus" | "alternateTitles" | "credits" | "movements">>,
-) {
-  return programSignature(before) === programSignature(after)
-    || programSemanticSignature(before) === programSemanticSignature(after);
-}
-
-function normalizeChangeText(value?: string) {
-  return (value ?? "")
-    .normalize("NFKC")
-    .toLocaleLowerCase("zh-CN")
-    .replace(/[\p{Z}\p{Cf}]/gu, "")
-    .replace(/[‐‑‒–—―]/g, "-")
-    .replace(/(?<=\p{N})([\p{P}])(?=\p{N})/gu, (_, punctuation: string) => (
-      `\uE000${punctuation.codePointAt(0)?.toString(16)}\uE001`
-    ))
-    .replace(/[\p{P}]/gu, "");
-}
-
-function normalizedTextSet(values?: string[]) {
-  return Array.from(new Set((values ?? []).map(normalizeChangeText).filter(Boolean))).sort();
-}
-
-function isMeaningfulStoredChange(item: DatasetChange) {
-  if (item.type !== "program" || !item.before || !item.after) return true;
-  return !programsEquivalent(item.before.programPreview, item.after.programPreview);
 }
 
 function change(

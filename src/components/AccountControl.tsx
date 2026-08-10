@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import { formatAuthError } from "../auth/auth-request";
 
 type AccountMode = "login" | "register" | "forgot" | "password";
 type Notice = { title: string; detail: string; canResendConfirmation?: boolean } | null;
@@ -254,19 +255,4 @@ export default function AccountControl() {
       ) : null}
     </>
   );
-}
-
-function formatAuthError(reason: unknown) {
-  const message = reason instanceof Error ? reason.message : String(reason);
-  const code = typeof reason === "object" && reason && "code" in reason ? String(reason.code) : "";
-  const detail = `${code} ${message}`;
-  if (/invalid login credentials/i.test(detail)) return "邮箱或密码不正确。";
-  if (/email not confirmed/i.test(detail)) return "邮箱尚未验证，请先打开注册邮件中的链接。";
-  if (/user already registered/i.test(detail)) return "该邮箱已经注册，请直接登录或找回密码。";
-  if (/password should be at least/i.test(detail)) return "密码长度不足，请至少输入 8 位字符。";
-  if (/email_address_not_authorized|email address not authorized/i.test(detail)) {
-    return "当前邮件服务尚未完成外部发信配置，暂时无法向该邮箱发送验证邮件。请联系网站管理员。";
-  }
-  if (/over_email_send_rate_limit|email rate limit|rate limit/i.test(detail)) return "邮件发送过于频繁，请稍后再试。";
-  return message;
 }

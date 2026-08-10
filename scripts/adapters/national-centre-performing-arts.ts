@@ -57,6 +57,11 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
     if (item) program.push(item);
   }
 
+  const sharedComposer = parseSharedComposer(lines);
+  if (sharedComposer && program.length && program.every((item) => !item.composer)) {
+    for (const item of program) item.composer = sharedComposer;
+  }
+
   const descriptionIntroduction = (detail.introduce as NcpaIntroduction[] | undefined)?.find(
     (item) => item.type === "20",
   );
@@ -78,6 +83,7 @@ function parseHierarchicalProgram(lines: string[]) {
   const parents = new Map<number, Parent>();
   const skippedIndexes = new Set<number>();
   let hasStandaloneComposer = false;
+  let hasStandaloneWork = false;
   let hasNumberedChild = false;
   let hasUnnumberedChild = false;
 
@@ -85,6 +91,29 @@ function parseHierarchicalProgram(lines: string[]) {
     const inline = parseChineseWork(lines[index]);
     if (inline?.composer) {
       parents.set(index, { item: inline, endIndex: index });
+      continue;
+    }
+
+    const standaloneWork = parseStandaloneWork(lines[index]);
+    if (standaloneWork) {
+      parents.set(index, { item: standaloneWork, endIndex: index });
+      hasStandaloneWork = true;
+      continue;
+    }
+
+    const nextLine = cleanText(lines[index + 1] ?? "");
+    if (
+      lines[index] &&
+      !isProgramNote(lines[index]) &&
+      !parseRole(lines[index]) &&
+      !isNumberedMovement(lines[index]) &&
+      isNumberedMovement(nextLine)
+    ) {
+      parents.set(index, {
+        item: { title: cleanText(lines[index].replace(/[《》]/g, "")), confidence: "official" },
+        endIndex: index,
+      });
+      hasStandaloneWork = true;
       continue;
     }
 
@@ -131,7 +160,7 @@ function parseHierarchicalProgram(lines: string[]) {
       !/^(?:(?:20\d{2})年)?\d{1,2}月\d{1,2}日/.test(line)
     )) hasUnnumberedChild = true;
   }
-  if (!parents.size || (!hasStandaloneComposer && !hasNumberedChild && !hasUnnumberedChild)) {
+  if (!parents.size || (!hasStandaloneComposer && !hasStandaloneWork && !hasNumberedChild && !hasUnnumberedChild)) {
     return undefined;
   }
 
@@ -170,8 +199,22 @@ function isNumberedMovement(line: string) {
 
 function isProgramNote(line: string) {
   return /中场(?:休息)?|以上内容|节目及演出票价|subject to change/i.test(line) ||
+    /^(?:上|下)半场(?:[：:].*)?$/.test(line) ||
+    /^(?:取材自|作曲|艺术顾问)\s*[：:]?/.test(line) ||
+    /联合创作/.test(line) ||
     /^(?:注|说明|备注|曲目说明|温馨提示)\s*[：:]/.test(line) ||
     /^[-—–\s]+$/.test(line);
+}
+
+function parseSharedComposer(lines: string[]) {
+  const composerLine = lines.find((line) => /^作曲\s*[：:]/.test(line));
+  if (!composerLine) return undefined;
+  const names = composerLine
+    .replace(/^作曲\s*[：:]\s*/, "")
+    .split(/[、，,]/)
+    .map((name) => cleanText(name.replace(/[（(][^）)]*[）)]/g, "")))
+    .filter(Boolean);
+  return names.length ? unique(names).join("、") : undefined;
 }
 
 function selectNcpaProgramLines(lines: string[], sessionDate?: string) {
@@ -239,7 +282,7 @@ function htmlLines(html: string) {
 
 function parseRole(line: string) {
   const match = line.match(
-    /^(指挥|钢琴|小提琴|中提琴|大提琴|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]\s*(.+)$/,
+    /^(指挥|钢琴|小提琴|中提琴|大提琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]\s*(.+)$/,
   );
   if (!match) return undefined;
   return {
@@ -254,7 +297,8 @@ function parseRole(line: string) {
 function parseChineseWork(line: string): ProgramItem | undefined {
   if (line.length < 3 || line.length > 180 || /^[（(]?\d+[）).、]/.test(line)) return undefined;
   if (
-    /^(作曲|改编|编曲|指挥|钢琴|小提琴|中提琴|大提琴|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]/.test(
+    isProgramNote(line) ||
+    /^(作曲|改编|编曲|指挥|钢琴|小提琴|中提琴|大提琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]/.test(
       line,
     ) ||
     /^[\p{L}·\s]{2,30}\s+改编$/u.test(line)
@@ -265,7 +309,7 @@ function parseChineseWork(line: string): ProgramItem | undefined {
   let value = cleanText(line);
   let composer: string | undefined;
   const suffixComposer = value.match(
-    /^(.+?)\s+([\p{L}·.]{2,40})\s+曲(?:\s+[\p{L}·.\s]{2,40}\s+改编)?$/u,
+    /^(.+?)\s+([\p{L}·.、，,\-]{2,40})\s+曲(?:\s+[\p{L}·.、，,\-]{2,40}\s+(?:编曲|编配|改编|配器))?$/u,
   );
   const prefixComposer = value.match(/^([\u3400-\u9fff·]{2,24})[：:]\s*(.+)$/);
 
@@ -283,6 +327,15 @@ function parseChineseWork(line: string): ProgramItem | undefined {
     composer,
     title: cleanText(value.replace(/[《》]/g, "")),
     opus,
+    confidence: "official",
+  };
+}
+
+function parseStandaloneWork(line: string): ProgramItem | undefined {
+  if (!/《[^》]+》/.test(line)) return undefined;
+  if (!/(?:选自|协奏曲|与乐队|曲牌|\s(?:曲|编曲|编配|改编|配器)(?:\s|$))/.test(line)) return undefined;
+  return {
+    title: cleanText(line.replace(/[《》]/g, "")),
     confidence: "official",
   };
 }

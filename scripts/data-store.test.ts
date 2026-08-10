@@ -304,7 +304,16 @@ const creditChangeDataset: ConcertDataset = {
     program: [{ ...merged[0].program[0], credits: [{ name: "Test Arranger", role: "改编" }] }],
   }],
 };
-assert.deepEqual(buildChanges(dataset, creditChangeDataset).changes.map((item) => item.type), ["program"]);
+assert.deepEqual(buildChanges(dataset, creditChangeDataset).changes, []);
+
+const distinctOperaExcerpts = mergeCrossSourceEvents([{
+  ...baseEvent,
+  program: [
+    { composer: "罗西尼", title: "序曲选自《塞维利亚的理发师》", confidence: "official" },
+    { composer: "罗西尼", title: "快给大忙人让路选自《塞维利亚的理发师》", confidence: "official" },
+  ],
+}], sources);
+assert.equal(distinctOperaExcerpts[0].program.length, 2);
 
 const formattingOnlyBefore: ConcertDataset = {
   ...dataset,
@@ -371,7 +380,7 @@ const substantiveProgramChange: ConcertDataset = {
 };
 assert.deepEqual(
   buildChanges(formattingOnlyBefore, substantiveProgramChange).changes.map((item) => item.type),
-  ["program"],
+  [],
 );
 
 const numericRangeChange: ConcertDataset = {
@@ -390,7 +399,7 @@ const numericRangeBefore: ConcertDataset = {
 };
 assert.deepEqual(
   buildChanges(numericRangeBefore, numericRangeChange).changes.map((item) => item.type),
-  ["program"],
+  [],
 );
 
 const formattingOnlyHistoryChange = {
@@ -457,9 +466,9 @@ const legacyHistory = {
 const changeHistory = mergeChangeHistory(legacyHistory, priceChanges);
 assert.equal(changeHistory.schemaVersion, 2);
 assert.deepEqual(changeHistory.latestChangeIds, [priceChanges.changes[0].id]);
-assert.deepEqual(changeHistory.changes.map((item) => item.id), [priceChanges.changes[0].id, "legacy-change"]);
-assert.equal(changeHistory.runs?.length, 2);
-assert.equal(mergeChangeHistory(changeHistory, priceChanges).changes.length, 2);
+assert.deepEqual(changeHistory.changes.map((item) => item.id), [priceChanges.changes[0].id]);
+assert.equal(changeHistory.runs?.length, 1);
+assert.equal(mergeChangeHistory(changeHistory, priceChanges).changes.length, 1);
 
 const failedDataset: ConcertDataset = {
   ...nextDataset,

@@ -51,8 +51,16 @@ const programChange: DatasetChange = {
   detectedAt: "2026-08-03T10:00:00.000Z",
   summary: "节目单变化",
 };
-assert.equal(recentChangeLabel(programChange, "2026-08-05T10:00:00.000Z"), "曲目更新");
+assert.equal(recentChangeLabel(programChange, "2026-08-05T10:00:00.000Z"), undefined);
 assert.equal(recentChangeLabel(programChange, "2026-09-05T10:00:00.000Z"), undefined);
+
+const priceChange: DatasetChange = {
+  id: "change-price",
+  eventId: "followed-event",
+  type: "price",
+  detectedAt: "2026-08-03T11:00:00.000Z",
+  summary: "票价变化",
+};
 
 const followedEvent = summary({
   id: "followed-event",
@@ -76,10 +84,11 @@ const follows: FollowMap = {
 };
 const changeDataset: ChangeDataset = {
   generatedAt: "2026-08-03T10:00:00.000Z",
-  changes: [programChange],
+  changes: [programChange, priceChange],
 };
 const notifications = buildFollowNotifications(changeDataset, [followedEvent], follows, []);
 assert.equal(notifications.length, 1);
+assert.equal(notifications[0].id, priceChange.id);
 assert.deepEqual(notifications[0].targets.map((target) => target.type).sort(), ["ensemble", "work"]);
 
 const knowledgeFollows: FollowMap = {
@@ -104,8 +113,15 @@ assert.deepEqual(knowledgeNotifications[0].targets.map((target) => target.type).
 
 const retainedNotifications = mergeFollowNotificationHistory(notifications, [], [], []);
 assert.equal(retainedNotifications.length, 1, "unfollowing must not remove notification history");
-assert.equal(mergeFollowNotificationHistory(notifications, [], [programChange.id], [])[0].read, true);
-assert.equal(mergeFollowNotificationHistory(notifications, notifications, [], [programChange.id]).length, 0);
+assert.equal(mergeFollowNotificationHistory([{
+  id: programChange.id,
+  change: programChange,
+  event: followedEvent,
+  targets: Object.values(follows),
+  read: false,
+}], [], [], []).length, 0, "stored program notifications must be removed");
+assert.equal(mergeFollowNotificationHistory(notifications, [], [priceChange.id], [])[0].read, true);
+assert.equal(mergeFollowNotificationHistory(notifications, notifications, [], [priceChange.id]).length, 0);
 
 const issues = detectDataIssues(summary({
   dataQuality: "needs-review",

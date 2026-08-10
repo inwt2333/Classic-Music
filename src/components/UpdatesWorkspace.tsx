@@ -40,6 +40,8 @@ const productUpdates: ProductUpdate[] = [
       { category: "fix", title: "双语节目单", description: "星海音乐厅双语曲目合并为中文标题与外文名，影片分段标题不再被当作独立曲目。" },
       { category: "fix", title: "深圳音乐厅节目单", description: "协奏曲乐章会归入所属作品，带“协奏曲”的标题不再被误判为署名；演出人员也按角色正确提取。" },
       { category: "fix", title: "复杂节目单层级", description: "修复国家大剧院多部套曲的作品与分曲归属、深圳音乐厅纯文本及组曲列表，并校正东方艺术中心海报中的曲名和作者。" },
+      { category: "fix", title: "节目单边界", description: "民族乐器演奏者、上下半场标题和作曲家分组不再被识别为曲目。" },
+      { category: "improvement", title: "变化历史降噪", description: "曲目仍随官网刷新，但不再写入变化历史或关注消息，避免 OCR 与官网排版波动造成误报。" },
       { category: "improvement", title: "最新演出数据", description: "重新检查全部 18 个来源并更新演出快照，数据审计无错误和警告。" },
     ],
   },
@@ -112,7 +114,7 @@ const productUpdates: ProductUpdate[] = [
       { category: "feature", title: "关注与消息", description: "可以关注音乐家、作品、乐团和场馆，相关演出变化进入站内消息中心并保留历史。" },
       { category: "feature", title: "个人演出标记", description: "支持“想去”和“已去”，并可以按个人状态筛选演出。" },
       { category: "feature", title: "分享卡片", description: "生成包含时间、地点、票价、人物、乐团、曲目和购票二维码的图片并复制到剪贴板。" },
-      { category: "improvement", title: "变化降噪", description: "标点、空格、括号和 OCR 排版差异不再被误判为真实曲目变化。" },
+      { category: "improvement", title: "变化降噪", description: "标点、空格和括号等排版差异会在变化比较前统一处理。" },
     ],
   },
   {
@@ -121,7 +123,7 @@ const productUpdates: ProductUpdate[] = [
     summary: "演出范围从长三角扩展至全国主要城市，并开始长期保存每一次数据变化。",
     items: [
       { category: "feature", title: "全国演出来源", description: "接入北京、广州、深圳、西安、杭州等城市的主要乐团和音乐厅官网。" },
-      { category: "feature", title: "变化前后对照", description: "新增、下架、改期、取消、换人、换曲和票价变化均可查看修改前后的具体内容。" },
+      { category: "feature", title: "变化前后对照", description: "新增、下架、改期、取消、换人和票价变化可查看修改前后的具体内容。" },
       { category: "improvement", title: "跨来源去重", description: "同一场演出来自乐团和场馆官网时合并展示，并保留全部来源与购票链接。" },
     ],
   },
@@ -179,7 +181,7 @@ export default function UpdatesWorkspace() {
 
         <div className="updates-summary">
           <BookOpenText size={18} />
-          <div><strong>产品更新与演出变化分别记录</strong><span>这里记录网站本身的版本；演出改期、换人、换曲和票价调整仍在“变化历史”中查询。</span></div>
+          <div><strong>产品更新与演出变化分别记录</strong><span>这里记录网站本身的版本；演出改期、换人和票价调整仍在“变化历史”中查询。</span></div>
           <a href="?changes=1">查看变化历史</a>
         </div>
 

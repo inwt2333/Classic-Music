@@ -2208,6 +2208,7 @@ function inferComposers(title: string) {
 function inferPerformers(title: string) {
   const names = Array.from(title.matchAll(/([\u4e00-\u9fa5·]{2,8})[与和]/g))
     .map((match) => match[1])
+    .filter((name) => !/的$/.test(name))
     .filter((name) => !/^(?:钢琴|小提琴|中提琴|大提琴|长笛|双簧管|单簧管|管风琴|乐团|合唱团|乐圣|师徒|芭比)$/.test(name));
   const western = Array.from(title.matchAll(/([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+){1,3})/g)).map((match) => match[1]);
   return Array.from(new Set([...names, ...western])).slice(0, 6);

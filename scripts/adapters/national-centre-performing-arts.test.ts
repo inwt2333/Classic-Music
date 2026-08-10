@@ -146,4 +146,84 @@ assert.deepEqual(september18.performers, ["安东尼奥·帕帕诺", "刘晓禹"
 assert.equal(parseNcpaDetail(multiDateDetail).program.length, 7);
 assert.equal(parseNcpaDetail(multiDateDetail, "2026-09-19 周六 19:30").program.length, 7);
 
+const nationalOrchestraGala = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>《节日序曲》 施万春 曲 罗麦朔 编配</p>
+        <p>二胡协奏曲《巾帼》 王云飞 曲</p><p>二胡：宋飞、马可、王啸、谭欣、张敬然、马子迪</p>
+        <p>《若一去不回》选自歌剧《冷月无声》 王晓岭 词 栾凯 曲</p><p>演唱：孙砾</p>
+        <p>《快给大忙人让路》选自罗西尼歌剧《塞维利亚的理发师》</p><p>演唱：孙砾、林子豪</p>
+        <p>京剧曲牌《夜深沉》 吴华 编曲</p><p>京胡：沈诚</p><p>京二胡：晏璐婷</p>
+        <p>《沂蒙山，永远的爹娘》 王晓岭、李文绪 词 栾凯 曲</p><p>演唱：王丽达</p>
+        <p>小提琴协奏曲《梁山伯与祝英台》（选段） 何占豪、陈钢 曲</p><p>小提琴：吕思清</p>
+        <p>——中场休息——</p>
+        <p>钢琴与乐队《祭献之舞》（选自芭蕾舞剧《春之祭》） 伊戈尔·斯特拉文斯基 曲</p>
+        <p>钢琴：韩冰、韩寒北、李博文、田容</p>
+        <p>《Ｇ小调双大提琴协奏曲》第一乐章 维瓦尔第 曲</p><p>大提琴：刘蔓、张又嘉</p>
+        <p>《红星照我去战斗》 邬大为、魏宝贵 词 傅庚辰 曲</p><p>演唱：王宏伟</p>
+        <p>《情话》选自歌剧《尘埃落定》 冯必烈、冯柏铭 词 孟卫东 曲</p>
+        <p>古筝与乐队《汉江韵》 任清芝 传谱 王中山 改编 陈哲 配器</p>
+        <p>古筝：王中山、宋心馨、曹照照、倪一鸣</p>
+        <p>《上下求索》 屈原 词 老锣 曲</p><p>演唱：龚琳娜</p>
+        <p>《幽兰操》 韩愈 词 赵季平 曲</p><p>演唱：吴碧霞、周彬</p>
+        <p>《卜算子·咏梅》 毛泽东 词 孙玄龄 曲</p><p>演唱：吴碧霞</p>
+        <p>《我的井冈 我的家》选自歌剧《摇篮》 赵大鸣 词 胡廷江 曲</p><p>演唱：吴碧霞、陈滢竹、周彬</p>
+      `,
+    }],
+  }],
+});
+assert.equal(nationalOrchestraGala.program.length, 16);
+assert.equal(nationalOrchestraGala.program.some((item) => ["二胡", "京胡", "京二胡", "古筝"].includes(item.composer ?? "")), false);
+assert.ok(nationalOrchestraGala.performers.includes("宋飞"));
+assert.ok(nationalOrchestraGala.performers.includes("沈诚"));
+assert.ok(nationalOrchestraGala.performers.includes("王中山"));
+
+const astronomyConcert = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>上半场：人类与星辰</p>
+        <p>查拉图斯特拉如是说 理查德·施特劳斯 曲</p>
+        <p>日出 选自《培尔金特》 格里格 曲</p><p>月光 德彪西 曲</p>
+        <p>四季（春、夏、秋、冬） 维瓦尔第 曲</p>
+        <p>春：第一乐章，快板</p><p>夏：第三乐章，急板</p><p>秋：第一乐章，快板</p><p>冬：第一乐章，不太快的快板</p>
+        <p>行星组曲之木星 霍尔斯特 曲</p><p>——中场休息——</p>
+        <p>下半场：天文学与音乐中的人类思想进化</p>
+        <p>降E大调前奏曲，BWV552a 巴赫 曲</p><p>D大调第十二号交响曲 威廉·赫谢尔 曲</p>
+        <p>降E大调前奏曲与赋格，Op.99 No.3 圣-桑 曲</p><p>《星际穿越》配乐 汉斯·季默 曲</p>
+      `,
+    }],
+  }],
+});
+assert.equal(astronomyConcert.program.length, 9);
+assert.equal(astronomyConcert.program.some((item) => /上半场|下半场/.test(item.title)), false);
+assert.equal(astronomyConcert.program.find((item) => item.composer === "圣-桑")?.title, "降E大调前奏曲与赋格，Op.99 No.3");
+
+const redRibbon = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>长路当歌</p><p>第一乐章 血战湘江</p><p>第二乐章 四渡赤水</p>
+        <p>第三乐章 泡桐岗之夜</p><p>第四乐章 雪山草地</p><p>第五乐章 胜利会师</p>
+        <p>——中场休息——</p>
+        <p>英雄的黎明</p><p>第一乐章 天际</p><p>第二乐章 瑞流</p>
+        <p>第三乐章 寒碑</p><p>第四乐章 烈焰</p>
+        <p>取材自魏巍同名长篇小说、沈尧伊同名连环画</p>
+        <p>作曲：商沛雷（特邀）、罗麦朔（特邀）</p>
+        <p>（中央芭蕾舞团、上海爱乐乐团、浙江交响乐团、四川爱乐乐团联合创作）</p>
+        <p>艺术顾问：沈尧伊</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(redRibbon.program.map((item) => [item.composer, item.title, item.movements?.length]), [
+  ["商沛雷、罗麦朔", "长路当歌", 5],
+  ["商沛雷、罗麦朔", "英雄的黎明", 4],
+]);
+assert.equal(redRibbon.program.some((item) => item.composer === "艺术顾问"), false);
+
 console.log("NCPA parser tests passed.");
