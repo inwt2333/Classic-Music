@@ -156,6 +156,54 @@ assert.equal(szyytCredits.program[0].composer, "张阿雅");
 assert.deepEqual(szyytCredits.program[0].credits, [{ name: "黄摩崖", role: "词" }]);
 assert.deepEqual(szyytCredits.performers, ["深圳音乐厅“小金树”多民族童声合唱团", "罗诗祺", "李东南"]);
 
+const szyytNumberedWorks = parseShenzhenConcertHallDetail(`
+  <h1>奥斯卡·罗曼耶卓钢琴独奏音乐会-深圳站</h1>
+  <div class="tabContent2"><p>演出曲目</p>
+    <p>1. 诀别书</p><p>2. 曹操</p><p>3. 月光</p><p>4. 卡农幻想曲</p>
+    <p>5. 这世界那么多人</p><p>6. 青花瓷</p><p>7. 派对动物</p><p>8. 暗香</p><p>9. Lemon</p>
+    <p>10. 《海上钢琴师》组曲</p><p>11. Grand Escape</p><p>12. 圣诞快乐，劳伦斯先生</p>
+    <p>13. 《星际穿越》组曲</p><p>14. 《爱乐之城》组曲</p>
+    <p>*曲目以演出当天为准。</p>
+  </div>
+`);
+assert.equal(szyytNumberedWorks.program.length, 14);
+assert.deepEqual(szyytNumberedWorks.program.slice(-5).map((item) => item.title), [
+  "海上钢琴师组曲",
+  "Grand Escape",
+  "圣诞快乐，劳伦斯先生",
+  "星际穿越组曲",
+  "爱乐之城组曲",
+]);
+assert.ok(szyytNumberedWorks.program.every((item) => item.composer !== "组"));
+
+const szyytBarbie = parseShenzhenConcertHallDetail(`
+  <h1>芭比与室内乐之梦 刘一诺Noral＆她的朋友们</h1>
+  <div class="tabContent2"><p>演出曲目</p>
+    <p>上半场</p><p>莎米娜德《小协奏曲》</p>
+    <p>克拉拉·舒曼《g小调钢琴三重奏，作品17》（第一乐章）</p>
+    <p>亨莉耶特·雷尼耶《静谧行板》</p><p>莉莉·布朗热《夜曲》</p><p>中场休息</p>
+    <p>芭比之真假公主</p><p>自由</p><p>如果你为我而爱我</p><p>我是一个像你一样的女孩</p>
+    <p>芭比之森林公主</p><p>就在我怀里</p><p>我需要知道</p>
+    <p>芭比之天鹅湖</p><p>《天鹅湖主题曲》</p>
+    <p>芭比之胡桃夹子</p><p>柴可夫斯基-胡桃夹子-花之圆舞曲</p>
+    <p>芭比之十二芭蕾舞公主</p><p>阿格里斯</p><p>公主的命运</p>
+    <p>*曲目以演出当天为准。</p>
+  </div>
+`);
+assert.equal(szyytBarbie.program.length, 13);
+assert.deepEqual(szyytBarbie.program.slice(0, 4).map((item) => item.composer), [
+  "莎米娜德",
+  "克拉拉·舒曼",
+  "亨莉耶特·雷尼耶",
+  "莉莉·布朗热",
+]);
+assert.equal(szyytBarbie.program.some((item) => item.title.startsWith("芭比之")), false);
+assert.deepEqual(szyytBarbie.program.at(-3), {
+  composer: "柴可夫斯基",
+  title: "胡桃夹子-花之圆舞曲",
+  confidence: "official",
+});
+
 const xinghai = parseXinghaiConcertHallDetail(`
   <h1>石进钢琴音乐会---星海音乐厅</h1>
   <div class="fl fblack lh21">演出地点：交响乐演奏大厅</div>

@@ -81,12 +81,16 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
   const scoped = marker >= 0 ? lines.slice(marker + 1) : [];
   const program: ProgramItem[] = [];
   const performers: string[] = [];
+  let numberedWorksMode = false;
   for (const rawLine of scoped) {
-    const line = rawLine.replace(/^\d+[.、]\s*/, "");
-    if (/曲目.*为准|演出阵容|艺术家介绍|温馨提示/.test(line)) break;
-    if (/中场休息/.test(line)) continue;
+    const arabicNumber = rawLine.match(/^(\d+)[.．、]\s*(.+)$/);
+    if (arabicNumber && program.length === 0) numberedWorksMode = true;
+    const line = arabicNumber ? cleanText(arabicNumber[2]) : rawLine;
+    if (/(?:曲目|演出节目).*为准|演出阵容|艺术家介绍|温馨提示/.test(line)) break;
+    if (/^(?:上半场|下半场)$/.test(line) || /中场休息/.test(line) || /^芭比之[^：:《》]{2,24}$/.test(line)) continue;
 
-    const movement = line.match(/^([ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]+|[IVXLCDM]+|\d+)[.．、]\s*(.+)$/i);
+    const movement = rawLine.match(/^([ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]+|[IVXLCDM]+)[.．、]\s*(.+)$/i)
+      ?? (!numberedWorksMode ? rawLine.match(/^(\d+)[.．、]\s*(.+)$/) : null);
     if (movement && program.length) {
       const item = program.at(-1)!;
       item.movements = [
@@ -102,39 +106,46 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
       continue;
     }
 
-    const work = line.match(/^《([^》]+)》(.*)$/);
+    const delimited = line.match(/^([^—－\-:：]{2,36})[—－\-:：]\s*(.+)$/);
+    if (delimited) {
+      if (isPersonnelLabel(delimited[1])) {
+        performers.push(...splitPeople(delimited[2]));
+        continue;
+      }
+      const titles = Array.from(delimited[2].matchAll(/《([^》]+)》/g)).map((item) => item[1]);
+      for (const title of titles.length ? titles : [delimited[2]]) {
+        program.push({ composer: cleanComposerName(delimited[1]), title: cleanText(title.replace(/[《》]/g, "")), confidence });
+      }
+      continue;
+    }
+
+    const work = line.match(/^([^《]{2,36})?《([^》]+)》(.*)$/);
     if (work) {
-      const sourceSuffix = work[2].match(/^\s*([（(][^）)]+[）)])/)?.[1] ?? "";
+      const composer = cleanComposerName((work[1] ?? "").replace(/[：:]$/, "")) || undefined;
+      const sourceSuffix = work[3].match(/^\s*([（(][^）)]+[）)])/)?.[1] ?? "";
+      const suiteSuffix = /^\s*组曲/.test(work[3]) ? "组曲" : "";
       const item: ProgramItem = {
-        title: cleanText(`${work[1]}${sourceSuffix}`),
+        composer,
+        title: cleanText(`${work[2]}${suiteSuffix}${sourceSuffix}`),
         confidence,
       };
-      applyCredits(item, work[2]);
+      applyCredits(item, work[3].replace(/^\s*组曲/, ""));
       program.push(item);
       continue;
     }
 
-    const match = line.match(/^([^—－\-:：]{2,36})[—－\-:：]\s*(.+)$/);
-    if (!match) {
-      if (program.length && applyCredits(program.at(-1)!, line)) continue;
-      continue;
-    }
-    if (isPersonnelLabel(match[1])) {
-      performers.push(...splitPeople(match[2]));
-      continue;
-    }
-    const titles = Array.from(match[2].matchAll(/《([^》]+)》/g)).map((item) => item[1]);
-    if (match[1] === "组曲" && titles.length > 1) {
-      program.push({
-        title: "组曲",
-        movements: titles.map((title, index) => ({ number: String(index + 1), title })),
-        confidence,
-      });
-      continue;
-    }
-    for (const title of titles.length ? titles : [match[2]]) program.push({ composer: match[1], title: title.replace(/[《》]/g, ""), confidence });
+    if (program.length && applyCredits(program.at(-1)!, line)) continue;
+    if (isPlainProgramTitle(line)) program.push({ title: line.replace(/[《》]/g, ""), confidence });
   }
   return { program: dedupe(program), performers: unique(performers) };
+}
+
+function isPlainProgramTitle(value: string) {
+  const line = cleanText(value);
+  return line.length >= 2 && line.length <= 80 &&
+    !/^(?:上半场|下半场|中场休息|曲目|节目单)/.test(line) &&
+    !/^芭比之[^：:《》]{2,24}$/.test(line) &&
+    !/(?:主演|主办|承办|票价|演出时间|演出地点)[：:]/.test(line);
 }
 
 function applyCredits(item: ProgramItem, value: string) {
@@ -149,9 +160,10 @@ function applyCredits(item: ProgramItem, value: string) {
   for (const part of parts) {
     const match = part.match(/^(.{1,40}?)\s*(作词|填词|汉语填词|词曲|词|曲|改编合唱|合唱改编|合唱编创|钢琴编配|编配|编创|改编)$/);
     if (!match) continue;
-    matched = true;
     const name = cleanText(match[1]);
     const role = match[2];
+    if (role === "曲" && !/\s曲$/.test(part)) continue;
+    matched = true;
     if (role === "曲" || role === "词曲") {
       item.composer ||= name;
       if (role === "词曲") credits.push({ name, role: "词" });
@@ -196,4 +208,5 @@ function dedupeCredits(items: NonNullable<ProgramItem["credits"]>) {
 
 function dedupe(items: ProgramItem[]) { const s = new Set<string>(); return items.filter((x) => { const k = `${x.composer}:${x.title}`; if (s.has(k)) return false; s.add(k); return true; }); }
 function unique<T>(values: T[]) { return Array.from(new Set(values)); }
+function cleanComposerName(value: string) { return cleanText(value).replace(/\s*·\s*/g, "·"); }
 function cleanText(value: string) { return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim(); }

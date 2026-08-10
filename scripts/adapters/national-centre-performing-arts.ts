@@ -21,7 +21,8 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
   const lines = selectNcpaProgramLines(allProgramLines, sessionDate);
   const performers: string[] = [];
   let conductor: string | undefined;
-  const program: ProgramItem[] = [];
+  const hierarchicalProgram = parseHierarchicalProgram(lines);
+  const program: ProgramItem[] = hierarchicalProgram ?? [];
 
   for (const line of lines) {
     if (
@@ -39,6 +40,8 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
       if (role.conductor) conductor = role.names[0];
       continue;
     }
+
+    if (hierarchicalProgram) continue;
 
     const movement = line.match(/^第([一二三四五六七八九十\d]+)乐章[：:、]?\s*(.+)$/);
     if (movement && program.length) {
@@ -68,6 +71,107 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
     program: dedupeProgram(program),
     description: description || undefined,
   };
+}
+
+function parseHierarchicalProgram(lines: string[]) {
+  type Parent = { item: ProgramItem; endIndex: number };
+  const parents = new Map<number, Parent>();
+  const skippedIndexes = new Set<number>();
+  let hasStandaloneComposer = false;
+  let hasNumberedChild = false;
+  let hasUnnumberedChild = false;
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const inline = parseChineseWork(lines[index]);
+    if (inline?.composer) {
+      parents.set(index, { item: inline, endIndex: index });
+      continue;
+    }
+
+    const standaloneComposer = lines[index].match(/^([\p{L}·.\s]{2,40})\s+曲$/u);
+    if (
+      !standaloneComposer ||
+      index === 0 ||
+      looksLikeWork(standaloneComposer[1]) ||
+      /[《》（）(),，:：]/.test(standaloneComposer[1])
+    ) continue;
+
+    let titleIndex = index - 1;
+    let title = lines[titleIndex];
+    if (/^第[一二三四五六七八九十\d]+册$/.test(title) && titleIndex > 0) {
+      titleIndex -= 1;
+      title = `${lines[titleIndex]} ${title}`;
+      skippedIndexes.add(index - 1);
+    }
+    if (!title || parseRole(title) || isProgramNote(title)) continue;
+
+    parents.set(titleIndex, {
+      item: {
+        composer: cleanText(standaloneComposer[1]),
+        title: cleanText(title.replace(/[《》]/g, "")),
+        confidence: "official",
+      },
+      endIndex: index,
+    });
+    skippedIndexes.add(index);
+    hasStandaloneComposer = true;
+  }
+
+  const parentIndexes = [...parents.keys()].sort((a, b) => a - b);
+  for (const parentIndex of parentIndexes) {
+    const nextParentIndex = parentIndexes.find((value) => value > parentIndex) ?? lines.length;
+    const children = lines.slice(parents.get(parentIndex)!.endIndex + 1, nextParentIndex);
+    if (children.some(isNumberedMovement)) {
+      hasNumberedChild = true;
+    }
+    if (children.some((line) =>
+      !isNumberedMovement(line) &&
+      !isProgramNote(line) &&
+      !parseRole(line) &&
+      !/^(?:(?:20\d{2})年)?\d{1,2}月\d{1,2}日/.test(line)
+    )) hasUnnumberedChild = true;
+  }
+  if (!parents.size || (!hasStandaloneComposer && !hasNumberedChild && !hasUnnumberedChild)) {
+    return undefined;
+  }
+
+  const program: ProgramItem[] = [];
+  for (let parentPosition = 0; parentPosition < parentIndexes.length; parentPosition += 1) {
+    const parentIndex = parentIndexes[parentPosition];
+    const parent = parents.get(parentIndex)!;
+    const nextParentIndex = parentIndexes[parentPosition + 1] ?? lines.length;
+    const movements: NonNullable<ProgramItem["movements"]> = [];
+
+    for (let index = parent.endIndex + 1; index < nextParentIndex; index += 1) {
+      const line = lines[index];
+      if (skippedIndexes.has(index) || !line || isProgramNote(line) || parseRole(line)) continue;
+
+      const numbered = parseNumberedMovement(line);
+      if (numbered) movements.push(numbered);
+      else movements.push({ title: cleanText(line.replace(/[《》]/g, "")) });
+    }
+
+    if (movements.length) parent.item.movements = movements;
+    program.push(parent.item);
+  }
+  return dedupeProgram(program);
+}
+
+function parseNumberedMovement(line: string) {
+  const named = line.match(/^第([一二三四五六七八九十\d]+)乐章[：:、]?\s*(.+)$/);
+  if (named) return { number: named[1], title: cleanText(named[2]) };
+  const numbered = line.match(/^([一二三四五六七八九十\d]+)[.．、]\s*(.+)$/);
+  return numbered ? { number: numbered[1], title: cleanText(numbered[2]) } : undefined;
+}
+
+function isNumberedMovement(line: string) {
+  return Boolean(parseNumberedMovement(line));
+}
+
+function isProgramNote(line: string) {
+  return /中场(?:休息)?|以上内容|节目及演出票价|subject to change/i.test(line) ||
+    /^(?:注|说明|备注|曲目说明|温馨提示)\s*[：:]/.test(line) ||
+    /^[-—–\s]+$/.test(line);
 }
 
 function selectNcpaProgramLines(lines: string[], sessionDate?: string) {
@@ -161,7 +265,7 @@ function parseChineseWork(line: string): ProgramItem | undefined {
   let value = cleanText(line);
   let composer: string | undefined;
   const suffixComposer = value.match(
-    /^(.+?)\s+([\u3400-\u9fff·]{2,24})\s+曲(?:\s+[\u3400-\u9fff·]{2,24}\s+改编)?$/,
+    /^(.+?)\s+([\p{L}·.]{2,40})\s+曲(?:\s+[\p{L}·.\s]{2,40}\s+改编)?$/u,
   );
   const prefixComposer = value.match(/^([\u3400-\u9fff·]{2,24})[：:]\s*(.+)$/);
 

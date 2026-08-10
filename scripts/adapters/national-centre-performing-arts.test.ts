@@ -38,6 +38,57 @@ const noteAfterWork = parseNcpaDetail({
   }],
 });
 assert.deepEqual(noteAfterWork.program.map((item) => item.title), ["前奏曲", "前奏曲集 第二册"]);
+
+const rogerRecital = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>三首玄秘曲 E.萨蒂 曲</p>
+        <p>三首新事曲 F.普朗克 曲</p>
+        <p>那泽尔之夜 F.普朗克 曲</p>
+        <p>前奏曲</p><p>贵客满座</p><p>深情地握手</p><p>朴素和大方</p>
+        <p>烦恼的滋味</p><p>灵活的老人</p><p>华彩乐段</p><p>终曲</p>
+        <p>中场</p>
+        <p>前奏曲集 第二册 C.德彪西 曲</p>
+        <p>迷雾</p><p>枯叶</p><p>维诺之门</p><p>善舞的仙女</p><p>欧石楠</p>
+        <p>怪癖的拉文将军</p><p>月光满亭台</p><p>水妖</p><p>向匹克威克先生致敬</p>
+        <p>埃及古壶</p><p>焰火</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(
+  rogerRecital.program.map((item) => [item.composer, item.title, item.movements?.length ?? 0]),
+  [
+    ["E.萨蒂", "三首玄秘曲", 0],
+    ["F.普朗克", "三首新事曲", 0],
+    ["F.普朗克", "那泽尔之夜", 8],
+    ["C.德彪西", "前奏曲集 第二册", 11],
+  ],
+);
+assert.equal(rogerRecital.program[2].movements?.[0].title, "前奏曲");
+assert.equal(rogerRecital.program[3].movements?.at(-1)?.title, "焰火");
+
+const swanLake = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>《天鹅湖》第二幕　柴科夫斯基 曲</p>
+        <p>1.场景（天鹅湖畔）</p><p>2.王子登场，初遇奥杰塔</p><p>3.群鹅出场</p>
+        <p>4.天鹅之舞</p><p>圆舞曲</p><p>奥杰塔独舞（女变奏）</p><p>四小天鹅舞</p>
+        <p>《天鹅湖》第三幕　柴科夫斯基 曲</p>
+        <p>1.引子-宫廷进行曲</p><p>2.王子的萨拉班德舞</p><p>3.场景-候选新娘的圆舞曲</p>
+        <p>指挥：张艺</p><p>导聆：曹舒慈</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(swanLake.program.map((item) => item.title), ["天鹅湖第二幕", "天鹅湖第三幕"]);
+assert.equal(swanLake.program[0].movements?.length, 7);
+assert.equal(swanLake.program[1].movements?.length, 3);
+assert.deepEqual(swanLake.performers, ["张艺", "曹舒慈"]);
 assert.deepEqual(
   parseNcpaPriceTiers({
     sessionPrices: [{ name: "480" }, { name: "380(满3张打8折)" }, { name: "80" }],

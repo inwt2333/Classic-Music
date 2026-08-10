@@ -178,6 +178,22 @@ const ocrProgram = parseOrientalArtCenterOcrText(`
 assert.equal(ocrProgram.length, 3);
 assert.ok(ocrProgram.every((item) => item.confidence === "ocr"));
 
+const ocrTitleCredits = parseOrientalArtCenterOcrText(`
+  音乐会精选曲目 Programme
+  《钢铁洪流进行曲 》一一作曲: 李旭昊
+  《燃情岁月 》一一 作曲: James Horner
+  《The Rains of Castamere (权力的游戏) 》一一作曲: Ramin Djawadi
+  曲目以现场为准
+`);
+assert.deepEqual(
+  ocrTitleCredits.map((item) => [item.composer, item.title]),
+  [
+    ["李旭昊", "钢铁洪流进行曲"],
+    ["James Horner", "燃情岁月"],
+    ["Ramin Djawadi", "The Rains of Castamere (权力的游戏)"],
+  ],
+);
+
 const composerHeadingProgram = parseOrientalArtCenterContent(`
   <p>音乐会曲目 PROGRAM</p>
   <p>门德尔松 Mendelssohn</p>

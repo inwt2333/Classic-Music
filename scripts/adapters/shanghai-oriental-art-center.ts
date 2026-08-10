@@ -217,6 +217,14 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     }
     previousSourceLine = line;
 
+    const ocrTitleCredit = confidence === "ocr" ? parseOcrTitleCredit(line, confidence) : undefined;
+    if (ocrTitleCredit) {
+      currentComposer = ocrTitleCredit.composer;
+      currentWork = ocrTitleCredit;
+      program.push(currentWork);
+      continue;
+    }
+
     const bracketWork = parseBracketWork(line, confidence);
     if (bracketWork) {
       currentComposer = bracketWork.composer;
@@ -323,6 +331,20 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
   }
 
   return dedupeConsecutiveProgram(program);
+}
+
+function parseOcrTitleCredit(
+  line: string,
+  confidence: ProgramItem["confidence"],
+): ProgramItem | undefined {
+  const match = line.match(
+    /^《?\s*([^》]+?)\s*》?\s*(?:一一|——|--|[-—–])\s*(?:作曲|曲)\s*[:：]?\s*(.+)$/i,
+  );
+  if (!match) return undefined;
+  const title = cleanProgramTitle(match[1]);
+  const rawComposer = cleanText(match[2]).replace(/[，,；;]+$/, "");
+  const composer = /[\u3400-\u9fff]/.test(rawComposer) ? cleanComposer(rawComposer) : rawComposer;
+  return title && composer ? { composer, title, confidence } : undefined;
 }
 
 function parseBracketWork(line: string, confidence: ProgramItem["confidence"]) {

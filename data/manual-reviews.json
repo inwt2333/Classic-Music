@@ -10,118 +10,83 @@
       "status": "approved",
       "program": [
         {
-          "title": "《钢铁洪流进行曲 》一一作曲: 李旭吴",
-          "alternateTitles": [],
+          "composer": "李旭昊",
+          "title": "钢铁洪流进行曲",
           "confidence": "manual"
         },
         {
-          "title": "《燃情岁月 》一一 作曲:",
-          "alternateTitles": [
-            "James Horner"
-          ],
+          "composer": "James Horner",
+          "title": "燃情岁月",
           "confidence": "manual"
         },
         {
-          "title": "《Victory 》一一 作曲:",
-          "alternateTitles": [
-            "Thomas Bergersen"
-          ],
+          "composer": "Thomas Bergersen",
+          "title": "Victory",
           "confidence": "manual"
         },
         {
-          "title": "《乡村骑士 》一一作曲:",
-          "alternateTitles": [
-            "Pietro Mascagni"
-          ],
+          "composer": "Pietro Mascagni",
+          "title": "乡村骑士",
           "confidence": "manual"
         },
         {
-          "title": "《帝国进行曲 》一一作曲:",
-          "alternateTitles": [
-            "John Wiliams"
-          ],
+          "composer": "John Williams",
+          "title": "帝国进行曲",
           "confidence": "manual"
         },
         {
-          "title": "《Pacific Rim (环太平洋) 》一一作曲:",
-          "alternateTitles": [
-            "Ramin Dijawadi"
-          ],
+          "composer": "Ramin Djawadi",
+          "title": "Pacific Rim (环太平洋)",
           "confidence": "manual"
         },
         {
-          "title": "《权力的游戏主题曲》一一作曲:",
-          "alternateTitles": [
-            "Ramin Djawadi"
-          ],
+          "composer": "Ramin Djawadi",
+          "title": "权力的游戏主题曲",
           "confidence": "manual"
         },
         {
-          "title": "《歌剧魅影》一一作曲:",
-          "alternateTitles": [
-            "Andrew Lloyd Webber"
-          ],
+          "composer": "Andrew Lloyd Webber",
+          "title": "歌剧魅影",
           "confidence": "manual"
         },
         {
-          "title": "《亡灵序曲》一一作曲:",
-          "alternateTitles": [
-            "Hans Zimmer"
-          ],
+          "composer": "Hans Zimmer",
+          "title": "亡灵序曲",
           "confidence": "manual"
         },
         {
-          "title": "《复仇者联盟主题曲 》一一作曲:",
-          "alternateTitles": [
-            "Alan Silvestri"
-          ],
+          "composer": "Alan Silvestri",
+          "title": "复仇者联盟主题曲",
           "confidence": "manual"
         },
         {
-          "title": "《Honor (太平洋战争) 》一一作曲:",
-          "alternateTitles": [
-            "Hans Zimmer"
-          ],
+          "composer": "Hans Zimmer",
+          "title": "Honor (太平洋战争)",
           "confidence": "manual"
         },
         {
-          "title": "《Exodus(出埃及记)》一一作曲:Ernest",
-          "alternateTitles": [
-            "Ernest Gold"
-          ],
+          "composer": "Ernest Gold",
+          "title": "Exodus (出埃及记)",
           "confidence": "manual"
         },
         {
-          "title": "《The Rains of Castamere (权利的游戏) 》一一作曲:",
-          "alternateTitles": [
-            "Ramin"
-          ],
+          "composer": "Ramin Djawadi",
+          "title": "The Rains of Castamere (权力的游戏)",
           "confidence": "manual"
         },
         {
-          "title": "Djawadi",
-          "alternateTitles": [],
+          "composer": "James Horner",
+          "title": "泰坦尼克号",
           "confidence": "manual"
         },
         {
-          "title": "《泰坦尼克号》一一作曲:",
-          "alternateTitles": [
-            "James Horner"
-          ],
+          "composer": "Thomas Bergersen",
+          "title": "Star Sky",
           "confidence": "manual"
         },
         {
-          "title": "《Star Sky》一一作曲:",
-          "alternateTitles": [
-            "Thomas Bergersen"
-          ],
-          "confidence": "manual"
-        },
-        {
-          "title": "《加勒比海盗》一一作曲:",
-          "alternateTitles": [
-            "Hans Zimmer"
-          ],
+          "composer": "Hans Zimmer",
+          "title": "加勒比海盗",
           "confidence": "manual"
         }
       ],
