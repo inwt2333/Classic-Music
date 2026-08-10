@@ -17,18 +17,34 @@ export type AccountProfile = {
   role: AppRole;
 };
 
+export type SignInRequest = {
+  id: number;
+  reason: string;
+};
+
+type SignUpResult = {
+  requiresEmailConfirmation: boolean;
+};
+
 type AuthContextValue = {
   configured: boolean;
   loading: boolean;
   authError: string;
   profileLoading: boolean;
   profileError: string;
+  passwordRecovery: boolean;
+  signInRequest: SignInRequest | null;
   session: Session | null;
   user: User | null;
   profile: AccountProfile | null;
   isAdmin: boolean;
-  signInWithEmail: (email: string) => Promise<void>;
+  signInWithPassword: (email: string, password: string) => Promise<void>;
+  signUp: (displayName: string, email: string, password: string) => Promise<SignUpResult>;
+  sendPasswordReset: (email: string) => Promise<void>;
+  updatePassword: (password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  requestSignIn: (reason: string) => void;
+  dismissSignInRequest: () => void;
   clearAuthError: () => void;
   refreshProfile: () => Promise<void>;
 };
@@ -42,6 +58,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<AccountProfile | null>(null);
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileError, setProfileError] = useState("");
+  const [passwordRecovery, setPasswordRecovery] = useState(false);
+  const [signInRequest, setSignInRequest] = useState<SignInRequest | null>(null);
 
   useEffect(() => {
     if (!supabaseConfigured) {
@@ -59,10 +77,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(data.session);
       setLoading(false);
 
-      const { data: { subscription } } = client.auth.onAuthStateChange((_event, nextSession) => {
+      const { data: { subscription } } = client.auth.onAuthStateChange((event, nextSession) => {
         if (!active) return;
         setSession(nextSession);
-        if (nextSession) setAuthError("");
+        if (event === "PASSWORD_RECOVERY") setPasswordRecovery(true);
+        if (nextSession) {
+          setAuthError("");
+          setSignInRequest(null);
+        }
         setLoading(false);
       });
       unsubscribe = () => subscription.unsubscribe();
@@ -117,29 +139,65 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     void loadProfile();
   }, [loadProfile]);
 
-  const signInWithEmail = useCallback(async (email: string) => {
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
     setAuthError("");
     const client = await getSupabase();
     if (!client) throw new Error("Supabase 尚未配置");
-    const redirectTo = new URL(import.meta.env.BASE_URL, window.location.origin).toString();
-    const { error } = await client.auth.signInWithOtp({
-      email: email.trim().toLocaleLowerCase("en-US"),
+    const { error } = await client.auth.signInWithPassword({
+      email: normalizeEmail(email),
+      password,
+    });
+    if (error) throw error;
+  }, []);
+
+  const signUp = useCallback(async (displayName: string, email: string, password: string) => {
+    setAuthError("");
+    const client = await getSupabase();
+    if (!client) throw new Error("Supabase 尚未配置");
+    const { data, error } = await client.auth.signUp({
+      email: normalizeEmail(email),
+      password,
       options: {
-        emailRedirectTo: redirectTo,
-        shouldCreateUser: true,
+        data: { display_name: displayName.trim() },
+        emailRedirectTo: getAuthRedirectUrl(),
       },
     });
     if (error) throw error;
+    return { requiresEmailConfirmation: !data.session };
+  }, []);
+
+  const sendPasswordReset = useCallback(async (email: string) => {
+    setAuthError("");
+    const client = await getSupabase();
+    if (!client) throw new Error("Supabase 尚未配置");
+    const { error } = await client.auth.resetPasswordForEmail(normalizeEmail(email), {
+      redirectTo: getAuthRedirectUrl(),
+    });
+    if (error) throw error;
+  }, []);
+
+  const updatePassword = useCallback(async (password: string) => {
+    setAuthError("");
+    const client = await getSupabase();
+    if (!client) throw new Error("Supabase 尚未配置");
+    const { error } = await client.auth.updateUser({ password });
+    if (error) throw error;
+    setPasswordRecovery(false);
   }, []);
 
   const signOut = useCallback(async () => {
     const client = await getSupabase();
     if (!client) return;
-    const { error } = await client.auth.signOut();
+    const { error } = await client.auth.signOut({ scope: "local" });
     if (error) throw error;
     setProfile(null);
     setAuthError("");
     setProfileError("");
+    setPasswordRecovery(false);
+  }, []);
+
+  const requestSignIn = useCallback((reason: string) => {
+    setSignInRequest({ id: Date.now(), reason });
   }, []);
 
   const value = useMemo<AuthContextValue>(() => ({
@@ -148,17 +206,48 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     authError,
     profileLoading,
     profileError,
+    passwordRecovery,
+    signInRequest,
     session,
     user: session?.user ?? null,
     profile,
     isAdmin: profile?.role === "admin",
-    signInWithEmail,
+    signInWithPassword,
+    signUp,
+    sendPasswordReset,
+    updatePassword,
     signOut,
+    requestSignIn,
+    dismissSignInRequest: () => setSignInRequest(null),
     clearAuthError: () => setAuthError(""),
     refreshProfile: loadProfile,
-  }), [authError, loadProfile, loading, profile, profileError, profileLoading, session, signInWithEmail, signOut]);
+  }), [
+    authError,
+    loadProfile,
+    loading,
+    passwordRecovery,
+    profile,
+    profileError,
+    profileLoading,
+    requestSignIn,
+    sendPasswordReset,
+    session,
+    signInRequest,
+    signInWithPassword,
+    signOut,
+    signUp,
+    updatePassword,
+  ]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+function normalizeEmail(email: string) {
+  return email.trim().toLocaleLowerCase("en-US");
+}
+
+function getAuthRedirectUrl() {
+  return new URL(import.meta.env.BASE_URL, window.location.origin).toString();
 }
 
 function consumeAuthCallbackError() {

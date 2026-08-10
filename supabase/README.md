@@ -3,10 +3,10 @@
 The browser only uses `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`.
 Never expose a secret or service-role key through a `VITE_` variable.
 
-The static SPA uses Supabase's implicit browser flow. Magic links therefore
-carry the session in the URL fragment, which the JavaScript client consumes
-and persists without requiring the link to return to the browser that started
-the login. PKCE is reserved for a future server-side callback or native app.
+The static SPA uses email/password authentication. Email confirmation is sent
+only for registration, while password recovery sends a separate reset link.
+Both callbacks use Supabase's implicit browser flow so the JavaScript client
+can consume and persist the returned session on a static GitHub Pages site.
 
 ## Apply the identity migration
 
@@ -30,6 +30,10 @@ npm run auth:verify
 The check confirms that email Auth is enabled, both tables exist, anonymous
 reads are denied or return no rows, anonymous inserts fail, and the
 administrator RPC cannot be called anonymously.
+
+In **Authentication > Providers > Email**, keep email/password sign-up and
+email confirmation enabled. Users choose a display name during registration;
+daily sign-in uses email and password without sending another email.
 
 ## Promote the first administrator
 

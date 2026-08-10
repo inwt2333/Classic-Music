@@ -159,7 +159,8 @@ const coverSlides = [
 ] as const;
 
 function App() {
-  const { isAdmin } = useAuth();
+  const auth = useAuth();
+  const { isAdmin } = auth;
   const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
@@ -234,6 +235,18 @@ function App() {
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase("zh-CN"));
   const filterModalActive = filtersOpen && filterIsModal;
   const detailModalActive = detailOpen && detailIsModal;
+
+  useEffect(() => {
+    const userId = auth.user?.id;
+    setPersonalEvents(readPersonalEvents(userId));
+    setFollows(readFollows(userId));
+    setReadNotificationIds(readReadNotificationIds(userId));
+    setNotificationHistory(readFollowNotificationHistory(userId));
+    setDismissedNotificationIds(readDismissedNotificationIds(userId));
+    setSavedFilters(readSavedFilters(userId));
+    setNotificationOpen(false);
+    if (!userId) setPersonalFilter("all");
+  }, [auth.user?.id]);
 
   useEffect(() => {
     if (coverPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -620,10 +633,11 @@ function App() {
   );
   const unreadNotificationCount = notifications.filter((notification) => !notification.read).length;
   useEffect(() => {
+    if (!auth.user) return;
     if (JSON.stringify(notificationHistory) === JSON.stringify(notifications)) return;
-    writeFollowNotificationHistory(notifications);
+    writeFollowNotificationHistory(notifications, auth.user.id);
     setNotificationHistory(notifications);
-  }, [notificationHistory, notifications]);
+  }, [auth.user, notificationHistory, notifications]);
   useEffect(() => {
     setVisibleCount(pageSize);
   }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, sortMode, venue]);
@@ -699,8 +713,15 @@ function App() {
     setActiveVenue("");
   };
 
+  const requireAccount = (reason: string) => {
+    if (auth.user) return true;
+    auth.requestSignIn(reason);
+    return false;
+  };
+
   const updatePersonalStatus = (eventId: string, status: PersonalEventStatus | null) => {
-    setPersonalEvents((current) => setPersonalEventStatus(current, eventId, status));
+    if (!requireAccount("登录后才能标记想去或已去。")) return;
+    setPersonalEvents((current) => setPersonalEventStatus(current, eventId, status, auth.user?.id));
   };
 
   const copySelectedEvent = async (event: ConcertEvent) => {
@@ -718,38 +739,43 @@ function App() {
   };
 
   const updateFollow = (target: FollowTarget) => {
-    setFollows((current) => toggleFollow(current, target));
+    if (!requireAccount("登录后才能关注作品、音乐家、乐团或场馆。")) return;
+    setFollows((current) => toggleFollow(current, target, auth.user?.id));
   };
 
   const markAllNotificationsRead = () => {
+    if (!auth.user) return;
     const next = Array.from(new Set([...readNotificationIds, ...notifications.map((item) => item.id)]));
-    writeReadNotificationIds(next);
+    writeReadNotificationIds(next, auth.user.id);
     setReadNotificationIds(next);
   };
 
   const markNotificationRead = (id: string) => {
+    if (!auth.user) return;
     if (readNotificationIds.includes(id)) return;
     const next = [...readNotificationIds, id];
-    writeReadNotificationIds(next);
+    writeReadNotificationIds(next, auth.user.id);
     setReadNotificationIds(next);
   };
 
   const deleteNotification = (id: string) => {
+    if (!auth.user) return;
     setDismissedNotificationIds((current) => {
       const next = Array.from(new Set([...current, id]));
-      writeDismissedNotificationIds(next);
+      writeDismissedNotificationIds(next, auth.user?.id);
       return next;
     });
     setNotificationHistory((current) => {
       const next = current.filter((item) => item.id !== id);
-      writeFollowNotificationHistory(next);
+      writeFollowNotificationHistory(next, auth.user?.id);
       return next;
     });
   };
 
   const saveCurrentFilter = () => {
+    if (!requireAccount("登录后才能保存和管理筛选方案。")) return;
     const state: SavedFilterState = { query, datePreset, city, venue, ensemble, genre, hasProgram, sortMode };
-    setSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state)));
+    setSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state), auth.user?.id));
     setCopyState("筛选方案已保存");
     window.setTimeout(() => setCopyState(""), 1800);
   };
@@ -1053,7 +1079,9 @@ function App() {
             更新日志
           </a>
           <AccountControl />
-          <button className="header-link notification-button" type="button" onClick={() => setNotificationOpen(true)} title="我的关注" aria-label="我的关注">
+          <button className="header-link notification-button" type="button" onClick={() => {
+            if (requireAccount("登录后才能查看关注内容和更新提醒。")) setNotificationOpen(true);
+          }} title="我的关注" aria-label="我的关注">
             <Bell size={14} />
             我的关注
             {unreadNotificationCount ? <b>{unreadNotificationCount}</b> : null}
@@ -1249,22 +1277,28 @@ function App() {
         <button
           type="button"
           className={personalFilter === "interested" ? "active" : ""}
-          onClick={() => setPersonalFilter(personalFilter === "interested" ? "all" : "interested")}
+          onClick={() => {
+            if (requireAccount("登录后才能查看想去的演出。")) setPersonalFilter(personalFilter === "interested" ? "all" : "interested");
+          }}
         >
           <Star size={15} />想去 {Object.values(personalEvents).filter((status) => status === "interested").length}
         </button>
         <button
           type="button"
           className={personalFilter === "attended" ? "active" : ""}
-          onClick={() => setPersonalFilter(personalFilter === "attended" ? "all" : "attended")}
+          onClick={() => {
+            if (requireAccount("登录后才能查看已去的演出。")) setPersonalFilter(personalFilter === "attended" ? "all" : "attended");
+          }}
         >
           <Check size={15} />已去 {Object.values(personalEvents).filter((status) => status === "attended").length}
         </button>
         <SavedFilterMenu
           filters={savedFilters}
+          authenticated={Boolean(auth.user)}
           onSave={saveCurrentFilter}
           onApply={applySavedFilter}
-          onRemove={(id) => setSavedFilters((current) => removeSavedFilter(current, id))}
+          onRemove={(id) => setSavedFilters((current) => removeSavedFilter(current, id, auth.user?.id))}
+          onRequireLogin={() => auth.requestSignIn("登录后才能保存和管理筛选方案。")}
         />
         {copyState ? <span role="status">{copyState}</span> : null}
       </section>
@@ -1424,21 +1458,23 @@ function App() {
         </>
       )}
 
-      <NotificationCenter
-        open={notificationOpen}
-        notifications={notifications}
-        follows={follows}
-        onClose={() => setNotificationOpen(false)}
-        onReadAll={markAllNotificationsRead}
-        onRead={markNotificationRead}
-        onDelete={deleteNotification}
-        onOpenEvent={(eventId) => {
-          const event = dataset.events.find((item) => item.id === eventId);
-          if (event) selectEvent(event);
-          setNotificationOpen(false);
-        }}
-        onRemoveFollow={updateFollow}
-      />
+      {auth.user ? (
+        <NotificationCenter
+          open={notificationOpen}
+          notifications={notifications}
+          follows={follows}
+          onClose={() => setNotificationOpen(false)}
+          onReadAll={markAllNotificationsRead}
+          onRead={markNotificationRead}
+          onDelete={deleteNotification}
+          onOpenEvent={(eventId) => {
+            const event = dataset.events.find((item) => item.id === eventId);
+            if (event) selectEvent(event);
+            setNotificationOpen(false);
+          }}
+          onRemoveFollow={updateFollow}
+        />
+      ) : null}
     </main>
   );
 }

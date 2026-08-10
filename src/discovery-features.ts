@@ -81,6 +81,10 @@ function writeStorage<T>(key: string, value: T) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
+function accountStorageKey(key: string, userId?: string) {
+  return userId ? `${key}.${userId}` : "";
+}
+
 export function makeFollowTarget(
   type: FollowTargetType,
   name: string,
@@ -98,31 +102,36 @@ export function makeFollowTarget(
   };
 }
 
-export function readFollows(): FollowMap {
-  return readStorage<FollowMap>(storageKeys.follows, {});
+export function readFollows(userId?: string): FollowMap {
+  const key = accountStorageKey(storageKeys.follows, userId);
+  return key ? readStorage<FollowMap>(key, {}) : {};
 }
 
-export function toggleFollow(follows: FollowMap, target: FollowTarget) {
+export function toggleFollow(follows: FollowMap, target: FollowTarget, userId?: string) {
   const next = { ...follows };
   if (next[target.key]) delete next[target.key];
   else next[target.key] = target;
-  writeStorage(storageKeys.follows, next);
+  const key = accountStorageKey(storageKeys.follows, userId);
+  if (key) writeStorage(key, next);
   return next;
 }
 
-export function readReadNotificationIds() {
-  return readStorage<string[]>(storageKeys.readNotifications, []);
+export function readReadNotificationIds(userId?: string) {
+  const key = accountStorageKey(storageKeys.readNotifications, userId);
+  return key ? readStorage<string[]>(key, []) : [];
 }
 
-export function writeReadNotificationIds(ids: string[]) {
-  writeStorage(storageKeys.readNotifications, Array.from(new Set(ids)).slice(-1000));
+export function writeReadNotificationIds(ids: string[], userId?: string) {
+  const key = accountStorageKey(storageKeys.readNotifications, userId);
+  if (key) writeStorage(key, Array.from(new Set(ids)).slice(-1000));
 }
 
-export function readFollowNotificationHistory() {
-  return readStorage<FollowNotification[]>(storageKeys.notificationHistory, []);
+export function readFollowNotificationHistory(userId?: string) {
+  const key = accountStorageKey(storageKeys.notificationHistory, userId);
+  return key ? readStorage<FollowNotification[]>(key, []) : [];
 }
 
-export function writeFollowNotificationHistory(notifications: FollowNotification[]) {
+export function writeFollowNotificationHistory(notifications: FollowNotification[], userId?: string) {
   const compact = notifications.slice(0, 300).map((item) => ({
     ...item,
     change: {
@@ -134,15 +143,18 @@ export function writeFollowNotificationHistory(notifications: FollowNotification
     },
     event: item.event ? { id: item.event.id, title: item.event.title } : undefined,
   }));
-  writeStorage(storageKeys.notificationHistory, compact);
+  const key = accountStorageKey(storageKeys.notificationHistory, userId);
+  if (key) writeStorage(key, compact);
 }
 
-export function readDismissedNotificationIds() {
-  return readStorage<string[]>(storageKeys.dismissedNotifications, []);
+export function readDismissedNotificationIds(userId?: string) {
+  const key = accountStorageKey(storageKeys.dismissedNotifications, userId);
+  return key ? readStorage<string[]>(key, []) : [];
 }
 
-export function writeDismissedNotificationIds(ids: string[]) {
-  writeStorage(storageKeys.dismissedNotifications, Array.from(new Set(ids)).slice(-1000));
+export function writeDismissedNotificationIds(ids: string[], userId?: string) {
+  const key = accountStorageKey(storageKeys.dismissedNotifications, userId);
+  if (key) writeStorage(key, Array.from(new Set(ids)).slice(-1000));
 }
 
 export function mergeFollowNotificationHistory(
@@ -175,11 +187,12 @@ export function mergeFollowNotificationHistory(
     .slice(0, 300);
 }
 
-export function readSavedFilters() {
-  return readStorage<SavedFilter[]>(storageKeys.savedFilters, []);
+export function readSavedFilters(userId?: string) {
+  const key = accountStorageKey(storageKeys.savedFilters, userId);
+  return key ? readStorage<SavedFilter[]>(key, []) : [];
 }
 
-export function saveFilter(filters: SavedFilter[], state: SavedFilterState, name: string) {
+export function saveFilter(filters: SavedFilter[], state: SavedFilterState, name: string, userId?: string) {
   const next: SavedFilter[] = [
     ...filters,
     {
@@ -189,13 +202,15 @@ export function saveFilter(filters: SavedFilter[], state: SavedFilterState, name
       createdAt: new Date().toISOString(),
     },
   ].slice(-12);
-  writeStorage(storageKeys.savedFilters, next);
+  const key = accountStorageKey(storageKeys.savedFilters, userId);
+  if (key) writeStorage(key, next);
   return next;
 }
 
-export function removeSavedFilter(filters: SavedFilter[], id: string) {
+export function removeSavedFilter(filters: SavedFilter[], id: string, userId?: string) {
   const next = filters.filter((item) => item.id !== id);
-  writeStorage(storageKeys.savedFilters, next);
+  const key = accountStorageKey(storageKeys.savedFilters, userId);
+  if (key) writeStorage(key, next);
   return next;
 }
 

@@ -1,12 +1,12 @@
-import { ArrowLeft, LoaderCircle, LockKeyhole, Mail, Music, ShieldAlert } from "lucide-react";
+import { ArrowLeft, KeyRound, LoaderCircle, LockKeyhole, Music, ShieldAlert } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { useAuth } from "../auth/AuthProvider";
 
 export default function ReviewAccessGate({ children }: { children: ReactNode }) {
   const auth = useAuth();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
 
   if (auth.loading || auth.profileLoading) {
@@ -24,8 +24,7 @@ export default function ReviewAccessGate({ children }: { children: ReactNode }) 
       setSending(true);
       setError("");
       try {
-        await auth.signInWithEmail(email);
-        setSent(true);
+        await auth.signInWithPassword(email, password);
       } catch (reason) {
         setError(reason instanceof Error ? reason.message : String(reason));
       } finally {
@@ -34,12 +33,11 @@ export default function ReviewAccessGate({ children }: { children: ReactNode }) 
     };
     return (
       <AccessPage icon={<LockKeyhole size={26} />} title="管理员登录" detail="审核工作台仅向管理员账号开放。">
-        {sent ? <p className="review-access-status"><Mail size={16} />登录邮件已经发送，请在当前设备打开邮件中的链接。</p> : (
-          <form className="review-access-form" onSubmit={submit}>
-            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" placeholder="管理员邮箱" required />
-            <button type="submit" disabled={sending}>{sending ? <LoaderCircle className="spin" size={16} /> : <Mail size={16} />}{sending ? "正在发送" : "发送登录邮件"}</button>
-          </form>
-        )}
+        <form className="review-access-form" onSubmit={submit}>
+          <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" placeholder="管理员邮箱" required />
+          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" placeholder="密码" minLength={8} required />
+          <button type="submit" disabled={sending}>{sending ? <LoaderCircle className="spin" size={16} /> : <KeyRound size={16} />}{sending ? "正在登录" : "登录"}</button>
+        </form>
         {error ? <p className="account-error" role="alert">{error}</p> : null}
         {!error && auth.authError ? <p className="account-error" role="alert">{auth.authError}</p> : null}
       </AccessPage>

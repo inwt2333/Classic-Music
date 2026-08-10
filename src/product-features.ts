@@ -58,28 +58,30 @@ export function matchesExpandedSearch(searchText: string, expandedQueries: strin
   });
 }
 
-export function readPersonalEvents(): PersonalEventMap {
+export function readPersonalEvents(userId?: string): PersonalEventMap {
+  if (!userId) return {};
   try {
-    const value = window.localStorage.getItem(personalEventKey);
+    const value = window.localStorage.getItem(`${personalEventKey}.${userId}`);
     return value ? JSON.parse(value) as PersonalEventMap : {};
   } catch {
     return {};
   }
 }
 
-export function writePersonalEvents(events: PersonalEventMap) {
-  window.localStorage.setItem(personalEventKey, JSON.stringify(events));
+export function writePersonalEvents(events: PersonalEventMap, userId?: string) {
+  if (userId) window.localStorage.setItem(`${personalEventKey}.${userId}`, JSON.stringify(events));
 }
 
 export function setPersonalEventStatus(
   events: PersonalEventMap,
   eventId: string,
   status: PersonalEventStatus | null,
+  userId?: string,
 ) {
   const next = { ...events };
   if (status) next[eventId] = status;
   else delete next[eventId];
-  writePersonalEvents(next);
+  writePersonalEvents(next, userId);
   return next;
 }
 

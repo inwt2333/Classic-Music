@@ -8691,6 +8691,7 @@ body {
 }
 
 .account-signed-in > button,
+.account-session-actions button,
 .account-login-form > button,
 .account-message button,
 .review-access-form button {
@@ -8715,6 +8716,18 @@ body {
   font-size: 10px;
 }
 
+.account-session-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.account-session-actions button:first-child {
+  color: var(--forest);
+  background: #fff;
+  border-color: #bdc9c4;
+}
+
 .account-login-form {
   display: grid;
   padding-top: 20px;
@@ -8726,6 +8739,44 @@ body {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.65;
+}
+
+.account-mode-tabs {
+  display: grid;
+  padding: 3px;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  background: #f0f2ee;
+  border: 1px solid #d9dfda;
+  border-radius: 5px;
+}
+
+.account-mode-tabs button {
+  min-height: 34px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.account-mode-tabs button.active {
+  color: var(--forest);
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(35, 54, 47, 0.1);
+}
+
+.account-login-form .account-login-reason {
+  display: flex;
+  padding: 9px 10px;
+  align-items: center;
+  gap: 7px;
+  color: #315e54;
+  background: #edf5f1;
+  border-left: 3px solid var(--teal);
+  font-size: 11px;
 }
 
 .account-login-form label {
@@ -8749,6 +8800,46 @@ body {
   border: 1px solid #ccd6d1;
   border-radius: 4px;
   outline: 0;
+}
+
+.password-input {
+  position: relative;
+  display: block;
+}
+
+.password-input input {
+  padding-right: 42px;
+}
+
+.password-input button {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  place-items: center;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.account-form-links {
+  display: flex;
+  min-height: 24px;
+  justify-content: flex-end;
+}
+
+.account-form-links button {
+  padding: 2px 0;
+  color: var(--teal);
+  background: transparent;
+  border: 0;
+  font-size: 10px;
+  cursor: pointer;
 }
 
 .account-login-form input:focus,
@@ -8855,7 +8946,7 @@ body {
   display: grid;
   width: min(410px, 100%);
   margin-top: 22px;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
   gap: 8px;
 }
 
@@ -8882,9 +8973,13 @@ body {
     grid-template-columns: auto minmax(0, 1fr);
   }
 
-  .account-signed-in > button {
-    min-height: 44px;
+  .account-session-actions {
     grid-column: 1 / -1;
+  }
+
+  .account-session-actions button {
+    min-height: 44px;
+    flex: 1;
   }
 
   .review-access-shell {
