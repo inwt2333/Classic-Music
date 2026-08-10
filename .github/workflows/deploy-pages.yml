@@ -72,8 +72,8 @@ jobs:
 
       - name: Validate frontend account configuration
         env:
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || vars.SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || vars.SUPABASE_URL || secrets.VITE_SUPABASE_URL || secrets.SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
           test -n "$VITE_SUPABASE_URL" || { echo "::error::Missing Actions variable VITE_SUPABASE_URL"; exit 1; }
           test -n "$VITE_SUPABASE_PUBLISHABLE_KEY" || { echo "::error::Missing Actions variable VITE_SUPABASE_PUBLISHABLE_KEY"; exit 1; }
@@ -81,8 +81,8 @@ jobs:
       - name: Build
         env:
           VITE_BASE_PATH: /Classic-Music/
-          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || vars.SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || vars.SUPABASE_URL || secrets.VITE_SUPABASE_URL || secrets.SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: npm run build
 
       - name: Configure Pages

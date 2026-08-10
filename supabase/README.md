@@ -60,9 +60,10 @@ Actions > Variables**:
 - `VITE_SUPABASE_URL`: the project URL;
 - `VITE_SUPABASE_PUBLISHABLE_KEY`: the publishable key.
 
-The Pages workflow also accepts the legacy repository variable names
-`SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`, then maps them to the Vite names
-during the build.
+The Pages workflow also accepts the legacy names `SUPABASE_URL` and
+`SUPABASE_PUBLISHABLE_KEY`. For compatibility, either pair may be stored under
+repository Variables or Secrets; the workflow maps the first available pair
+to the Vite names during the build.
 
 These values are intentionally public. Never add the secret key or a
 service-role key to repository variables or frontend build settings.

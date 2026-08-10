@@ -449,7 +449,7 @@ LocalHub 已退出正式数据源。它可以用于发现演出线索，但缺�
 4. 运行数据审计和 SQLite/静态导出一致性审计；失败来源必须有上一版数据可恢复，否则停止部署。
 5. 使用 `/Classic-Music/` 基路径构建并部署到 GitHub Pages。
 
-Pages 构建还需要在仓库 `Settings > Secrets and variables > Actions > Variables` 配置 `VITE_SUPABASE_URL` 和 `VITE_SUPABASE_PUBLISHABLE_KEY`。为兼容早期配置，工作流也接受不带前缀的 `SUPABASE_URL` 和 `SUPABASE_PUBLISHABLE_KEY`，并在构建时统一映射到 Vite 变量。它们是可公开的前端配置；不要配置 Secret Key 或 Service Role Key。两套名称均缺失时工作流会停止，避免发布一个登录入口不可用的版本。
+Pages 构建需要在仓库 `Settings > Secrets and variables > Actions` 配置 Supabase 项目 URL 与 Publishable Key。推荐放在 **Variables**，名称使用 `VITE_SUPABASE_URL` 和 `VITE_SUPABASE_PUBLISHABLE_KEY`；为兼容已有设置，工作流也读取 **Secrets** 标签以及不带前缀的 `SUPABASE_URL` / `SUPABASE_PUBLISHABLE_KEY`，并在构建时统一映射到 Vite 变量。它们本身是可公开的前端配置，但 Secret Key 或 Service Role Key 绝不能用于前端。所有兼容名称均缺失时工作流会停止，避免发布一个登录入口不可用的版本。
 
 本地验证 Pages 构建：
 
