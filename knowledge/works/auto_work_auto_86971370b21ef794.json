@@ -1,0 +1,174 @@
+{
+  "id": "work_auto_86971370b21ef794",
+  "composerId": "composer_auto_2fac309078efb9a4",
+  "title": "D 大调小提琴协奏曲，作品 35",
+  "originalTitle": "Violin Concerto in D major, Op. 35",
+  "aliases": [
+    "Erich Korngold: Violin Concerto in D major, Op. 35"
+  ],
+  "opus": "Op. 35",
+  "key": "D 大调",
+  "genre": "协奏曲",
+  "period": "20世纪",
+  "composedYears": "1945",
+  "durationMinutes": 25,
+  "instrumentation": "独奏小提琴，两支长笛（兼短笛），两支双簧管（兼英国管），两支单簧管，低音单簧管，两支巴松管（兼低音巴松管），四支圆号，两支小号，长号，竖琴，弦乐组，以及打击乐组（定音鼓、大鼓、钹、锣、管钟、钟琴、颤音琴、木琴、钢片琴）",
+  "difficulty": "第一次听",
+  "tags": [
+    "小提琴协奏曲",
+    "浪漫主义",
+    "电影音乐",
+    "好莱坞",
+    "20世纪",
+    "德奥传统"
+  ],
+  "summary": "科恩戈尔德1945年创作的小提琴协奏曲，融合浪漫主义传统与电影音乐魅力，三个乐章均取材自其电影配乐。",
+  "whyListen": "这部协奏曲将好莱坞黄金时代的电影音乐语汇带入古典音乐厅，旋律优美、配器华丽，既有德奥浪漫主义的深情，又有电影配乐的戏剧张力，是20世纪小提琴协奏曲中的独特杰作。",
+  "firstListen": "建议从第一乐章的独奏主题开始，感受其跨越两个八度的五音动机；随后留意第二乐章的抒情旋律和第三乐章的炫技终曲。",
+  "listeningPoints": [
+    {
+      "title": "开篇独奏主题",
+      "description": "第一乐章开篇，小提琴独奏出源自电影《Another Dawn》的主题，五音跨越两个八度，立即展现作品的电影感。",
+      "movement": 1
+    },
+    {
+      "title": "第二主题的管弦乐色彩",
+      "description": "第一乐章的第二个主题源自《Juarez》，更宽广且依赖乐队，展现科恩戈尔德对管弦乐色彩的掌控。",
+      "movement": 1
+    },
+    {
+      "title": "慢乐章的抒情性",
+      "description": "第二乐章由独奏小提琴引入主要主题，源自《Anthony Adverse》，中段对比后主题回归，充满深情。",
+      "movement": 2
+    },
+    {
+      "title": "终曲的炫技与活力",
+      "description": "第三乐章以断奏吉格舞曲开始，第二主题基于《王子与贫儿》的动机，最终推向炫技高潮。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Moderato nobile",
+      "tempo": "Moderato nobile",
+      "description": "奏鸣曲式，独奏小提琴开门见山奏出源自《Another Dawn》的主题，第二主题源自《Juarez》，乐队色彩丰富。"
+    },
+    {
+      "number": 2,
+      "title": "Romance",
+      "tempo": "Andante",
+      "description": "慢板乐章，独奏小提琴引入源自《Anthony Adverse》的抒情主题，中段对比后主题再现。"
+    },
+    {
+      "number": 3,
+      "title": "Finale",
+      "tempo": "Allegro assai vivace",
+      "description": "回旋曲式，以断奏吉格舞曲开始，第二主题基于《王子与贫儿》的动机，炫技性极强。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Jascha Heifetz",
+      "year": 1954,
+      "note": "海菲茨的经典录音，首演者演绎，展现作品的炫技与抒情。",
+      "sourceId": "apple_music_548973400"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Benjamin Schmid, Vienna Philharmonic & Seiji Ozawa",
+      "year": 2018,
+      "note": "现场录音，维也纳爱乐与小泽征尔的合作，呈现作品的管弦乐色彩。",
+      "sourceId": "apple_music_1389828142"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_auto_a3178276f4e3b353",
+    "work_auto_3bbf1bec7bedb655",
+    "work_auto_51ce39034f97cc91"
+  ],
+  "completeness": "complete",
+  "generation": {
+    "method": "deepseek",
+    "model": "deepseek-v4-flash",
+    "skillVersion": "2.0.4",
+    "promptHash": "3c0223659c9a9907dd289637430c7c0dce9ee2e763b1d4a1a5a8822ffc042ef6",
+    "generatedAt": "2026-08-10T15:34:05.501Z",
+    "score": 100,
+    "sourceEventIds": [
+      "perf_96e7e0647b4ac6ab"
+    ],
+    "evidenceIds": [
+      "official_7f0a0d8a05da",
+      "wikipedia_en_4076728",
+      "apple_music_548973400",
+      "apple_music_1389828142",
+      "wikidata_Q313371"
+    ]
+  },
+  "status": "published",
+  "updatedAt": "2026-08-10T15:34:05.501Z",
+  "sources": [
+    {
+      "id": "official_7f0a0d8a05da",
+      "title": "寻音之旅——乔安·法莱塔与宁峰演绎陈怡、科恩戈尔德与柴可夫斯基",
+      "url": "http://www.cpolive.com/art/2026/1/17/art_1701_407.html",
+      "publisher": "中国爱乐乐团官网",
+      "accessedAt": "2026-08-10",
+      "supports": [
+        "composer",
+        "work title",
+        "opus"
+      ]
+    },
+    {
+      "id": "wikipedia_en_4076728",
+      "title": "Violin Concerto (Korngold)",
+      "url": "https://en.wikipedia.org/wiki/Violin_Concerto_(Korngold)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-10",
+      "supports": [
+        "composition year",
+        "duration",
+        "instrumentation",
+        "movements",
+        "premiere",
+        "dedication",
+        "thematic sources"
+      ]
+    },
+    {
+      "id": "apple_music_548973400",
+      "title": "Korngold: Violin Concerto in D Major, Op. 35 - Lalo: Symphonie espagnole, Op. 21",
+      "url": "https://music.apple.com/us/album/korngold-violin-concerto-in-d-major-op-35-lalo-symphonie/548973400?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-10",
+      "supports": [
+        "recording",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1389828142",
+      "title": "Korngold: Violin Concerto in D Major, Op. 35 (Live)",
+      "url": "https://music.apple.com/us/album/korngold-violin-concerto-in-d-major-op-35-live/1389828142?uo=4",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-10",
+      "supports": [
+        "recording",
+        "recordings.1"
+      ]
+    },
+    {
+      "id": "wikidata_Q313371",
+      "title": "Erich Wolfgang Korngold",
+      "url": "http://www.wikidata.org/entity/Q313371",
+      "publisher": "Wikidata",
+      "accessedAt": "2026-08-10",
+      "supports": [
+        "composer biography"
+      ]
+    }
+  ]
+}

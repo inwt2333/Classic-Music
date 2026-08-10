@@ -32,6 +32,21 @@
       "reviewedAt": "2026-08-09T15:05:02.910Z"
     },
     {
+      "id": "mapping_auto_0f1713b6f0c8804c",
+      "workId": "work_auto_86971370b21ef794",
+      "composers": [
+        "埃里希·科恩戈尔德"
+      ],
+      "titles": [
+        "D 大调小提琴协奏曲，作品 35"
+      ],
+      "opus": [
+        "作品 35"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-10T15:34:05.501Z"
+    },
+    {
       "id": "mapping_auto_0f44f17ff7886c42",
       "workId": "work_auto_3bbf1bec7bedb655",
       "composers": [
@@ -45,6 +60,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T16:18:23.991Z"
+    },
+    {
+      "id": "mapping_auto_0fee3c61ed6d8e49",
+      "workId": "work_auto_aa0c834dd18f8511",
+      "composers": [
+        "拉赫玛尼诺夫"
+      ],
+      "titles": [
+        "三首俄罗斯歌曲，作品41号"
+      ],
+      "opus": [
+        "作品41"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-10T15:34:05.501Z"
     },
     {
       "id": "mapping_auto_103a2026928dca1d",

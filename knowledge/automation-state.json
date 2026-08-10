@@ -435,6 +435,59 @@
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4",
       "nextRetryAt": "2026-08-16T15:05:02.910Z"
+    },
+    "16fd7ce724b7be6a4e7fefb1": {
+      "status": "published",
+      "workId": "work_auto_86971370b21ef794",
+      "attempts": 1,
+      "updatedAt": "2026-08-10T15:34:05.501Z",
+      "reason": "score-100",
+      "sourceEventIds": [
+        "perf_96e7e0647b4ac6ab"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "1add5bbf5b52833d74992b89": {
+      "status": "skipped",
+      "attempts": 1,
+      "updatedAt": "2026-08-10T15:34:05.501Z",
+      "reason": "作曲家维瓦尔第不在策展注册表中，且提供的证据中缺乏独立的非官方证据来支持其身份和传记信息。；作品的具体创作年份、时长、乐章结构及速度标记在证据中未明确，属于推测，缺乏证据支持。；录音证据未明确包含RV 86作品，无法确认其与目标作品的关联。",
+      "sourceEventIds": [
+        "perf_795cf10eb5479743"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "1ba3423098344a9cedecbdb4": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-08-10T15:34:05.501Z",
+      "reason": "Unterminated string in JSON at position 2034 (line 1 column 2035)",
+      "sourceEventIds": [
+        "perf_d33f9ef59feb68e9"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "2328b687f2164c2eaf58a782": {
+      "status": "skipped",
+      "attempts": 1,
+      "updatedAt": "2026-08-10T15:34:05.501Z",
+      "reason": "The official candidate does not specify the number of variations or the exact title '6 Piano Variations in F Major, Op. 34'. The proposal assumes a specific work structure (six variations) and details (movements, tempo markings) that are not supported by the official evidence. The official source on",
+      "sourceEventIds": [
+        "perf_b954926d13954d54"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "25618eb807efc49cb3816aef": {
+      "status": "needs_completion",
+      "workId": "work_auto_aa0c834dd18f8511",
+      "attempts": 1,
+      "updatedAt": "2026-08-10T15:34:05.501Z",
+      "reason": "score-75",
+      "sourceEventIds": [
+        "perf_2a5456d21e46e8e5"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-08-17T15:34:05.501Z"
     }
   }
 }
