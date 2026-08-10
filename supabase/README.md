@@ -9,11 +9,16 @@ Password recovery still sends a reset link and uses Supabase's implicit browser
 flow so the JavaScript client can consume and persist the returned session on a
 static GitHub Pages site.
 
-## Apply the identity migration
+## Apply the migrations
 
-Open the Supabase SQL Editor, paste the complete contents of
-`migrations/202608100001_user_identity.sql`, and run it. The migration is
-idempotent and can be run again when its policies or triggers are updated.
+Open the Supabase SQL Editor and run these files in order:
+
+1. `migrations/202608100001_user_identity.sql`
+2. `migrations/202608100002_personal_events.sql`
+
+Both migrations are idempotent and can be run again when policies or triggers
+are updated. The second migration depends on the shared `set_updated_at`
+function created by the first migration.
 
 The migration creates:
 
@@ -22,15 +27,28 @@ The migration creates:
 - RLS policies that isolate account data;
 - a trigger that provisions new users as ordinary users.
 
+The personal-data migration creates:
+
+- `personal_events`, with one private row per user and concert, including the
+  wanted/purchased status and a durable concert snapshot;
+- `user_preferences`, containing follows, saved filters, notification history,
+  and read/dismissed notification state;
+- per-user select, insert, update, and delete policies for both tables.
+
+On the first successful login after deployment, the browser merges existing
+account-scoped local data into these tables. Later cloud state is authoritative.
+Failed writes remain in a local pending queue and are retried during the next
+successful synchronization.
+
 Verify the deployed schema from the repository root:
 
 ```bash
 npm run auth:verify
 ```
 
-The check confirms that email Auth is enabled, both tables exist, anonymous
-reads are denied or return no rows, anonymous inserts fail, and the
-administrator RPC cannot be called anonymously.
+The check confirms that email Auth is enabled, all identity and personal-data
+tables exist, anonymous reads are denied or return no rows, anonymous inserts
+fail, and the administrator RPC cannot be called anonymously.
 
 In **Authentication > Providers > Email**, keep email/password sign-up enabled
 and turn **Confirm email** off. Users choose a display name during

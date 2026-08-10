@@ -18,14 +18,12 @@ import {
   UsersRound,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
+import BrandLogo from "./BrandLogo";
 import { useAuth } from "../auth/AuthProvider";
-import { loadEventIndex, loadKnowledgeIndex } from "../data";
+import { loadEventArchive, loadEventIndex, loadKnowledgeIndex } from "../data";
 import {
-  readFollows,
-  readSavedFilters,
   removeSavedFilter,
   toggleFollow,
-  type FollowMap,
   type FollowTargetType,
   type SavedFilter,
 } from "../discovery-features";
@@ -34,15 +32,16 @@ import {
   followTargetHref,
   followTypeOrder,
   groupFollowTargets,
+  listPersonalEvents,
   savedFilterHref,
+  type PersonalEventListItem,
 } from "../personal-profile";
 import {
-  readPersonalEvents,
-  setPersonalEventStatus,
-  type PersonalEventMap,
-  type PersonalEventStatus,
+  type PersonalEventSnapshotMap,
 } from "../product-features";
-import type { ConcertEventSummary, ConcertIndexDataset } from "../types";
+import type { ConcertIndexDataset } from "../types";
+import { usePersonalEvents } from "../use-personal-events";
+import { useUserPreferences } from "../use-user-preferences";
 import { formatEventVenue } from "../utils";
 import AccountControl from "./AccountControl";
 
@@ -58,18 +57,23 @@ const followTypeMeta: Record<FollowTargetType, { label: string; icon: ComponentT
 export default function PersonalWorkspace() {
   const auth = useAuth();
   const userId = auth.user?.id;
-  const [follows, setFollows] = useState<FollowMap>(() => readFollows(userId));
-  const [personalEvents, setPersonalEvents] = useState<PersonalEventMap>(() => readPersonalEvents(userId));
-  const [savedFilters, setSavedFilters] = useState<SavedFilter[]>(() => readSavedFilters(userId));
+  const {
+    events: personalEvents,
+    snapshots: personalEventSnapshots,
+    syncError: personalEventSyncError,
+    removeStatus: removePersonalEventStatus,
+    saveSnapshot: savePersonalEventSnapshot,
+  } = usePersonalEvents(userId);
+  const {
+    follows,
+    savedFilters,
+    syncError: userPreferencesSyncError,
+    updateFollows,
+    updateSavedFilters,
+  } = useUserPreferences(userId);
   const [dataset, setDataset] = useState<ConcertIndexDataset>();
   const [knowledgeWorkIds, setKnowledgeWorkIds] = useState<Set<string>>(new Set());
   const [dataError, setDataError] = useState("");
-
-  useEffect(() => {
-    setFollows(readFollows(userId));
-    setPersonalEvents(readPersonalEvents(userId));
-    setSavedFilters(readSavedFilters(userId));
-  }, [userId]);
 
   useEffect(() => {
     if (!userId) return;
@@ -93,28 +97,66 @@ export default function PersonalWorkspace() {
 
   const groupedFollows = useMemo(() => groupFollowTargets(follows), [follows]);
   const followCount = Object.keys(follows).length;
+  const typedPersonalEventSnapshots: PersonalEventSnapshotMap = personalEventSnapshots;
   const personalCounts = useMemo(() => countPersonalEvents(personalEvents), [personalEvents]);
   const eventMap = useMemo(() => new Map(dataset?.events.map((event) => [event.id, event]) ?? []), [dataset]);
-  const interestedEvents = useMemo(() => personalEventList(personalEvents, "interested", eventMap), [eventMap, personalEvents]);
-  const attendedEvents = useMemo(() => personalEventList(personalEvents, "attended", eventMap), [eventMap, personalEvents]);
+  const interestedEvents = useMemo(
+    () => listPersonalEvents(personalEvents, "interested", eventMap, typedPersonalEventSnapshots),
+    [eventMap, personalEvents, typedPersonalEventSnapshots],
+  );
+  const attendedEvents = useMemo(
+    () => listPersonalEvents(personalEvents, "attended", eventMap, typedPersonalEventSnapshots),
+    [eventMap, personalEvents, typedPersonalEventSnapshots],
+  );
   const accountName = auth.profile?.displayName || auth.user?.email?.split("@")[0] || "古典乐迷";
+
+  useEffect(() => {
+    if (!userId || !dataset) return;
+    for (const eventId of Object.keys(personalEvents)) {
+      if (typedPersonalEventSnapshots[eventId]) continue;
+      const event = eventMap.get(eventId);
+      if (!event) continue;
+      savePersonalEventSnapshot(event);
+    }
+  }, [dataset, eventMap, personalEvents, savePersonalEventSnapshot, typedPersonalEventSnapshots, userId]);
+
+  useEffect(() => {
+    if (!userId || !dataset) return;
+    const missingIds = Object.keys(personalEvents).filter((eventId) => !eventMap.has(eventId) && !typedPersonalEventSnapshots[eventId]);
+    if (!missingIds.length) return;
+    let cancelled = false;
+    loadEventArchive()
+      .then((archive) => {
+        if (cancelled) return;
+        const archiveMap = new Map(archive.events.map((event) => [event.id, event]));
+        for (const eventId of missingIds) {
+          const event = archiveMap.get(eventId);
+          if (!event) continue;
+          savePersonalEventSnapshot(event);
+        }
+      })
+      .catch(() => {
+        // Early records without a recoverable snapshot remain counted but cannot be reconstructed.
+      });
+    return () => { cancelled = true; };
+  }, [dataset, eventMap, personalEvents, savePersonalEventSnapshot, typedPersonalEventSnapshots, userId]);
 
   const removeFollow = (key: string) => {
     const target = follows[key];
     if (!target || !userId) return;
-    setFollows((current) => toggleFollow(current, target, userId));
+    updateFollows((current) => toggleFollow(current, target));
   };
 
   const removePersonalEvent = (eventId: string) => {
     if (!userId) return;
-    setPersonalEvents((current) => setPersonalEventStatus(current, eventId, null, userId));
+    removePersonalEventStatus(eventId);
   };
 
   return (
     <main className="personal-workspace">
       <header className="app-header source-page-header">
         <div className="brand-block">
-          <Music size={22} />
+          <BrandLogo />
           <div><strong>古典乐演出日历</strong><span>个人页</span></div>
         </div>
         <div className="personal-header-actions">
@@ -129,7 +171,7 @@ export default function PersonalWorkspace() {
         {auth.loading ? (
           <PersonalState icon={UserRound} title="正在载入个人页" detail="正在读取你的账户与关注内容。" />
         ) : !auth.user ? (
-          <PersonalState icon={UserRound} title="登录后查看个人页" detail="关注、想去、已去和筛选方案会按账号分别保存。">
+          <PersonalState icon={UserRound} title="登录后查看个人页" detail="关注、想去、已购和筛选方案会按账号分别保存。">
             <AccountControl />
           </PersonalState>
         ) : (
@@ -145,14 +187,14 @@ export default function PersonalWorkspace() {
               <dl>
                 <div><dt>关注</dt><dd>{followCount}</dd></div>
                 <div><dt>想去</dt><dd>{personalCounts.interested}</dd></div>
-                <div><dt>已去</dt><dd>{personalCounts.attended}</dd></div>
+                <div><dt>已购</dt><dd>{personalCounts.attended}</dd></div>
                 <div><dt>筛选方案</dt><dd>{savedFilters.length}</dd></div>
               </dl>
               <p className="personal-joined">加入于 {formatAccountDate(auth.user.created_at)}</p>
             </section>
 
-            {auth.profileError || dataError ? (
-              <p className="personal-warning"><CircleAlert size={16} />{auth.profileError || dataError}</p>
+            {auth.profileError || dataError || personalEventSyncError || userPreferencesSyncError ? (
+              <p className="personal-warning"><CircleAlert size={16} />{auth.profileError || dataError || personalEventSyncError || userPreferencesSyncError}</p>
             ) : null}
 
             {auth.isAdmin ? (
@@ -195,10 +237,10 @@ export default function PersonalWorkspace() {
             </section>
 
             <section className="personal-section personal-concerts">
-              <header><div><CalendarCheck size={18} /><span><h2>我的演出</h2><p>集中查看标记为想去和已去的音乐会。</p></span></div></header>
+              <header><div><CalendarCheck size={18} /><span><h2>我的演出</h2><p>集中查看标记为想去和已购的音乐会。</p></span></div></header>
               <div className="personal-concert-columns">
                 <PersonalEventGroup title="想去" count={personalCounts.interested} icon={CalendarClock} events={interestedEvents} onRemove={removePersonalEvent} />
-                <PersonalEventGroup title="已去" count={personalCounts.attended} icon={CalendarCheck} events={attendedEvents} onRemove={removePersonalEvent} />
+                <PersonalEventGroup title="已购" count={personalCounts.attended} icon={CalendarCheck} events={attendedEvents} onRemove={removePersonalEvent} />
               </div>
             </section>
 
@@ -209,7 +251,7 @@ export default function PersonalWorkspace() {
                   {savedFilters.map((filter) => (
                     <article key={filter.id}>
                       <a href={savedFilterHref(filter)}><Bookmark size={15} /><span><strong>{filter.name}</strong><small>{formatSavedFilter(filter)}</small></span><ChevronRight size={15} /></a>
-                      <button type="button" onClick={() => setSavedFilters((current) => removeSavedFilter(current, filter.id, userId))} title="删除筛选方案" aria-label={`删除筛选方案${filter.name}`}><Trash2 size={14} /></button>
+                      <button type="button" onClick={() => updateSavedFilters((current) => removeSavedFilter(current, filter.id))} title="删除筛选方案" aria-label={`删除筛选方案${filter.name}`}><Trash2 size={14} /></button>
                     </article>
                   ))}
                 </div>
@@ -236,36 +278,33 @@ function PersonalEventGroup({
   title: string;
   count: number;
   icon: ComponentType<{ size?: number }>;
-  events: ConcertEventSummary[];
+  events: PersonalEventListItem[];
   onRemove: (eventId: string) => void;
 }) {
   return (
     <section className="personal-event-group">
       <header><Icon size={15} /><h3>{title}</h3><span>{count}</span></header>
       <div>
-        {events.length ? events.map((event) => (
+        {events.length ? events.map(({ event, archived }) => (
           <article key={event.id}>
-            <a href={`?event=${encodeURIComponent(event.id)}`}>
-              <time dateTime={event.startTime}>{formatEventDate(event.startTime)}</time>
-              <span><strong>{event.title}</strong><small>{formatEventVenue(event)}</small></span>
-              <ChevronRight size={15} />
-            </a>
+            {archived ? (
+              <div className="personal-event-record">
+                <time dateTime={event.startTime}>{formatEventDate(event.startTime)}</time>
+                <span><strong>{event.title}</strong><small>{formatEventVenue(event)} · 历史记录</small></span>
+              </div>
+            ) : (
+              <a href={`?event=${encodeURIComponent(event.id)}`}>
+                <time dateTime={event.startTime}>{formatEventDate(event.startTime)}</time>
+                <span><strong>{event.title}</strong><small>{formatEventVenue(event)}</small></span>
+                <ChevronRight size={15} />
+              </a>
+            )}
             <button type="button" onClick={() => onRemove(event.id)} title={`从${title}中移除`} aria-label={`从${title}中移除${event.title}`}><Trash2 size={14} /></button>
           </article>
-        )) : <p>{count ? "相关演出已不在当前收录范围内。" : `还没有标记为${title}的演出。`}</p>}
+        )) : <p>{count ? "早期记录没有可恢复的演出信息。" : `还没有标记为${title}的演出。`}</p>}
       </div>
     </section>
   );
-}
-
-function personalEventList(events: PersonalEventMap, status: PersonalEventStatus, eventMap: Map<string, ConcertEventSummary>) {
-  return Object.entries(events)
-    .filter(([, value]) => value === status)
-    .map(([id]) => eventMap.get(id))
-    .filter((event): event is ConcertEventSummary => Boolean(event))
-    .sort((left, right) => status === "interested"
-      ? left.startTime.localeCompare(right.startTime)
-      : right.startTime.localeCompare(left.startTime));
 }
 
 function accountInitial(name: string) {

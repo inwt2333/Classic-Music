@@ -2,9 +2,31 @@ import type { ConcertEvent, ConcertEventSummary, ProgramCredit, ProgramItem } fr
 import { formatEventVenue } from "./utils";
 
 const personalEventKey = "classic-music.personal-events.v1";
+const personalEventSnapshotKey = "classic-music.personal-event-snapshots.v1";
 
 export type PersonalEventStatus = "interested" | "attended";
 export type PersonalEventMap = Record<string, PersonalEventStatus>;
+export type PersonalEventSnapshot = {
+  id: string;
+  title: string;
+  city: string;
+  venue: string;
+  hall?: string;
+  startTime: string;
+  endTime?: string;
+  dateLabel: string;
+  timeLabel: string;
+  price?: string;
+  ensemble?: string;
+  conductor?: string;
+  performers: string[];
+  programPreview: Array<Pick<ProgramItem, "composer" | "title" | "alternateTitles" | "opus" | "credits">>;
+  sourceName?: string;
+  sourceUrl?: string;
+  ticketUrl?: string;
+  savedAt: string;
+};
+export type PersonalEventSnapshotMap = Record<string, PersonalEventSnapshot>;
 
 const aliasMap: Array<[string, string[]]> = [
   ["贝五", ["贝多芬 第五交响曲 命运", "贝多芬 5"]],
@@ -72,16 +94,65 @@ export function writePersonalEvents(events: PersonalEventMap, userId?: string) {
   if (userId) window.localStorage.setItem(`${personalEventKey}.${userId}`, JSON.stringify(events));
 }
 
+export function readPersonalEventSnapshots(userId?: string): PersonalEventSnapshotMap {
+  if (!userId) return {};
+  try {
+    const value = window.localStorage.getItem(`${personalEventSnapshotKey}.${userId}`);
+    return value ? JSON.parse(value) as PersonalEventSnapshotMap : {};
+  } catch {
+    return {};
+  }
+}
+
+export function writePersonalEventSnapshots(snapshots: PersonalEventSnapshotMap, userId?: string) {
+  if (userId) window.localStorage.setItem(`${personalEventSnapshotKey}.${userId}`, JSON.stringify(snapshots));
+}
+
+export function createPersonalEventSnapshot(event: ConcertEvent | ConcertEventSummary): PersonalEventSnapshot {
+  const fullEvent = "program" in event ? event : undefined;
+  const programPreview = "program" in event
+    ? event.program.map(({ composer, title, alternateTitles, opus, credits }) => ({ composer, title, alternateTitles, opus, credits }))
+    : event.programPreview;
+  return {
+    id: event.id,
+    title: event.title,
+    city: event.city,
+    venue: event.venue,
+    hall: event.hall,
+    startTime: event.startTime,
+    endTime: event.endTime,
+    dateLabel: event.dateLabel,
+    timeLabel: event.timeLabel,
+    price: event.price,
+    ensemble: event.ensemble,
+    conductor: fullEvent?.conductor,
+    performers: fullEvent?.performers ?? [],
+    programPreview,
+    sourceName: fullEvent?.sourceName,
+    sourceUrl: fullEvent?.sourceUrl,
+    ticketUrl: fullEvent?.ticketUrl,
+    savedAt: new Date().toISOString(),
+  };
+}
+
 export function setPersonalEventStatus(
   events: PersonalEventMap,
   eventId: string,
   status: PersonalEventStatus | null,
   userId?: string,
+  event?: ConcertEvent | ConcertEventSummary,
 ) {
   const next = { ...events };
   if (status) next[eventId] = status;
   else delete next[eventId];
   writePersonalEvents(next, userId);
+
+  if (userId) {
+    const snapshots = readPersonalEventSnapshots(userId);
+    if (status && event) snapshots[eventId] = createPersonalEventSnapshot(event);
+    else if (!status) delete snapshots[eventId];
+    writePersonalEventSnapshots(snapshots, userId);
+  }
   return next;
 }
 

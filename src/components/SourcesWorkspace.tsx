@@ -1,5 +1,6 @@
 import { ArrowLeft, Building2, CircleAlert, ExternalLink, MapPin, Music } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import BrandLogo from "./BrandLogo";
 import { loadEventIndex } from "../data";
 import { sourceCoverUrl, sourceProfiles, type SourceProfile } from "../source-profiles";
 import type { ConcertIndexDataset } from "../types";
@@ -30,7 +31,7 @@ export default function SourcesWorkspace() {
     <main className="source-workspace">
       <header className="app-header source-page-header">
         <div className="brand-block">
-          <Music size={22} />
+          <BrandLogo />
           <div><strong>古典乐演出日历</strong><span>数据来源</span></div>
         </div>
         <a className="header-link" href={activeProfile ? `?sources=${activeProfile.category === "venue" ? "venues" : "orchestras"}` : import.meta.env.BASE_URL} title={activeProfile ? "返回数据来源" : "返回演出日历"}>
@@ -143,7 +144,7 @@ function SourceCard({ profile, source }: { profile: SourceProfile; source?: Sour
       <a href={`?sources=${encodeURIComponent(profile.id)}`} aria-label={`查看${profile.name}介绍`}>
         <div className="source-card-cover" style={{ backgroundImage: `url("${sourceCoverUrl(profile.coverImage)}")`, backgroundPosition: profile.coverPosition }}>
           {profile.logoUrl
-            ? <img className={profile.logoAppearance === "light" ? "source-logo-light" : undefined} src={profile.logoUrl} alt="" loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
+            ? <img className={profile.logoAppearance === "light" ? "source-logo-light" : undefined} data-source-logo={profile.id} src={profile.logoUrl} alt="" loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
             : <span className="source-card-mark">{sourceMark(profile.name)}</span>}
         </div>
         <div className="source-card-body">
@@ -164,7 +165,7 @@ function SourceProfileDetail({ profile, source, loading }: { profile: SourceProf
       <div className="source-profile-hero" style={{ backgroundImage: `url("${sourceCoverUrl(profile.coverImage)}")`, backgroundPosition: profile.coverPosition }}>
         <div className="source-profile-identity">
           {profile.logoUrl
-            ? <img className={profile.logoAppearance === "light" ? "source-logo-light" : undefined} src={profile.logoUrl} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />
+            ? <img className={profile.logoAppearance === "light" ? "source-logo-light" : undefined} data-source-logo={profile.id} src={profile.logoUrl} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />
             : <strong className="source-profile-mark">{sourceMark(profile.name)}</strong>}
           <span>{profile.category === "orchestra" ? "交响乐团" : "演出场馆"}</span>
           <h1>{profile.name}</h1>

@@ -2,9 +2,12 @@ import assert from "node:assert/strict";
 import {
   buildFollowNotifications,
   detectDataIssues,
+  isFollowTargetActive,
+  makeFollowTarget,
   mergeFollowNotificationHistory,
   recentChangeLabel,
   sortConcerts,
+  toggleFollow,
   type FollowMap,
 } from "../src/discovery-features";
 import type { ChangeDataset, ConcertEventSummary, DatasetChange } from "../src/types";
@@ -62,6 +65,15 @@ const priceChange: DatasetChange = {
   summary: "票价变化",
 };
 
+const lineupChange: DatasetChange = {
+  id: "change-lineup",
+  eventId: "followed-event",
+  type: "lineup",
+  detectedAt: "2026-08-03T10:30:00.000Z",
+  summary: "演出人员变化",
+};
+assert.equal(recentChangeLabel(lineupChange, "2026-08-05T10:00:00.000Z"), undefined);
+
 const followedEvent = summary({
   id: "followed-event",
   ensemble: "指挥与示例交响乐团",
@@ -84,7 +96,7 @@ const follows: FollowMap = {
 };
 const changeDataset: ChangeDataset = {
   generatedAt: "2026-08-03T10:00:00.000Z",
-  changes: [programChange, priceChange],
+  changes: [programChange, lineupChange, priceChange],
 };
 const notifications = buildFollowNotifications(changeDataset, [followedEvent], follows, []);
 assert.equal(notifications.length, 1);
@@ -110,6 +122,46 @@ const knowledgeFollows: FollowMap = {
 };
 const knowledgeNotifications = buildFollowNotifications(changeDataset, [followedEvent], knowledgeFollows, []);
 assert.deepEqual(knowledgeNotifications[0].targets.map((target) => target.type).sort(), ["composer", "work"]);
+
+const caiKeyiFollow: FollowMap = {
+  "person:legacy-cai-keyi": {
+    key: "person:legacy-cai-keyi",
+    type: "person",
+    name: "蔡珂宜",
+    entityId: "person_legacy",
+    createdAt: "2026-08-01T00:00:00.000Z",
+  },
+};
+const bilingualCaiKeyi = makeFollowTarget("person", "蔡珂宜 Chloe Chua", "person_bilingual");
+assert.equal(bilingualCaiKeyi.name, "蔡珂宜");
+assert.deepEqual(bilingualCaiKeyi.aliases, ["蔡珂宜 Chloe Chua", "Chloe Chua"]);
+assert.equal(isFollowTargetActive(caiKeyiFollow, bilingualCaiKeyi), true);
+assert.deepEqual(toggleFollow(caiKeyiFollow, bilingualCaiKeyi), {});
+
+const caiKeyiChange: DatasetChange = {
+  id: "change-cai-keyi",
+  eventId: "cai-keyi-event",
+  type: "added",
+  detectedAt: "2026-08-04T10:00:00.000Z",
+  summary: "新增演出：汉努·林图 × 蔡珂宜 新加坡交响乐团",
+  after: {
+    title: "汉努·林图 × 蔡珂宜 新加坡交响乐团",
+    city: "广州",
+    venue: "星海音乐厅",
+    startTime: "2026-10-21T12:00:00.000Z",
+    status: "scheduled",
+    conductor: "汉努·林图 Hannu Lintu",
+    performers: ["蔡珂宜 Chloe Chua", "新加坡交响乐团 Singapore Symphony Orchestra"],
+    sourceName: "星海音乐厅官网",
+    programPreview: [],
+  },
+};
+const caiKeyiEvent = summary({
+  id: "cai-keyi-event",
+  title: "汉努·林图 × 蔡珂宜 新加坡交响乐团",
+  mainPerson: "汉努·林图 Hannu Lintu",
+});
+assert.equal(buildFollowNotifications({ generatedAt: caiKeyiChange.detectedAt, changes: [caiKeyiChange] }, [caiKeyiEvent], caiKeyiFollow, []).length, 1);
 
 const retainedNotifications = mergeFollowNotificationHistory(notifications, [], [], []);
 assert.equal(retainedNotifications.length, 1, "unfollowing must not remove notification history");

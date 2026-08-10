@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%app-icon-180.png" />
     <meta
       name="description"
       content="全国古典音乐演出日历：按时间、城市、场馆、曲目和人物查找音乐会。"
@@ -20,9 +22,11 @@
         min-height: 70px;
         padding: 14px clamp(18px, 4vw, 56px);
         align-items: center;
+        gap: 12px;
         color: #f7f8f7;
         background: #1d302d;
       }
+      .boot-header img { width: 40px; height: 40px; border-radius: 6px; }
       .boot-header strong { display: block; font-size: 17px; }
       .boot-header span { color: #bdc9c5; font-size: 12px; }
       .boot-main {
@@ -56,6 +60,7 @@
     <div id="root">
       <main class="boot-shell" aria-label="正在加载古典乐演出日历">
         <header class="boot-header">
+          <img src="%BASE_URL%brand-logo.png" alt="" aria-hidden="true" />
           <div><strong>古典乐演出日历</strong><span>全国演出 · 持续更新</span></div>
         </header>
         <section class="boot-main">

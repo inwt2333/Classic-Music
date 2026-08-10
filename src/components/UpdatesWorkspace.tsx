@@ -9,6 +9,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 type UpdateCategory = "feature" | "improvement" | "fix";
 
@@ -41,8 +42,11 @@ const productUpdates: ProductUpdate[] = [
       { category: "fix", title: "深圳音乐厅节目单", description: "协奏曲乐章会归入所属作品，带“协奏曲”的标题不再被误判为署名；演出人员也按角色正确提取。" },
       { category: "fix", title: "复杂节目单层级", description: "修复国家大剧院多部套曲的作品与分曲归属、深圳音乐厅纯文本及组曲列表，并校正东方艺术中心海报中的曲名和作者。" },
       { category: "fix", title: "节目单边界", description: "民族乐器演奏者、上下半场标题和作曲家分组不再被识别为曲目。" },
-      { category: "improvement", title: "变化历史降噪", description: "曲目仍随官网刷新，但不再写入变化历史或关注消息，避免 OCR 与官网排版波动造成误报。" },
-      { category: "feature", title: "独立个人页", description: "账户资料、关注分类、想去与已去演出、筛选方案集中到个人页；主页关注入口改为纯消息提醒。" },
+      { category: "improvement", title: "变化历史降噪", description: "曲目和演出人员仍随官网刷新，但不再写入变化历史或关注消息，避免 OCR 与官网排版波动造成误报。" },
+      { category: "improvement", title: "全新品牌标识", description: "首页顶栏、浏览器标签和移动设备图标统一使用融合琴弦、日历与场馆轮廓的新标识。" },
+      { category: "feature", title: "独立个人页", description: "账户资料、关注分类、想去与已购演出、筛选方案集中到个人页；主页关注入口改为纯消息提醒。" },
+      { category: "feature", title: "已购演出长期保留", description: "“已去”统一改为“已购”；标记时保存演出快照，即使音乐会过期并退出首页列表，仍会在个人页作为历史记录显示。" },
+      { category: "feature", title: "个人数据跨设备同步", description: "想去、已购与演出快照、关注、提醒历史和已读/删除状态、保存筛选迁移到 Supabase 私有表；旧本机数据首次登录自动合并，离线修改恢复连接后补交。" },
       { category: "feature", title: "管理员中心", description: "管理员可从个人页进入数据审核工作台，审核页继续通过后端角色验证限制访问。" },
       { category: "improvement", title: "最新演出数据", description: "重新检查全部 18 个来源并更新演出快照，数据审计无错误和警告。" },
     ],
@@ -64,10 +68,10 @@ const productUpdates: ProductUpdate[] = [
     items: [
       { category: "feature", title: "邮箱密码账号", description: "注册时填写用户名、邮箱和密码后立即创建账号；之后可直接在网站登录，不再为注册和日常登录发送邮件。" },
       { category: "feature", title: "密码管理", description: "新增忘记密码邮件、站内设置新密码和登录后的修改密码入口；验证与重置回调失败会直接显示原因。" },
-      { category: "feature", title: "个人功能需登录", description: "关注、想去、已去、更新提醒和保存筛选统一增加登录门槛，并按用户 ID 隔离本机数据。" },
+      { category: "feature", title: "个人功能需登录", description: "关注、想去、已购、更新提醒和保存筛选统一增加登录门槛，并通过 RLS 按用户 ID 隔离云端数据。" },
       { category: "feature", title: "管理员角色", description: "用户资料与管理员角色分表保存并启用 RLS，普通用户不能读取他人资料或修改自己的角色。" },
       { category: "fix", title: "审核入口收紧", description: "审核入口只向管理员显示，直接访问审核地址仍会检查登录状态和后端角色；正式站点继续关闭尚无远程写入接口的审核操作。" },
-      { category: "improvement", title: "部署与后端自检", description: "GitHub Pages 构建支持公开 Supabase 变量，并增加账号表、匿名隔离和管理员函数权限的一键检查。" },
+      { category: "improvement", title: "部署与后端自检", description: "GitHub Pages 构建支持公开 Supabase 变量，并增加账号、个人数据表、匿名隔离和管理员函数权限的一键检查。" },
       { category: "fix", title: "手机首页不再误开详情", description: "没有 event 参数时保持未选择状态，详情只由分享链接或用户点击打开，不再在数据载入后默认选中第一场。" },
     ],
   },
@@ -114,7 +118,7 @@ const productUpdates: ProductUpdate[] = [
     summary: "网站从单纯浏览演出扩展到关注变化、个人标记和对外分享。",
     items: [
       { category: "feature", title: "关注与消息", description: "可以关注音乐家、作品、乐团和场馆，相关演出变化进入站内消息中心并保留历史。" },
-      { category: "feature", title: "个人演出标记", description: "支持“想去”和“已去”，并可以按个人状态筛选演出。" },
+      { category: "feature", title: "个人演出标记", description: "支持“想去”和“已购”，并可以按个人状态筛选演出。" },
       { category: "feature", title: "分享卡片", description: "生成包含时间、地点、票价、人物、乐团、曲目和购票二维码的图片并复制到剪贴板。" },
       { category: "improvement", title: "变化降噪", description: "标点、空格和括号等排版差异会在变化比较前统一处理。" },
     ],
@@ -158,7 +162,7 @@ export default function UpdatesWorkspace() {
     <main className="updates-workspace">
       <header className="app-header source-page-header">
         <div className="brand-block">
-          <Music size={22} />
+          <BrandLogo />
           <div><strong>古典乐演出日历</strong><span>更新日志</span></div>
         </div>
         <a className="header-link" href={import.meta.env.BASE_URL} title="返回演出日历" aria-label="返回演出日历">

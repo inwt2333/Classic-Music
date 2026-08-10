@@ -37,6 +37,7 @@ import {
   X,
 } from "lucide-react";
 import EventDetail from "./components/EventDetail";
+import BrandLogo from "./components/BrandLogo";
 import AccountControl from "./components/AccountControl";
 import ComposerPage from "./knowledge/components/ComposerPage";
 import KnowledgeLibraryPage from "./knowledge/components/KnowledgeLibraryPage";
@@ -63,22 +64,15 @@ import {
   buildFollowNotifications,
   buildSavedFilterName,
   detectDataIssues,
+  isFollowTargetActive,
   latestChangesByEvent,
   makeFollowTarget,
   mergeFollowNotificationHistory,
-  readDismissedNotificationIds,
-  readFollows,
-  readFollowNotificationHistory,
-  readReadNotificationIds,
-  readSavedFilters,
   recentChangeLabel,
   removeSavedFilter,
   saveFilter,
   sortConcerts,
   toggleFollow,
-  writeDismissedNotificationIds,
-  writeFollowNotificationHistory,
-  writeReadNotificationIds,
   type FollowTarget,
   type SavedFilter,
   type SavedFilterState,
@@ -89,11 +83,10 @@ import {
   downloadEventsIcs,
   expandSearchQuery,
   matchesExpandedSearch,
-  readPersonalEvents,
-  setPersonalEventStatus,
-  type PersonalEventMap,
   type PersonalEventStatus,
 } from "./product-features";
+import { usePersonalEvents } from "./use-personal-events";
+import { useUserPreferences } from "./use-user-preferences";
 import "./styles.css";
 import type {
   ConcertEvent,
@@ -212,12 +205,21 @@ function App() {
   const [coverIndex, setCoverIndex] = useState(0);
   const [loadedCoverIndexes, setLoadedCoverIndexes] = useState(() => new Set([0]));
   const [coverPaused, setCoverPaused] = useState(false);
-  const [personalEvents, setPersonalEvents] = useState<PersonalEventMap>(() => readPersonalEvents());
-  const [follows, setFollows] = useState(() => readFollows());
-  const [readNotificationIds, setReadNotificationIds] = useState(() => readReadNotificationIds());
-  const [notificationHistory, setNotificationHistory] = useState(() => readFollowNotificationHistory());
-  const [dismissedNotificationIds, setDismissedNotificationIds] = useState(() => readDismissedNotificationIds());
-  const [savedFilters, setSavedFilters] = useState(() => readSavedFilters());
+  const personalEventStore = usePersonalEvents(auth.user?.id);
+  const personalEvents = personalEventStore.events;
+  const {
+    follows,
+    readNotificationIds,
+    notificationHistory,
+    dismissedNotificationIds,
+    savedFilters,
+    syncError: userPreferencesSyncError,
+    updateFollows,
+    updateSavedFilters,
+    updateNotificationHistory,
+    updateReadNotificationIds,
+    updateDismissedNotificationIds,
+  } = useUserPreferences(auth.user?.id);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [copyState, setCopyState] = useState("");
   const filterButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -240,12 +242,6 @@ function App() {
 
   useEffect(() => {
     const userId = auth.user?.id;
-    setPersonalEvents(readPersonalEvents(userId));
-    setFollows(readFollows(userId));
-    setReadNotificationIds(readReadNotificationIds(userId));
-    setNotificationHistory(readFollowNotificationHistory(userId));
-    setDismissedNotificationIds(readDismissedNotificationIds(userId));
-    setSavedFilters(readSavedFilters(userId));
     setNotificationOpen(false);
     if (!userId) setPersonalFilter("all");
   }, [auth.user?.id]);
@@ -635,9 +631,8 @@ function App() {
   useEffect(() => {
     if (!auth.user) return;
     if (JSON.stringify(notificationHistory) === JSON.stringify(notifications)) return;
-    writeFollowNotificationHistory(notifications, auth.user.id);
-    setNotificationHistory(notifications);
-  }, [auth.user, notificationHistory, notifications]);
+    updateNotificationHistory(notifications);
+  }, [auth.user, notificationHistory, notifications, updateNotificationHistory]);
   useEffect(() => {
     setVisibleCount(pageSize);
   }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, sortMode, venue]);
@@ -676,6 +671,9 @@ function App() {
     const map = new Map<string, EntityRecord>();
     for (const entity of allEntities) {
       map.set(`${entity.type}:${entity.type === "work" ? entity.id : entity.name}`, entity);
+      if (entity.type === "person") {
+        for (const alias of entity.aliases) map.set(`person:${alias}`, entity);
+      }
     }
     for (const event of dataset.events) {
       if (!event.ensemble) continue;
@@ -719,9 +717,9 @@ function App() {
     return false;
   };
 
-  const updatePersonalStatus = (eventId: string, status: PersonalEventStatus | null) => {
-    if (!requireAccount("登录后才能标记想去或已去。")) return;
-    setPersonalEvents((current) => setPersonalEventStatus(current, eventId, status, auth.user?.id));
+  const updatePersonalStatus = (event: ConcertEvent, status: PersonalEventStatus | null) => {
+    if (!requireAccount("登录后才能标记想去或已购。")) return;
+    personalEventStore.updateStatus(event, status);
   };
 
   const copySelectedEvent = async (event: ConcertEvent) => {
@@ -740,34 +738,30 @@ function App() {
 
   const updateFollow = (target: FollowTarget) => {
     if (!requireAccount("登录后才能关注作品、音乐家、乐团或场馆。")) return;
-    setFollows((current) => toggleFollow(current, target, auth.user?.id));
+    updateFollows((current) => toggleFollow(current, target));
   };
 
   const markAllNotificationsRead = () => {
     if (!auth.user) return;
     const next = Array.from(new Set([...readNotificationIds, ...notifications.map((item) => item.id)]));
-    writeReadNotificationIds(next, auth.user.id);
-    setReadNotificationIds(next);
+    updateReadNotificationIds(next);
   };
 
   const markNotificationRead = (id: string) => {
     if (!auth.user) return;
     if (readNotificationIds.includes(id)) return;
     const next = [...readNotificationIds, id];
-    writeReadNotificationIds(next, auth.user.id);
-    setReadNotificationIds(next);
+    updateReadNotificationIds(next);
   };
 
   const deleteNotification = (id: string) => {
     if (!auth.user) return;
-    setDismissedNotificationIds((current) => {
+    updateDismissedNotificationIds((current) => {
       const next = Array.from(new Set([...current, id]));
-      writeDismissedNotificationIds(next, auth.user?.id);
       return next;
     });
-    setNotificationHistory((current) => {
+    updateNotificationHistory((current) => {
       const next = current.filter((item) => item.id !== id);
-      writeFollowNotificationHistory(next, auth.user?.id);
       return next;
     });
   };
@@ -775,7 +769,7 @@ function App() {
   const saveCurrentFilter = () => {
     if (!requireAccount("登录后才能保存和管理筛选方案。")) return;
     const state: SavedFilterState = { query, datePreset, city, venue, ensemble, genre, hasProgram, sortMode };
-    setSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state), auth.user?.id));
+    updateSavedFilters((current) => saveFilter(current, state, buildSavedFilterName(state)));
     setCopyState("筛选方案已保存");
     window.setTimeout(() => setCopyState(""), 1800);
   };
@@ -1059,7 +1053,7 @@ function App() {
     <main className="app-shell">
       <header className="app-header" data-app-background>
         <div className="brand-block">
-          <Music size={22} />
+          <BrandLogo />
           <div><strong>古典乐演出日历</strong><span>全国演出 · 持续更新</span></div>
         </div>
         <div className="header-status">
@@ -1119,7 +1113,7 @@ function App() {
           onOpenComposer={openComposer}
           onOpenRelatedWork={openLibraryWork}
           relatedWorks={relatedWorks}
-          followed={activeWorkTarget ? Boolean(follows[activeWorkTarget.key]) : false}
+          followed={activeWorkTarget ? isFollowTargetActive(follows, activeWorkTarget) : false}
           onToggleFollow={() => {
             if (activeWorkTarget) updateFollow(activeWorkTarget);
           }}
@@ -1133,7 +1127,7 @@ function App() {
           onBack={closeComposer}
           onOpenWork={openLibraryWork}
           onOpenEvent={openComposerEvent}
-          followed={activeComposerTarget ? Boolean(follows[activeComposerTarget.key]) : false}
+          followed={activeComposerTarget ? isFollowTargetActive(follows, activeComposerTarget) : false}
           onToggleFollow={() => {
             if (activeComposerTarget) updateFollow(activeComposerTarget);
           }}
@@ -1279,20 +1273,21 @@ function App() {
           type="button"
           className={personalFilter === "attended" ? "active" : ""}
           onClick={() => {
-            if (requireAccount("登录后才能查看已去的演出。")) setPersonalFilter(personalFilter === "attended" ? "all" : "attended");
+            if (requireAccount("登录后才能查看已购的演出。")) setPersonalFilter(personalFilter === "attended" ? "all" : "attended");
           }}
         >
-          <Check size={15} />已去 {Object.values(personalEvents).filter((status) => status === "attended").length}
+          <Check size={15} />已购 {Object.values(personalEvents).filter((status) => status === "attended").length}
         </button>
         <SavedFilterMenu
           filters={savedFilters}
           authenticated={Boolean(auth.user)}
           onSave={saveCurrentFilter}
           onApply={applySavedFilter}
-          onRemove={(id) => setSavedFilters((current) => removeSavedFilter(current, id, auth.user?.id))}
+          onRemove={(id) => updateSavedFilters((current) => removeSavedFilter(current, id))}
           onRequireLogin={() => auth.requestSignIn("登录后才能保存和管理筛选方案。")}
         />
         {copyState ? <span role="status">{copyState}</span> : null}
+        {personalEventStore.syncError || userPreferencesSyncError ? <span role="alert">{personalEventStore.syncError || userPreferencesSyncError}</span> : null}
       </section>
 
       {activeEntity ? (
@@ -1305,8 +1300,8 @@ function App() {
           </div>
           <div className="entity-context-actions">
             {activeEntityTarget ? (
-              <button className={follows[activeEntityTarget.key] ? "active" : ""} onClick={() => updateFollow(activeEntityTarget)}>
-                <Bell size={16} />{follows[activeEntityTarget.key] ? "已关注" : "关注"}
+              <button className={isFollowTargetActive(follows, activeEntityTarget) ? "active" : ""} onClick={() => updateFollow(activeEntityTarget)}>
+                <Bell size={16} />{isFollowTargetActive(follows, activeEntityTarget) ? "已关注" : "关注"}
               </button>
             ) : null}
             <button onClick={clearEntity}><X size={16} />退出关联页</button>
@@ -1324,8 +1319,8 @@ function App() {
           <div className="entity-context-actions">
             <a href={`https://uri.amap.com/search?keyword=${encodeURIComponent(activeVenue)}`} target="_blank" rel="noreferrer"><MapPin size={16} />地图交通</a>
             {activeVenueTarget ? (
-              <button className={follows[activeVenueTarget.key] ? "active" : ""} onClick={() => updateFollow(activeVenueTarget)}>
-                <Bell size={16} />{follows[activeVenueTarget.key] ? "已关注" : "关注"}
+              <button className={isFollowTargetActive(follows, activeVenueTarget) ? "active" : ""} onClick={() => updateFollow(activeVenueTarget)}>
+                <Bell size={16} />{isFollowTargetActive(follows, activeVenueTarget) ? "已关注" : "关注"}
               </button>
             ) : null}
             <button onClick={clearVenue}><X size={16} />退出场馆页</button>
@@ -1528,7 +1523,7 @@ const EventListRow = memo(function EventListRow({
               {changeLabel ? <span className="change-pill">{changeLabel}</span> : null}
               {hasDataIssue ? <span className="quality-pill">信息待确认</span> : null}
               {personalStatus ? (
-                <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已去"}</span>
+                <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已购"}</span>
               ) : null}
             </div>
             <ChevronRight size={18} />

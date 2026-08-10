@@ -5,6 +5,13 @@ import type {
   DatasetChange,
   ProgramItem,
 } from "./types";
+import {
+  canonicalPersonName,
+  normalizePersonIdentity,
+  personNameAppearsInText,
+  personNameVariants,
+  samePersonName,
+} from "./person-identity";
 
 export type FollowTargetType = "person" | "composer" | "work" | "ensemble" | "venue" | "city";
 
@@ -91,15 +98,40 @@ export function makeFollowTarget(
   entityId?: string,
   aliases: string[] = [],
 ): FollowTarget {
-  const identity = entityId || name.trim().toLocaleLowerCase("zh-CN");
+  const canonicalName = type === "person" ? canonicalPersonName(name) : name.trim();
+  const normalizedAliases = type === "person"
+    ? Array.from(new Set([
+      ...aliases,
+      ...personNameVariants(name),
+    ].map((alias) => alias.trim()).filter((alias) => alias && alias !== canonicalName)))
+    : Array.from(new Set(aliases.map((alias) => alias.trim()).filter(Boolean)));
+  const identity = type === "person"
+    ? normalizePersonIdentity(canonicalName)
+    : entityId || canonicalName.toLocaleLowerCase("zh-CN");
   return {
     key: `${type}:${identity}`,
     type,
-    name: name.trim(),
+    name: canonicalName,
     entityId,
-    aliases: Array.from(new Set(aliases.map((alias) => alias.trim()).filter(Boolean))),
+    aliases: normalizedAliases,
     createdAt: new Date().toISOString(),
   };
+}
+
+export function followTargetsEquivalent(left: FollowTarget, right: FollowTarget) {
+  if (left.type !== right.type) return false;
+  if (left.type !== "person") {
+    return left.key === right.key
+      || Boolean(left.entityId && right.entityId && left.entityId === right.entityId)
+      || left.name.trim().toLocaleLowerCase("zh-CN") === right.name.trim().toLocaleLowerCase("zh-CN");
+  }
+  const leftNames = [left.name, ...(left.aliases ?? [])];
+  const rightNames = [right.name, ...(right.aliases ?? [])];
+  return leftNames.some((leftName) => rightNames.some((rightName) => samePersonName(leftName, rightName)));
+}
+
+export function isFollowTargetActive(follows: FollowMap, target: FollowTarget) {
+  return Object.values(follows).some((follow) => followTargetsEquivalent(follow, target));
 }
 
 export function readFollows(userId?: string): FollowMap {
@@ -107,12 +139,19 @@ export function readFollows(userId?: string): FollowMap {
   return key ? readStorage<FollowMap>(key, {}) : {};
 }
 
+export function writeFollows(follows: FollowMap, userId?: string) {
+  const key = accountStorageKey(storageKeys.follows, userId);
+  if (key) writeStorage(key, follows);
+}
+
 export function toggleFollow(follows: FollowMap, target: FollowTarget, userId?: string) {
   const next = { ...follows };
-  if (next[target.key]) delete next[target.key];
+  const equivalentKeys = Object.entries(next)
+    .filter(([, follow]) => followTargetsEquivalent(follow, target))
+    .map(([key]) => key);
+  if (equivalentKeys.length) equivalentKeys.forEach((key) => delete next[key]);
   else next[target.key] = target;
-  const key = accountStorageKey(storageKeys.follows, userId);
-  if (key) writeStorage(key, next);
+  writeFollows(next, userId);
   return next;
 }
 
@@ -132,7 +171,13 @@ export function readFollowNotificationHistory(userId?: string) {
 }
 
 export function writeFollowNotificationHistory(notifications: FollowNotification[], userId?: string) {
-  const compact = notifications.slice(0, 300).map((item) => ({
+  const compact = compactFollowNotificationHistory(notifications);
+  const key = accountStorageKey(storageKeys.notificationHistory, userId);
+  if (key) writeStorage(key, compact);
+}
+
+export function compactFollowNotificationHistory(notifications: FollowNotification[]) {
+  return notifications.slice(0, 300).map((item) => ({
     ...item,
     change: {
       id: item.change.id,
@@ -143,8 +188,6 @@ export function writeFollowNotificationHistory(notifications: FollowNotification
     },
     event: item.event ? { id: item.event.id, title: item.event.title } : undefined,
   }));
-  const key = accountStorageKey(storageKeys.notificationHistory, userId);
-  if (key) writeStorage(key, compact);
 }
 
 export function readDismissedNotificationIds(userId?: string) {
@@ -168,7 +211,7 @@ export function mergeFollowNotificationHistory(
   const merged = new Map<string, FollowNotification>();
 
   for (const item of [...history, ...incoming]) {
-    if (item.change.type === "program") continue;
+    if (item.change.type === "program" || item.change.type === "lineup") continue;
     if (dismissed.has(item.id)) continue;
     const previous = merged.get(item.id);
     const targets = new Map(
@@ -193,6 +236,11 @@ export function readSavedFilters(userId?: string) {
   return key ? readStorage<SavedFilter[]>(key, []) : [];
 }
 
+export function writeSavedFilters(filters: SavedFilter[], userId?: string) {
+  const key = accountStorageKey(storageKeys.savedFilters, userId);
+  if (key) writeStorage(key, filters.slice(-12));
+}
+
 export function saveFilter(filters: SavedFilter[], state: SavedFilterState, name: string, userId?: string) {
   const next: SavedFilter[] = [
     ...filters,
@@ -203,15 +251,13 @@ export function saveFilter(filters: SavedFilter[], state: SavedFilterState, name
       createdAt: new Date().toISOString(),
     },
   ].slice(-12);
-  const key = accountStorageKey(storageKeys.savedFilters, userId);
-  if (key) writeStorage(key, next);
+  writeSavedFilters(next, userId);
   return next;
 }
 
 export function removeSavedFilter(filters: SavedFilter[], id: string, userId?: string) {
   const next = filters.filter((item) => item.id !== id);
-  const key = accountStorageKey(storageKeys.savedFilters, userId);
-  if (key) writeStorage(key, next);
+  writeSavedFilters(next, userId);
   return next;
 }
 
@@ -259,7 +305,7 @@ export function buildGithubCorrectionUrl(report: CorrectionReport) {
 export function latestChangesByEvent(changes: ChangeDataset | null) {
   const map = new Map<string, DatasetChange>();
   for (const change of changes?.changes ?? []) {
-    if (change.type === "program") continue;
+    if (change.type === "program" || change.type === "lineup") continue;
     const current = map.get(change.eventId);
     if (!current || new Date(change.detectedAt) > new Date(current.detectedAt)) map.set(change.eventId, change);
   }
@@ -268,7 +314,7 @@ export function latestChangesByEvent(changes: ChangeDataset | null) {
 
 export function recentChangeLabel(change: DatasetChange | undefined, generatedAt: string | null) {
   if (!change || !generatedAt) return undefined;
-  if (change.type === "program") return undefined;
+  if (change.type === "program" || change.type === "lineup") return undefined;
   const age = new Date(generatedAt).getTime() - new Date(change.detectedAt).getTime();
   if (age > 14 * 24 * 60 * 60 * 1000) return undefined;
   if (change.type === "added") return "新收录";
@@ -324,7 +370,7 @@ export function buildFollowNotifications(
   const targets = Object.values(follows);
   if (!targets.length) return [];
   return (changes?.changes ?? [])
-    .filter((change) => change.type !== "program")
+    .filter((change) => change.type !== "program" && change.type !== "lineup")
     .flatMap<FollowNotification>((change) => {
       const event = eventMap.get(change.eventId);
       const matching = targets.filter((target) => eventMatchesFollow(event, change, target));
@@ -350,8 +396,11 @@ function eventMatchesFollow(
       event?.mainPerson,
       snapshot?.conductor,
       ...(snapshot?.performers ?? []),
-    ].filter(Boolean).join(" ").toLocaleLowerCase("zh-CN");
-    return people.includes(normalizedName);
+    ].filter((value): value is string => Boolean(value));
+    const followedNames = [target.name, ...(target.aliases ?? [])];
+    if (people.some((person) => followedNames.some((name) => samePersonName(person, name)))) return true;
+    const title = event?.title ?? snapshot?.title ?? "";
+    return followedNames.some((name) => personNameAppearsInText(name, title));
   }
   if (target.type === "composer") {
     const program = event?.programPreview ?? snapshot?.programPreview ?? [];

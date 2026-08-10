@@ -27,14 +27,19 @@ async function request(path: string, init?: RequestInit) {
   });
 }
 
-async function expectPrivateTable(table: "profiles" | "user_roles") {
+type PrivateTable = "profiles" | "user_roles" | "personal_events" | "user_preferences";
+
+async function expectPrivateTable(table: PrivateTable) {
   const response = await request(`rest/v1/${table}?select=*&limit=1`);
   if (response.status === 401 || response.status === 403) {
     const denial = await response.json() as { code?: string; message?: string };
     if (denial.code === "42501" && denial.message?.includes(table)) return;
   }
   if (!response.ok) {
-    throw new Error(`${table} is unavailable (HTTP ${response.status}); apply the Supabase identity migration`);
+    const migration = table === "profiles" || table === "user_roles"
+      ? "202608100001_user_identity.sql"
+      : "202608100002_personal_events.sql";
+    throw new Error(`${table} is unavailable (HTTP ${response.status}); apply ${migration}`);
   }
   const rows = await response.json();
   if (!Array.isArray(rows) || rows.length !== 0) {
@@ -42,13 +47,18 @@ async function expectPrivateTable(table: "profiles" | "user_roles") {
   }
 }
 
-async function expectAnonymousWriteDenied(table: "profiles" | "user_roles", body: Record<string, string>) {
+async function expectAnonymousWriteDenied(table: PrivateTable, body: Record<string, unknown>) {
   const response = await request(`rest/v1/${table}`, {
     method: "POST",
     body: JSON.stringify(body),
   });
   if (response.ok) throw new Error(`${table} accepted an anonymous insert`);
-  if (response.status === 404) throw new Error(`${table} is unavailable; apply the Supabase identity migration`);
+  if (response.status === 404) {
+    const migration = table === "profiles" || table === "user_roles"
+      ? "202608100001_user_identity.sql"
+      : "202608100002_personal_events.sql";
+    throw new Error(`${table} is unavailable; apply ${migration}`);
+  }
 }
 
 async function main() {
@@ -62,15 +72,28 @@ async function main() {
 
   await expectPrivateTable("profiles");
   await expectPrivateTable("user_roles");
+  await expectPrivateTable("personal_events");
+  await expectPrivateTable("user_preferences");
 
   const fakeUserId = randomUUID();
   await expectAnonymousWriteDenied("profiles", { id: fakeUserId, display_name: "anonymous-test" });
   await expectAnonymousWriteDenied("user_roles", { user_id: fakeUserId, role: "admin" });
+  await expectAnonymousWriteDenied("personal_events", {
+    user_id: fakeUserId,
+    event_id: "anonymous-test",
+    status: "attended",
+    snapshot: { title: "anonymous-test" },
+  });
+  await expectAnonymousWriteDenied("user_preferences", {
+    user_id: fakeUserId,
+    follows: {},
+    saved_filters: [],
+  });
 
   const adminCheck = await request("rest/v1/rpc/is_admin", { method: "POST", body: "{}" });
   if (adminCheck.ok) throw new Error("is_admin RPC is executable by the anonymous role");
 
-  console.log("Supabase identity checks passed: Auth online, private tables isolated, anonymous writes denied.");
+  console.log("Supabase checks passed: Auth online, identity and personal data tables isolated, anonymous writes denied.");
 }
 
 main().catch((error) => {

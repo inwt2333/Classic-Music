@@ -32,7 +32,7 @@ const changeLabels: Record<DatasetChange["type"], string> = {
 };
 
 const changeTypes = (Object.entries(changeLabels) as Array<[DatasetChange["type"], string]>)
-  .filter(([type]) => type !== "program");
+  .filter(([type]) => type !== "program" && type !== "lineup");
 const PAGE_SIZE = 80;
 
 export default function ChangesWorkspace() {
@@ -65,7 +65,7 @@ export default function ChangesWorkspace() {
     [dataset],
   );
   const storedChanges = useMemo(
-    () => (changes?.changes ?? []).filter((change) => change.type !== "program"),
+    () => (changes?.changes ?? []).filter((change) => change.type !== "program" && change.type !== "lineup"),
     [changes],
   );
   const latestIds = useMemo(() => {
@@ -138,7 +138,7 @@ export default function ChangesWorkspace() {
           <div>
             <span>CHANGELOG</span>
             <h1>演出数据变更历史</h1>
-            <p>新增、下架、改期、取消、阵容与票价</p>
+            <p>新增、下架、改期、取消与票价</p>
           </div>
           <dl>
             <div>
@@ -199,7 +199,7 @@ export default function ChangesWorkspace() {
           <div className="empty-results changes-empty">
             <CalendarClock size={30} />
             <h2>尚无历史变更</h2>
-            <p>演出时间、阵容或票价发生变化后，会记录在这里。</p>
+            <p>演出时间或票价发生变化后，会记录在这里。</p>
           </div>
         ) : null}
         {!error && storedChanges.length > 0 && !filteredChanges.length ? (

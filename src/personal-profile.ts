@@ -1,5 +1,11 @@
 import type { FollowMap, FollowTarget, FollowTargetType, SavedFilter } from "./discovery-features";
-import type { PersonalEventMap } from "./product-features";
+import type {
+  PersonalEventMap,
+  PersonalEventSnapshot,
+  PersonalEventSnapshotMap,
+  PersonalEventStatus,
+} from "./product-features";
+import type { ConcertEventSummary } from "./types";
 
 export const followTypeOrder: FollowTargetType[] = ["work", "composer", "person", "ensemble", "venue", "city"];
 
@@ -49,4 +55,28 @@ export function countPersonalEvents(events: PersonalEventMap) {
     (counts, status) => ({ ...counts, [status]: counts[status] + 1 }),
     { interested: 0, attended: 0 },
   );
+}
+
+export type PersonalEventListItem = {
+  event: ConcertEventSummary | PersonalEventSnapshot;
+  archived: boolean;
+};
+
+export function listPersonalEvents(
+  events: PersonalEventMap,
+  status: PersonalEventStatus,
+  eventMap: Map<string, ConcertEventSummary>,
+  snapshots: PersonalEventSnapshotMap,
+): PersonalEventListItem[] {
+  return Object.entries(events)
+    .filter(([, value]) => value === status)
+    .flatMap(([id]): PersonalEventListItem[] => {
+      const currentEvent = eventMap.get(id);
+      if (currentEvent) return [{ event: currentEvent, archived: false }];
+      const snapshot = snapshots[id];
+      return snapshot ? [{ event: snapshot, archived: true }] : [];
+    })
+    .sort((left, right) => status === "interested"
+      ? left.event.startTime.localeCompare(right.event.startTime)
+      : right.event.startTime.localeCompare(left.event.startTime));
 }

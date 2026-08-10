@@ -27,6 +27,7 @@ export const sourceProfiles: SourceProfile[] = [
     description: "上海交响乐团的历史可追溯至 1879 年，是亚洲历史悠久的交响乐团之一。乐团以上海交响乐团音乐厅为主要演出基地，通过音乐季、委约创作、国内外巡演和音乐教育项目，持续连接上海与世界古典音乐舞台。",
     details: ["从早期上海公共乐队到今天的职业交响院团，上交见证了交响音乐在中国的传播与本土化进程，也长期承担中国作品首演、青年音乐家培养和国际文化交流。除常规音乐季外，乐团还通过上海夏季音乐节、录音出版及面向公众的音乐教育项目，让专业演出与城市文化生活形成持续联系。"],
     coverImage: "shanghai-symphony.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/shanghai-symphony.png`,
   },
   {
     id: "suzhou-symphony",
@@ -38,6 +39,7 @@ export const sourceProfiles: SourceProfile[] = [
     description: "苏州交响乐团成立于 2016 年，是一支汇集多国音乐家的职业交响乐团。乐团以苏州文化艺术中心为重要演出基地，围绕音乐季、城市文化活动、国内外巡演与青少年普及项目，展现苏州兼具传统底蕴与当代活力的城市气质。",
     details: ["乐团由苏州市与苏州工业园区共同组建，建团之初便形成国际化的乐手结构。其节目既覆盖主流交响与协奏曲文献，也关注中国作品、节庆音乐会和面向家庭观众的普及演出，并通过与国内外指挥家、独奏家及院团合作，逐步建立年轻而开放的艺术面貌。"],
     coverImage: "suzhou-symphony.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/suzhou-symphony.png`,
   },
   {
     id: "china-national-symphony",
@@ -64,6 +66,8 @@ export const sourceProfiles: SourceProfile[] = [
     details: ["乐团在原中国广播交响乐团基础上组建，现为国家广播电视总局直属国家级院团。建团以来，中国爱乐曾开展大规模海外巡演，并与国际唱片公司合作录制发行作品；在音乐季中既重视马勒、布鲁克纳、瓦格纳等大型曲目的完整呈现，也持续推动中国当代作品走向更广泛的舞台。"],
     coverImage: "china-philharmonic.jpg",
     coverPosition: "center 67%",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/china-philharmonic.png`,
+    logoAppearance: "light",
   },
   {
     id: "shanghai-philharmonic",
@@ -75,6 +79,8 @@ export const sourceProfiles: SourceProfile[] = [
     description: "上海爱乐乐团是上海重要的职业交响乐团，长期开展音乐季、主题音乐会、委约创作和国内外文化交流。除经典交响曲目外，乐团亦拥有深厚的影视音乐演奏积淀，并通过多样化项目服务城市公共文化生活。",
     details: ["乐团的历史源流与上海电影乐团、上海广播交响乐团密切相关，因此在传统交响曲目之外，也保有鲜明的电影音乐和广播录音传统。今天的上海爱乐通过原创作品、跨界舞台、社区及校园演出拓展听众，同时与上海其他文化机构合作呈现具有城市记忆和中国表达的音乐项目。"],
     coverImage: "shanghai-philharmonic.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/shanghai-philharmonic.png`,
+    logoAppearance: "light",
   },
   {
     id: "guangzhou-symphony",
@@ -86,6 +92,7 @@ export const sourceProfiles: SourceProfile[] = [
     description: "广州交响乐团创建于 1957 年，是中国较早建立的职业交响乐团之一。乐团以星海音乐厅为重要演出基地，运营常规音乐季，策划大型节庆与青少年音乐教育项目，并通过巡演和国际合作展现粤港澳大湾区的开放文化气质。",
     details: ["经过长期职业化建设，广交形成了覆盖五大洲的巡演经历，并与众多国际指挥家、独奏家和作曲家合作。除订阅音乐会外，乐团重视委约创作、广东地域文化题材和青少年培养，通过乐季、节庆、户外及公益项目构成华南地区较完整的交响音乐生态。"],
     coverImage: "guangzhou-symphony.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/guangzhou-symphony.png`,
   },
   {
     id: "shenzhen-symphony",
@@ -98,6 +105,7 @@ export const sourceProfiles: SourceProfile[] = [
     details: ["深交的发展与深圳城市化进程同步，节目策划既重视德奥、俄罗斯等传统交响文献，也持续呈现中国作曲家的新作和大型主题作品。乐团以深圳音乐厅等场馆为主要舞台，并通过湾区合作、海外交流、室内乐系列和公益普及，为城市建立稳定的古典音乐演出网络。"],
     coverImage: "shenzhen-symphony.jpg",
     coverPosition: "center 52%",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/shenzhen-symphony.png`,
   },
   {
     id: "zhejiang-symphony",
@@ -109,6 +117,8 @@ export const sourceProfiles: SourceProfile[] = [
     description: "浙江交响乐团是浙江省重要的职业交响艺术院团，以杭州为基地开展音乐季、巡演、主题创作和公共文化演出。乐团在演绎中外经典的同时，重视浙江题材和中国作品，以交响语言呈现地域文化与时代生活。",
     details: ["乐团于 2009 年经浙江省人民政府批准独立建制，长期探索“中西合璧”的发展路径。除经典曲目外，浙交创排了《良渚》《唐诗之路》《社戏》《运河魂》等具有浙江文化辨识度的原创作品，并通过全省巡演、惠民演出和青少年活动扩大交响音乐的公共覆盖。"],
     coverImage: "zhejiang-symphony.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/zhejiang-symphony.png`,
+    logoAppearance: "light",
   },
   {
     id: "oriental-art-center",
@@ -121,6 +131,8 @@ export const sourceProfiles: SourceProfile[] = [
     details: ["中心于 2005 年投入使用，东方音乐厅以大型交响和合唱演出为核心，歌剧厅适合歌剧、舞剧和综合舞台作品，演奏厅则服务室内乐、独奏及小型交流活动。东艺通过年度演出季、驻演合作和公益普及项目连接浦东社区与国际舞台，是上海观察世界表演艺术的重要窗口。"],
     coverImage: "oriental-art-center.jpg",
     coverPosition: "center 42%",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/oriental-art-center.png`,
+    logoAppearance: "light",
   },
   {
     id: "shanghai-concert-hall",
@@ -132,6 +144,7 @@ export const sourceProfiles: SourceProfile[] = [
     description: "凯迪拉克·上海音乐厅始建于 1930 年，前身为南京大戏院，是上海重要的历史文化建筑和专业音乐场馆。音乐厅历经整体平移与多次修缮，在保留建筑风貌的同时持续举办交响乐、室内乐、声乐及艺术教育项目。",
     details: ["为配合城市道路和周边环境改造，这座重达数千吨的建筑于 2003 年整体平移约 66 米，成为上海建筑保护史上的标志性工程。如今音乐厅以主厅和“音乐立方”等不同尺度的空间承接演出，节目从古乐、室内乐延伸至跨界创作和青年艺术家项目。"],
     coverImage: "shanghai-concert-hall.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/shanghai-concert-hall.png`,
   },
   {
     id: "national-centre-performing-arts",
@@ -143,6 +156,7 @@ export const sourceProfiles: SourceProfile[] = [
     description: "国家大剧院坐落于北京中心城区，拥有歌剧院、音乐厅、戏剧场和小剧场等专业空间。作为国家级表演艺术机构，这里既引进世界优秀院团与艺术家，也开展自主制作、委约创作、艺术教育和数字传播。",
     details: ["不同剧场分别服务歌剧与舞剧、大型交响与民族管弦乐、话剧戏曲及小型实验性演出，构成覆盖主要舞台艺术门类的综合体系。除密集的演出日程外，国家大剧院还运营管弦乐团、合唱团等艺术力量，持续制作歌剧和音乐会，并通过展览、讲座、线上直播及数字档案扩大公共文化服务。"],
     coverImage: "ncpa.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/ncpa.png`,
   },
   {
     id: "shanghai-grand-theatre",
@@ -154,6 +168,8 @@ export const sourceProfiles: SourceProfile[] = [
     description: "上海大剧院位于人民广场，是上海具有代表性的综合性表演艺术中心。剧院设有大剧场、中剧场和小剧场，长期呈现歌剧、舞剧、音乐剧、戏剧与音乐会，并通过自制项目和国际合作连接全球舞台。",
     details: ["剧院于 1998 年正式开幕，以“国际性、艺术性、经典性、原创性”为长期定位。三个剧场提供不同规模与技术条件，使大型歌剧芭蕾、交响音乐会和实验戏剧都能获得相应空间；其演出季、自制剧目和艺术教育活动也共同构成上海市中心持续活跃的表演艺术平台。"],
     coverImage: "shanghai-grand-theatre.jpg",
+    logoUrl: `${import.meta.env.BASE_URL}source-logos/shanghai-grand-theatre.png`,
+    logoAppearance: "light",
   },
   {
     id: "beijing-concert-hall",
@@ -203,7 +219,6 @@ export const sourceProfiles: SourceProfile[] = [
     details: ["建筑以现代设计回应中国传统五行色彩，演奏大厅主要服务交响、合唱和大型器乐演出，小剧场则适合室内乐及更灵活的舞台形式。深圳音乐厅既是深圳交响乐团的重要演出地，也通过“美丽星期天”等公益品牌、线上内容和青少年项目培养城市听众。"],
     coverImage: "shenzhen-concert-hall.jpg",
     logoUrl: `${import.meta.env.BASE_URL}source-logos/shenzhen-concert-hall.png`,
-    logoAppearance: "light",
   },
   {
     id: "xian-concert-hall",

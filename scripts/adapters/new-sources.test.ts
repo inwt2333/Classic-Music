@@ -239,6 +239,29 @@ assert.equal(xinghaiBilingualProgram[0].alternateTitles, undefined);
 assert.deepEqual(xinghaiBilingualProgram[2].alternateTitles, ["Free"]);
 assert.deepEqual(xinghaiBilingualProgram[3].alternateTitles, ["If you love me for me"]);
 
+const xinghaiBilingualComposerPairs = parseXinghaiConcertHallDetail(`
+  <h1>汉努·林图 × 蔡珂宜 新加坡交响乐团---星海音乐厅</h1>
+  <div id="program">
+    王辰威：姐妹岛<br>
+    Wang Chenwei: Sisters' Islands<br>
+    门德尔松：E小调小提琴协奏曲，作品64<br>
+    Mendelssohn: Violin Concerto in E Minor, Op.64<br>
+    马勒：D大调第一交响曲 “巨人”<br>
+    Mahler: Symphony No. 1 in D major "Titan"
+  </div>
+`, "https://www.concerthall.com.cn/events/neweventdetail.php?id=5051");
+assert.deepEqual(xinghaiBilingualComposerPairs.program.map((item) => item.title), [
+  "姐妹岛",
+  "E小调小提琴协奏曲，作品64",
+  "D大调第一交响曲 “巨人”",
+]);
+const xinghaiBilingualComposerProgram = xinghaiBilingualComposerPairs.program as ProgramItem[];
+assert.deepEqual(xinghaiBilingualComposerProgram.map((item) => item.alternateTitles), [
+  ["Sisters' Islands"],
+  ["Violin Concerto in E Minor, Op.64"],
+  ['Symphony No. 1 in D major "Titan"'],
+]);
+
 const xinghaiComposerHeading = parseXinghaiConcertHallDetail(`
   <h1>柴科夫斯基作品音乐会---星海音乐厅</h1>
   <div id="program">

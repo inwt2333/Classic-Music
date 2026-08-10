@@ -292,6 +292,12 @@ assert.deepEqual(priceChanges.changes.map((item) => item.type), ["price"]);
 assert.equal(priceChanges.changes[0].before?.price, merged[0].price);
 assert.equal(priceChanges.changes[0].after?.price, "¥100 - ¥680");
 assert.equal(priceChanges.changes[0].after?.programPreview.length, 1);
+const personnelOnlyDataset: ConcertDataset = {
+  ...dataset,
+  generatedAt: "2026-07-30T01:00:00.000Z",
+  events: [{ ...merged[0], performers: ["OCR 识别出的另一位演奏者"] }],
+};
+assert.deepEqual(buildChanges(dataset, personnelOnlyDataset).changes, []);
 assert.equal(buildChangeEventSnapshot({
   ...merged[0],
   program: Array.from({ length: 12 }, (_, index) => ({ title: `Work ${index + 1}`, confidence: "official" as const })),
@@ -382,6 +388,18 @@ assert.deepEqual(
   buildChanges(formattingOnlyBefore, substantiveProgramChange).changes.map((item) => item.type),
   [],
 );
+const bilingualPeople = buildEntities({
+  ...dataset,
+  events: [
+    { ...merged[0], id: "cai-zh", conductor: undefined, performers: ["蔡珂宜"] },
+    { ...merged[0], id: "cai-bilingual", conductor: undefined, performers: ["小提琴：蔡珂宜 Chloe Chua", "新加坡交响乐团 Singapore Symphony Orchestra"] },
+  ],
+});
+const caiKeyiEntity = bilingualPeople.entities.find((entity) => entity.type === "person" && entity.name === "蔡珂宜");
+assert.deepEqual(caiKeyiEntity?.eventIds.sort(), ["cai-bilingual", "cai-zh"]);
+assert.ok(caiKeyiEntity?.aliases.includes("Chloe Chua"));
+assert.equal(bilingualPeople.entities.filter((entity) => entity.type === "person" && entity.name.includes("蔡珂宜")).length, 1);
+assert.equal(bilingualPeople.entities.some((entity) => entity.type === "person" && entity.name.includes("新加坡交响乐团")), false);
 
 const numericRangeChange: ConcertDataset = {
   ...formattingOnlyAfter,

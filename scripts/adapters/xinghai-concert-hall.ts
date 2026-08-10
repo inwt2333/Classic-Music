@@ -77,10 +77,10 @@ function parseProgramBlock(html: string, confidence: ProgramItem["confidence"] =
 
     items.push({ composer: currentComposer, title: stripBookTitle(line), confidence });
   }
-  return dedupeProgram(mergeAdjacentAlternateTitles(items));
+  return dedupeProgram(mergeXinghaiProgramTranslations(items));
 }
 
-function mergeAdjacentAlternateTitles(items: ProgramItem[]) {
+export function mergeXinghaiProgramTranslations(items: ProgramItem[], mergeUnattributed = true) {
   const merged: ProgramItem[] = [];
   let canMergeWithPrevious = true;
   for (const item of items) {
@@ -91,7 +91,12 @@ function mergeAdjacentAlternateTitles(items: ProgramItem[]) {
     const previous = merged.at(-1);
     const isLatinTitle = /[A-Za-z]/.test(item.title) && !/[\u3400-\u9fff]/.test(item.title);
     const previousIsChinese = previous && /[\u3400-\u9fff]/.test(previous.title);
-    if (canMergeWithPrevious && isLatinTitle && previousIsChinese && !item.composer) {
+    const bilingualComposerPair = previous?.composer
+      && /[\u3400-\u9fff]/.test(previous.composer)
+      && Boolean(item.composer)
+      && /[A-Za-z]/.test(item.composer ?? "")
+      && !/[\u3400-\u9fff]/.test(item.composer ?? "");
+    if (canMergeWithPrevious && isLatinTitle && previousIsChinese && ((mergeUnattributed && !item.composer) || bilingualComposerPair)) {
       previous.alternateTitles = unique([...(previous.alternateTitles ?? []), item.title]);
       continue;
     }

@@ -18,6 +18,7 @@ import type {
 import { formatChinaDateLabels } from "./china-time";
 import { addManualEventsToDataset, loadManualEvents } from "./manual-event-store";
 import { normalizeIdentity } from "./identity";
+import { canonicalPersonName, isEnsembleName, personNameVariants } from "../src/person-identity";
 import {
   loadKnowledgeRegistry,
   mapProgramItemToKnowledge,
@@ -27,6 +28,7 @@ import {
 } from "./knowledge-store";
 import { applyManualReviews, loadManualReviews } from "./review-store";
 import { attachOcrEvidence, loadOcrEvidence } from "./ocr/evidence";
+import { mergeXinghaiProgramTranslations } from "./adapters/xinghai-concert-hall";
 
 type PreparedData = {
   dataset: ConcertDataset;
@@ -324,8 +326,11 @@ export function buildEntities(dataset: ConcertDataset): EntityDataset {
 
   for (const event of dataset.events) {
     const upcoming = new Date(event.startTime).getTime() >= now;
-    const people = [event.conductor, ...event.performers].filter((value): value is string => Boolean(value));
-    for (const name of new Set(people)) {
+    const people = [event.conductor, ...event.performers]
+      .filter((value): value is string => Boolean(value))
+      .filter((value) => !isEnsembleName(value));
+    for (const observedName of new Set(people)) {
+      const name = canonicalPersonName(observedName);
       const id = entityId("person", name);
       const current = entities.get(id) ?? {
         id,
@@ -335,6 +340,10 @@ export function buildEntities(dataset: ConcertDataset): EntityDataset {
         eventIds: [],
         upcomingEventCount: 0,
       };
+      current.aliases = unique([
+        ...current.aliases,
+        ...personNameVariants(observedName).filter((alias) => alias !== name),
+      ]);
       current.eventIds.push(event.id);
       if (upcoming) current.upcomingEventCount += 1;
       entities.set(id, current);
@@ -391,9 +400,6 @@ export function buildChanges(
     }
     if (old.price !== event.price || JSON.stringify(old.priceTiers) !== JSON.stringify(event.priceTiers)) {
       changes.push(change(event.id, "price", detectedAt, `票价变化：${event.title}`, old, event));
-    }
-    if (signature(old.performers) !== signature(event.performers)) {
-      changes.push(change(event.id, "lineup", detectedAt, `演出人员变化：${event.title}`, old, event));
     }
   }
 
@@ -504,7 +510,7 @@ export function mergeChangeHistory(
 }
 
 export function cleanChangeHistory(history: ChangeDataset): ChangeDataset {
-  const changes = history.changes.filter((item) => item.type !== "program");
+  const changes = history.changes.filter((item) => item.type !== "program" && item.type !== "lineup");
   const retainedIds = new Set(changes.map((item) => item.id));
   return {
     ...history,
@@ -744,13 +750,16 @@ async function persistSqlite(prepared: PreparedData, databasePath: string) {
       }
 
       if (event.conductor) {
-        const personId = entityId("person", event.conductor);
-        insertPerson.run(personId, event.conductor);
+        const personName = canonicalPersonName(event.conductor);
+        const personId = entityId("person", personName);
+        insertPerson.run(personId, personName);
         insertEventPerson.run(event.id, personId, "conductor");
       }
       for (const performer of event.performers) {
-        const personId = entityId("person", performer);
-        insertPerson.run(personId, performer);
+        if (isEnsembleName(performer)) continue;
+        const personName = canonicalPersonName(performer);
+        const personId = entityId("person", personName);
+        insertPerson.run(personId, personName);
         insertEventPerson.run(event.id, personId, "performer");
       }
 
@@ -1146,6 +1155,7 @@ export function normalizeKnownSourceEvent(event: ConcertEvent): ConcertEvent {
       title: sanitized.title.replace(/\s*[-—–－]+\s*星海音乐厅\s*$/, "").trim(),
       venue: "星海音乐厅",
       hall,
+      program: mergeXinghaiProgramTranslations(sanitized.program, false),
     };
   }
   if (sanitized.sourceName !== "深圳音乐厅官网") return sanitized;
@@ -1352,10 +1362,6 @@ function programConfidenceRank(confidence: ProgramItem["confidence"]) {
 
 function unique(values: Array<string | undefined>) {
   return Array.from(new Set(values.filter((value): value is string => Boolean(value))));
-}
-
-function signature(values: string[]) {
-  return [...values].sort().join("|");
 }
 
 function change(

@@ -24,6 +24,7 @@ import { useEffect, useState, type ReactNode, type RefObject } from "react";
 import CorrectionDialog from "./CorrectionDialog";
 import {
   detectDataIssues,
+  isFollowTargetActive,
   makeFollowTarget,
   type FollowMap,
   type FollowTarget,
@@ -31,6 +32,7 @@ import {
 import type { ConcertEvent, EntityRecord, EventEvidenceImage, ProgramCredit, ProgramItem } from "../types";
 import type { KnowledgeWorkSummary } from "../knowledge/types";
 import type { PersonalEventStatus } from "../product-features";
+import { isEnsembleName } from "../person-identity";
 import {
   bilibiliSearchUrl,
   formatDateTime,
@@ -80,7 +82,7 @@ export default function EventDetail({
   follows: FollowMap;
   onToggleFollow: (target: FollowTarget) => void;
   personalStatus?: PersonalEventStatus;
-  onSetPersonalStatus: (eventId: string, status: PersonalEventStatus | null) => void;
+  onSetPersonalStatus: (event: ConcertEvent, status: PersonalEventStatus | null) => void;
 }) {
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -119,7 +121,9 @@ export default function EventDetail({
   }
 
   const people = Array.from(
-    new Set([event.conductor, ...event.performers].filter((value): value is string => Boolean(value))),
+    new Set([event.conductor, ...event.performers]
+      .filter((value): value is string => Boolean(value))
+      .filter((value) => !isEnsembleName(value))),
   );
   const ensemble = normalizeEnsembleName(event.ensemble) ?? event.ensemble;
   const dataIssues = detectDataIssues(event);
@@ -179,16 +183,16 @@ export default function EventDetail({
         <button
           type="button"
           className={personalStatus === "interested" ? "active" : ""}
-          onClick={() => onSetPersonalStatus(event.id, personalStatus === "interested" ? null : "interested")}
+          onClick={() => onSetPersonalStatus(event, personalStatus === "interested" ? null : "interested")}
         >
           <Clock size={15} />想去
         </button>
         <button
           type="button"
           className={personalStatus === "attended" ? "active" : ""}
-          onClick={() => onSetPersonalStatus(event.id, personalStatus === "attended" ? null : "attended")}
+          onClick={() => onSetPersonalStatus(event, personalStatus === "attended" ? null : "attended")}
         >
-          <Check size={15} />已去
+          <Check size={15} />已购
         </button>
       </div>
 
@@ -372,7 +376,7 @@ function ProgramRow({
   const target = knowledge
     ? makeFollowTarget("work", knowledge.title, knowledge.id)
     : entity ? makeFollowTarget("work", entity.name, entity.id) : undefined;
-  const followed = target ? Boolean(follows[target.key]) : false;
+  const followed = target ? isFollowTargetActive(follows, target) : false;
   return (
     <article className="program-row">
       <div className="program-copy">
@@ -462,8 +466,8 @@ function EntityChip({
   onToggleFollow: (target: FollowTarget) => void;
 }) {
   const type = entity?.type === "ensemble" ? "ensemble" : "person";
-  const target = makeFollowTarget(type, name, entity?.id);
-  const followed = Boolean(follows[target.key]);
+  const target = makeFollowTarget(type, name, entity?.id, entity?.aliases);
+  const followed = isFollowTargetActive(follows, target);
   return (
     <span className="entity-chip">
       {entity ? <button type="button" onClick={() => onExplore(entity)}>{name}</button> : <em>{name}</em>}

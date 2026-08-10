@@ -3,9 +3,12 @@ import {
   countPersonalEvents,
   followTargetHref,
   groupFollowTargets,
+  listPersonalEvents,
   savedFilterHref,
 } from "../src/personal-profile";
 import type { FollowMap, SavedFilter } from "../src/discovery-features";
+import { createPersonalEventSnapshot } from "../src/product-features";
+import type { ConcertEventSummary } from "../src/types";
 
 const follows: FollowMap = {
   "work:work_1": { key: "work:work_1", type: "work", name: "作品一", entityId: "work_1", createdAt: "2026-08-01T00:00:00Z" },
@@ -33,5 +36,41 @@ const filter: SavedFilter = {
 };
 assert.equal(savedFilterHref(filter), "?q=%E8%B4%9D%E5%A4%9A%E8%8A%AC&date=weekend&city=%E4%B8%8A%E6%B5%B7&genre=%E4%BA%A4%E5%93%8D&program=1");
 assert.deepEqual(countPersonalEvents({ a: "interested", b: "attended", c: "interested" }), { interested: 2, attended: 1 });
+
+const eventSummary = {
+  id: "event-archive",
+  title: "已经结束的音乐会",
+  city: "上海",
+  venue: "测试音乐厅",
+  startTime: "2026-01-01T19:30:00+08:00",
+  weekday: "周四",
+  dateLabel: "01/01",
+  timeLabel: "19:30",
+  status: "scheduled",
+  genres: ["交响"],
+  dataQuality: "scraped",
+  detailPath: "events/event-archive.json",
+  hasProgram: false,
+  programPreview: [],
+  searchText: "已经结束的音乐会",
+  sourceCount: 1,
+} satisfies ConcertEventSummary;
+const archivedSnapshot = createPersonalEventSnapshot(eventSummary);
+const archivedEvents = listPersonalEvents(
+  { "event-archive": "attended" },
+  "attended",
+  new Map(),
+  { "event-archive": archivedSnapshot },
+);
+assert.equal(archivedEvents[0].archived, true);
+assert.equal(archivedEvents[0].event.title, "已经结束的音乐会");
+
+const currentEvents = listPersonalEvents(
+  { "event-archive": "attended" },
+  "attended",
+  new Map([[eventSummary.id, eventSummary]]),
+  { "event-archive": archivedSnapshot },
+);
+assert.equal(currentEvents[0].archived, false);
 
 console.log("Personal profile tests passed.");

@@ -1,6 +1,7 @@
 import type {
   ChangeDataset,
   ConcertEvent,
+  ConcertDataset,
   ConcertIndexDataset,
   EntityDataset,
 } from "./types";
@@ -49,6 +50,10 @@ async function fetchJsonWithRetry<T>(path: string) {
 
 export function loadEventIndex() {
   return fetchJson<ConcertIndexDataset>("events-index.json");
+}
+
+export function loadEventArchive() {
+  return fetchJson<ConcertDataset>("events.json");
 }
 
 export async function loadEventDetail(id: string, detailPath: string) {

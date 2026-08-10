@@ -1,6 +1,7 @@
-import { ArrowLeft, KeyRound, LoaderCircle, LockKeyhole, Music, ShieldAlert } from "lucide-react";
+import { ArrowLeft, KeyRound, LoaderCircle, LockKeyhole, ShieldAlert } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import BrandLogo from "./BrandLogo";
 
 export default function ReviewAccessGate({ children }: { children: ReactNode }) {
   const auth = useAuth();
@@ -59,7 +60,7 @@ function AccessPage({ icon, title, detail, children }: { icon: ReactNode; title:
   return (
     <main className="review-access-shell">
       <header className="app-header">
-        <div className="brand-block"><Music size={22} /><div><strong>古典乐演出日历</strong><span>管理员审核</span></div></div>
+        <div className="brand-block"><BrandLogo /><div><strong>古典乐演出日历</strong><span>管理员审核</span></div></div>
         <a className="header-link" href="?profile=1"><ArrowLeft size={15} />返回个人页</a>
       </header>
       <section className="review-access-card">
