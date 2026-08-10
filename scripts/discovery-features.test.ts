@@ -113,7 +113,7 @@ const issues = detectDataIssues(summary({
   ensemble: "美乐四重奏演绎法式浪漫与印象丨上海交响乐团音乐季",
 }));
 assert.equal(issues.length, 3);
-assert.ok(issues.some((issue) => issue.includes("人工复核")));
+assert.ok(issues.some((issue) => issue.includes("待补充")));
 assert.ok(issues.some((issue) => issue.includes("场馆")));
 assert.ok(issues.some((issue) => issue.includes("乐团")));
 

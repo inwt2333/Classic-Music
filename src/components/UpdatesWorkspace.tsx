@@ -32,6 +32,17 @@ const categoryMeta: Record<UpdateCategory, { label: string; icon: typeof Sparkle
 const productUpdates: ProductUpdate[] = [
   {
     date: "2026-08-10",
+    title: "正式版上线检查",
+    summary: "完成全站桌面与手机端复验，整理面向用户的页面信息，并刷新全国演出数据。",
+    items: [
+      { category: "improvement", title: "页面信息精简", description: "详情、来源和作品页不再显示解析方式、模型评分、采集批次等内部信息，只保留更新时间、官网来源和必要的完整性提示。" },
+      { category: "fix", title: "加载与可访问性", description: "静态数据短暂失败时自动重试，首页加载过程不再误报无演出；桌面详情侧栏与手机全屏详情使用正确的交互语义。" },
+      { category: "fix", title: "双语节目单", description: "星海音乐厅双语曲目合并为中文标题与外文名，影片分段标题不再被当作独立曲目。" },
+      { category: "improvement", title: "最新演出数据", description: "重新检查全部 18 个来源并更新演出快照，数据审计无错误和警告。" },
+    ],
+  },
+  {
+    date: "2026-08-10",
     title: "音乐主题视觉更新",
     summary: "在保持信息密度与简约布局的基础上，加入更接近音乐会节目册的色彩、字体层次和克制音乐纹样。",
     items: [
@@ -45,7 +56,7 @@ const productUpdates: ProductUpdate[] = [
     title: "密码账号与个人功能边界",
     summary: "将邮件链接登录升级为邮箱密码账号，并让关注、观演记录与筛选方案真正归属于登录用户。",
     items: [
-      { category: "feature", title: "邮箱密码账号", description: "注册时填写用户名、邮箱和密码并验证邮箱；之后可直接在网站登录，不再为每次登录发送邮件。" },
+      { category: "feature", title: "邮箱密码账号", description: "注册时填写用户名、邮箱和密码后立即创建账号；之后可直接在网站登录，不再为注册和日常登录发送邮件。" },
       { category: "feature", title: "密码管理", description: "新增忘记密码邮件、站内设置新密码和登录后的修改密码入口；验证与重置回调失败会直接显示原因。" },
       { category: "feature", title: "个人功能需登录", description: "关注、想去、已去、更新提醒和保存筛选统一增加登录门槛，并按用户 ID 隔离本机数据。" },
       { category: "feature", title: "管理员角色", description: "用户资料与管理员角色分表保存并启用 RLS，普通用户不能读取他人资料或修改自己的角色。" },
@@ -94,7 +105,7 @@ const productUpdates: ProductUpdate[] = [
   {
     date: "2026-08-05",
     title: "发现、关注与分享流程",
-    summary: "Demo 从单纯浏览演出扩展到关注变化、个人标记和对外分享。",
+    summary: "网站从单纯浏览演出扩展到关注变化、个人标记和对外分享。",
     items: [
       { category: "feature", title: "关注与消息", description: "可以关注音乐家、作品、乐团和场馆，相关演出变化进入站内消息中心并保留历史。" },
       { category: "feature", title: "个人演出标记", description: "支持“想去”和“已去”，并可以按个人状态筛选演出。" },
@@ -125,7 +136,7 @@ const productUpdates: ProductUpdate[] = [
   },
   {
     date: "2026-07-23",
-    title: "上海演出日历 Demo",
+    title: "上海演出日历上线",
     summary: "项目建立第一条可运行链路，从上海交响乐团官网采集演出并在本地展示。",
     items: [
       { category: "feature", title: "演出列表与详情", description: "支持按日期浏览演出，查看节目单、人物、场馆、票价和官网链接。" },

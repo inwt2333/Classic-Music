@@ -37,10 +37,11 @@ export function parseXinghaiConcertHallProgramText(text: string, confidence: Pro
 
 function parseProgramBlock(html: string, confidence: ProgramItem["confidence"] = "official") {
   const lines = htmlLines(html);
-  return dedupeProgram(lines.flatMap((raw) => {
+  const items = lines.flatMap((raw) => {
     const line = cleanText(raw.replace(/^\d+[.、]\s*/, ""));
     if (!line || /中场休息|曲目.*为准|演出现场为准|节目.*为准/.test(line)) return [];
     if (/^(?:注|说明|备注|主办|承办|协办|演出|演奏|伴奏|指挥)[：:]/.test(line)) return [];
+    if (/^芭比之[^：:《》]{2,24}$/.test(line)) return [{ title: "", confidence } satisfies ProgramItem];
 
     const colon = line.match(/^([^：:—－]{2,32})[：:—－]\s*(.+)$/);
     if (colon) {
@@ -57,7 +58,29 @@ function parseProgramBlock(html: string, confidence: ProgramItem["confidence"] =
     }
 
     return [{ title: stripBookTitle(line), confidence } satisfies ProgramItem];
-  }));
+  });
+  return dedupeProgram(mergeAdjacentAlternateTitles(items));
+}
+
+function mergeAdjacentAlternateTitles(items: ProgramItem[]) {
+  const merged: ProgramItem[] = [];
+  let canMergeWithPrevious = true;
+  for (const item of items) {
+    if (!item.title) {
+      canMergeWithPrevious = false;
+      continue;
+    }
+    const previous = merged.at(-1);
+    const isLatinTitle = /[A-Za-z]/.test(item.title) && !/[\u3400-\u9fff]/.test(item.title);
+    const previousIsChinese = previous && /[\u3400-\u9fff]/.test(previous.title);
+    if (canMergeWithPrevious && isLatinTitle && previousIsChinese && !item.composer) {
+      previous.alternateTitles = unique([...(previous.alternateTitles ?? []), item.title]);
+      continue;
+    }
+    merged.push({ ...item });
+    canMergeWithPrevious = true;
+  }
+  return merged;
 }
 
 function parseMarkedProgram(

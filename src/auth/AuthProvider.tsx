@@ -40,6 +40,7 @@ type AuthContextValue = {
   isAdmin: boolean;
   signInWithPassword: (email: string, password: string) => Promise<void>;
   signUp: (displayName: string, email: string, password: string) => Promise<SignUpResult>;
+  resendSignUpConfirmation: (email: string) => Promise<void>;
   sendPasswordReset: (email: string) => Promise<void>;
   updatePassword: (password: string) => Promise<void>;
   signOut: () => Promise<void>;
@@ -166,6 +167,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { requiresEmailConfirmation: !data.session };
   }, []);
 
+  const resendSignUpConfirmation = useCallback(async (email: string) => {
+    setAuthError("");
+    const client = await getSupabase();
+    if (!client) throw new Error("Supabase 尚未配置");
+    const { error } = await client.auth.resend({
+      type: "signup",
+      email: normalizeEmail(email),
+      options: { emailRedirectTo: getAuthRedirectUrl() },
+    });
+    if (error) throw error;
+  }, []);
+
   const sendPasswordReset = useCallback(async (email: string) => {
     setAuthError("");
     const client = await getSupabase();
@@ -214,6 +227,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isAdmin: profile?.role === "admin",
     signInWithPassword,
     signUp,
+    resendSignUpConfirmation,
     sendPasswordReset,
     updatePassword,
     signOut,
@@ -230,6 +244,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     profileError,
     profileLoading,
     requestSignIn,
+    resendSignUpConfirmation,
     sendPasswordReset,
     session,
     signInRequest,

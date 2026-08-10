@@ -20,7 +20,32 @@ export function formatDateTime(value: string) {
 }
 
 export function formatEventVenue(event: Pick<ConcertEventSummary, "venue" | "hall">) {
-  return event.hall ? `${event.venue} · ${event.hall}` : event.venue;
+  const venue = normalizeVenueName(event.venue);
+  return event.hall ? `${venue} · ${event.hall}` : venue;
+}
+
+export function normalizeVenueName(value: string) {
+  const aliases: Record<string, string> = {
+    "Beijing Concert Hall": "北京音乐厅",
+    "Concert Hall of National Centre for the Performing Arts": "国家大剧院",
+  };
+  return aliases[value.trim()] ?? value;
+}
+
+export function normalizeEnsembleName(value?: string) {
+  if (!value) return undefined;
+  if (value.includes("新加坡交响乐团")) return "新加坡交响乐团";
+  if (value.includes("中国交响乐团")) return "中国交响乐团";
+  if (value.includes("爱乐男声合唱团")) return "爱乐男声合唱团";
+  if (value.includes("上海交响乐团")) return "上海交响乐团";
+  if (value.includes("苏州交响乐团")) return "苏州交响乐团";
+  const cleaned = (value.includes("与") ? value.split("与").at(-1) : value)?.replace(/^与/, "").trim() ?? "";
+  if (
+    cleaned.length <= 24
+    && !/[丨|]/.test(cleaned)
+    && /(?:交响乐团|爱乐乐团|管弦乐团|室内乐团|合唱团|四重奏)$/.test(cleaned)
+  ) return cleaned;
+  return undefined;
 }
 
 export function eventDateKey(value: string | Date) {

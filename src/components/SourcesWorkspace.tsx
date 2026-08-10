@@ -1,4 +1,4 @@
-import { ArrowLeft, Building2, Check, CircleAlert, ExternalLink, MapPin, Music } from "lucide-react";
+import { ArrowLeft, Building2, CircleAlert, ExternalLink, MapPin, Music } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { loadEventIndex } from "../data";
 import { sourceCoverUrl, sourceProfiles, type SourceProfile } from "../source-profiles";
@@ -17,7 +17,8 @@ export default function SourcesWorkspace() {
 
   useEffect(() => {
     loadEventIndex().then(setDataset).catch((loadError) => {
-      setError(loadError instanceof Error ? loadError.message : String(loadError));
+      console.error("Unable to load source directory", loadError);
+      setError("页面暂时无法载入，请稍后重试。");
     });
   }, []);
 
@@ -25,8 +26,6 @@ export default function SourcesWorkspace() {
     () => new Map((dataset?.sources || []).map((source) => [source.id, source])),
     [dataset],
   );
-  const successfulSources = dataset?.sources.filter((source) => source.ok).length ?? 0;
-
   return (
     <main className="source-workspace">
       <header className="app-header source-page-header">
@@ -48,7 +47,6 @@ export default function SourcesWorkspace() {
             dataset={dataset}
             error={error}
             statuses={statuses}
-            successfulSources={successfulSources}
             activeCategory={activeCategory}
           />
         )}
@@ -61,19 +59,17 @@ function SourceDirectory({
   dataset,
   error,
   statuses,
-  successfulSources,
   activeCategory,
 }: {
   dataset?: ConcertIndexDataset;
   error: string;
   statuses: Map<string, SourceStatus>;
-  successfulSources: number;
   activeCategory: SourceProfile["category"];
 }) {
   const activeProfiles = sourceProfiles.filter((profile) => profile.category === activeCategory);
   const activeSourceIds = new Set(activeProfiles.map((profile) => profile.sourceId));
   const activeEventCount = dataset?.sources.reduce(
-    (total, source) => total + (activeSourceIds.has(source.id) ? source.eventCount : 0),
+    (total, source) => total + (activeSourceIds.has(source.id) ? source.normalizedCount ?? source.eventCount : 0),
     0,
   ) ?? 0;
 
@@ -81,15 +77,14 @@ function SourceDirectory({
     <>
       <header className="source-page-intro">
         <div>
-          <span>DATA SOURCES</span>
           <h1>数据来源</h1>
-          <p>从乐团和场馆出发，查看本站当前覆盖范围与采集状态。</p>
+          <p>从乐团和场馆出发，了解本站收录范围与相关机构。</p>
         </div>
         {dataset ? (
           <dl>
-            <div><dt>采集通道</dt><dd>{dataset.sources.length}</dd></div>
-            <div><dt>采集正常</dt><dd>{successfulSources}</dd></div>
-            <div><dt>本页演出</dt><dd>{activeEventCount}</dd></div>
+            <div><dt>信息来源</dt><dd>{dataset.sources.length}</dd></div>
+            <div><dt>本页机构</dt><dd>{activeProfiles.length}</dd></div>
+            <div><dt>相关演出</dt><dd>{activeEventCount}</dd></div>
           </dl>
         ) : null}
       </header>
@@ -106,7 +101,7 @@ function SourceDirectory({
       </nav>
 
       {error ? (
-        <div className="source-page-error"><CircleAlert size={18} />数据来源加载失败：{error}</div>
+        <div className="source-page-error"><CircleAlert size={18} />{error}</div>
       ) : dataset ? (
         <>
           <SourceGroup
@@ -142,15 +137,11 @@ function SourceGroup({ title, icon, category, statuses }: {
 }
 
 function SourceCard({ profile, source }: { profile: SourceProfile; source?: SourceStatus }) {
-  const displayedCount = source?.eventCount ?? 0;
+  const displayedCount = source?.normalizedCount ?? source?.eventCount ?? 0;
   return (
     <article className="source-card">
       <a href={`?sources=${encodeURIComponent(profile.id)}`} aria-label={`查看${profile.name}介绍`}>
         <div className="source-card-cover" style={{ backgroundImage: `url("${sourceCoverUrl(profile.coverImage)}")`, backgroundPosition: profile.coverPosition }}>
-          <span className={source?.ok ? "source-card-status ok" : "source-card-status warning"}>
-            {source?.ok ? <Check size={12} /> : <CircleAlert size={12} />}
-            {source?.ok ? "采集正常" : "待恢复"}
-          </span>
           {profile.logoUrl
             ? <img className={profile.logoAppearance === "light" ? "source-logo-light" : undefined} src={profile.logoUrl} alt="" loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
             : <span className="source-card-mark">{sourceMark(profile.name)}</span>}
@@ -182,19 +173,16 @@ function SourceProfileDetail({ profile, source, loading }: { profile: SourceProf
       </div>
       <div className="source-profile-content">
         <section>
-          <span>ABOUT</span>
           <h2>{profile.category === "orchestra" ? "乐团介绍" : "场馆介绍"}</h2>
           <div className="source-profile-description">
             {[profile.description, ...profile.details].map((paragraph, index) => <p key={index}>{paragraph}</p>)}
           </div>
         </section>
         <dl className="source-profile-stats">
-          <div><dt>当前收录</dt><dd>{loading ? "…" : `${source?.eventCount ?? 0} 场`}</dd></div>
-          <div><dt>最近采集</dt><dd className={source?.ok ? "ok" : "warning"}>{source?.ok ? "正常" : "沿用已有数据"}</dd></div>
-          {source?.rawCount !== undefined ? <div><dt>本次处理</dt><dd>{source.rawCount} 项目 / {source.normalizedCount ?? 0} 场次</dd></div> : null}
+          <div><dt>当前收录</dt><dd>{loading ? "…" : `${source?.normalizedCount ?? source?.eventCount ?? 0} 场`}</dd></div>
+          <div><dt>所在城市</dt><dd>{profile.city}</dd></div>
         </dl>
       </div>
-      {source?.message ? <p className="source-profile-message"><CircleAlert size={15} />{source.message}</p> : null}
       {officialUrl ? <a className="source-official-link" href={officialUrl} target="_blank" rel="noreferrer"><ExternalLink size={16} />进入官方网站</a> : null}
     </article>
   );

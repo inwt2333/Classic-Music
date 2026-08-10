@@ -110,7 +110,7 @@ export default function ComposerPage({
               </button>
             ))}
           </div>
-        ) : <div className="work-empty-live"><CalendarDays size={22} /><div><strong>近期暂无已匹配演出</strong><p>资料会继续保留，新节目单命中后会自动更新。</p></div></div>}
+        ) : <div className="work-empty-live"><CalendarDays size={22} /><div><strong>近期暂无相关演出</strong><p>有新的相关演出时，会自动显示在这里。</p></div></div>}
       </section>
 
       <footer className="composer-sources">

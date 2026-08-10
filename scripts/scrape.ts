@@ -521,7 +521,7 @@ async function postShanghaiSymphonyApi(path: string, body: Record<string, string
     method: "POST",
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "application/json, text/plain, */*",
       "content-type": "application/x-www-form-urlencoded",
       cmpappkey: "shsymphonyPC",
@@ -584,7 +584,7 @@ async function requestShanghaiConcertHallApi(
   const response = await fetchWithRetry(`${source.apiBase}${path}`, {
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "application/json, text/plain, */*",
       language: "zh-CN",
       referer: source.url,
@@ -663,7 +663,7 @@ async function scrapeSuzhouSymphony(
   const homeResponse = await fetchWithRetry(source.url, {
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "text/html,application/xhtml+xml",
     },
   });
@@ -719,7 +719,7 @@ async function requestSuzhouSymphonyPage(
   const response = await fetchWithRetry(new URL(endpoint, source.url), {
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "application/json, text/plain, */*",
       referer,
     },
@@ -1028,7 +1028,7 @@ async function requestOrientalArtCenterApi(
     method: options.method ?? "GET",
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "application/json, text/plain, */*",
       channel: "theatre_pc",
       location: "121.458563,31.250315",
@@ -1082,7 +1082,7 @@ async function scrapeNationalCentreForPerformingArts(
       {
         headers: {
           "user-agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
           accept: "application/json, text/plain, */*",
           referer: `https://wticket.chncpa.org/product.html?id=${productId}`,
         },
@@ -1116,7 +1116,7 @@ async function requestNcpaApi(
     method: "POST",
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "application/json, text/plain, */*",
       "content-type": "application/json",
       referer: source.url,
@@ -1849,7 +1849,7 @@ async function fetchHarbinMaitixJson(
   url.searchParams.set("__sr", source.siteOrigin);
   const response = await fetchWithRetry(url, () => ({
     headers: {
-      "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1",
+      "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0",
       accept: "application/json",
       origin: source.siteOrigin.replace(/\/$/, ""),
       referer: source.siteOrigin,
@@ -1911,7 +1911,7 @@ function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
 async function postTheatreVendor(baseUrl: string, cmpAppKey: string, path: string, body: Record<string, unknown>) {
   const response = await fetchWithRetry(`${baseUrl.replace(/\/$/, "")}/thvendor/ticket/${path}`, () => ({
     method: "POST",
-    headers: { cmpappkey: cmpAppKey, "content-type": "application/x-www-form-urlencoded", "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" },
+    headers: { cmpappkey: cmpAppKey, "content-type": "application/x-www-form-urlencoded", "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0" },
     body: new URLSearchParams(Object.entries(body).map(([key, value]) => [key, String(value)])),
     signal: AbortSignal.timeout(30_000),
   }));
@@ -1923,7 +1923,7 @@ async function getTheatreVendorSchedules(baseUrl: string, cmpAppKey: string, det
   if (!detail.programKey) return [{ id: detail.id, playTime: detail.startTime, playEndTime: detail.endTime, venueName: detail.venueName }];
   const url = new URL(`${baseUrl.replace(/\/$/, "")}/thvendor/ticket/listScheduleByDate.xhtml`);
   url.search = new URLSearchParams({ programId: String(detail.id), date: "", action: "commit" }).toString();
-  const response = await fetchWithRetry(url, () => ({ headers: { cmpappkey: cmpAppKey, programkey: detail.programKey, "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) }));
+  const response = await fetchWithRetry(url, () => ({ headers: { cmpappkey: cmpAppKey, programkey: detail.programKey, "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0" }, signal: AbortSignal.timeout(30_000) }));
   const data = await response.json() as Record<string, any>;
   return Array.isArray(data.data) && data.data.length ? data.data : [{ id: detail.id, playTime: detail.startTime, playEndTime: detail.endTime, venueName: detail.venueName }];
 }
@@ -1943,13 +1943,13 @@ async function recognizeSourceImages(
 }
 
 async function fetchJson(url: string) {
-  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1", accept: "application/json" }, signal: AbortSignal.timeout(30_000) }));
+  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0", accept: "application/json" }, signal: AbortSignal.timeout(30_000) }));
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json() as Promise<Record<string, any>>;
 }
 
 async function fetchLegacyChineseText(url: string) {
-  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicDemo/0.1" }, signal: AbortSignal.timeout(30_000) }));
+  const response = await fetchWithRetry(url, () => ({ headers: { "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0" }, signal: AbortSignal.timeout(30_000) }));
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return new TextDecoder("gb18030").decode(await response.arrayBuffer());
 }
@@ -1966,7 +1966,7 @@ async function fetchText(url: string) {
   const response = await fetchWithRetry(url, {
     headers: {
       "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
       accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     },
   });

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import type { ProgramItem } from "../../src/types";
 import { isShanghaiGrandTheatreClassical, parseShanghaiGrandTheatreDetail } from "./shanghai-grand-theatre";
 import { parseBeijingConcertHallDetail } from "./beijing-concert-hall";
 import {
@@ -124,6 +125,27 @@ assert.deepEqual(xinghai.performers, ["石进"]);
 assert.equal(xinghai.title, "石进钢琴音乐会");
 assert.equal(xinghai.venue, "星海音乐厅");
 assert.equal(xinghai.hall, "交响乐演奏大厅");
+
+const xinghaiBilingual = parseXinghaiConcertHallDetail(`
+  <h1>芭比与室内乐之梦---星海音乐厅</h1>
+  <div id="program">
+    莉莉·布朗热：夜曲<br>
+    芭比之梦幻仙境<br>
+    Fairytopia Theme<br>
+    芭比之真假公主<br>
+    自由<br>
+    Free<br>
+    如果你为我而爱我<br>
+    If you love me for me<br>
+    芭比之天鹅湖<br>
+    柴科夫斯基：天鹅湖主题曲
+  </div>
+`, "https://www.concerthall.com.cn/events/neweventdetail.php?id=5055");
+assert.deepEqual(xinghaiBilingual.program.map((item) => item.title), ["夜曲", "Fairytopia Theme", "自由", "如果你为我而爱我", "天鹅湖主题曲"]);
+const xinghaiBilingualProgram = xinghaiBilingual.program as ProgramItem[];
+assert.equal(xinghaiBilingualProgram[0].alternateTitles, undefined);
+assert.deepEqual(xinghaiBilingualProgram[2].alternateTitles, ["Free"]);
+assert.deepEqual(xinghaiBilingualProgram[3].alternateTitles, ["If you love me for me"]);
 
 const zhongshan = parseZhongshanMusicHallDetail(`
   <div class="pp_l"><img class="pp_pic" src="/concert-poster.jpg"></div>

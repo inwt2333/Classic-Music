@@ -23,17 +23,28 @@ function fetchJson<T>(path: string): Promise<T> {
   const existing = jsonRequests.get(path);
   if (existing) return existing as Promise<T>;
 
-  const request = fetch(dataUrl(path))
-    .then((response) => {
-      if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
-      return response.json() as Promise<T>;
-    })
+  const request = fetchJsonWithRetry<T>(path)
     .catch((error) => {
       jsonRequests.delete(path);
       throw error;
     });
   jsonRequests.set(path, request);
   return request;
+}
+
+async function fetchJsonWithRetry<T>(path: string) {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const response = await fetch(dataUrl(path));
+      if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+      return await response.json() as T;
+    } catch (error) {
+      lastError = error;
+      if (attempt === 0) await new Promise((resolve) => window.setTimeout(resolve, 600));
+    }
+  }
+  throw lastError;
 }
 
 export function loadEventIndex() {

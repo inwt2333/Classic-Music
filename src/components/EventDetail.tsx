@@ -15,7 +15,6 @@ import {
   Music,
   Search,
   Share2,
-  ShieldCheck,
   Star,
   Ticket,
   UserRound,
@@ -38,6 +37,7 @@ import {
   formatEventVenue,
   imslpSearchUrl,
   musicBrainzWorkSearchUrl,
+  normalizeEnsembleName,
   resourceSearchUrl,
 } from "../utils";
 
@@ -45,6 +45,7 @@ export default function EventDetail({
   event,
   loading,
   open,
+  modal,
   entitiesByKey,
   knowledgeWorksById,
   panelRef,
@@ -64,6 +65,7 @@ export default function EventDetail({
   event: ConcertEvent | null;
   loading: boolean;
   open: boolean;
+  modal: boolean;
   entitiesByKey: Map<string, EntityRecord>;
   knowledgeWorksById: Map<string, KnowledgeWorkSummary>;
   panelRef?: RefObject<HTMLElement | null>;
@@ -119,13 +121,7 @@ export default function EventDetail({
   const people = Array.from(
     new Set([event.conductor, ...event.performers].filter((value): value is string => Boolean(value))),
   );
-  const qualityLabel = {
-    scraped: "官网解析",
-    "manual-reviewed": "人工确认",
-    "ocr-assisted": "图片 OCR · 待复核",
-    "ai-enhanced": "AI 辅助",
-    "needs-review": "待复核",
-  }[event.dataQuality];
+  const ensemble = normalizeEnsembleName(event.ensemble) ?? event.ensemble;
   const dataIssues = detectDataIssues(event);
   const evidenceImages = event.extraction?.images ?? [];
   const showEvidenceImages = evidenceImages.length > 0
@@ -136,15 +132,11 @@ export default function EventDetail({
     <section
       ref={panelRef}
       className={`detail-panel ${open ? "open" : ""}`}
-      role={open ? "dialog" : undefined}
-      aria-modal={open ? "true" : undefined}
+      role={modal ? "dialog" : "region"}
+      aria-modal={modal ? "true" : undefined}
       aria-label="演出详情"
     >
       <DetailClose buttonRef={closeButtonRef} onClose={onClose} />
-      <div className="detail-kicker">
-        <span>{qualityLabel}</span>
-        <span>{event.sources?.length ?? 1} 个来源</span>
-      </div>
       <h2>{event.title}</h2>
 
       <div className="detail-meta">
@@ -200,15 +192,14 @@ export default function EventDetail({
         </button>
       </div>
 
-      <div className={`quality-card ${dataIssues.length ? "warning" : ""}`}>
-        {dataIssues.length ? <Flag size={18} /> : <ShieldCheck size={18} />}
+      {dataIssues.length ? <div className="quality-card warning">
+        <Flag size={18} />
         <div>
-          <strong>{dataIssues.length ? "这条信息可能需要核对" : "数据来源清晰"}</strong>
-          <span>{qualityLabel} · {event.sources?.length ?? 1} 个来源 · 最后采集 {formatDateTime(event.scrapedAt)}</span>
+          <strong>部分信息可能不完整</strong>
           {dataIssues.map((issue) => <small key={issue}>{issue}</small>)}
         </div>
         <button type="button" onClick={() => setCorrectionOpen(true)}><Flag size={14} />信息有误</button>
-      </div>
+      </div> : null}
 
       {event.priceTiers?.length ? (
         <div className="price-tier-list" aria-label="票价档位">
@@ -217,14 +208,14 @@ export default function EventDetail({
         </div>
       ) : null}
 
-      {people.length || event.ensemble ? (
+      {people.length || ensemble ? (
         <>
           <SectionTitle icon={<UserRound size={17} />} title="人物与乐团" />
           <div className="entity-list">
-            {event.ensemble ? (
+            {ensemble ? (
               <EntityChip
-                name={event.ensemble}
-                entity={entitiesByKey.get(`ensemble:${event.ensemble}`)}
+                name={ensemble}
+                entity={entitiesByKey.get(`ensemble:${ensemble}`)}
                 follows={follows}
                 onExplore={onExplore}
                 onToggleFollow={onToggleFollow}
@@ -250,10 +241,7 @@ export default function EventDetail({
       <SectionTitle icon={<Music size={17} />} title={`节目单${event.program.length ? ` · ${event.program.length} 首` : ""}`} />
       {event.dataQuality === "ocr-assisted" ? (
         <p className="ocr-notice">
-          官网节目单来自图片，当前文字由本地 OCR 提取并等待复核
-          {event.extraction?.confidence !== undefined
-            ? ` · 置信度 ${event.extraction.confidence}`
-            : ""}
+          节目单来自官方图片，文字信息可能不完整，请结合下方原图查看。
         </p>
       ) : null}
       <div className="program-list">
@@ -271,7 +259,7 @@ export default function EventDetail({
             />
           ))
         ) : (
-          <p className="muted">官网暂未提供可确认的文字节目单，已标记等待复核。</p>
+          <p className="muted">官网暂未提供完整的文字节目单。</p>
         )}
       </div>
 
@@ -283,12 +271,7 @@ export default function EventDetail({
             <small>{evidenceImages.length} 张</small>
           </summary>
           <div className="ocr-evidence-content">
-            <p>以下图片来自演出官方页面，OCR 尚未完整识别其中的曲目信息，可展开原图核对。</p>
-            {event.extraction?.reasons?.length ? (
-              <div className="ocr-evidence-reasons">
-                {event.extraction.reasons.map((reason) => <span key={reason}>{reason}</span>)}
-              </div>
-            ) : null}
+            <p>以下图片来自演出官方页面，可展开查看完整内容。</p>
             <div className="ocr-evidence-gallery">
               {evidenceImages.map((image, index) => (
                 <button key={image.url} type="button" onClick={() => setEvidenceImage(image)}>
@@ -333,7 +316,7 @@ export default function EventDetail({
         }]).map((source) => (
           <a key={source.sourceRecordId} href={source.sourceUrl} target="_blank" rel="noreferrer">
             <span>{source.sourceName}</span>
-            <small>{formatDateTime(source.scrapedAt)}</small>
+            <ExternalLink size={13} />
           </a>
         ))}
       </div>

@@ -77,6 +77,7 @@ jobs:
         run: |
           test -n "$VITE_SUPABASE_URL" || { echo "::error::Missing Actions variable VITE_SUPABASE_URL"; exit 1; }
           test -n "$VITE_SUPABASE_PUBLISHABLE_KEY" || { echo "::error::Missing Actions variable VITE_SUPABASE_PUBLISHABLE_KEY"; exit 1; }
+          npm run auth:verify
 
       - name: Build
         env:

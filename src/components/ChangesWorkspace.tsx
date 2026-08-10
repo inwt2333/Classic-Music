@@ -51,7 +51,10 @@ export default function ChangesWorkspace() {
         setChanges(changeData);
         setDataset(eventData);
       })
-      .catch((reason) => setError(reason instanceof Error ? reason.message : String(reason)));
+      .catch((reason) => {
+        console.error("Unable to load change history", reason);
+        setError("变化记录暂时无法载入，请稍后重试。");
+      });
   }, []);
 
   useEffect(() => setVisibleCount(PAGE_SIZE), [query, typeFilter, fromDate, toDate, latestOnly]);
@@ -105,8 +108,7 @@ export default function ChangesWorkspace() {
     return [...map.entries()];
   }, [visibleChanges]);
   const hasFilters = Boolean(query || fromDate || toDate || latestOnly || typeFilter !== "all");
-  const runCount = changes?.runs?.length ?? new Set(changes?.changes.map((item) => item.detectedAt)).size;
-
+  const changeTypeCount = new Set(changes?.changes.map((item) => item.type)).size;
   function resetFilters() {
     setQuery("");
     setTypeFilter("all");
@@ -142,8 +144,8 @@ export default function ChangesWorkspace() {
               <dd>{changes?.changes.length ?? 0}</dd>
             </div>
             <div>
-              <dt>采集批次</dt>
-              <dd>{runCount}</dd>
+              <dt>变化类型</dt>
+              <dd>{changeTypeCount}</dd>
             </div>
           </dl>
         </div>
@@ -172,10 +174,10 @@ export default function ChangesWorkspace() {
             <span>结束日期</span>
             <input type="date" value={toDate} min={fromDate || undefined} onChange={(event) => setToDate(event.target.value)} />
           </label>
-          <label className="change-latest-toggle">
+          {latestIds.size ? <label className="change-latest-toggle">
             <input type="checkbox" checked={latestOnly} onChange={(event) => setLatestOnly(event.target.checked)} />
-            <span>仅本次采集</span>
-          </label>
+            <span>仅看最近更新</span>
+          </label> : null}
           <button type="button" className="change-reset" title="重置筛选" aria-label="重置筛选" disabled={!hasFilters} onClick={resetFilters}>
             <RotateCcw size={16} />
           </button>
@@ -183,15 +185,15 @@ export default function ChangesWorkspace() {
 
         <div className="change-result-summary">
           <span>{filteredChanges.length} 条记录</span>
-          {latestOnly ? <small>本次采集 {latestIds.size} 条</small> : null}
+          {latestOnly ? <small>最近更新 {latestIds.size} 条</small> : null}
         </div>
 
-        {error ? <p className="muted">加载失败：{error}</p> : null}
+        {error ? <p className="muted">{error}</p> : null}
         {!error && changes && !changes.changes.length ? (
           <div className="empty-results changes-empty">
             <CalendarClock size={30} />
             <h2>尚无历史变更</h2>
-            <p>下一次采集发现的结构化变化会保存在这里。</p>
+            <p>演出时间、阵容、曲目或票价发生变化后，会记录在这里。</p>
           </div>
         ) : null}
         {!error && changes?.changes.length && !filteredChanges.length ? (

@@ -23,6 +23,7 @@ import {
   Download,
   Filter,
   List as ListIcon,
+  LoaderCircle,
   MapPin,
   MoreHorizontal,
   Music,
@@ -108,6 +109,8 @@ import {
   dateMatchesPreset,
   formatEventVenue,
   getInitialCalendarMonth,
+  normalizeEnsembleName,
+  normalizeVenueName,
 } from "./utils";
 
 const CalendarView = lazy(() => import("./components/CalendarView"));
@@ -165,7 +168,7 @@ function App() {
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
   const [changes, setChanges] = useState<ChangeDataset | null>(null);
-  const [loadState, setLoadState] = useState("正在加载演出索引");
+  const [loadState, setLoadState] = useState("正在加载演出");
   const [query, setQuery] = useState(initialParams.get("q") ?? "");
   const [datePreset, setDatePreset] = useState<DatePreset>((initialParams.get("date") as DatePreset) || "all");
   const [city, setCity] = useState(initialParams.get("city") ?? "全部城市");
@@ -380,7 +383,7 @@ function App() {
         supplementalTimer = window.setTimeout(() => void loadSupplementalData(), 200);
       })
       .catch((error) => {
-        if (!cancelled) setLoadState(`加载失败：${error instanceof Error ? error.message : String(error)}`);
+        if (!cancelled) setLoadState("演出数据暂时无法载入");
       });
 
     return () => {
@@ -535,7 +538,7 @@ function App() {
     () => [
       "全部场馆",
       ...Array.from(
-        new Set(dataset.events.filter((event) => city === "全部城市" || event.city === city).map((event) => event.venue)),
+        new Set(dataset.events.filter((event) => city === "全部城市" || event.city === city).map((event) => normalizeVenueName(event.venue))),
       ).sort(),
     ],
     [city, dataset.events],
@@ -586,13 +589,13 @@ function App() {
       if (eventTime < now) return false;
       if (!dateMatchesPreset(event.startTime, datePreset)) return false;
       if (city !== "全部城市" && event.city !== city) return false;
-      if (venue !== "全部场馆" && event.venue !== venue) return false;
+      if (venue !== "全部场馆" && normalizeVenueName(event.venue) !== venue) return false;
       if (ensemble !== "全部乐团" && normalizeEnsembleLabel(event.ensemble) !== ensemble) return false;
       if (genre !== "全部类型" && !event.genres.includes(genre)) return false;
       if (hasProgram && !event.hasProgram) return false;
       if (personalFilter !== "all" && personalEvents[event.id] !== personalFilter) return false;
       if (activeEntityEvents && !activeEntityEvents.has(event.id)) return false;
-      if (activeVenue && event.venue !== activeVenue) return false;
+      if (activeVenue && normalizeVenueName(event.venue) !== activeVenue) return false;
       return !deferredQuery || matchesExpandedSearch(event.searchText, expandedQueries);
     });
   }, [
@@ -1022,8 +1025,9 @@ function App() {
   };
 
   const exploreVenue = (nextVenue: string) => {
-    pushHistoryValue("venuePage", nextVenue);
-    setActiveVenue(nextVenue);
+    const normalizedVenue = normalizeVenueName(nextVenue);
+    pushHistoryValue("venuePage", normalizedVenue);
+    setActiveVenue(normalizedVenue);
     setActiveEntityId("");
     setActiveWorkId("");
     setActiveComposerId("");
@@ -1098,17 +1102,14 @@ function App() {
               <a href="?updates=1"><History size={15} />更新日志</a>
             </nav>
           </details>
-          <span className={dataset.stats.errors.length ? "warning" : ""}>
-            {dataset.stats.errors.length ? <CircleAlert size={14} /> : <Check size={14} />}
+          <span>
+            <Check size={14} />
             {dataset.generatedAt
               ? `数据更新时间：${formatDatasetTimestamp(dataset.generatedAt)}`
               : loadState}
           </span>
           <small>
             {dataset.events.length} 场 · {dataset.sources.length} 个来源
-            {dataset.stats.errors.length
-              ? ` · ${dataset.sources.filter((source) => source.ok).length} 个本次成功`
-              : ""}
           </small>
         </div>
       </header>
@@ -1325,7 +1326,7 @@ function App() {
           <div>
             <Building2 size={18} />
             <span><small>场馆</small><strong>{activeVenue}</strong></span>
-            <em>{dataset.events.filter((event) => event.venue === activeVenue).length} 场已收录</em>
+            <em>{dataset.events.filter((event) => normalizeVenueName(event.venue) === activeVenue).length} 场已收录</em>
           </div>
           <div className="entity-context-actions">
             <a href={`https://uri.amap.com/search?keyword=${encodeURIComponent(activeVenue)}`} target="_blank" rel="noreferrer"><MapPin size={16} />地图交通</a>
@@ -1392,7 +1393,16 @@ function App() {
 
         {viewMode === "list" ? (
           <section className="event-list" aria-label="演出列表" data-app-background>
-            {filteredEvents.length ? (
+            {!dataset.generatedAt && loadState === "正在加载演出" ? (
+              <div className="empty-results loading-state" aria-live="polite">
+                <LoaderCircle className="spin" size={28} /><h2>正在加载演出</h2><p>请稍候。</p>
+              </div>
+            ) : loadState === "演出数据暂时无法载入" && !dataset.events.length ? (
+              <div className="empty-results load-failure" role="alert">
+                <CircleAlert size={28} /><h2>演出暂时无法载入</h2><p>请检查网络连接后重新加载。</p>
+                <button type="button" onClick={() => window.location.reload()}>重新加载</button>
+              </div>
+            ) : filteredEvents.length ? (
               <>
                 {displayedEvents.slice(0, visibleCount).map((event) => (
                   <EventListRow
@@ -1420,6 +1430,16 @@ function App() {
           </section>
         ) : (
           <section data-app-background>
+            {!dataset.generatedAt && loadState === "正在加载演出" ? (
+              <div className="empty-results loading-state" aria-live="polite">
+                <LoaderCircle className="spin" size={28} /><h2>正在加载演出</h2><p>请稍候。</p>
+              </div>
+            ) : loadState === "演出数据暂时无法载入" && !dataset.events.length ? (
+              <div className="empty-results load-failure" role="alert">
+                <CircleAlert size={28} /><h2>演出暂时无法载入</h2><p>请检查网络连接后重新加载。</p>
+                <button type="button" onClick={() => window.location.reload()}>重新加载</button>
+              </div>
+            ) :
             <Suspense fallback={<section className="calendar-panel loading">正在加载日历</section>}>
               <CalendarView
                 events={displayedEvents}
@@ -1428,7 +1448,7 @@ function App() {
                 onMonthChange={setCalendarMonth}
                 onSelect={selectEvent}
               />
-            </Suspense>
+            </Suspense>}
           </section>
         )}
 
@@ -1436,6 +1456,7 @@ function App() {
           event={selectedDetail}
           loading={detailLoading}
           open={detailOpen}
+          modal={detailModalActive}
           entitiesByKey={entitiesByKey}
           knowledgeWorksById={knowledgeWorksById}
           panelRef={detailPanelRef}
@@ -1514,7 +1535,7 @@ const EventListRow = memo(function EventListRow({
             <h2>{event.title}</h2>
             <div className="event-badges">
               {changeLabel ? <span className="change-pill">{changeLabel}</span> : null}
-              {hasDataIssue ? <span className="quality-pill">需核对</span> : null}
+              {hasDataIssue ? <span className="quality-pill">信息待确认</span> : null}
               {personalStatus ? (
                 <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已去"}</span>
               ) : null}
@@ -1565,18 +1586,7 @@ function SelectFilter({
 }
 
 function normalizeEnsembleLabel(value?: string) {
-  if (!value) return undefined;
-  if (value.includes("上海交响乐团")) return "上海交响乐团";
-  if (value.includes("苏州交响乐团")) return "苏州交响乐团";
-  const cleaned = (value.includes("与") ? value.split("与").at(-1) : value)?.replace(/^与/, "").trim() ?? "";
-  if (
-    cleaned.length <= 24 &&
-    !/[丨|]/.test(cleaned) &&
-    /(?:交响乐团|爱乐乐团|管弦乐团|室内乐团|合唱团|四重奏)$/.test(cleaned)
-  ) {
-    return cleaned;
-  }
-  return undefined;
+  return normalizeEnsembleName(value);
 }
 
 function useMediaQuery(query: string) {

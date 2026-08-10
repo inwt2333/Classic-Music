@@ -370,11 +370,11 @@ function eventMatchesFollow(
 export function detectDataIssues(event: ConcertEvent | ConcertEventSummary) {
   const issues: string[] = [];
   if (event.dataQuality === "needs-review" || event.dataQuality === "ocr-assisted") {
-    issues.push(event.dataQuality === "ocr-assisted" ? "节目单来自 OCR，尚未人工确认" : "该演出正在等待人工复核");
+    issues.push(event.dataQuality === "ocr-assisted" ? "节目单文字来自官方图片，可能不完整" : "部分信息尚待补充");
   }
-  if (isSuspiciousVenue(event.venue)) issues.push("场馆名称可能混入主办方或演出标题");
-  if (event.ensemble && isSuspiciousEnsemble(event.ensemble)) issues.push("乐团名称可能需要拆分或规范化");
-  if ("program" in event && event.program.some(isSuspiciousProgramItem)) issues.push("节目单中可能混入演出简介或人员信息");
+  if (isSuspiciousVenue(event.venue)) issues.push("场馆信息可能不完整");
+  if (event.ensemble && isSuspiciousEnsemble(event.ensemble)) issues.push("乐团信息可能不完整");
+  if ("program" in event && event.program.some(isSuspiciousProgramItem)) issues.push("节目单可能包含无关文字");
   return Array.from(new Set(issues));
 }
 

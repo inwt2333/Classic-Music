@@ -54,8 +54,11 @@ async function expectAnonymousWriteDenied(table: "profiles" | "user_roles", body
 async function main() {
   const settingsResponse = await request("auth/v1/settings");
   if (!settingsResponse.ok) throw new Error(`Supabase Auth is unavailable (HTTP ${settingsResponse.status})`);
-  const settings = await settingsResponse.json() as { external?: { email?: boolean } };
+  const settings = await settingsResponse.json() as { external?: { email?: boolean }; mailer_autoconfirm?: boolean };
   if (!settings.external?.email) throw new Error("Email authentication is disabled");
+  if (!settings.mailer_autoconfirm) {
+    throw new Error("Email confirmation is still required; turn Confirm email off before production launch");
+  }
 
   await expectPrivateTable("profiles");
   await expectPrivateTable("user_roles");

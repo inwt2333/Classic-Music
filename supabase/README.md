@@ -3,10 +3,11 @@
 The browser only uses `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`.
 Never expose a secret or service-role key through a `VITE_` variable.
 
-The static SPA uses email/password authentication. Email confirmation is sent
-only for registration, while password recovery sends a separate reset link.
-Both callbacks use Supabase's implicit browser flow so the JavaScript client
-can consume and persist the returned session on a static GitHub Pages site.
+The static SPA uses email/password authentication. Email confirmation is
+disabled so registration creates a session immediately.
+Password recovery still sends a reset link and uses Supabase's implicit browser
+flow so the JavaScript client can consume and persist the returned session on a
+static GitHub Pages site.
 
 ## Apply the identity migration
 
@@ -31,9 +32,11 @@ The check confirms that email Auth is enabled, both tables exist, anonymous
 reads are denied or return no rows, anonymous inserts fail, and the
 administrator RPC cannot be called anonymously.
 
-In **Authentication > Providers > Email**, keep email/password sign-up and
-email confirmation enabled. Users choose a display name during registration;
-daily sign-in uses email and password without sending another email.
+In **Authentication > Providers > Email**, keep email/password sign-up enabled
+and turn **Confirm email** off. Users choose a display name during
+registration and receive a session immediately. Daily sign-in uses email and
+password without sending an email. Password recovery still requires a custom
+SMTP provider before delivery to ordinary external addresses is reliable.
 
 ## Promote the first administrator
 

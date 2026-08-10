@@ -374,8 +374,8 @@ function CollectionDirectory({
   if (!active) {
     return <div className="library-collections">
       <section className="library-section collection-intro">
-        <div><span>CURATED FROM LIVE DATA</span><h2>从作品指南回到真实现场</h2></div>
-        <p>专题不是固定榜单。只有完成知识映射且当前确有未来场次的作品才会出现，采集更新后内容会自动变化。</p>
+        <div><span>精选专题</span><h2>从作品指南回到真实现场</h2></div>
+        <p>专题会根据近期演出持续更新，方便从感兴趣的作品找到真实现场。</p>
       </section>
       <div className="collection-grid">
         {collections.map((collection, index) => <article key={collection.key}>

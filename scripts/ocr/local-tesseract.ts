@@ -42,7 +42,7 @@ export async function createLocalTesseract(cacheDirectory: string): Promise<Loca
       const response = await fetchWithRetry(url, () => ({
         headers: {
           "user-agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicDemo/0.1",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
           accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
         },
         signal: AbortSignal.timeout(30_000),

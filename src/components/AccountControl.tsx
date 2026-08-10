@@ -15,7 +15,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useAuth } from "../auth/AuthProvider";
 
 type AccountMode = "login" | "register" | "forgot" | "password";
-type Notice = { title: string; detail: string } | null;
+type Notice = { title: string; detail: string; canResendConfirmation?: boolean } | null;
 
 export default function AccountControl() {
   const auth = useAuth();
@@ -102,7 +102,11 @@ export default function AccountControl() {
       if (mode === "register") {
         const result = await auth.signUp(displayName, email, password);
         if (result.requiresEmailConfirmation) {
-          setNotice({ title: "验证邮件已经发送", detail: "请打开邮件完成注册，之后即可直接使用邮箱和密码登录。" });
+          setNotice({
+            title: "请验证邮箱",
+            detail: "验证邮件通常会在几分钟内到达，也请检查垃圾邮件。没有收到时可在此重新发送。",
+            canResendConfirmation: true,
+          });
         } else {
           setOpen(false);
         }
@@ -190,6 +194,24 @@ export default function AccountControl() {
             ) : notice ? (
               <div className="account-message success">
                 <Mail size={24} /><strong>{notice.title}</strong><span>{notice.detail}</span>
+                {notice.canResendConfirmation ? (
+                  <button type="button" disabled={sending} onClick={async () => {
+                    setSending(true);
+                    setError("");
+                    try {
+                      await auth.resendSignUpConfirmation(email);
+                      setNotice({
+                        title: "验证邮件已重新发送",
+                        detail: "请稍候检查收件箱和垃圾邮件。为防止重复发送，短时间内请不要连续点击。",
+                        canResendConfirmation: true,
+                      });
+                    } catch (reason) {
+                      setError(formatAuthError(reason));
+                    } finally {
+                      setSending(false);
+                    }
+                  }}>{sending ? <LoaderCircle className="spin" size={15} /> : <Mail size={15} />}{sending ? "正在发送" : "重新发送验证邮件"}</button>
+                ) : null}
                 <button type="button" onClick={() => resetFormState("login")}>返回登录</button>
               </div>
             ) : (
@@ -218,7 +240,7 @@ export default function AccountControl() {
                 ) : null}
                 <button type="submit" disabled={sending}>
                   {sending ? <LoaderCircle className="spin" size={16} /> : mode === "register" ? <UserPlus size={16} /> : mode === "forgot" ? <Mail size={16} /> : <KeyRound size={16} />}
-                  {sending ? "正在处理" : mode === "register" ? "注册并验证邮箱" : mode === "forgot" ? "发送重置邮件" : mode === "password" ? "保存新密码" : "登录"}
+                  {sending ? "正在处理" : mode === "register" ? "注册账号" : mode === "forgot" ? "发送重置邮件" : mode === "password" ? "保存新密码" : "登录"}
                 </button>
                 <div className="account-form-links">
                   {mode === "login" ? <button type="button" onClick={() => resetFormState("forgot")}>忘记密码</button> : null}
@@ -236,10 +258,15 @@ export default function AccountControl() {
 
 function formatAuthError(reason: unknown) {
   const message = reason instanceof Error ? reason.message : String(reason);
-  if (/invalid login credentials/i.test(message)) return "邮箱或密码不正确。";
-  if (/email not confirmed/i.test(message)) return "邮箱尚未验证，请先打开注册邮件中的链接。";
-  if (/user already registered/i.test(message)) return "该邮箱已经注册，请直接登录或找回密码。";
-  if (/password should be at least/i.test(message)) return "密码长度不足，请至少输入 8 位字符。";
-  if (/rate limit/i.test(message)) return "操作过于频繁，请稍后再试。";
+  const code = typeof reason === "object" && reason && "code" in reason ? String(reason.code) : "";
+  const detail = `${code} ${message}`;
+  if (/invalid login credentials/i.test(detail)) return "邮箱或密码不正确。";
+  if (/email not confirmed/i.test(detail)) return "邮箱尚未验证，请先打开注册邮件中的链接。";
+  if (/user already registered/i.test(detail)) return "该邮箱已经注册，请直接登录或找回密码。";
+  if (/password should be at least/i.test(detail)) return "密码长度不足，请至少输入 8 位字符。";
+  if (/email_address_not_authorized|email address not authorized/i.test(detail)) {
+    return "当前邮件服务尚未完成外部发信配置，暂时无法向该邮箱发送验证邮件。请联系网站管理员。";
+  }
+  if (/over_email_send_rate_limit|email rate limit|rate limit/i.test(detail)) return "邮件发送过于频繁，请稍后再试。";
   return message;
 }

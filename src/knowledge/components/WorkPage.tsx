@@ -54,7 +54,7 @@ export default function WorkPage({
       <section className="work-page work-page-state" aria-live="polite">
         <Music2 size={28} />
         <h1>正在打开作品指南</h1>
-        <p>载入已审核的作品资料与近期演出。</p>
+        <p>正在载入作品资料与近期演出。</p>
       </section>
     );
   }
@@ -80,7 +80,7 @@ export default function WorkPage({
         </button>
         <div className="work-hero-grid">
           <div>
-            <span className="work-eyebrow">{work.generation ? "自动整理" : "作品指南"}{work.period ? ` · ${work.period}` : ""}</span>
+            <span className="work-eyebrow">作品指南{work.period ? ` · ${work.period}` : ""}</span>
             <h1>{work.title}</h1>
             {work.originalTitle ? <p className="work-original-title">{work.originalTitle}</p> : null}
             <p className="work-summary">{work.summary}</p>
@@ -123,7 +123,7 @@ export default function WorkPage({
         ) : (
           <div className="work-empty-live">
             <CalendarDays size={22} />
-            <div><strong>近期暂无已匹配演出</strong><p>作品指南会保留；当官网节目单出现经过审核的精确曲名时，现场信息会自动汇入这里。</p></div>
+            <div><strong>近期暂无相关演出</strong><p>有新的相关演出时，会自动显示在这里。</p></div>
           </div>
         )}
       </section>
@@ -219,9 +219,7 @@ export default function WorkPage({
                 {source.publisher} · {source.title}<ExternalLink size={12} />
               </a>
             ))}
-            <small>{work.generation
-              ? `DeepSeek 自动整理 · 可信度 ${work.generation.score} · 更新 ${formatReviewedDate(work.updatedAt)}`
-              : `内容复核 ${formatReviewedDate(work.reviewedAt ?? work.updatedAt)} · 更新 ${formatReviewedDate(work.updatedAt)}`}</small>
+            <small>资料更新于 {formatReviewedDate(work.updatedAt)}</small>
           </section>
         </aside>
       </div>
