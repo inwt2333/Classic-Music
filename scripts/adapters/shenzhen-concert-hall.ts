@@ -45,6 +45,11 @@ export function parseShenzhenConcertHallDetail(html: string, pageUrl = "https://
     .filter((value) => /演出曲目|节目单|曲目单/.test(cheerio.load(value).text()));
   const content = candidates.sort((a, b) => cheerio.load(a).text().length - cheerio.load(b).text().length)[0] || "";
   const parsedProgram = parseProgram(content);
+  const eventPerformers = $("li")
+    .map((_, element) => cleanText($(element).text()))
+    .get()
+    .filter((line) => /^演出[：:]/.test(line))
+    .flatMap((line) => parseEventPerformers(line.replace(/^演出[：:]\s*/, "")));
   const content$ = cheerio.load(content);
   const imageUrls = content$("img[src]").map((_, element) => content$(element).attr("src") || "").get().filter(Boolean).map((url) => new URL(url, pageUrl).href);
   return {
@@ -54,7 +59,7 @@ export function parseShenzhenConcertHallDetail(html: string, pageUrl = "https://
     hall,
     priceTiers,
     program: parsedProgram.program,
-    performers: parsedProgram.performers,
+    performers: unique([...eventPerformers, ...parsedProgram.performers]),
     imageUrls,
   };
 }
@@ -79,7 +84,17 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
   for (const rawLine of scoped) {
     const line = rawLine.replace(/^\d+[.、]\s*/, "");
     if (/曲目.*为准|演出阵容|艺术家介绍|温馨提示/.test(line)) break;
-    if (/^中场休息$/.test(line)) continue;
+    if (/中场休息/.test(line)) continue;
+
+    const movement = line.match(/^([ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]+|[IVXLCDM]+|\d+)[.．、]\s*(.+)$/i);
+    if (movement && program.length) {
+      const item = program.at(-1)!;
+      item.movements = [
+        ...(item.movements ?? []),
+        { number: movement[1], title: cleanText(movement[2]) },
+      ];
+      continue;
+    }
 
     const personnel = line.match(/^(演出|演奏|伴奏|领唱|合唱|独唱)[：:]\s*(.+)$/);
     if (personnel) {
@@ -99,10 +114,11 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
       continue;
     }
 
-    if (program.length && applyCredits(program.at(-1)!, line)) continue;
-
     const match = line.match(/^([^—－\-:：]{2,36})[—－\-:：]\s*(.+)$/);
-    if (!match) continue;
+    if (!match) {
+      if (program.length && applyCredits(program.at(-1)!, line)) continue;
+      continue;
+    }
     if (isPersonnelLabel(match[1])) {
       performers.push(...splitPeople(match[2]));
       continue;
@@ -155,6 +171,17 @@ function isPersonnelLabel(value: string) {
 function splitPeople(value: string) {
   if (cleanText(value) === "全体") return [];
   return value.split(/[、，,\/]/).map(cleanText).filter(Boolean);
+}
+
+function parseEventPerformers(value: string) {
+  return value
+    .split(/[、，,；;]/)
+    .map(cleanText)
+    .map((part) => cleanText(part.split(/[\/／]/).at(-1) ?? part))
+    .map((part) => cleanText(part.replace(/^(?:指挥|钢琴|小提琴|大提琴|特邀嘉宾|嘉宾|演出)[：:]\s*/, "")))
+    .filter((part) => part
+      && !/^(?:钢琴|双钢琴|小提琴|大提琴|指挥)$/.test(part)
+      && !/(?:乐团|合唱团|管弦乐团|交响乐团)$/.test(part));
 }
 
 function dedupeCredits(items: NonNullable<ProgramItem["credits"]>) {

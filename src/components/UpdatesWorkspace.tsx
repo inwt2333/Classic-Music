@@ -38,6 +38,7 @@ const productUpdates: ProductUpdate[] = [
       { category: "improvement", title: "页面信息精简", description: "详情、来源和作品页不再显示解析方式、模型评分、采集批次等内部信息，只保留更新时间、官网来源和必要的完整性提示。" },
       { category: "fix", title: "加载与可访问性", description: "静态数据短暂失败时自动重试，首页加载过程不再误报无演出；桌面详情侧栏与手机全屏详情使用正确的交互语义。" },
       { category: "fix", title: "双语节目单", description: "星海音乐厅双语曲目合并为中文标题与外文名，影片分段标题不再被当作独立曲目。" },
+      { category: "fix", title: "深圳音乐厅节目单", description: "协奏曲乐章会归入所属作品，带“协奏曲”的标题不再被误判为署名；演出人员也按角色正确提取。" },
       { category: "improvement", title: "最新演出数据", description: "重新检查全部 18 个来源并更新演出快照，数据审计无错误和警告。" },
     ],
   },

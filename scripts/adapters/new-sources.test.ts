@@ -98,6 +98,50 @@ const szyytOrganizer = parseShenzhenConcertHallDetail(`
 assert.equal(szyytOrganizer.venue, "深圳音乐厅");
 assert.equal(szyytOrganizer.hall, undefined);
 
+const szyytConcertos = parseShenzhenConcertHallDetail(`
+  <h1>深圳交响乐团2026-2027乐季——乐圣与师徒--纪念贝多芬逝世200周年</h1>
+  <div>2027年04月09日（星期五）19:30 深圳音乐厅演奏大厅</div>
+  <ul><li>演出：指挥/林大叶、钢琴/格哈德·奥皮茨、钢琴/袁芳、深圳交响乐团</li></ul>
+  <div class="tabContent2">
+    <strong>演出曲目：</strong><br>
+    <strong>路德维希·凡·贝多芬：C大调第一钢琴协奏曲，作品15</strong><br>
+    <span>Ⅰ. 有活力的快板</span><br><span>Ⅱ. 广板</span><br><span>Ⅲ. 回旋曲：快板</span><br>
+    <strong>路德维希·凡·贝多芬：降B大调第二钢琴协奏曲，作品19</strong><br>
+    <span>Ⅰ. 有活力的快板</span><br><span>Ⅱ. 柔板</span><br><span>Ⅲ. 回旋曲：很快的快板</span><br>
+    <strong>路德维希·凡·贝多芬：c小调第三钢琴协奏曲，作品37</strong><br>
+    <span>Ⅰ. 有活力的快板</span><br><span>Ⅱ. 广板</span><br><span>Ⅲ. 回旋曲：快板</span><br>
+    <strong>----中场休息----</strong><br>
+    <strong>路德维希·凡·贝多芬：G大调第四钢琴协奏曲，作品58</strong><br>
+    <span>Ⅰ. 中庸的快板</span><br><span>Ⅱ. 稍快的行板</span><br><span>Ⅲ. 回旋曲：有活力的</span><br>
+    <strong>路德维希·凡·贝多芬：降E大调第五钢琴协奏曲“皇帝”，作品73</strong><br>
+    <span>Ⅰ. 快板</span><br><span>Ⅱ. 稍快的柔板</span><br><span>Ⅲ. 回旋曲：快板</span><br>
+    <span>*曲目以演出当日为准</span>
+  </div>
+`);
+assert.deepEqual(szyytConcertos.program.map((item) => item.title), [
+  "C大调第一钢琴协奏曲，作品15",
+  "降B大调第二钢琴协奏曲，作品19",
+  "c小调第三钢琴协奏曲，作品37",
+  "G大调第四钢琴协奏曲，作品58",
+  "降E大调第五钢琴协奏曲“皇帝”，作品73",
+]);
+assert.deepEqual(szyytConcertos.program.map((item) => item.composer), Array(5).fill("路德维希·凡·贝多芬"));
+assert.deepEqual(szyytConcertos.performers, ["林大叶", "格哈德·奥皮茨", "袁芳"]);
+assert.deepEqual(szyytConcertos.program.map((item) => item.movements?.map((movement) => movement.title)), [
+  ["有活力的快板", "广板", "回旋曲：快板"],
+  ["有活力的快板", "柔板", "回旋曲：很快的快板"],
+  ["有活力的快板", "广板", "回旋曲：快板"],
+  ["中庸的快板", "稍快的行板", "回旋曲：有活力的"],
+  ["快板", "稍快的柔板", "回旋曲：快板"],
+]);
+
+const szyytSemicolonCast = parseShenzhenConcertHallDetail(`
+  <h1>《长征组歌》专场音乐会</h1>
+  <div>2027年04月10日19:30 深圳音乐厅演奏大厅</div>
+  <ul><li>演出：指挥：张国勇；特邀嘉宾：王志昕；演出：深圳歌剧舞剧院合唱团；深圳技术大学瓦蓝合唱团；双钢琴</li></ul>
+`);
+assert.deepEqual(szyytSemicolonCast.performers, ["张国勇", "王志昕"]);
+
 const szyytCredits = parseShenzhenConcertHallDetail(`
   <h1>多民族童声合唱音乐会</h1><div>2026年08月28日 20:00 深圳音乐厅二楼演奏大厅</div>
   <div class="tabContent2"><p>演出曲目</p>
