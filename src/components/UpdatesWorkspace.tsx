@@ -51,6 +51,7 @@ const productUpdates: ProductUpdate[] = [
       { category: "feature", title: "管理员角色", description: "用户资料与管理员角色分表保存并启用 RLS，普通用户不能读取他人资料或修改自己的角色。" },
       { category: "fix", title: "审核入口收紧", description: "审核入口只向管理员显示，直接访问审核地址仍会检查登录状态和后端角色；正式站点继续关闭尚无远程写入接口的审核操作。" },
       { category: "improvement", title: "部署与后端自检", description: "GitHub Pages 构建支持公开 Supabase 变量，并增加账号表、匿名隔离和管理员函数权限的一键检查。" },
+      { category: "fix", title: "手机首页不再误开详情", description: "没有 event 参数时保持未选择状态，详情只由分享链接或用户点击打开，不再在数据载入后默认选中第一场。" },
     ],
   },
   {

@@ -376,8 +376,6 @@ function App() {
       .then((data) => {
         if (cancelled) return;
         setDataset(data);
-        const first = data.events.find((event) => new Date(event.startTime).getTime() >= Date.now()) ?? data.events[0];
-        setSelectedId((current) => current || first?.id || "");
         setCalendarMonth(getInitialCalendarMonth(data.events));
         supplementalTimer = window.setTimeout(() => void loadSupplementalData(), 200);
       })
@@ -643,9 +641,9 @@ function App() {
   }, [activeEntityId, activeVenue, city, datePreset, deferredQuery, ensemble, genre, hasProgram, personalFilter, sortMode, venue]);
 
   useEffect(() => {
-    if (!filteredEvents.length) return;
+    if (!detailOpen || !selectedId || !filteredEvents.length) return;
     if (!filteredEvents.some((event) => event.id === selectedId)) setSelectedId(filteredEvents[0].id);
-  }, [filteredEvents, selectedId]);
+  }, [detailOpen, filteredEvents, selectedId]);
 
   useEffect(() => {
     const params = new URLSearchParams();
