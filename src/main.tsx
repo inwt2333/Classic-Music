@@ -29,7 +29,6 @@ import {
   Music,
   Piano,
   Search,
-  ScanText,
   SlidersHorizontal,
   Star,
   Ticket,
@@ -43,6 +42,7 @@ import ComposerPage from "./knowledge/components/ComposerPage";
 import KnowledgeLibraryPage from "./knowledge/components/KnowledgeLibraryPage";
 import WorkPage from "./knowledge/components/WorkPage";
 import NotificationCenter from "./components/NotificationCenter";
+import PersonalWorkspace from "./components/PersonalWorkspace";
 import SavedFilterMenu from "./components/SavedFilterMenu";
 import ChangesWorkspace from "./components/ChangesWorkspace";
 import ReviewWorkspace from "./components/ReviewWorkspace";
@@ -163,7 +163,6 @@ const coverSlides = [
 
 function App() {
   const auth = useAuth();
-  const { isAdmin } = auth;
   const initialParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const [dataset, setDataset] = useState(emptyDataset);
   const [entities, setEntities] = useState(emptyEntities);
@@ -1080,20 +1079,14 @@ function App() {
             <History size={14} />
             更新日志
           </a>
-          <AccountControl />
+          <AccountControl authenticatedHref="?profile=1" />
           <button className="header-link notification-button" type="button" onClick={() => {
-            if (requireAccount("登录后才能查看关注内容和更新提醒。")) setNotificationOpen(true);
-          }} title="我的关注" aria-label="我的关注">
+            if (requireAccount("登录后才能查看更新提醒。")) setNotificationOpen(true);
+          }} title="消息提醒" aria-label="消息提醒">
             <Bell size={14} />
-            我的关注
+            消息
             {unreadNotificationCount ? <b>{unreadNotificationCount}</b> : null}
           </button>
-          {import.meta.env.DEV && isAdmin ? (
-            <a className="header-link" href="?review=1" title="数据审核" aria-label="数据审核">
-              <ScanText size={14} />
-              审核
-            </a>
-          ) : null}
           <details className="header-more">
             <summary className="header-link" title="更多页面" aria-label="更多页面"><MoreHorizontal size={17} /><span>更多</span></summary>
             <nav>
@@ -1481,7 +1474,6 @@ function App() {
         <NotificationCenter
           open={notificationOpen}
           notifications={notifications}
-          follows={follows}
           onClose={() => setNotificationOpen(false)}
           onReadAll={markAllNotificationsRead}
           onRead={markNotificationRead}
@@ -1491,7 +1483,6 @@ function App() {
             if (event) selectEvent(event);
             setNotificationOpen(false);
           }}
-          onRemoveFollow={updateFollow}
         />
       ) : null}
     </main>
@@ -1630,6 +1621,7 @@ function AppRouter() {
   if (rootParams.get("review") === "1") {
     return <ReviewAccessGate><ReviewWorkspace /></ReviewAccessGate>;
   }
+  if (rootParams.get("profile") === "1") return <PersonalWorkspace />;
   if (rootParams.get("updates") === "1") return <UpdatesWorkspace />;
   if (rootParams.get("changes") === "1") return <ChangesWorkspace />;
   if (rootParams.has("sources")) return <SourcesWorkspace />;

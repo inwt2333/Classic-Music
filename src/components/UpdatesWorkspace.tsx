@@ -42,6 +42,8 @@ const productUpdates: ProductUpdate[] = [
       { category: "fix", title: "复杂节目单层级", description: "修复国家大剧院多部套曲的作品与分曲归属、深圳音乐厅纯文本及组曲列表，并校正东方艺术中心海报中的曲名和作者。" },
       { category: "fix", title: "节目单边界", description: "民族乐器演奏者、上下半场标题和作曲家分组不再被识别为曲目。" },
       { category: "improvement", title: "变化历史降噪", description: "曲目仍随官网刷新，但不再写入变化历史或关注消息，避免 OCR 与官网排版波动造成误报。" },
+      { category: "feature", title: "独立个人页", description: "账户资料、关注分类、想去与已去演出、筛选方案集中到个人页；主页关注入口改为纯消息提醒。" },
+      { category: "feature", title: "管理员中心", description: "管理员可从个人页进入数据审核工作台，审核页继续通过后端角色验证限制访问。" },
       { category: "improvement", title: "最新演出数据", description: "重新检查全部 18 个来源并更新演出快照，数据审计无错误和警告。" },
     ],
   },

@@ -60,7 +60,7 @@ function AccessPage({ icon, title, detail, children }: { icon: ReactNode; title:
     <main className="review-access-shell">
       <header className="app-header">
         <div className="brand-block"><Music size={22} /><div><strong>古典乐演出日历</strong><span>管理员审核</span></div></div>
-        <a className="header-link" href={import.meta.env.BASE_URL}><ArrowLeft size={15} />返回演出日历</a>
+        <a className="header-link" href="?profile=1"><ArrowLeft size={15} />返回个人页</a>
       </header>
       <section className="review-access-card">
         <span>{icon}</span><h1>{title}</h1>{detail ? <p>{detail}</p> : null}{children}

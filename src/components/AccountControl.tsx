@@ -18,7 +18,13 @@ import { formatAuthError } from "../auth/auth-request";
 type AccountMode = "login" | "register" | "forgot" | "password";
 type Notice = { title: string; detail: string; canResendConfirmation?: boolean } | null;
 
-export default function AccountControl() {
+export default function AccountControl({
+  authenticatedHref,
+  signedInLabel,
+}: {
+  authenticatedHref?: string;
+  signedInLabel?: string;
+} = {}) {
   const auth = useAuth();
   const [open, setOpen] = useState(() => Boolean(auth.authError && !auth.user));
   const [mode, setMode] = useState<AccountMode>("login");
@@ -130,6 +136,13 @@ export default function AccountControl() {
   };
 
   const accountName = auth.profile?.displayName || auth.user?.email?.split("@")[0] || "账号";
+  const accountButtonContent = (
+    <>
+      {auth.loading ? <LoaderCircle className="spin" size={14} /> : auth.user ? <UserRound size={14} /> : <LogIn size={14} />}
+      <span>{auth.loading ? "账号" : auth.user ? signedInLabel || accountName : "登录"}</span>
+      {auth.isAdmin ? <i>管理员</i> : null}
+    </>
+  );
   const modalTitle = mode === "register"
     ? "注册账号"
     : mode === "forgot"
@@ -140,23 +153,32 @@ export default function AccountControl() {
 
   return (
     <>
-      <button
-        className="header-link account-button"
-        type="button"
-        title={auth.user ? `账号：${accountName}` : "登录账号"}
-        aria-label={auth.user ? `打开账号菜单，当前用户${accountName}` : "登录账号"}
-        onClick={() => {
-          setOpen(true);
-          auth.clearAuthError();
-          setError("");
-          setNotice(null);
-          if (!auth.user) setMode("login");
-        }}
-      >
-        {auth.loading ? <LoaderCircle className="spin" size={14} /> : auth.user ? <UserRound size={14} /> : <LogIn size={14} />}
-        <span>{auth.loading ? "账号" : auth.user ? accountName : "登录"}</span>
-        {auth.isAdmin ? <i>管理员</i> : null}
-      </button>
+      {auth.user && authenticatedHref ? (
+        <a
+          className="header-link account-button"
+          href={authenticatedHref}
+          title={`打开${accountName}的个人页`}
+          aria-label={`打开个人页，当前用户${accountName}`}
+        >
+          {accountButtonContent}
+        </a>
+      ) : (
+        <button
+          className="header-link account-button"
+          type="button"
+          title={auth.user ? `账号设置：${accountName}` : "登录账号"}
+          aria-label={auth.user ? `打开账号设置，当前用户${accountName}` : "登录账号"}
+          onClick={() => {
+            setOpen(true);
+            auth.clearAuthError();
+            setError("");
+            setNotice(null);
+            if (!auth.user) setMode("login");
+          }}
+        >
+          {accountButtonContent}
+        </button>
+      )}
 
       {open ? (
         <div className="modal-layer" role="presentation" onMouseDown={(event) => {

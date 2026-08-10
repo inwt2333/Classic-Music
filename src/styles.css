@@ -3987,6 +3987,620 @@ summary:focus-visible {
   }
 }
 
+/* Personal account workspace */
+.personal-workspace {
+  display: flex;
+  width: min(1240px, 100vw);
+  height: 100vh;
+  margin: 0 auto;
+  padding: 14px 18px;
+  flex-direction: column;
+}
+
+.personal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.personal-page {
+  min-height: 0;
+  padding: clamp(28px, 5vw, 58px);
+  flex: 1;
+  overflow-y: auto;
+  color: var(--ink);
+  background: #fffefa;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 12px 34px rgba(35, 48, 43, 0.1);
+}
+
+.personal-identity {
+  position: relative;
+  display: grid;
+  min-height: 190px;
+  padding: clamp(24px, 4vw, 42px);
+  grid-template-columns: auto minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+  overflow: hidden;
+  color: #f9f4e8;
+  background: var(--forest);
+  border-top: 3px solid var(--gold);
+}
+
+.personal-identity::after {
+  position: absolute;
+  right: -22px;
+  bottom: -52px;
+  width: 260px;
+  height: 130px;
+  content: "𝄞  ♩  ♫";
+  color: rgba(245, 223, 185, 0.08);
+  font-family: Georgia, serif;
+  font-size: 68px;
+  white-space: nowrap;
+  transform: rotate(-7deg);
+  pointer-events: none;
+}
+
+.personal-avatar {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  color: var(--forest);
+  background: #f7eddb;
+  border: 2px solid rgba(185, 142, 76, 0.72);
+  border-radius: 50%;
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.personal-identity > div {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.personal-identity > div > small {
+  color: #d7bd8e;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.personal-identity h1 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 36px;
+  letter-spacing: 0;
+}
+
+.personal-identity > div > p {
+  margin: 0;
+  overflow: hidden;
+  color: #c7d4ce;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personal-identity > div > span {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 5px;
+  padding: 4px 7px;
+  align-items: center;
+  gap: 5px;
+  color: #dbe8e2;
+  border: 1px solid rgba(219, 232, 226, 0.25);
+  border-radius: 3px;
+  font-size: 9px;
+}
+
+.personal-identity > div > span.admin {
+  color: #f5dfb9;
+  border-color: rgba(245, 223, 185, 0.38);
+}
+
+.personal-identity dl {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 310px;
+  margin: 0;
+  grid-template-columns: repeat(4, minmax(58px, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.personal-identity dl > div {
+  display: grid;
+  min-height: 72px;
+  padding: 12px 9px;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  background: rgba(18, 49, 41, 0.88);
+}
+
+.personal-identity dt {
+  color: #b9cbc4;
+  font-size: 9px;
+}
+
+.personal-identity dd {
+  margin: 0;
+  color: #fff8e9;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.personal-joined {
+  position: absolute;
+  right: clamp(24px, 4vw, 42px);
+  bottom: 15px;
+  z-index: 1;
+  margin: 0;
+  color: #9fb5ad;
+  font-size: 9px;
+}
+
+.personal-warning {
+  display: flex;
+  margin: 18px 0 0;
+  padding: 11px 13px;
+  align-items: center;
+  gap: 8px;
+  color: #805a28;
+  background: #fff6e5;
+  border-left: 3px solid var(--gold);
+  font-size: 11px;
+}
+
+.personal-admin-panel {
+  display: flex;
+  margin-top: 24px;
+  padding: 18px 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: #f3f0e8;
+  border-top: 1px solid #d5c39e;
+  border-bottom: 1px solid #d5c39e;
+}
+
+.personal-admin-panel > div,
+.personal-admin-panel > div > div {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.personal-admin-panel > div > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: #f8ead0;
+  background: var(--wine);
+  border-radius: 50%;
+}
+
+.personal-admin-panel > div > div {
+  display: grid;
+  gap: 2px;
+}
+
+.personal-admin-panel small {
+  color: var(--wine);
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.personal-admin-panel h2,
+.personal-admin-panel p {
+  margin: 0;
+}
+
+.personal-admin-panel h2 {
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 17px;
+}
+
+.personal-admin-panel p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.personal-admin-panel > a {
+  display: inline-flex;
+  min-height: 38px;
+  padding: 8px 11px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  background: var(--wine);
+  border-radius: 4px;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.personal-section {
+  padding: 34px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.personal-section > header {
+  display: flex;
+  margin-bottom: 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.personal-section > header > div {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  color: var(--wine);
+}
+
+.personal-section > header > div > span {
+  display: grid;
+  gap: 3px;
+}
+
+.personal-section h2,
+.personal-section p {
+  margin: 0;
+}
+
+.personal-section h2 {
+  color: var(--ink);
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 20px;
+}
+
+.personal-section > header p {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.personal-section > header > strong {
+  color: var(--forest);
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.personal-follow-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 28px;
+}
+
+.personal-follow-group > header,
+.personal-event-group > header {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 7px;
+  color: var(--forest);
+  border-bottom: 1px solid #bdc9c4;
+}
+
+.personal-follow-group h3,
+.personal-event-group h3 {
+  margin: 0;
+  flex: 1;
+  font-size: 12px;
+}
+
+.personal-follow-group > header span,
+.personal-event-group > header span {
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 13px;
+}
+
+.personal-follow-group > div,
+.personal-event-group > div {
+  display: grid;
+}
+
+.personal-follow-item,
+.personal-event-group article,
+.personal-filter-list article {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  border-bottom: 1px solid #e4e9e6;
+}
+
+.personal-follow-item > a,
+.personal-event-group article > a,
+.personal-filter-list article > a {
+  display: flex;
+  min-width: 0;
+  min-height: 58px;
+  padding: 10px 8px;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.personal-follow-item > a > span,
+.personal-event-group article > a > span,
+.personal-filter-list article > a > span {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 3px;
+}
+
+.personal-follow-item strong,
+.personal-event-group article strong,
+.personal-filter-list article strong {
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personal-follow-item small,
+.personal-event-group article small,
+.personal-filter-list article small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personal-follow-item > a > svg,
+.personal-event-group article > a > svg,
+.personal-filter-list article > a > svg {
+  flex: 0 0 auto;
+  color: #91a19a;
+}
+
+.personal-follow-item > button,
+.personal-event-group article > button,
+.personal-filter-list article > button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  padding: 0;
+  place-items: center;
+  color: #7f8b85;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #e0e6e2;
+  cursor: pointer;
+}
+
+.personal-follow-item > button:hover,
+.personal-event-group article > button:hover,
+.personal-filter-list article > button:hover {
+  color: var(--wine);
+  background: var(--wine-soft);
+}
+
+.personal-empty,
+.personal-state {
+  display: grid;
+  min-height: 300px;
+  padding: 36px 20px;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.personal-empty > svg,
+.personal-state > span {
+  color: var(--wine);
+}
+
+.personal-empty strong,
+.personal-state h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+}
+
+.personal-empty p,
+.personal-state p {
+  margin: 0;
+  font-size: 11px;
+}
+
+.personal-empty a {
+  margin-top: 6px;
+  color: var(--teal);
+  font-size: 11px;
+}
+
+.personal-state .account-button {
+  margin-top: 10px;
+  color: #fff;
+  background: var(--forest);
+  border: 1px solid var(--forest);
+}
+
+.personal-concert-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.personal-event-group article time {
+  width: 64px;
+  flex: 0 0 auto;
+  color: var(--wine);
+  font-size: 9px;
+}
+
+.personal-event-group > div > p,
+.personal-inline-empty {
+  margin: 0;
+  padding: 18px 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.personal-filter-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+}
+
+.personal-filter-list article > a > svg:first-child {
+  color: var(--wine);
+}
+
+@media (max-width: 900px) {
+  .personal-identity {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .personal-identity dl {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .personal-joined {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .personal-workspace {
+    height: 100svh;
+    padding: 0;
+  }
+
+  .personal-workspace .source-page-header {
+    border-radius: 0;
+  }
+
+  .personal-header-actions {
+    gap: 3px;
+  }
+
+  .personal-header-actions .account-button i,
+  .personal-header-actions .header-link span {
+    display: none;
+  }
+
+  .personal-page {
+    padding: 20px 14px 40px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .personal-identity {
+    padding: 24px 18px;
+    gap: 14px;
+  }
+
+  .personal-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 23px;
+  }
+
+  .personal-identity h1 {
+    font-size: 27px;
+  }
+
+  .personal-identity dl {
+    min-width: 0;
+  }
+
+  .personal-identity dl > div {
+    min-height: 60px;
+    padding: 8px 4px;
+  }
+
+  .personal-identity dd {
+    font-size: 19px;
+  }
+
+  .personal-admin-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .personal-admin-panel > a {
+    justify-content: center;
+  }
+
+  .personal-follow-groups,
+  .personal-concert-columns,
+  .personal-filter-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .personal-section {
+    padding: 28px 0;
+  }
+
+  .personal-section > header p {
+    line-height: 1.5;
+  }
+
+  .personal-follow-item > a,
+  .personal-event-group article > a,
+  .personal-filter-list article > a {
+    min-height: 62px;
+  }
+
+  .personal-follow-item > button,
+  .personal-event-group article > button,
+  .personal-filter-list article > button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 430px) {
+  .personal-identity {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .personal-avatar,
+  .personal-identity > div > span {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .personal-identity > div > p {
+    max-width: 100%;
+  }
+
+  .personal-identity dl {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .personal-section > header p {
+    display: none;
+  }
+}
+
 @media (max-width: 1180px) {
   .review-layout {
     grid-template-columns: 250px minmax(470px, 1fr) 310px;

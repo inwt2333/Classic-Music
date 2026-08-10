@@ -134,9 +134,9 @@ export default function ReviewWorkspace() {
               公众号导入
             </button>
           </div>
-          <a href="/">
+          <a href="?profile=1">
             <ArrowLeft size={16} />
-            返回演出日历
+            返回个人页
           </a>
         </div>
       </header>
