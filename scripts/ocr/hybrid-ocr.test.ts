@@ -93,6 +93,27 @@ assert.equal((await isolatedImageFailure.recognizeUrl("https://example.com/avail
 assert.equal(imageDownloads, 2);
 assert.equal(visionCalls, 1);
 
+let timedOutVisionCalls = 0;
+const timedOutVision = await createHybridOcr(
+  await mkdtemp(join(tmpdir(), "classic-music-vision-timeout-")),
+  config,
+  {
+    fetchImpl: (async (url) => {
+      if (String(url).includes("chat/completions")) {
+        timedOutVisionCalls += 1;
+        const error = new Error("The operation was aborted due to timeout");
+        error.name = "TimeoutError";
+        throw error;
+      }
+      return new Response(image, { headers: { "content-type": "image/png" } });
+    }) as typeof fetch,
+    localFactory: async () => fallback,
+  },
+);
+assert.equal((await timedOutVision.recognizeUrl("https://example.com/timeout-one.png")).provider, "tesseract");
+assert.equal((await timedOutVision.recognizeUrl("https://example.com/timeout-two.png")).provider, "tesseract");
+assert.equal(timedOutVisionCalls, 1);
+
 console.log("Hybrid OCR tests passed.");
 }
 

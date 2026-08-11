@@ -83,6 +83,7 @@ export async function createHybridOcr(
         const cachePath = resolve(visionCacheDirectory, `${cacheKey}.json`);
         try {
           const cached = JSON.parse(await readFile(cachePath, "utf8")) as OcrPage;
+          console.log(`[vision] ${config.visionModel} cache hit for ${describeImage(url)}`);
           return { ...cached, url, imageHash, cacheHit: true, provider: config.visionModel };
         } catch {
           // A cache miss is expected for a newly discovered poster.
@@ -151,6 +152,9 @@ export async function createHybridOcr(
           })),
         };
         await writeFile(cachePath, JSON.stringify(page, null, 2), "utf8");
+        console.log(
+          `[vision] ${config.visionModel} completed ${describeImage(url)}: ${page.programSections?.length ?? 0} section(s)`,
+        );
         return page;
       } catch (error) {
         // A poster CDN failure applies only to that image. Disable vision for
@@ -167,8 +171,20 @@ export async function createHybridOcr(
 }
 
 function isVisionServiceFailure(error: unknown) {
+  if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
+    return true;
+  }
   const message = error instanceof Error ? error.message : String(error);
   return /(?:SJTU AI HTTP (?:401|403|404|429|5\d\d)|fetch failed|network|ECONN|ETIMEDOUT|AbortError)/i.test(message);
+}
+
+function describeImage(url: string) {
+  try {
+    const parsed = new URL(url);
+    return `${parsed.host}${parsed.pathname}`;
+  } catch {
+    return url;
+  }
 }
 
 function cleanOptional(value: string | null | undefined) {
