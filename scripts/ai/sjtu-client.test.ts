@@ -47,6 +47,20 @@ await assert.rejects(() => requestSjtuChat({
 }), /401/);
 assert.equal(unauthorizedCalls, 1);
 
+let limitedAttemptCalls = 0;
+await assert.rejects(() => requestSjtuChat({
+  config,
+  model: config.visionModel,
+  messages: [{ role: "user", content: "test" }],
+  maxAttempts: 1,
+  retryDelayMs: 0,
+  fetchImpl: (async () => {
+    limitedAttemptCalls += 1;
+    throw new TypeError("fetch failed");
+  }) as typeof fetch,
+}), /fetch failed/);
+assert.equal(limitedAttemptCalls, 1);
+
 console.log("SJTU AI client tests passed.");
 }
 

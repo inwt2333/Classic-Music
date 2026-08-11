@@ -49,12 +49,13 @@ export async function requestSjtuChat(input: {
   messages: ChatMessage[];
   maxTokens?: number;
   timeoutMs?: number;
+  maxAttempts?: number;
   fetchImpl?: typeof fetch;
   retryDelayMs?: number;
 }) {
   const fetchImpl = input.fetchImpl ?? globalThis.fetch;
   const endpoint = `${input.config.baseUrl}/chat/completions`;
-  const maxAttempts = 2;
+  const maxAttempts = Math.max(1, Math.floor(input.maxAttempts ?? 2));
   let lastError: Error | undefined;
 
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {

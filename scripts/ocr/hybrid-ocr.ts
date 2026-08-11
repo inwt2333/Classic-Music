@@ -119,6 +119,8 @@ export async function createHybridOcr(
             ],
           }],
           maxTokens: 8_000,
+          timeoutMs: Math.max(10_000, Number(process.env.SJTU_VISION_TIMEOUT_MS ?? 120_000)),
+          maxAttempts: 1,
           fetchImpl,
           parse: (value) => visionSchema.parse(value),
         });

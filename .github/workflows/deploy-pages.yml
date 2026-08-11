@@ -20,7 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # A cold OCR cache can require local Tesseract fallbacks for several posters.
+    timeout-minutes: 75
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -69,6 +70,7 @@ jobs:
           SJTU_AI_BASE_URL: ${{ vars.SJTU_AI_BASE_URL }}
           SJTU_PROGRAM_MODEL: ${{ vars.SJTU_PROGRAM_MODEL }}
           SJTU_VISION_MODEL: ${{ vars.SJTU_VISION_MODEL }}
+          SJTU_VISION_TIMEOUT_MS: "120000"
           PROGRAM_AI_MAX_REVIEWS: "30"
         run: npm run scrape:ai
 
