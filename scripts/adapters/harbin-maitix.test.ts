@@ -40,6 +40,32 @@ assert.deepEqual(getHarbinMaitixPriceTiers({ priceVoList: [
   { price: "192", priceType: 2 }, { price: "80", priceType: 0 },
 ] }), [80, 120]);
 
+const annotatedProgram = parseHarbinMaitixDetail({
+  projectName: "弦•击 室内乐音乐会",
+  projectDetail: `
+    <p>精彩曲目&曲目赏析</p>
+    <p>巴赫《G大调三重奏鸣曲》BWV 1039</p>
+    <p>Trio Sonata in G major, BWV 1039</p>
+    <p>第一乐章：柔板</p>
+    <p>Adagio</p>
+    <p>第二乐章：快板</p>
+    <p>Allegro ma non presto</p>
+    <p>海顿《G大调弦乐三重奏第二首》Op.5 Hob.V:20</p>
+    <p>第一乐章：快板 Allegro</p>
+    <p>德沃夏克《小品集》</p>
+    <p>Antonin Dvorak: Bagatelles</p>
+    <p>维瓦尔第《福利亚——D小调第12号弦乐三重奏与鼓奏鸣曲》</p>
+    <p>全称：《D小调第12号三重奏“福利亚”》</p>
+    <p>作曲家：安东尼奥·维瓦尔第</p>
+    <p>出版：1705年</p>
+    <p>编制：2把小提琴 + 大提琴</p>
+  `,
+  eventVoList: [{ eventToken: "2", showTime: 1787482800000 }],
+});
+assert.deepEqual(annotatedProgram.program.map((item) => item.composer), ["巴赫", "海顿", "德沃夏克", "维瓦尔第"]);
+assert.equal(annotatedProgram.program[0].movements?.length, 2);
+assert.ok(!annotatedProgram.program.some((item) => /^(?:全称|作曲家|出版|编制|第二乐章)$/.test(item.composer || "")));
+
 const seededProjects = parseHarbinMaitixSeedFile(JSON.parse(
   readFileSync(resolve(process.cwd(), "data/source-seeds/harbin-maitix.json"), "utf8"),
 ));

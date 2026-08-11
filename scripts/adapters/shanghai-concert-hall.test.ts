@@ -120,4 +120,32 @@ const datedSeries = parseShanghaiConcertHallContent(
 assert.deepEqual(datedSeries.program.map((item) => item.composer), ["莫扎特"]);
 assert.equal(datedSeries.program[0].title, "A大调单簧管协奏曲");
 
+const bachPartitas685 = parseShanghaiConcertHallContent(`
+  <p><strong>曲目单：</strong></p>
+  <p>巴赫：G小调第1号小提琴无伴奏奏鸣曲，BWV 1001</p>
+  <p>J.S.Bach: Violin Sonata No.1 in G minor, BWV 1001</p>
+  <p>巴赫：E大调第3号小提琴帕蒂塔，BWV 1006</p>
+  <p>J.S.Bach: Violin Partita No.3 in E major, BWV 1006</p>
+  <p>巴赫：D小调第2号小提琴帕蒂塔，BWV 1004</p>
+  <p>J.S.Bach: Violin Partita No.2 in D minor, BWV 1004</p>
+  <p>*曲目以现场为准</p>
+  <p><strong>艺术家</strong></p>
+`);
+assert.deepEqual(
+  bachPartitas685.program.map((item) => [item.composer, item.title, item.opus]),
+  [
+    ["巴赫", "G小调第1号小提琴无伴奏奏鸣曲", "BWV 1001"],
+    ["巴赫", "E大调第3号小提琴帕蒂塔", "BWV 1006"],
+    ["巴赫", "D小调第2号小提琴帕蒂塔", "BWV 1004"],
+  ],
+);
+assert.deepEqual(
+  bachPartitas685.program.map((item) => item.alternateTitles),
+  [
+    ["J.S.Bach: Violin Sonata No.1 in G minor, BWV 1001"],
+    ["J.S.Bach: Violin Partita No.3 in E major, BWV 1006"],
+    ["J.S.Bach: Violin Partita No.2 in D minor, BWV 1004"],
+  ],
+);
+
 console.log("Shanghai Concert Hall adapter tests passed.");

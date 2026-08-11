@@ -78,7 +78,7 @@
 - 国家大剧院、中国交响乐团、中国爱乐乐团和上海爱乐乐团均使用各自独立的列表发现与详情解析规则。
 - 跨来源去重联合比较时间、标准化场馆/厅堂、标题、艺术家与曲目，并保留全部官网来源链接。
 - 星海音乐厅等场馆来源会把场馆与具体厅堂分开保存，并清理官网附加在演出标题末尾的场馆名称。
-- 纯图片节目单可使用本地 Tesseract.js OCR，不需要付费 API。
+- 纯图片节目单优先使用通义千问视觉模型识别；接口不可用时自动回退到本地 Tesseract.js OCR。
 - OCR 或正文仍不足以还原节目单时，详情页按需展示官网原始节目单图片，供用户直接核对，不把普通演出照片误当作节目单证据。
 - 微信公众号文章支持半自动导入：链接尽力读取、正文粘贴回退、多场候选拆分、可编辑审核和人工确认后发布。
 - DeepSeek 节目单提取仍是实验性兜底；独立的知识扩充任务已启用严格证据与评分门槛。
@@ -278,7 +278,7 @@ React 前端（静态托管）
 
 联网检索由本地任务完成，而不是假设模型自带浏览器：任务主动读取演出官网、英文/中文 Wikipedia、Wikidata、MusicBrainz 和 Apple Music，再把带固定 ID 的证据交给 DeepSeek。Wikipedia 原始配器章节会单独清洗，避免模板列表在纯文本接口中丢失。生成与审核规则见 [DeepSeek Skill](./skills/deepseek-knowledge-curator/SKILL.md)。模型不能生成 URL、永久 ID、状态、风险分数或不存在的证据 ID。
 
-默认模型为 `deepseek-v4-flash`。V4 默认启用思考模式；本任务显式使用非思考模式生成短小、可校验的 JSON，避免推理内容占满输出预算。音乐资料的覆盖和可追溯性仍由上述宿主联网检索保证。程序会兼容模型偶发的字段层级偏移和空标签，移除没有真实录音证据支持的推荐，并把证据不足的作品降为待补全或直接拦截，不会为追求完整度伪造事实。
+知识库任务使用 `deepseek-reasoner`。音乐资料的覆盖和可追溯性仍由上述宿主联网检索保证。程序会兼容模型偶发的字段层级偏移和空标签，移除没有真实录音证据支持的推荐，并把证据不足的作品降为待补全或直接拦截，不会为追求完整度伪造事实。
 
 评分达到 90 且标题、体裁、年代、时长、详细配器、导赏、乐章、聆听点和录音均完整时标记为完整条目；达到 70 的基础条目可先发布，但会进入持续补全队列并在七天后重试。Skill 升级也会重新检查旧自动条目。升级采用按字段合并和分数优先策略，低分、空字段或较短配器不能覆盖已有的更好内容。低于 70、证据冲突或不是完整作品时自动跳过。每个自动条目保存模型、Skill 版本、提示词散列、来源演出、证据和分数，人工内容不会被自动任务覆盖。
 
@@ -304,7 +304,7 @@ npm run changes:backfill -- <before-revision> <after-revision> [detected-at]
 
 ## OCR
 
-只有同时满足以下条件的图片型详情页才执行本地 Tesseract OCR。当前包括东方艺术中心、星海音乐厅、深圳交响乐团、深圳音乐厅、中山公园音乐堂和西安音乐厅：
+只有同时满足以下条件的图片型详情页才执行图片识别。当前包括东方艺术中心、星海音乐厅、深圳交响乐团、深圳音乐厅、中山公园音乐堂和西安音乐厅：
 
 1. 页面正文没有解析出曲目。
 2. 详情内容包含图片。
@@ -318,7 +318,7 @@ npm run scrape:ocr
 npm run scrape:no-ocr
 ```
 
-首次运行会加载 Tesseract `chi_sim` 模型。图片按内容哈希缓存，即使官网复用同一 URL 更换图片，缓存刷新后也不会沿用旧识别结果；项目级结果默认 7 天刷新一次。可以在 `.env` 中配置：
+配置交大 AI 接口后，图片优先交给 `qwen3.6-27b` 精确转写，再进入各来源自己的节目单解析器；鉴权失败、超时、限流、模型异常或输出校验失败时，同一次采集会自动加载 Tesseract `chi_sim` 模型继续处理。图片按内容哈希、模型和提示词版本缓存，即使官网复用同一 URL 更换图片也不会沿用旧结果；项目级结果默认 7 天刷新一次。可以在 `.env` 中配置：
 
 ```text
 SHOAC_OCR_MAX_NEW_PROJECTS=
@@ -371,16 +371,19 @@ npm run wechat:import -- --url "https://mp.weixin.qq.com/s/..." --text-file arti
 npm run wechat:import -- --url "https://mp.weixin.qq.com/s/..." --text-file article.txt --ai
 ```
 
-公众号规则解析不依赖 API。配置 `DEEPSEEK_API_KEY` 后，审核页可显式勾选 DeepSeek 增强；模型输出必须通过 Zod Schema，并且仍然只能进入待确认队列。
+公众号规则解析不依赖 API。配置 `SJTU_AI_API_KEY` 后，审核页可显式勾选 AI 增强；旧的 `DEEPSEEK_API_KEY` 仍兼容。模型输出必须通过 Zod Schema，并且仍然只能进入待确认队列。
 
-## DeepSeek
+## AI 辅助采集与知识库
 
 复制 `.env.example` 为 `.env`，填写：
 
 ```text
-DEEPSEEK_API_KEY=你的密钥
-DEEPSEEK_BASE_URL=https://api.deepseek.com
-DEEPSEEK_MODEL=deepseek-v4-flash
+SJTU_AI_API_KEY=你的密钥
+SJTU_AI_BASE_URL=https://models.sjtu.edu.cn/api/v1
+SJTU_KNOWLEDGE_MODEL=deepseek-reasoner
+SJTU_PROGRAM_MODEL=deepseek-chat
+SJTU_VISION_MODEL=qwen3.6-27b
+PROGRAM_AI_MAX_REVIEWS=30
 ```
 
 然后运行：
@@ -392,9 +395,13 @@ npm run knowledge:enrich -- --limit 1
 npm run knowledge:enrich -- --limit 1 --force
 ```
 
-官网采集的 `scrape:ai` 仍只是实验性节目单提取，公众号导入仍进入审核队列；这两条路径不能自动创建知识。只有 `knowledge:enrich` 使用受控来源、身份解析、外部补证、完整生成、缺失字段补全、独立审计、严格 Schema 和确定性风险评分执行无人值守知识发布。`--force` 仅用于调试，会忽略基础条目的下一次补全时间。
+`scrape:ai` 仍先运行每个网站的专用规则。只有规则结果缺失、重复、包含场次标题/人物等明显异常，或正文显示可能遗漏多首作品时，才由 `deepseek-chat` 对照带行号的官网原文复核。AI 只能调整节目单结构；每个作品、作曲家和作品号都必须在引用原文或原解析中出现，否则整次替换作废。图片型节目单使用 `qwen3.6-27b` 转写后仍进入来源专用解析器。任一 AI 接口不可用时，文字保留规则结果，图片回退 Tesseract，来源采集和 Pages 构建不会因此中断。
 
-仓库 Actions 已配置 `DEEPSEEK_API_KEY` Secret，以及 `DEEPSEEK_MODEL`、`DEEPSEEK_BASE_URL` Variables；密钥不会写入 Git。`knowledge-enrichment.yml` 每天独立运行一次，优先补全旧基础条目，再处理新作品，每次合计最多 5 部；验证通过后直接提交 `knowledge/` 到 `main`，随后触发常规 Pages 部署。若 `main` 开启了禁止 GitHub Actions 直接推送的保护规则，需要为该工作流配置例外。
+公众号导入仍进入审核队列；节目单复核和公众号导入不能自动创建知识。只有 `knowledge:enrich` 使用受控来源、身份解析、外部补证、完整生成、缺失字段补全、独立审计、严格 Schema 和确定性风险评分执行无人值守知识发布。`--force` 仅用于调试，会忽略基础条目的下一次补全时间。
+
+线上只在 GitHub Actions 中读取密钥，前端和 GitHub Pages 均不会得到它。进入仓库 **Settings → Secrets and variables → Actions → Secrets → New repository secret**，新建名为 `SJTU_AI_API_KEY` 的 Repository secret。非敏感配置可在同页的 Variables 中按需添加 `SJTU_AI_BASE_URL`、`SJTU_KNOWLEDGE_MODEL`、`SJTU_PROGRAM_MODEL` 和 `SJTU_VISION_MODEL`；全部留空时使用上面的默认值。旧的 `DEEPSEEK_API_KEY`、`DEEPSEEK_BASE_URL` 和 `DEEPSEEK_MODEL` 仅在未配置新密钥时作为兼容配置，不会覆盖交大接口地址和模型。
+
+`knowledge-enrichment.yml` 每天独立运行一次，优先补全旧基础条目，再处理新作品，每次合计最多 5 部；验证通过后直接提交 `knowledge/` 到 `main`，随后触发常规 Pages 部署。若 `main` 开启了禁止 GitHub Actions 直接推送的保护规则，需要为该工作流配置例外。
 
 ## 已接入来源
 

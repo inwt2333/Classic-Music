@@ -9,6 +9,7 @@ import type {
 } from "../src/types";
 import { parseChinaDate } from "./china-time";
 import { fetchWithRetry } from "./fetch-retry";
+import { parseJsonContent, SJTU_AI_DEFAULT_BASE_URL } from "./ai/sjtu-client";
 
 export type WechatArticle = {
   articleUrl?: string;
@@ -133,20 +134,25 @@ export function parseWechatArticle(
 }
 
 export async function enhanceWechatImportWithDeepSeek(record: WechatImportRecord) {
-  const apiKey = process.env.DEEPSEEK_API_KEY;
-  if (!apiKey) throw new Error("未配置 DEEPSEEK_API_KEY，已保留规则解析结果");
+  const usingSjtuApi = Boolean(process.env.SJTU_AI_API_KEY);
+  const apiKey = usingSjtuApi ? process.env.SJTU_AI_API_KEY : process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) throw new Error("未配置 SJTU_AI_API_KEY，已保留规则解析结果");
+  const baseUrl = usingSjtuApi
+    ? process.env.SJTU_AI_BASE_URL || SJTU_AI_DEFAULT_BASE_URL
+    : process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com";
   const prompt = `请从下面的微信公众号文章中提取古典音乐演出。文章可能包含多场日期或不同节目单。只返回 JSON，不要 Markdown。不要猜测文章中没有的信息。时间使用带 +08:00 的 ISO 8601。\nSchema:\n{"events":[{"title":"","city":"","venue":"","hall":"","startTime":"","endTime":"","price":"","ticketUrl":"","description":"不超过500字的演出简介","ensemble":"","conductor":"","performers":[""],"program":[{"composer":"","title":"","alternateTitles":[""],"opus":"","movements":[{"number":"","title":"","alternateTitles":[""]}],"confidence":"ai"}],"tags":[""]}]}\n文章标题：${record.articleTitle ?? ""}\n公众号：${record.accountName ?? ""}\n正文：\n${record.rawText.slice(0, 30_000)}`;
-  const response = await fetchWithRetry("https://api.deepseek.com/chat/completions", () => ({
+  const response = await fetchWithRetry(`${baseUrl.replace(/\/$/, "")}/chat/completions`, () => ({
     method: "POST",
     headers: {
       authorization: `Bearer ${apiKey}`,
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
+      model: usingSjtuApi
+        ? process.env.SJTU_PROGRAM_MODEL || "deepseek-chat"
+        : process.env.DEEPSEEK_MODEL || "deepseek-chat",
       messages: [{ role: "user", content: prompt }],
       temperature: 0,
-      response_format: { type: "json_object" },
     }),
     signal: AbortSignal.timeout(60_000),
   }));
@@ -154,7 +160,7 @@ export async function enhanceWechatImportWithDeepSeek(record: WechatImportRecord
   const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
   const content = data.choices?.[0]?.message?.content;
   if (!content) throw new Error("DeepSeek 没有返回结构化内容");
-  const parsed = deepSeekResponseSchema.parse(JSON.parse(content));
+  const parsed = deepSeekResponseSchema.parse(parseJsonContent(content));
   const candidates = parsed.events.map((event, index) => ({
     id: `candidate_${hash(`${record.id}:ai:${index}:${event.startTime}:${event.title}`)}`,
     status: "pending" as const,

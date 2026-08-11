@@ -173,7 +173,7 @@ export function reviewApiPlugin(root = process.cwd()): Plugin {
 async function readWechatImportState(root: string) {
   const inbox = await loadWechatInbox(resolve(root, "data/wechat-inbox.json"));
   return {
-    aiAvailable: Boolean(process.env.DEEPSEEK_API_KEY),
+    aiAvailable: Boolean(process.env.SJTU_AI_API_KEY || process.env.DEEPSEEK_API_KEY),
     imports: inbox.imports,
   };
 }

@@ -52,7 +52,11 @@ async function main() {
     loadAutomationState(statePath),
     readAutomatedMappings(mappingsPath),
   ]);
-  if (process.env.DEEPSEEK_MODEL?.trim()) config.model = process.env.DEEPSEEK_MODEL.trim();
+  const usingSjtuApi = Boolean(process.env.SJTU_AI_API_KEY?.trim());
+  const configuredModel = usingSjtuApi
+    ? process.env.SJTU_KNOWLEDGE_MODEL?.trim() || "deepseek-reasoner"
+    : process.env.DEEPSEEK_MODEL?.trim();
+  if (configuredModel) config.model = configuredModel;
   if (!config.enabled) {
     console.log("Knowledge automation is disabled.");
     return;
@@ -124,7 +128,10 @@ async function main() {
     changed = true;
   }
 
-  const apiKey = process.env.DEEPSEEK_API_KEY;
+  const apiKey = usingSjtuApi ? process.env.SJTU_AI_API_KEY!.trim() : process.env.DEEPSEEK_API_KEY?.trim();
+  const aiBaseUrl = usingSjtuApi
+    ? process.env.SJTU_AI_BASE_URL?.trim() || "https://models.sjtu.edu.cn/api/v1"
+    : process.env.DEEPSEEK_BASE_URL?.trim();
   const generationQueue = [
     ...dueUpgrades.map((item) => ({ candidate: item.candidate, existingWork: item.work })),
     ...unresolved.map((candidate) => ({ candidate, existingWork: undefined })),
@@ -134,7 +141,7 @@ async function main() {
       automatedMappings.rules.sort((left, right) => left.id.localeCompare(right.id));
       await Promise.all([saveJson(mappingsPath, automatedMappings), saveJson(statePath, state)]);
     }
-    console.warn("未配置 DEEPSEEK_API_KEY；已保存确定性映射，跳过新作品生成。配置密钥后将继续处理生成队列。");
+    console.warn("未配置 SJTU_AI_API_KEY（或兼容的 DEEPSEEK_API_KEY）；已保存确定性映射，跳过新作品生成。");
     return;
   }
 
@@ -145,7 +152,7 @@ async function main() {
       const identity = await requestDeepSeekJson({
         apiKey: apiKey!,
         model: config.model,
-        baseUrl: process.env.DEEPSEEK_BASE_URL,
+        baseUrl: aiBaseUrl,
         system: skillText,
         prompt: buildIdentityPrompt(candidate, knownComposer),
         schema: generatedIdentitySchema,
@@ -170,7 +177,7 @@ async function main() {
       let generated = await requestDeepSeekJson({
         apiKey: apiKey!,
         model: config.model,
-        baseUrl: process.env.DEEPSEEK_BASE_URL,
+        baseUrl: aiBaseUrl,
         system: skillText,
         prompt: buildGenerationPrompt(candidate, identity, evidence, knownComposer),
         schema: generatedKnowledgeSchema,
@@ -193,7 +200,7 @@ async function main() {
         generated = await requestDeepSeekJson({
           apiKey: apiKey!,
           model: config.model,
-          baseUrl: process.env.DEEPSEEK_BASE_URL,
+          baseUrl: aiBaseUrl,
           system: skillText,
           prompt: buildCompletionPrompt(candidate, identity, generated, evidence, missingFields, knownComposer),
           schema: generatedKnowledgeSchema,
@@ -227,7 +234,7 @@ async function main() {
       const audit = await requestDeepSeekJson({
         apiKey: apiKey!,
         model: config.model,
-        baseUrl: process.env.DEEPSEEK_BASE_URL,
+        baseUrl: aiBaseUrl,
         system: skillText,
         prompt: buildAuditPrompt(candidate, generated, evidence, knownComposer),
         schema: generatedAuditSchema,

@@ -89,10 +89,19 @@ import { prepareAndPersistDataset } from "./data-store";
 import { fetchWithRetry } from "./fetch-retry";
 import { assertSourceCollectionHealthy } from "./source-health";
 import { createLocalTesseract, type LocalOcr } from "./ocr/local-tesseract";
+import { createHybridOcr } from "./ocr/hybrid-ocr";
 import {
   evaluateOcrProgram,
+  selectOcrProgramForDate,
   type OcrProgramExtraction,
 } from "./ocr/program-extraction";
+import { loadSjtuAiConfig } from "./ai/sjtu-client";
+import {
+  isProgramReviewCandidate,
+  programReviewPriority,
+  registerProgramEvidence,
+  verifyProgramWithAi,
+} from "./ai/program-verifier";
 
 const sourceConfigSchema = z.object({
   city: z.string(),
@@ -248,6 +257,10 @@ const databasePath = resolve(root, process.env.SCRAPE_DATABASE_PATH || "data/cla
 const snapshotDir = resolve(root, process.env.SCRAPE_SNAPSHOT_DIR || "data/snapshots");
 const ocrCacheDir = resolve(root, "data/ocr-cache");
 const ocrInspectDir = resolve(root, "data/ocr-inspect");
+const aiProgramCacheDir = resolve(root, "data/ai-cache/program-verification");
+const configuredAi = loadSjtuAiConfig();
+const aiConfig = useAi ? configuredAi : undefined;
+const visionAiConfig = process.env.SJTU_AI_API_KEY?.trim() ? configuredAi : undefined;
 
 type OcrRunBudget = {
   newProjects: number;
@@ -349,19 +362,6 @@ async function main() {
       });
       const events = result.events;
 
-      if (useAi && process.env.DEEPSEEK_API_KEY) {
-        for (const event of events) {
-          const enhanced = await enhanceWithDeepSeek(event).catch(() => null);
-          if (enhanced) {
-            event.program = enhanced.program;
-            event.performers = Array.from(new Set([...event.performers, ...enhanced.performers]));
-            event.composers = Array.from(new Set([...event.composers, ...enhanced.composers]));
-            event.dataQuality = "ai-enhanced";
-            dataset.stats.aiEnhancedEvents += 1;
-          }
-        }
-      }
-
       dataset.events.push(...events);
       dataset.stats.rawEvents += rawCount;
       dataset.sources.push({
@@ -391,6 +391,10 @@ async function main() {
     }
   }
 
+  if (aiConfig) {
+    dataset.stats.aiEnhancedEvents += await reviewProgramsWithAi(dataset.events, aiConfig);
+  }
+
   await writeFile(
     resolve(snapshotDir, "source-health.json"),
     JSON.stringify({ generatedAt: startedAt, sources: dataset.sources }, null, 2),
@@ -407,6 +411,39 @@ async function main() {
   if (dataset.stats.errors.length) {
     console.log(`Errors: ${dataset.stats.errors.join(" | ")}`);
   }
+}
+
+async function reviewProgramsWithAi(events: ConcertEvent[], config: NonNullable<typeof aiConfig>) {
+  const requestedIds = new Set(
+    (process.env.PROGRAM_AI_EVENT_IDS || "").split(",").map((value) => value.trim()).filter(Boolean),
+  );
+  const limit = requestedIds.size
+    ? requestedIds.size
+    : Math.max(0, Number(process.env.PROGRAM_AI_MAX_REVIEWS ?? 30));
+  const candidates = events
+    .filter((event) => !requestedIds.size || Array.from(requestedIds).some(
+      (selector) => event.id === selector || event.sourceUrl.includes(selector),
+    ))
+    .map((event) => ({ event, priority: programReviewPriority(event) }))
+    .filter(({ event, priority }) => priority > 0 && isProgramReviewCandidate(event))
+    .sort((left, right) => right.priority - left.priority)
+    .slice(0, limit);
+  let enhanced = 0;
+  for (const { event } of candidates) {
+    try {
+      const reviewed = await verifyProgramWithAi({ event, config, cacheDirectory: aiProgramCacheDir });
+      console.log(`[ai] ${event.id}: ${reviewed.reason}`);
+      if (reviewed.changed) enhanced += 1;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      if (/SJTU AI HTTP|fetch failed|timeout|aborted/i.test(message)) {
+        console.warn(`[ai] Program review disabled for this run; keeping deterministic results: ${message}`);
+        break;
+      }
+      console.warn(`[ai] ${event.id}: invalid model output; keeping deterministic result: ${message}`);
+    }
+  }
+  return enhanced;
 }
 
 function scrapeSource(source: SourceConfig, scrapedAt: string) {
@@ -626,7 +663,7 @@ function normalizeShanghaiConcertHallEvent(
   );
   const detailUrl = `https://www.shanghaiconcerthall.com.cn/showDetails?id=${project.id}&activeType=0`;
 
-  return {
+  return registerProgramEvidence({
     id: `shch_${project.id}_${start.getTime()}`,
     title,
     city: source.city,
@@ -652,7 +689,7 @@ function normalizeShanghaiConcertHallEvent(
     program,
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
-  };
+  }, project.detail || project.content || "");
 }
 
 async function scrapeSuzhouSymphony(
@@ -752,7 +789,7 @@ function normalizeSuzhouSymphonyEvent(
     ]),
   ) as string[];
 
-  return {
+  return registerProgramEvidence({
     id: `szsorch_${item.id}_${start.getTime()}`,
     title,
     city: source.city,
@@ -775,14 +812,14 @@ function normalizeSuzhouSymphonyEvent(
     program: parsed.program,
     tags: inferTags(title, composers),
     dataQuality: parsed.program.length ? "scraped" : "needs-review",
-  };
+  }, item.content || "");
 }
 
 async function scrapeOrientalArtCenter(
   source: Extract<SourceConfig, { adapter: "shoac-api" }>,
   scrapedAt: string,
 ) {
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const configuredProjects = configuredOcrProjectIds();
   const configuredBudget = process.env.SHOAC_OCR_MAX_NEW_PROJECTS;
   const ocrBudget: OcrRunBudget = {
@@ -937,7 +974,7 @@ async function recognizeOrientalArtCenterImages(
 }
 
 type OcrProjectCache = {
-  schemaVersion: 2;
+  schemaVersion: 6;
   projectId: string;
   imageSignature: string;
   createdAt: string;
@@ -955,12 +992,19 @@ async function readOcrProjectCache(projectId: string, imageUrls: string[]) {
     const age = Date.now() - Date.parse(cached.createdAt);
     const fresh = Number.isFinite(age) && age <= maxAgeDays * 24 * 60 * 60 * 1000;
     if (
-      cached.schemaVersion === 2 &&
+      cached.schemaVersion === 6 &&
       cached.projectId === projectId &&
       cached.imageSignature === ocrImageSignature(imageUrls) &&
       fresh
     ) {
-      return cached.extraction;
+      return {
+        ...cached.extraction,
+        programSections: cached.extraction.programSections ?? [],
+        pages: cached.extraction.pages.map((page) => ({
+          ...page,
+          programSections: page.programSections ?? [],
+        })),
+      };
     }
   } catch {
     // A missing or incompatible project cache is expected during OCR backfill.
@@ -974,7 +1018,7 @@ async function writeOcrProjectCache(
   extraction: OcrProgramExtraction,
 ) {
   const cache: OcrProjectCache = {
-    schemaVersion: 2,
+    schemaVersion: 6,
     projectId,
     imageSignature: ocrImageSignature(imageUrls),
     createdAt: new Date().toISOString(),
@@ -1000,7 +1044,8 @@ async function writeOcrProjectCache(
 function ocrImageSignature(imageUrls: string[]) {
   return createHash("sha256")
     .update(JSON.stringify({
-      parserVersion: 2,
+      parserVersion: 5,
+      provider: aiConfig?.visionModel ?? "tesseract",
       imageUrls,
       minConfidence: Number(process.env.SHOAC_OCR_MIN_CONFIDENCE ?? 55),
       minProgramItems: Number(process.env.SHOAC_OCR_MIN_PROGRAM_ITEMS ?? 2),
@@ -1157,7 +1202,7 @@ function normalizeNcpaEvent(
   ]);
   const detailUrl = `https://wticket.chncpa.org/product.html?id=${detail.productId}`;
 
-  return {
+  return registerProgramEvidence({
     id: `ncpa_${detail.productId}_${session.sessionId ?? start.getTime()}`,
     title,
     city: source.city,
@@ -1182,7 +1227,7 @@ function normalizeNcpaEvent(
     program,
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
-  };
+  }, detail);
 }
 
 async function scrapeChinaNationalSymphony(
@@ -1233,7 +1278,7 @@ async function scrapeChinaNationalSymphony(
       ...program.map((item) => item.composer).filter(Boolean),
     ]);
 
-    events.push({
+    events.push(registerProgramEvidence({
       id: stableId(`${source.id}:${detailUrl}:${start.toISOString()}`),
       title: parsed.title,
       city: source.city,
@@ -1257,7 +1302,7 @@ async function scrapeChinaNationalSymphony(
       program,
       tags: inferTags(parsed.title, composers),
       dataQuality: program.length ? "scraped" : "needs-review",
-    });
+    }, html));
   }
   return { rawCount: discoveredUrls.size, events };
 }
@@ -1312,7 +1357,7 @@ async function scrapeChinaPhilharmonic(
       ...inferComposers(parsed.title),
       ...program.map((item) => item.composer).filter(Boolean),
     ]);
-    events.push({
+    events.push(registerProgramEvidence({
       id: stableId(`${source.id}:${detailUrl}:${start.toISOString()}`),
       title: parsed.title,
       city: source.city,
@@ -1334,7 +1379,7 @@ async function scrapeChinaPhilharmonic(
       program,
       tags: inferTags(parsed.title, composers),
       dataQuality: program.length ? "scraped" : "needs-review",
-    });
+    }, html));
   }
   return { rawCount: detailUrls.size, events };
 }
@@ -1394,7 +1439,7 @@ async function scrapeShanghaiPhilharmonic(
       html,
       "utf8",
     );
-    events.push({
+    events.push(registerProgramEvidence({
       id: stableId(`${source.id}:${detailUrl}:${start.toISOString()}`),
       title: parsed.title,
       city: source.city,
@@ -1418,7 +1463,7 @@ async function scrapeShanghaiPhilharmonic(
       program,
       tags: inferTags(parsed.title, composers),
       dataQuality: program.length ? "scraped" : "needs-review",
-    });
+    }, html));
   }
   return { rawCount: discoveredUrls.size, events };
 }
@@ -1449,6 +1494,7 @@ async function scrapeShanghaiGrandTheatre(
         priceTiers: unique(pricing).sort((a, b) => a - b), description: parsed.description,
         program: parsed.program, performers: inferPerformers(detail.fullCnName || ""),
         sourceUrl: detailUrl, ticketUrl: detailUrl,
+        evidenceText: detail.programInfo || detail.showContent || "",
       }));
     }
   }
@@ -1462,7 +1508,7 @@ async function scrapeXianConcertHall(
   const response = await postTheatreVendor(source.url, source.cmpAppKey, "program/getHotProgramList.xhtml", { showSite: "pclist" });
   const items = (response.data ?? []) as Array<Record<string, any>>;
   await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(items, null, 2), "utf8");
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const events: ConcertEvent[] = [];
   try {
     for (const item of items.filter(isXianConcertHallClassical)) {
@@ -1470,15 +1516,29 @@ async function scrapeXianConcertHall(
       const detail = detailResponse.data;
       if (!detail) continue;
       const parsed = parseXianConcertHallDetail(detail.programInfo || detail.showContent || "");
-      const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
-        ? await recognizeSourceImages(`xian_${item.id}`, absolutizeImages(parsed.imageUrls, source.url), localOcr, parseXianConcertHallProgramText)
-        : undefined;
-      const program = parsed.program;
       const schedules = await getTheatreVendorSchedules(source.url, source.cmpAppKey, detail);
+      const scheduleStarts = schedules.map((schedule) => parseChinaDate(schedule.playTime || detail.startTime));
+      const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
+        ? await recognizeSourceImages(
+            `xian_${item.id}`,
+            absolutizeImages(parsed.imageUrls, source.url),
+            localOcr,
+            parseXianConcertHallProgramText,
+            {
+              maxImages: schedules.length > 1 ? Math.min(20, Math.max(6, schedules.length * 3)) : undefined,
+              targetDates: scheduleStarts,
+            },
+          )
+        : undefined;
       const pricing = unique([Number(detail.minPrice), Number(detail.maxPrice)].filter((value) => Number.isFinite(value) && value > 0)).sort((a, b) => a - b);
       const detailUrl = `${source.url.replace(/\/$/, "")}/sxtheatre/#/ticket/detail/${item.id}`;
-      for (const schedule of schedules) {
-        const start = parseChinaDate(schedule.playTime || detail.startTime);
+      for (const [scheduleIndex, schedule] of schedules.entries()) {
+        const start = scheduleStarts[scheduleIndex];
+        const program = parsed.program.length
+          ? parsed.program
+          : extraction?.accepted
+            ? selectOcrProgramForDate(extraction, start)
+            : [];
         events.push(createSimpleEvent({
           source, scrapedAt, sourceRecordId: `${item.id}:${schedule.id ?? start.getTime()}`, projectId: `xian_${item.id}`,
           title: cleanText(detail.fullCnName || detail.cnName), start,
@@ -1487,6 +1547,7 @@ async function scrapeXianConcertHall(
           priceTiers: pricing, description: parsed.description, program,
           performers: inferPerformers(detail.fullCnName || ""), sourceUrl: detailUrl, ticketUrl: detailUrl,
           extraction,
+          evidenceText: detail.programInfo || detail.showContent || "",
         }));
       }
     }
@@ -1523,6 +1584,7 @@ async function scrapeBeijingConcertHall(
       venue: source.venue, hall: undefined, priceTiers, program: parsed.program,
       ensemble: inferEnsemble(project.projectName), performers: inferPerformers(project.projectName),
       sourceUrl: detailUrl, ticketUrl: detailUrl,
+      evidenceText: detail.projectIntroduce || "",
     }));
   }
   await writeFile(resolve(snapshotDir, `${source.id}.list.json`), JSON.stringify(items, null, 2), "utf8");
@@ -1563,7 +1625,8 @@ async function scrapeGuangzhouSymphony(
     if (!start || !parsed.title) continue;
     events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, title: parsed.title, start,
       venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program: parsed.program,
-      ensemble: "广州交响乐团", performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl }));
+      ensemble: "广州交响乐团", performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl,
+      evidenceText: html }));
   }
   for (const detailUrl of supplementalUrls) {
     const html = await fetchLegacyChineseText(detailUrl);
@@ -1579,6 +1642,7 @@ async function scrapeGuangzhouSymphony(
         conductor: parsed.conductor,
         performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
         sourceUrl: detailUrl, ticketUrl: detailUrl,
+        evidenceText: html,
       }));
   }
   return { rawCount: discoveredUrls.size, events: dedupeEvents(events) };
@@ -1599,7 +1663,7 @@ async function scrapeXinghaiConcertHall(
     discoveredUrls.add(detailUrl);
     detailUrls.add(detailUrl);
   });
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const events: ConcertEvent[] = [];
   try {
     for (const detailUrl of detailUrls) {
@@ -1610,14 +1674,14 @@ async function scrapeXinghaiConcertHall(
       const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
         ? await recognizeSourceImages(key, parsed.imageUrls, localOcr, parseXinghaiConcertHallProgramText)
         : undefined;
-      const program = parsed.program;
+      const program = parsed.program.length ? parsed.program : extraction?.accepted ? extraction.program : [];
       const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
         venue: parsed.venue || source.venue, hall: parsed.hall, priceTiers: parsed.priceTiers, program,
         conductor: parsed.conductor,
         performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
-        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
+        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction, evidenceText: html }));
     }
   } finally { await localOcr?.terminate(); }
   return { rawCount: discoveredUrls.size, events };
@@ -1632,7 +1696,7 @@ async function scrapeShenzhenSymphony(
   const supplementalUrls = source.supplementalIndexUrl
     ? await discoverShenzhenConcertHallPages(source.supplementalIndexUrl, source.supplementalMaxPages)
     : [];
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const events: ConcertEvent[] = [];
   try {
     for (const detailUrl of supplementalUrls) {
@@ -1648,6 +1712,7 @@ async function scrapeShenzhenSymphony(
         priceTiers: parsed.priceTiers, program: parsed.program, ensemble: "深圳交响乐团",
         performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
         sourceUrl: detailUrl, ticketUrl: detailUrl,
+        evidenceText: html,
       }));
     }
     const supplementalDates = new Set(events.map((event) => event.startTime.slice(0, 10)));
@@ -1658,12 +1723,13 @@ async function scrapeShenzhenSymphony(
       const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
         ? await recognizeSourceImages(key, parsed.imageUrls, localOcr, parseShenzhenSymphonyProgramText)
         : undefined;
-      const program = parsed.program;
+      const program = parsed.program.length ? parsed.program : extraction?.accepted ? extraction.program : [];
       const start = parseFlexibleChinaDate(`${item.date} ${parsed.time || source.defaultTime}`);
       if (!start) continue;
       if (supplementalDates.has(start.toISOString().slice(0, 10))) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: item.url, projectId: key, title: item.title, start,
-        venue: source.venue, program, ensemble: "深圳交响乐团", sourceUrl: item.url, ticketUrl: item.url, extraction }));
+        venue: source.venue, program, ensemble: "深圳交响乐团", sourceUrl: item.url, ticketUrl: item.url, extraction,
+        evidenceText: html }));
     }
   } finally { await localOcr?.terminate(); }
   return { rawCount: items.length + supplementalUrls.length, events: dedupeEvents(events) };
@@ -1676,7 +1742,7 @@ async function scrapeShenzhenConcertHall(
   const detailUrls = new Set(source.seedUrls);
   const discoveredUrls = new Set(await discoverShenzhenConcertHallPages(source.url, source.maxPages));
   for (const detailUrl of discoveredUrls) detailUrls.add(detailUrl);
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const events: ConcertEvent[] = [];
   try {
     for (const detailUrl of detailUrls) {
@@ -1687,13 +1753,13 @@ async function scrapeShenzhenConcertHall(
       const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
         ? await recognizeSourceImages(key, parsed.imageUrls, localOcr, parseShenzhenConcertHallProgramText)
         : undefined;
-      const program = parsed.program;
+      const program = parsed.program.length ? parsed.program : extraction?.accepted ? extraction.program : [];
       const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
         venue: parsed.venue || source.venue, hall: parsed.hall, priceTiers: parsed.priceTiers, program,
         performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
-        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
+        sourceUrl: detailUrl, ticketUrl: detailUrl, extraction, evidenceText: html }));
     }
   } finally { await localOcr?.terminate(); }
   return { rawCount: discoveredUrls.size, events };
@@ -1720,7 +1786,7 @@ async function scrapeZhongshanMusicHall(
   const listHtml = await fetchText(source.url);
   const items = parseZhongshanMusicHallList(listHtml, source.url);
   const detailUrls = new Set([...source.seedUrls, ...items.map((item) => item.url)]);
-  const localOcr = useOcr ? await createLocalTesseract(ocrCacheDir) : undefined;
+  const localOcr = useOcr ? await createConfiguredOcr() : undefined;
   const events: ConcertEvent[] = [];
   try {
     for (const detailUrl of detailUrls) {
@@ -1731,12 +1797,13 @@ async function scrapeZhongshanMusicHall(
       const extraction = !parsed.program.length && parsed.imageUrls.length && localOcr
         ? await recognizeSourceImages(key, parsed.imageUrls, localOcr, parseZhongshanMusicHallProgramText)
         : undefined;
-      const program = parsed.program;
+      const program = parsed.program.length ? parsed.program : extraction?.accepted ? extraction.program : [];
       const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
         venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program,
-        performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction }));
+        performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction,
+        evidenceText: html }));
     }
   } finally { await localOcr?.terminate(); }
   return { rawCount: items.length, events };
@@ -1753,7 +1820,7 @@ async function scrapeZhejiangSymphony(
     return createSimpleEvent({ source, scrapedAt, sourceRecordId: item.uid, title: item.title, start, end,
       venue: item.location.split(",")[0] || source.venue, description: item.description,
       program: parseZhejiangSymphonyProgram(item.description), ensemble: "浙江交响乐团",
-      sourceUrl: item.url || source.url, ticketUrl: item.url || source.url });
+      sourceUrl: item.url || source.url, ticketUrl: item.url || source.url, evidenceText: item.description });
   });
   return { rawCount: calendar.length, events };
 }
@@ -1826,6 +1893,7 @@ async function scrapeHarbinMaitix(
         performers: uniqueStrings(parsed.performers),
         sourceUrl: detailUrl,
         ticketUrl: detailUrl,
+        evidenceText: detail.projectDetail || detail,
       }));
     }
   }
@@ -1882,6 +1950,7 @@ type SimpleEventInput = {
   venue: string; hall?: string; priceTiers?: number[]; description?: string; program: ProgramItem[];
   ensemble?: string; conductor?: string; performers?: string[]; sourceUrl: string; ticketUrl?: string;
   extraction?: OcrProgramExtraction;
+  evidenceText?: unknown;
 };
 
 function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
@@ -1889,7 +1958,7 @@ function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
   const program = input.program.map((item) => ({ ...item, composer: item.composer || inferComposers(`${input.title} ${item.title}`)[0] }));
   const composers = uniqueStrings([...inferComposers(input.title), ...program.map((item) => item.composer)]);
   const tiers = unique(input.priceTiers ?? []).sort((a, b) => a - b);
-  return {
+  const event: ConcertEvent = {
     id: stableId(`${input.source.id}:${input.sourceRecordId}:${input.start.toISOString()}`), projectId: input.projectId,
     title: cleanText(input.title), city: input.source.city, venue: cleanText(input.venue || input.source.venue), hall: input.hall,
     startTime: input.start.toISOString(), endTime: input.end?.toISOString(), weekday: labels.weekday,
@@ -1906,6 +1975,7 @@ function createSimpleEvent(input: SimpleEventInput): ConcertEvent {
       images: input.extraction.pages.map((page) => ({ url: page.url, confidence: page.confidence })),
     } : undefined,
   };
+  return registerProgramEvidence(event, input.evidenceText);
 }
 
 async function postTheatreVendor(baseUrl: string, cmpAppKey: string, path: string, body: Record<string, unknown>) {
@@ -1931,13 +2001,21 @@ async function getTheatreVendorSchedules(baseUrl: string, cmpAppKey: string, det
 async function recognizeSourceImages(
   projectId: string, imageUrls: string[], localOcr: LocalOcr,
   parser: (text: string, confidence?: ProgramItem["confidence"]) => ProgramItem[],
+  options: { maxImages?: number; targetDates?: Date[] } = {},
 ) {
-  const selected = imageUrls.slice(0, Math.max(1, Number(process.env.OCR_MAX_IMAGES || (explicitOcr ? 8 : 3))));
+  const selected = imageUrls.slice(0, Math.max(
+    1,
+    options.maxImages ?? Number(process.env.OCR_MAX_IMAGES || (explicitOcr ? 8 : 3)),
+  ));
   const cached = await readOcrProjectCache(projectId, selected);
   if (cached) return cached;
   const pages: OcrProgramExtraction["pages"] = [];
-  for (const url of selected) pages.push(await localOcr.recognizeUrl(url));
-  const extraction = evaluateOcrProgram(pages, (text) => parser(text, "ocr"));
+  for (const url of selected) {
+    pages.push(await localOcr.recognizeUrl(url));
+  }
+  const extraction = evaluateOcrProgram(pages, (text) => parser(text, "ocr"), {
+    targetDates: options.targetDates,
+  });
   await writeOcrProjectCache(projectId, selected, extraction);
   return extraction;
 }
@@ -2063,7 +2141,7 @@ function normalizeShanghaiSymphonyEvent(
     raw.supportSeat || "Y"
   }`;
 
-  return {
+  return registerProgramEvidence({
     id: `shsymphony_${raw.id}`,
     title,
     city: source.city,
@@ -2089,7 +2167,7 @@ function normalizeShanghaiSymphonyEvent(
     program,
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
-  };
+  }, `${raw.programInfo || ""}\n${raw.showContent || ""}`);
 }
 
 function normalizeOrientalArtCenterEvent(
@@ -2109,9 +2187,11 @@ function normalizeOrientalArtCenterEvent(
   });
   const ocrProgram = parsed.program.length || !ocrExtraction?.accepted
     ? []
-    : parseOrientalArtCenterOcrText(ocrExtraction.rawText, { showDate: start });
+    : ocrExtraction.programSections.length
+      ? selectOcrProgramForDate(ocrExtraction, start)
+      : parseOrientalArtCenterOcrText(ocrExtraction.rawText, { showDate: start });
   const inferredComposers = inferComposers(title);
-  const program = parsed.program;
+  const program = parsed.program.length ? parsed.program : ocrProgram;
   const composers = Array.from(
     new Set([...inferredComposers, ...program.map((item) => item.composer).filter(Boolean)]),
   ) as string[];
@@ -2120,7 +2200,7 @@ function normalizeOrientalArtCenterEvent(
   const detailUrl = `https://www.shoac.com.cn/#/detail?projectId=${projectId}`;
   const showStatus = cleanText(show.showStatusName || "");
 
-  return {
+  return registerProgramEvidence({
     id: `shoac_${projectId}_${show.showId ?? start.getTime()}`,
     title,
     city: source.city,
@@ -2144,7 +2224,7 @@ function normalizeOrientalArtCenterEvent(
     composers,
     program,
     tags: inferTags(`${title} ${detail.productSubtypeName || ""}`, composers),
-    dataQuality: parsed.program.length ? "scraped" : "needs-review",
+    dataQuality: parsed.program.length ? "scraped" : program.length ? "ocr-assisted" : "needs-review",
     extraction: !parsed.program.length && ocrExtraction
       ? {
           method: "ocr",
@@ -2160,7 +2240,7 @@ function normalizeOrientalArtCenterEvent(
           reviewRequired: true,
         }
       : undefined,
-  };
+  }, detail.projectDesp || detail.showDesc || "");
 }
 
 function orientalArtCenterShowDate(show: Record<string, any>) {
@@ -2293,67 +2373,10 @@ function unique<T>(values: T[]) {
   return Array.from(new Set(values));
 }
 
-async function enhanceWithDeepSeek(event: ConcertEvent) {
-  const apiKey = process.env.DEEPSEEK_API_KEY;
-  if (!apiKey) return null;
-
-  const prompt = `请从下面的上海音乐会标题中抽取古典音乐结构化信息。只返回 JSON，不要 Markdown。
-Schema:
-{"program":[{"composer":"作曲家或空字符串","title":"中文作品名或主要作品名","alternateTitles":["官网提供的英文或其他语言作品名"],"opus":"作品号或空字符串","movements":[{"number":"乐章编号或空字符串","title":"中文乐章名或主要乐章名","alternateTitles":["官网提供的英文或其他语言乐章名"]}],"confidence":"ai"}],"performers":["人物"],"composers":["作曲家"]}
-标题：${event.title}
-场馆：${event.venue}`;
-
-  const response = await fetchWithRetry("https://api.deepseek.com/chat/completions", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${apiKey}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0,
-      response_format: { type: "json_object" },
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`DeepSeek HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
-  const text = data.choices?.[0]?.message?.content;
-  if (!text) return null;
-  const parsed = JSON.parse(text);
-
-  return {
-    program: Array.isArray(parsed.program)
-      ? parsed.program.map((item: any) => ({
-          composer: item.composer || undefined,
-          title: item.title,
-          alternateTitles: Array.isArray(item.alternateTitles)
-            ? item.alternateTitles.filter((title: unknown): title is string => typeof title === "string" && Boolean(title))
-            : undefined,
-          opus: item.opus || undefined,
-          movements: Array.isArray(item.movements)
-            ? item.movements
-                .filter((movement: any) => movement?.title)
-                .map((movement: any) => ({
-                  number: movement.number || undefined,
-                  title: movement.title,
-                  alternateTitles: Array.isArray(movement.alternateTitles)
-                    ? movement.alternateTitles.filter(
-                        (title: unknown): title is string => typeof title === "string" && Boolean(title),
-                      )
-                    : undefined,
-                }))
-            : undefined,
-          confidence: "ai" as const,
-        }))
-      : event.program,
-    performers: Array.isArray(parsed.performers) ? parsed.performers.filter(Boolean) : [],
-    composers: Array.isArray(parsed.composers) ? parsed.composers.filter(Boolean) : [],
-  };
+async function createConfiguredOcr() {
+  return visionAiConfig
+    ? createHybridOcr(ocrCacheDir, visionAiConfig)
+    : createLocalTesseract(ocrCacheDir);
 }
 
 function dedupeEvents(events: ConcertEvent[]) {

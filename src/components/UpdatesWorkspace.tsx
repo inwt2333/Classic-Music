@@ -32,6 +32,17 @@ const categoryMeta: Record<UpdateCategory, { label: string; icon: typeof Sparkle
 
 const productUpdates: ProductUpdate[] = [
   {
+    date: "2026-08-11",
+    title: "节目单智能复核",
+    summary: "在保留各官网专用解析规则的基础上，引入有原文约束的文字复核和图片识别，并为接口异常提供自动降级。",
+    items: [
+      { category: "improvement", title: "文字节目单复核", description: "只复核缺失或结构可疑的节目单；AI 调整必须逐项对应官网原文，证据不足时保留原解析。" },
+      { category: "improvement", title: "图片节目单识别", description: "图片型节目单优先使用视觉模型转写，再交给对应官网的专用规则整理作品、作曲家和乐章。" },
+      { category: "fix", title: "自动降级", description: "接口超时、限流、鉴权或输出校验失败时，文字回到原规则结果，图片自动切换本地识别，不影响演出更新。" },
+      { category: "improvement", title: "知识库整理", description: "作品知识库使用推理模型继续执行身份确认、多来源补证、完整生成与独立审计。" },
+    ],
+  },
+  {
     date: "2026-08-10",
     title: "正式版上线检查",
     summary: "完成全站桌面与手机端复验，整理面向用户的页面信息，并刷新全国演出数据。",

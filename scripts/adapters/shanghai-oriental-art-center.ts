@@ -203,6 +203,22 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     if (hasDateSections && targetDate && activeDate !== targetDate) continue;
 
     if (matchRoleLine(line) || isCastOrCreditLine(line)) continue;
+    if (confidence === "ocr" && /^(?:上半场|下半场|中场休息|幕间休息)(?:\s+Intermission)?$/i.test(line)) {
+      currentComposer = undefined;
+      currentWork = undefined;
+      untranslatedTargets.length = 0;
+      continue;
+    }
+
+    const creditedOcrWork = confidence === "ocr"
+      ? parseCreditedOcrWork(line, confidence)
+      : undefined;
+    if (creditedOcrWork) {
+      currentComposer = creditedOcrWork.composer;
+      currentWork = creditedOcrWork;
+      program.push(currentWork);
+      continue;
+    }
     if (confidence !== "ocr" && isEnglishTranslation(line) && untranslatedTargets.length) {
       const alternateTitle = extractStandaloneAlternateTitle(line);
       if (alternateTitle) {
@@ -244,6 +260,26 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     }
     if (labeledProgramFormat) continue;
 
+    const canonicalOcrWork = confidence === "ocr"
+      ? parseCanonicalOcrWork(line, confidence)
+      : undefined;
+    if (canonicalOcrWork) {
+      currentComposer = canonicalOcrWork.composer;
+      currentWork = canonicalOcrWork;
+      program.push(currentWork);
+      continue;
+    }
+
+    const bilingualOcrWork = confidence === "ocr"
+      ? parseBilingualOcrWork(line, confidence)
+      : undefined;
+    if (bilingualOcrWork) {
+      currentComposer = undefined;
+      currentWork = bilingualOcrWork;
+      program.push(currentWork);
+      continue;
+    }
+
     const inline = line.match(/^(.{1,80}?)\s*[|｜∣]\s*(.+)$/);
     if (inline) {
       const left = cleanText(inline[1]);
@@ -273,6 +309,22 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentWork = colonWork;
       program.push(currentWork);
       registerTranslationTarget(currentWork, line, untranslatedTargets);
+      continue;
+    }
+
+    const standaloneOcrTitle = confidence === "ocr"
+      ? line.match(/^《\s*([^》]+?)\s*》\s*(.*)$/)
+      : undefined;
+    if (standaloneOcrTitle) {
+      const title = cleanProgramTitle(
+        [standaloneOcrTitle[1], standaloneOcrTitle[2]].filter(Boolean).join(" "),
+      );
+      if (title) {
+        currentComposer = undefined;
+        currentWork = { title, confidence };
+        program.push(currentWork);
+        registerTranslationTarget(currentWork, line, untranslatedTargets);
+      }
       continue;
     }
 
@@ -331,6 +383,49 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
   }
 
   return dedupeConsecutiveProgram(program);
+}
+
+function parseCanonicalOcrWork(
+  line: string,
+  confidence: ProgramItem["confidence"],
+): ProgramItem | undefined {
+  const match = stripLeadingWorkNumber(line).match(
+    /^([^:：|｜∣]{2,30})\s*[:：]\s*(.+?)\s*[|｜∣]\s*(.+)$/,
+  );
+  if (!match || !isEnglishTranslation(match[3])) return undefined;
+  const composer = cleanComposer(match[1]);
+  const title = cleanProgramTitle(match[2]);
+  const alternateTitle = extractStandaloneAlternateTitle(match[3]) || cleanText(match[3]);
+  if (!composer || !title || !alternateTitle) return undefined;
+  return { composer, title, alternateTitles: [alternateTitle], confidence };
+}
+
+function parseCreditedOcrWork(
+  line: string,
+  confidence: ProgramItem["confidence"],
+): ProgramItem | undefined {
+  const match = line.match(/^(.+?)\s*\/\s*(.+)$/);
+  if (!match || !/作曲/.test(match[2])) return undefined;
+  const composerMatch = match[2].match(
+    /(?:作词\s*&\s*)?作曲\s*[:：]\s*(.+?)(?=\s+(?:再创作|编曲|作词|演奏)\s*[:：]|$)/,
+  );
+  const title = cleanProgramTitle(match[1]);
+  const composer = composerMatch ? cleanComposer(composerMatch[1]) : undefined;
+  return title && composer ? { composer, title, confidence } : undefined;
+}
+
+function parseBilingualOcrWork(
+  line: string,
+  confidence: ProgramItem["confidence"],
+): ProgramItem | undefined {
+  if (/[:：]/.test(line)) return undefined;
+  const match = line.match(/^(.+?)\s*[|｜∣]\s*(.+)$/);
+  if (!match || !/[\u3400-\u9fff]/.test(match[1]) || !isEnglishTranslation(match[2])) return undefined;
+  const title = cleanProgramTitle(match[1]);
+  const alternateTitle = extractStandaloneAlternateTitle(match[2]) || cleanText(match[2]);
+  return title && alternateTitle
+    ? { title, alternateTitles: [alternateTitle], confidence }
+    : undefined;
 }
 
 function parseOcrTitleCredit(

@@ -194,6 +194,56 @@ assert.deepEqual(
   ],
 );
 
+const standaloneOcrWork = parseOrientalArtCenterOcrText(`
+节目单
+小约翰·施特劳斯：《蓝色多瑙河》
+《茉莉花》
+`);
+assert.equal(standaloneOcrWork[0].composer, "小约翰·施特劳斯");
+assert.equal(standaloneOcrWork[1].composer, undefined);
+assert.equal(standaloneOcrWork[1].title, "茉莉花");
+
+const canonicalBilingualOcr = parseOrientalArtCenterOcrText(`
+节目单
+2026.10.13 19:30
+朱塞佩·威尔第：《游吟诗人》“静谧安宁的夜色” | “Tacea la notte placida” (from Il trovatore)
+2026.10.15 19:30
+安东·德沃夏克：《水仙女》“月亮颂” | Měsíčku na nebi hlubokém (Song to the Moon)
+`, { showDate: new Date("2026-10-15T11:30:00.000Z") });
+assert.equal(canonicalBilingualOcr.length, 1);
+assert.equal(canonicalBilingualOcr[0].composer, "安东·德沃夏克");
+assert.match(canonicalBilingualOcr[0].title, /月亮颂/);
+assert.deepEqual(canonicalBilingualOcr[0].alternateTitles, ["Měsíčku na nebi hlubokém (Song to the Moon)"]);
+
+const uncreditedBilingualOcr = parseOrientalArtCenterOcrText(`
+节目单
+上半场
+茉莉花 | Jasmin
+下半场
+北京喜讯到边寨 | Beijing News
+`);
+assert.deepEqual(
+  uncreditedBilingualOcr.map((item) => [item.composer, item.title, item.alternateTitles]),
+  [
+    [undefined, "茉莉花", ["Jasmin"]],
+    [undefined, "北京喜讯到边寨", ["Beijing News"]],
+  ],
+);
+
+const creditedOcrProgram = parseOrientalArtCenterOcrText(`
+节目单
+诀别书 / 作曲:邓垚
+曹操 / 作词:林秋离 作曲:林俊杰
+月光 Suite bergamasque, L. 75: No. 3, Clair de lune / 作曲:克劳德·德彪西
+卡农幻想曲 Fantasy on Canon in D / 作曲:约翰·帕赫贝尔 再创作:奥斯卡·罗曼耶卓
+派对动物 / 作词&作曲:陈信宏
+`);
+assert.deepEqual(
+  creditedOcrProgram.map((item) => item.composer),
+  ["邓垚", "林俊杰", "克劳德·德彪西", "约翰·帕赫贝尔", "陈信宏"],
+);
+assert.match(creditedOcrProgram[2].title, /^月光/);
+
 const composerHeadingProgram = parseOrientalArtCenterContent(`
   <p>音乐会曲目 PROGRAM</p>
   <p>门德尔松 Mendelssohn</p>

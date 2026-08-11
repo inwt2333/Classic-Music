@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "model": "deepseek-v4-flash",
+  "model": "deepseek-reasoner",
   "skillVersion": "2.0.4",
   "maxCandidatesPerRun": 5,
   "basicPublishScore": 70,

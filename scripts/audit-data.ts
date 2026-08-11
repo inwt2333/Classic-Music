@@ -82,7 +82,7 @@ for (const event of dataset.events) {
       addIssue("error", event, "OCR 置信度缺失或超出 0-100");
     }
   }
-  if (event.program.length > 30) addIssue("warning", event, `节目项异常偏多：${event.program.length}`);
+  if (event.program.length > 45) addIssue("warning", event, `节目项异常偏多：${event.program.length}`);
 
   const tiers = event.priceTiers ?? [];
   if (tiers.some((price) => !Number.isFinite(price) || price < 0)) {

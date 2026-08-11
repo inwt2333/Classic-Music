@@ -87,6 +87,11 @@ export function parseHarbinMaitixProgram(input: string[] | string) {
       const movement = parseMovement(line);
       if (movement) {
         const next = lines[index + 1];
+        if (hasChinese(movement.title) && next && !hasChinese(next) && /[A-Za-z]{3}/.test(next)) {
+          movements.push({ ...movement, alternateTitles: [cleanText(next)] });
+          index += 2;
+          continue;
+        }
         if (next && hasChinese(next) && !isWorkHeader(next)) {
           movements.push({ number: movement.number, title: stripMovementNumber(next), alternateTitles: [movement.title] });
           index += 2;
@@ -142,14 +147,20 @@ function extractLines(html: string) {
 }
 
 function parseWorkHeader(line: string) {
-  const normalized = cleanText(line).replace(/^[《【]|[》】]$/g, "");
+  const normalized = cleanText(line).replace(/^【|】$/g, "");
+  const bracket = normalized.match(/^(?:[一二三四五六七八九十]+|\d+)?[.、．]?\s*([^《》：:]{2,30})\s*《\s*([^》]{2,100})\s*》\s*(.*)$/);
+  if (bracket) {
+    const composer = cleanText(bracket[1]);
+    const title = cleanText(`${bracket[2]} ${bracket[3]}`);
+    if (isPlausibleComposer(composer) && looksLikeWork(title)) return { composer, title };
+  }
   const numbered = normalized.match(/^(?:[一二三四五六七八九十]+|\d+)[.、．]\s*(.{2,40}?)[：:]\s*(.+)$/);
   const plain = normalized.match(/^([^：:]{2,30})[：:]\s*(.+)$/);
   const match = numbered || plain;
   if (!match) return undefined;
   const composer = cleanText(match[1]);
   const title = cleanText(match[2].replace(/[《》]/g, ""));
-  if (!hasChinese(composer) || !looksLikeWork(title) || /^(演出|购票|时间|地点|票价|阵容|曲目)$/.test(composer)) return undefined;
+  if (!isPlausibleComposer(composer) || !looksLikeWork(title)) return undefined;
   return { composer, title };
 }
 
@@ -158,7 +169,7 @@ function isWorkHeader(line: string) {
 }
 
 function parseMovement(line: string): NonNullable<ProgramItem["movements"]>[number] | undefined {
-  const match = cleanText(line).match(/^((?:[IVX]+|\d+))[.、．]\s*(.+)$/i);
+  const match = cleanText(line).match(/^(?:第\s*)?((?:[IVX]+|\d+|[一二三四五六七八九十]+))(?:\s*乐章)?\s*[.、．:：]\s*(.+)$/i);
   if (!match || isWorkHeader(line)) return undefined;
   return { number: match[1], title: cleanText(match[2]) };
 }
@@ -183,7 +194,13 @@ function parseCast(lines: string[]) {
 }
 
 function looksLikeWork(value: string) {
-  return /交响曲|协奏曲|奏鸣曲|四重奏|三重奏|组曲|序曲|变奏曲|幻想曲|狂想曲|舞曲|练习曲|夜曲|前奏曲|赋格|作品|Op\.|曲$/i.test(value);
+  return /交响曲|协奏曲|奏鸣曲|四重奏|三重奏|组曲|小品集|序曲|变奏曲|幻想曲|狂想曲|舞曲|练习曲|夜曲|前奏曲|赋格|作品|Op\.|曲$/i.test(value);
+}
+
+function isPlausibleComposer(value: string) {
+  return hasChinese(value) &&
+    !/^(?:演出|购票|时间|地点|票价|阵容|曲目|节目单|全称|作曲家|出版|编制|第?[一二三四五六七八九十\dIVX]+乐章)$/i.test(value) &&
+    !/乐章$/.test(value);
 }
 
 function isBoilerplate(line: string, title: string) {

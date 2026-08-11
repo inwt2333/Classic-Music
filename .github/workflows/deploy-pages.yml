@@ -34,13 +34,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Restore OCR cache
+      - name: Restore AI and OCR caches
         uses: actions/cache@v5
         with:
-          path: data/ocr-cache
-          key: ocr-v2-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.run_id }}
+          path: |
+            data/ocr-cache
+            data/ai-cache
+          key: ai-ocr-v3-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ github.run_id }}
           restore-keys: |
-            ocr-v2-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+            ai-ocr-v3-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
 
       - name: Download the currently deployed dataset
         run: |
@@ -63,7 +65,12 @@ jobs:
         env:
           PREVIOUS_DATASET_PATH: .cache/previous-events.json
           SHOAC_OCR_MAX_IMAGES: "3"
-        run: npm run scrape
+          SJTU_AI_API_KEY: ${{ secrets.SJTU_AI_API_KEY || secrets.DEEPSEEK_API_KEY }}
+          SJTU_AI_BASE_URL: ${{ vars.SJTU_AI_BASE_URL }}
+          SJTU_PROGRAM_MODEL: ${{ vars.SJTU_PROGRAM_MODEL }}
+          SJTU_VISION_MODEL: ${{ vars.SJTU_VISION_MODEL }}
+          PROGRAM_AI_MAX_REVIEWS: "30"
+        run: npm run scrape:ai
 
       - name: Audit generated data
         run: |

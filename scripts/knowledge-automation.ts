@@ -11,6 +11,7 @@ import type {
   KnowledgeWorkMappingRule,
 } from "../src/knowledge/types";
 import { fetchWithRetry } from "./fetch-retry";
+import { parseJsonContent, SJTU_AI_DEFAULT_BASE_URL } from "./ai/sjtu-client";
 import { normalizeIdentity } from "./identity";
 import type { KnowledgeRegistry } from "./knowledge-store";
 
@@ -813,7 +814,7 @@ export async function requestDeepSeekJson<T>(input: {
   sleep?: (delayMs: number) => Promise<void>;
 }) {
   const fetchImpl = input.fetchImpl ?? globalThis.fetch;
-  const endpoint = `${(input.baseUrl ?? "https://api.deepseek.com").replace(/\/$/, "")}/chat/completions`;
+  const endpoint = `${(input.baseUrl ?? SJTU_AI_DEFAULT_BASE_URL).replace(/\/$/, "")}/chat/completions`;
   const sleep = input.sleep ?? ((delayMs: number) => new Promise<void>((done) => setTimeout(done, delayMs)));
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const response = await fetchWithRetry(endpoint, () => ({
@@ -824,8 +825,7 @@ export async function requestDeepSeekJson<T>(input: {
         messages: [{ role: "system", content: input.system }, { role: "user", content: input.prompt }],
         temperature: 0,
         max_tokens: input.maxTokens,
-        thinking: { type: input.thinking ?? "disabled" },
-        response_format: { type: "json_object" },
+        ...(input.thinking ? { thinking: { type: input.thinking } } : {}),
       }),
       signal: AbortSignal.timeout(input.timeoutMs ?? 180_000),
     }), { retries: 1, retryDelayMs: 60_000, fetchImpl });
@@ -840,7 +840,7 @@ export async function requestDeepSeekJson<T>(input: {
         const reasoningOnly = choice?.message?.reasoning_content ? "（仅返回了推理内容）" : "";
         throw new Error(`DeepSeek 没有返回 JSON 内容${reason}${reasoningOnly}`);
       }
-      return input.schema.parse(JSON.parse(content));
+      return input.schema.parse(parseJsonContent(content));
     }
     if (attempt === 0 && (response.status === 429 || response.status >= 500)) {
       await sleep(60_000);

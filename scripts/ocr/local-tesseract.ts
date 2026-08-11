@@ -3,17 +3,26 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createWorker, PSM, type Worker } from "tesseract.js";
 import { fetchWithRetry } from "../fetch-retry";
+import type { ProgramItem } from "../../src/types";
 
-type CachedOcr = {
+export type OcrProgramSection = {
+  date?: string;
+  time?: string;
+  program: ProgramItem[];
+};
+
+export type OcrPage = {
   url: string;
   text: string;
   confidence: number;
   imageHash: string;
   cacheHit: boolean;
+  provider?: string;
+  programSections?: OcrProgramSection[];
 };
 
 export type LocalOcr = {
-  recognizeUrl: (url: string) => Promise<CachedOcr>;
+  recognizeUrl: (url: string) => Promise<OcrPage>;
   terminate: () => Promise<void>;
 };
 
@@ -54,19 +63,20 @@ export async function createLocalTesseract(cacheDirectory: string): Promise<Loca
       await mkdir(imageCacheDirectory, { recursive: true });
       const cachePath = resolve(imageCacheDirectory, `${imageHash}.json`);
       try {
-        const cached = JSON.parse(await readFile(cachePath, "utf8")) as CachedOcr;
-        return { ...cached, url, imageHash, cacheHit: true };
+        const cached = JSON.parse(await readFile(cachePath, "utf8")) as OcrPage;
+        return { ...cached, url, imageHash, cacheHit: true, provider: "tesseract" };
       } catch {
         // A cache miss is expected on the first scrape.
       }
 
       const result = await (await getWorker()).recognize(image, { rotateAuto: true });
-      const cached: CachedOcr = {
+      const cached: OcrPage = {
         url,
         text: result.data.text.trim(),
         confidence: result.data.confidence,
         imageHash,
         cacheHit: false,
+        provider: "tesseract",
       };
       await writeFile(cachePath, JSON.stringify(cached, null, 2), "utf8");
       return cached;
