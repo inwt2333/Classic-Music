@@ -41,7 +41,7 @@ const programItemSchema = z.object({
     title: z.string().min(1).max(180),
     alternateTitles: alternateTitlesSchema.default([]),
   }).strict()).max(30).default([]),
-  evidenceLineIds: z.array(z.number().int().positive()).min(1).max(12),
+  evidenceLineIds: z.array(z.number().int().positive()).min(1).max(40),
 }).strict();
 
 const programReviewSchema = z.object({

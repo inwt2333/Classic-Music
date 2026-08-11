@@ -138,7 +138,7 @@ const verboseResult = await verifyProgramWithAi({
     decision: "replace",
     confidence: 0.95,
     issues: Array.from({ length: 15 }, (_, index) => `issue ${index + 1}`),
-    program: [{ composer: "\u8d1d\u591a\u82ac", title: "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2", alternateTitles: [], opus: "\u4f5c\u54c121", movements: [], evidenceLineIds: [2] }],
+    program: [{ composer: "\u8d1d\u591a\u82ac", title: "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2", alternateTitles: [], opus: "\u4f5c\u54c121", movements: [], evidenceLineIds: Array.from({ length: 13 }, (_, index) => index + 1) }],
   }) } }] })) as typeof fetch,
 });
 assert.equal(verboseResult.changed, true);
