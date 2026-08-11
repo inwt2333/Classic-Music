@@ -9,6 +9,7 @@ import {
   mergeCrossSourceEvents,
   normalizeKnownSourceEvent,
   normalizeProgramItemCredits,
+  preserveTrustedPreviousPrograms,
   restoreFailedSourceEvents,
   restoreUnavailableSourceEvents,
   sanitizeKnownSourceProgram,
@@ -173,6 +174,38 @@ const officialAndOcr = mergeCrossSourceEvents(
 assert.equal(officialAndOcr.length, 1);
 assert.equal(officialAndOcr[0].dataQuality, "scraped");
 assert.equal(officialAndOcr[0].extraction, undefined);
+
+const degradedOcrEvent: ConcertEvent = {
+  ...ocrEvent,
+  program: [],
+  composers: [],
+  tags: ["交响"],
+  dataQuality: "needs-review",
+  extraction: {
+    method: "ocr",
+    provider: "tesseract",
+    confidence: 82,
+    accepted: false,
+    reviewRequired: true,
+  },
+};
+const preservedOcr = preserveTrustedPreviousPrograms([degradedOcrEvent], [{
+  ...ocrEvent,
+  extraction: { ...ocrEvent.extraction!, accepted: true },
+}]);
+assert.equal(preservedOcr[0].program.length, 1);
+assert.equal(preservedOcr[0].extraction?.provider, "tesseract");
+assert.equal(preservedOcr[0].extraction?.accepted, true);
+assert.deepEqual(preservedOcr[0].composers, ["贝多芬"]);
+
+const rejectedOcr = preserveTrustedPreviousPrograms([degradedOcrEvent], [ocrEvent]);
+assert.equal(rejectedOcr[0].program.length, 0);
+
+const freshProgram = preserveTrustedPreviousPrograms([baseEvent], [{
+  ...baseEvent,
+  program: [{ composer: "贝多芬", title: "第七交响曲", confidence: "official" }],
+}]);
+assert.equal(freshProgram[0].program[0].title, "C小调第五交响曲");
 
 const dataset: ConcertDataset = {
   schemaVersion: 2,

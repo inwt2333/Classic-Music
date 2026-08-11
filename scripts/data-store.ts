@@ -57,9 +57,12 @@ export async function prepareAndPersistDataset(
   const datasetWithManualEvents = addManualEventsToDataset(retainedDataset, manualEvents.events);
   const ocrEvidence = await loadOcrEvidence(resolve(dirname(databasePath), "ocr-inspect"));
   const eventsWithOcrEvidence = attachOcrEvidence(datasetWithManualEvents.events, ocrEvidence);
-  const canonicalEvents = mergeCrossSourceEvents(
-    normalizeKnownSourceFields(eventsWithOcrEvidence),
-    datasetWithManualEvents.sources,
+  const canonicalEvents = preserveTrustedPreviousPrograms(
+    mergeCrossSourceEvents(
+      normalizeKnownSourceFields(eventsWithOcrEvidence),
+      datasetWithManualEvents.sources,
+    ),
+    previous?.events ?? [],
   );
   const reviewPath = resolve(dirname(databasePath), "manual-reviews.json");
   const reviews = await loadManualReviews(reviewPath);
@@ -264,6 +267,34 @@ export function restoreUnavailableSourceEvents(
       };
     }),
   };
+}
+
+export function preserveTrustedPreviousPrograms(
+  current: ConcertEvent[],
+  previous: ConcertEvent[],
+) {
+  if (!current.length || !previous.length) return current;
+  const previousMatches = matchPreviousEvents(previous, current);
+
+  return current.map((event) => {
+    const old = previousMatches.get(event.id);
+    if (event.program.length || !old || !isTrustedProgram(old)) return event;
+    return {
+      ...event,
+      program: old.program,
+      composers: unique([...event.composers, ...old.composers]),
+      tags: unique([...event.tags, ...old.tags]),
+      dataQuality: old.dataQuality,
+      extraction: old.extraction,
+      review: old.review,
+    };
+  });
+}
+
+function isTrustedProgram(event: ConcertEvent) {
+  if (!event.program.length) return false;
+  if (event.dataQuality === "ocr-assisted") return event.extraction?.accepted === true;
+  return event.dataQuality !== "needs-review";
 }
 
 export function mergeCrossSourceEvents(
@@ -1417,10 +1448,23 @@ async function readPreviousChangeHistory(path: string) {
 }
 
 async function readPreviousDataset(path: string) {
-  const previousPath = process.env.PREVIOUS_DATASET_PATH || path;
-  try {
-    return JSON.parse(await readFile(previousPath, "utf8")) as ConcertDataset;
-  } catch {
-    return null;
+  const paths = Array.from(new Set([process.env.PREVIOUS_DATASET_PATH, path].filter(Boolean))) as string[];
+  let previous: ConcertDataset | null = null;
+  for (const candidatePath of paths) {
+    try {
+      const candidate = JSON.parse(await readFile(candidatePath, "utf8")) as ConcertDataset;
+      if (previous === null) {
+        previous = candidate;
+      } else {
+        const primary = previous as ConcertDataset;
+        previous = {
+          ...primary,
+          events: preserveTrustedPreviousPrograms(primary.events, candidate.events),
+        };
+      }
+    } catch {
+      // Try the next baseline. A first deployment may not have either file yet.
+    }
   }
+  return previous;
 }
