@@ -98,9 +98,8 @@ import {
 } from "./ocr/program-extraction";
 import { loadSjtuAiConfig } from "./ai/sjtu-client";
 import {
-  isProgramReviewCandidate,
-  programReviewPriority,
   registerProgramEvidence,
+  selectProgramReviewCandidates,
   verifyProgramWithAi,
 } from "./ai/program-verifier";
 
@@ -421,14 +420,10 @@ async function reviewProgramsWithAi(events: ConcertEvent[], config: NonNullable<
   const limit = requestedIds.size
     ? requestedIds.size
     : Math.max(0, Number(process.env.PROGRAM_AI_MAX_REVIEWS ?? 60));
-  const candidates = events
-    .filter((event) => !requestedIds.size || Array.from(requestedIds).some(
+  const eligibleEvents = events.filter((event) => !requestedIds.size || Array.from(requestedIds).some(
       (selector) => event.id === selector || event.sourceUrl.includes(selector),
-    ))
-    .map((event) => ({ event, priority: programReviewPriority(event) }))
-    .filter(({ event, priority }) => priority > 0 && isProgramReviewCandidate(event))
-    .sort((left, right) => right.priority - left.priority)
-    .slice(0, limit);
+    ));
+  const candidates = selectProgramReviewCandidates(eligibleEvents, limit);
   let enhanced = 0;
   let consecutiveTransientFailures = 0;
   for (const { event } of candidates) {

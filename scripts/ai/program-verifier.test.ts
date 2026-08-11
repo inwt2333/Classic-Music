@@ -3,7 +3,7 @@ import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { ConcertEvent } from "../../src/types";
-import { isProgramReviewCandidate, programReviewPriority, registerProgramEvidence, verifyProgramWithAi } from "./program-verifier";
+import { isProgramReviewCandidate, programReviewPriority, registerProgramEvidence, selectProgramReviewCandidates, verifyProgramWithAi } from "./program-verifier";
 import type { SjtuAiConfig } from "./sjtu-client";
 
 async function main() {
@@ -143,6 +143,14 @@ const verboseResult = await verifyProgramWithAi({
 });
 assert.equal(verboseResult.changed, true);
 assert.equal(verboseResult.issues?.length, 12);
+
+const crowdedQueue = Array.from({ length: 61 }, (_, index) => registerProgramEvidence({
+  ...event(`high-priority-${index}`),
+  program: [{ composer: "\u53cc\u7c27\u7ba1", title: `\u6f14\u594f\u8005${index}`, confidence: "official" }],
+}, `\u53cc\u7c27\u7ba1\uff1a\u6f14\u594f\u8005${index}\nD\u5927\u8c03\u53cc\u7c27\u7ba1\u534f\u594f\u66f2 \u7406\u67e5\u00b7\u65bd\u7279\u52b3\u65af \u66f2`));
+const selectedQueue = selectProgramReviewCandidates([...crowdedQueue, ncpaRoutineReview], 60);
+assert.equal(selectedQueue.length, 60);
+assert.equal(selectedQueue.some(({ event: selected }) => selected.id === ncpaRoutineReview.id), true);
 
 console.log("Program verifier tests passed.");
 }

@@ -33,7 +33,7 @@ const alternateTitlesSchema = z.array(z.string().min(2).max(1_000))
 
 const programItemSchema = z.object({
   composer: optionalText,
-  title: z.string().min(2).max(180),
+  title: z.string().min(1).max(180),
   alternateTitles: alternateTitlesSchema.default([]),
   opus: optionalText,
   movements: z.array(z.object({
@@ -68,7 +68,7 @@ export function isProgramReviewCandidate(event: ConcertEvent, evidence = getProg
 export function programReviewPriority(event: ConcertEvent, evidence = getProgramEvidence(event)) {
   if (!evidence || evidence.length < 20) return 0;
   const normalized = normalizeEvidence(evidence);
-  const isNcpa = /wticket\.chncpa\.org\/product\.html/i.test(event.sourceUrl);
+  const isNcpa = isNcpaProgramSource(event);
   const hasProgramHeading = /(?:曲目|节目单|programme?|programlist)/i.test(normalized);
   if (!event.program.length) return hasProgramHeading || isNcpa ? 100 : 0;
   if (hasAmbiguousPartialBilingualPair(event, evidence)) return 120;
@@ -80,6 +80,18 @@ export function programReviewPriority(event: ConcertEvent, evidence = getProgram
   if (event.program.length === 1 && hasProgramHeading && countWorkLikeLines(evidence) >= 2) return 95;
   if (isNcpa) return 70;
   return event.dataQuality === "needs-review" ? 50 : 0;
+}
+
+export function selectProgramReviewCandidates(events: ConcertEvent[], limit: number) {
+  const ranked = events
+    .map((event) => ({ event, priority: programReviewPriority(event) }))
+    .filter(({ priority }) => priority > 0)
+    .sort((left, right) => right.priority - left.priority);
+  const ncpa = ranked.filter(({ event }) => isNcpaProgramSource(event));
+  const others = ranked.filter(({ event }) => !isNcpaProgramSource(event));
+  const otherSlots = Math.max(0, limit - ncpa.length);
+  return [...ncpa, ...others.slice(0, otherSlots)]
+    .sort((left, right) => right.priority - left.priority);
 }
 
 export async function verifyProgramWithAi(input: {
@@ -199,7 +211,7 @@ function validateReplacement(
   for (const item of items) {
     const cited = item.evidenceLineIds.map((id) => lineMap.get(id)).filter(Boolean).join("");
     const title = normalizeEvidence(item.title);
-    if (title.length < 2 || (!cited.includes(title) && !currentFacts.includes(title))) return [];
+    if (!title.length || (!cited.includes(title) && !currentFacts.includes(title))) return [];
     if (item.composer) {
       const composer = normalizeEvidence(item.composer);
       if (composer.length >= 2 && !cited.includes(composer) && !currentFacts.includes(composer)) return [];
@@ -238,6 +250,10 @@ function validateReplacement(
 
 function normalizeEvidence(value: string) {
   return value.normalize("NFKC").toLocaleLowerCase().replace(/[\p{P}\p{S}\s]/gu, "");
+}
+
+function isNcpaProgramSource(event: ConcertEvent) {
+  return /wticket\.chncpa\.org\/product\.html/i.test(event.sourceUrl);
 }
 
 function isSuspiciousProgramTitle(title: string) {
