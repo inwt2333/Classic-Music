@@ -21,8 +21,9 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
   const lines = selectNcpaProgramLines(allProgramLines, sessionDate);
   const performers: string[] = [];
   let conductor: string | undefined;
-  const hierarchicalProgram = parseHierarchicalProgram(lines);
-  const program: ProgramItem[] = hierarchicalProgram ?? [];
+  const flatSongProgram = parseFlatSongProgram(lines);
+  const hierarchicalProgram = flatSongProgram ? undefined : parseHierarchicalProgram(lines);
+  const program: ProgramItem[] = flatSongProgram ?? hierarchicalProgram ?? [];
 
   for (const line of lines) {
     if (
@@ -41,7 +42,7 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
       continue;
     }
 
-    if (hierarchicalProgram) continue;
+    if (flatSongProgram || hierarchicalProgram) continue;
 
     const movement = line.match(/^第([一二三四五六七八九十\d]+)乐章[：:、]?\s*(.+)$/);
     if (movement && program.length) {
@@ -88,6 +89,7 @@ function parseHierarchicalProgram(lines: string[]) {
   let hasUnnumberedChild = false;
 
   for (let index = 0; index < lines.length; index += 1) {
+    if (isProgramNote(lines[index]) || parseRole(lines[index])) continue;
     const inline = parseChineseWork(lines[index]);
     if (inline?.composer) {
       parents.set(index, { item: inline, endIndex: index });
@@ -186,6 +188,97 @@ function parseHierarchicalProgram(lines: string[]) {
   return dedupeProgram(program);
 }
 
+function parseFlatSongProgram(lines: string[]): ProgramItem[] | undefined {
+  if (lines.some((line) => parseRole(line))) return undefined;
+  const songStyleLines = lines.filter((line) => (
+    /\s(?:词曲|词|诗|扩词|编合唱(?:及钢琴)?|传统民歌|传统民谣|民歌|民谣)(?:\s|$)/.test(line)
+    || /乐队$/.test(line)
+  ));
+  if (songStyleLines.length < 2 || lines.some(isNumberedMovement)) return undefined;
+
+  const program: ProgramItem[] = [];
+  let suite: ProgramItem | undefined;
+  for (const line of lines) {
+    if (!line || isProgramNote(line) || parseRole(line)) continue;
+    const item = parseCreditedSong(line);
+    if (item) {
+      program.push(item);
+      suite = /组曲/.test(item.title) ? item : undefined;
+      continue;
+    }
+    if (suite && isPlainSongTitle(line)) {
+      suite.movements = [...(suite.movements ?? []), { title: cleanText(line.replace(/[《》]/g, "")) }];
+    }
+  }
+  return program.length >= 2 ? dedupeProgram(program) : undefined;
+}
+
+function parseCreditedSong(line: string): ProgramItem | undefined {
+  const value = cleanText(line);
+  const titleEnd = songTitleEnd(value);
+  if (titleEnd <= 0) return undefined;
+  const title = cleanText(value.slice(0, titleEnd).replace(/[《》]/g, ""));
+  const remainder = cleanText(value.slice(titleEnd));
+  if (!title || !remainder) return undefined;
+
+  const markerPattern = /\s+(编合唱及钢琴|编合唱|编配|编曲|词曲|扩词|词|诗|曲)(?=\s|$)/g;
+  const markers = [...remainder.matchAll(markerPattern)];
+  const credits: NonNullable<ProgramItem["credits"]> = [];
+  let composer: string | undefined;
+  let cursor = 0;
+
+  for (const marker of markers) {
+    const segment = cleanText(remainder.slice(cursor, marker.index));
+    const { name, prefix } = trailingCreditName(segment);
+    if (prefix) credits.push({ name: prefix, role: /民歌|民谣/.test(prefix) ? "来源" : "词" });
+    const role = marker[1];
+    if (name) {
+      if (role === "曲" || role === "词曲") composer = name;
+      if (role !== "曲") credits.push({ name, role });
+    }
+    cursor = (marker.index ?? 0) + marker[0].length;
+  }
+
+  if (!markers.length) {
+    if (/传统民歌|传统民谣|民歌|民谣/.test(remainder)) {
+      credits.push({ name: remainder, role: "来源" });
+    } else if (/乐队$/.test(remainder)) {
+      composer = remainder;
+    } else {
+      return undefined;
+    }
+  }
+
+  return {
+    composer,
+    title,
+    credits: credits.length ? credits : undefined,
+    confidence: "official",
+  };
+}
+
+function songTitleEnd(line: string) {
+  if (/^[A-Za-z]/.test(line)) {
+    const translatedTitleEnd = line.indexOf("）");
+    if (translatedTitleEnd >= 0) return translatedTitleEnd + 1;
+  }
+  const firstSpace = line.search(/\s/);
+  return firstSpace < 0 ? 0 : firstSpace;
+}
+
+function trailingCreditName(value: string) {
+  const normalized = cleanText(value);
+  if (!normalized) return { name: "", prefix: "" };
+  if (!/[\u3400-\u9fff]/.test(normalized)) return { name: normalized, prefix: "" };
+  const tokens = normalized.split(/\s+/);
+  if (tokens.length === 1) return { name: normalized, prefix: "" };
+  return { name: tokens.at(-1)!, prefix: tokens.slice(0, -1).join(" ") };
+}
+
+function isPlainSongTitle(line: string) {
+  return /^[\p{L}\p{N}][\p{L}\p{N}\s·'’.-]{1,80}$/u.test(line) && !isProgramNote(line);
+}
+
 function parseNumberedMovement(line: string) {
   const named = line.match(/^第([一二三四五六七八九十\d]+)乐章[：:、]?\s*(.+)$/);
   if (named) return { number: named[1], title: cleanText(named[2]) };
@@ -199,6 +292,7 @@ function isNumberedMovement(line: string) {
 
 function isProgramNote(line: string) {
   return /中场(?:休息)?|以上内容|节目及演出票价|subject to change/i.test(line) ||
+    /^\*/.test(line) ||
     /^(?:上|下)半场(?:[：:].*)?$/.test(line) ||
     /^(?:取材自|作曲|艺术顾问)\s*[：:]?/.test(line) ||
     /联合创作/.test(line) ||
@@ -282,7 +376,7 @@ function htmlLines(html: string) {
 
 function parseRole(line: string) {
   const match = line.match(
-    /^(指挥|钢琴|小提琴|中提琴|大提琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]\s*(.+)$/,
+    /^(指挥|钢琴|小提琴|中提琴|大提琴|低音提琴|长笛|短笛|双簧管|单簧管|大管|圆号|小号|长号|大号|竖琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]\s*(.+)$/,
   );
   if (!match) return undefined;
   return {
@@ -298,7 +392,7 @@ function parseChineseWork(line: string): ProgramItem | undefined {
   if (line.length < 3 || line.length > 180 || /^[（(]?\d+[）).、]/.test(line)) return undefined;
   if (
     isProgramNote(line) ||
-    /^(作曲|改编|编曲|指挥|钢琴|小提琴|中提琴|大提琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]/.test(
+    /^(作曲|改编|编曲|指挥|钢琴|小提琴|中提琴|大提琴|低音提琴|长笛|短笛|双簧管|单簧管|大管|圆号|小号|长号|大号|竖琴|二胡|京胡|京二胡|古筝|琵琶|笛子|箫|唢呐|扬琴|打击乐|大阮|中阮|柳琴|阮|笙|板胡|女高音|女中音|男高音|男中音|男低音|独唱|合唱|演奏|公爵|众臣|弄臣|(?:[\u3400-\u9fff]{0,8})(?:独奏|领奏|领唱|演唱|伴奏|朗诵|导聆))[：:]/.test(
       line,
     ) ||
     /^[\p{L}·\s]{2,30}\s+改编$/u.test(line)

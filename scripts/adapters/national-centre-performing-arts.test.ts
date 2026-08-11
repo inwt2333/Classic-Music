@@ -226,4 +226,91 @@ assert.deepEqual(redRibbon.program.map((item) => [item.composer, item.title, ite
 ]);
 assert.equal(redRibbon.program.some((item) => item.composer === "艺术顾问"), false);
 
+const aCappellaSongs = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>啊，宽阔的田野 捷克传统民歌</p>
+        <p>事事皆可 科尔·波特 词曲</p>
+        <p>莎莉花园 爱尔兰传统民歌 威廉·巴特勒·叶芝 词曲</p>
+        <p>自然男孩 伊甸·阿贝兹 词曲</p>
+        <p>它也会发生在你身上 约翰尼·伯克 词 吉米·范·休森 曲</p>
+        <p>茉莉花 中国传统民歌</p>
+        <p>——中场休息——</p>
+        <p>夜空中最亮的星 逃跑计划乐队</p>
+        <p>*音乐会所有曲目均改编为阿卡贝拉版本。</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(aCappellaSongs.program.map((item) => item.title), [
+  "啊，宽阔的田野",
+  "事事皆可",
+  "莎莉花园",
+  "自然男孩",
+  "它也会发生在你身上",
+  "茉莉花",
+  "夜空中最亮的星",
+]);
+assert.equal(aCappellaSongs.program.every((item) => !item.movements?.length), true);
+assert.equal(aCappellaSongs.program.find((item) => item.title === "它也会发生在你身上")?.composer, "吉米·范·休森");
+
+const oboeConcert = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>D大调双簧管协奏曲，TrV292 理查·施特劳斯 曲</p>
+        <p>第一乐章：适中的快板</p>
+        <p>第二乐章：行板</p>
+        <p>第三乐章：活泼的—快板</p>
+        <p>双簧管：徐慧静</p>
+        <p>F小调第11号弦乐四重奏“庄严”，Op.95 贝多芬 曲 马勒 改编</p>
+        <p>第一乐章：有活力的快板</p>
+        <p>第二乐章：不太快的小快板</p>
+        <p>——中场休息——</p>
+        <p>C大调弦乐小夜曲，TH48 柴科夫斯基 曲</p>
+        <p>第一乐章：小奏鸣曲式的小品</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(oboeConcert.program.map((item) => item.title), [
+  "D大调双簧管协奏曲，TrV292",
+  "F小调第11号弦乐四重奏“庄严”，Op.95",
+  "C大调弦乐小夜曲，TH48",
+]);
+assert.deepEqual(oboeConcert.performers, ["徐慧静"]);
+assert.equal(oboeConcert.program.some((item) => item.composer === "双簧管"), false);
+
+const choralSongsAndSuite = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>Sure On This Shining Night（在这闪耀的夜晚） James Agee 词 Morten Lauridsen 曲</p>
+        <p>喜欢 袁晶 词 欧阳江岸 曲 李朕 编合唱</p>
+        <p>山中月 徐志摩 词 张士超 曲</p>
+        <p>如此爱你 扎西拉姆·多多 诗 刘新诚 曲</p>
+        <p>朴树组曲（上集） 朴树 词曲 吴昊 编合唱及钢琴</p>
+        <p>new boy</p>
+        <p>平凡之路</p>
+        <p>生如夏花</p>
+        <p>那些花儿</p>
+        <p>如此爱你 扎西拉姆·多多 诗 刘新诚 曲</p>
+        <p>燕歌行（两团合唱） 【唐】高适 张士超 曲</p>
+      `,
+    }],
+  }],
+});
+assert.equal(choralSongsAndSuite.program.length, 6);
+assert.equal(choralSongsAndSuite.program[0].title, "Sure On This Shining Night（在这闪耀的夜晚）");
+assert.equal(choralSongsAndSuite.program[0].composer, "Morten Lauridsen");
+assert.deepEqual(
+  choralSongsAndSuite.program.find((item) => item.title === "朴树组曲（上集）")?.movements?.map((item) => item.title),
+  ["new boy", "平凡之路", "生如夏花", "那些花儿"],
+);
+assert.equal(choralSongsAndSuite.program.filter((item) => item.title === "如此爱你").length, 1);
+
 console.log("NCPA parser tests passed.");

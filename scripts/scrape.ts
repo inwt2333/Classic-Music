@@ -1208,6 +1208,9 @@ function normalizeNcpaEvent(
     ...program.map((item) => item.composer).filter(Boolean),
   ]);
   const detailUrl = `https://wticket.chncpa.org/product.html?id=${detail.productId}`;
+  const inferredTitlePerformers = inferPerformers(title).filter(
+    (name) => inferComposers(name).length === 0,
+  );
 
   return registerProgramEvidence({
     id: `ncpa_${detail.productId}_${session.sessionId ?? start.getTime()}`,
@@ -1229,7 +1232,7 @@ function normalizeNcpaEvent(
     scrapedAt,
     ensemble: inferEnsemble(title),
     conductor: parsed.conductor,
-    performers: uniqueStrings([...parsed.performers, ...inferPerformers(title)]),
+    performers: uniqueStrings([...parsed.performers, ...inferredTitlePerformers]),
     composers,
     program,
     tags: inferTags(title, composers),
