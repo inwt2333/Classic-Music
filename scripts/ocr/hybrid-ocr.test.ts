@@ -61,6 +61,38 @@ assert.equal((await failed.recognizeUrl("https://example.com/one.png")).provider
 assert.equal((await failed.recognizeUrl("https://example.com/two.png")).provider, "tesseract");
 assert.equal(fallbackCalls, 2);
 
+let imageDownloads = 0;
+let visionCalls = 0;
+const isolatedImageFailure = await createHybridOcr(
+  await mkdtemp(join(tmpdir(), "classic-music-image-failure-")),
+  config,
+  {
+    fetchImpl: (async (url) => {
+      if (String(url).includes("chat/completions")) {
+        visionCalls += 1;
+        return Response.json({ choices: [{ message: { content: JSON.stringify({
+          containsProgram: false,
+          rawText: "",
+          programSections: [],
+          confidence: 1,
+        }) } }] });
+      }
+      imageDownloads += 1;
+      if (String(url).includes("unavailable")) {
+        const error = new Error("poster download aborted");
+        error.name = "AbortError";
+        throw error;
+      }
+      return new Response(image, { headers: { "content-type": "image/png" } });
+    }) as typeof fetch,
+    localFactory: async () => fallback,
+  },
+);
+assert.equal((await isolatedImageFailure.recognizeUrl("https://example.com/unavailable.png")).provider, "tesseract");
+assert.equal((await isolatedImageFailure.recognizeUrl("https://example.com/available.png")).provider, "qwen3.6-27b");
+assert.equal(imageDownloads, 2);
+assert.equal(visionCalls, 1);
+
 console.log("Hybrid OCR tests passed.");
 }
 

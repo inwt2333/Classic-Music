@@ -974,7 +974,7 @@ async function recognizeOrientalArtCenterImages(
 }
 
 type OcrProjectCache = {
-  schemaVersion: 6;
+  schemaVersion: 7;
   projectId: string;
   imageSignature: string;
   createdAt: string;
@@ -992,9 +992,10 @@ async function readOcrProjectCache(projectId: string, imageUrls: string[]) {
     const age = Date.now() - Date.parse(cached.createdAt);
     const fresh = Number.isFinite(age) && age <= maxAgeDays * 24 * 60 * 60 * 1000;
     if (
-      cached.schemaVersion === 6 &&
+      cached.schemaVersion === 7 &&
       cached.projectId === projectId &&
       cached.imageSignature === ocrImageSignature(imageUrls) &&
+      isCompatibleOcrProvider(cached.extraction) &&
       fresh
     ) {
       return {
@@ -1018,7 +1019,7 @@ async function writeOcrProjectCache(
   extraction: OcrProgramExtraction,
 ) {
   const cache: OcrProjectCache = {
-    schemaVersion: 6,
+    schemaVersion: 7,
     projectId,
     imageSignature: ocrImageSignature(imageUrls),
     createdAt: new Date().toISOString(),
@@ -1044,13 +1045,19 @@ async function writeOcrProjectCache(
 function ocrImageSignature(imageUrls: string[]) {
   return createHash("sha256")
     .update(JSON.stringify({
-      parserVersion: 5,
-      provider: aiConfig?.visionModel ?? "tesseract",
+      parserVersion: 6,
+      provider: visionAiConfig?.visionModel ?? "tesseract",
       imageUrls,
       minConfidence: Number(process.env.SHOAC_OCR_MIN_CONFIDENCE ?? 55),
       minProgramItems: Number(process.env.SHOAC_OCR_MIN_PROGRAM_ITEMS ?? 2),
     }))
     .digest("hex");
+}
+
+function isCompatibleOcrProvider(extraction: OcrProgramExtraction) {
+  if (!visionAiConfig) return true;
+  return extraction.pages.length > 0
+    && extraction.pages.every((page) => page.provider === visionAiConfig.visionModel);
 }
 
 function isBetterOcrExtraction(

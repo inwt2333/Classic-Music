@@ -63,6 +63,7 @@ export async function createHybridOcr(
   return {
     async recognizeUrl(url: string) {
       if (!visionAvailable) return (await getFallback()).recognizeUrl(url);
+      let visionRequestStarted = false;
       try {
         const imageResponse = await fetchWithRetry(url, () => ({
           headers: {
@@ -88,6 +89,7 @@ export async function createHybridOcr(
         }
 
         const contentType = imageResponse.headers.get("content-type")?.split(";")[0] || "image/jpeg";
+        visionRequestStarted = true;
         const result = await requestSjtuJson({
           config,
           model: config.visionModel,
@@ -151,7 +153,9 @@ export async function createHybridOcr(
         await writeFile(cachePath, JSON.stringify(page, null, 2), "utf8");
         return page;
       } catch (error) {
-        if (isVisionServiceFailure(error)) visionAvailable = false;
+        // A poster CDN failure applies only to that image. Disable vision for
+        // the run only when the request actually reached the AI service.
+        if (visionRequestStarted && isVisionServiceFailure(error)) visionAvailable = false;
         console.warn(`Vision OCR failed for one image; using Tesseract: ${error instanceof Error ? error.message : error}`);
         return (await getFallback()).recognizeUrl(url);
       }
