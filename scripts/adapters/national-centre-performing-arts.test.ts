@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { parseNcpaDetail, parseNcpaPriceTiers } from "./national-centre-performing-arts";
+import { extractNcpaProgramEvidence, parseNcpaDetail, parseNcpaPriceTiers } from "./national-centre-performing-arts";
 
 const parsed = parseNcpaDetail({
   introduce: [
@@ -312,5 +312,16 @@ assert.deepEqual(
   ["new boy", "平凡之路", "生如夏花", "那些花儿"],
 );
 assert.equal(choralSongsAndSuite.program.filter((item) => item.title === "如此爱你").length, 1);
+
+const scopedEvidenceDetail = {
+  introduce: [
+    { type: "20", contents: [{ content: "<p>\u8fd9\u662f\u6f14\u51fa\u80cc\u666f\u4ecb\u7ecd</p>" }] },
+    { type: "70", contents: [{ content: "<p>\u53cc\u7c27\u7ba1\uff1a\u5f90\u6167\u9759</p><p>D\u5927\u8c03\u53cc\u7c27\u7ba1\u534f\u594f\u66f2 \u7406\u67e5\u00b7\u65bd\u7279\u52b3\u65af \u66f2</p>" }] },
+  ],
+};
+assert.equal(
+  extractNcpaProgramEvidence(scopedEvidenceDetail),
+  "\u53cc\u7c27\u7ba1\uff1a\u5f90\u6167\u9759\nD\u5927\u8c03\u53cc\u7c27\u7ba1\u534f\u594f\u66f2 \u7406\u67e5\u00b7\u65bd\u7279\u52b3\u65af \u66f2",
+);
 
 console.log("NCPA parser tests passed.");

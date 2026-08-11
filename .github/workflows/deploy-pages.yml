@@ -71,7 +71,7 @@ jobs:
           SJTU_PROGRAM_MODEL: ${{ vars.SJTU_PROGRAM_MODEL }}
           SJTU_VISION_MODEL: ${{ vars.SJTU_VISION_MODEL }}
           SJTU_VISION_TIMEOUT_MS: "120000"
-          PROGRAM_AI_MAX_REVIEWS: "30"
+          PROGRAM_AI_MAX_REVIEWS: "60"
         run: npm run scrape:ai
 
       - name: Audit generated data

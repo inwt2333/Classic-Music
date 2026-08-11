@@ -8,6 +8,12 @@ import { requestSjtuJson, type SjtuAiConfig } from "./sjtu-client";
 
 const PROMPT_VERSION = 3;
 const evidenceByEvent = new WeakMap<ConcertEvent, string>();
+const personnelLabels = new Set([
+  "\u6307\u6325", "\u94a2\u7434", "\u5c0f\u63d0\u7434", "\u4e2d\u63d0\u7434", "\u5927\u63d0\u7434", "\u4f4e\u97f3\u63d0\u7434",
+  "\u957f\u7b1b", "\u77ed\u7b1b", "\u53cc\u7c27\u7ba1", "\u5355\u7c27\u7ba1", "\u5927\u7ba1", "\u5706\u53f7", "\u5c0f\u53f7", "\u957f\u53f7", "\u5927\u53f7", "\u7ad6\u7434",
+  "\u4e8c\u80e1", "\u53e4\u7b5d", "\u7435\u7436", "\u7b1b\u5b50", "\u7b19", "\u626c\u7434", "\u6253\u51fb\u4e50", "\u6f14\u5531", "\u6f14\u594f", "\u72ec\u594f", "\u9886\u594f", "\u5408\u5531",
+]);
+const creditMarkerPattern = /(?:^|\s)(?:\u8bcd\u66f2|\u6269\u8bcd|\u8bcd|\u8bd7|\u66f2|\u7f16\u66f2|\u7f16\u5408\u5531|\u7f16\u914d)(?:\s|$)/;
 
 const optionalText = z.preprocess(
   (value) => typeof value === "string" && value.trim() ? value.trim() : undefined,
@@ -16,6 +22,10 @@ const optionalText = z.preprocess(
 const reviewIssue = z.preprocess(
   (value) => typeof value === "string" ? value.trim().slice(0, 400) : value,
   z.string().min(1).max(400),
+);
+const reviewIssues = z.preprocess(
+  (value) => Array.isArray(value) ? value.slice(0, 12) : value,
+  z.array(reviewIssue).max(12).default([]),
 );
 const alternateTitlesSchema = z.array(z.string().min(2).max(1_000))
   .max(8)
@@ -37,7 +47,7 @@ const programItemSchema = z.object({
 const programReviewSchema = z.object({
   decision: z.enum(["keep", "replace", "abstain"]),
   confidence: z.number().min(0).max(1),
-  issues: z.array(reviewIssue).max(12).default([]),
+  issues: reviewIssues,
   program: z.array(programItemSchema).max(40).default([]),
 }).strict();
 
@@ -58,13 +68,17 @@ export function isProgramReviewCandidate(event: ConcertEvent, evidence = getProg
 export function programReviewPriority(event: ConcertEvent, evidence = getProgramEvidence(event)) {
   if (!evidence || evidence.length < 20) return 0;
   const normalized = normalizeEvidence(evidence);
+  const isNcpa = /wticket\.chncpa\.org\/product\.html/i.test(event.sourceUrl);
   const hasProgramHeading = /(?:曲目|节目单|programme?|programlist)/i.test(normalized);
-  if (!event.program.length) return hasProgramHeading ? 100 : 0;
+  if (!event.program.length) return hasProgramHeading || isNcpa ? 100 : 0;
   if (hasAmbiguousPartialBilingualPair(event, evidence)) return 120;
+  if (hasPersonnelAsProgram(event)) return 118;
+  if (hasCreditTextInProgram(event)) return 116;
   if (event.program.some((item) => isSuspiciousProgramTitle(item.title))) return 110;
   const fingerprints = event.program.map((item) => normalizeEvidence(`${item.composer ?? ""}${item.title}`));
   if (new Set(fingerprints).size !== fingerprints.length) return 105;
   if (event.program.length === 1 && hasProgramHeading && countWorkLikeLines(evidence) >= 2) return 95;
+  if (isNcpa) return 70;
   return event.dataQuality === "needs-review" ? 50 : 0;
 }
 
@@ -232,6 +246,21 @@ function isSuspiciousProgramTitle(title: string) {
 
 function countWorkLikeLines(evidence: string) {
   return evidence.split("\n").filter((line) => /[:：《》]|(?:交响曲|协奏曲|奏鸣曲|组曲|序曲|幻想曲|变奏曲|随想曲)/.test(line)).length;
+}
+
+function hasPersonnelAsProgram(event: ConcertEvent) {
+  return event.program.some((item) => {
+    if (personnelLabels.has(normalizeEvidence(item.composer ?? ""))) return true;
+    const roleLine = item.title.match(/^([^\uff1a:]{1,12})[\uff1a:]\s*\S/);
+    return Boolean(roleLine && personnelLabels.has(normalizeEvidence(roleLine[1])));
+  });
+}
+
+function hasCreditTextInProgram(event: ConcertEvent) {
+  return event.program.some((item) => (
+    creditMarkerPattern.test(item.title)
+    || item.movements?.some((movement) => creditMarkerPattern.test(movement.title))
+  ));
 }
 
 function hasAmbiguousPartialBilingualPair(event: ConcertEvent, evidence: string) {

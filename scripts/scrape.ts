@@ -27,6 +27,7 @@ import {
   parseSuzhouSymphonyVenue,
 } from "./adapters/suzhou-symphony";
 import {
+  extractNcpaProgramEvidence,
   parseNcpaDetail,
   parseNcpaPriceTiers,
 } from "./adapters/national-centre-performing-arts";
@@ -419,7 +420,7 @@ async function reviewProgramsWithAi(events: ConcertEvent[], config: NonNullable<
   );
   const limit = requestedIds.size
     ? requestedIds.size
-    : Math.max(0, Number(process.env.PROGRAM_AI_MAX_REVIEWS ?? 30));
+    : Math.max(0, Number(process.env.PROGRAM_AI_MAX_REVIEWS ?? 60));
   const candidates = events
     .filter((event) => !requestedIds.size || Array.from(requestedIds).some(
       (selector) => event.id === selector || event.sourceUrl.includes(selector),
@@ -429,16 +430,23 @@ async function reviewProgramsWithAi(events: ConcertEvent[], config: NonNullable<
     .sort((left, right) => right.priority - left.priority)
     .slice(0, limit);
   let enhanced = 0;
+  let consecutiveTransientFailures = 0;
   for (const { event } of candidates) {
     try {
       const reviewed = await verifyProgramWithAi({ event, config, cacheDirectory: aiProgramCacheDir });
       console.log(`[ai] ${event.id}: ${reviewed.reason}`);
+      consecutiveTransientFailures = 0;
       if (reviewed.changed) enhanced += 1;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       if (/SJTU AI HTTP|fetch failed|timeout|aborted/i.test(message)) {
-        console.warn(`[ai] Program review disabled for this run; keeping deterministic results: ${message}`);
-        break;
+        consecutiveTransientFailures += 1;
+        console.warn(`[ai] ${event.id}: request failed; keeping deterministic result (${consecutiveTransientFailures}/3): ${message}`);
+        if (consecutiveTransientFailures >= 3) {
+          console.warn("[ai] Program review stopped after three consecutive request failures.");
+          break;
+        }
+        continue;
       }
       console.warn(`[ai] ${event.id}: invalid model output; keeping deterministic result: ${message}`);
     }
@@ -1237,7 +1245,7 @@ function normalizeNcpaEvent(
     program,
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
-  }, detail);
+  }, extractNcpaProgramEvidence(detail, String(session.sessionDate ?? "")));
 }
 
 async function scrapeChinaNationalSymphony(

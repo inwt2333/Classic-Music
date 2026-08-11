@@ -12,13 +12,7 @@ type NcpaIntroduction = {
 };
 
 export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: string) {
-  const programIntroduction = (detail.introduce as NcpaIntroduction[] | undefined)?.find(
-    (item) => item.type === "70",
-  );
-  const allProgramLines = (programIntroduction?.contents ?? []).flatMap((content) =>
-    htmlLines(content.content ?? ""),
-  );
-  const lines = selectNcpaProgramLines(allProgramLines, sessionDate);
+  const lines = extractNcpaProgramLines(detail, sessionDate);
   const performers: string[] = [];
   let conductor: string | undefined;
   const flatSongProgram = parseFlatSongProgram(lines);
@@ -77,6 +71,20 @@ export function parseNcpaDetail(detail: Record<string, any>, sessionDate?: strin
     program: dedupeProgram(program),
     description: description || undefined,
   };
+}
+
+export function extractNcpaProgramEvidence(detail: Record<string, any>, sessionDate?: string) {
+  return extractNcpaProgramLines(detail, sessionDate).join("\n");
+}
+
+function extractNcpaProgramLines(detail: Record<string, any>, sessionDate?: string) {
+  const programIntroduction = (detail.introduce as NcpaIntroduction[] | undefined)?.find(
+    (item) => item.type === "70",
+  );
+  const allProgramLines = (programIntroduction?.contents ?? []).flatMap((content) =>
+    htmlLines(content.content ?? ""),
+  );
+  return selectNcpaProgramLines(allProgramLines, sessionDate);
 }
 
 function parseHierarchicalProgram(lines: string[]) {

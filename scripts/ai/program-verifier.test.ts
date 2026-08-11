@@ -100,6 +100,50 @@ const ambiguousResult = await verifyProgramWithAi({
 assert.equal(ambiguousResult.changed, true);
 assert.deepEqual(ambiguous.program.map((item) => item.title), ["派对动物", "lemon", "圣诞快乐，劳伦斯先生"]);
 
+const ncpaRoutineReview = registerProgramEvidence({
+  ...event("ncpa-routine"),
+  sourceName: "\u56fd\u5bb6\u5927\u5267\u9662\u5b98\u7f51",
+  sourceUrl: "https://wticket.chncpa.org/product.html?id=10000000",
+  program: [{ composer: "\u8d1d\u591a\u82ac", title: "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2", confidence: "official" }],
+}, "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2 \u8d1d\u591a\u82ac \u66f2\n\u7b2c\u4e00\u4e50\u7ae0\uff1a\u6709\u6d3b\u529b\u7684\u5feb\u677f");
+assert.equal(isProgramReviewCandidate(ncpaRoutineReview), true);
+assert.equal(programReviewPriority(ncpaRoutineReview), 70);
+
+const performerParsedAsWork = registerProgramEvidence({
+  ...event("performer-as-work"),
+  program: [{ composer: "\u53cc\u7c27\u7ba1", title: "\u5f90\u6167\u9759", confidence: "official" }],
+}, "\u53cc\u7c27\u7ba1\uff1a\u5f90\u6167\u9759\nD\u5927\u8c03\u53cc\u7c27\u7ba1\u534f\u594f\u66f2 \u7406\u67e5\u00b7\u65bd\u7279\u52b3\u65af \u66f2");
+assert.equal(programReviewPriority(performerParsedAsWork), 118);
+
+const creditsParsedAsMovements = registerProgramEvidence({
+  ...event("credits-as-movements"),
+  program: [{
+    composer: "\u5409\u7c73\u00b7\u8303\u00b7\u4f11\u68ee",
+    title: "\u5b83\u4e5f\u4f1a\u53d1\u751f\u5728\u4f60\u8eab\u4e0a",
+    movements: [{ title: "\u5229\u6cb3 \u963f\u9edb\u5c14\u00b7\u963f\u5fb7\u91d1\u65af \u8bcd\u66f2" }],
+    confidence: "official",
+  }],
+}, "\u5b83\u4e5f\u4f1a\u53d1\u751f\u5728\u4f60\u8eab\u4e0a \u5409\u7c73\u00b7\u8303\u00b7\u4f11\u68ee \u66f2\n\u5229\u6cb3 \u963f\u9edb\u5c14\u00b7\u963f\u5fb7\u91d1\u65af \u8bcd\u66f2");
+assert.equal(programReviewPriority(creditsParsedAsMovements), 116);
+
+const verboseReview = registerProgramEvidence(event("verbose-review"), [
+  "\u66f2\u76ee",
+  "\u8d1d\u591a\u82ac\uff1aC\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2\uff0c\u4f5c\u54c121",
+].join("\n"));
+const verboseResult = await verifyProgramWithAi({
+  event: verboseReview,
+  config,
+  cacheDirectory,
+  fetchImpl: (async () => Response.json({ choices: [{ message: { content: JSON.stringify({
+    decision: "replace",
+    confidence: 0.95,
+    issues: Array.from({ length: 15 }, (_, index) => `issue ${index + 1}`),
+    program: [{ composer: "\u8d1d\u591a\u82ac", title: "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2", alternateTitles: [], opus: "\u4f5c\u54c121", movements: [], evidenceLineIds: [2] }],
+  }) } }] })) as typeof fetch,
+});
+assert.equal(verboseResult.changed, true);
+assert.equal(verboseResult.issues?.length, 12);
+
 console.log("Program verifier tests passed.");
 }
 
