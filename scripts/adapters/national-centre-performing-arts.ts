@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import type { ProgramItem } from "../../src/types";
+import { isProgramRoleLabel } from "../program-role-labels";
 
 type NcpaContent = {
   type?: string;
@@ -131,6 +132,7 @@ function parseHierarchicalProgram(lines: string[]) {
     if (
       !standaloneComposer ||
       index === 0 ||
+      isProgramRoleLabel(standaloneComposer[1]) ||
       looksLikeWork(standaloneComposer[1]) ||
       /[《》（）(),，:：]/.test(standaloneComposer[1])
     ) continue;
@@ -241,7 +243,7 @@ function parseCreditedSong(line: string): ProgramItem | undefined {
     if (prefix) credits.push({ name: prefix, role: /民歌|民谣/.test(prefix) ? "来源" : "词" });
     const role = marker[1];
     if (name) {
-      if (role === "曲" || role === "词曲") composer = name;
+      if ((role === "曲" || role === "词曲") && !isProgramRoleLabel(name)) composer = name;
       if (role !== "曲") credits.push({ name, role });
     }
     cursor = (marker.index ?? 0) + marker[0].length;
@@ -250,7 +252,7 @@ function parseCreditedSong(line: string): ProgramItem | undefined {
   if (!markers.length) {
     if (/传统民歌|传统民谣|民歌|民谣/.test(remainder)) {
       credits.push({ name: remainder, role: "来源" });
-    } else if (/乐队$/.test(remainder)) {
+    } else if (/乐队$/.test(remainder) && !isProgramRoleLabel(remainder)) {
       composer = remainder;
     } else {
       return undefined;
@@ -417,9 +419,11 @@ function parseChineseWork(line: string): ProgramItem | undefined {
 
   if (suffixComposer) {
     value = cleanText(suffixComposer[1]);
-    composer = cleanText(suffixComposer[2]);
+    const candidate = cleanText(suffixComposer[2]);
+    composer = isProgramRoleLabel(candidate) ? undefined : candidate;
   } else if (prefixComposer) {
-    composer = cleanText(prefixComposer[1]);
+    const candidate = cleanText(prefixComposer[1]);
+    composer = isProgramRoleLabel(candidate) ? undefined : candidate;
     value = cleanText(prefixComposer[2]);
   }
 

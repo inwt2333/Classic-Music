@@ -313,6 +313,22 @@ assert.deepEqual(
 );
 assert.equal(choralSongsAndSuite.program.filter((item) => item.title === "如此爱你").length, 1);
 
+const performanceForceIsNotComposer = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>丰收序曲 混声合唱 曲</p>
+        <p>金色田野 张千一 曲</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(performanceForceIsNotComposer.program.map((item) => [item.composer, item.title]), [
+  [undefined, "丰收序曲"],
+  ["张千一", "金色田野"],
+]);
+
 const scopedEvidenceDetail = {
   introduce: [
     { type: "20", contents: [{ content: "<p>\u8fd9\u662f\u6f14\u51fa\u80cc\u666f\u4ecb\u7ecd</p>" }] },

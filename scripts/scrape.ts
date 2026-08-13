@@ -31,6 +31,7 @@ import {
   parseNcpaDetail,
   parseNcpaPriceTiers,
 } from "./adapters/national-centre-performing-arts";
+import { isProgramRoleLabel } from "./program-role-labels";
 import { parseChinaNationalSymphonyDetail } from "./adapters/china-national-symphony";
 import { parseChinaPhilharmonicDetail } from "./adapters/china-philharmonic";
 import { parseShanghaiPhilharmonicDetail } from "./adapters/shanghai-philharmonic";
@@ -1204,12 +1205,14 @@ function normalizeNcpaEvent(
   const priceTiers = parseNcpaPriceTiers(session);
   const program = parsed.program.map((item) => ({
     ...item,
-    composer: item.composer || inferComposers(`${title} ${item.title}`)[0],
+    composer: isProgramRoleLabel(item.composer)
+      ? undefined
+      : item.composer || inferComposers(`${title} ${item.title}`)[0],
   }));
   const composers = uniqueStrings([
     ...inferComposers(title),
     ...program.map((item) => item.composer).filter(Boolean),
-  ]);
+  ]).filter((composer) => !isProgramRoleLabel(composer));
   const detailUrl = `https://wticket.chncpa.org/product.html?id=${detail.productId}`;
   const inferredTitlePerformers = inferPerformers(title).filter(
     (name) => inferComposers(name).length === 0,

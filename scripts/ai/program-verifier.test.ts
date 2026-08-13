@@ -57,6 +57,25 @@ assert.equal(correctedResult.changed, true);
 assert.equal(corrected.program[0]?.title, "C\u5927\u8c03\u7b2c\u4e00\u4ea4\u54cd\u66f2");
 assert.equal(corrected.program[0]?.confidence, "ai");
 
+const roleComposer = registerProgramEvidence({
+  ...event("role-composer"),
+  composers: ["混声合唱"],
+}, "曲目\n国家大剧院原创交响合唱音乐会丰收序曲 混声合唱 曲");
+const roleComposerResult = await verifyProgramWithAi({
+  event: roleComposer,
+  config,
+  cacheDirectory,
+  fetchImpl: (async () => Response.json({ choices: [{ message: { content: JSON.stringify({
+    decision: "replace",
+    confidence: 0.95,
+    issues: ["performance force parsed as composer"],
+    program: [{ composer: "混声合唱", title: "丰收序曲", alternateTitles: [], movements: [], evidenceLineIds: [2] }],
+  }) } }] })) as typeof fetch,
+});
+assert.equal(roleComposerResult.changed, true, JSON.stringify(roleComposerResult));
+assert.equal(roleComposer.program[0]?.composer, undefined);
+assert.deepEqual(roleComposer.composers, []);
+
 const rejected = registerProgramEvidence(event("rejected"), "\u66f2\u76ee\n\u83ab\u624e\u7279\uff1aA\u5927\u8c03\u5355\u7c27\u7ba1\u534f\u594f\u66f2\uff0cK. 622\n\u6f14\u51fa\u66f2\u76ee\u4ee5\u73b0\u573a\u4e3a\u51c6");
 const rejectedResult = await verifyProgramWithAi({
   event: rejected,

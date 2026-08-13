@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import * as cheerio from "cheerio";
 import { z } from "zod";
 import type { ConcertEvent, ProgramItem } from "../../src/types";
+import { isProgramRoleLabel } from "../program-role-labels";
 import { requestSjtuJson, type SjtuAiConfig } from "./sjtu-client";
 
 const PROMPT_VERSION = 3;
@@ -142,7 +143,7 @@ export async function verifyProgramWithAi(input: {
 
   input.event.program = validated;
   input.event.composers = uniqueStrings([
-    ...input.event.composers,
+    ...input.event.composers.filter((composer) => !isProgramRoleLabel(composer)),
     ...validated.map((item) => item.composer),
   ]);
   input.event.dataQuality = "ai-enhanced";
@@ -197,7 +198,7 @@ function evidenceLines(evidence: string) {
 }
 
 function buildProgramReviewPrompt(event: ConcertEvent, lines: Array<{ id: number; text: string }>) {
-  return `TASK\nCheck the deterministic parser result against SOURCE_LINES. Fix only program structure, including composer/work pairing, bilingual titles, suite movements, and removal of people, section headings or notes incorrectly treated as works.\n\nRULES\n- Use only SOURCE_LINES.\n- Keep Chinese and foreign-language titles together as alternateTitles only when they are semantically the same work.\n- An unlabelled Latin-script line after a Chinese title is not automatically its translation. If they name different songs or works, output two independent program items.\n- This semantic check applies to classical works, pop songs, film music and crossover programs alike.\n- Keep movements under their parent work.\n- Do not infer missing works from general musical knowledge, but extract every identifiable work actually present even when the published list may be incomplete.\n- Section headings such as 上半场, 下半场 and 中场休息 in currentProgram are parser errors. When source lines contain identifiable works, replace those headings with the cited works rather than abstaining.\n- Every output work must cite source line IDs that contain its title.\n- Use decision=keep when no material correction is needed; abstain only when no work can be supported by source lines.\n\nOUTPUT_SCHEMA\n{"decision":"keep|replace|abstain","confidence":0.0,"issues":[],"program":[{"composer":"","title":"","alternateTitles":[],"opus":"","movements":[{"number":"","title":"","alternateTitles":[]}],"evidenceLineIds":[1]}]}\n\nEVENT\n${JSON.stringify({ title: event.title, venue: event.venue, currentProgram: event.program })}\n\nSOURCE_LINES\n${lines.map((line) => `[${line.id}] ${line.text}`).join("\n")}`;
+  return `TASK\nCheck the deterministic parser result against SOURCE_LINES. Fix only program structure, including composer/work pairing, bilingual titles, suite movements, and removal of people, section headings or notes incorrectly treated as works.\n\nRULES\n- Use only SOURCE_LINES.\n- Keep Chinese and foreign-language titles together as alternateTitles only when they are semantically the same work.\n- An unlabelled Latin-script line after a Chinese title is not automatically its translation. If they name different songs or works, output two independent program items.\n- This semantic check applies to classical works, pop songs, film music and crossover programs alike.\n- Keep movements under their parent work.\n- Do not infer missing works from general musical knowledge, but extract every identifiable work actually present even when the published list may be incomplete.\n- Section headings such as 上半场, 下半场 and 中场休息 in currentProgram are parser errors. When source lines contain identifiable works, replace those headings with the cited works rather than abstaining.\n- Performance forces and role labels such as 混声合唱, 童声合唱, 合唱, 乐队, 演唱 and 演奏 are never composers or works. Keep the composer empty when the source does not name one.\n- Every output work must cite source line IDs that contain its title.\n- Use decision=keep when no material correction is needed; abstain only when no work can be supported by source lines.\n\nOUTPUT_SCHEMA\n{"decision":"keep|replace|abstain","confidence":0.0,"issues":[],"program":[{"composer":"","title":"","alternateTitles":[],"opus":"","movements":[{"number":"","title":"","alternateTitles":[]}],"evidenceLineIds":[1]}]}\n\nEVENT\n${JSON.stringify({ title: event.title, venue: event.venue, currentProgram: event.program })}\n\nSOURCE_LINES\n${lines.map((line) => `[${line.id}] ${line.text}`).join("\n")}`;
 }
 
 function validateReplacement(
@@ -209,11 +210,13 @@ function validateReplacement(
   const currentFacts = normalizeEvidence(JSON.stringify(current));
   const result: ProgramItem[] = [];
   for (const item of items) {
+    if (isProgramRoleLabel(item.title)) continue;
     const cited = item.evidenceLineIds.map((id) => lineMap.get(id)).filter(Boolean).join("");
     const title = normalizeEvidence(item.title);
     if (!title.length || (!cited.includes(title) && !currentFacts.includes(title))) return [];
-    if (item.composer) {
-      const composer = normalizeEvidence(item.composer);
+    const composerValue = isProgramRoleLabel(item.composer) ? undefined : item.composer;
+    if (composerValue) {
+      const composer = normalizeEvidence(composerValue);
       if (composer.length >= 2 && !cited.includes(composer) && !currentFacts.includes(composer)) return [];
     }
     if (item.opus) {
@@ -233,7 +236,7 @@ function validateReplacement(
       }
     }
     result.push({
-      composer: item.composer,
+      composer: composerValue,
       title: item.title.trim(),
       alternateTitles: item.alternateTitles.length ? uniqueStrings(item.alternateTitles) : undefined,
       opus: item.opus,
@@ -266,9 +269,11 @@ function countWorkLikeLines(evidence: string) {
 
 function hasPersonnelAsProgram(event: ConcertEvent) {
   return event.program.some((item) => {
-    if (personnelLabels.has(normalizeEvidence(item.composer ?? ""))) return true;
+    if (isProgramRoleLabel(item.composer) || personnelLabels.has(normalizeEvidence(item.composer ?? ""))) return true;
     const roleLine = item.title.match(/^([^\uff1a:]{1,12})[\uff1a:]\s*\S/);
-    return Boolean(roleLine && personnelLabels.has(normalizeEvidence(roleLine[1])));
+    return Boolean(roleLine && (
+      isProgramRoleLabel(roleLine[1]) || personnelLabels.has(normalizeEvidence(roleLine[1]))
+    ));
   });
 }
 
