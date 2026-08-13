@@ -59,8 +59,8 @@ assert.equal(corrected.program[0]?.confidence, "ai");
 
 const roleComposer = registerProgramEvidence({
   ...event("role-composer"),
-  composers: ["混声合唱"],
-}, "曲目\n国家大剧院原创交响合唱音乐会丰收序曲 混声合唱 曲");
+  composers: ["混声合唱", "第一乐章", "男女声领唱与混声合唱"],
+}, "曲目\n国家大剧院原创交响合唱音乐会丰收序曲 男女声领唱与混声合唱 曲");
 const roleComposerResult = await verifyProgramWithAi({
   event: roleComposer,
   config,
@@ -69,7 +69,7 @@ const roleComposerResult = await verifyProgramWithAi({
     decision: "replace",
     confidence: 0.95,
     issues: ["performance force parsed as composer"],
-    program: [{ composer: "混声合唱", title: "丰收序曲", alternateTitles: [], movements: [], evidenceLineIds: [2] }],
+    program: [{ composer: "男女声领唱与混声合唱", title: "丰收序曲", alternateTitles: [], movements: [], evidenceLineIds: [2] }],
   }) } }] })) as typeof fetch,
 });
 assert.equal(roleComposerResult.changed, true, JSON.stringify(roleComposerResult));

@@ -60,5 +60,8 @@ const programRoleLabels = new Set([
 export function isProgramRoleLabel(value: string | undefined) {
   if (!value) return false;
   const normalized = value.normalize("NFKC").replace(/[\p{P}\p{S}\s]/gu, "");
-  return programRoleLabels.has(normalized);
+  if (programRoleLabels.has(normalized)) return true;
+  if (/^第[一二三四五六七八九十百\d]+乐章$/.test(normalized)) return true;
+  const vocalForce = "(?:(?:男|女|童|混|男女)声)?(?:独唱|领唱|合唱|对唱|齐唱|重唱|演唱)";
+  return new RegExp(`^${vocalForce}(?:[与及和]${vocalForce})*$`).test(normalized);
 }
