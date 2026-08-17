@@ -405,14 +405,14 @@
     "1598e95fc9f0e58ec3770ef2": {
       "status": "needs_completion",
       "workId": "work_auto_8525ce5fc3fc5912",
-      "attempts": 1,
-      "updatedAt": "2026-08-09T15:05:02.910Z",
-      "reason": "score-95",
+      "attempts": 2,
+      "updatedAt": "2026-08-17T14:58:01.451Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_e6bfb19e75c10ad6"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-16T15:05:02.910Z"
+      "nextRetryAt": "2026-08-24T14:58:01.451Z"
     },
     "15b9d3c405d65b9a5cb4ed24": {
       "status": "skipped",
@@ -427,14 +427,14 @@
     "190ababb41c7fc6641b99d5e": {
       "status": "needs_completion",
       "workId": "work_auto_2b591c49e84d88f1",
-      "attempts": 1,
-      "updatedAt": "2026-08-09T15:05:02.910Z",
-      "reason": "score-95",
+      "attempts": 2,
+      "updatedAt": "2026-08-17T14:58:01.451Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_f37b58229e25494c"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-16T15:05:02.910Z"
+      "nextRetryAt": "2026-08-24T14:58:01.451Z"
     },
     "16fd7ce724b7be6a4e7fefb1": {
       "status": "published",
@@ -551,8 +551,8 @@
     },
     "3867d0324656aa1cfef00786": {
       "status": "failed",
-      "attempts": 2,
-      "updatedAt": "2026-08-15T14:55:34.209Z",
+      "attempts": 3,
+      "updatedAt": "2026-08-17T14:58:01.451Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_df214adf516d5b93"
@@ -561,8 +561,8 @@
     },
     "388686aea9f0a83b3aca7c87": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-08-14T15:26:57.899Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-17T14:58:01.451Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_b43f2f6a449dd8d9"
@@ -571,8 +571,8 @@
     },
     "3979f6e1d38e8cab608777d7": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-08-14T15:26:57.899Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-17T14:58:01.451Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_e8ea06e5b8c8e223"
