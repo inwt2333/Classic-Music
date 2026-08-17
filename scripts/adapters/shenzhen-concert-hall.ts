@@ -82,11 +82,13 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
   const program: ProgramItem[] = [];
   const performers: string[] = [];
   let numberedWorksMode = false;
+  let lastProgramLineHadCjk = false;
   for (const rawLine of scoped) {
     const arabicNumber = rawLine.match(/^(\d+)[.．、]\s*(.+)$/);
     if (arabicNumber && program.length === 0) numberedWorksMode = true;
-    const line = arabicNumber ? cleanText(arabicNumber[2]) : rawLine;
-    if (/(?:曲目|演出节目).*为准|演出阵容|艺术家介绍|温馨提示/.test(line)) break;
+    let line = arabicNumber ? cleanText(arabicNumber[2]) : rawLine;
+    line = cleanText(line.replace(/\*\s*\d{3,4}\b/g, ""));
+    if (/(?:曲目|演出节目).*(?:为准|视现场情况而定)|演出阵容|艺术家介绍|温馨提示|^\*?\s*演出时长|^duration\s*[:：]/i.test(line)) break;
     if (/^(?:上半场|下半场)$/.test(line) || /中场休息/.test(line) || /^芭比之[^：:《》]{2,24}$/.test(line)) continue;
 
     const movement = rawLine.match(/^([ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ]+|[IVXLCDM]+)[.．、]\s*(.+)$/i)
@@ -106,6 +108,14 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
       continue;
     }
 
+    if (!arabicNumber && !/[\u3400-\u9fff]/.test(line) && program.length && lastProgramLineHadCjk && isLatinTranslationLine(line)) {
+      const last = program.at(-1)!;
+      last.alternateTitles = [...(last.alternateTitles ?? []), cleanText(line)];
+      lastProgramLineHadCjk = false;
+      continue;
+    }
+    lastProgramLineHadCjk = /[\u3400-\u9fff]/.test(line);
+
     const delimited = line.match(/^([^—－\-:：]{2,36})[—－\-:：]\s*(.+)$/);
     if (delimited) {
       if (isPersonnelLabel(delimited[1])) {
@@ -121,12 +131,16 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
 
     const work = line.match(/^([^《]{2,36})?《([^》]+)》(.*)$/);
     if (work) {
-      const composer = cleanComposerName((work[1] ?? "").replace(/[：:]$/, "")) || undefined;
-      const sourceSuffix = work[3].match(/^\s*([（(][^）)]+[）)])/)?.[1] ?? "";
-      const suiteSuffix = /^\s*组曲/.test(work[3]) ? "组曲" : "";
+      let composer = cleanComposerName((work[1] ?? "").replace(/[：:]$/, "")) || undefined;
+      let title = cleanText(`${work[2]}${suiteSuffix(work[3])}${sourceSuffix(work[3])}`);
+      const derived = (work[1] ?? "").match(/^([\u3400-\u9fff]{2,5}|[\u3400-\u9fff]{1,8}·[\u3400-\u9fff]{1,8})\s+(.+)$/u);
+      if (derived && /选自|选段/.test(derived[2])) {
+        composer = cleanComposerName(derived[1]) || composer;
+        title = cleanText(`${derived[2]}《${work[2]}》${suiteSuffix(work[3])}${sourceSuffix(work[3])}`);
+      }
       const item: ProgramItem = {
         composer,
-        title: cleanText(`${work[2]}${suiteSuffix}${sourceSuffix}`),
+        title,
         confidence,
       };
       applyCredits(item, work[3].replace(/^\s*组曲/, ""));
@@ -135,9 +149,30 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
     }
 
     if (program.length && applyCredits(program.at(-1)!, line)) continue;
-    if (isPlainProgramTitle(line)) program.push({ title: line.replace(/[《》]/g, ""), confidence });
+    if (isPlainProgramTitle(line)) {
+      const leading = line.match(/^([\u3400-\u9fff]{2,5}|[\u3400-\u9fff]{1,8}·[\u3400-\u9fff]{1,8})\s+(.{2,})$/u);
+      if (leading && !/[\u3400-\u9fff]{1,4}\s+(?:曲|词|编曲|配器|演唱)$/.test(line)) {
+        program.push({ composer: cleanComposerName(leading[1]), title: cleanText(leading[2].replace(/[《》]/g, "")), confidence });
+      } else {
+        program.push({ title: line.replace(/[《》]/g, ""), confidence });
+      }
+    }
   }
   return { program: dedupe(program), performers: unique(performers) };
+}
+
+function isLatinTranslationLine(value: string) {
+  return value.length >= 4 && value.length <= 160 &&
+    /[A-Za-z]{3}/.test(value) &&
+    !/^[\d\s.．、]+$/.test(value);
+}
+
+function suiteSuffix(suffix: string) {
+  return /^\s*组曲/.test(suffix) ? "组曲" : "";
+}
+
+function sourceSuffix(suffix: string) {
+  return suffix.match(/^\s*([（(][^）)]+[）)])/)?.[1] ?? "";
 }
 
 function isPlainProgramTitle(value: string) {

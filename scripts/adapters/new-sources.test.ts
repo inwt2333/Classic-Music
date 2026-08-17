@@ -42,6 +42,43 @@ assert.equal(bj.program.length, 2);
 assert.equal(bj.program[1].movements?.length, 2);
 assert.deepEqual(bj.priceTiers, [69, 99, 149, 199]);
 
+const bjTrailingCredits = parseBeijingConcertHallDetail(`
+  <h3>【曲目介绍】</h3>
+  <p>1.红旗颂 吕其明 曲</p>
+  <p>2.茉莉花 江苏民歌</p>
+  <p>3.瑶族舞曲 茅源、刘铁山 曲</p>
+  <p>4.梨花颂（选自京剧《大唐贵妃》） 于建芳 编曲</p>
+  <p>7.如愿 唐恬 词 钱雷 曲 张艺演唱</p>
+  <p>10.我和我的祖国 张黎 词 秦咏诚 曲 徐波 配器张艺 演唱</p>
+  <p>13.长江颂 于建芳 曲</p>
+  <p>*演出曲目及顺序以现场为准</p>
+  <h3>【阵容介绍】</h3>
+`);
+assert.equal(bjTrailingCredits.program.length, 7);
+assert.deepEqual(
+  bjTrailingCredits.program.map((item) => [item.composer, item.title]),
+  [
+    ["吕其明", "红旗颂"],
+    [undefined, "茉莉花"],
+    ["茅源、刘铁山", "瑶族舞曲"],
+    [undefined, "梨花颂（选自京剧大唐贵妃）"],
+    ["钱雷", "如愿"],
+    ["秦咏诚", "我和我的祖国"],
+    ["于建芳", "长江颂"],
+  ],
+);
+assert.deepEqual(bjTrailingCredits.program[1].credits, [{ name: "江苏民歌", role: "来源" }]);
+assert.deepEqual(bjTrailingCredits.program[3].credits, [{ name: "于建芳", role: "编曲" }]);
+assert.deepEqual(
+  bjTrailingCredits.program[4].credits,
+  [{ name: "唐恬", role: "词" }, { name: "张艺", role: "演唱" }],
+);
+assert.deepEqual(
+  bjTrailingCredits.program[5].credits,
+  [{ name: "张黎", role: "词" }, { name: "徐波", role: "配器" }, { name: "张艺", role: "演唱" }],
+);
+
+
 const gso = parseGuangzhouSymphonyDetail(`
   <h1 class="post-title">广州交响乐团2025/2026音乐季闭幕音乐会</h1>
   <div class="av_promobox">时间：2026年7月12日 20:00 地点：星海音乐厅 票价：80/180/280元</div>
@@ -71,6 +108,41 @@ assert.deepEqual(
     "https://www.concerthall.com.cn/events/newindexhm_gso.php",
   ),
   ["https://www.concerthall.com.cn/events/neweventdetail.php?id=5101"],
+);
+
+const szyytBilingual = parseShenzhenConcertHallDetail(`
+  <h1>2026深圳“一带一路”国际音乐季 著名女高音歌唱家普莱蒂·颜德独唱音乐会</h1>
+  <div>2026年09月20日（星期日）19:30 深圳音乐厅演奏大厅</div>
+  <ul><li>演出：普莱蒂·延德</li></ul>
+  <div class="tabContent2">
+    <p>演出曲目</p>
+    <p>1.罗西尼 诺言，选自艺术歌曲集《音乐晚会》*1835</p>
+    <p>Rossini La promessa, from Les soirées musicales</p>
+    <p>3.多尼采蒂 不幸的爱情*1842</p>
+    <p>Donizetti L’amor funesto</p>
+    <p>9.理查德·施特劳斯 塞西莉*1894</p>
+    <p>Richard Strauss Cäcilie</p>
+    <p>12.德沃夏克 “月亮颂”，选自歌剧《水仙女》*1900</p>
+    <p>Dvořák “Song to the moon”, from Rusalka</p>
+    <p>中场休息Intermission</p>
+    <p>演出曲目顺序视现场情况而定。Performance Order is Subject to change.</p>
+    <p>*演出时长:约90分钟 (含15分钟中场休息）</p>
+    <p>Duration: Approxi. 90 min (including 15-minute intermission)</p>
+  </div>
+`);
+assert.deepEqual(szyytBilingual.program.map((item) => [item.composer, item.title]), [
+  ["罗西尼", "诺言，选自艺术歌曲集《音乐晚会》"],
+  ["多尼采蒂", "不幸的爱情"],
+  ["理查德·施特劳斯", "塞西莉"],
+  ["德沃夏克", "“月亮颂”，选自歌剧《水仙女》"],
+]);
+assert.deepEqual(
+  szyytBilingual.program[0].alternateTitles,
+  ["Rossini La promessa, from Les soirées musicales"],
+);
+assert.deepEqual(
+  szyytBilingual.program[3].alternateTitles,
+  ["Dvořák “Song to the moon”, from Rusalka"],
 );
 
 assert.equal(

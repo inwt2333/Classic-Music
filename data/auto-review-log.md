@@ -44,3 +44,39 @@
 ### 提交过程披露
 
 Mimosa 预提交钩子以 2 个高危拦截提交（scripts/verify-supabase.ts:20 SSRF 模式、scripts/ai/sjtu-client.test.ts:6 硬编码凭据模式），两处均为 HEAD 既有内容、不在本次数据修复 diff 中。按钩子"修复并重扫"要求做了最小处理：verify-supabase.ts 发请求前校验 URL 协议为 http(s) 且 host 非环回/私有/保留地址（与 session 安全约束一致）；sjtu-client.test.ts 将 mock 占位 key 改为中性常量 unitTestHeaderValue（无真实凭据、fetch 为 mock，语义不变，测试通过）。若两处仍被判定为高危，说明为扫描器固有误报，建议人工复核或调整钩子范围为增量 diff。
+# 2026-08-18 自动数据审阅（首次运行）
+
+窗口：最近 3 天（无状态标记，回溯 2026-08-15 之后）。基线 changes.json：56 条变更（34 新增 / 22 下架），另纳入待审队列，按计划审阅 15 场。
+
+## 结论：审阅 15 场：一致 10 / 官网已更新 0 / 已修复 3 / 待人工 2 项（另 2 场下架核实正常）
+
+### 已修复并推送（extraction-bug ×3）
+
+1. **北京音乐厅《江山如此多娇》红色经典交响音乐会**（perf_04a28eed4f7644ec）
+   - 症状：作曲者与标题整体颠倒（红旗颂→composer），13 首漏掉"梨花颂"1 首。
+   - 修复：`scripts/adapters/beijing-concert-hall.ts` 新增尾部署名行解析（"曲名 人名 曲/词/编曲/配器/民歌"→ 正确 composer/credits），带空格归一化处理"配器张艺"类粘写。
+   - 回归：new-sources.test.ts（7 条断言含 credits 结构）。
+2. **深圳音乐厅 颜德独唱音乐会**（perf_3ee8b677c99b371b）
+   - 症状：中英双语被拆成 28 条（实际 13 首）；"演出曲目顺序视现场情况而定""Duration 90min"两条注释成为曲目；"罗西尼 诺言，选自艺术歌曲集《音乐晚会》"被拆成 composer="罗西尼 诺言，选自艺术歌曲集"+title="音乐晚会"；*1835 等脚注年份残留。
+   - 修复：`scripts/adapters/shenzhen-concert-hall.ts`：无编号纯拉丁行并入前一曲目的 alternateTitles（编号模式豁免，避免误吞 "9. Lemon"）；扩展 break 规则（"视现场情况而定"/演出时长/Duration）；"选自"前缀拆分出前置作曲者并重组标题；剥离 *\d{3,4} 脚注；普通行前置作曲者提取（含·间隔译名）。
+   - 回归：new-sources.test.ts（双语场次用例）。
+3. **国家大剧院 亚马孙雨林视听交响**（perf_94cc66a00ad3ddf4）
+   - 症状：游离人名"阿尔梅达·普拉多"被当作交响曲乐章；团体"北京音乐家协会合唱团"被当作"淡水豚与小鸟"的乐章。
+   - 修复：`scripts/adapters/national-centre-performing-arts.ts` 新增 isNonMovementAttribution（团体后缀 + 带间隔号的人名不作为乐章）。
+   - 回归：national-centre-performing-arts.test.ts（按真实 HTML 版式重放）。
+
+验证：test:parser / test:data 全过；scrape:ai 重新采集 432 场；audit:data 0 错误（4 个范围外警告）；audit:storage 0 错误。
+
+### 一致（10 场）
+西安音乐厅齐默尔曼×2、芭比（官网仅图片节目单，OCR 保守拒绝正确）；东艺新年音乐会（OCR 过提取被正确拒绝）；中山国乐节闭幕（与 fixture 逐项核对 20 首全对）；东艺奥拉夫松（5 首全对）；苏州大师系列一/二（与 API 原文逐项核对）；NCPA 追光回响（5 首全对）；哈尔滨弦•击（内容合理，adapter 有种子测试，未做原页深核）。
+
+### 下架核实（2 场）
+NCPA 吕嘉风雅如歌（8/15 已演过，正常滚出）；西安古典直通车西安音乐厅站（旧场次日期已过，9/9-12/1 未来场次均以独立事件在库）。
+
+### 待人工
+1. **仓库内约 170 个 " N.json" 重复文件**（如 `public/data/events/perf_ff6a3b773788c0b5 2.json`、`public/data/knowledge/index 3.json`）：Windows 复制冲突命名，随 ec788ad 混入提交。站点按 ID 加载不受影响，但属仓库垃圾，建议人工确认后删除。
+2. **audit:data 4 个警告**（NCPA 歌剧合唱专场"丹珠/艾叶儿/郑小琪"疑似作曲家当作品、深圳《长征组歌》专场）——为本次窗口外场次的既有疑点，建议纳入下次审阅。
+
+### 备注
+- 本轮 CI 采集时视觉模型一度不可用回退 tesseract（西安 4 场 extraction.provider=tesseract）；本地重采时 qwen3.6-27b 正常，齐默尔曼等图片节目单仍 0 节目项（海报为宣传图非节目单），维持待审队列。
+- 状态标记 data/auto-review-state.json 已更新至 2026-08-17T13:00:34.458Z。

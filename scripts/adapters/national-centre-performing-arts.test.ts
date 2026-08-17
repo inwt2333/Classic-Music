@@ -345,3 +345,33 @@ assert.equal(
 );
 
 console.log("NCPA parser tests passed.");
+
+const amazonProgram = parseNcpaDetail({
+  introduce: [{
+    type: "70",
+    contents: [{
+      content: `
+        <p>我们的父亲 克拉丽斯·阿萨德 曲</p>
+        <p>肖罗曲第三号“啄木鸟” 埃托尔·维拉-罗伯斯 曲</p>
+        <p>第二号交响曲“奥里沙们”（选段） 荷西·安东尼奥 曲</p>
+        <p>阿尔梅达·普拉多</p>
+        <p>“黄昏”（选自《亚马孙森林》） 埃托尔·维拉-罗伯斯 曲</p>
+        <p>亚马孙之水 菲利普·格拉斯 曲</p>
+        <p>第五乐章：马德拉河</p>
+        <p>淡水豚与小鸟 汤姆·若宾 曲</p>
+        <p>北京音乐家协会合唱团</p>
+      `,
+    }],
+  }],
+});
+assert.deepEqual(amazonProgram.program.map((item) => [item.composer, item.title]), [
+  ["克拉丽斯·阿萨德", "我们的父亲"],
+  ["埃托尔·维拉-罗伯斯", "肖罗曲第三号“啄木鸟”"],
+  ["荷西·安东尼奥", "第二号交响曲“奥里沙们”（选段）"],
+  ["埃托尔·维拉-罗伯斯", "“黄昏”（选自亚马孙森林）"],
+  ["菲利普·格拉斯", "亚马孙之水"],
+  ["汤姆·若宾", "淡水豚与小鸟"],
+]);
+assert.equal(amazonProgram.program[2].movements, undefined);
+assert.deepEqual(amazonProgram.program[4].movements, [{ number: "五", title: "马德拉河" }]);
+assert.equal(amazonProgram.program[5].movements, undefined);

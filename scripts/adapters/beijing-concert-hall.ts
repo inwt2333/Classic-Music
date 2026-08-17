@@ -28,6 +28,16 @@ export function parseBeijingConcertHallDetail(html: string) {
     }
     const line = raw.replace(/^\d+[.、]\s*/, "");
     if (!line || line.length > 180) continue;
+    const trailingCredits = parseTrailingCreditTitle(line);
+    if (trailingCredits) {
+      program.push({
+        composer: trailingCredits.composer,
+        title: stripBookTitle(trailingCredits.title),
+        credits: trailingCredits.credits.length ? trailingCredits.credits : undefined,
+        confidence: "official",
+      });
+      continue;
+    }
     const colon = line.match(/^([^：:]{2,36})[：:]\s*(.+)$/);
     if (colon) {
       program.push({ composer: cleanText(colon[1]), title: stripBookTitle(colon[2]), confidence: "official" });
@@ -58,6 +68,56 @@ export function parseBeijingConcertHallDetail(html: string) {
 function stripBookTitle(value: string) { return cleanText(value.replace(/[《》]/g, "")); }
 function cleanText(value: string) { return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim(); }
 function unique<T>(values: T[]) { return Array.from(new Set(values)); }
+
+const trailingCreditRoleWords = ["作词", "填词", "作曲", "编曲", "编配", "改编", "配器", "演唱", "演奏", "词", "曲"];
+
+function normalizeCreditSpacing(value: string) {
+  return value
+    .replace(/([^\s])(作词|填词|作曲|编曲|编配|改编|配器|民歌|演唱|演奏)/g, "$1 $2")
+    .replace(/(作词|填词|作曲|编曲|编配|改编|配器|民歌)([\u3400-\u9fff])/g, "$1 $2");
+}
+
+function consumeCreditToken(token: string) {
+  if (token === "民歌") return { name: "", role: "民歌" };
+  if (trailingCreditRoleWords.includes(token)) return { name: "", role: token };
+  const glued = token.match(/^([\u3400-\u9fff·、]{2,8})(作词|填词|作曲|编曲|编配|改编|配器|民歌|演唱|演奏)$/u);
+  if (glued) return { name: glued[1], role: glued[2] };
+  return undefined;
+}
+
+function parseTrailingCreditTitle(line: string) {
+  const tokens = normalizeCreditSpacing(cleanText(line)).split(/\s+/).filter(Boolean);
+  if (tokens.length < 2) return undefined;
+  const credits: NonNullable<ProgramItem["credits"]> = [];
+  let composer: string | undefined;
+  let end = tokens.length;
+  while (end > 1 && credits.length < 4) {
+    const consumed = consumeCreditToken(tokens[end - 1]);
+    if (!consumed) break;
+    let { name, role } = consumed;
+    if (!name) {
+      const previous = tokens[end - 2];
+      if (
+        !previous ||
+        previous.length > 12 ||
+        trailingCreditRoleWords.includes(previous) ||
+        /交响|协奏|奏鸣|组曲|序曲|狂想|变奏|舞曲|进行曲|前奏|间奏|练习|夜曲|圆舞|合唱|重奏|幻想|随想/.test(previous)
+      ) break;
+      name = previous;
+      end -= 2;
+    } else {
+      end -= 1;
+    }
+    if (role === "民歌") credits.unshift({ name: `${name}民歌`, role: "来源" });
+    else if (role === "曲" || role === "作曲") composer ||= cleanText(name);
+    else credits.unshift({ name: cleanText(name), role });
+  }
+  const title = tokens.slice(0, end).join(" ");
+  if (!credits.length && !composer) return undefined;
+  if (title.length < 2 || title.length > 60) return undefined;
+  if (!/[\u3400-\u9fff]/.test(title)) return undefined;
+  return { title, composer, credits };
+}
 function dedupe(items: ProgramItem[]) {
   const seen = new Set<string>();
   return items.filter((item) => { const key = `${item.composer}:${item.title}`; if (seen.has(key)) return false; seen.add(key); return true; });

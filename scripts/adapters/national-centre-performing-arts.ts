@@ -189,13 +189,21 @@ function parseHierarchicalProgram(lines: string[]) {
 
       const numbered = parseNumberedMovement(line);
       if (numbered) movements.push(numbered);
-      else movements.push({ title: cleanText(line.replace(/[《》]/g, "")) });
+      else if (!isNonMovementAttribution(line)) movements.push({ title: cleanText(line.replace(/[《》]/g, "")) });
     }
 
     if (movements.length) parent.item.movements = movements;
     program.push(parent.item);
   }
   return dedupeProgram(program);
+}
+
+function isNonMovementAttribution(value: string) {
+  const line = cleanText(value);
+  if (!line) return true;
+  if (/(?:合唱团|合唱队|交响乐团|管弦乐团|爱乐乐团|民族乐团|室内乐团|重奏组|乐团|歌剧院|音乐学院|音乐家协会)$/.test(line)) return true;
+  if (/^[\u3400-\u9fff·]{3,24}$/.test(line) && (line.match(/·/g) ?? []).length >= 1) return true;
+  return false;
 }
 
 function parseFlatSongProgram(lines: string[]): ProgramItem[] | undefined {

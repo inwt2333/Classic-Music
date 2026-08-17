@@ -1,6 +1,5 @@
 {
-  "schemaVersion": 1,
-  "lastReviewedDetectedAt": "2026-08-16T10:40:58.143Z",
-  "updatedAt": "2026-08-16T17:20:43.253Z",
-  "notes": "首次自动审阅。窗口内权威变更来自线上已部署 changes.json（CI 只部署不回写仓库，本地 public/data 基线为 2026-08-11）。本次已核对 perf_76beebdc4b815ac4（中山公园音乐堂 xhmpw）并修复 zhongshan 适配器；本地重生成产生的当日 added/removed 变更（detectedAt 2026-08-16T17:0x）留待下次审阅。"
+  "lastReviewedDetectedAt": "2026-08-17T13:00:34.458Z",
+  "reviewedAt": "2026-08-17T13:43:28.901Z",
+  "runNote": "auto-review 2026-08-18"
 }
