@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { ProgramItem } from "../../src/types";
 import { isShanghaiGrandTheatreClassical, parseShanghaiGrandTheatreDetail } from "./shanghai-grand-theatre";
 import { parseBeijingConcertHallDetail } from "./beijing-concert-hall";
@@ -12,7 +14,7 @@ import {
   discoverShenzhenConcertHallDetailUrls,
   parseShenzhenConcertHallDetail,
 } from "./shenzhen-concert-hall";
-import { parseZhongshanMusicHallDetail } from "./zhongshan-music-hall";
+import { parseZhongshanMusicHallDetail, parseZhongshanMusicHallProgramText } from "./zhongshan-music-hall";
 import { parseZhejiangSymphonyCalendar, parseZhejiangSymphonyProgram } from "./zhejiang-symphony";
 import { isXianConcertHallClassical } from "./xian-concert-hall";
 import { parseXinghaiConcertHallDetail } from "./xinghai-concert-hall";
@@ -295,6 +297,54 @@ const zhongshan = parseZhongshanMusicHallDetail(`
   <div class="wz2"><img src="/unrelated-recommendation.jpg"></div>
 `, "https://xhmpw.com/t48086.html");
 assert.deepEqual(zhongshan.imageUrls, ["https://xhmpw.com/concert-poster.jpg"]);
+
+const zhongshanXhmpwFixture = readFileSync(
+  resolve(process.cwd(), "scripts/fixtures/zhongshan-music-hall/xhmpw-t48917.html"),
+  "utf8",
+);
+const zhongshanShenzhou = parseZhongshanMusicHallDetail(zhongshanXhmpwFixture, "https://xhmpw.com/t48917.html");
+assert.equal(zhongshanShenzhou.title, "《神州音画》民族管弦乐组曲——暨第六届北京国乐节闭幕式 联合音乐会");
+assert.equal(zhongshanShenzhou.dateTime, "2026-08-17 19:30");
+assert.deepEqual(zhongshanShenzhou.priceTiers, [100, 180, 280, 380]);
+assert.equal(zhongshanShenzhou.venue, undefined);
+assert.equal(zhongshanShenzhou.program.length, 20);
+assert.deepEqual(zhongshanShenzhou.program.map((item) => item.title), [
+  "吉祥歌", "塔舞小蛮腰", "岭南水乡小阿妹", "湾区飞虹", "灞桥柳", "崖畔上开花", "风调雨顺", "采江南",
+  "上茶山", "井冈山下种南瓜", "楼兰新娘", "牧羊人与养蜂女", "乌兰姑娘", "你那里下雪了吗", "军中绿花",
+  "中国结", "甜歌进行曲", "炬影长风", "玫瑰狂想曲", "龙腾虎跃",
+]);
+assert.deepEqual(zhongshanShenzhou.program.map((item) => item.composer), [
+  "颂今、孙小松", "颂今", "颂今", "颂今", "颂今、孙小松", "颂今", "颂今、郑阳", "颂今、徐可", "颂今、傅丹",
+  "颂今", "颂今", "颂今、孙小松", "颂今、孙小松", "颂今、郑阳", "颂今", "颂今、郑阳",
+  "韩乘光、颂今、郑阳", "王晓峰", "王丹红", "徐昌俊",
+]);
+assert.ok(zhongshanShenzhou.program.every((item) => item.confidence === "official"));
+assert.deepEqual(zhongshanShenzhou.performers, ["于海音", "张鸣", "刘心悦", "王晶晶", "王向阳"]);
+assert.equal(zhongshanShenzhou.ensemble, "北京民族乐团");
+
+const zhongshanPersonnelGuard = parseZhongshanMusicHallProgramText(
+  "演出曲目：\n指挥：张鸣\n独奏：王晶晶\n1、欢乐颂 贝多芬作曲\n贝多芬：月光",
+  "official",
+);
+assert.deepEqual(zhongshanPersonnelGuard.map((item) => [item.composer, item.title]), [
+  ["贝多芬", "欢乐颂"],
+  ["贝多芬", "月光"],
+]);
+
+const zhongshanFooterGuard = parseZhongshanMusicHallDetail(`
+  <title>测试音乐会--票品详情</title>
+  <body>
+  <p>演出曲目：</p>
+  <script>var x = "指挥：假人";</script>
+  <p>莫扎特：小夜曲</p>
+  <p>推荐演出</p>
+  <p>德云社相声大会——天桥德</p>
+  </body>
+`, "https://xhmpw.com/t99999.html");
+assert.deepEqual(zhongshanFooterGuard.program.map((item) => [item.composer, item.title]), [
+  ["莫扎特", "小夜曲"],
+]);
+assert.deepEqual(zhongshanFooterGuard.performers, []);
 
 const ical = `BEGIN:VCALENDAR\nBEGIN:VEVENT\nDTSTART;TZID=Asia/Shanghai:20261113T193000\nDTEND;TZID=Asia/Shanghai:20261113T210000\nUID:8554@test\nSUMMARY:浙江交响乐团2026年音乐季\nDESCRIPTION:音乐会曲目\\n上半场\\n《悲剧序曲》\\n勃拉姆斯\\n《第五交响曲》\\n肖斯塔科维奇\nURL:https://www.zjso.org/event/8554\nLOCATION:杭州运河大剧院歌剧厅\\, 浙江省杭州市\nEND:VEVENT\nEND:VCALENDAR`;
 const calendar = parseZhejiangSymphonyCalendar(ical);

@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import { loadSjtuAiConfig, parseJsonContent, requestSjtuChat } from "./sjtu-client";
 
+const unitTestHeaderValue = "unit-test-placeholder";
+
 async function main() {
 const config = loadSjtuAiConfig({
-  SJTU_AI_API_KEY: "test-key",
+  SJTU_AI_API_KEY: unitTestHeaderValue,
   SJTU_AI_BASE_URL: "https://models.example/api/v1/",
   SJTU_KNOWLEDGE_MODEL: "reasoner",
   SJTU_PROGRAM_MODEL: "chat",
@@ -25,7 +27,7 @@ const content = await requestSjtuChat({
   retryDelayMs: 0,
   fetchImpl: (async (url, init) => {
     assert.equal(url, "https://models.example/api/v1/chat/completions");
-    assert.equal(new Headers(init?.headers).get("authorization"), "Bearer test-key");
+    assert.equal(new Headers(init?.headers).get("authorization"), `Bearer ${unitTestHeaderValue}`);
     requestBody = JSON.parse(String(init?.body));
     return Response.json({ choices: [{ message: { content: "{\"ok\":true}" } }] });
   }) as typeof fetch,

@@ -1818,7 +1818,8 @@ async function scrapeZhongshanMusicHall(
       if (!start) continue;
       events.push(createSimpleEvent({ source, scrapedAt, sourceRecordId: detailUrl, projectId: key, title: parsed.title, start,
         venue: parsed.venue || source.venue, priceTiers: parsed.priceTiers, program,
-        performers: inferPerformers(parsed.title), sourceUrl: detailUrl, ticketUrl: detailUrl, extraction,
+        performers: uniqueStrings([...parsed.performers, ...inferPerformers(parsed.title)]),
+        ensemble: parsed.ensemble, sourceUrl: detailUrl, ticketUrl: detailUrl, extraction,
         evidenceText: html }));
     }
   } finally { await localOcr?.terminate(); }

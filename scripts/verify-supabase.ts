@@ -11,13 +11,31 @@ if (!supabaseUrl || !publishableKey) {
   throw new Error("VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY are required");
 }
 
+function publicHttpOrigin(raw: string) {
+  const url = new URL(raw);
+  if (url.protocol !== "https:" && url.protocol !== "http:") {
+    throw new Error("VITE_SUPABASE_URL must use http or https");
+  }
+  const host = url.hostname.toLowerCase();
+  const privateHost = host === "localhost" || host === "::1" || host.endsWith(".localhost")
+    || /^(?:127\.|0\.|10\.|192\.168\.|169\.254\.)/.test(host)
+    || /^172\.(?:1[6-9]|2\d|3[01])\./.test(host)
+    || /^(?:f[cd][0-9a-f]{2}:|fe80:)/.test(host);
+  if (privateHost) {
+    throw new Error("VITE_SUPABASE_URL must not point at a loopback, private, or reserved address");
+  }
+  return url.origin;
+}
+
+const supabaseOrigin = publicHttpOrigin(supabaseUrl);
+
 const headers = {
   apikey: publishableKey,
   authorization: `Bearer ${publishableKey}`,
 };
 
 async function request(path: string, init?: RequestInit) {
-  return fetch(`${supabaseUrl}/${path}`, {
+  return fetch(`${supabaseOrigin}/${path}`, {
     ...init,
     headers: {
       ...headers,
