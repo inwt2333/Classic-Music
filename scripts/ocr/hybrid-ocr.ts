@@ -84,7 +84,7 @@ export async function createHybridOcr(
         try {
           const cached = JSON.parse(await readFile(cachePath, "utf8")) as OcrPage;
           console.log(`[vision] ${config.visionModel} cache hit for ${describeImage(url)}`);
-          return { ...cached, url, imageHash, cacheHit: true, provider: config.visionModel };
+          return { ...sanitizeCachedPage(cached), url, imageHash, cacheHit: true, provider: config.visionModel };
         } catch {
           // A cache miss is expected for a newly discovered poster.
         }
@@ -140,12 +140,16 @@ export async function createHybridOcr(
             program: section.program.map((item) => ({
               composer: cleanComposer(item.composer),
               title: item.title.trim(),
-              alternateTitles: item.alternateTitles.map((title) => title.trim()).filter(Boolean),
+              alternateTitles: item.alternateTitles
+                .map((title) => title.trim())
+                .filter(isWorkTitleAlias),
               opus: cleanOptional(item.opus),
               movements: item.movements.map((movement) => ({
                 number: cleanOptional(movement.number),
                 title: movement.title.trim(),
-                alternateTitles: movement.alternateTitles.map((title) => title.trim()).filter(Boolean),
+                alternateTitles: movement.alternateTitles
+                  .map((title) => title.trim())
+                  .filter(isWorkTitleAlias),
               })),
               confidence: "ocr",
             })),
@@ -196,4 +200,31 @@ function cleanComposer(value: string | null | undefined) {
   if (!normalized) return undefined;
   const parts = normalized.split(/\s*[|｜]\s*/).map((part) => part.trim()).filter(Boolean);
   return parts.find((part) => /[\u3400-\u9fff]/.test(part)) ?? parts[0];
+}
+
+function isWorkTitleAlias(value: string) {
+  if (!value) return false;
+  // Vision models echo source fragments like "from Rigoletto" or arrangement
+  // notes as alternate titles; they describe the origin, not the work itself.
+  return !/^(?:from|arr\.?|aus|op\.?|bwv|k\.?|kv)\b/i.test(value) && !/^(?:选自|改编自|译自)/.test(value);
+}
+
+function sanitizeCachedPage(page: OcrPage): OcrPage {
+  if (!page.programSections?.length) return page;
+  const filterAliases = (titles: string[] | undefined) =>
+    titles?.map((title) => title.trim()).filter(isWorkTitleAlias);
+  return {
+    ...page,
+    programSections: page.programSections.map((section) => ({
+      ...section,
+      program: section.program.map((item) => ({
+        ...item,
+        alternateTitles: filterAliases(item.alternateTitles),
+        movements: item.movements?.map((movement) => ({
+          ...movement,
+          alternateTitles: filterAliases(movement.alternateTitles),
+        })),
+      })),
+    })),
+  };
 }

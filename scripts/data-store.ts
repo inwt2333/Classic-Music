@@ -1293,17 +1293,23 @@ function programItemsEquivalent(a: ProgramItem, b: ProgramItem) {
   if (workNumberIdentityConflicts(a.title, b.title)) return false;
   if (selectedExcerptIdentityConflicts(a.title, b.title)) return false;
   const similarityThreshold = aComposer && bComposer ? 0.65 : 0.8;
-  const aTitles = [a.title, ...(a.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
-  const bTitles = [b.title, ...(b.alternateTitles ?? [])].map(normalizeIdentity).filter(Boolean);
-  return aTitles.some((left) =>
-    bTitles.some(
-      (right) =>
-        left === right ||
-        (Math.min(left.length, right.length) >= 6 &&
-          (left.includes(right) ||
-            right.includes(left) ||
-            diceCoefficient(left, right) >= similarityThreshold)),
-    ),
+  const titlesMatch = (left: string, right: string) =>
+    left === right ||
+    (Math.min(left.length, right.length) >= 6 &&
+      (left.includes(right) ||
+        right.includes(left) ||
+        diceCoefficient(left, right) >= similarityThreshold));
+  const aMain = normalizeIdentity(a.title);
+  const bMain = normalizeIdentity(b.title);
+  const aAlternates = (a.alternateTitles ?? []).map(normalizeIdentity).filter(Boolean);
+  const bAlternates = (b.alternateTitles ?? []).map(normalizeIdentity).filter(Boolean);
+  // A shared alternate alone must not identify a work: at least one side's main
+  // title has to match, otherwise arias sharing "from Rigoletto"-style fragments
+  // or composer-name lines collapse into one entry during dedupe.
+  return Boolean(
+    (aMain && bMain && titlesMatch(aMain, bMain)) ||
+      aAlternates.some((alternate) => bMain && titlesMatch(alternate, bMain)) ||
+      bAlternates.some((alternate) => aMain && titlesMatch(alternate, aMain)),
   );
 }
 

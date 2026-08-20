@@ -26,7 +26,7 @@ const successful = await createHybridOcr(await mkdtemp(join(tmpdir(), "classic-m
           program: [{
             composer: "\u83ab\u624e\u7279 | Mozart",
             title: "A\u5927\u8c03\u5355\u7c27\u7ba1\u4e94\u91cd\u594f",
-            alternateTitles: ["Clarinet Quintet in A Major"],
+            alternateTitles: ["Clarinet Quintet in A Major", "from Clarinet Quintet K. 581", "arr. for Strings"],
             opus: "K. 581",
             movements: [{ number: "I", title: "\u5feb\u677f", alternateTitles: ["Allegro"] }],
           }],
@@ -42,6 +42,7 @@ assert.match(page.text, /\u83ab\u624e\u7279/);
 assert.equal(page.programSections?.[0].date, "4/21");
 assert.equal(page.programSections?.[0].program[0].composer, "\u83ab\u624e\u7279");
 assert.equal(page.programSections?.[0].program[0].movements?.[0].title, "\u5feb\u677f");
+assert.deepEqual(page.programSections?.[0].program[0].alternateTitles, ["Clarinet Quintet in A Major"]);
 
 let fallbackCalls = 0;
 const fallback: LocalOcr = {

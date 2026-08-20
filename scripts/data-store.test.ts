@@ -135,6 +135,32 @@ const numberedWorks = mergeCrossSourceEvents([{
 }], sources);
 assert.deepEqual(numberedWorks[0].program.map((item) => item.title), ["夜的钢琴曲五", "夜的钢琴曲六"]);
 
+const sharedAlternateArias = mergeCrossSourceEvents([{
+  ...baseEvent,
+  id: "shared-alternate-arias",
+  program: [
+    { composer: "朱塞佩·威尔第", title: "女儿！我的父亲！……啊，姑娘，请守护这朵花", alternateTitles: ["from Rigoletto"], confidence: "ocr" },
+    { composer: "朱塞佩·威尔第", title: "那可恶的老东西诅咒我……", alternateTitles: ["from Rigoletto"], confidence: "ocr" },
+    { composer: "沃尔夫冈·莫扎特", title: "第一小提琴协奏曲", alternateTitles: ["Wolfgang Mozart", "Violin Concerto No. 1"], confidence: "ocr" },
+    { composer: "沃尔夫冈·莫扎特", title: "单簧管协奏曲", alternateTitles: ["Wolfgang Mozart", "Clarinet Concerto"], confidence: "ocr" },
+  ],
+}], sources);
+assert.equal(sharedAlternateArias[0].program.length, 4);
+assert.deepEqual(
+  sharedAlternateArias[0].program.map((item) => item.title),
+  ["女儿！我的父亲！……啊，姑娘，请守护这朵花", "那可恶的老东西诅咒我……", "第一小提琴协奏曲", "单簧管协奏曲"],
+);
+
+const mainTitleVersusAlternateStillMerges = mergeCrossSourceEvents(
+  [
+    { ...baseEvent, id: "alt-main-a", program: [{ composer: "里亚多夫", title: "魔湖", confidence: "official" }] },
+    { ...baseEvent, id: "alt-main-b", program: [{ composer: "里亚多夫", title: "The Enchanted Lake", alternateTitles: ["魔湖"], confidence: "official" }] },
+  ],
+  sources,
+);
+assert.equal(mainTitleVersusAlternateStillMerges.length, 1);
+assert.equal(mainTitleVersusAlternateStillMerges[0].program.length, 1);
+
 const ocrEvent: ConcertEvent = {
   ...baseEvent,
   id: "ocr-event",
