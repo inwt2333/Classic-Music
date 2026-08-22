@@ -44,8 +44,22 @@ export function parseZhongshanMusicHallProgramText(text: string, confidence: Pro
   if (marker < 0) return [];
   const program: ProgramItem[] = [];
   for (const raw of lines.slice(marker + 1)) {
-    if (/演出阵容|艺术家|购票|温馨提示|演出介绍|团体介绍|推荐演出|曲目.*为准|以.{0,8}为准/.test(raw)) break;
+    if (/演出阵容|艺术家|购票|温馨提示|演出介绍|院团简介|团体介绍|主创简介|主要演员|推荐演出|曲目.*为准|以.{0,8}为准/.test(raw)) break;
     const line = raw.replace(/^\d+[.、]\s*/, "");
+    const movementHeader = line.match(/^(?:序曲|终曲|尾声|引子|前奏|间奏曲?|第[一二三四五六七八九十百\d]+乐章)[\s　]*(?:[\u4e00-\u9fa5与·]*?)《([^》]+)》\s*(.*)$/);
+    if (movementHeader) {
+      const item: ProgramItem = { title: cleanText(movementHeader[1]), confidence };
+      const trailingCredits = parsePerformanceCredits(movementHeader[2]);
+      if (trailingCredits.length) item.credits = trailingCredits;
+      program.push(item);
+      continue;
+    }
+    const leadingRole = line.match(/^(.{1,10}?)[：:]\s*(.+)$/);
+    if (leadingRole && program.length && !/《/.test(line) && isPerformanceRoleLabel(leadingRole[1])) {
+      const last = program.at(-1)!;
+      last.credits = [...(last.credits ?? []), ...parsePerformanceCredits(line)];
+      continue;
+    }
     const match = line.match(/^([^：:—－]{2,32})[：:—－]\s*(.+)$/);
     if (match && match[2].length <= 160 && !isProgramRoleLabel(match[1])) {
       program.push({ composer: match[1], title: match[2].replace(/[《》]/g, ""), confidence });
@@ -104,3 +118,32 @@ function stripPerformanceForceAnnotation(title: string) {
 
 function unique<T>(values: T[]) { return Array.from(new Set(values)); }
 function cleanText(value: string) { return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim(); }
+
+function isPerformanceRoleLabel(value: string) {
+  const role = cleanText(value);
+  if (role.length < 2 || role.length > 10) return false;
+  return /[\u4e00-\u9fa5]{0,6}(?:独奏|独唱|领奏|领唱|吟诵|吟唱|伴奏|演奏|演唱|朗诵)$/.test(role);
+}
+
+function parsePerformanceCredits(value: string) {
+  const match = cleanText(value).match(/^(.{1,10}?)[：:]\s*(.+)$/);
+  if (!match || !isPerformanceRoleLabel(match[1])) return [];
+  const merged: string[] = [];
+  for (const token of match[2].split(/[\s、，,／/]+/).filter(Boolean)) {
+    const previous = merged.at(-1);
+    if (
+      previous &&
+      previous.length <= 2 &&
+      token.length === 1 &&
+      /^[一-龥]+$/.test(previous + token)
+    ) {
+      merged[merged.length - 1] = previous + token;
+      continue;
+    }
+    merged.push(token);
+  }
+  return merged
+    .map((name) => name.replace(/[（(][^（）()]*[）)]/g, "").trim())
+    .filter((name) => name.length >= 2 && name.length <= 20)
+    .map((name) => ({ name, role: cleanText(match[1]) }));
+}

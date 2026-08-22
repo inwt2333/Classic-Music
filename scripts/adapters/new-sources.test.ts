@@ -394,6 +394,24 @@ assert.ok(zhongshanShenzhou.program.every((item) => item.confidence === "officia
 assert.deepEqual(zhongshanShenzhou.performers, ["于海音", "张鸣", "刘心悦", "王晶晶", "王向阳"]);
 assert.equal(zhongshanShenzhou.ensemble, "北京民族乐团");
 
+const zhongshanCanalFixture = readFileSync(
+  resolve(process.cwd(), "scripts/fixtures/zhongshan-music-hall/xhmpw-t48697.html"),
+  "utf8",
+);
+const zhongshanCanal = parseZhongshanMusicHallDetail(zhongshanCanalFixture, "https://xhmpw.com/t48697.html");
+assert.equal(zhongshanCanal.title, "民族交响诗《大运河》音乐会");
+assert.equal(zhongshanCanal.program.length, 8);
+assert.deepEqual(zhongshanCanal.program.map((item) => item.title), [
+  "开河", "黄金水道", "漕运沧桑", "江河万古流", "舟楫通南北", "运河明珠", "醉千秋", "大河·天下",
+]);
+assert.deepEqual(zhongshanCanal.program[0].credits, [{ name: "冯金伟", role: "吟诵" }]);
+assert.deepEqual(zhongshanCanal.program[3].credits, [{ name: "霍佳雨", role: "笙独奏" }]);
+assert.deepEqual(zhongshanCanal.program[5].credits, [
+  { name: "李雨涵", role: "阮独奏" },
+  { name: "李倩", role: "阮独奏" },
+]);
+assert.deepEqual(zhongshanCanal.program[6].credits, [{ name: "郑潇", role: "吟唱" }]);
+
 const zhongshanPersonnelGuard = parseZhongshanMusicHallProgramText(
   "演出曲目：\n指挥：张鸣\n独奏：王晶晶\n1、欢乐颂 贝多芬作曲\n贝多芬：月光",
   "official",

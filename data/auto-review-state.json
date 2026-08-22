@@ -1,5 +1,5 @@
 {
-  "lastReviewedDetectedAt": "2026-08-17T13:00:34.458Z",
-  "reviewedAt": "2026-08-20T12:10:54.223Z",
-  "runNote": "auto-review 2026-08-19: queue review, shared-alternate dedupe fix; new changes from 2026-08-18 regeneration left for next run"
+  "lastReviewedDetectedAt": "2026-08-20T12:01:12.488Z",
+  "reviewedAt": "2026-08-22T12:19:19.872Z",
+  "runNote": "auto-review 2026-08-22: reviewed 2026-08-20 batch (10 added + 6 removed), fixed zhongshan movement-header parsing; 2026-08-22T12:09 regeneration changes left for next run"
 }
