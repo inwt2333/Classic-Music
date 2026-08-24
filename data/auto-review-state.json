@@ -1,5 +1,5 @@
 {
-  "lastReviewedDetectedAt": "2026-08-20T12:01:12.488Z",
-  "reviewedAt": "2026-08-22T12:19:19.872Z",
-  "runNote": "auto-review 2026-08-22: reviewed 2026-08-20 batch (10 added + 6 removed), fixed zhongshan movement-header parsing; 2026-08-22T12:09 regeneration changes left for next run"
+  "lastReviewedDetectedAt": "2026-08-22T12:09:09.178Z",
+  "reviewedAt": "2026-08-24T12:25:46.429Z",
+  "runNote": "auto-review 2026-08-24: reviewed 2026-08-22 batch (5 added), fixed SHOAC half-section/prose/numbered-credit layouts; xinghai site redesign pending manual; 2026-08-24 regeneration changes left for next run"
 }

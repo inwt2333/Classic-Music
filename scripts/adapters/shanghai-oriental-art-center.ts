@@ -18,7 +18,7 @@ type AlternateTitleTarget = {
 const boilerplatePattern =
   /请留意确认所购场次和票档|迟到或中途离场|曲目以现场为准|曲目及顺序以现场为准|programs? (?:is|are)? ?subject to change|开演无短信提醒服务/i;
 const programFooterPattern =
-  /曲目(?:及顺序)?以现场|programs? (?:is|are)? ?subject to change|主办方保留更换曲目|艺术家简介|演奏家介绍|演出阵容|主办单位|温馨提示|购票须知/i;
+  /曲目(?:及顺序|及阵容)?以现场|programs? (?:is|are)? ?subject to change|主办方保留更换曲目|艺术家简介|艺术家介绍|演奏家介绍|乐团介绍|音乐总监|主要演员|演出阵容|主办单位|温馨提示|购票须知|媒体评价/i;
 const rolePattern =
   /^(指\s*挥|演\s*奏|演\s*唱|钢琴|小提琴|中提琴|大提琴|低音提琴|长笛|双簧管|单簧管|大管|圆号|小号|长号|打击乐|竖琴|吉他|管风琴|男高音|男中音|低男中音|男低音|女高音|女中音|女低音|独唱|独奏|合唱|乐团|管弦乐团)\s*[|｜:：]\s*(.+)$/i;
 const dateMarkerPattern = /^(20\d{2})[./-](\d{1,2})[./-](\d{1,2})(?:\s+\d{1,2}:\d{2})?/;
@@ -203,12 +203,13 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
     if (hasDateSections && targetDate && activeDate !== targetDate) continue;
 
     if (matchRoleLine(line) || isCastOrCreditLine(line)) continue;
-    if (confidence === "ocr" && /^(?:上半场|下半场|中场休息|幕间休息)(?:\s+Intermission)?$/i.test(line)) {
+    if (/^(?:[―—－-]*\s*)?(?:上半场|下半场|中场休息|幕间休息)(?:\s*[：:].*)?(?:\s+Intermission)?\s*[―—－-]*$/i.test(line)) {
       currentComposer = undefined;
       currentWork = undefined;
       untranslatedTargets.length = 0;
       continue;
     }
+    if (isProseParagraph(line) || isInlineMovementSummary(line)) continue;
 
     const creditedOcrWork = confidence === "ocr"
       ? parseCreditedOcrWork(line, confidence)
@@ -238,6 +239,26 @@ function parseProgram(blocks: ContentBlock[], options: ParseOptions) {
       currentComposer = ocrTitleCredit.composer;
       currentWork = ocrTitleCredit;
       program.push(currentWork);
+      continue;
+    }
+
+    const chineseNumberedWork = confidence !== "ocr"
+      ? parseChineseNumberedWork(line, confidence)
+      : undefined;
+    if (chineseNumberedWork) {
+      currentComposer = chineseNumberedWork.composer;
+      currentWork = chineseNumberedWork;
+      program.push(currentWork);
+      continue;
+    }
+
+    const composerWork = confidence !== "ocr" ? matchComposerWorkHeader(line) : undefined;
+    if (composerWork) {
+      const work: ProgramItem = { composer: composerWork.composer, title: composerWork.title, confidence };
+      index = attachNumberedMovements(work, blocks, index);
+      program.push(work);
+      currentComposer = work.composer;
+      currentWork = work;
       continue;
     }
 
@@ -899,4 +920,85 @@ function formatPrice(price: number) {
 
 function cleanText(value: string) {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
+}
+
+
+function isProseParagraph(value: string) {
+  const punctuation = (value.match(/[，。；]/g) ?? []).length;
+  return (value.length >= 36 && punctuation >= 2) || (value.includes("。") && value.length >= 20);
+}
+
+function matchComposerWorkHeader(line: string) {
+  const match = line.match(/^([一-龥A-Za-z·.\-]{2,24})\s*《\s*([^》]+?)\s*》\s*$/);
+  if (!match) return undefined;
+  const composer = cleanText(match[1]);
+  if (!composer || isPerformanceRoleWord(composer)) return undefined;
+  return { composer, title: cleanText(match[2]) };
+}
+
+function isPerformanceRoleWord(value: string) {
+  return /^(?:指挥|钢琴|小提琴|大提琴|长笛|双簧管|单簧管|大管|圆号|小号|长号|打击乐|竖琴|吉他|管风琴|男高音|男中音|男低音|女高音|女中音|女低音|独奏|独唱|领奏|领唱|演奏|演唱|上半场|下半场)$/.test(value);
+}
+
+function attachNumberedMovements(work: ProgramItem, blocks: ContentBlock[], startIndex: number) {
+  let cursor = startIndex + 1;
+  let alternateTarget: { title: string; alternateTitles?: string[] } = work;
+  while (cursor < blocks.length) {
+    const childLine = cleanText(blocks[cursor].text);
+    if (!childLine) {
+      cursor += 1;
+      continue;
+    }
+    if (isEnglishTranslation(childLine) && /[^\s|｜∣]/.test(childLine)) {
+      alternateTarget.alternateTitles = [...(alternateTarget.alternateTitles ?? []), cleanText(childLine)];
+      cursor += 1;
+      continue;
+    }
+    if (isInlineMovementSummary(childLine)) {
+      cursor += 1;
+      continue;
+    }
+    const child = childLine.match(/^\d{1,2}\s*[.、．]\s*(.+)$/);
+    if (!child) break;
+    let movementTitle = cleanText(child[1].replace(/[《》]/g, ""));
+    let movementAlternate: string | undefined;
+    const splitLatin = movementTitle.match(/^(.+?)\s+([A-Za-z][A-Za-zÀ-ÿ'’\-]{2,}(?:\s+[A-Za-zÀ-ÿ'’\-]{2,})*)$/);
+    if (splitLatin && /[一-鿿]/.test(splitLatin[1])) {
+      movementTitle = cleanText(splitLatin[1]);
+      movementAlternate = cleanText(splitLatin[2]);
+    }
+    if (!movementTitle || movementTitle.length > 60) break;
+    const movement = movementAlternate
+      ? { title: movementTitle, alternateTitles: [movementAlternate] }
+      : { title: movementTitle };
+    work.movements = [...(work.movements ?? []), movement];
+    alternateTarget = movement;
+    cursor += 1;
+  }
+  return cursor - 1;
+}
+
+function isInlineMovementSummary(value: string) {
+  const segments = value.match(/[一二三四五六七八九十]+、[^一二三四五六七八九十]{1,26}/g);
+  return Boolean(segments && segments.length >= 2 && value.replace(/[一二三四五六七八九十]、/g, "").length <= value.length - 4);
+}
+
+function parseChineseNumberedWork(line: string, confidence: ProgramItem["confidence"]) {
+  const match = line.match(/^[一二三四五六七八九十]{1,3}\s*[、.．]\s*《\s*([^》]+?)\s*》\s*(.*)$/);
+  if (!match) return undefined;
+  const title = cleanText(match[1]);
+  const trailing = cleanText(match[2] || "");
+  const credit = trailing.match(/^(.*?)\s*(?:作\s*曲|编\s*曲|编\s*订|编\s*配)\s*[：:]\s*([一-龥A-Za-z·]{2,12})/)
+    ?? trailing.match(/^(.{1,16}?)\s*([一-龥·]{2,4})\s+(?:作\s*曲|编\s*曲|编\s*订|编\s*配)\s*(?:[（(].*?[）)])?\s*$/)
+    ?? trailing.match(/^(.{1,16}?)\s*([一-龥·]{2,4})\s*[（(]\s*(?:世界首演|中国首演|首演)\s*[）)]\s*$/);
+  const genrePart = cleanText(credit ? credit[1] : trailing);
+  const fullTitle = cleanProgramTitle(
+    [title, genrePart && genrePart.length <= 14 ? genrePart : ""].filter(Boolean).join(" "),
+  );
+  if (!fullTitle) return undefined;
+  return {
+    composer: credit ? cleanText(credit[2]) : undefined,
+    title: fullTitle,
+    confidence,
+  } satisfies ProgramItem;
 }

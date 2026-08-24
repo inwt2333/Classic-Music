@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import {
   parseOrientalArtCenterContent,
   parseOrientalArtCenterOcrText,
@@ -449,5 +451,38 @@ assert.deepEqual(russianRomances.program, [
     confidence: "official",
   },
 ]);
+
+const tangoProgram = parseOrientalArtCenterContent(
+  readFileSync(resolve(process.cwd(), "scripts/fixtures/shanghai-oriental-art-center/tango-1296843135003652096.html"), "utf8"),
+);
+assert.deepEqual(
+  tangoProgram.program.map((item) => [item.composer, item.title, item.movements?.length ?? 0]),
+  [
+    ["安东尼奥·维瓦尔第", "四季", 4],
+    ["阿斯托尔·皮亚佐拉", "布宜诺斯艾利斯的四季", 4],
+  ],
+);
+assert.equal(tangoProgram.program[0].movements?.[0].title, "春E大调，作品8，RV 269");
+assert.deepEqual(tangoProgram.program[0].movements?.[0].alternateTitles, ["La Primavera, E Major, Op. 8, RV 269"]);
+assert.equal(tangoProgram.program[1].movements?.[3].title, "布宜诺斯艾利斯之春");
+
+const pipaProgram = parseOrientalArtCenterContent(
+  readFileSync(resolve(process.cwd(), "scripts/fixtures/shanghai-oriental-art-center/pipa-1296497903689027584.html"), "utf8"),
+);
+assert.deepEqual(
+  pipaProgram.program.map((item) => [item.composer ?? "—", item.title]),
+  [
+    ["余祎曈", "素弦 琵琶与古琴"],
+    ["陈思昂", "广东音画 琵琶四重奏"],
+    ["刘天琪", "云中君 琵琶四重奏"],
+    ["李博禅", "悄然 琵琶四重奏"],
+    ["王云飞", "武生 琵琶七重奏"],
+    ["顾冠仁", "春江花月夜 琵琶五重奏"],
+    ["王瑞", "诗画芙蓉 琵琶四重奏"],
+    ["李博禅", "晚秋 琵琶与钢琴"],
+    ["王瑞", "霓裳羽衣 琵琶重奏"],
+    ["刘天琪", "惊鸿 琵琶重奏"],
+  ],
+);
 
 console.log("Shanghai Oriental Art Center adapter tests passed.");
