@@ -83,6 +83,7 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
   const performers: string[] = [];
   let numberedWorksMode = false;
   let lastProgramLineHadCjk = false;
+  let suiteWork: ProgramItem | undefined;
   for (const rawLine of scoped) {
     const arabicNumber = rawLine.match(/^(\d+)[.．、]\s*(.+)$/);
     if (arabicNumber && program.length === 0) numberedWorksMode = true;
@@ -102,9 +103,45 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
       continue;
     }
 
-    const personnel = line.match(/^(演出|演奏|伴奏|领唱|合唱|独唱)[：:]\s*(.+)$/);
-    if (personnel) {
-      performers.push(...splitPeople(personnel[2]));
+    if (/^[一二三四五六七八九十]{1,3}\s*、\s*[㐀-鿿]{2,10}$/.test(line)) {
+      suiteWork = undefined;
+      lastProgramLineHadCjk = false;
+      continue;
+    }
+
+    const castTokens = line.split(/\s+/);
+    if (castTokens.every((token) => /^(?:演出|演奏|伴奏|领唱|合唱|独唱|指挥|低男中音|男中音|男高音|女高音|女中音|女低音|男低音|朗诵|主持人|艺术指导|钢琴伴奏|民族男高音歌唱家|歌唱家)[：:].+$/.test(token))) {
+      for (const token of castTokens) {
+        performers.push(...splitPeople(token.replace(/^[^：:]*[：:]/, "").replace(/[（(][^）)]*[）)]/g, "")));
+      }
+      continue;
+    }
+
+    const numberedBracket = rawLine.match(/^(?:\d{1,2}|[０-９]{1,2})\s*[.、．]\s*《([^》]+)》\s*(?:[—－-]+\s*(.+))?$/);
+    if (numberedBracket) {
+      const creditsPart = numberedBracket[2] ? cleanText(numberedBracket[2]) : undefined;
+      if (creditsPart) {
+        const credited = buildCreditedWork(numberedBracket[1], creditsPart, confidence);
+        program.push(credited);
+        suiteWork = undefined;
+        lastProgramLineHadCjk = true;
+        continue;
+      }
+      if (suiteWork) {
+        suiteWork.movements = [...(suiteWork.movements ?? []), { title: cleanText(numberedBracket[1]) }];
+        continue;
+      }
+      program.push({ title: cleanText(numberedBracket[1]), confidence });
+      lastProgramLineHadCjk = true;
+      continue;
+    }
+
+    const suiteHeader = line.match(/^《([^》]+)》\s*[—－-]+\s*(.+)$/);
+    if (suiteHeader) {
+      const suite = buildCreditedWork(suiteHeader[1], suiteHeader[2], confidence);
+      program.push(suite);
+      suiteWork = suite;
+      lastProgramLineHadCjk = true;
       continue;
     }
 
@@ -245,3 +282,27 @@ function dedupe(items: ProgramItem[]) { const s = new Set<string>(); return item
 function unique<T>(values: T[]) { return Array.from(new Set(values)); }
 function cleanComposerName(value: string) { return cleanText(value).replace(/\s*·\s*/g, "·"); }
 function cleanText(value: string) { return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim(); }
+
+function buildCreditedWork(title: string, creditsText: string, confidence: ProgramItem["confidence"]): ProgramItem {
+  const segments = creditsText
+    .split(/[｜|/／]/)
+    .map(cleanText)
+    .filter(Boolean);
+  let composer: string | undefined;
+  const credits: NonNullable<ProgramItem["credits"]> = [];
+  for (const segment of segments) {
+    const match = segment.match(/^(作词|填词|诗词|词|诗|作曲|曲|编曲|编配|改编|配器)\s*[：:]?\s*(.+)$/);
+    if (!match) continue;
+    const role = match[1];
+    const name = cleanText(match[2]);
+    if (role === "曲" || role === "作曲") composer ||= name;
+    else if (role === "诗词" || role === "诗") credits.push({ name, role: "词" });
+    else credits.push({ name, role });
+  }
+  return {
+    composer,
+    title: cleanText(title.replace(/[《》]/g, "")),
+    credits: credits.length ? credits : undefined,
+    confidence,
+  };
+}

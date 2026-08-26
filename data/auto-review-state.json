@@ -1,5 +1,5 @@
 {
   "lastReviewedDetectedAt": "2026-08-24T12:10:18.432Z",
-  "reviewedAt": "2026-08-25T12:09:15.858Z",
-  "runNote": "auto-review 2026-08-26: reviewed 2026-08-24 batch (2 added + 1 price) plus 12 queue events; all consistent, no defects found"
+  "reviewedAt": "2026-08-26T12:20:53.023Z",
+  "runNote": "auto-review 2026-08-28: queue review, fixed shenzhen long-march suite layout + beijing br-split/credit formats; 2026-08-28 regeneration changes left for next run"
 }

@@ -7,10 +7,11 @@ export function isBeijingConcertHallClassical(category: string, title: string) {
 }
 
 export function parseBeijingConcertHallDetail(html: string) {
-  const $ = cheerio.load(html || "");
+  const $ = cheerio.load((html || "").replace(/<br\s*\/?>/gi, "\n"));
   const lines = $("p, h1, h2, h3, h4, li")
-    .map((_, element) => cleanText($(element).text()))
+    .map((_, element) => $(element).text().split(/\n+/).map(cleanText))
     .get()
+    .flat()
     .filter(Boolean);
   const marker = lines.findIndex((line) => /^(?:【)?(?:曲目介绍|演出曲目|节目单)(?:】)?[：:]?$/.test(line));
   const end = lines.findIndex((line, index) => index > marker && /^(?:【)?(?:阵容介绍|艺术家介绍|艺术家简介|演出介绍|主创介绍|曲目解读)(?:】)?[：:]?$/.test(line));
@@ -28,6 +29,33 @@ export function parseBeijingConcertHallDetail(html: string) {
     }
     const line = raw.replace(/^\d+[.、]\s*/, "");
     if (!line || line.length > 180) continue;
+    const bracketCredit = line.match(/^《([^》]+)》\s*(.+)$/);
+    if (bracketCredit) {
+      const rest = cleanText(bracketCredit[2]);
+      const credit = rest.match(/^(.*?)(?:曲|作曲)\s*(?:[：:]\s*|(?=【))(\S.{1,40})$/);
+      if (credit && cleanText(credit[2])) {
+        const titleExtra = cleanText(credit[1]);
+        let name = cleanText(credit[2]);
+        const fromMatch = name.match(/^(.*?)[（(]\s*(选自[^）)]*)\s*[）)]$/);
+        let fromSuffix = "";
+        if (fromMatch) {
+          name = cleanText(fromMatch[1]);
+          fromSuffix = `（${fromMatch[2]}）`;
+        }
+        name = name.replace(/[【\[]([^】\]]*)[】\]]/g, "").trim();
+        const title = cleanText(`${bracketCredit[1]}${titleExtra ? ` ${titleExtra}` : ""}${fromSuffix}`);
+        program.push({ composer: name || undefined, title: stripBookTitle(title), confidence: "official" });
+        continue;
+      }
+      if (/^(?:[一-龥]{2,8}民歌|中国传统古曲|[一-龥]{2,8}古曲|[一-龥]{2,8}曲牌)$/.test(rest)) {
+        program.push({
+          title: stripBookTitle(bracketCredit[1]),
+          credits: [{ name: rest, role: "来源" }],
+          confidence: "official",
+        });
+        continue;
+      }
+    }
     const trailingCredits = parseTrailingCreditTitle(line);
     if (trailingCredits) {
       program.push({

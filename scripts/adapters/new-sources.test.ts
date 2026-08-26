@@ -42,6 +42,23 @@ assert.equal(bj.program.length, 2);
 assert.equal(bj.program[1].movements?.length, 2);
 assert.deepEqual(bj.priceTiers, [69, 99, 149, 199]);
 
+const bjMinguoFixture = JSON.parse(
+  readFileSync(resolve(process.cwd(), "scripts/fixtures/beijing-concert-hall/minguo-238837025.json"), "utf8"),
+);
+const bjMinguo = parseBeijingConcertHallDetail(bjMinguoFixture.projectIntroduce);
+assert.ok(bjMinguo.program.length >= 10);
+assert.deepEqual(
+  bjMinguo.program.slice(0, 3).map((item) => [item.composer ?? "—", item.title]),
+  [
+    ["—", "阳关三叠"],
+    ["—", "梅花三弄"],
+    ["任光", "渔光曲"],
+  ],
+);
+assert.deepEqual(bjMinguo.program[0].credits, [{ name: "中国传统古曲", role: "来源" }]);
+assert.ok(bjMinguo.program.some((item) => item.composer === "李斯特" && item.title.includes("爱之梦")));
+assert.ok(bjMinguo.program.some((item) => item.composer === "圣-桑" && item.title.includes("天鹅")));
+
 const bjTrailingCredits = parseBeijingConcertHallDetail(`
   <h3>【曲目介绍】</h3>
   <p>1.红旗颂 吕其明 曲</p>
@@ -144,6 +161,26 @@ assert.deepEqual(
   szyytBilingual.program[3].alternateTitles,
   ["Dvořák “Song to the moon”, from Rusalka"],
 );
+
+const szyytLongMarch = parseShenzhenConcertHallDetail(
+  readFileSync(resolve(process.cwd(), "scripts/fixtures/shenzhen-concert-hall/longmarch-100001036063587.html"), "utf8"),
+  "https://szyyt.com/performance/show_100001036063587.html",
+);
+assert.deepEqual(
+  szyytLongMarch.program.map((item) => [item.composer ?? "—", item.title, item.movements?.length ?? 0]),
+  [
+    ["田丰", "沁园春·雪", 0],
+    ["田丰", "忆秦娥·娄山关", 0],
+    ["彦克、吕远", "七律·长征", 0],
+    ["晨耕、生茂、唐诃、遇秋", "长征组歌", 10],
+  ],
+);
+assert.deepEqual(szyytLongMarch.program[0].credits, [{ name: "毛泽东", role: "词" }]);
+assert.deepEqual(szyytLongMarch.program[3].credits, [{ name: "肖华", role: "词" }]);
+assert.equal(szyytLongMarch.program[3].movements?.[3].title, "四渡赤水出奇兵");
+assert.ok(szyytLongMarch.performers.includes("吉鹏宇"));
+assert.ok(szyytLongMarch.performers.includes("张静铭慧"));
+assert.ok(szyytLongMarch.performers.includes("王志昕"));
 
 assert.equal(
   buildShenzhenConcertHallListUrl("https://szyyt.com/performance", 3),
