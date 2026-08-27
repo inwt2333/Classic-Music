@@ -1,0 +1,40 @@
+{
+  "id": "composer_000020",
+  "name": "卡米尔·圣-桑",
+  "originalName": "Camille Saint-Saëns",
+  "aliases": [
+    "圣-桑",
+    "圣桑",
+    "夏尔·卡米尔·圣-桑",
+    "Camille Saint-Saëns",
+    "Charles-Camille Saint-Saëns",
+    "Saint-Saëns",
+    "Saint-Saens"
+  ],
+  "birthYear": 1835,
+  "deathYear": 1921,
+  "nationality": "法国",
+  "period": "浪漫主义",
+  "introduction": "法国作曲家、钢琴家、管风琴家，神童出身，寿高八十六岁，亲历了从柏辽兹到德彪西的整个世纪。他写作体裁极广：五部钢琴协奏曲、三部小提琴协奏曲、大提琴协奏曲、交响诗《骷髅之舞》、歌剧《参孙与达莉拉》、组曲《动物狂欢节》都是常演曲目。他是法国音乐协会的创始人之一，为法国器乐音乐的复兴铺路。",
+  "styleSummary": "技法精熟、清澈优雅，带古典式的克制与法兰西的机敏色彩。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-camille-saint-saens",
+      "title": "Camille Saint-Saëns",
+      "url": "https://en.wikipedia.org/wiki/Camille_Saint-Sa%C3%ABns",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

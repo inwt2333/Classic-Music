@@ -109,9 +109,9 @@ assert.equal(prepared.works.length, registry.works.filter((work) => work.status 
 assert.equal(prepared.composers.length, registry.composers.filter((composer) => composer.status === "published").length);
 assert.deepEqual(prepared.works.find((work) => work.id === "work_000001")?.upcomingEventIds, [eventId]);
 assert.equal(prepared.index.works.find((work) => work.id === "work_000001")?.upcomingEventCount, 1);
-assert.equal(prepared.composers.find((composer) => composer.id === "composer_000001")?.works.length, 3);
+assert.equal(prepared.composers.find((composer) => composer.id === "composer_000001")?.works.length, 5);
 assert.deepEqual(prepared.composers.find((composer) => composer.id === "composer_000001")?.upcomingEventIds, [eventId]);
-assert.equal(prepared.index.composers.find((composer) => composer.id === "composer_000001")?.workCount, 3);
+assert.equal(prepared.index.composers.find((composer) => composer.id === "composer_000001")?.workCount, 5);
 assert.equal(prepared.index.composers.find((composer) => composer.id === "composer_000001")?.periodKey, "classical");
 assert.equal(prepared.index.works.find((work) => work.id === "work_000001")?.genreFamily, "orchestral");
 assert.equal(prepared.index.works.find((work) => work.id === "work_000002")?.genreFamily, "orchestral");

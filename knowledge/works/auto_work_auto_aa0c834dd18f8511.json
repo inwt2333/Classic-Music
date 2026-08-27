@@ -9,10 +9,52 @@
   ],
   "opus": "Op. 41",
   "genre": "合唱",
-  "tags": [],
+  "period": "20世纪",
+  "composedYears": "1926",
+  "durationMinutes": 13,
+  "instrumentation": "混声合唱与管弦乐队",
+  "difficulty": "适合深入",
+  "tags": [
+    "拉赫玛尼诺夫",
+    "合唱",
+    "俄罗斯民歌",
+    "20世纪"
+  ],
   "summary": "拉赫玛尼诺夫为合唱与管弦乐队而作的三首俄罗斯民歌改编曲，展现俄罗斯民间音乐与晚期浪漫主义色彩。",
-  "listeningPoints": [],
-  "movements": [],
+  "listeningPoints": [
+    {
+      "title": "民歌的合唱织体",
+      "description": "拉赫玛尼诺夫把三首俄罗斯民歌交给混声合唱，声部交替模仿民歌的即兴语气。",
+      "movement": 1
+    },
+    {
+      "title": "乐队的暗色包围",
+      "description": "乐队织体低沉厚重，像森林雾气一样包围合唱，是晚期拉赫玛尼诺夫的标志色彩。",
+      "movement": 2
+    },
+    {
+      "title": "终曲的舞蹈节奏",
+      "description": "第三首在舞蹈性节奏中收束，合唱与打击乐一问一答，情绪逐渐明亮。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Через ручей（穿过小溪）",
+      "description": "轻快的复调合唱，描绘姑娘们涉水过溪的情景。"
+    },
+    {
+      "number": 2,
+      "title": "Ой, Иван мой（哦，我的伊万）",
+      "description": "抒情的慢歌，男女声部交替诉说思念。"
+    },
+    {
+      "number": 3,
+      "title": "Белилицы, румяницы（白脸庞红脸颊的姑娘们）",
+      "description": "节奏欢快的终曲，在舞蹈性律动中收束全曲。"
+    }
+  ],
   "recordings": [],
   "relatedWorkIds": [
     "work_000019",
@@ -35,7 +77,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-10T15:34:05.501Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_31402df2c75a",

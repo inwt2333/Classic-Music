@@ -1,0 +1,139 @@
+{
+  "id": "work_000057",
+  "composerId": "composer_000002",
+  "title": "降E大调钢琴三重奏「九柱球」",
+  "originalTitle": "Trio for Clarinet, Viola and Piano in E-flat major, K. 498",
+  "aliases": [
+    "降E大调钢琴三重奏，KV 498「九柱球」",
+    "九柱球三重奏",
+    "Kegelstatt Trio",
+    "Trio in E-flat major for Clarinet, Viola and Piano"
+  ],
+  "opus": "K. 498",
+  "key": "降E大调",
+  "genre": "室内乐（钢琴三重奏）",
+  "period": "古典主义",
+  "composedYears": "1786",
+  "durationMinutes": 19,
+  "instrumentation": "单簧管、中提琴、钢琴",
+  "difficulty": "容易进入",
+  "tags": [
+    "莫扎特",
+    "室内乐",
+    "古典主义",
+    "单簧管",
+    "中提琴"
+  ],
+  "summary": "莫扎特1786年为单簧管、中提琴与钢琴写的三重奏，史上第一部为这件组合而写的作品，绰号来自\"九柱球\"（撞柱游戏）的轶事。",
+  "whyListen": "莫扎特首创了这件音色组合：单簧管圆润、中提琴内敛、钢琴通透，三件乐器像三个朋友在交谈，谁也不抢话。手稿署期1786年8月5日——十天前他把另一组作品题注\"玩九柱球时所作\"，这个绰号便跟着传了两百年。首演就在朋友家里：施塔德勒吹单簧管，莫扎特本人拉中提琴。",
+  "firstListen": "第一乐章 unusually 以\"不快的\"行板开场，谈话式的你来我往请听三件乐器怎么互相接话；小步舞曲里注意中提琴难得走到台前；末乐章的回旋曲轻盈跳动，数一数主题回来了几次。",
+  "listeningPoints": [
+    {
+      "title": "朋友间的开场谈话",
+      "description": "第一乐章没有快板，三件乐器以行板轮流接话，气质亲密放松。",
+      "movement": 1
+    },
+    {
+      "title": "中提琴的时刻",
+      "description": "小步舞曲与中段里，平时当配器的中提琴多次领奏，音色温柔沙哑。",
+      "movement": 2
+    },
+    {
+      "title": "七段回旋曲",
+      "description": "末乐章是罕见的 AB–AC–AD–A 七段结构回旋曲，主题每次回归都换新的伴奏织体。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Andante",
+      "tempo": "行板",
+      "description": "三件乐器轮流呈示与应答，无发展部的奏鸣曲式，谈话般亲密。"
+    },
+    {
+      "number": 2,
+      "title": "Menuetto",
+      "tempo": "小步舞曲",
+      "description": "降B大调的舞曲，中段由单簧管与中提琴对话。"
+    },
+    {
+      "number": 3,
+      "title": "Rondeaux: Allegretto",
+      "tempo": "回旋曲：小快板",
+      "description": "七段式回旋曲，主题多次回归，机敏而轻盈。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Gidon Kremer, Kim Kashkashian & Valery Afanassiev",
+      "year": 1985,
+      "note": "克莱默、卡什卡什扬与阿法纳西耶夫的经典录音，线条讲究、张力微妙。",
+      "sourceId": "apple_music_1452224096"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Yo-Yo Ma, Emanuel Ax & Richard Stoltzman",
+      "year": 1995,
+      "note": "马友友（改用大提琴声部版本）、阿克斯与斯托尔茨曼的组合温暖圆润。",
+      "sourceId": "apple_music_447207874"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000056",
+    "work_000004"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-kegelstatt",
+      "title": "上交室内乐 7：管中日月——木管与铜管的时空对话丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21810&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含莫扎特降E大调钢琴三重奏，KV 498「九柱球」",
+        "作曲者与编号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-kegelstatt",
+      "title": "Kegelstatt Trio",
+      "url": "https://en.wikipedia.org/wiki/Kegelstatt_Trio",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "手稿署期1786年8月5日",
+        "编制为单簧管、中提琴与钢琴（史上首创该组合）",
+        "三个乐章与速度标记",
+        "首演者与绰号来源"
+      ]
+    },
+    {
+      "id": "apple_music_1452224096",
+      "title": "Mozart: Kegelstatt-Trio & Duos for Violin and Viola",
+      "url": "https://music.apple.com/us/album/1452224096",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_447207874",
+      "title": "Brahms, Beethoven, Mozart: Clarinet Trios",
+      "url": "https://music.apple.com/us/album/447207874",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

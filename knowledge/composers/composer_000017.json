@@ -1,0 +1,36 @@
+{
+  "id": "composer_000017",
+  "name": "马克斯·布鲁赫",
+  "originalName": "Max Bruch",
+  "aliases": [
+    "布鲁赫",
+    "Max Bruch",
+    "Bruch"
+  ],
+  "birthYear": 1838,
+  "deathYear": 1920,
+  "nationality": "德国",
+  "period": "浪漫主义",
+  "introduction": "德国浪漫主义作曲家、指挥家，科隆出身。在瓦格纳风潮席卷德语世界的年代，他坚守门德尔松式的旋律传统，写有歌剧、清唱剧与三部小提琴协奏曲。g小调第一小提琴协奏曲是十九世纪最受欢迎的小提琴协奏曲之一，但他很早便把版权贱卖，未能从其长销中获益。",
+  "styleSummary": "旋律宽广温暖，配器明晰，是晚期浪漫主义中的保守抒情一路。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-max-bruch",
+      "title": "Max Bruch",
+      "url": "https://en.wikipedia.org/wiki/Max_Bruch",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

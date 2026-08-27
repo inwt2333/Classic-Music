@@ -10,6 +10,9 @@
   "key": "G大调",
   "genre": "钢琴协奏曲",
   "period": "浪漫主义",
+  "composedYears": "1879–1880",
+  "durationMinutes": 36,
+  "instrumentation": "独奏钢琴、2长笛、2双簧管、2单簧管、2大管、4圆号、2小号、定音鼓、弦乐组（原始版第二乐章含小提琴与大提琴独奏）",
   "difficulty": "第一次听",
   "tags": [
     "钢琴协奏曲",
@@ -29,7 +32,7 @@
     },
     {
       "title": "第二乐章的抒情",
-      "description": "慢板乐章中钢琴的歌唱性旋律，体现柴可夫斯基的深情。",
+      "description": "慢板乐章中钢琴与乐队交替歌唱，原始版乐谱中小提琴与大提琴的独奏对话尤为动人。",
       "movement": 2
     },
     {
@@ -61,10 +64,17 @@
   "recordings": [
     {
       "label": "第一次听",
-      "performers": "Various Artists",
+      "performers": "Andreas Boyde, Freiburg Philharmonic Orchestra & Johannes Fritzsch",
+      "year": 2013,
+      "note": "博伊德与弗赖堡爱乐采用原始版乐谱，第二乐章的弦乐独奏对话得以完整保留。",
+      "sourceId": "apple_music_717405017"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Liviu Buiuc, Saulis Dirvanauskas & Moldavian Philharmonic Orchestra",
       "year": 2014,
-      "note": "原始版本录音，适合第一次听。",
-      "sourceId": "apple_music_909532778"
+      "note": "另一个完整录音，色彩更浓，可作为对照版本。",
+      "sourceId": "apple_music_882573011"
     }
   ],
   "relatedWorkIds": [
@@ -72,7 +82,7 @@
     "work_000016",
     "work_000018"
   ],
-  "completeness": "basic",
+  "completeness": "complete",
   "generation": {
     "method": "deepseek",
     "model": "deepseek-v4-flash",
@@ -89,7 +99,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-09T15:05:02.910Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_c5ca156d66cd",
@@ -104,14 +114,37 @@
       ]
     },
     {
-      "id": "apple_music_909532778",
-      "title": "Tchaikovsky: Piano Concerto No.2 in G Major, Op. 44 (original version)",
-      "url": "https://music.apple.com/us/album/tchaikovsky-piano-concerto-no-2-in-g-major-op-44-original/909532778?uo=4",
-      "publisher": "Apple Music",
-      "accessedAt": "2026-08-09",
+      "id": "wikipedia-en-tchaikovsky-pc2",
+      "title": "Piano Concerto No. 2 (Tchaikovsky)",
+      "url": "https://en.wikipedia.org/wiki/Piano_Concerto_No._2_(Tchaikovsky)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
       "supports": [
-        "recording",
+        "创作年份1879–1880",
+        "三个乐章与速度标记",
+        "编制与原始版第二乐章的独奏设置"
+      ]
+    },
+    {
+      "id": "apple_music_717405017",
+      "title": "Tchaikovsky: Piano Concerto No. 2 - Shostakovich: Symphony No. 9",
+      "url": "https://music.apple.com/us/album/717405017",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
         "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_882573011",
+      "title": "Tchaikovsky: Piano Concerto No. 2",
+      "url": "https://music.apple.com/us/album/882573011",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
       ]
     }
   ]

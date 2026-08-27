@@ -1,0 +1,151 @@
+{
+  "id": "work_000052",
+  "composerId": "composer_000012",
+  "title": "降B大调第五交响曲",
+  "originalTitle": "Symphony No. 5 in B-flat major, Op. 100",
+  "aliases": [
+    "降B大调第五交响曲，作品100",
+    "B大调第五交响曲",
+    "第五交响曲",
+    "Symphony No. 5 in B-flat major",
+    "Symphony No. 5"
+  ],
+  "opus": "Op. 100",
+  "key": "降B大调",
+  "genre": "交响曲",
+  "period": "20世纪",
+  "composedYears": "1944",
+  "durationMinutes": 45,
+  "instrumentation": "大型管弦乐队（含短笛、英国管、低音单簧管、竖琴、钢琴与丰富打击乐）",
+  "difficulty": "容易进入",
+  "tags": [
+    "普罗科菲耶夫",
+    "交响曲",
+    "20世纪",
+    "战争年代",
+    "抒情"
+  ],
+  "summary": "普罗科菲耶夫1944年在一个夏天写成的交响曲，自称是\"人类精神的伟大\"的颂歌，首演由作曲家亲自指挥，是二十世纪交响曲目中最受欢迎的作品之一。",
+  "whyListen": "在肖斯塔科维奇用交响曲写战争创伤的同时，普罗科菲耶夫写了一部明亮宽阔的英雄交响曲：第一乐章主题如地平线展开，慢乐章的沉思近乎圣咏，终曲把前几个乐章的主题汇成欢腾的洪流。旋律性与现代感平衡得恰到好处，是进入二十世纪交响曲的最好门票之一。",
+  "firstListen": "第一乐章开头大管与弦乐的主题像缓缓拉开的宽银幕；第二乐章谐谑曲有股邪恶的幽默感；第三乐章单簧管的主题带着童话般的脆弱；末乐章开场先听到第一乐章主题回归，然后一切汇入节日的洪流。",
+  "listeningPoints": [
+    {
+      "title": "宽银幕般的开头",
+      "description": "第一乐章主题由大管与低音弦乐沉着展开，逐渐长成宏大的歌唱。",
+      "movement": 1
+    },
+    {
+      "title": "带刺的谐谑曲",
+      "description": "第二乐章小快板外表轻盈，重音与和声却处处使坏，笑里藏针。",
+      "movement": 2
+    },
+    {
+      "title": "童话式的柔板",
+      "description": "单簧管与双簧管轮流奏出天真的主题，中段被沉重的铜管打断再缓缓复原。",
+      "movement": 3
+    },
+    {
+      "title": "洪流般的终曲",
+      "description": "末乐章回顾前面乐章的主题，在持续的推进中以炽热的全奏收束。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Andante",
+      "tempo": "行板",
+      "description": "奏鸣曲式，主题宽阔沉着，发展部力度层层累积。"
+    },
+    {
+      "number": 2,
+      "title": "Allegro marcato",
+      "tempo": "清晰强调的快板",
+      "description": "谐谑曲，节奏尖利、和声带刺，中段有机械般的推进。"
+    },
+    {
+      "number": 3,
+      "title": "Adagio",
+      "tempo": "柔板",
+      "description": "抒情乐章，木管的纯真主题与铜管的沉重阴影交替。"
+    },
+    {
+      "number": 4,
+      "title": "Allegro giocoso",
+      "tempo": "游戏般的快板",
+      "description": "回顾性终曲，前乐章主题回归后汇入欢腾的结尾。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "The Cleveland Orchestra & Franz Welser-Möst",
+      "year": 2023,
+      "note": "韦尔瑟-莫斯特与克利夫兰管弦乐团2023年新录音，清晰、有力、录音一流。",
+      "sourceId": "apple_music_1663268554"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "George Szell & The Cleveland Orchestra",
+      "year": 1999,
+      "note": "塞尔同团的经典录音（1999年再版），锋利紧凑，节奏咬合如钟表。",
+      "sourceId": "apple_music_212387521"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000034",
+    "work_000036"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shphilharmonic-prokofiev-5",
+      "title": "古典与现代的交响诗",
+      "url": "http://shphilharmonic.com/activity/68c81d174d4ada1cc2c185ed?no=3&out=true",
+      "publisher": "上海爱乐乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含普罗科菲耶夫降B大调第五交响曲，作品100",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-prokofiev-symphony-5",
+      "title": "Symphony No. 5 (Prokofiev)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._5_(Prokofiev)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1944与首演由作曲家指挥",
+        "四个乐章与速度标记",
+        "编制",
+        "作曲家自述"
+      ]
+    },
+    {
+      "id": "apple_music_1663268554",
+      "title": "Prokofiev: Symphony No. 5",
+      "url": "https://music.apple.com/us/album/1663268554",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_212387521",
+      "title": "Prokofiev: Symphony No. 5",
+      "url": "https://music.apple.com/us/album/212387521",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

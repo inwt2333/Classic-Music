@@ -76,13 +76,21 @@
       "description": "回旋曲式，主题活泼，插部对比鲜明，结尾欢快。"
     }
   ],
-  "recordings": [],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Hagen Quartett",
+      "year": 2006,
+      "note": "哈根四重奏的莫扎特四重奏专集录音，均衡细腻，末乐章的回旋曲轻巧灵动。",
+      "sourceId": "apple_music_1452323263"
+    }
+  ],
   "relatedWorkIds": [
     "work_000005",
     "work_000004",
     "work_000006"
   ],
-  "completeness": "basic",
+  "completeness": "complete",
   "generation": {
     "method": "deepseek",
     "model": "deepseek-v4-flash",
@@ -98,7 +106,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-09T01:14:53.875Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_9efe76728cc5",
@@ -114,6 +122,17 @@
         "period",
         "composedYears",
         "movement structure"
+      ]
+    },
+    {
+      "id": "apple_music_1452323263",
+      "title": "Mozart: String Quartets",
+      "url": "https://music.apple.com/us/album/1452323263",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
       ]
     }
   ]

@@ -1,0 +1,151 @@
+{
+  "id": "work_000040",
+  "composerId": "composer_000006",
+  "title": "f小调第四交响曲",
+  "originalTitle": "Symphony No. 4 in F minor, Op. 36",
+  "aliases": [
+    "F小调第四交响曲",
+    "第四交响曲",
+    "f小调第四交响曲，作品36",
+    "Symphony No. 4 in F minor",
+    "Symphony No. 4"
+  ],
+  "opus": "Op. 36",
+  "key": "f小调",
+  "genre": "交响曲",
+  "period": "浪漫主义",
+  "composedYears": "1877–1878",
+  "durationMinutes": 45,
+  "instrumentation": "大型管弦乐队（含竖琴、大鼓与钹）",
+  "difficulty": "第一次听",
+  "tags": [
+    "柴可夫斯基",
+    "交响曲",
+    "浪漫主义",
+    "命运",
+    "俄罗斯"
+  ],
+  "summary": "柴可夫斯基在与梅克夫人通信中反复讨论的\"命运\"交响曲：圆号齐奏的命运动机贯穿首尾，从个人的挣扎走向与民众同庆的终曲。",
+  "whyListen": "第四交响曲把私人信件里的绝望写成了公共的凯旋：第一乐章命运号角与圆舞曲主题的搏斗惊心动魄，终曲却把一首民歌变成酒馆里的狂欢。它是理解柴可夫斯基最直接的入口。",
+  "firstListen": "开头记住圆号齐奏的四个音——它会在关键时刻反复回来；第三乐章整乐章几乎全是弦乐拨弦，像看到木偶军队行进；终曲听到民歌《田野里有棵白桦树》被全奏放大时，很难不跟着激动。",
+  "listeningPoints": [
+    {
+      "title": "命运的号角",
+      "description": "圆号与小号齐奏的命运动机冷峻登场，随后快板主题在焦躁与圆舞曲间摇摆。",
+      "movement": 1
+    },
+    {
+      "title": "忧伤的歌谣",
+      "description": "双簧管唱出如歌的第二主题，像隔着距离的安慰，中途几度黯淡。",
+      "movement": 2
+    },
+    {
+      "title": "拨弦的谐谑曲",
+      "description": "弦乐拨弦、木管笛音与铜管回声三组材料交替，轻盈得近乎俏皮。",
+      "movement": 3
+    },
+    {
+      "title": "与民同庆的终曲",
+      "description": "民歌《田野里有棵白桦树》与命运动机先后再现，在炽热的全奏中收场。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Andante sostenuto – Moderato con anima",
+      "tempo": "持续的行板 – 有活力的中板",
+      "description": "命运动机引出漫长的斗争性快板，是柴可夫斯基最具张力的开头。"
+    },
+    {
+      "number": 2,
+      "title": "Andantino in modo di canzona",
+      "tempo": "歌谣风格的小行板",
+      "description": "双簧管主奏的忧伤歌谣，中段情绪渐起又归于平静。"
+    },
+    {
+      "number": 3,
+      "title": "Scherzo: Pizzicato ostinato",
+      "tempo": "谐谑曲：固定拨弦",
+      "description": "弦乐拨弦、木管、铜管三组音色轮流接力的谐谑曲。"
+    },
+    {
+      "number": 4,
+      "title": "Finale: Allegro con fuoco",
+      "tempo": "终曲：火热的快板",
+      "description": "民歌主题与命运动机并置，从狂欢冲向辉煌结尾。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Berliner Philharmoniker & Herbert von Karajan",
+      "year": 1960,
+      "note": "卡拉扬与柏林爱乐的经典录音，音响厚重、线条歌唱，入门首选之一。",
+      "sourceId": "apple_music_895639542"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Chicago Symphony Orchestra & Daniel Barenboim",
+      "year": 1997,
+      "note": "巴伦博伊姆与芝加哥交响的版本更强调戏剧冲撞，铜管 blazing。",
+      "sourceId": "apple_music_145422531"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000016",
+    "work_000041"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shoac-vpo-sochiaev",
+      "title": "第二十五届中国上海国际艺术节参演节目-图甘·索契耶夫与维也纳爱乐乐团2026上海音乐会",
+      "url": "https://www.shoac.com.cn/#/detail?projectId=1264259457443942400",
+      "publisher": "上海东方艺术中心官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含柴可夫斯基F小调第四交响曲",
+        "作曲者"
+      ]
+    },
+    {
+      "id": "wikipedia-en-tchaikovsky-symphony-4",
+      "title": "Symphony No. 4 (Tchaikovsky)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._4_(Tchaikovsky)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1877–1878",
+        "四个乐章与速度标记",
+        "命运动机与民歌引用",
+        "编制"
+      ]
+    },
+    {
+      "id": "apple_music_895639542",
+      "title": "Tchaikovsky: Symphony No. 4",
+      "url": "https://music.apple.com/us/album/895639542",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_145422531",
+      "title": "Tchaikovsky: Symphony No. 4",
+      "url": "https://music.apple.com/us/album/145422531",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

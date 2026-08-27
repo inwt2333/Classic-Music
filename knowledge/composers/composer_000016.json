@@ -1,0 +1,37 @@
+{
+  "id": "composer_000016",
+  "name": "让·西贝柳斯",
+  "originalName": "Jean Sibelius",
+  "aliases": [
+    "西贝柳斯",
+    "简·西贝柳斯",
+    "Jean Sibelius",
+    "Sibelius"
+  ],
+  "birthYear": 1865,
+  "deathYear": 1957,
+  "nationality": "芬兰",
+  "period": "20世纪",
+  "introduction": "芬兰作曲家，民族乐派最重要的代表之一。他把芬兰的自然、史诗《卡勒瓦拉》的气质凝练成高度凝练的交响语言，七部交响曲与《芬兰颂》、《图翁内拉的天鹅》、小提琴协奏曲是核心曲目。晚年沉默三十载，直到逝世前几乎不再发表作品。",
+  "styleSummary": "动机高度浓缩渐次生长，弦乐分层与铜管和声带有北欧森林般的冷冽与苍茫。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-jean-sibelius",
+      "title": "Jean Sibelius",
+      "url": "https://en.wikipedia.org/wiki/Jean_Sibelius",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

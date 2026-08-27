@@ -1,0 +1,145 @@
+{
+  "id": "work_000044",
+  "composerId": "composer_000016",
+  "title": "d小调小提琴协奏曲",
+  "originalTitle": "Violin Concerto in D minor, Op. 47",
+  "aliases": [
+    "D小调小提琴协奏曲",
+    "d小调小提琴协奏曲，作品47",
+    "西贝柳斯小提琴协奏曲",
+    "Violin Concerto in D minor",
+    "Sibelius: Violin Concerto, Op. 47"
+  ],
+  "opus": "Op. 47",
+  "key": "d小调",
+  "genre": "小提琴协奏曲",
+  "period": "20世纪",
+  "composedYears": "1903（1905年修订）",
+  "durationMinutes": 32,
+  "instrumentation": "独奏小提琴、2长笛、2双簧管、2单簧管、2大管、4圆号、2小号、3长号、定音鼓、弦乐组",
+  "difficulty": "需要专注",
+  "tags": [
+    "西贝柳斯",
+    "小提琴协奏曲",
+    "20世纪",
+    "芬兰",
+    "北欧"
+  ],
+  "summary": "西贝柳斯1903年写成、1905年修订的小提琴协奏曲，把协奏曲写成北欧的独白：独奏在茫茫乐队音浪上歌唱，既有炫技的华彩也有极地的苍凉。",
+  "whyListen": "作为一位小提琴梦想破灭的作曲家，西贝柳斯把全部遗憾写给了这件乐器。第一乐章独奏一开口就是漫长的忧郁旋律，华彩段把乐队完全抛开；末乐章被评论家称为\"北极熊的波兰舞曲\"，节奏粗野、火花四溅。",
+  "firstListen": "第一乐章在弦乐的薄雾上，独奏小提琴直接唱出主题，不需要等乐队铺垫；中段大段的华彩就是独奏者的独白。末乐章注意低音弦乐顿挫的节奏——独奏在其上跳的那支舞既野性又精确。",
+  "listeningPoints": [
+    {
+      "title": "雾上的独白",
+      "description": "弦乐轻颤的背景上独奏小提琴直接进入，第一主题绵长而忧郁。",
+      "movement": 1
+    },
+    {
+      "title": "第一乐章的华彩",
+      "description": "独奏独自完成大幅度的华彩段，双音与快速经过句密集，是技巧与歌唱的双重考验。",
+      "movement": 1
+    },
+    {
+      "title": "慢乐章的木管对话",
+      "description": "双簧管与圆号先后应答独奏的歌唱，像湖面上的回声，静得出奇。",
+      "movement": 2
+    },
+    {
+      "title": "「北极熊的波兰舞曲」",
+      "description": "末乐章低音沉重、独奏狂舞，节奏棱角分明，被 Donald Tovey 形容为波兰舞曲的北极版本。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Allegro moderato – Vivacissimo",
+      "tempo": "中庸的快板 – 很快的",
+      "description": "独奏开门见山唱出主题，中段插入长大的华彩，结构自由。"
+    },
+    {
+      "number": 2,
+      "title": "Adagio di molto",
+      "tempo": "很慢的柔板",
+      "description": "木管引出的宁静夜色中，独奏的歌唱近似人声。"
+    },
+    {
+      "number": 3,
+      "title": "Allegro, ma non tanto",
+      "tempo": "快板，但不过分",
+      "description": "粗野的舞蹈节奏与独奏的急速音型相撞，被称为\"北极熊的波兰舞曲\"。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Frank Peter Zimmermann, Philharmonia Orchestra & Mariss Jansons",
+      "year": 2022,
+      "note": "齐默尔曼与杨松斯爱乐乐团的版本音色温暖、分句大气，录音极佳。",
+      "sourceId": "apple_music_1621777194"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Simone Lamsma & Orchestre national d'île-de-France",
+      "year": 2025,
+      "note": "拉姆萨的新录音棱角更冷冽，北欧气质更浓。",
+      "sourceId": "apple_music_1821510951"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000018",
+    "work_000028"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-cpo-sibelius",
+      "title": "纪念西贝柳斯诞辰160周年：音生共情——阿卜杜拉与五明佳廉演绎西贝柳斯与柴可夫斯基",
+      "url": "http://www.cpolive.com/art/2026/3/27/art_1701_409.html",
+      "publisher": "中国爱乐乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含西贝柳斯D小调小提琴协奏曲，作品47",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-sibelius-violin-concerto",
+      "title": "Violin Concerto (Sibelius)",
+      "url": "https://en.wikipedia.org/wiki/Violin_Concerto_(Sibelius)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1903与1905年修订",
+        "三个乐章与速度标记",
+        "编制",
+        "「北极熊的波兰舞曲」评语"
+      ]
+    },
+    {
+      "id": "apple_music_1621777194",
+      "title": "Sibelius: Violin Concerto, Op. 47",
+      "url": "https://music.apple.com/us/album/1621777194",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1821510951",
+      "title": "Sibelius: Violin Concerto, Op. 47",
+      "url": "https://music.apple.com/us/album/1821510951",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "composer_000014",
+  "name": "古斯塔夫·马勒",
+  "originalName": "Gustav Mahler",
+  "aliases": [
+    "马勒",
+    "Gustav Mahler",
+    "Mahler"
+  ],
+  "birthYear": 1860,
+  "deathYear": 1911,
+  "nationality": "奥地利",
+  "period": "浪漫主义",
+  "introduction": "奥地利晚期浪漫主义作曲家、指挥家，生于波希米亚。作为指挥家他长期执掌维也纳宫廷歌剧院与纽约大都会歌剧院；作为作曲家他写了十部规模宏大的交响曲与《大地之歌》，把交响曲扩展为容纳整个世界的形式。其音乐在民间歌调、自然音响与深沉哲思之间往来，深刻影响了二十世纪音乐。",
+  "styleSummary": "配器宏大细腻并存，交响曲常融入人声，情绪在纯真与讽刺、赞美与幻灭间大幅摆动。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-gustav-mahler",
+      "title": "Gustav Mahler",
+      "url": "https://en.wikipedia.org/wiki/Gustav_Mahler",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "id": "work_000048",
+  "composerId": "composer_000018",
+  "title": "《童年情景》",
+  "originalTitle": "Kinderszenen, Op. 15",
+  "aliases": [
+    "童年情景",
+    "童年情景，作品15",
+    "Kinderszenen",
+    "Scenes from Childhood"
+  ],
+  "opus": "Op. 15",
+  "genre": "钢琴套曲",
+  "period": "浪漫主义",
+  "composedYears": "1838",
+  "durationMinutes": 17,
+  "instrumentation": "钢琴",
+  "difficulty": "第一次听",
+  "tags": [
+    "舒曼",
+    "钢琴套曲",
+    "浪漫主义",
+    "童年",
+    "梦幻曲"
+  ],
+  "summary": "舒曼1838年写给克拉拉的十三首钢琴小品，以成人的乡愁回望童年，第七首《梦幻曲》成为世界上被演奏最多的钢琴小品之一。",
+  "whyListen": "每一首只有一两分钟，像相册里的一页：《陌生的事物与人民》开篇、《捉迷藏》的追逐、《重要事件》的煞有介事，到《入睡》《诗人的话》渐渐合上。舒曼说这些是\"大人写给大人的童年回忆\"——温柔里全是回不去的怅然。",
+  "firstListen": "先听第七首《梦幻曲》：旋律在中声部缓缓浮起，像热牛奶上的奶皮；《重要事件》数一数它夸张的重音；最后两首听音乐如何\"睡着\"——速度越来越慢，直到《诗人的话》轻轻合上相册。",
+  "listeningPoints": [
+    {
+      "title": "相册的第一页",
+      "description": "《陌生的事物与人民》以平稳的旋律开场，像翻开一本旧相册。",
+      "movement": 1
+    },
+    {
+      "title": "捉迷藏与骑木马",
+      "description": "第三首上下翻飞的经过句是追逐的脚步，第九首的固定节奏则是木马的摇晃。",
+      "movement": 3
+    },
+    {
+      "title": "梦幻曲",
+      "description": "第七首旋律在中声部歌唱，高声部如光环环绕，是全集最著名的一页。",
+      "movement": 7
+    },
+    {
+      "title": "入睡与诗人的话",
+      "description": "末两首速度渐慢、音量渐轻，音乐像孩子入睡，最后由\"诗人\"轻轻合上相册。",
+      "movement": 13
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Von fremden Ländern und Menschen（陌生的事物与人民）",
+      "description": "平稳歌唱的开篇，像旅行故事的引子。"
+    },
+    {
+      "number": 2,
+      "title": "Curiose Geschichte（奇怪的故事）",
+      "description": "带附点节奏的小曲，讲一件煞有介事的怪事。"
+    },
+    {
+      "number": 3,
+      "title": "Hasche-Mann（捉迷藏）",
+      "description": "快速音型你追我躲，是全套曲最活泼的一页。"
+    },
+    {
+      "number": 4,
+      "title": "Bittendes Kind（乞求的孩子）",
+      "description": "旋律反复回旋，像孩子拉着衣角不肯松口。"
+    },
+    {
+      "number": 5,
+      "title": "Glückes genug（足够的幸福）",
+      "description": "得到满足后心满意足的小快板。"
+    },
+    {
+      "number": 6,
+      "title": "Wichtige Begebenheit（重要事件）",
+      "description": "重音夸张、步伐庄重，孩子的\"大事\"郑重其事。"
+    },
+    {
+      "number": 7,
+      "title": "Träumerei（梦幻曲）",
+      "description": "最著名的一首，旋律在中声部缓缓浮起，温柔得近乎透明。"
+    },
+    {
+      "number": 8,
+      "title": "Am Kamin（火炉旁）",
+      "description": "温暖的摇摆节奏，冬夜炉火的安心。"
+    },
+    {
+      "number": 9,
+      "title": "Ritter vom Steckenpferd（骑木马）",
+      "description": "低音固定节奏模仿木马颠簸，孩子策马冲锋。"
+    },
+    {
+      "number": 10,
+      "title": "Fast zu ernst（几乎太认真）",
+      "description": "小调的沉思，孩子扮大人的严肃面孔。"
+    },
+    {
+      "number": 11,
+      "title": "Fürchtenmachen（惊吓）",
+      "description": "安静与急促交替，讲鬼故事时的屏息与尖叫。"
+    },
+    {
+      "number": 12,
+      "title": "Kind im Einschlummern（入睡的孩子）",
+      "description": "速度渐慢，和声悬置，孩子在摇曳中睡去。"
+    },
+    {
+      "number": 13,
+      "title": "Der Dichter spricht（诗人的话）",
+      "description": "结尾转向成年叙述者，一句轻声的告别合上相册。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Clara Haskil",
+      "year": 2009,
+      "note": "哈斯基尔的传奇录音（2009年再版），纯净内敛，《梦幻曲》如空气般轻盈。",
+      "sourceId": "apple_music_324861892"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Kun-Woo Paik",
+      "year": 2020,
+      "note": "白建宇的版本音色更温暖绵密，慢曲的呼吸极长。",
+      "sourceId": "apple_music_1530886237"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000049"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-kinderszenen",
+      "title": "德奈什·瓦尔永钢琴独奏会丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21827&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含舒曼《童年情景》，作品15",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-kinderszenen",
+      "title": "Kinderszenen",
+      "url": "https://en.wikipedia.org/wiki/Kinderszenen",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1838",
+        "十三首小品的标题与顺序",
+        "写给克拉拉、\"大人的童年回忆\"自述"
+      ]
+    },
+    {
+      "id": "apple_music_324861892",
+      "title": "Schumann: Kinderszenen, Op. 15",
+      "url": "https://music.apple.com/us/album/324861892",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1530886237",
+      "title": "Schumann",
+      "url": "https://music.apple.com/us/album/1530886237",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

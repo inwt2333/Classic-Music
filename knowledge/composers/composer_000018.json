@@ -1,0 +1,37 @@
+{
+  "id": "composer_000018",
+  "name": "罗伯特·舒曼",
+  "originalName": "Robert Schumann",
+  "aliases": [
+    "舒曼",
+    "罗伯特.舒曼",
+    "Robert Schumann",
+    "Schumann"
+  ],
+  "birthYear": 1810,
+  "deathYear": 1856,
+  "nationality": "德国",
+  "period": "浪漫主义",
+  "introduction": "德国浪漫主义作曲家、乐评人，《新音乐杂志》创办人。他以钢琴套曲确立了自己最私密的文体——短小性格小品串联成诗意的整体，《童年情景》《克莱斯勒偶记》《幻想曲》皆是代表。与克拉拉·舒曼的爱情与婚姻是音乐史上的著名篇章，晚年精神疾病缠身，享年四十六岁。",
+  "styleSummary": "诗意、内省、冲动，善用节奏动机与文字联想，钢琴写作充满幻想气质。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-robert-schumann",
+      "title": "Robert Schumann",
+      "url": "https://en.wikipedia.org/wiki/Robert_Schumann",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

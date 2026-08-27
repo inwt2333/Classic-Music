@@ -1,0 +1,150 @@
+{
+  "id": "work_000038",
+  "composerId": "composer_000014",
+  "title": "D大调第一交响曲「巨人」",
+  "originalTitle": "Symphonie Nr. 1 in D-Dur \"Titan\"",
+  "aliases": [
+    "D大调第一交响曲",
+    "第一交响曲「巨人」",
+    "巨人交响曲",
+    "Symphony No. 1 in D major",
+    "Symphony No. 1 \"Titan\""
+  ],
+  "key": "D大调",
+  "genre": "交响曲",
+  "period": "浪漫主义",
+  "composedYears": "1884–1888（后经修订）",
+  "durationMinutes": 55,
+  "instrumentation": "大型管弦乐队：木管（含短笛、英国管、低音单簧管）、铜管、竖琴、定音鼓与打击乐、弦乐组",
+  "difficulty": "需要专注",
+  "tags": [
+    "马勒",
+    "交响曲",
+    "浪漫主义",
+    "巨人",
+    "自然"
+  ],
+  "summary": "马勒1888年完成的第一部交响曲，从林中晨号与杜鹃啼鸣出发，途经葬礼进行曲，最终抵达排山倒海的终曲，青春的澎湃一览无余。",
+  "whyListen": "它是一部\"成长小说\"式的交响曲：自然苏醒、民间舞曲、猎队号角与暴风雨般的自我确立层层递进；第三乐章用小调奏出《马丁兄弟》的葬礼进行曲，是交响曲文献里最奇异的段落之一。",
+  "firstListen": "开头屏息听七度下行的弦乐泛音如晨雾散开，圆号远远传来自然信号；第三乐章低音提琴独奏主题入耳时不要惊讶；终曲先扛过劈头而来的风暴，再等主题在铜管全奏中站立起来。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章：自然的苏醒",
+      "description": "延长的泛音和弦如晨雾，布谷鸟般的下行四度动机逐渐聚成流动的主题。",
+      "movement": 1
+    },
+    {
+      "title": "第二乐章：兰德勒舞曲",
+      "description": "粗朴的乡村舞曲与优雅的圆舞曲交替，节奏故意踩在\"错拍\"上，乡野又幽默。",
+      "movement": 2
+    },
+    {
+      "title": "第三乐章：怪异的葬礼进行曲",
+      "description": "低音提琴奏出小调《马丁兄弟》，双簧管带着街头乐队式的讽刺腔调，中段忽然温柔。",
+      "movement": 3
+    },
+    {
+      "title": "第四乐章：从深渊到辉煌",
+      "description": "开场如霹雳，中段抒情主题积蓄力量，最后全乐团齐奏把D大调主题推向顶点。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Langsam. Schleppend – Wie ein Naturlaut",
+      "tempo": "缓慢地，拖曳地——如大自然的声音",
+      "description": "从晨雾般的引子到快板的青春主题，马勒自称\"春天的黎明\"。"
+    },
+    {
+      "number": 2,
+      "title": "Kräftig bewegt, doch nicht zu schnell",
+      "tempo": "有力地运动，但不太快",
+      "description": "兰德勒舞曲性格的谐谑曲，充满乡野节奏的动力。"
+    },
+    {
+      "number": 3,
+      "title": "Feierlich und gemessen, ohne zu schleppen",
+      "tempo": "庄严而有节制，不拖沓",
+      "description": "以小调《马丁兄弟》为主题的葬礼进行曲，带波希米亚街头乐队色彩。"
+    },
+    {
+      "number": 4,
+      "title": "Stürmisch bewegt",
+      "tempo": "风暴般地运动",
+      "description": "从激烈的开叫到辉煌的D大调终曲，情绪跨度极大。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Berliner Philharmoniker & Claudio Abbado",
+      "year": 1991,
+      "note": "阿巴多与柏林爱乐的现场录音，线条清晰、层次分明，是入门的稳妥选择。",
+      "sourceId": "apple_music_1452377808"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Leonard Bernstein & New York Philharmonic",
+      "year": 1998,
+      "note": "伯恩斯坦的演绎冲劲十足，把青春的冲动推到极限。",
+      "sourceId": "apple_music_202391616"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000011",
+    "work_000025"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-szsorch-mahler-1",
+      "title": "巨人的肖像——许忠与苏州交响乐团音乐会",
+      "url": "https://www.szsorch.com/2026-27-Music-Season/2088141283425861632.html",
+      "publisher": "苏州交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目为马勒第一交响曲",
+        "作曲者"
+      ]
+    },
+    {
+      "id": "wikipedia-en-mahler-symphony-1",
+      "title": "Symphony No. 1 (Mahler)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._1_(Mahler)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1884–1888",
+        "四个乐章与速度标记",
+        "编制规模",
+        "标题「巨人」来源"
+      ]
+    },
+    {
+      "id": "apple_music_1452377808",
+      "title": "Mahler: Symphony No. 1",
+      "url": "https://music.apple.com/us/album/1452377808",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_202391616",
+      "title": "Mahler: Symphony No. 1 \"Titan\"",
+      "url": "https://music.apple.com/us/album/202391616",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

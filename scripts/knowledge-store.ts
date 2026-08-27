@@ -165,8 +165,24 @@ export function mapProgramItemToKnowledge(
     if (!rule.titles.some((value) => normalizeIdentity(value) === title)) return false;
     return !rule.opus?.length || !opus || rule.opus.some((value) => normalizeIdentity(value) === opus);
   });
-  if (matches.length !== 1) return {};
-  const match = matches[0];
+  if (matches.length === 1) return toKnowledgeMapping(matches[0]);
+  if (matches.length === 0) {
+    // 官网页面常把目录号写进标题（如「E小调第二交响曲，作品27」），精确标题匹配会漏。
+    // 允许在剥离目录号后的标题上做第二次唯一匹配；仍要求作曲家精确一致且无歧义。
+    const plainTitle = stripCatalogueIdentity(item.title);
+    if (plainTitle && plainTitle !== title) {
+      const loose = registry.mappings.filter((rule) => {
+        if (!rule.composers.some((value) => normalizeIdentity(value) === composer)) return false;
+        if (!rule.titles.some((value) => stripCatalogueIdentity(value) === plainTitle)) return false;
+        return !rule.opus?.length || !opus || rule.opus.some((value) => normalizeIdentity(value) === opus);
+      });
+      if (loose.length === 1) return toKnowledgeMapping(loose[0]);
+    }
+  }
+  return {};
+}
+
+function toKnowledgeMapping(match: KnowledgeWorkMappingRule): Pick<ProgramItem, "knowledgeWorkId" | "knowledgeMapping"> {
   return {
     knowledgeWorkId: match.workId,
     knowledgeMapping: {
@@ -330,6 +346,14 @@ function toWorkSummary(work: PublishedKnowledgeWork) {
 
 function assertUnique(values: string[], label: string) {
   if (new Set(values).size !== values.length) throw new Error(`${label} 重复`);
+}
+
+// 与 knowledge-automation.ts 的 stripCatalogue 保持一致，两处需同步修改。
+function stripCatalogueIdentity(value: string) {
+  return normalizeIdentity(value.replace(
+    /[,，]?\s*(?:BWV|K(?:V)?|D|Op(?:us)?|作品|Hob\.?|RV|Sz\.?|TrV|M\.?|S\.?)[\s.]*[A-Za-z]?[\d]+(?::\s*\d+)?(?:[/-]\d+)?/ig,
+    "",
+  ));
 }
 
 async function listJsonFiles(path: string) {

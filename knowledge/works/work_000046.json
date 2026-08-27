@@ -1,0 +1,140 @@
+{
+  "id": "work_000046",
+  "composerId": "composer_000017",
+  "title": "g小调第一小提琴协奏曲",
+  "originalTitle": "Violin Concerto No. 1 in G minor, Op. 26",
+  "aliases": [
+    "G小调第一小提琴协奏曲",
+    "g小调第一小提琴协奏曲，作品26",
+    "布鲁赫小提琴协奏曲",
+    "Violin Concerto No. 1 in G minor",
+    "Bruch: Violin Concerto No. 1"
+  ],
+  "opus": "Op. 26",
+  "key": "g小调",
+  "genre": "小提琴协奏曲",
+  "period": "浪漫主义",
+  "composedYears": "1866（1868年修订）",
+  "durationMinutes": 26,
+  "instrumentation": "独奏小提琴、2长笛、2双簧管、2单簧管、2大管、4圆号、2小号、定音鼓、弦乐组",
+  "difficulty": "第一次听",
+  "tags": [
+    "布鲁赫",
+    "小提琴协奏曲",
+    "浪漫主义",
+    "德国",
+    "旋律"
+  ],
+  "summary": "布鲁赫1866年写成、经约阿希姆建议修订的g小调小提琴协奏曲，是十九世纪旋律最丰美的协奏曲之一，慢板乐章几乎无人不被打动。",
+  "whyListen": "它没有炫技的野心，只有接连不断的歌唱：第一乐章定音鼓轻敲下独奏倾泻而下，慢板把浪漫主义的柔情推到顶点，终曲明亮有力。布鲁赫后来把版权一次性卖掉，这首\"印钞机\"再没给他带来一分钱——音乐史著名的遗憾。",
+  "firstListen": "第一乐章开头独奏的下行乐句像一声叹息直接抓住耳朵；第二乐章绵长的旋律一段比一段动人，请给它完整的六分钟；终曲冲劲十足，像一场漂亮的收尾冲刺。",
+  "listeningPoints": [
+    {
+      "title": "定音鼓上的开场独白",
+      "description": "定音鼓轻击铺底，独奏小提琴以华丽的下行乐句直接登场，毫无客套。",
+      "movement": 1
+    },
+    {
+      "title": "慢板的绵长歌唱",
+      "description": "降E大调的柔板一段接一段地歌唱，是全曲的心脏，也是最常被单独返场的乐章。",
+      "movement": 2
+    },
+    {
+      "title": "明亮的终曲",
+      "description": "快板终曲节奏果断、双音密集，带着向勃拉姆斯式厚重致意的力量感。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Vorspiel: Allegro moderato",
+      "tempo": "前奏曲：中庸的快板",
+      "description": "定音鼓与乐队低语之上独奏倾泻而下，乐章不设再现，直接滑入慢板。"
+    },
+    {
+      "number": 2,
+      "title": "Adagio",
+      "tempo": "柔板",
+      "description": "降E大调，旋律绵长深情，独奏与乐队轮流把情绪推向高潮。"
+    },
+    {
+      "number": 3,
+      "title": "Finale: Allegro energico",
+      "tempo": "终曲：有力的快板",
+      "description": "节奏鲜明、技巧辉煌的回旋性终曲，结尾明亮有力。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Jascha Heifetz & Sir Malcolm Sargent",
+      "year": 1962,
+      "note": "海菲茨与萨金特的经典录音（1962年再版），技巧无懈可击、速度痛快。",
+      "sourceId": "apple_music_463324465"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Joshua Bell & Academy of St Martin in the Fields",
+      "year": 2018,
+      "note": "贝尔自拉自领的版本线条温润，歌唱性极强。",
+      "sourceId": "apple_music_1382362770"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000018",
+    "work_000028"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-hrbso-bruch",
+      "title": "【8.28】印象、浪漫与现代的交响音乐会",
+      "url": "https://hrbso.maitix.com/h5#/pages-order/projectDetail/index?projectId=239358001",
+      "publisher": "哈尔滨交响乐团（麦座）官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含布鲁赫g小调第一小提琴协奏曲，作品26",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-bruch-vc1",
+      "title": "Violin Concerto No. 1 (Bruch)",
+      "url": "https://en.wikipedia.org/wiki/Violin_Concerto_No._1_(Bruch)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1866与1868年修订、约阿希姆协助",
+        "三个乐章与速度标记",
+        "编制",
+        "版权售出的轶事"
+      ]
+    },
+    {
+      "id": "apple_music_463324465",
+      "title": "Bruch: Violin Concerto No. 1 in G Minor, Op. 26",
+      "url": "https://music.apple.com/us/album/463324465",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1382362770",
+      "title": "Bruch: Scottish Fantasy, Op. 46 - Violin Concerto No. 1 in G Minor, Op. 26",
+      "url": "https://music.apple.com/us/album/1382362770",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

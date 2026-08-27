@@ -1,0 +1,133 @@
+{
+  "id": "work_000062",
+  "composerId": "composer_000022",
+  "title": "c小调大提琴协奏曲",
+  "originalTitle": "Cello Concerto in C minor, Op. 66",
+  "aliases": [
+    "C小调大提琴协奏曲",
+    "c小调大提琴协奏曲，作品66",
+    "米亚斯科夫斯基大提琴协奏曲",
+    "Cello Concerto in C minor",
+    "Myaskovsky: Cello Concerto"
+  ],
+  "opus": "Op. 66",
+  "key": "c小调",
+  "genre": "大提琴协奏曲",
+  "period": "20世纪",
+  "composedYears": "1944",
+  "durationMinutes": 25,
+  "instrumentation": "独奏大提琴与管弦乐队（含竖琴）",
+  "difficulty": "适合深入",
+  "tags": [
+    "米亚斯科夫斯基",
+    "大提琴协奏曲",
+    "20世纪",
+    "苏联",
+    "战争年代"
+  ],
+  "summary": "米亚斯科夫斯基1944年为大提琴家克努舍维茨基写的协奏曲，1945年由作曲家与独奏家在莫斯科首演，是苏联大提琴文献中最深沉的一部。",
+  "whyListen": "写于战争最残酷的年份，这部协奏曲却几乎没有呐喊：两个乐章都是\"慢起—激动—归于平静\"的弧线，大提琴始终在歌唱，乐队像雾一样包围它。罗斯特罗波维奇1956年录下了第一部录音。想听肖斯塔科维奇与普罗科菲耶夫之外的苏联声音，这是必修课。",
+  "firstListen": "第一乐章从不太慢的行板开始，独奏大提琴几乎立刻唱出忧郁的主题；第二乐章活泼的快板里注意中段\"更有标记\"的段落如何把情绪顶起来，最后又平静收束。",
+  "listeningPoints": [
+    {
+      "title": "开场的独白",
+      "description": "第一乐章行板开头独奏大提琴直接唱出忧郁的第一主题，织体透明。",
+      "movement": 1
+    },
+    {
+      "title": "两乐章的弧线",
+      "description": "两个乐章都从平静出发，中段推向激动的高点，再回到沉思——像两次呼吸。",
+      "movement": 1
+    },
+    {
+      "title": "终曲的中段",
+      "description": "第二乐章中段转入更有力的进行曲性格，铜管短暂抬头，随后被大提琴抚平。",
+      "movement": 2
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Lento ma non troppo – Andante – Tempo I",
+      "tempo": "不太慢的慢板 – 行板 – 原速",
+      "description": "独奏大提琴的忧郁主题贯穿，情绪起伏后回到开头的沉思。"
+    },
+    {
+      "number": 2,
+      "title": "Allegro vivace – Più marcato – Meno mosso – Tempo I",
+      "tempo": "活泼的快板 – 更有标记地 – 更慢地 – 原速",
+      "description": "轻快的主题带俄罗斯舞曲气质，中段推向高潮后安静收束。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Mstislav Rostropovich",
+      "year": 2017,
+      "note": "罗斯特罗波维奇的历史性录音（2017年再版），他也是这部作品最早的录音者。",
+      "sourceId": "apple_music_1206071732"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Mischa Maisky, Russian National Orchestra & Mikhail Pletnev",
+      "year": 1996,
+      "note": "麦斯基与俄罗斯国家乐团/普列特涅夫的版本音色浓烈，歌唱性强。",
+      "sourceId": "apple_music_1570734493"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000015"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-myaskovsky",
+      "title": "汤沐海、卡瓦科斯、陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21769&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含米亚斯科夫斯基大提琴协奏曲，作品66",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-myaskovsky-cello-concerto",
+      "title": "Cello Concerto (Myaskovsky)",
+      "url": "https://en.wikipedia.org/wiki/Cello_Concerto_(Myaskovsky)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "c小调，作品66，创作于1944–45年",
+        "1945年3月17日克努舍维茨基莫斯科首演",
+        "两个乐章与速度标记，约25分钟",
+        "罗斯特罗波维奇1956年首次录音"
+      ]
+    },
+    {
+      "id": "apple_music_1206071732",
+      "title": "Saint-Saëns & Miaskovsky: Cello Concertos",
+      "url": "https://music.apple.com/us/album/1206071732",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1570734493",
+      "title": "Prokofiev: Sinfonia Concertante - Miaskovsky: Cello Concerto",
+      "url": "https://music.apple.com/us/album/1570734493",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

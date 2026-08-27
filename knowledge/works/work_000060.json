@@ -1,0 +1,139 @@
+{
+  "id": "work_000060",
+  "composerId": "composer_auto_2fac309078efb9a4",
+  "title": "D大调小提琴协奏曲",
+  "originalTitle": "Violin Concerto in D major, Op. 35",
+  "aliases": [
+    "D大调小提琴协奏曲，作品35",
+    "科恩戈尔德小提琴协奏曲",
+    "Violin Concerto in D major",
+    "Korngold: Violin Concerto, Op. 35"
+  ],
+  "opus": "Op. 35",
+  "key": "D大调",
+  "genre": "小提琴协奏曲",
+  "period": "20世纪",
+  "composedYears": "1945",
+  "durationMinutes": 25,
+  "instrumentation": "独奏小提琴、2长笛、2双簧管、2单簧管、2大管、4圆号、2小号、定音鼓、打击乐、竖琴与弦乐组",
+  "difficulty": "第一次听",
+  "tags": [
+    "科恩戈尔德",
+    "小提琴协奏曲",
+    "20世纪",
+    "好莱坞",
+    "晚期浪漫主义"
+  ],
+  "summary": "好莱坞作曲家科恩戈尔德1945年重返音乐会舞台的小提琴协奏曲，三个乐章的主题全部来自他自己的电影音乐，华丽得像一部没有画面的电影。",
+  "whyListen": "科恩戈尔德把给《另一个黎明》《王子与贫儿》等电影写的旋律织成了协奏曲，1947年由海菲茨首演。它拥有晚期浪漫主义的全部魅力——宽广的旋律、绚烂的配器、 virtuosic 的华彩——又带着好莱坞黄金年代的说服力。想听\"电影感\"的古典音乐，这是原点。",
+  "firstListen": "第一乐章独奏小提琴一进来就是大片主题（出自电影《另一个黎明》）；第二乐章 Romance 像一段爱情戏的配乐，中段忽然转暗；末乐章谐谑般的急板里藏着《王子与贫儿》的动机，结尾光彩夺目。",
+  "listeningPoints": [
+    {
+      "title": "开场的大片主题",
+      "description": "乐队序奏后独奏直接唱出宽广的主题，源自电影《另一个 dawn》的音乐。",
+      "movement": 1
+    },
+    {
+      "title": "Romance 的爱情戏",
+      "description": "第二乐章主题来自《风流种子》，中段情绪转暗如剧情突变。",
+      "movement": 2
+    },
+    {
+      "title": "电影动机的终曲",
+      "description": "末乐章把《王子与贫儿》的动机变成飞转的舞蹈，结尾辉煌明亮。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Moderato nobile",
+      "tempo": "高贵的的中板",
+      "description": "乐队序奏后独奏呈示宽广主题，发展部华彩段炫目。"
+    },
+    {
+      "number": 2,
+      "title": "Romance: Andante",
+      "tempo": "浪漫曲：行板",
+      "description": "源自电影音乐的抒情乐章，中段转入阴影后再回到温暖。"
+    },
+    {
+      "number": 3,
+      "title": "Finale: Allegro assai vivace",
+      "tempo": "终曲：十分活泼的快板",
+      "description": "谐谑性格的急板终曲，电影动机飞转，以炫技收场。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Jascha Heifetz",
+      "year": 1954,
+      "note": "首演者海菲兹1954年的录音，技术与风度都是这套音乐的\"官方口音\"。",
+      "sourceId": "apple_music_548973400"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Anne-Sophie Mutter, Wiener Philharmoniker & André Previn",
+      "year": 2004,
+      "note": "穆特与普列文/维也纳爱乐的版本线条更现代，录音温暖。",
+      "sourceId": "apple_music_1452285562"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000018",
+    "work_000028"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-korngold",
+      "title": "余隆、卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21779&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含科恩戈尔德D大调小提琴协奏曲，作品35",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-korngold-vc",
+      "title": "Violin Concerto (Korngold)",
+      "url": "https://en.wikipedia.org/wiki/Violin_Concerto_(Korngold)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1945",
+        "1947年2月15日海菲兹与圣路易斯交响首演",
+        "三个乐章与速度标记、约25分钟",
+        "各乐章引用的电影音乐来源"
+      ]
+    },
+    {
+      "id": "apple_music_548973400",
+      "title": "Korngold: Violin Concerto in D Major, Op. 35",
+      "url": "https://music.apple.com/us/album/548973400",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1452285562",
+      "title": "Tchaikovsky / Korngold: Violin Concertos",
+      "url": "https://music.apple.com/us/album/1452285562",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

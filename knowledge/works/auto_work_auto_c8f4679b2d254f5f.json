@@ -63,13 +63,28 @@
       "description": "G大调，3/8拍，回旋曲式，中间插入G小调行板与G大调小快板，节奏变化丰富。"
     }
   ],
-  "recordings": [],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "David Oistrakh, Alceo Galliera & Philharmonia Orchestra",
+      "year": 1962,
+      "note": "奥伊斯特拉赫与爱乐乐团的经典录音，歌唱性与结构感俱佳。",
+      "sourceId": "apple_music_1797341217"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Julian Rachlin",
+      "year": 2004,
+      "note": "拉什林 2004 年的版本干净利落，第三乐章的节奏变化尤为生动。",
+      "sourceId": "apple_music_145533236"
+    }
+  ],
   "relatedWorkIds": [
     "work_000004",
     "work_000006",
     "work_000005"
   ],
-  "completeness": "basic",
+  "completeness": "complete",
   "generation": {
     "method": "deepseek",
     "model": "deepseek-v4-flash",
@@ -86,7 +101,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-09T01:14:53.875Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_87688647e686",
@@ -111,6 +126,28 @@
         "instrumentation",
         "movements",
         "aliases"
+      ]
+    },
+    {
+      "id": "apple_music_1797341217",
+      "title": "Mozart: Violin Concerto No. 3, K. 216 - Prokofiev: Violin Concerto No. 2, Op. 63",
+      "url": "https://music.apple.com/us/album/1797341217",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_145533236",
+      "title": "Mozart: Violin Concerto No. 3 - Brahms: Violin Concerto",
+      "url": "https://music.apple.com/us/album/145533236",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
       ]
     }
   ]

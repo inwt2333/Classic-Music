@@ -1,0 +1,37 @@
+{
+  "id": "composer_000019",
+  "name": "奥托里诺·雷斯皮吉",
+  "originalName": "Ottorino Respighi",
+  "aliases": [
+    "雷斯皮吉",
+    "奥托里诺·雷斯庇基",
+    "Ottorino Respighi",
+    "Respighi"
+  ],
+  "birthYear": 1879,
+  "deathYear": 1936,
+  "nationality": "意大利",
+  "period": "20世纪",
+  "introduction": "意大利作曲家、音乐学家。在歌剧独大的意大利，他专心经营管弦乐，曾随里姆斯基-科萨科夫学习配器，写出了以罗马为题的著名三部曲——《罗马的喷泉》《罗马的松树》《罗马的节日》。他还整理改编了大量古代音乐（如《琉特琴古歌与舞曲》），音响华丽透明，是最受乐团与听众欢迎的意大利管弦乐大师之一。",
+  "styleSummary": "配器灿烂、画面感极强，印象派色彩与意大利歌唱性线条交织。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-ottorino-respighi",
+      "title": "Ottorino Respighi",
+      "url": "https://en.wikipedia.org/wiki/Ottorino_Respighi",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

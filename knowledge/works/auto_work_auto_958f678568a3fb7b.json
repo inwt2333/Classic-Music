@@ -12,6 +12,8 @@
   "key": "C小调",
   "genre": "托卡塔",
   "period": "巴洛克",
+  "composedYears": "约1707–1710",
+  "durationMinutes": 13,
   "instrumentation": "钢琴",
   "difficulty": "容易进入",
   "tags": [
@@ -76,7 +78,7 @@
     "work_000008",
     "work_000009"
   ],
-  "completeness": "basic",
+  "completeness": "complete",
   "generation": {
     "method": "deepseek",
     "model": "deepseek-v4-flash",
@@ -95,7 +97,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-08T16:09:33.431Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_770cfd5e277b",
@@ -146,6 +148,17 @@
         "录制年份2023",
         "录音专辑信息",
         "recordings.1"
+      ]
+    },
+    {
+      "id": "imslp-bwv-911",
+      "title": "Toccata in C minor, BWV 911 (Bach, Johann Sebastian)",
+      "url": "https://imslp.org/wiki/Toccata_in_C_minor,_BWV_911_(Bach,_Johann_Sebastian)",
+      "publisher": "IMSLP",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年代约1707–1710",
+        "内部段落结构与时长参考"
       ]
     }
   ]

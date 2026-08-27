@@ -1,0 +1,160 @@
+{
+  "id": "work_000039",
+  "composerId": "composer_000015",
+  "title": "乐队协奏曲",
+  "originalTitle": "Concerto for Orchestra, Sz. 116, BB 123",
+  "aliases": [
+    "管弦乐协奏曲",
+    "为乐队而作的协奏曲",
+    "Concerto for Orchestra",
+    "Bartók: Concerto for Orchestra"
+  ],
+  "opus": "Sz. 116 / BB 123",
+  "genre": "乐队协奏曲",
+  "period": "20世纪",
+  "composedYears": "1943",
+  "durationMinutes": 37,
+  "instrumentation": "大型管弦乐队（木管成对至成三、铜管组、竖琴、钢琴与丰富打击乐、弦乐组）",
+  "difficulty": "容易进入",
+  "tags": [
+    "巴托克",
+    "乐队协奏曲",
+    "20世纪",
+    "匈牙利",
+    "美国时期"
+  ],
+  "summary": "巴托克1943年受库谢维茨基基金会委约、在纽约州疗养期间写成，让乐队各声部轮番像独奏家一样出场，是他最受欢迎的管弦乐作品。",
+  "whyListen": "标题里的\"协奏曲\"指的不是某件乐器，而是整个乐队：大管、双簧管、长号都有自己的独白。作品既有炫技的欢乐，也有第三乐章夜曲般的挽歌——病中的作曲家在异乡写下的最深叹息。",
+  "firstListen": "先记住第二乐章\"成对的游戏\"：两支大管、两支双簧管依次登场，像化装舞会；再听第四乐章被粗暴打断的歌谣与第五乐章飞驰的赋格，你会明白为什么它是乐团的试金石。",
+  "listeningPoints": [
+    {
+      "title": "低音弦乐上开场的引子",
+      "description": "大提琴与低音提琴低沉的序奏缓缓上行，木管应答，像黑暗中睁开眼睛。",
+      "movement": 1
+    },
+    {
+      "title": "成对的游戏",
+      "description": "成对的大管、双簧管、单簧管、长笛与小号各跳一支舞，配器色彩一组接一组。",
+      "movement": 2
+    },
+    {
+      "title": "挽歌与夜曲",
+      "description": "缓慢的第三乐章如夜色下的独白，长笛与竖琴的微光浮在低音弦乐之上。",
+      "movement": 3
+    },
+    {
+      "title": "被打断的间奏曲",
+      "description": "歌谣般的中欧旋律被乐队粗鲁的小丑式插话一次次搅乱，幽默中带刺。",
+      "movement": 4
+    },
+    {
+      "title": "疾风般的赋格终曲",
+      "description": "小号吹出号角性主题，弦乐赋格层层加速，铜管全奏辉煌收束。",
+      "movement": 5
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Introduzione: Andante non troppo – Allegro vivace",
+      "tempo": "不太慢的行板 – 活泼的快板",
+      "description": "从低音弦乐的序奏进入充满活力的快板，主题性格严峻而集中。"
+    },
+    {
+      "number": 2,
+      "title": "Giuoco delle coppie: Allegretto",
+      "tempo": "成对的游戏，小快板",
+      "description": "成对管乐器依次独奏的舞曲，间隔五度、六度、七度不等，色彩斑斓。"
+    },
+    {
+      "number": 3,
+      "title": "Elegia: Andante non troppo",
+      "tempo": "挽歌，不太慢的行板",
+      "description": "巴托克式的\"夜曲\"，织体缓慢流动，哀而不嚎。"
+    },
+    {
+      "number": 4,
+      "title": "Intermezzo interrotto: Allegretto",
+      "tempo": "被打断的间奏曲，小快板",
+      "description": "歌谣旋律数次被乐队怪诞的插话打断，带自嘲式的幽默。"
+    },
+    {
+      "number": 5,
+      "title": "Finale: Pesante – Presto",
+      "tempo": "沉重地 – 急板",
+      "description": "号角性主题与飞动的赋格段结合，以巨大的能量结束全曲。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Chicago Symphony Orchestra & Fritz Reiner",
+      "year": 2012,
+      "note": "莱纳与芝加哥交响的经典录音（2012年再版），精准锋利，质感如刀刻。",
+      "sourceId": "apple_music_510627656"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Orchestre Symphonique de Montréal & Charles Dutoit",
+      "year": 1998,
+      "note": "迪图瓦与蒙特利尔交响的版本色彩更柔和明亮，音响现代。",
+      "sourceId": "apple_music_1452512434"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000023",
+    "work_000033"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-szsorch-bartok-cfo",
+      "title": "许忠、祖克曼与苏州交响乐团音乐会",
+      "url": "https://www.szsorch.com/2026-27-Music-Season/2087374603217092608.html",
+      "publisher": "苏州交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含巴托克《乐队协奏曲，BB 123》",
+        "作曲者与目录号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-bartok-concerto-for-orchestra",
+      "title": "Concerto for Orchestra",
+      "url": "https://en.wikipedia.org/wiki/Concerto_for_Orchestra",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1943与库谢维茨基委约",
+        "五个乐章与标题",
+        "编制",
+        "首演1944年波士顿"
+      ]
+    },
+    {
+      "id": "apple_music_510627656",
+      "title": "Bartók: Concerto for Orchestra",
+      "url": "https://music.apple.com/us/album/510627656",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1452512434",
+      "title": "Bartók: Concerto for Orchestra",
+      "url": "https://music.apple.com/us/album/1452512434",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

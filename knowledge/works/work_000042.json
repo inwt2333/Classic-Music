@@ -1,0 +1,151 @@
+{
+  "id": "work_000042",
+  "composerId": "composer_000006",
+  "title": "c小调第二交响曲「小俄罗斯」",
+  "originalTitle": "Symphony No. 2 in C minor, Op. 17 \"Little Russian\"",
+  "aliases": [
+    "C小调第二交响曲",
+    "第二交响曲「小俄罗斯」",
+    "小俄罗斯交响曲",
+    "c小调第二交响曲，作品17",
+    "Symphony No. 2 in C minor",
+    "Little Russian Symphony"
+  ],
+  "opus": "Op. 17",
+  "key": "c小调",
+  "genre": "交响曲",
+  "period": "浪漫主义",
+  "composedYears": "1872（1879–1880年修订）",
+  "durationMinutes": 38,
+  "instrumentation": "大型管弦乐队（含竖琴）",
+  "difficulty": "容易进入",
+  "tags": [
+    "柴可夫斯基",
+    "交响曲",
+    "浪漫主义",
+    "乌克兰民歌",
+    "小俄罗斯"
+  ],
+  "summary": "柴可夫斯基在乌克兰卡缅卡度假时写下的一部交响曲，三个乐章直接引用乌克兰民歌，粗犷欢腾，绰号\"小俄罗斯\"即指乌克兰。",
+  "whyListen": "这是柴可夫斯基最快活的一部交响曲：第一乐章开头就吹出一只悠长的乌克兰号角调，末乐章把民歌《仙鹤》越奏越疯。比起后来的心理戏剧，它更像一场阳光下的乡村庆典，是轻松进入老柴交响世界的捷径。",
+  "firstListen": "开头独奏圆号的长旋律是整部作品的种子；末乐章先听大管低声奏出《仙鹤》主题，然后看它被全乐队一遍遍放大成狂欢。",
+  "listeningPoints": [
+    {
+      "title": "圆号的悠长号角",
+      "description": "基于乌克兰民歌的引子由圆号独自唱出，像草原尽头的呼唤，贯穿全乐章。",
+      "movement": 1
+    },
+    {
+      "title": "婚礼进行曲式的第二乐章",
+      "description": "据说是为未完成的歌剧《翁迪娜》所写，带有行列行进与水波摇曳的两种性格。",
+      "movement": 2
+    },
+    {
+      "title": "粗野的谐谑曲",
+      "description": "节奏故意跛行、重音错位，中段却忽然飘出温柔的双簧管旋律。",
+      "movement": 3
+    },
+    {
+      "title": "《仙鹤》的狂欢",
+      "description": "末乐章把民歌《仙鹤》从大管的低语推向全奏的沸腾，是全集最痛快的段落。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Andante sostenuto – Allegro vivo",
+      "tempo": "持续的行板 – 活泼的快板",
+      "description": "乌克兰号角调引子辽阔悠长，快板主题取自民歌《纺纱女》。"
+    },
+    {
+      "number": 2,
+      "title": "Andantino marziale, quasi moderato",
+      "tempo": "进行曲风格的小行板",
+      "description": "带有行列与水波两种意象的乐章，据称源自歌剧《翁迪娜》配乐。"
+    },
+    {
+      "number": 3,
+      "title": "Scherzo: Allegro molto vivo",
+      "tempo": "谐谑曲：非常活泼的快板",
+      "description": "重音错位的粗野节奏与温柔的中段交替。"
+    },
+    {
+      "number": 4,
+      "title": "Finale: Moderato assai",
+      "tempo": "终曲：很中庸的速度",
+      "description": "以民歌《仙鹤》为主题，从大管独白推向炽烈的全奏尾声。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Philharmonia Orchestra & Carlo Maria Giulini",
+      "year": 1958,
+      "note": "朱利尼与爱乐乐团的录音气息宽广，民歌主题的放歌唱劲十足。",
+      "sourceId": "apple_music_1498205633"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Kirill Karabits",
+      "year": 2011,
+      "note": "卡拉比茨（本人有乌克兰血统）的版本节奏更野，色彩更亮。",
+      "sourceId": "apple_music_484524640"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000016",
+    "work_000040"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-little-russian",
+      "title": "柴可夫斯基2+2：林大叶、罗维与上海交响乐团丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21771&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含c小调第二交响曲「小俄罗斯」作品17",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-tchaikovsky-symphony-2",
+      "title": "Symphony No. 2 (Tchaikovsky)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._2_(Tchaikovsky)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1872与1879–1880修订",
+        "乌克兰民歌引用与「小俄罗斯」别称",
+        "四个乐章与速度标记"
+      ]
+    },
+    {
+      "id": "apple_music_1498205633",
+      "title": "Tchaikovsky: Symphony No. 2 \"Little Russian\"",
+      "url": "https://music.apple.com/us/album/1498205633",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_484524640",
+      "title": "Tchaikovsky: Symphony No. 2 \"Little Russian\"",
+      "url": "https://music.apple.com/us/album/484524640",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

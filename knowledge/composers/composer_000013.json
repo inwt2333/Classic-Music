@@ -1,0 +1,37 @@
+{
+  "id": "composer_000013",
+  "name": "安东尼奥·维瓦尔第",
+  "originalName": "Antonio Vivaldi",
+  "aliases": [
+    "维瓦尔第",
+    "安东尼奥·卢奇奥·维瓦尔第",
+    "Antonio Lucio Vivaldi",
+    "Vivaldi"
+  ],
+  "birthYear": 1678,
+  "deathYear": 1741,
+  "nationality": "意大利",
+  "period": "巴洛克",
+  "introduction": "意大利巴洛克作曲家、小提琴家，绰号\"红发神父\"。他确立了独奏协奏曲的形式，快—慢—快三乐章结构与 ritornello 手法经他定型并影响深远，一生写下五百余首协奏曲，同时是威尼斯皮耶塔女子音乐学校的音乐指导。代表作有《四季》、歌剧与大量宗教音乐。",
+  "styleSummary": "旋律明快、节奏富有动力，独奏与乐队交替的协奏语汇生动外向。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-antonio-vivaldi",
+      "title": "Antonio Vivaldi",
+      "url": "https://en.wikipedia.org/wiki/Antonio_Vivaldi",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

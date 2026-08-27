@@ -1,0 +1,39 @@
+{
+  "id": "composer_000022",
+  "name": "尼古拉·米亚斯科夫斯基",
+  "originalName": "Nikolai Myaskovsky",
+  "aliases": [
+    "米亚斯科夫斯基",
+    "尼古拉·雅科夫列维奇·米亚斯科夫斯基",
+    "Nikolai Myaskovsky",
+    "Nikolai Yakovlevich Myaskovsky",
+    "Myaskovsky",
+    "米亚斯可夫斯基"
+  ],
+  "birthYear": 1881,
+  "deathYear": 1950,
+  "nationality": "俄罗斯",
+  "period": "20世纪",
+  "introduction": "苏联作曲家、教育家，被称为\"苏联交响曲之父\"。他写了二十七部交响曲，执教莫斯科音乐学院四十余年，哈恰图良、卡巴列夫斯基与谢德林皆出其门。1948年与肖斯塔科维奇、普罗科菲耶夫一同遭日丹诺夫批判。c小调大提琴协奏曲与晚期交响曲是他最常被演奏的作品。",
+  "styleSummary": "结构严谨的晚期浪漫主义语汇，气质沉思忧郁，常带俄罗斯式的抒情暗流。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-nikolai-myaskovsky",
+      "title": "Nikolai Myaskovsky",
+      "url": "https://en.wikipedia.org/wiki/Nikolai_Myaskovsky",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

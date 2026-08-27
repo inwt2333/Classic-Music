@@ -1,0 +1,148 @@
+{
+  "id": "work_000055",
+  "composerId": "composer_000019",
+  "title": "《罗马的节日》",
+  "originalTitle": "Feste romane, P. 157",
+  "aliases": [
+    "罗马的节日",
+    "罗马的节日，作品157",
+    "Roman Festivals",
+    "Feste romane"
+  ],
+  "opus": "P. 157",
+  "genre": "交响诗",
+  "period": "20世纪",
+  "composedYears": "1926–1928",
+  "durationMinutes": 25,
+  "instrumentation": "超大编制管弦乐队（含六支圆号、四支小号、管风琴、三架竖琴与大量打击乐，另需定音鼓三人）",
+  "difficulty": "需要专注",
+  "tags": [
+    "雷斯皮吉",
+    "交响诗",
+    "20世纪",
+    "罗马",
+    "大编制"
+  ],
+  "summary": "罗马三部曲的终章，也是编制最庞大、音响最狂放的一部：从古代竞技场的血腥狂欢，到大赦年朝圣、十月节酒馆，直到主显节广场上全民的喧腾。",
+  "whyListen": "如果说《喷泉》画光、《松树》画影，《节日》画的就是人：第一段竞技场里铜管与合唱般的人群吼声凶蛮逼人，第二段朝圣的钟声由远及近再远去，第三段小夜曲带着吉他与酒气，终段狂欢的塔兰泰拉越转越快。它是乐队火力全开的展品，现场的压迫感无与伦比。",
+  "firstListen": "开头注意低音铜管与打击乐营造的古罗马竞技场的杀气，那是全曲最凶的段落；第二段跟着钟声由弱到强再消失，像朝圣队伍经过；末段意大利民间舞曲被反复加速，直到广场上人声鼎沸般的结尾。",
+  "listeningPoints": [
+    {
+      "title": "竞技场的杀气",
+      "description": "开篇低音铜管与打击乐阴沉推进，人群的吼声被写成乐队全奏，凶蛮而血腥。",
+      "movement": 1
+    },
+    {
+      "title": "朝圣的钟声",
+      "description": "大赦年段落由远及近的钟声与圣咏，队伍经过后又渐渐消失在远方。",
+      "movement": 2
+    },
+    {
+      "title": "十月节的酒馆",
+      "description": "曼多林与吉他式的拨弦、鲁特琴般的小夜曲，秋天酒馆里的微醺。",
+      "movement": 3
+    },
+    {
+      "title": "主显节的狂欢",
+      "description": "广场上的号角、手风琴式的节奏与塔兰泰拉舞曲叠加成全民的喧腾。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "I giochi（竞技场）",
+      "tempo": "Allegro con brio",
+      "description": "古代竞技场的残酷庆典，铜管写人群吼声，打击乐如战鼓。"
+    },
+    {
+      "number": 2,
+      "title": "Il giubileo（大赦年）",
+      "tempo": "Molto mosso",
+      "description": "朝圣者的圣咏与钟声由远而近再远去，气象宏大。"
+    },
+    {
+      "number": 3,
+      "title": "L'ottobrata（十月节）",
+      "tempo": "Allegretto vivace",
+      "description": "秋日酒馆的小夜曲，吉他式拨弦与缠绵的旋律。"
+    },
+    {
+      "number": 4,
+      "title": "L'Epifania（主显节）",
+      "tempo": "Allegro febbrile",
+      "description": "广场狂欢：号角、舞曲与人群的喧腾叠加，狂热的收束。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Sinfonia of London & John Wilson",
+      "year": 2020,
+      "note": "约翰·威尔逊与伦敦小交响（Sinfonia of London）的罗马三部曲全录音，音响华丽精准，近年口碑之作。",
+      "sourceId": "apple_music_1761603101"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Buffalo Philharmonic Orchestra & JoAnn Falletta",
+      "year": 2019,
+      "note": "法列塔与布法罗爱乐的版本色彩明快，细节清晰。",
+      "sourceId": "apple_music_1449282493"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000053",
+    "work_000054"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-festivals",
+      "title": "迪图瓦、莱昂斯卡娅与上海交响乐团演绎莫扎特与雷斯皮吉《罗马三部曲》丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21758&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含雷斯皮吉《罗马的节日》，作品157",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-roman-festivals",
+      "title": "Roman Festivals",
+      "url": "https://en.wikipedia.org/wiki/Roman_Festivals",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1926–1928与1929年首演",
+        "四个段落标题",
+        "超大编制要求"
+      ]
+    },
+    {
+      "id": "apple_music_1761603101",
+      "title": "Respighi: Roman Trilogy",
+      "url": "https://music.apple.com/us/album/1761603101",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1449282493",
+      "title": "Respighi: Roman Trilogy",
+      "url": "https://music.apple.com/us/album/1449282493",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

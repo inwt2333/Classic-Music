@@ -1,0 +1,143 @@
+{
+  "id": "work_000049",
+  "composerId": "composer_000018",
+  "title": "C大调幻想曲",
+  "originalTitle": "Fantasie in C major, Op. 17",
+  "aliases": [
+    "C大调幻想曲，作品17",
+    "舒曼幻想曲",
+    "Fantasie in C major",
+    "Schumann: Fantasie, Op. 17"
+  ],
+  "opus": "Op. 17",
+  "key": "C大调",
+  "genre": "钢琴奏鸣曲／幻想曲",
+  "period": "浪漫主义",
+  "composedYears": "1836–1839",
+  "durationMinutes": 29,
+  "instrumentation": "钢琴",
+  "difficulty": "适合深入",
+  "tags": [
+    "舒曼",
+    "钢琴",
+    "浪漫主义",
+    "幻想曲",
+    "克拉拉"
+  ],
+  "summary": "舒曼在与克拉拉分离最痛苦的日子里写成的钢琴巨作，三个乐章从火山般的激情到近乎透明的告别，末乐章引用了贝多芬《致远方的爱人》。",
+  "whyListen": "它最初是为贝多芬纪念碑募捐而作，却成了舒曼写给克拉拉的情书：第一乐章标题\"废墟\"下是压不住的冲动，第二乐章\"凯旋门\"带进行曲般的昂扬，第三乐章标题\"桂冠\"却安静得像月光。结尾对贝多芬的引用是浪漫主义最动人的一次致敬。",
+  "firstListen": "第一乐章开头的和弦像被风吹开的大门，注意那个短促的\"叹息\"动机如何反复回来；第二乐章是振奋的进行曲，结尾一串下行的五连音如旗子收拢；第三乐章把音量降到最低，听旋律在极弱中一点点远去。",
+  "listeningPoints": [
+    {
+      "title": "被风吹开的大门",
+      "description": "第一乐章开头爆发式的和弦与紧随的\"叹息\"动机，构成全曲的呼吸节奏。",
+      "movement": 1
+    },
+    {
+      "title": "内声部的暗涌",
+      "description": "慢速段落里中声部持续翻滚的对位线条，是舒曼钢琴写作最迷人也最难的地方。",
+      "movement": 1
+    },
+    {
+      "title": "进行曲与五连音",
+      "description": "第二乐章昂扬的进行曲收尾处，一串下行五连音如旗帜收拢，是音乐会的名场面。",
+      "movement": 2
+    },
+    {
+      "title": "致远的引用",
+      "description": "第三乐章在极弱的音响中引用贝多芬《致远方的爱人》旋律，把思念写到近乎透明。",
+      "movement": 3
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Durchaus fantastisch und leidenschaftlich vorzutragen（ Durchaus leidenschaftlich）",
+      "tempo": "彻底幻想而热情地演奏",
+      "description": "标题\"废墟\"，奏鸣曲式，激情与内省交替，内声部对位绵密。"
+    },
+    {
+      "number": 2,
+      "title": "Mäßig, durchaus energisch",
+      "tempo": "中庸地，始终有力",
+      "description": "标题\"凯旋门\"，进行曲性格的回旋曲，结尾五连音下行收束。"
+    },
+    {
+      "number": 3,
+      "title": "Langsam getragen, durchweg leise zu halten",
+      "tempo": "缓慢持续，始终轻奏",
+      "description": "标题\"桂冠\"，近似无终歌的安静乐章，引用贝多芬《致远方的爱人》。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Nikolai Lugansky",
+      "year": 2026,
+      "note": "卢甘斯松2026年新录音，音色圆润、结构清晰，录音状态极佳。",
+      "sourceId": "apple_music_1846245724"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Alexander Drozdov",
+      "year": 2010,
+      "note": "德罗兹多夫的版本更自由冲动，句法带老派浪漫气息。",
+      "sourceId": "apple_music_492850207"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000048"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-schumann-fantasie",
+      "title": "内尔松·格纳钢琴独奏会丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21818&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含舒曼C大调幻想曲，作品17",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-schumann-fantasie",
+      "title": "Fantasie (Schumann)",
+      "url": "https://en.wikipedia.org/wiki/Fantasie_(Schumann)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1836–1839",
+        "贝多芬纪念碑募捐的缘起",
+        "三个乐章与速度标记",
+        "末乐章引用《致远方的爱人》"
+      ]
+    },
+    {
+      "id": "apple_music_1846245724",
+      "title": "Schumann: Fantasie, Op. 17",
+      "url": "https://music.apple.com/us/album/1846245724",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_492850207",
+      "title": "Schumann: Fantasie, Op. 17",
+      "url": "https://music.apple.com/us/album/492850207",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

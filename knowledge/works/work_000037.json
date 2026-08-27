@@ -1,0 +1,149 @@
+{
+  "id": "work_000037",
+  "composerId": "composer_000013",
+  "title": "《四季》",
+  "originalTitle": "Le quattro stagioni, Op. 8",
+  "aliases": [
+    "四季",
+    "四季（小提琴协奏曲集）",
+    "The Four Seasons",
+    "和声与创意的试验，Op. 8",
+    "Il cimento dell'armonia e dell'inventione"
+  ],
+  "opus": "Op. 8",
+  "genre": "小提琴协奏曲集",
+  "period": "巴洛克",
+  "composedYears": "约1718–1720（1725年出版）",
+  "durationMinutes": 42,
+  "instrumentation": "独奏小提琴、弦乐队、羽管键琴（通奏低音）",
+  "difficulty": "第一次听",
+  "tags": [
+    "维瓦尔第",
+    "巴洛克",
+    "小提琴协奏曲",
+    "标题音乐",
+    "意大利"
+  ],
+  "summary": "1725年出版的四部小提琴协奏曲，各附一首十四行诗，把春雷、酷暑、收获与寒冬写成巴洛克标题音乐中最深入人心的名篇。",
+  "whyListen": "它们几乎是有史以来最早的\"音画\"协奏曲：鸟鸣、雷雨、蚊蝇、冰雪都化成具体的音乐笔触，独奏小提琴时而是叙述者、时而是风暴本身，四曲连听像走过完整的一年。",
+  "firstListen": "先听《春》第一乐章的主题如何像阳光一样倾泻；再听《夏》第三乐章的狂暴急板与《冬》第二乐章炉火边的慢板，感受维瓦尔第把天气写成戏剧的本领。",
+  "listeningPoints": [
+    {
+      "title": "春之鸟语与雷雨",
+      "description": "开主题后小提琴模仿群鸟啁啾，随后雷声打断歌唱，雨过天晴又回到明媚主题。",
+      "movement": 1
+    },
+    {
+      "title": "夏的酷热与暴风",
+      "description": "第一乐章在慵懒的喘息中蓄力，第三乐章急板如狂风骤雨，是全集最炽烈的一曲。",
+      "movement": 2
+    },
+    {
+      "title": "秋的狩猎与酣睡",
+      "description": "乡村舞曲与狩猎号角相接，慢乐章描写收获后的沉睡，末乐章在黎明猎队中收束。",
+      "movement": 3
+    },
+    {
+      "title": "冬的寒风与炉火",
+      "description": "第一乐章弦乐震音如凛冽寒风，第二乐章独奏小提琴在拨弦\"雨滴\"旁温暖歌唱，对比动人心弦。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "春（E大调，RV 269）",
+      "tempo": "Allegro – Largo – Danza pastorale",
+      "description": "鸟鸣、雷雨与牧歌之舞三段相连，附十四行诗描述春天降临。"
+    },
+    {
+      "number": 2,
+      "title": "夏（g小调，RV 315）",
+      "tempo": "Allegro non molto – Adagio e piano – Presto",
+      "description": "酷暑中的昏沉、牧人的惊惶与终乐章的暴风骤雨。"
+    },
+    {
+      "number": 3,
+      "title": "秋（F大调，RV 293）",
+      "tempo": "Allegro – Adagio molto – Allegro",
+      "description": "村民歌舞、醉后酣眠与黎明狩猎的场面连缀。"
+    },
+    {
+      "number": 4,
+      "title": "冬（f小调，RV 297）",
+      "tempo": "Allegro non molto – Largo – Allegro",
+      "description": "寒风中的战栗、炉火边的安宁与冰面上滑倒又起的谐趣。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Itzhak Perlman & London Philharmonic Orchestra",
+      "year": 1990,
+      "note": "帕尔曼独奏兼指挥伦敦爱乐，歌唱性强、录音温暖，是最常被推荐的入门版本。",
+      "sourceId": "apple_music_693711974"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Anne-Sophie Mutter, Wiener Philharmoniker & Herbert von Karajan",
+      "year": 2026,
+      "note": "穆特与维也纳爱乐新录制的版本，线条更现代、张力更尖锐。",
+      "sourceId": "apple_music_1880768330"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000007"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shoac-baroque-tango",
+      "title": "《巴洛克与探戈》—— 维瓦尔第VS.皮亚佐拉的四季对话",
+      "url": "https://www.shoac.com.cn/#/detail?projectId=1296843135003652096",
+      "publisher": "上海东方艺术中心官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含维瓦尔第《四季》",
+        "作曲者"
+      ]
+    },
+    {
+      "id": "wikipedia-en-vivaldi-four-seasons",
+      "title": "The Four Seasons (Vivaldi)",
+      "url": "https://en.wikipedia.org/wiki/The_Four_Seasons_(Vivaldi)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "出版年份1725",
+        "四部协奏曲与十四行诗结构",
+        "乐章划分与调性",
+        "体裁与编制"
+      ]
+    },
+    {
+      "id": "apple_music_693711974",
+      "title": "Vivaldi: The Four Seasons",
+      "url": "https://music.apple.com/us/album/693711974",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1880768330",
+      "title": "Vivaldi: The Four Seasons",
+      "url": "https://music.apple.com/us/album/1880768330",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

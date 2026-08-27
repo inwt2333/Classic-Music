@@ -62,13 +62,28 @@
       "description": "回归慢速，音乐在平静中结束，带有宿命般的沉思。"
     }
   ],
-  "recordings": [],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Gächinger Kantorei Stuttgart, Helmuth Rilling & Stuttgart Bach Collegium",
+      "year": 2000,
+      "note": "林令指挥的斯图加特合唱团专集录音，声部清晰、文本分明，是这首合唱作品的入门首选。",
+      "sourceId": "apple_music_346700607"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Berliner Philharmoniker & Claudio Abbado",
+      "year": 1990,
+      "note": "阿巴多与柏林爱乐的版本乐队线条更流动，戏剧张力更强。",
+      "sourceId": "apple_music_1452521638"
+    }
+  ],
   "relatedWorkIds": [
     "work_000025",
     "work_000026",
     "work_000027"
   ],
-  "completeness": "basic",
+  "completeness": "complete",
   "generation": {
     "method": "deepseek",
     "model": "deepseek-v4-flash",
@@ -87,7 +102,7 @@
     ]
   },
   "status": "published",
-  "updatedAt": "2026-08-09T15:05:02.910Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
   "sources": [
     {
       "id": "official_75847806a141",
@@ -133,6 +148,28 @@
       "supports": [
         "work.movements",
         "work.recordings"
+      ]
+    },
+    {
+      "id": "apple_music_346700607",
+      "title": "Brahms: Schicksalslied, Op. 54 - 4 Songs, Op. 17 - Nanie, Op. 82",
+      "url": "https://music.apple.com/us/album/346700607",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1452521638",
+      "title": "Brahms: Symphony No. 3",
+      "url": "https://music.apple.com/us/album/1452521638",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
       ]
     }
   ]

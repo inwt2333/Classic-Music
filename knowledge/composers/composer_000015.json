@@ -1,0 +1,38 @@
+{
+  "id": "composer_000015",
+  "name": "贝拉·巴托克",
+  "originalName": "Bartók Béla",
+  "aliases": [
+    "巴托克",
+    "贝拉·巴尔托克",
+    "Béla Bartók",
+    "Bela Bartok",
+    "Bartok"
+  ],
+  "birthYear": 1881,
+  "deathYear": 1945,
+  "nationality": "匈牙利",
+  "period": "20世纪",
+  "introduction": "匈牙利作曲家、钢琴家与民族音乐学奠基人之一。他与柯达伊系统采集匈牙利及东欧民间音乐，把农民歌曲的五声性节奏与音程融入现代作曲技法，形成尖锐而鲜活的个人语言。代表作有六首弦乐四重奏、《乐队协奏曲》、《神奇的满大人》与《为两个孩子写的钢琴小曲》。",
+  "styleSummary": "民间旋律与现代和声的结合，节奏强劲不对称，夜曲式的神秘音响与粗犷舞曲并置。",
+  "completeness": "complete",
+  "status": "published",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "wikipedia-en-bela-bartok",
+      "title": "Béla Bartók",
+      "url": "https://en.wikipedia.org/wiki/B%C3%A9la_Bart%C3%B3k",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "name",
+        "birthYear",
+        "deathYear",
+        "nationality",
+        "period",
+        "introduction"
+      ]
+    }
+  ]
+}

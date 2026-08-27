@@ -236,16 +236,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "879227420286c418070ec169": {
-      "status": "needs_completion",
+      "status": "published",
       "workId": "work_auto_958f678568a3fb7b",
       "attempts": 7,
-      "updatedAt": "2026-08-23T14:56:45.805Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_2a203fb9aad9c7ff"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-30T14:56:45.805Z"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "f131d65eaa6401a87fef6d89": {
       "status": "published",
@@ -259,28 +258,26 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "4aadbe984a60642a1ddf313f": {
-      "status": "needs_completion",
+      "status": "published",
       "workId": "work_auto_c8f4679b2d254f5f",
       "attempts": 5,
-      "updatedAt": "2026-08-23T14:56:45.805Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_68276ae3dc49e5a3"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-30T14:56:45.805Z"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "6aa26124c11b3d25717e17f4": {
-      "status": "needs_completion",
+      "status": "published",
       "workId": "work_auto_e47397200c6d8e54",
       "attempts": 5,
-      "updatedAt": "2026-08-23T14:56:45.805Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_02ba0048b11fb7b1"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-30T14:56:45.805Z"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "428644be5a99c3d34305b007": {
       "status": "published",
@@ -403,16 +400,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "1598e95fc9f0e58ec3770ef2": {
-      "status": "needs_completion",
+      "status": "published",
       "workId": "work_auto_8525ce5fc3fc5912",
       "attempts": 3,
-      "updatedAt": "2026-08-24T15:20:36.302Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_e6bfb19e75c10ad6"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-31T15:20:36.302Z"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "15b9d3c405d65b9a5cb4ed24": {
       "status": "skipped",
@@ -425,16 +421,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "190ababb41c7fc6641b99d5e": {
-      "status": "needs_completion",
+      "status": "published",
       "workId": "work_auto_2b591c49e84d88f1",
       "attempts": 3,
-      "updatedAt": "2026-08-24T15:20:36.302Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_f37b58229e25494c"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-08-31T15:20:36.302Z"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "16fd7ce724b7be6a4e7fefb1": {
       "status": "published",
@@ -458,14 +453,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "1ba3423098344a9cedecbdb4": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-12T15:32:54.942Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_d33f9ef59feb68e9"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000048"
     },
     "2328b687f2164c2eaf58a782": {
       "status": "skipped",
@@ -481,12 +477,12 @@
       "status": "needs_completion",
       "workId": "work_auto_aa0c834dd18f8511",
       "attempts": 3,
-      "updatedAt": "2026-08-25T15:25:37.915Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "结构已人工补全，等待可用录音证据（agent-curated）",
       "sourceEventIds": [
         "perf_2a5456d21e46e8e5"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "pipelineVersion": "agent-curated:1.0.0",
       "nextRetryAt": "2026-09-01T15:25:37.915Z"
     },
     "26815bc9c09519598c6c482c": {
@@ -510,14 +506,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "2a3d7ee7c414b8ba7046dcb5": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-13T15:34:37.712Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_4a77af4d9cc0aa7c"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000057"
     },
     "2c4edad5667a02c5586c7633": {
       "status": "failed",
@@ -530,14 +527,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "318d8a240f8a24dc6956dba1": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-15T14:55:34.209Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_e8ea06e5b8c8e223"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000056"
     },
     "31f0b257cebf1f6bd8d91b55": {
       "status": "failed",
@@ -550,24 +548,26 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "3867d0324656aa1cfef00786": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-17T14:58:01.451Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_df214adf516d5b93"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000060"
     },
     "388686aea9f0a83b3aca7c87": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-18T15:05:02.549Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_b43f2f6a449dd8d9"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000041"
     },
     "3979f6e1d38e8cab608777d7": {
       "status": "failed",
@@ -590,14 +590,15 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "350540393401d579b93dd0fb": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-20T15:09:02.178Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_ec4ab58ee85f4af6"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000058"
     },
     "39ae48506d86ae293fbf6b83": {
       "status": "failed",
@@ -610,55 +611,60 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "3a0bae19d2944b4c9de09c61": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-21T15:07:01.826Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_1fa555ec7dfb967b"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000061"
     },
     "3ab2f41c699e048869b630a8": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-21T15:07:01.826Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_f5beffef1faa4c7a"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000043"
     },
     "3c673d2432e2ab74478e171c": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-21T15:07:01.826Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_f37b58229e25494c"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000042"
     },
     "3cfc1a6de7e8853d3c0ff53b": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-22T14:55:05.455Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_71a1a0854179d150"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000059"
     },
     "3d038c8ec3ec05592ee3418f": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-24T15:20:36.302Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_898cdf4c7306782a",
         "perf_4da52adfe0adc867"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000063"
     },
     "3d3bbc5aa5069c5ded2e5fc4": {
       "status": "failed",
@@ -681,34 +687,37 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "422c66dcee985eaed1c15d17": {
-      "status": "failed",
+      "status": "published",
       "attempts": 3,
-      "updatedAt": "2026-08-26T16:04:20.351Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_4698356ac25670e0"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000053"
     },
     "46471aaa3ea84d7390480728": {
-      "status": "failed",
+      "status": "published",
       "attempts": 2,
-      "updatedAt": "2026-08-26T16:04:20.351Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_204e14e946616a65"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000044"
     },
     "47a63f7f9b03d666dec3c284": {
-      "status": "failed",
+      "status": "published",
       "attempts": 2,
-      "updatedAt": "2026-08-26T16:04:20.351Z",
-      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "updatedAt": "2026-08-27T12:00:00.000Z",
+      "reason": "agent-curated",
       "sourceEventIds": [
         "perf_a2158511b6229a44"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+      "pipelineVersion": "agent-curated:1.0.0",
+      "workId": "work_000062"
     },
     "47f779b5477ace908d23449d": {
       "status": "failed",

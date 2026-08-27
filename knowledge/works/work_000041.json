@@ -1,0 +1,152 @@
+{
+  "id": "work_000041",
+  "composerId": "composer_000006",
+  "title": "b小调第六交响曲「悲怆」",
+  "originalTitle": "Symphony No. 6 in B minor, Op. 74 \"Pathétique\"",
+  "aliases": [
+    "B小调第六交响曲",
+    "第六交响曲「悲怆」",
+    "悲怆交响曲",
+    "b小调第六交响曲，作品74",
+    "Symphony No. 6 in B minor",
+    "Pathétique"
+  ],
+  "opus": "Op. 74",
+  "key": "b小调",
+  "genre": "交响曲",
+  "period": "浪漫主义",
+  "composedYears": "1893",
+  "durationMinutes": 46,
+  "instrumentation": "大型管弦乐队（含竖琴、大鼓、锣与钹）",
+  "difficulty": "第一次听",
+  "tags": [
+    "柴可夫斯基",
+    "交响曲",
+    "浪漫主义",
+    "悲怆",
+    "绝笔"
+  ],
+  "summary": "柴可夫斯基亲自指挥首演九天后猝然离世的绝笔，用慢板终曲代替欢庆收场，是交响曲文献中最著名的一次告别。",
+  "whyListen": "「悲怆」打破交响曲必须辉煌结束的惯例：第三乐章进行曲会让你想鼓掌，第四乐章却把一切光彩收进黯淡的慢板。首演九天后作曲家离世，使这部作品成为音乐史上最令人心碎的注脚。",
+  "firstListen": "第一乐章开头的低音提琴与大管如叹息般下沉，记住它；快板主题爆发时情绪会瞬间翻转。听完热烈的第三乐章请留在座位上——真正的结尾在后面，让慢板静静消失。",
+  "listeningPoints": [
+    {
+      "title": "第一乐章的嚎啕",
+      "description": "黑暗的开头之后，快板主题带着哭腔冲上来，发展部是全曲最撕心裂耳的段落。",
+      "movement": 1
+    },
+    {
+      "title": "五拍子的\"残缺圆舞曲\"",
+      "description": "第二乐章想跳起圆舞曲却总差半步，优雅里藏着跛足般的不安。",
+      "movement": 2
+    },
+    {
+      "title": "虚假凯旋的进行曲",
+      "description": "第三乐章像一场越走越辉煌的游行，常被误当作终曲，气氛热烈得近乎自欺。",
+      "movement": 3
+    },
+    {
+      "title": "以告别收场",
+      "description": "慢板终曲一路下行，铜管的呜咽后弦乐把音乐埋进低音区，渐渐听不见。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Adagio – Allegro non troppo",
+      "tempo": "柔板 – 不太快的快板",
+      "description": "从大管与低音提琴的叹息开始，快板主题焦灼挣扎，再现时伴随命运的回响。"
+    },
+    {
+      "number": 2,
+      "title": "Allegro con grazia",
+      "tempo": "优雅的快板（5/4拍）",
+      "description": "五拍子的圆舞曲，温柔中带着无法安顿的不稳。"
+    },
+    {
+      "number": 3,
+      "title": "Allegro molto vivace",
+      "tempo": "非常活泼的快板",
+      "description": "进行曲谐谑曲，声势不断累积至凯旋般的高潮。"
+    },
+    {
+      "number": 4,
+      "title": "Finale: Adagio lamentoso",
+      "tempo": "终曲：哀伤的柔板",
+      "description": "以慢板作结，下行的旋律数度哽咽，最后沉入寂静。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "Berliner Philharmoniker & Kirill Petrenko",
+      "year": 2019,
+      "note": "彼得连科与柏林爱乐的新录音，结构干净、结尾处理极有分量。",
+      "sourceId": "apple_music_1681767929"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Wiener Philharmoniker & Herbert von Karajan",
+      "year": 1985,
+      "note": "卡拉扬与维也纳爱乐的版本浓郁绵长，弦乐线条如泣如诉。",
+      "sourceId": "apple_music_1452171099"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000016",
+    "work_000040"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-shsymphony-pathetique",
+      "title": "波嘉、张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团音乐季",
+      "url": "https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?id=21777&supportSeat=Y",
+      "publisher": "上海交响乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含b小调第六交响曲「悲怆」作品74",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-tchaikovsky-symphony-6",
+      "title": "Symphony No. 6 (Tchaikovsky)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._6_(Tchaikovsky)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1893与首演九天后作曲家离世",
+        "四个乐章与速度标记",
+        "慢板终曲的结构",
+        "编制"
+      ]
+    },
+    {
+      "id": "apple_music_1681767929",
+      "title": "Tchaikovsky: Symphony No. 6 \"Pathétique\"",
+      "url": "https://music.apple.com/us/album/1681767929",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1452171099",
+      "title": "Tchaikovsky: Symphony No. 6 \"Pathétique\"",
+      "url": "https://music.apple.com/us/album/1452171099",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}

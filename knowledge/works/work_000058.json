@@ -1,0 +1,151 @@
+{
+  "id": "work_000058",
+  "composerId": "composer_000001",
+  "title": "降B大调第四交响曲",
+  "originalTitle": "Symphony No. 4 in B-flat major, Op. 60",
+  "aliases": [
+    "降B大调第四交响曲，作品60",
+    "B大调第四交响曲",
+    "第四交响曲",
+    "Symphony No. 4 in B-flat major",
+    "Symphony No. 4"
+  ],
+  "opus": "Op. 60",
+  "key": "降B大调",
+  "genre": "交响曲",
+  "period": "古典主义",
+  "composedYears": "1806",
+  "durationMinutes": 34,
+  "instrumentation": "2长笛、2双簧管、2单簧管、2大管、2圆号、2小号、定音鼓、弦乐组",
+  "difficulty": "第一次听",
+  "tags": [
+    "贝多芬",
+    "交响曲",
+    "古典主义",
+    "1806年",
+    "明快"
+  ],
+  "summary": "贝多芬1806年写成的第四交响曲，夹在《英雄》与《命运》之间却明朗轻盈，舒曼形容它是\"两座巨人间的希腊少女\"。",
+  "whyListen": "在第三和第五的巨影之间，第四交响曲常被忽略，却是贝多芬最优美匀称的一部：慢引子像雾中亮起的光，第一乐章主题轻盈跳跃，柔板的单簧管主题温柔至极，终曲一路欢跑。要认识\"快乐的贝多芬\"，这是最好的入口。",
+  "firstListen": "开头几小节的和弦像在雾里试探，注意它们怎么把音乐\"引导\"进快板的明亮；第二乐章第二小提琴持续的摇摆音型是心跳般的背景；末乐章的速度感几乎在飞驰。",
+  "listeningPoints": [
+    {
+      "title": "雾中的开场",
+      "description": "慢引子的和声在远处试探，逐渐聚成快板明亮的第一主题。",
+      "movement": 1
+    },
+    {
+      "title": "心跳上的柔板",
+      "description": "第二乐章第二小提琴持续摇摆的音型之上，旋律像波浪般起伏推进。",
+      "movement": 2
+    },
+    {
+      "title": "俏皮的谐谑曲",
+      "description": "第三乐章节奏干脆，强弱对比的反复像恶作剧的眨眼。",
+      "movement": 3
+    },
+    {
+      "title": "飞驰的终曲",
+      "description": "连续的十六分音符疾驰，木管与小提琴追逐嬉戏，一气呵成。",
+      "movement": 4
+    }
+  ],
+  "movements": [
+    {
+      "number": 1,
+      "title": "Adagio – Allegro vivace",
+      "tempo": "柔板 – 活泼的快板",
+      "description": "慢引子朦胧试探后进入轻盈明快的奏鸣曲式。"
+    },
+    {
+      "number": 2,
+      "title": "Adagio",
+      "tempo": "柔板",
+      "description": "持续的摇摆音型上旋律层层展开，温柔而宽广。"
+    },
+    {
+      "number": 3,
+      "title": "Menuetto: Allegro vivace",
+      "tempo": "小步舞曲：活泼的快板",
+      "description": "实际是谐谑曲，节奏棱角分明，反复带强弱对比的游戏。"
+    },
+    {
+      "number": 4,
+      "title": "Allegro ma non troppo",
+      "tempo": "不太快的快板",
+      "description": "十六分音符驱动的欢快终曲，木管与弦乐相互追逐。"
+    }
+  ],
+  "recordings": [
+    {
+      "label": "第一次听",
+      "performers": "The Cleveland Orchestra & George Szell",
+      "year": 2018,
+      "note": "塞尔与克利夫兰管弦乐团的录音（2018年再版）干净利落，节奏生动。",
+      "sourceId": "apple_music_1391674440"
+    },
+    {
+      "label": "另一种理解",
+      "performers": "Wiener Philharmoniker & Sir Simon Rattle",
+      "year": 1992,
+      "note": "拉特尔与维也纳爱乐的版本弹性丰富，慢乐章尤其动人。",
+      "sourceId": "apple_music_1579798845"
+    }
+  ],
+  "relatedWorkIds": [
+    "work_000001",
+    "work_000047"
+  ],
+  "completeness": "complete",
+  "status": "published",
+  "reviewedAt": "2026-08-27T12:00:00.000Z",
+  "updatedAt": "2026-08-27T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "official-cpo-beethoven-4",
+      "title": "纪念普罗科菲耶夫诞辰135周年系列之二：传奇再临——迪图瓦携手苏千寻演绎贝多芬、普罗科菲耶夫与斯特拉文斯基",
+      "url": "http://www.cpolive.com/art/2026/5/8/art_1701_413.html",
+      "publisher": "中国爱乐乐团官网",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "演出曲目包含贝多芬降B大调第四交响曲，作品60",
+        "作曲者与作品号"
+      ]
+    },
+    {
+      "id": "wikipedia-en-beethoven-symphony-4",
+      "title": "Symphony No. 4 (Beethoven)",
+      "url": "https://en.wikipedia.org/wiki/Symphony_No._4_(Beethoven)",
+      "publisher": "English Wikipedia",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "创作年份1806",
+        "四个乐章与速度标记",
+        "编制",
+        "舒曼\"希腊少女\"评语"
+      ]
+    },
+    {
+      "id": "apple_music_1391674440",
+      "title": "Beethoven: Symphony No. 4, Op. 60",
+      "url": "https://music.apple.com/us/album/1391674440",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.0"
+      ]
+    },
+    {
+      "id": "apple_music_1579798845",
+      "title": "Beethoven: Symphony No. 4, Op. 60",
+      "url": "https://music.apple.com/us/album/1579798845",
+      "publisher": "Apple Music",
+      "accessedAt": "2026-08-27",
+      "supports": [
+        "录音演奏者与年份",
+        "recordings.1"
+      ]
+    }
+  ]
+}
