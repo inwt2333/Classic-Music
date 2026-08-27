@@ -52,6 +52,7 @@ const followTypeMeta: Record<FollowTargetType, { label: string; icon: ComponentT
   ensemble: { label: "乐团", icon: UsersRound },
   venue: { label: "场馆", icon: Building2 },
   city: { label: "城市", icon: MapPin },
+  filter: { label: "筛选", icon: Bell },
 };
 
 export default function PersonalWorkspace() {

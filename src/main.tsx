@@ -63,6 +63,7 @@ import {
 } from "./data";
 import {
   buildFollowNotifications,
+  buildSavedFilterNotifications,
   buildSavedFilterName,
   detectDataIssues,
   isFollowTargetActive,
@@ -633,8 +634,11 @@ function App() {
     [changesByEvent, filteredEvents, sortMode],
   );
   const generatedNotifications = useMemo(
-    () => buildFollowNotifications(changes, dataset.events, follows, readNotificationIds),
-    [changes, dataset.events, follows, readNotificationIds],
+    () => [
+      ...buildFollowNotifications(changes, dataset.events, follows, readNotificationIds),
+      ...buildSavedFilterNotifications(changes, dataset.events, savedFilters, readNotificationIds),
+    ],
+    [changes, dataset.events, follows, readNotificationIds, savedFilters],
   );
   const notifications = useMemo(
     () => mergeFollowNotificationHistory(

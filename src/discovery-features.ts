@@ -12,8 +12,10 @@ import {
   personNameVariants,
   samePersonName,
 } from "./person-identity";
+import { matchesExpandedSearch } from "./product-features";
+import { dateMatchesPreset, normalizeEnsembleName, normalizeVenueName } from "./utils";
 
-export type FollowTargetType = "person" | "composer" | "work" | "ensemble" | "venue" | "city";
+export type FollowTargetType = "person" | "composer" | "work" | "ensemble" | "venue" | "city" | "filter";
 
 export type FollowTarget = {
   key: string;
@@ -360,8 +362,52 @@ function lowestPrice(price?: string) {
   return values.length ? Math.min(...values) : Number.MAX_SAFE_INTEGER;
 }
 
-export function buildFollowNotifications(
+export function buildSavedFilterNotifications(
   changes: ChangeDataset | null,
+  events: ConcertEventSummary[],
+  savedFilters: SavedFilter[],
+  readIds: string[],
+): FollowNotification[] {
+  if (!changes || !savedFilters.length) return [];
+  const eventMap = new Map(events.map((event) => [event.id, event]));
+  return (changes.changes ?? [])
+    .filter((change) => change.type === "added")
+    .flatMap<FollowNotification>((change) => {
+      const event = eventMap.get(change.eventId);
+      if (!event) return [];
+      return savedFilters
+        .filter((filter) => eventMatchesSavedFilter(event, filter))
+        .map((filter) => {
+          const id = `${change.id}:filter:${filter.id}`;
+          return {
+            id,
+            change,
+            event,
+            targets: [{
+              key: `filter:${filter.id}`,
+              type: "filter" as const,
+              name: `筛选「${filter.name}」`,
+              createdAt: filter.createdAt,
+            }],
+            read: readIds.includes(id),
+          };
+        });
+    })
+    .sort((left, right) => right.change.detectedAt.localeCompare(left.change.detectedAt));
+}
+
+function eventMatchesSavedFilter(event: ConcertEventSummary, filter: SavedFilterState) {
+  if (filter.city !== "全部城市" && event.city !== filter.city) return false;
+  if (filter.venue !== "全部场馆" && normalizeVenueName(event.venue) !== filter.venue) return false;
+  if (filter.ensemble !== "全部乐团" && normalizeEnsembleName(event.ensemble) !== filter.ensemble) return false;
+  if (filter.genre !== "全部类型" && !event.genres.includes(filter.genre)) return false;
+  if (filter.hasProgram && !event.hasProgram) return false;
+  if (filter.datePreset !== "all" && !dateMatchesPreset(event.startTime, filter.datePreset)) return false;
+  const query = filter.query.trim();
+  return !query || matchesExpandedSearch(event.searchText, [query]);
+}
+
+export function buildFollowNotifications(  changes: ChangeDataset | null,
   events: ConcertEventSummary[],
   follows: FollowMap,
   readIds: string[],

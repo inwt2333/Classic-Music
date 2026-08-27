@@ -1,4 +1,4 @@
-import { ArrowLeft, Building2, CircleAlert, ExternalLink, MapPin, Music } from "lucide-react";
+import { ArrowLeft, Building2, CalendarPlus, CircleAlert, ExternalLink, MapPin, Music, Rss } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import BrandLogo from "./BrandLogo";
 import { loadEventIndex } from "../data";
@@ -101,6 +101,20 @@ function SourceDirectory({
         </a>
       </nav>
 
+      <aside className="source-subscribe-card">
+        <div>
+          <h2>订阅演出日历</h2>
+          <p>把即将上演的音乐会加入你的日历软件（Apple 日历、Google 日历、Outlook 等），数据随官网每 8 小时更新。</p>
+        </div>
+        <div className="source-subscribe-links">
+          <a href={`${import.meta.env.BASE_URL}data/feeds/all.ics`}><CalendarPlus size={15} />全部城市日历</a>
+          {dataset ? [...new Set(dataset.events.map((event) => event.city))].slice(0, 8).map((city) => (
+            <a key={city} href={`${import.meta.env.BASE_URL}data/feeds/cities/${city === "上海" ? "shanghai" : city === "北京" ? "beijing" : city === "苏州" ? "suzhou" : city === "广州" ? "guangzhou" : city === "深圳" ? "shenzhen" : city === "杭州" ? "hangzhou" : city === "西安" ? "xian" : city === "哈尔滨" ? "harbin" : encodeURIComponent(city)}.ics`}><CalendarPlus size={15} />{city}</a>
+          )) : null}
+          <a href={`${import.meta.env.BASE_URL}data/feeds/changes.rss.xml`} target="_blank" rel="noreferrer"><Rss size={15} />数据变更 RSS</a>
+        </div>
+      </aside>
+
       {error ? (
         <div className="source-page-error"><CircleAlert size={18} />{error}</div>
       ) : dataset ? (
@@ -185,6 +199,12 @@ function SourceProfileDetail({ profile, source, loading }: { profile: SourceProf
         </dl>
       </div>
       {officialUrl ? <a className="source-official-link" href={officialUrl} target="_blank" rel="noreferrer"><ExternalLink size={16} />进入官方网站</a> : null}
+      <a
+        className="source-official-link"
+        href={`${import.meta.env.BASE_URL}data/feeds/sources/${profile.sourceId}.ics`}
+      >
+        <CalendarPlus size={16} />订阅该来源的演出日历
+      </a>
     </article>
   );
 }

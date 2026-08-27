@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   buildFollowNotifications,
+  buildSavedFilterNotifications,
   detectDataIssues,
   isFollowTargetActive,
   makeFollowTarget,
@@ -9,6 +10,7 @@ import {
   sortConcerts,
   toggleFollow,
   type FollowMap,
+  type SavedFilter,
 } from "../src/discovery-features";
 import type { ChangeDataset, ConcertEventSummary, DatasetChange } from "../src/types";
 
@@ -174,6 +176,61 @@ assert.equal(mergeFollowNotificationHistory([{
 }], [], [], []).length, 0, "stored program notifications must be removed");
 assert.equal(mergeFollowNotificationHistory(notifications, [], [priceChange.id], [])[0].read, true);
 assert.equal(mergeFollowNotificationHistory(notifications, notifications, [], [priceChange.id]).length, 0);
+
+const addedChange: DatasetChange = {
+  id: "change-added-xinghai",
+  eventId: "new-guangzhou-event",
+  type: "added",
+  detectedAt: "2026-08-04T11:00:00.000Z",
+  summary: "新增演出：广州交响乐团音乐季",
+};
+const guangzhouEvent = summary({ id: "new-guangzhou-event", city: "广州", ensemble: "广州交响乐团" });
+const savedFilters: SavedFilter[] = [
+  {
+    id: "filter-gz",
+    name: "广州音乐会",
+    createdAt: "2026-08-01T00:00:00.000Z",
+    query: "",
+    datePreset: "all",
+    city: "广州",
+    venue: "全部场馆",
+    ensemble: "全部乐团",
+    genre: "全部类型",
+    hasProgram: false,
+    sortMode: "time",
+  },
+  {
+    id: "filter-beijing",
+    name: "北京室内乐",
+    createdAt: "2026-08-01T00:00:00.000Z",
+    query: "室内乐",
+    datePreset: "all",
+    city: "北京",
+    venue: "全部场馆",
+    ensemble: "全部乐团",
+    genre: "全部类型",
+    hasProgram: false,
+    sortMode: "time",
+  },
+];
+const filterNotifications = buildSavedFilterNotifications(
+  { generatedAt: addedChange.detectedAt, changes: [addedChange] },
+  [guangzhouEvent],
+  savedFilters,
+  [],
+);
+assert.equal(filterNotifications.length, 1);
+assert.equal(filterNotifications[0].targets[0].type, "filter");
+assert.ok(filterNotifications[0].id.includes("filter-gz"));
+assert.equal(
+  buildSavedFilterNotifications(
+    { generatedAt: addedChange.detectedAt, changes: [addedChange] },
+    [guangzhouEvent],
+    savedFilters,
+    [filterNotifications[0].id],
+  )[0].read,
+  true,
+);
 
 const issues = detectDataIssues(summary({
   dataQuality: "needs-review",

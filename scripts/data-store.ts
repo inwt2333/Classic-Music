@@ -29,6 +29,7 @@ import {
 import { applyManualReviews, loadManualReviews } from "./review-store";
 import { attachOcrEvidence, loadOcrEvidence } from "./ocr/evidence";
 import { mergeXinghaiProgramTranslations } from "./adapters/xinghai-concert-hall";
+import { buildCalendarFeed, buildChangesRss, buildFeedIndex, cityFeedSlug } from "./feeds";
 
 type PreparedData = {
   dataset: ConcertDataset;
@@ -617,12 +618,18 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
   const knowledgeDir = resolve(dataDir, "knowledge");
   const knowledgeWorkDir = resolve(knowledgeDir, "works");
   const knowledgeComposerDir = resolve(knowledgeDir, "composers");
+  const feedsDir = resolve(dataDir, "feeds");
+  const cityFeedsDir = resolve(feedsDir, "cities");
+  const sourceFeedsDir = resolve(feedsDir, "sources");
   await rm(detailDir, { recursive: true, force: true });
   await rm(knowledgeDir, { recursive: true, force: true });
+  await rm(feedsDir, { recursive: true, force: true });
   await Promise.all([
     mkdir(detailDir, { recursive: true }),
     mkdir(knowledgeWorkDir, { recursive: true }),
     mkdir(knowledgeComposerDir, { recursive: true }),
+    mkdir(cityFeedsDir, { recursive: true }),
+    mkdir(sourceFeedsDir, { recursive: true }),
   ]);
 
   await writeFile(outputPath, `${JSON.stringify(prepared.dataset, null, 2)}\n`, "utf8");
@@ -635,6 +642,7 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
     "utf8",
   );
   await writeFile(resolve(knowledgeDir, "index.json"), JSON.stringify(prepared.knowledge.index), "utf8");
+  await writeFeedFiles(prepared, dataDir);
   await Promise.all([
     ...prepared.publishedDataset.events.map((event) =>
       writeFile(resolve(detailDir, `${event.id}.json`), JSON.stringify(event), "utf8"),
@@ -646,6 +654,37 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
       writeFile(resolve(knowledgeComposerDir, `${composer.id}.json`), JSON.stringify(composer), "utf8"),
     ),
   ]);
+}
+
+async function writeFeedFiles(prepared: PreparedData, dataDir: string) {
+  const feedsDir = resolve(dataDir, "feeds");
+  const generatedAt = prepared.dataset.generatedAt ?? new Date().toISOString();
+  const eventsByCity = new Map<string, typeof prepared.publishedDataset.events>();
+  const eventsBySource = new Map<string, typeof prepared.publishedDataset.events>();
+  for (const event of prepared.publishedDataset.events) {
+    eventsByCity.set(event.city, [...(eventsByCity.get(event.city) ?? []), event]);
+    for (const source of event.sources ?? []) {
+      eventsBySource.set(source.sourceId, [...(eventsBySource.get(source.sourceId) ?? []), event]);
+    }
+  }
+
+  await writeFile(resolve(feedsDir, "all.ics"), buildCalendarFeed(prepared.publishedDataset.events, { name: "古典音乐演出日历（全部城市）", generatedAt }), "utf8");
+  for (const [city, events] of eventsByCity) {
+    await writeFile(
+      resolve(feedsDir, "cities", `${cityFeedSlug(city)}.ics`),
+      buildCalendarFeed(events, { name: `古典音乐演出日历 · ${city}`, generatedAt }),
+      "utf8",
+    );
+  }
+  for (const [sourceId, events] of eventsBySource) {
+    await writeFile(
+      resolve(feedsDir, "sources", `${sourceId}.ics`),
+      buildCalendarFeed(events, { name: `古典音乐演出日历 · ${events[0]?.sourceName ?? sourceId}`, generatedAt }),
+      "utf8",
+    );
+  }
+  await writeFile(resolve(feedsDir, "changes.rss.xml"), buildChangesRss(prepared.changes), "utf8");
+  await writeFile(resolve(feedsDir, "index.json"), JSON.stringify(buildFeedIndex(prepared.publishedDataset)), "utf8");
 }
 
 async function persistSqlite(prepared: PreparedData, databasePath: string) {
