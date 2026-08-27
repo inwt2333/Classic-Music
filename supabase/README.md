@@ -97,3 +97,25 @@ to the Vite names during the build.
 
 These values are intentionally public. Never add the secret key or a
 service-role key to repository variables or frontend build settings.
+
+## Remote review queue (admin, server-side only)
+
+Migration `migrations/202608270001_remote_review_queue.sql` creates
+`public.remote_review_submissions`: admins can insert program-review decisions
+from the browser; a scheduled workflow (`apply-remote-reviews.yml`) pulls
+pending rows with the service-role key, applies them via
+`scripts/pull-remote-reviews.ts` into `data/manual-reviews.json`, marks rows
+`applied`, and commits to main so the next deploy pipeline re-applies reviews
+during the scrape.
+
+Setup (repo owner):
+
+1. Run the migration in the Supabase SQL editor.
+2. Add repository **secrets** (never variables):
+   - `SUPABASE_URL` — the project URL;
+   - `SUPABASE_SERVICE_ROLE_KEY` — the service-role key.
+3. The workflow runs every 3 hours; it can also be triggered manually.
+
+The frontend submission UI is still local-only (`?review=1` via the Vite dev
+plugin); the table and puller above are the server-side landing zone for the
+upcoming browser submission flow.
