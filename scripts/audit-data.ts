@@ -55,6 +55,9 @@ for (const event of dataset.events) {
 
   if (!event.title.trim()) addIssue("error", event, "标题为空");
   if (!event.sourceUrl) addIssue("error", event, "缺少来源链接");
+  if (event.ticketStatus && !["on-sale", "pre-sale", "sold-out", "off-sale"].includes(event.ticketStatus)) {
+    addIssue("error", event, `无效的售票状态：${event.ticketStatus}`);
+  }
   if (Number.isNaN(Date.parse(event.startTime))) addIssue("error", event, "开始时间无效");
   if (event.dataQuality === "scraped" && !event.program.length) {
     addIssue("error", event, "标记为 scraped 但节目单为空");

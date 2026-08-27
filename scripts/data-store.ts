@@ -35,6 +35,7 @@ type PreparedData = {
   index: ConcertIndexDataset;
   entities: EntityDataset;
   changes: ChangeDataset;
+  eventRedirects: Record<string, string>;
   publishedDataset: ConcertDataset;
   publishedEntities: EntityDataset;
   knowledge: PreparedKnowledge;
@@ -83,11 +84,16 @@ export async function prepareAndPersistDataset(
     await readPreviousChangeHistory(resolve(dirname(outputPath), "changes.json")),
     latestChanges,
   );
+  const eventRedirects = await mergeEventRedirects(
+    resolve(dirname(outputPath), "redirects.json"),
+    buildEventRedirects(previous, canonicalDataset),
+    canonicalDataset,
+  );
   const publishedDataset = toPublishedDataset(canonicalDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
   const knowledge = prepareKnowledge(knowledgeRegistry, publishedDataset);
-  const prepared = { dataset: canonicalDataset, index, entities, changes, publishedDataset, publishedEntities, knowledge };
+  const prepared = { dataset: canonicalDataset, index, entities, changes, eventRedirects, publishedDataset, publishedEntities, knowledge };
 
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
@@ -132,6 +138,11 @@ export async function reapplyManualReviewsAndPersist(
     await readPreviousChangeHistory(resolve(dirname(outputPath), "changes.json")),
     latestChanges,
   );
+  const eventRedirects = await mergeEventRedirects(
+    resolve(dirname(outputPath), "redirects.json"),
+    buildEventRedirects(previous, reviewedDataset),
+    reviewedDataset,
+  );
   const publishedDataset = toPublishedDataset(reviewedDataset);
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
@@ -141,6 +152,7 @@ export async function reapplyManualReviewsAndPersist(
     index,
     entities,
     changes,
+    eventRedirects,
     publishedDataset,
     publishedEntities,
     knowledge,
@@ -406,8 +418,45 @@ export function buildEntities(dataset: ConcertDataset): EntityDataset {
   };
 }
 
-export function buildChanges(
+export function buildEventRedirects(
   previous: ConcertDataset | null,
+  current: ConcertDataset,
+): Record<string, string> {
+  if (!previous || previous.schemaVersion !== 2) return {};
+  const matches = matchPreviousEvents(previous.events, current.events);
+  const redirects: Record<string, string> = {};
+  for (const [currentId, oldEvent] of matches) {
+    if (oldEvent.id !== currentId) redirects[oldEvent.id] = currentId;
+  }
+  return redirects;
+}
+
+async function mergeEventRedirects(
+  redirectsPath: string,
+  latest: Record<string, string>,
+  current: ConcertDataset,
+): Promise<Record<string, string>> {
+  let existing: Record<string, string> = {};
+  try {
+    const raw = JSON.parse(await readFile(redirectsPath, "utf8"));
+    if (raw && typeof raw === "object" && raw.redirects && typeof raw.redirects === "object") {
+      existing = raw.redirects as Record<string, string>;
+    }
+  } catch {
+    existing = {};
+  }
+  const currentIds = new Set(current.events.map((event) => event.id));
+  const merged: Record<string, string> = {};
+  for (const [from, to] of Object.entries({ ...existing, ...latest })) {
+    if (from === to) continue;
+    // 跟随链式跳转：被再次合并的事件始终指向当前存活的事件 ID。
+    const target = currentIds.has(to) ? to : latest[to];
+    if (target && currentIds.has(target) && target !== from) merged[from] = target;
+  }
+  return merged;
+}
+
+export function buildChanges(  previous: ConcertDataset | null,
   current: ConcertDataset,
 ): ChangeDataset {
   const detectedAt = current.generatedAt ?? new Date().toISOString();
@@ -580,6 +629,11 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
   await writeFile(resolve(dataDir, "events-index.json"), JSON.stringify(prepared.index), "utf8");
   await writeFile(resolve(dataDir, "entities.json"), JSON.stringify(prepared.publishedEntities), "utf8");
   await writeFile(resolve(dataDir, "changes.json"), JSON.stringify(prepared.changes), "utf8");
+  await writeFile(
+    resolve(dataDir, "redirects.json"),
+    JSON.stringify({ schemaVersion: 1, generatedAt: prepared.dataset.generatedAt, redirects: prepared.eventRedirects }),
+    "utf8",
+  );
   await writeFile(resolve(knowledgeDir, "index.json"), JSON.stringify(prepared.knowledge.index), "utf8");
   await Promise.all([
     ...prepared.publishedDataset.events.map((event) =>
@@ -970,6 +1024,7 @@ function toSummary(event: ConcertEvent): ConcertEventSummary {
     timeLabel: event.timeLabel,
     price: event.price,
     status: event.status,
+    ticketStatus: event.ticketStatus,
     ensemble: event.ensemble,
     mainPerson: event.conductor ?? event.performers[0],
     genres: knownGenres.filter((genre) => event.tags.includes(genre) || event.title.includes(genre)),

@@ -1235,6 +1235,7 @@ function normalizeNcpaEvent(
     priceTiers,
     description: parsed.description,
     status: /取消/.test(String(session.sessionSaleStatus ?? "")) ? "cancelled" : "scheduled",
+    ticketStatus: mapNcpaSaleStatus(String(detail.productSaleStatus ?? "")),
     ticketUrl: detailUrl,
     sourceName: source.name,
     sourceUrl: detailUrl,
@@ -1247,6 +1248,15 @@ function normalizeNcpaEvent(
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
   }, extractNcpaProgramEvidence(detail, String(session.sessionDate ?? "")));
+}
+
+function mapNcpaSaleStatus(value: string): ConcertEvent["ticketStatus"] {
+  const normalized = value.trim();
+  if (normalized === "售卖中" || normalized === "售卖") return "on-sale";
+  if (normalized === "即将开票" || normalized === "预售" || normalized === "未开售") return "pre-sale";
+  if (normalized === "售罄" || normalized === "已售罄") return "sold-out";
+  if (normalized === "停售" || normalized === "下架" || normalized === "已结束") return "off-sale";
+  return undefined;
 }
 
 async function scrapeChinaNationalSymphony(
@@ -2114,6 +2124,7 @@ function normalizeShanghaiSymphonyEvent(
     priceTiers: pricing.priceTiers,
     description: content.description,
     status: raw.status === "Y" && raw.closed !== "Y" ? "scheduled" : "unknown",
+    ticketStatus: raw.saleType === "sale" && raw.status === "Y" && raw.closed !== "Y" ? "on-sale" : undefined,
     ticketUrl: detailUrl,
     sourceName: source.name,
     sourceUrl: detailUrl,

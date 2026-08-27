@@ -74,6 +74,7 @@ export type ConcertEvent = {
   priceTiers?: number[];
   description?: string;
   status: "scheduled" | "cancelled" | "unknown";
+  ticketStatus?: "on-sale" | "pre-sale" | "sold-out" | "off-sale";
   ticketUrl?: string;
   sourceName: string;
   sourceUrl: string;
@@ -109,6 +110,7 @@ export type ConcertEventSummary = {
   timeLabel: string;
   price?: string;
   status: ConcertEvent["status"];
+  ticketStatus?: ConcertEvent["ticketStatus"];
   ensemble?: string;
   mainPerson?: string;
   genres: string[];

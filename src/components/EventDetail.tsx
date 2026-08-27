@@ -149,10 +149,14 @@ export default function EventDetail({
           <MapPin size={16} />{formatEventVenue(event)}
         </button>
         {event.price ? <span><Ticket size={16} />{event.price}</span> : null}
+        {event.ticketStatus === "on-sale" ? <span className="ticket-pill on-sale">售票中</span> : null}
+        {event.ticketStatus === "pre-sale" ? <span className="ticket-pill pre-sale">即将开票</span> : null}
+        {event.ticketStatus === "sold-out" ? <span className="ticket-pill sold-out">已售罄</span> : null}
+        {event.ticketStatus === "off-sale" ? <span className="ticket-pill off-sale">已停售</span> : null}
       </div>
 
       <div className="action-row">
-        {event.ticketUrl ? (
+        {event.ticketUrl && event.ticketStatus !== "sold-out" && event.ticketStatus !== "off-sale" ? (
           <a className="primary-link" href={event.ticketUrl} target="_blank" rel="noreferrer">
             <Ticket size={16} />购票
           </a>

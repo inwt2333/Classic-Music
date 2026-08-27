@@ -4923,7 +4923,8 @@ summary:focus-visible {
 }
 
 .change-pill,
-.quality-pill {
+.quality-pill,
+.ticket-pill {
   margin-top: 2px;
   padding: 3px 6px;
   border-radius: 3px;
@@ -4940,6 +4941,30 @@ summary:focus-visible {
 .quality-pill {
   color: #805f24;
   background: #fff2d8;
+}
+
+.ticket-pill.on-sale {
+  color: #2f695d;
+  background: #e4f0ec;
+}
+
+.ticket-pill.pre-sale {
+  color: #4a5aa8;
+  background: #e8eaf6;
+}
+
+.ticket-pill.sold-out {
+  color: #a84040;
+  background: #fbe8e8;
+}
+
+.ticket-pill.off-sale {
+  color: #6b6b6b;
+  background: #eee;
+}
+
+.detail-meta .ticket-pill {
+  margin-top: 0;
 }
 
 .action-row .active-action {

@@ -73,6 +73,15 @@ export function loadChanges() {
   return fetchJson<ChangeDataset>("changes.json");
 }
 
+export async function loadEventRedirects(): Promise<Record<string, string>> {
+  try {
+    const data = await fetchJson<{ redirects?: Record<string, string> }>("redirects.json");
+    return data.redirects ?? {};
+  } catch {
+    return {};
+  }
+}
+
 export function loadKnowledgeIndex() {
   return fetchJson<KnowledgeIndex>("knowledge/index.json");
 }

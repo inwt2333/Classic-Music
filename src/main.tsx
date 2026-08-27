@@ -56,6 +56,7 @@ import {
   loadEntities,
   loadEventDetail,
   loadEventIndex,
+  loadEventRedirects,
   loadKnowledgeComposer,
   loadKnowledgeIndex,
   loadKnowledgeWork,
@@ -197,6 +198,7 @@ function App() {
     return isKnowledgeCollectionKey(value) ? value : "";
   });
   const [knowledgeIndex, setKnowledgeIndex] = useState<KnowledgeIndex | null>(null);
+  const [eventRedirects, setEventRedirects] = useState<Record<string, string>>({});
   const [activeComposerId, setActiveComposerId] = useState(initialParams.get("composer") ?? "");
   const [activeComposer, setActiveComposer] = useState<PublishedKnowledgeComposer | null>(null);
   const [composerLoading, setComposerLoading] = useState(Boolean(initialParams.get("composer")));
@@ -207,6 +209,16 @@ function App() {
   const [coverPaused, setCoverPaused] = useState(false);
   const personalEventStore = usePersonalEvents(auth.user?.id);
   const personalEvents = personalEventStore.events;
+  const resolvedPersonalEvents = useMemo(() => {
+    if (!Object.keys(eventRedirects).length) return personalEvents;
+    const resolved = { ...personalEvents };
+    for (const [oldId, newId] of Object.entries(eventRedirects)) {
+      if (resolved[newId]) continue;
+      const status = personalEvents[oldId];
+      if (status) resolved[newId] = status;
+    }
+    return resolved;
+  }, [personalEvents, eventRedirects]);
   const {
     follows,
     readNotificationIds,
@@ -380,6 +392,9 @@ function App() {
       .catch((error) => {
         if (!cancelled) setLoadState("演出数据暂时无法载入");
       });
+    loadEventRedirects().then((redirects) => {
+      if (!cancelled && Object.keys(redirects).length) setEventRedirects(redirects);
+    });
 
     return () => {
       cancelled = true;
@@ -426,9 +441,11 @@ function App() {
     return () => window.removeEventListener("popstate", restoreFromUrl);
   }, []);
 
+  const resolveEventId = (id: string) => eventRedirects[id] ?? id;
+
   const selectedSummary = useMemo(
-    () => dataset.events.find((event) => event.id === selectedId) ?? null,
-    [dataset.events, selectedId],
+    () => dataset.events.find((event) => event.id === resolveEventId(selectedId)) ?? null,
+    [dataset.events, selectedId, eventRedirects],
   );
 
   useEffect(() => {
@@ -588,7 +605,7 @@ function App() {
       if (ensemble !== "全部乐团" && normalizeEnsembleLabel(event.ensemble) !== ensemble) return false;
       if (genre !== "全部类型" && !event.genres.includes(genre)) return false;
       if (hasProgram && !event.hasProgram) return false;
-      if (personalFilter !== "all" && personalEvents[event.id] !== personalFilter) return false;
+      if (personalFilter !== "all" && resolvedPersonalEvents[event.id] !== personalFilter) return false;
       if (activeEntityEvents && !activeEntityEvents.has(event.id)) return false;
       if (activeVenue && normalizeVenueName(event.venue) !== activeVenue) return false;
       return !deferredQuery || matchesExpandedSearch(event.searchText, expandedQueries);
@@ -604,6 +621,7 @@ function App() {
     genre,
     hasProgram,
     personalEvents,
+    resolvedPersonalEvents,
     personalFilter,
     venue,
     expandedQueries,
@@ -1397,7 +1415,7 @@ function App() {
                     key={event.id}
                     event={event}
                     active={selectedId === event.id}
-                    personalStatus={personalEvents[event.id]}
+                    personalStatus={resolvedPersonalEvents[event.id]}
                     onSelect={selectEvent}
                     changeLabel={recentChangeLabel(changesByEvent.get(event.id), dataset.generatedAt)}
                     hasDataIssue={detectDataIssues(event).length > 0}
@@ -1458,7 +1476,7 @@ function App() {
           onShare={shareSelectedEvent}
           follows={follows}
           onToggleFollow={updateFollow}
-          personalStatus={selectedDetail ? personalEvents[selectedDetail.id] : undefined}
+          personalStatus={selectedDetail ? resolvedPersonalEvents[selectedDetail.id] : undefined}
           onSetPersonalStatus={updatePersonalStatus}
         />
       </section>
@@ -1521,6 +1539,9 @@ const EventListRow = memo(function EventListRow({
             <h2>{event.title}</h2>
             <div className="event-badges">
               {changeLabel ? <span className="change-pill">{changeLabel}</span> : null}
+              {event.ticketStatus === "sold-out" ? <span className="ticket-pill sold-out">售罄</span> : null}
+              {event.ticketStatus === "pre-sale" ? <span className="ticket-pill pre-sale">即将开票</span> : null}
+              {event.ticketStatus === "off-sale" ? <span className="ticket-pill off-sale">停售</span> : null}
               {hasDataIssue ? <span className="quality-pill">信息待确认</span> : null}
               {personalStatus ? (
                 <span className="personal-pill">{personalStatus === "interested" ? "想去" : "已购"}</span>
