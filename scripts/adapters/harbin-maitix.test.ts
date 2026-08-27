@@ -83,4 +83,35 @@ assert.deepEqual(seededAugust.performers, ["玛丽安娜·特切里安"]);
 assert.equal(seededAugust.program.length, 3);
 assert.deepEqual(seededAugust.program[0].movements?.[0].alternateTitles, ["En bateau. Andantino"]);
 
+// 江苏大剧院（同一麦座平台、jscpa 租户）的真实项目详情：
+// 详情不用 <p>/<li> 而是 <h3>+<br> 分行，曲目在【曲目单】标记之后、艺术家介绍之前。
+const jscFixtureDir = resolve(process.cwd(), "scripts/fixtures/jiangsu-centre-theatre");
+const blackshaw = parseHarbinMaitixDetail(
+  JSON.parse(readFileSync(resolve(jscFixtureDir, "detail-blackshaw.json"), "utf8")),
+);
+assert.equal(blackshaw.program.length, 3);
+assert.deepEqual(
+  blackshaw.program.map((item) => item.composer),
+  ["莫扎特", "舒曼", "舒伯特"],
+);
+assert.equal(blackshaw.program[0].title, "B小调柔板，作品号K.540");
+assert.deepEqual(blackshaw.program[0].alternateTitles, ["Mozart：Adagio in B minor K.540"]);
+
+const goldberg = parseHarbinMaitixDetail(
+  JSON.parse(readFileSync(resolve(jscFixtureDir, "detail-organ-goldberg.json"), "utf8")),
+);
+assert.equal(goldberg.program.length, 1);
+assert.equal(goldberg.program[0].composer, "J.S.巴赫");
+assert.ok(goldberg.program[0].title.includes("哥德堡变奏曲"));
+
+const pappano = parseHarbinMaitixDetail(
+  JSON.parse(readFileSync(resolve(jscFixtureDir, "detail-pappano.json"), "utf8")),
+);
+assert.ok(pappano.program.length >= 2);
+assert.ok(pappano.program.some((item) => item.composer === "普罗科菲耶夫"));
+assert.ok(
+  !pappano.program.some((item) => /演奏|独奏$/.test(item.composer ?? "")),
+  "演奏家角色词不应被识别为作曲家",
+);
+
 console.log("Harbin Maitix parser tests passed.");

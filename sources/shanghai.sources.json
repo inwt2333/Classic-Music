@@ -196,6 +196,19 @@
       "city": "广州",
       "venue": "广州大剧院",
       "pageSize": 10
+    },
+    {
+      "id": "jiangsu-centre-theatre-official",
+      "name": "江苏大剧院官网",
+      "adapter": "harbin-maitix-api",
+      "url": "https://www.jsartcentre.org/new_ticket.html",
+      "apiBase": "https://client.maitix.com",
+      "siteOrigin": "https://jscpa.maitix.com/",
+      "city": "南京",
+      "venue": "江苏大剧院",
+      "pageSize": 50,
+      "detailUrlTemplate": "https://www.jsartcentre.org/new_ticket_del2.html?id={id}",
+      "allowEmpty": false
     }
   ]
 }

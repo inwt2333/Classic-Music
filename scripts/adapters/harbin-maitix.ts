@@ -44,7 +44,7 @@ export function parseHarbinMaitixSeedFile(value: unknown): HarbinMaitixProject[]
 
 export function parseHarbinMaitixDetail(project: HarbinMaitixProject) {
   const lines = extractLines(project.projectDetail || "");
-  const program = parseHarbinMaitixProgram(lines);
+  const program = parseHarbinMaitixProgram(sliceProgramSection(lines));
   const cast = parseCast(lines);
   const firstWorkIndex = lines.findIndex((line) => isWorkHeader(line));
   const description = lines
@@ -140,10 +140,29 @@ export function getHarbinMaitixPriceTiers(event: HarbinMaitixEvent) {
 }
 
 function extractLines(html: string) {
-  const $ = cheerio.load(html || "");
+  // 部分剧院（如江苏大剧院）的详情不用 <p>/<li>，而是 <br> 分行。
+  const normalized = (html || "").replace(/<br\s*\/?>/gi, "\n");
+  const $ = cheerio.load(normalized);
   const elements = $("p, li").map((_, element) => cleanText($(element).text())).get().filter(Boolean);
   if (elements.length) return elements;
-  return cleanText($.root().text()).split(/\n+/).map(cleanText).filter(Boolean);
+  // 注意先按行切分再逐行清洗，cleanText 会把换行折叠成空格。
+  return $.root().text().split(/\n+/).map(cleanText).filter(Boolean);
+}
+
+// 综合剧院（如江苏大剧院）的详情把艺术家介绍与曲目混排；
+// 存在「曲目单」标记时只解析标记之后的段落，遇艺术家介绍/温馨提示等段落截止。
+export function sliceProgramSection(lines: string[]) {
+  const start = lines.findIndex((line) => {
+    const normalized = cleanText(line).replace(/^【|】$/g, "");
+    return /^曲\s*目(单)?\s*(PROGRAMME)?$/i.test(normalized);
+  });
+  if (start < 0) return lines;
+  const rest = lines.slice(start + 1);
+  const end = rest.findIndex((line) =>
+    /^【?(艺术家介绍|演员介绍|艺术家|演出信息|温馨提示|观演须知)】?/.test(cleanText(line))
+    || /^\*?\s*曲目以/.test(cleanText(line)));
+  const section = end >= 0 ? rest.slice(0, end) : rest;
+  return section.length ? section : lines;
 }
 
 function parseWorkHeader(line: string) {
@@ -199,7 +218,12 @@ function looksLikeWork(value: string) {
 
 function isPlausibleComposer(value: string) {
   return hasChinese(value) &&
-    !/^(?:演出|购票|时间|地点|票价|阵容|曲目|节目单|全称|作曲家|出版|编制|第?[一二三四五六七八九十\dIVX]+乐章)$/i.test(value) &&
+    value.length <= 12 &&
+    !/——/.test(value) &&
+    !/^[一二三四五六七八九十\d]+[、.．]?$/.test(value) &&
+    !/(?:演奏|独奏|指挥|演唱)$/.test(value) &&
+    !/(?:管弦乐|协奏曲|交响曲|奏鸣曲|组曲|舞曲|重奏)$/.test(value) &&
+    !/^(?:演出|购票|时间|地点|票价|阵容|曲目|节目单|全称|作曲家|出版|编制|温馨提示|观演须知|演出票|第?[一二三四五六七八九十\dIVX]+乐章)$/i.test(value) &&
     !/乐章$/.test(value);
 }
 

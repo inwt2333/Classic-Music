@@ -255,6 +255,19 @@ export const sourceProfiles: SourceProfile[] = [
     coverImage: "guangzhou-grand-theatre.jpg",
     officialUrl: "https://www.gzdjy.org/",
   },
+  {
+    id: "jiangsu-centre-theatre",
+    sourceId: "jiangsu-centre-theatre-official",
+    category: "venue",
+    name: "江苏大剧院",
+    city: "南京",
+    summary: "长江之滨的综合性表演艺术殿堂",
+    description: "江苏大剧院坐落于南京建邺区滨江，是国内规模较大的综合性表演艺术中心之一，设歌剧厅、音乐厅、戏剧厅、综艺厅等空间。剧院以歌剧、交响乐、室内乐、独奏会和民族音乐为核心，持续引进国际名家名团，是长三角地区重要的古典音乐演出平台。",
+    details: ["剧院自 2017 年投入使用以来，先后呈现\"名家名团\"\"镜像莫扎特\"\"循音·镇厅之宝管风琴系列\"等品牌演出板块，江苏交响乐团与江苏省演艺集团民族乐团也在此定期驻演。其音乐厅管风琴为国内重要的管风琴演出阵地，常年举办独奏与讲解音乐会。"],
+    coverImage: "jiangsu-centre-theatre.webp",
+    coverPosition: "center 30%",
+    officialUrl: "https://www.jsartcentre.org/",
+  },
 ];
 
 export function sourceCoverUrl(file: string) {

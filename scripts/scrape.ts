@@ -238,8 +238,9 @@ const sourceConfigSchema = z.object({
         id: z.string(), name: z.string(), adapter: z.literal("harbin-maitix-api"),
         url: z.string().url(), apiBase: z.string().url(), siteOrigin: z.string().url(),
         city: z.string(), venue: z.string(), pageSize: z.number().int().positive().max(100).default(50),
-        projectIds: z.array(z.string()).default([]), seedFile: z.string().default("data/source-seeds/harbin-maitix.json"),
+        projectIds: z.array(z.string()).default([]), seedFile: z.string().optional(),
         allowEmpty: z.boolean().default(true),
+        detailUrlTemplate: z.string().optional(),
       }),
       z.object({
         id: z.string(), name: z.string(), adapter: z.literal("gzdjy-mservice"),
@@ -1987,10 +1988,7 @@ async function scrapeHarbinMaitix(
   scrapedAt: string,
 ) {
   const projects = new Map<string, Record<string, any>>();
-  const seedProjects = new Map(
-    parseHarbinMaitixSeedFile(JSON.parse(await readFile(resolve(root, source.seedFile), "utf8")))
-      .map((project) => [String(project.projectToken), project]),
-  );
+  const seedProjects = new Map<string, HarbinMaitixProject>(await loadMaitixSeedProjects(source));
   let page = 1;
   let totalPages = 1;
   do {
@@ -2000,7 +1998,12 @@ async function scrapeHarbinMaitix(
     });
     const data = list.data || {};
     for (const item of Array.isArray(data.dataList) ? data.dataList : []) {
-      if (item?.projectToken) projects.set(String(item.projectToken), item);
+      if (!item?.projectToken) continue;
+      // 综合性剧院（如江苏大剧院）的列表里舞剧、放映、音乐剧占多数，
+      // 用场地和标题先做保守预筛（只排除明显非古典的项目），避免上百次无谓的详情请求。
+      if (maitixProjectWorthDetail(item)) {
+        projects.set(String(item.projectToken), item);
+      }
     }
     totalPages = Math.max(1, Math.min(20, Number(data.totalPage) || 1));
     page += 1;
@@ -2016,16 +2019,35 @@ async function scrapeHarbinMaitix(
   const events: ConcertEvent[] = [];
   const activeProjects: HarbinMaitixProject[] = [];
   for (const [projectId] of projects) {
-    const response = await fetchHarbinMaitixJson(source, "/api/pro/project", {
-      projectToken: projectId,
-      reqType: "1",
-    });
-    const detail = (response.data as HarbinMaitixProject | null) ?? seedProjects.get(projectId) ?? null;
+    // 麦座对连续详情请求有限流，串行加间隔并对单次失败做一次退避重试。
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 400));
+    let detailResponse: Record<string, any> | null = null;
+    for (let attempt = 0; attempt < 2 && !detailResponse; attempt += 1) {
+      try {
+        detailResponse = await fetchHarbinMaitixJson(source, "/api/pro/project", {
+          projectToken: projectId,
+          reqType: "1",
+        });
+      } catch (error) {
+        if (attempt === 0) {
+          await new Promise((resolveDelay) => setTimeout(resolveDelay, 2000));
+          continue;
+        }
+        // 单个项目详情失败（下架、接口限流等）不应拖垮整个来源。
+        console.warn(
+          `[source] ${source.name}: 项目 ${projectId} 详情请求失败，跳过：${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+    }
+    if (!detailResponse) continue;
+    const detail = (detailResponse.data as HarbinMaitixProject | null) ?? seedProjects.get(projectId) ?? null;
     if (!detail) continue;
     activeProjects.push(detail);
     const parsed = parseHarbinMaitixDetail(detail);
     if (!isHarbinMaitixClassical(parsed.title, parsed.program)) continue;
-    const detailUrl = `${source.url.replace(/#.*$/, "")}#/pages-order/projectDetail/index?projectId=${encodeURIComponent(projectId)}`;
+    const detailUrl = source.detailUrlTemplate
+      ? source.detailUrlTemplate.replace("{id}", encodeURIComponent(projectId))
+      : `${source.url.replace(/#.*$/, "")}#/pages-order/projectDetail/index?projectId=${encodeURIComponent(projectId)}`;
 
     for (const event of parsed.events) {
       const showTime = Number(event.showTime);
@@ -2064,6 +2086,19 @@ async function scrapeHarbinMaitix(
   return { rawCount: discoveredActiveCount, events };
 }
 
+async function loadMaitixSeedProjects(
+  source: Extract<SourceConfig, { adapter: "harbin-maitix-api" }>,
+): Promise<Array<[string, HarbinMaitixProject]>> {
+  if (!source.seedFile) return [];
+  try {
+    const seeds = parseHarbinMaitixSeedFile(JSON.parse(await readFile(resolve(root, source.seedFile), "utf8")));
+    return seeds.map((project) => [String(project.projectToken), project]);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException)?.code === "ENOENT") return [];
+    throw error;
+  }
+}
+
 async function fetchHarbinMaitixJson(
   source: Extract<SourceConfig, { adapter: "harbin-maitix-api" }>,
   path: string,
@@ -2093,6 +2128,16 @@ function isHarbinMaitixClassical(title: string, program: ProgramItem[]) {
   if (program.length) return true;
   if (/音乐剧|话剧|儿童剧|相声|脱口秀|演唱会|舞蹈|杂技|魔术/.test(title)) return false;
   return /交响|管弦|室内乐|独奏|重奏|钢琴|小提琴|大提琴|古典|协奏曲|奏鸣曲/.test(title);
+}
+
+function maitixProjectWorthDetail(item: Record<string, any>) {
+  const title = String(item.projectName ?? item.aliasName ?? "");
+  const siteName = String(item.siteName ?? "");
+  if (siteName.includes("音乐厅")) return true;
+  if (/放映|影像|音乐剧|话剧|儿童|亲子|脱口秀|相声|演唱会|舞剧|舞蹈|芭蕾|戏曲|京剧|喜剧|马戏|魔术|体验|展览|生日/.test(title)) {
+    return false;
+  }
+  return /交响|管弦|室内乐|独奏|重奏|钢琴|小提琴|大提琴|中提琴|古典|协奏|奏鸣曲|四重奏|乐团|合唱|歌剧|音乐会/.test(title);
 }
 
 function cleanHarbinHall(value: string | undefined, venue: string) {
