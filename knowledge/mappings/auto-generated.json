@@ -2,6 +2,21 @@
   "schemaVersion": 1,
   "rules": [
     {
+      "id": "mapping_auto_0280f07eccee0d06",
+      "workId": "work_000045",
+      "composers": [
+        "约翰内斯·勃拉姆斯"
+      ],
+      "titles": [
+        "降 B 大调钢琴协奏曲第二号，作品 83"
+      ],
+      "opus": [
+        "作品 83"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-27T23:57:34.995Z"
+    },
+    {
       "id": "mapping_auto_0d839f17693ac26d",
       "workId": "work_auto_2b591c49e84d88f1",
       "composers": [
@@ -465,6 +480,21 @@
       ],
       "method": "automated-exact",
       "reviewedAt": "2026-08-08T14:41:05.043Z"
+    },
+    {
+      "id": "mapping_auto_b48815b853973094",
+      "workId": "work_000047",
+      "composers": [
+        "贝多芬"
+      ],
+      "titles": [
+        "f小调第二十三钢琴奏鸣曲，作品57「热情」"
+      ],
+      "opus": [
+        "作品57"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-08-27T23:57:34.995Z"
     },
     {
       "id": "mapping_auto_c601c268b0d9f9eb",

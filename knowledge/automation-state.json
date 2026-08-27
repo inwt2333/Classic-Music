@@ -236,15 +236,16 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "879227420286c418070ec169": {
-      "status": "published",
+      "status": "needs_completion",
       "workId": "work_auto_958f678568a3fb7b",
-      "attempts": 7,
-      "updatedAt": "2026-08-27T12:00:00.000Z",
-      "reason": "agent-curated",
+      "attempts": 8,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_2a203fb9aad9c7ff"
       ],
-      "pipelineVersion": "agent-curated:1.0.0"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-09-03T23:57:34.995Z"
     },
     "f131d65eaa6401a87fef6d89": {
       "status": "published",
@@ -454,14 +455,14 @@
     },
     "1ba3423098344a9cedecbdb4": {
       "status": "published",
+      "workId": "work_000048",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_d33f9ef59feb68e9"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000048"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "2328b687f2164c2eaf58a782": {
       "status": "skipped",
@@ -476,14 +477,14 @@
     "25618eb807efc49cb3816aef": {
       "status": "needs_completion",
       "workId": "work_auto_aa0c834dd18f8511",
-      "attempts": 3,
-      "updatedAt": "2026-08-27T12:00:00.000Z",
-      "reason": "结构已人工补全，等待可用录音证据（agent-curated）",
+      "attempts": 4,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_2a5456d21e46e8e5"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "nextRetryAt": "2026-09-01T15:25:37.915Z"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4",
+      "nextRetryAt": "2026-09-03T23:57:34.995Z"
     },
     "26815bc9c09519598c6c482c": {
       "status": "failed",
@@ -507,14 +508,14 @@
     },
     "2a3d7ee7c414b8ba7046dcb5": {
       "status": "published",
+      "workId": "work_000057",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_4a77af4d9cc0aa7c"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000057"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "2c4edad5667a02c5586c7633": {
       "status": "failed",
@@ -528,14 +529,14 @@
     },
     "318d8a240f8a24dc6956dba1": {
       "status": "published",
+      "workId": "work_000056",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_e8ea06e5b8c8e223"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000056"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "31f0b257cebf1f6bd8d91b55": {
       "status": "failed",
@@ -549,25 +550,25 @@
     },
     "3867d0324656aa1cfef00786": {
       "status": "published",
+      "workId": "work_000060",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_df214adf516d5b93"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000060"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "388686aea9f0a83b3aca7c87": {
       "status": "published",
+      "workId": "work_000041",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_b43f2f6a449dd8d9"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000041"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3979f6e1d38e8cab608777d7": {
       "status": "failed",
@@ -591,14 +592,14 @@
     },
     "350540393401d579b93dd0fb": {
       "status": "published",
+      "workId": "work_000058",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_ec4ab58ee85f4af6"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000058"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "39ae48506d86ae293fbf6b83": {
       "status": "failed",
@@ -612,50 +613,51 @@
     },
     "3a0bae19d2944b4c9de09c61": {
       "status": "published",
+      "workId": "work_000061",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_1fa555ec7dfb967b"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000061"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3ab2f41c699e048869b630a8": {
       "status": "published",
+      "workId": "work_000043",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_f5beffef1faa4c7a"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000043"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3c673d2432e2ab74478e171c": {
       "status": "published",
+      "workId": "work_000042",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_f37b58229e25494c"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000042"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3cfc1a6de7e8853d3c0ff53b": {
       "status": "published",
+      "workId": "work_000059",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_71a1a0854179d150"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000059"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3d038c8ec3ec05592ee3418f": {
       "status": "published",
+      "workId": "work_000063",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
@@ -663,8 +665,7 @@
         "perf_898cdf4c7306782a",
         "perf_4da52adfe0adc867"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000063"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "3d3bbc5aa5069c5ded2e5fc4": {
       "status": "failed",
@@ -688,41 +689,41 @@
     },
     "422c66dcee985eaed1c15d17": {
       "status": "published",
+      "workId": "work_000053",
       "attempts": 3,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_4698356ac25670e0"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000053"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "46471aaa3ea84d7390480728": {
       "status": "published",
+      "workId": "work_000044",
       "attempts": 2,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_204e14e946616a65"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000044"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "47a63f7f9b03d666dec3c284": {
       "status": "published",
+      "workId": "work_000062",
       "attempts": 2,
       "updatedAt": "2026-08-27T12:00:00.000Z",
       "reason": "agent-curated",
       "sourceEventIds": [
         "perf_a2158511b6229a44"
       ],
-      "pipelineVersion": "agent-curated:1.0.0",
-      "workId": "work_000062"
+      "pipelineVersion": "agent-curated:1.0.0"
     },
     "47f779b5477ace908d23449d": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-08-26T16:04:20.351Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_c609f0eee111fc40",
@@ -732,11 +733,43 @@
     },
     "4ae4fa7a4545e130569ce026": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-08-26T16:04:20.351Z",
+      "attempts": 2,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_41a8819ec7ca8764"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "c3d02170d04e4c0acfbfbd3f": {
+      "status": "mapped",
+      "workId": "work_000047",
+      "attempts": 1,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
+      "reason": "matched-by-title",
+      "sourceEventIds": [
+        "perf_09bdd5648f5b8406"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "e2083bbee935c5495a6b06cd": {
+      "status": "mapped",
+      "workId": "work_000045",
+      "attempts": 1,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
+      "reason": "matched-by-catalogue",
+      "sourceEventIds": [
+        "perf_6a43cabe5a6f05a4"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "4e8072fb3835a743a964c93b": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-08-27T23:57:34.995Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_2a5456d21e46e8e5"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     }
