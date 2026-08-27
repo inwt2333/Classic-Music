@@ -1,0 +1,73 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 星海音乐厅官网
+BEGIN:VEVENT
+UID:perf_49b8f1b97f0326f5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260829T113000Z
+DTEND:20260829T133000Z
+SUMMARY:星弧之路·启程 广州星弧合唱团 5 周年音乐会
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:星弧之路·启程 广州星弧合唱团\n指挥：鲍泽云\n¥80 - ¥480\n凭着爱\n那些年\n女神\n我们都是这样长大的\n
+ 梨花又开放
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5063
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0b57d92f465e0f67@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260920T060000Z
+DTEND:20260920T080000Z
+SUMMARY:2026管风琴艺术季 午后音乐会（1）音乐之声
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:¥1 - ¥60\n莫扎特·F 小调幻想曲，K.608\nJ. S. 巴赫·G弦上的咏叹调（陈进谦 改编）\n罗杰斯·音乐之
+ 声组曲（陈进谦 改编）\n肖邦·降 E 大调夜曲，Op.9 No.2（陈进谦 改编）\n巴特·霍华德·带我飞向月球（陈进谦 改编）
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5076
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dc705d65397fbb29@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260924T120000Z
+DTEND:20260924T140000Z
+SUMMARY:钢琴名家系列 浪漫王者 基里尔·格斯坦钢琴独奏会
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:¥80 - ¥480\n李斯特·弗朗茨·李斯特\n彼得拉克十四行诗三首，S.158\n但丁幻想奏鸣曲，选自钢琴组曲·旅行岁月
+ II，S. 161，No. 7\n匈牙利快速进行曲，S. 233\nE大调第二波罗乃兹舞曲，选自·两首波罗乃兹舞曲，S. 223
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5064
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_910d0007c4ac5b4a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261021T120000Z
+DTEND:20261021T140000Z
+SUMMARY:汉努·林图 × 蔡珂宜 新加坡交响乐团 2026 广州音乐会
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:蔡珂宜 新加坡交响乐团\n指挥：汉努·林图 Hannu Lintu\n¥180 - ¥680\n王辰威·姐妹岛\n门德尔松·
+ E小调小提琴协奏曲，作品64\n马勒·D大调第一交响曲 “巨人”
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5051
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ede1233175efb435@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261106T120000Z
+DTEND:20261106T140000Z
+SUMMARY:畅响湾区 大师神韵——香港中乐团经典国风音乐会
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:香港中乐团\n指挥：阎惠昌\n¥180 - ¥680\n赵季平曲·民族管弦乐国风\n贾达群曲·随想曲·梨园竹调，选自大型民族
+ 器乐协奏套曲梨园\n王立平曲，黄学杨、李垂谊编曲·王立平之红楼梦大提琴随想曲\n阎惠昌曲·民族管弦乐线狂
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5061
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b4511f5351415e40@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261113T120000Z
+DTEND:20261113T140000Z
+SUMMARY:年度音乐大赏 巴洛克瑰宝 法比奥·比昂迪 × 欧洲嘉兰古乐团《四季》
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:欧洲嘉兰古乐团\n¥80 - ¥580\n阿尔坎杰罗·科雷利·D大调第四大协奏曲，作品6之4\n弗朗切斯科·杰米尼亚尼·D小
+ 调大协奏曲，作品5之12“福利亚舞曲”\n彼得罗·洛卡泰利·六首剧场序奏，作品4之1、4\n安东尼奥·维瓦尔第·四季
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5074
+END:VEVENT
+END:VCALENDAR

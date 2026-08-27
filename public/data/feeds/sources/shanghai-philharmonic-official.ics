@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 上海东方艺术中心官网
+BEGIN:VEVENT
+UID:perf_4d6abef4805ad402@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T113000Z
+DTEND:20260906T133000Z
+SUMMARY:上海爱乐乐团2026-2027音乐季 开幕音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:上海爱乐乐团\n指挥：张艺\n¥50 - ¥480\n德米特里·肖斯塔科维奇·交响合唱《阳光照耀着我们的祖国》，作品90（中
+ 国首演）\n德米特里·肖斯塔科维奇·芭蕾组曲《螺栓》，作品27a\n德米特里·肖斯塔科维奇·清唱剧《森林之歌》，作品81
+URL:https://www.shoac.com.cn/#/detail?projectId=1287373359820890112
+END:VEVENT
+END:VCALENDAR

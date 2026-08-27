@@ -1,0 +1,1838 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 上海
+BEGIN:VEVENT
+UID:perf_b1cd93db3f8e6915@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260828T111500Z
+DTEND:20260828T131500Z
+SUMMARY:马思聪的音乐碎片
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:上海交响乐团\n¥80 - ¥200\n马思聪·《内蒙组曲》\n马思聪·《西藏音诗》\n马思聪·《山歌》\n马思聪·《新疆狂
+ 想曲》\n马思聪·《阿美组曲》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21857&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c48a6dcf55e66b25@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260828T113000Z
+DTEND:20260828T130000Z
+SUMMARY:保罗·刘易斯钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n沃尔夫冈·阿玛多伊斯·莫扎特·C大调第十号钢琴奏鸣曲\n弗朗西斯·普朗克·即兴曲，第7–12首\n克
+ 劳德·德彪西·欢乐岛\n弗朗西斯·普朗克·即兴曲，第1–6首 & 第13–15首\n沃尔夫冈·阿玛多伊斯·莫扎特·C小调第十四号钢琴奏鸣曲
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=681&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ca6ae48053f3bbb6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260829T113000Z
+DTEND:20260829T133000Z
+SUMMARY:许忠与上海歌剧院交响乐团演绎莫扎特
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:许忠与上海歌剧院交响乐团\n¥180 - ¥680\n莫扎特·降E大调第九钢琴协奏曲“热纳米”，作品271\n莫扎特·C大调
+ 第二十一钢琴协奏曲，作品467\n莫扎特·D大调第三十一交响曲“巴黎”，作品297\n莫扎特·D大调第三十八交响曲“布拉格”，作品504
+URL:https://www.shoac.com.cn/#/detail?projectId=1276853225232302080
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_93fd23c27ad58adc@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260830T060000Z
+DTEND:20260830T080000Z
+SUMMARY:Key上海交响乐音乐会2026——键曲回响
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥880\n鸟之诗\n夏影\n等风的日子\nLittle Busters Medley\nCLANNAD Su
+ ite
+URL:https://www.shoac.com.cn/#/detail?projectId=1288848393559138304
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_48d03b4d7848ab06@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260830T113000Z
+DTEND:20260830T133000Z
+SUMMARY:Key上海交响乐音乐会2026——键曲回响
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥880\n鸟之诗\n夏影\n等风的日子\nLittle Busters Medley\nCLANNAD Su
+ ite
+URL:https://www.shoac.com.cn/#/detail?projectId=1288848393559138304
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_69619ec6fd78cdf3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260903T114500Z
+DTEND:20260903T134500Z
+SUMMARY:《光与行-苏美玲独唱音乐会》
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥380\n应尚能·我侬词\n丁善德·玻璃窗\n邹彦卓·新编燕子歌\n郑镇玉·闺女之歌\n三宝·相思
+URL:https://www.shoac.com.cn/#/detail?projectId=1287044463345242112
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6fa37ec9ec423f60@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T113000Z
+DTEND:20260904T133000Z
+SUMMARY:南方回响-Marcin Dylla(马钦·迪拉)古典吉他演奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥120 - ¥480\n华金·图里纳·塞维利亚纳，作品号29\n若安·玛能·幻想奏鸣曲，作品号22\n弗朗西斯科·泰雷嘉·
+ 玛祖卡四首\n何塞·玛丽亚·桑切斯·维尔杜·书写 I\n华金·罗德里格·祈祷与舞蹈
+URL:https://www.shoac.com.cn/#/detail?projectId=1279023567967125504
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7ce9209c74cb391e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T113000Z
+DTEND:20260904T130000Z
+SUMMARY:朱凯源小提琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥380\n勃拉姆斯·匈牙利舞曲四首\n格里格·C小调第三号小提琴奏鸣曲\n理查·施特劳斯·《玫瑰骑士》圆舞曲\
+ n理查·施特劳斯·降E大调小提琴奏鸣曲
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=684&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b288f08773faa14c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T114500Z
+DTEND:20260904T134500Z
+SUMMARY:未来大师：浮生若梦——汪月含早期钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥300\n海顿·C大调第60奏鸣曲\n贝多芬·C大调“黎明”奏鸣曲\n舒曼·童年情景\n舒伯特·即兴曲四首，D
+ . 899
+URL:https://www.shoac.com.cn/#/detail?projectId=1216386638815326208
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dafacbc62c2e4b94@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T020000Z
+DTEND:20260905T040000Z
+SUMMARY:2026东方市民音乐会：法朵音乐节——葡萄牙歌后克里斯蒂娜·布兰科音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥50 - ¥80\n冷澈之光\n云之河\n自由\n圆海夫人\n我将法朵深藏于感官
+URL:https://www.shoac.com.cn/#/detail?projectId=1253302967820189696
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1313462567317362@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T113000Z
+DTEND:20260905T133000Z
+SUMMARY:帕格尼尼冠军之夜——吉博尼&达莉娅小提琴与吉他音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥80 - ¥480\n帕格尼尼·E小调奏鸣曲，选自《六首小提琴与吉他奏鸣曲》\n马斯内·沉思曲\n帕格尼尼·6首小提琴随想
+ 曲，选自《24首随想曲集》\n朱塞佩·塔尔蒂尼·魔鬼的颤音\n弗朗西斯科·塔雷加·阿拉伯风格随想曲（吉他独奏）
+URL:https://www.shoac.com.cn/#/detail?projectId=1280905486115831808
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4d6abef4805ad402@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T113000Z
+DTEND:20260906T133000Z
+SUMMARY:上海爱乐乐团2026-2027音乐季 开幕音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:上海爱乐乐团\n指挥：张艺\n¥50 - ¥480\n德米特里·肖斯塔科维奇·交响合唱《阳光照耀着我们的祖国》，作品90（中
+ 国首演）\n德米特里·肖斯塔科维奇·芭蕾组曲《螺栓》，作品27a\n德米特里·肖斯塔科维奇·清唱剧《森林之歌》，作品81
+URL:https://www.shoac.com.cn/#/detail?projectId=1287373359820890112
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b93eba4e56e2b085@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260910T113000Z
+DTEND:20260910T133000Z
+SUMMARY:德国斯图加特室内乐团2026上海音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:德国斯图加特室内乐团\n¥100 - ¥480\n博凯里尼·F大调第十交响曲，作品35之4\n柴科夫斯基·如歌的行板，选自D
+ 大调第一弦乐四重奏，作品11\n何占豪、陈钢·梁山伯与祝英台选段\n圣-桑·A小调第一大提琴协奏曲（弦乐团改编版）\n斯卡尔科塔斯·为弦乐团而作的
+ 五首希腊舞曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1276893942516318208
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c669952a6b02d398@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T113000Z
+DTEND:20260911T133000Z
+SUMMARY:上海交响乐团2026-27音乐季开幕音乐会（一） 余隆与卡瓦科斯纪念肖斯塔科维奇诞辰120周年
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:上海交响乐团\n指挥：余隆\n¥80 - ¥380\n肖斯塔科维奇·f小调第一交响曲，作品10\n肖斯塔科维奇·a小调第一小
+ 提琴协奏曲，作品77
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21754&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9c5cfdbf11f3d7cb@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T113000Z
+DTEND:20260911T133000Z
+SUMMARY:奥斯卡·罗曼耶卓钢琴独奏音乐会-上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥99 - ¥580\n邓垚·诀别书\n林俊杰·曹操\n克劳德·德彪西·月光\n约翰·帕赫贝尔·卡农幻想曲\n彭飞·这世界那
+ 么多人
+URL:https://www.shoac.com.cn/#/detail?projectId=1253696578524217344
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e98c9aa158ddae21@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T113000Z
+DTEND:20260911T130000Z
+SUMMARY:邂逅巴赫—丹尼尔・洛扎科维奇小提琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n巴赫·G小调第1号小提琴无伴奏奏鸣曲\n巴赫·E大调第3号小提琴帕蒂塔\n巴赫·D小调第2号小提琴帕
+ 蒂塔
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=685&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2a203fb9aad9c7ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T111500Z
+DTEND:20260912T131500Z
+SUMMARY:内尔松·格纳钢琴独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:内尔松·格纳钢琴独奏会丨上海交响乐团\n¥80 - ¥480\n巴赫·c小调托卡塔，BWV 911\n舒曼·C大调幻想曲，作
+ 品17\n阿尔韦尼斯·《伊比利亚》（第三册）\n阿尔韦尼斯·阿尔瓦伊辛—波罗调—拉瓦皮耶斯\n阿尔韦尼斯·《伊比利亚》（第四册）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21818&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8a7e7dbb86fcb403@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T114500Z
+DTEND:20260912T134500Z
+SUMMARY:海上雅乐·浙派古筝艺术音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥320\n上元灯火中秋月\n春莺啭 唐大曲\n四合如意 浙派传统筝曲\n高山流水 浙派传统筝曲\n别港 李汉颖
+ 曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1276912060246290432
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_68276ae3dc49e5a3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T113000Z
+DTEND:20260913T133000Z
+SUMMARY:上海交响乐团2026-27音乐季开幕音乐会（二） 肖斯塔科维奇第十交响曲
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:上海交响乐团\n指挥：余隆\n¥80 - ¥380\n莫扎特·G大调第三小提琴协奏曲，作品216\n肖斯塔科维奇·e小调第十
+ 交响曲，作品93
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21755&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ba27c8aeef435537@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260918T113000Z
+DTEND:20260918T133000Z
+SUMMARY:张国勇、卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团\n指挥：张国勇\n¥80 - ¥180\n门德尔松·《仲夏夜之梦》组曲，作
+ 品61\n门德尔松·e小调小提琴协奏曲，作品64\n勃拉姆斯·D大调小提琴协奏曲，作品77
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21756&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f338b41289177945@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260918T113000Z
+DTEND:20260918T130000Z
+SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会——巴赫与莫扎特跨越时代的对话
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:阿姆斯特丹美泉宫室内乐团\n¥80 - ¥120\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·G大调第二号长笛四
+ 重奏，KV 285a\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·C小调慢板与赋格（改编自巴赫管风琴奏鸣曲第2号）\n沃尔夫冈·阿玛多
+ 伊斯·莫扎特 W.A. Mozart·A大调第四号长笛四重奏，KV 298\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·G小调慢板与赋
+ 格（赋格改编自巴赫《平均律键盘曲集第二卷》G小调前奏曲与赋格）
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=688&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_91c586018e13cb84@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T020000Z
+DTEND:20260919T040000Z
+SUMMARY:2026东方市民音乐会：舞蹈与歌剧——牛牛钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥50 - ¥80\n普罗科菲耶夫·《罗密欧与朱丽叶》选曲，作品75\n柴科夫斯基·《胡桃夹⼦》⾳乐会组曲（普莱特涅夫改编）
+ \n普契尼·我亲爱的爸爸，选⾃《贾尼·斯基基》（牛牛改编）\n普契尼·晴朗的⼀天，选⾃《蝴蝶夫⼈》（牛牛改编）\n普契尼·今夜星光灿烂，选⾃《托斯
+ 卡》（牛牛改编）
+URL:https://www.shoac.com.cn/#/detail?projectId=1253400899781230592
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6d09ad2e10903796@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T070000Z
+DTEND:20260919T090000Z
+SUMMARY:碎片之一「惊叹」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:阿莉莎·韦勒斯坦独奏会丨上海交响乐团\n¥80 - ¥380
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21851&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6bf86effee0af052@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T111500Z
+DTEND:20260919T131500Z
+SUMMARY:碎片之二「激荡」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:阿莉莎·韦勒斯坦独奏会丨上海交响乐团\n¥80 - ¥380
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21852&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1dff4f2f811b68b8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T130000Z
+SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会：巨匠之外——贝多芬、舒伯特及挚友们
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:阿姆斯特丹美泉宫室内乐团\n¥80 - ¥120\n路德维希·凡·贝多芬 L.v. Beethoven·D大调小夜曲作品25
+ （长笛、小提琴与中提琴）\n约瑟夫·海顿 J. Haydn·A小调长笛、中提琴与大提琴三重奏( 改编自Hob.XI:87，约1770年 ）\n弗里
+ 德里希·哈特曼·格拉夫 F.H. Graf·G大调四重奏\n弗朗茨·舒伯特 F. Schubert·降B大调弦乐三重奏（1816年）\n费迪南德·
+ 里斯 F. Ries·C大调长笛四重奏，作品145 第一号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=687&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_75adb76eedaa88bd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T130500Z
+SUMMARY:一个人的古典——巴拉蒂演绎巴赫无伴奏小提琴奏鸣曲与组曲
+LOCATION:上海大剧院 中剧场
+DESCRIPTION:¥100 - ¥380\n巴赫E大调第三号帕蒂塔，BWV1006·巴赫G小调第一号奏鸣曲，BWV 1001\n巴赫E大调第三
+ 号帕蒂塔，BWV1006·巴赫A小调第二号奏鸣曲，BWV 1003
+URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22557
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_77119e4e9acc56ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260921T113000Z
+DTEND:20260921T130000Z
+SUMMARY:基里尔·格斯坦钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥580\n弗朗茨·李斯特·I 愿那日蒙福Benedetto sia il giorno\n弗朗茨·李斯特·但丁
+ 幻想奏鸣曲\n弗朗茨·李斯特·降E小调谐谑曲，作品\n向勃拉姆斯致敬·II. 港口酒馆音乐\n布雷特·迪恩·F小调钢琴奏鸣曲， 作品
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=686&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_91e3136286910fa8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260922T113000Z
+DTEND:20260922T133000Z
+SUMMARY:哈德利希小提琴独奏音乐会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:哈德利希小提琴独奏音乐会丨上海交响乐团\n¥180 - ¥780\n泰勒曼·E大调第八无伴奏小提琴幻想曲，TWV 40:21
+ \n科尔里奇-泰勒·珀金森·《路易斯安那布鲁斯漫步——一首独奏小提琴的蛋糕舞曲》\n科尔里奇-泰勒·珀金森·《布鲁斯形式》\n伊萨依·G大调无伴奏
+ 小提琴奏鸣曲，作品27之5\n马克·奥康纳·《梅纽因随想曲》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21830&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_15f1e272a6de76ab@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260922T113000Z
+DTEND:20260922T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-安东尼奥·帕帕诺与伦敦交响乐团音乐会-“与国同进 与君同行”国泰海通倾情支持
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n阿纳托利·里亚多夫·魔湖\n谢尔盖·普罗科菲耶夫·第三钢琴协奏
+ 曲\n德米特里·肖斯塔科维奇·第五交响曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1275881439496785920
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_19da9b1d8bf95494@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260923T113000Z
+DTEND:20260923T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-安东尼奥·帕帕诺与伦敦交响乐团音乐会-“与国同进 与君同行”国泰海通倾情支持
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n沃尔夫冈·莫扎特·交响协奏曲\n安东·布鲁克纳·第九交响曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1275881439496785920
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_02ba0048b11fb7b1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260924T111500Z
+DTEND:20260924T131500Z
+SUMMARY:斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团\n¥80 - ¥380\n莫扎特·F大调第二十三弦乐四重奏，KV 590\n莫扎
+ 特·g小调第四弦乐五重奏，KV 516\n门德尔松·f小调第六弦乐四重奏，作品80
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21781&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fb4a811d30495550@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260925T113000Z
+DTEND:20260925T133000Z
+SUMMARY:孙一凡、上海交响乐团与国家大剧院合唱团演绎《布兰诗歌》丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:上海交响乐团与国家大剧院合唱团\n指挥：孙一凡\n¥80 - ¥880\n卡尔·奥尔夫·《布兰诗歌》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21757&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6df5a422ba4f37ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260925T114500Z
+DTEND:20260925T134500Z
+SUMMARY:《浪漫之夜：肖邦和他的朋友们》传世经典名曲音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥100 - ¥300
+URL:https://www.shoac.com.cn/#/detail?projectId=1283426947536793600
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fcef4e2c5363b09a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T113000Z
+DTEND:20260926T133000Z
+SUMMARY:环球之旅——国家大剧院合唱团音乐会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:国家大剧院合唱团音乐会丨上海交响乐团\n指挥：焦淼\n¥80 - ¥380\n斯坦福·蓝鸟\n特雷内·大海\n月亮圆圈舞\n
+ 斯卡布罗集市\n威尔肖·香榭丽舍大街
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21782&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4bcd03fc45685816@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T113000Z
+DTEND:20260926T133000Z
+SUMMARY:王健与约兰·索舍尔大提琴、吉他二重奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥880\n皮亚佐拉·天使米隆加\n西贝柳斯·练习曲，作品76第2首\n福雷·摇篮曲，作品16\n达维多夫·无
+ 词浪漫曲，作品23\n舒伯特·A小调阿佩乔尼奏鸣曲，作品821
+URL:https://www.shoac.com.cn/#/detail?projectId=1274387787331162112
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ae3033b221aceac0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T060000Z
+DTEND:20260927T073000Z
+SUMMARY:【玲珑国乐】乐养仲秋——音乐疗愈现场
+LOCATION:凯迪拉克·上海音乐厅 音乐立方-B2
+DESCRIPTION:¥180\n刘铁山、茅沅·云瑶\n丁培峰·梦渡江南\n贺绿汀·念•旧时\n左宏元·三生映梦\n王惠然·彝火·重生
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=682&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6c5118620d8cb67a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T070000Z
+DTEND:20260927T090000Z
+SUMMARY:凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团\n¥120 - ¥680\n巴赫·G大调第一无伴奏大提琴组曲，BWV 1007
+ \n巴赫·d小调第二无伴奏大提琴组曲，BWV 1008\n巴赫·C大调第三无伴奏大提琴组曲，BWV 1009\n巴赫·降E大调第四无伴奏大提琴组曲
+ ，BWV 1010\n巴赫·c小调第五无伴奏大提琴组曲，BWV 1011
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21790&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8270532f1150fa0c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T113000Z
+DTEND:20260927T133000Z
+SUMMARY:《梁祝》东方经典交响音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥100 - ¥480\n茉莉花\n桃花诺\n射雕英雄传组曲\n舌尖上的中国\n大鱼海棠
+URL:https://www.shoac.com.cn/#/detail?projectId=1286672503416872960
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c9bf8a4211886384@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T114500Z
+DTEND:20260927T134500Z
+SUMMARY:取消 未来大师：梦幻瞬间——安娜斯塔西娅·沃尔乔克钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥300\n舒曼·狂欢节，作品9\n肖邦·升C小调夜曲，作品27之1\n肖邦·第2降B小调谐谑曲，作品31\n安
+ 娜斯塔西娅·沃尔乔克·玛丽母子的即兴梦境\n梅西安·钢琴前奏曲（选段）
+URL:https://www.shoac.com.cn/#/detail?projectId=1217826360255213568
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2465218ef2febb27@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260929T103000Z
+DTEND:20260929T123000Z
+SUMMARY:晚高峰音乐会1：时间里的莫扎特丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:时间里的莫扎特丨上海交响乐团\n¥100 - ¥150\n莫扎特·C大调「小星星」主题变奏曲，KV 265（选段）\n莫扎特
+ ·C大调弦乐小夜曲，KV 648\n莫扎特·降E大调交响协奏曲，KV 364（选段）\n莫扎特·A大调第二十三钢琴协奏曲，KV 488（选段）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21811&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3b6ed56d82b33245@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260930T113000Z
+DTEND:20260930T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演剧目 上海交响乐团纪念长征胜利90周年音乐会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:第二十五届中国上海国际艺术节参演剧目 上海交响乐团\n指挥：孙一凡\n¥80 - ¥580\n吕其明·《红旗颂》\n梁皓一·
+ 《信仰之路——星火与征途》 （上海交响乐团委约，世界首演）\n梁皓一·上海音乐学院合唱团\n丁善德·《长征交响曲》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21759&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8800e69717c202a5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261001T113000Z
+DTEND:20261001T133000Z
+SUMMARY:我和我的祖国-2026红色经典交响演唱音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥80 - ¥480\n《红旗颂》\n《七律·长征》\n《我爱五指山，我爱万泉河》\n《红色娘子军》组曲\n《中国心》
+URL:https://www.shoac.com.cn/#/detail?projectId=1287363242257866752
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_00730c5d2c688944@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261001T114500Z
+DTEND:20261001T134500Z
+SUMMARY:《巴洛克与探戈》—— 维瓦尔第VS.皮亚佐拉的四季对话
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥100 - ¥300\n安东尼奥·维瓦尔第·四季\n阿斯托尔·皮亚佐拉·布宜诺斯艾利斯的四季
+URL:https://www.shoac.com.cn/#/detail?projectId=1296843135003652096
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1c48599877347ff9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261002T113000Z
+DTEND:20261002T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-破界交响 乐无边界 德国古典电子跨界乐队“交响狂徒”上海2026音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥680\n维瓦尔第·冬，选自小提琴协奏曲《四季》\n卡尔·詹金斯·帕拉迪奥\n酷玩乐队·满天繁星\n巴赫·前
+ 奏曲，选自《第一无伴奏大提琴组曲》\n大卫·库塔/希雅·钛（金刚不坏）
+URL:https://www.shoac.com.cn/#/detail?projectId=1279100605757157376
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7de4da8acfa3de49@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261003T111500Z
+DTEND:20261003T131500Z
+SUMMARY:「复刻回忆」Pianoboy高至豪流行钢琴音乐会
+LOCATION:上海东方艺术中心 东方歌剧厅
+DESCRIPTION:¥180 - ¥980
+URL:https://www.shoac.com.cn/#/detail?projectId=1246540212129697792
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_94ea8f3351d9e4fa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261003T113000Z
+DTEND:20261003T133000Z
+SUMMARY:维也纳之声-金秋交响音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥80 - ¥480\n红旗颂\n南国玫瑰圆舞曲\n狩猎波尔卡\n皇帝圆舞曲\n雷鸣电闪波尔卡
+URL:https://www.shoac.com.cn/#/detail?projectId=1278380144847257600
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_428237f7340cb6ed@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261003T113000Z
+DTEND:20261003T130000Z
+SUMMARY:本杰明·格罗夫纳钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n沃尔夫冈·阿玛多伊斯·莫扎特·降B大调钢琴奏鸣曲\n路德维希·凡·贝多芬·升C小调第十四钢琴奏鸣曲“
+ 月光”，作品27号第2首\n亚历山大·斯克里亚宾·升G小调第二钢琴奏鸣曲，作品19号\n弗朗茨·李斯特·彼特拉克十四行诗第104首\, S. 16
+ 1 No.5\n弗里德里克·肖邦·降B小调第二钢琴奏鸣曲，作品35号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=689&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b77346aea0c693ae@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261004T113000Z
+DTEND:20261004T133000Z
+SUMMARY:维也纳圆舞曲之夜-2026交响音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥80 - ¥480\n小约翰·施特劳斯·蝙蝠序曲\n小约翰·施特劳斯·春之声圆舞曲\n小约翰·施特劳斯·南国玫瑰圆舞曲\n
+ 小约翰·施特劳斯·狩猎波尔卡\n小约翰·施特劳斯·皇帝圆舞曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1287403318006308864
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_993d06f4a9a11cb6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261006T113000Z
+DTEND:20261006T133000Z
+SUMMARY:来自奥地利的天籁-维也纳童声合唱团音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳童声合唱团\n指挥：曼努埃尔·胡贝尔\n¥180 - ¥680\n莫扎特·让我们欢庆和平，选自歌剧《伊多梅纽斯》\n莫
+ 扎特·G大调弦乐小夜曲《一首小夜曲》，K. 525\n舒伯特·鳟鱼，作品32\n小约翰·施特劳斯·圆舞曲《一千零一夜》，作品346\n罗伯特·斯托
+ 尔茨·普拉特公园的树木又开花了
+URL:https://www.shoac.com.cn/#/detail?projectId=1282816491156930560
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4698356ac25670e0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261007T113000Z
+DTEND:20261007T133000Z
+SUMMARY:迪图瓦、莱昂斯卡娅与上海交响乐团演绎莫扎特与雷斯皮吉《罗马三部曲》丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:莱昂斯卡娅与上海交响乐团\n指挥：夏尔·迪图瓦\n¥80 - ¥580\n莫扎特·降E大调第二十二钢琴协奏曲，K.482\n
+ 雷斯皮吉·《罗马的节日》，作品157\n雷斯皮吉·《罗马的喷泉》，作品106\n雷斯皮吉·《罗马的松树》，作品141
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21758&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1d6dd52e5823a860@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261010T113000Z
+DTEND:20261010T133000Z
+SUMMARY:宁峰与德国波茨坦室内乐团演绎莫扎特全套小提琴协奏曲
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:宁峰与德国波茨坦室内乐团\n¥180 - ¥680\n莫扎特·降B大调第一小提琴协奏曲，作品207\n莫扎特·D大调第二小提
+ 琴协奏曲，作品211\n莫扎特·《善意的谎言》序曲，作品51\n莫扎特·A大调第五小提琴协奏曲“土耳其”，作品219
+URL:https://www.shoac.com.cn/#/detail?projectId=1278668590912405504
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_83dfd633ed36dee7@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261011T093000Z
+DTEND:20261011T130000Z
+SUMMARY:弦咏浪漫——卡米尔·托马斯与朱利安·博考大提琴与钢琴音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n约翰内斯·勃拉姆斯·E小调第一号大提琴与钢琴奏鸣曲，作品38号\n弗雷德里克·肖邦·G小调大提琴与钢
+ 琴奏鸣曲，作品65号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=690&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d815305d37a8783f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261011T113000Z
+DTEND:20261011T133000Z
+SUMMARY:宁峰与德国波茨坦室内乐团演绎莫扎特全套小提琴协奏曲
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:宁峰与德国波茨坦室内乐团\n¥180 - ¥680\n莫扎特·G大调第十三弦乐小夜曲，作品525\n莫扎特·G大调第三小提琴
+ 协奏曲，作品216\n莫扎特·降B大调第三十三交响曲，作品319\n莫扎特·D大调第四小提琴协奏曲，作品218
+URL:https://www.shoac.com.cn/#/detail?projectId=1278668590912405504
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7085cde220c70441@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261013T113000Z
+DTEND:20261013T133000Z
+SUMMARY:汉努·林图、蔡珂宜与新加坡交响乐团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:蔡珂宜与新加坡交响乐团丨上海交响乐团\n指挥：汉努·林图\n¥180 - ¥580\n王辰威·《姐妹岛》\n门德尔松·e小调
+ 小提琴协奏曲，作品64\n马勒·D大调第一交响曲「巨人」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21859&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b9f19673ebe375ad@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261013T113000Z
+DTEND:20261013T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-女高音安娜·奈瑞贝科音乐会-上药雷允上 虔脩蕴佳作
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥280 - ¥1280\n朱塞佩·威尔第·静谧安宁的夜色\n朱塞佩·威尔第·那可恶的老东西诅咒我……\n朱塞佩·威尔第·女
+ 儿！我的父亲！……啊，姑娘，请守护这朵花\n朱塞佩·威尔第·她从未爱过我\n朱塞佩·威尔第·你沉溺虚荣
+URL:https://www.shoac.com.cn/#/detail?projectId=1284902605109579776
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3ab72638e8c6a690@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261015T111500Z
+DTEND:20261015T131500Z
+SUMMARY:上交室内乐1·上交弦乐队演绎尼尔森、伯恩斯坦与巴托克丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:伯恩斯坦与巴托克丨上海交响乐团\n指挥：孙一凡\n¥120 - ¥220\n尼尔森·弦乐小组曲，作品1\n伯恩斯坦·为小提琴
+ 和弦乐队而作的《西区故事》组曲（保罗·贝特曼改编）\n巴托克·嬉游曲，Sz. 113
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21804&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_15ec1091535baba0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261015T113000Z
+DTEND:20261015T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-女高音安娜·奈瑞贝科音乐会-上药雷允上 虔脩蕴佳作
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥280 - ¥1280\n朱塞佩·威尔第·静谧安宁的夜色\n朱塞佩·威尔第·那可恶的老东西诅咒我……\n朱塞佩·威尔第·女
+ 儿！我的父亲！……啊，姑娘，请守护这朵花\n朱塞佩·威尔第·她从未爱过我\n朱塞佩·威尔第·看那荒芜的田野……但我仍要从这枯枝上将它摘下
+URL:https://www.shoac.com.cn/#/detail?projectId=1284902605109579776
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_471f50836fea1370@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-世界音乐传奇阿努什卡·香卡2026上海音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥280 - ¥1080\nOffering 奉献\nStolen Moments 被偷走的时刻\nPacifica 太平洋
+ 之歌\nWhat Will We Remember 我们将记住什么\nHiraeth 乡愁
+URL:https://www.shoac.com.cn/#/detail?projectId=1284160086591655936
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_417af241b5652460@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T130000Z
+SUMMARY:法国凡酷四重奏《大师杰作》音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥100 - ¥380\n莫扎特·C大调第19号弦乐四重奏“不协和音”\n勃拉姆斯·A小调第2号弦乐四重奏\n德彪西·G小调
+ 弦乐四重奏\n海顿·D大调弦乐四重奏\n门德尔松·F小调第6号弦乐四重奏
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=691&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8d4f5dcf2c26be1f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T020000Z
+DTEND:20261017T040000Z
+SUMMARY:2026东方市民音乐会：刻在我心底的名字——北京大学百周年纪念讲堂室内合唱团音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:北京大学百周年纪念讲堂室内合唱团\n指挥：王铮\n¥50 - ¥80\n徐志摩词 周鑫泉编曲·偶然\n刻在我心底的名字\n张
+ 曼娟词 周鑫泉曲·月光笺\n唐恬词 钱雷曲 乐律创编工作室·无名的人\n柳永原词马玉洁词 吴明昊曲·钱塘梦华
+URL:https://www.shoac.com.cn/#/detail?projectId=1253397390704869376
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d818d2420962a305@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T113000Z
+DTEND:20261017T133000Z
+SUMMARY:莉莉亚·齐柏丝坦钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥580\n李斯特·六首安慰曲\n车尔尼·引子、辉煌变奏曲与狩猎回旋曲\n肖邦·升F大调船歌\n拉赫玛尼诺夫·
+ 十三首前奏曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1227972199646834688
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_83c7e8762fb75d0e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261018T060000Z
+DTEND:20261018T080000Z
+SUMMARY:音乐地图课堂系列 1：古典主义时期丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:古典主义时期丨上海交响乐团\n免费\n莫扎特·「快板」，选自《G大调弦乐小夜曲》，KV 525\n莫扎特·「很快的快板」，选
+ 自《g小调第四十交响曲》，KV 550\n海顿·「行板」，选自《G大调第九十四交响曲「惊愕」》\n贝多芬·「活泼而充满活力的快板」，选自《F大调第
+ 八交响曲》，作品93 8’\n福雷·「西西里舞曲」，选自《佩雷阿斯与梅丽桑德》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21819&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_26229805b05ad53c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261018T060000Z
+DTEND:20261018T080000Z
+SUMMARY:2026上海儿童视听交响音乐会—演唱版
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥80 - ¥480\n《疯狂动物城》主题曲\n《玩具兵进行曲》\n《Happy》\n《春之声圆舞曲》\n《小猪佩奇》主题曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1285984706600927232
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e0ab3fdfd74e880d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261019T113000Z
+DTEND:20261019T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-图甘·索契耶夫与维也纳爱乐乐团2026上海音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:图甘·索契耶夫与维也纳爱乐乐团\n¥380 - ¥2880\n贝多芬·G大调第四钢琴协奏曲，作品58（钢琴：郎朗）\n勃拉姆
+ 斯·D大调第二交响曲，作品73
+URL:https://www.shoac.com.cn/#/detail?projectId=1264259457443942400
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7a275615732ad1f0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261020T113000Z
+DTEND:20261020T133000Z
+SUMMARY:加贝塔与科帕钦斯卡娅丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:加贝塔与科帕钦斯卡娅丨上海交响乐团\n¥80 - ¥580\n勒克莱尔·C大调铃鼓舞曲\n维德曼·24首小提琴与大提琴二重奏
+ ，第二卷（选段）\n巴赫·G大调前奏曲，BWV 860\n科尔·《根茎》\n拉威尔·小提琴与大提琴奏鸣曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21783&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8b7011af45c3f659@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261020T113000Z
+DTEND:20261020T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-图甘·索契耶夫与维也纳爱乐乐团2026上海音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:图甘·索契耶夫与维也纳爱乐乐团\n¥380 - ¥2880\n莫扎特·G小调第四十交响曲，作品550\n柴科夫斯基·F小调第
+ 四交响曲，作品36
+URL:https://www.shoac.com.cn/#/detail?projectId=1264259457443942400
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b41620d631a3c2db@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261022T111500Z
+DTEND:20261022T131500Z
+SUMMARY:奥皮茨与上海四重奏丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:奥皮茨与上海四重奏丨上海交响乐团\n¥80 - ¥380\n莫扎特·改编自巴赫《平均律键盘曲集》的五首赋格，KV 405\n
+ 莫扎特·g小调第一钢琴四重奏，KV 478\n舒曼·降E大调钢琴五重奏，作品44
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21832&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3680789f67ff0d77@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261022T113000Z
+DTEND:20261022T133000Z
+SUMMARY:帕沃·雅尔维、亚历山大·康托洛夫与爱沙尼亚节日管弦乐团音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:亚历山大·康托洛夫与爱沙尼亚节日管弦乐团\n指挥：帕沃·雅尔维\n¥180 - ¥880\n埃尔基-斯文·图尔·《激情 幻象
+ 》\n拉赫玛尼诺夫·第二钢琴协奏曲，作品18\n西贝柳斯·第五交响曲，作品82
+URL:https://www.shoac.com.cn/#/detail?projectId=1291792979474534400
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8a94074c8e85a2b1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261023T113000Z
+DTEND:20261023T133000Z
+SUMMARY:奥滕萨默、奥皮茨与上海交响乐团纪念莫扎特诞辰270周年丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:奥皮茨与上海交响乐团\n指挥：安德烈亚斯·奥滕萨默\n¥80 - ¥880\n莫扎特·F大调嬉游曲，作品138\n莫扎特·c
+ 小调第二十四钢琴协奏曲，K.491\n理查·施特劳斯·《唐璜》，作品20\n理查·施特劳斯·理查·施特劳斯《玫瑰骑士》组曲，作品59
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21760&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9f87f6889df7c932@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261024T113000Z
+DTEND:20261024T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-今夜星光灿烂——阿格里奇/文格洛夫/伊瑟利斯领衔室内乐音乐节
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥380 - ¥1880\n李斯特·唐璜的回忆\,作品S. 418\n勃拉姆斯·F-A-E奏鸣曲:第三乐章 C小调谐谑曲\n
+ 柴科夫斯基·回忆留恋的地方\,作品42\n舒曼·幻想曲\,作品73\n马勒·A小调钢琴四重奏
+URL:https://www.shoac.com.cn/#/detail?projectId=1291341703482720256
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dbaf2d3bc76bd238@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261024T114500Z
+DTEND:20261024T134500Z
+SUMMARY:海上雅乐·古弦心声—陆笑姿独奏音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥320\n阳春\n塞上曲\n大胡笳\n乌夜啼\n流水
+URL:https://www.shoac.com.cn/#/detail?projectId=1291417109140361216
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_64f2a582e787d8f2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261025T111500Z
+DTEND:20261025T131500Z
+SUMMARY:奥皮茨演绎舒伯特与勃拉姆斯丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:奥皮茨演绎舒伯特与勃拉姆斯丨上海交响乐团\n¥80 - ¥380\n舒伯特·A大调第二十钢琴奏鸣曲，D. 959\n勃拉姆斯
+ ·f小调第三钢琴奏鸣曲，作品5
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21833&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_30629d0c8881ac4e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261025T113000Z
+DTEND:20261025T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-今夜星光灿烂——阿格里奇/文格洛夫/伊瑟利斯领衔室内乐音乐节
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥380 - ¥1880\n李斯特·唐璜的回忆\n勃拉姆斯·F-A-E奏鸣曲:第三乐章 C小调谐谑曲\n柴科夫斯基·回忆留恋
+ 的地方\n舒曼·幻想曲\n马勒·A小调钢琴四重奏
+URL:https://www.shoac.com.cn/#/detail?projectId=1291341703482720256
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d33f9ef59feb68e9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261029T111500Z
+DTEND:20261029T131500Z
+SUMMARY:德奈什·瓦尔永钢琴独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:德奈什·瓦尔永钢琴独奏会丨上海交响乐团\n¥120 - ¥480\n巴赫·a小调第二英国组曲，BWV 807\n贝多芬·E大
+ 调第三十钢琴奏鸣曲，作品109\n舒曼·C大调幻想曲，作品17\n舒曼·《童年情景》，作品15
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21827&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_084ca9952bb7778e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261030T113000Z
+DTEND:20261030T133000Z
+SUMMARY:大地与传说——吕绍嘉、法齐尔·萨伊与上海交响乐团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:法齐尔·萨伊与上海交响乐团丨上海交响乐团\n指挥：吕绍嘉\n¥80 - ¥580\n法齐尔·萨伊·钢琴协奏曲《大地母亲》，作
+ 品111\n西贝柳斯·莱明凯宁组曲，作品22「传奇」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21761&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6979ea50efa37277@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261031T113000Z
+DTEND:20261031T133000Z
+SUMMARY:幻奏盛宴·2026上海场
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥280 - ¥980\nBad Apple!\n众神眷恋的幻想乡\n幽灵客船的穿越时空之旅\n敬迎莅临地狱街道\n狸猫的五
+ 十种变化
+URL:https://www.shoac.com.cn/#/detail?projectId=1281668336988991488
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e72ca0ec05e8100b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261031T113000Z
+DTEND:20261031T130000Z
+SUMMARY:《双琴对韵：跨越时空的变奏》双钢琴音乐会
+LOCATION:凯迪拉克·上海音乐厅 音乐立方-B2
+DESCRIPTION:¥80 - ¥180
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=683&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ec562d69f3db703d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261104T113000Z
+DTEND:20261104T133000Z
+SUMMARY:爱的喜悦——女高音安吉拉·乔治乌独唱音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥680\n乔尔达尼·我亲爱的\n帕伊谢洛·我心里不再感到青春火焰燃烧\n多尼采蒂·我要建一座王宫\n贝多芬·
+ 《我心里不再感到青春火焰燃烧》六首变奏曲（钢琴独奏）\n托斯蒂·理想佳人
+URL:https://www.shoac.com.cn/#/detail?projectId=1279106246710161408
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ba6bfc9f6baca049@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261105T113000Z
+DTEND:20261105T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-维京格尔·奥拉夫松钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥580\n巴赫·E大调前奏曲，作品BWV 854\n贝多芬·E小调第二十七钢琴奏鸣曲，作品90\n巴赫·E小
+ 调第六帕蒂塔，作品BWV 830\n舒伯特·E小调第六钢琴奏鸣曲，作品D566\n贝多芬·E大调第三十钢琴奏鸣曲，作品109
+URL:https://www.shoac.com.cn/#/detail?projectId=1291025259950788608
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9a143ba172dafb03@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261106T111500Z
+DTEND:20261106T131500Z
+SUMMARY:上交室内乐 2：北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团\n¥120\n莫扎特·g小调第四弦乐五重奏，KV 516\n德沃夏克·降E大
+ 调第三弦乐五重奏，作品97
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21805&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e8ea06e5b8c8e223@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261106T113000Z
+DTEND:20261106T133000Z
+SUMMARY:米歇尔·达尔贝托演奏莫扎特丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:米歇尔·达尔贝托演奏莫扎特丨上海交响乐团\n¥80 - ¥380\n莫扎特·c小调幻想曲，KV 475\n莫扎特·a小调第八
+ 钢琴奏鸣曲，KV 310\n莫扎特·A大调第十一钢琴奏鸣曲，KV 331\n莫扎特·迪波尔小步舞曲主题变奏曲，KV 573\n莫扎特·a小调回旋曲
+ ，KV 511
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21828&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_41df39ef2c6a2a2a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261106T113000Z
+DTEND:20261106T133000Z
+SUMMARY:40Fingers—意大利指弹天团世界巡演 上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥100 - ¥880\n公路之星\n摇摆苏丹\n波西米亚狂想曲\n加勒比海盗\n星球大战
+URL:https://www.shoac.com.cn/#/detail?projectId=1279444699979481088
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_991820f70c48c3bb@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261107T020000Z
+DTEND:20261107T040000Z
+SUMMARY:2026东方市民音乐会：海上双钢琴师——小捷杰耶夫与方演双钢琴音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥50 - ¥80\n肖斯塔科维奇·双钢琴组曲，作品6\n莫里康内·《海上钢琴师》选段\n舒伯特·F小调幻想曲，作品940\
+ n柴科夫斯基·花之圆舞曲，选自《胡桃夹子组曲》
+URL:https://www.shoac.com.cn/#/detail?projectId=1253307189416525824
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3d757ade77866837@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261107T113000Z
+DTEND:20261107T133000Z
+SUMMARY:节奏幻想——钱骏平、林喆与上海交响乐团 丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:林喆与上海交响乐团 丨上海交响乐团\n指挥：钱骏平\n¥80 - ¥580\n拉威尔·《丑角的晨歌》\n埃马纽埃尔·塞茹尔内
+ ·幻想协奏曲（第二马林巴协奏曲）\n罗迪翁·谢德林·卡门组曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21762&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a01075ca6a633c30@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261107T113000Z
+DTEND:20261107T133000Z
+SUMMARY:【交响+演唱】“四大名著”红楼梦·西游记·三国演义·水浒传 大型交响演唱会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥100 - ¥680\n历史的天空\n短歌行\n貂蝉已经随风而去\n这一拜\n滚滚长江东逝水
+URL:https://www.shoac.com.cn/#/detail?projectId=1261311744527515648
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_605438689a8a6c99@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261112T113000Z
+DTEND:20261112T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-完全莫扎特——诺亚·本迪克斯-巴尔格利、梅第扬 与柏林爱乐巴洛克独奏家合奏团音乐会-上药神象荣
+ 誉呈现 参启精气神
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥980\n沃尔夫冈·莫扎特·第一小提琴协奏曲\n沃尔夫冈·莫扎特·单簧管协奏曲\n沃尔夫冈·莫扎特·c小调柔
+ 板与赋格\n沃尔夫冈·莫扎特·小提琴与中提琴交响复协奏曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1278712085746053120
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f5beffef1faa4c7a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261113T113000Z
+DTEND:20261113T133000Z
+SUMMARY:秋夜北国回响——李心草、秦立巍与上海交响乐团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:秦立巍与上海交响乐团丨上海交响乐团\n指挥：李心草\n¥80 - ¥580\n肖斯塔科维奇·G大调第二大提琴协奏曲，作品12
+ 6\n柴可夫斯基·C大调弦乐小夜曲，作品48\n柴可夫斯基·肖斯塔科维奇（巴尔沙伊改编）：室内交响曲，作品110a
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21763&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_898cdf4c7306782a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261115T060000Z
+DTEND:20261115T080000Z
+SUMMARY:音乐地图课堂系列 2：浪漫主义时期丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:浪漫主义时期丨上海交响乐团\n免费\n门德尔松·《A大调第四交响曲》，作品90「意大利」（第一乐章）\n肖邦·c小调夜曲，作
+ 品48之1\n福雷·帕凡舞曲，作品50\n柴可夫斯基·C大调弦乐小夜曲（第二乐章）\n门德尔松·「乘着歌声的翅膀」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21820&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c54e0115856a5d1b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261115T113000Z
+DTEND:20261115T133000Z
+SUMMARY:第二十五届中国上海国际艺术节参演节目-卡蒂雅·布尼亚季什维莉钢琴独奏音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥180 - ¥1080\n舒伯特·降B大调第二十一钢琴奏鸣曲\, 作品960\n萨蒂·D大调第一玄秘曲，选自《三首玄秘曲》
+ \n肖邦·E小调前奏曲，作品28之4\n肖邦·升C小调第三谐谑曲，作品39\n巴赫·《G弦上的咏叹调》，选自D大调第三管弦乐组曲，作品1068
+URL:https://www.shoac.com.cn/#/detail?projectId=1289608913147367424
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a6e49b98981ed639@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261117T113000Z
+DTEND:20261117T133000Z
+SUMMARY:第八届上海早期音乐节 忧思——塔利斯学者合唱团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:塔利斯学者合唱团丨上海交响乐团\n指挥：彼得·菲利普斯\n¥80 - ¥580\n帕莱斯特里纳·《母亲的歌》\n若斯坎·《母
+ 亲的歌》\n佩尔特·《凯撒的物》\n佩尔特·《携香液瓶的妇人》\n皮尔索尔·《放上花环》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21784&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5fd2e122846c34bd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261118T111500Z
+DTEND:20261118T131500Z
+SUMMARY:上交室内乐 3：马勒第四交响曲室内乐版丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:马勒第四交响曲室内乐版丨上海交响乐团\n指挥：孙一凡\n¥120 - ¥220\n马勒·G大调第四交响曲（室内乐版，埃尔温·
+ 施泰因改编）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21806&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d7bd0885477dd2a5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261120T113000Z
+DTEND:20261120T133000Z
+SUMMARY:暴雪35周年官方游戏交响音乐会（Jason Hayes 领衔）
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥280 - ¥1380
+URL:https://www.shoac.com.cn/#/detail?projectId=1263853537697910784
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4e8659b25a1a62aa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261121T020000Z
+DTEND:20261121T040000Z
+SUMMARY:2026东方市民音乐会：俄罗斯浪漫曲——莫斯科国立柴科夫斯基音乐学院室内合唱团音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:莫斯科国立柴科夫斯基音乐学院室内合唱团\n¥80\n斯克里亚宾·向艺术致敬！\n塔涅耶夫·在船上\n谢巴林·母亲把思念寄给儿
+ 子\n列杰涅夫·我们被遗忘的土地，选自《克柳耶夫三联画》\n波捷延科·一个女孩在合唱团里歌唱
+URL:https://www.shoac.com.cn/#/detail?projectId=1253307636814544896
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_489824db7e73f483@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261122T070000Z
+DTEND:20261122T130000Z
+SUMMARY:第八届上海早期音乐节 叶斯廷·戴维斯演唱约翰·道兰丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:第八届上海早期音乐节 叶斯廷·戴维斯演唱约翰·道兰丨上海交响乐团\n¥80 - ¥380\n约翰·道兰·「让我在黑暗中栖居」
+ \n约翰·道兰·「她能否宽恕我的过错」\n约翰·道兰·「再来吧」\n约翰·道兰·眼泪\n「我是否该以言辞争取？」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21785&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5b63594176a2e744@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261128T111500Z
+DTEND:20261128T131500Z
+SUMMARY:可可和丹麦豆豆爵士三人行丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:可可和丹麦豆豆爵士三人行丨上海交响乐团\n免费\n我只能给你爱\n新鲜事\n我会见到你\n忧伤\n不再忧郁
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21834&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_87b9c211456a8684@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261128T114500Z
+DTEND:20261128T134500Z
+SUMMARY:海上雅乐·琶音诗话——李晖与琵琶舞室内乐音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥320\n余祎曈·素弦 琵琶与古琴\n陈思昂·广东音画 琵琶四重奏\n刘天琪·云中君 琵琶四重奏\n李博禅·
+ 悄然 琵琶四重奏\n王云飞·武生 琵琶七重奏
+URL:https://www.shoac.com.cn/#/detail?projectId=1296497903689027584
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_73692c5245e66ce1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261130T111500Z
+DTEND:20261130T131500Z
+SUMMARY:第八届上海早期音乐节 忧郁的排遣——安德烈亚斯·施泰尔独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:安德烈亚斯·施泰尔独奏会丨上海交响乐团\n¥80 - ¥380\n约翰·雅各布·弗罗贝格尔·a小调第三十组曲\n让-亨利·当
+ 格勒贝尔·为管风琴而作的严肃赋格\n让-亨利·当格勒贝尔·约翰·卡斯帕·费迪南德·费舍尔：「乌拉尼亚组曲」（选段）\n路易·库普兰·F大调组曲\n
+ 让-亨利·当格勒贝尔·《羽管键琴曲集第一册》（选段
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21829&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_61a2b4d90dfc8b8b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261202T113000Z
+DTEND:20261202T133000Z
+SUMMARY:皮奥特·安德谢夫斯基钢琴独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:皮奥特·安德谢夫斯基钢琴独奏会丨上海交响乐团\n¥100 - ¥480\n贝多芬·c小调第三十二钢琴奏鸣曲，作品111
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21835&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_269d8df72c050bff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261205T020000Z
+DTEND:20261205T040000Z
+SUMMARY:2026东方市民音乐会：神奇的管风琴之旅——马丁·施梅丁管风琴音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:¥50 - ¥80\n瓦格纳·《漂泊的荷兰人》序曲，作品63（埃德温·H·勒马尔改编）\n巴赫·D大调前奏曲与赋格，作品53
+ 2\n马丁·施梅丁·即兴演奏，基于中国民歌旋律的前奏曲与托卡塔\n门德尔松·D小调严肃变奏曲，作品54（马丁·施梅丁改编）\n李斯特·传奇曲，作品
+ 175之2（马克斯·雷格/沃尔夫冈·S·迈耶改编）
+URL:https://www.shoac.com.cn/#/detail?projectId=1253337499306917888
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5a848033a5c2f885@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261205T114500Z
+DTEND:20261205T134500Z
+SUMMARY:未来大师：巴赫×苏轼 跨时空的邂逅——匡俊宏吉他独奏音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥300\n巴赫·为鲁特琴而作的C小调前奏曲，BWV 999\n巴赫·G大调大提琴组曲第1首，BWV 1007\
+ n巴赫·为鲁特琴而作的降E大调前奏曲、赋格与快板，BWV 998（选曲）\n姚晨·邂逅（上海首演）\n巴赫·D小调小提琴帕蒂塔第2首，BWV 10
+ 04
+URL:https://www.shoac.com.cn/#/detail?projectId=1217826798790668288
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_795cf10eb5479743@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261211T111500Z
+DTEND:20261211T131500Z
+SUMMARY:上交室内乐 4：风与键的编年史丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:风与键的编年史丨上海交响乐团\n¥120\n布拉韦·g小调长笛奏鸣曲，作品2之4\nC.P.E. 巴赫·g小调双簧管奏鸣曲，
+ H. 549\n维瓦尔第·为长笛与大管而作的a小调奏鸣曲，RV 86\n莫谢莱斯·F大调交响协奏曲\n科里亚·长笛、大管与钢琴三重奏
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21807&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_783fb9d413c11640@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261211T114500Z
+DTEND:20261211T134500Z
+SUMMARY:未来大师：对话金奖——琥珀四重奏与王丽雅音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥300\n柴科夫斯基·D大调第一弦乐四重奏，作品11 - “如歌的行板”\n施尼特凯·第三弦乐四重奏\n斯克里
+ 亚宾·幻想曲，作品28\n肖斯塔科维奇·G小调钢琴五重奏，作品57\n- 前奏曲，缓板·Lento
+URL:https://www.shoac.com.cn/#/detail?projectId=1288863526841192448
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_bd2f7fd7465f9e50@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261212T060000Z
+DTEND:20261212T080000Z
+SUMMARY:音乐地图课堂系列 3：乐无中西丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:乐无中西丨上海交响乐团\n免费\n刘天华·《良宵》\n任光·《彩云追月》\n孙以强·《春舞》\n沙汉昆·《牧歌》\n俄罗斯民
+ 歌·《卡林卡》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21821&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_400979604aad424f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261213T114500Z
+DTEND:20261213T134500Z
+SUMMARY:未来大师：心的形状——竖琴与萨克斯二重奏音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥80 - ¥300\n德彪西·萨克斯狂想曲（为萨克斯与竖琴改编）\n德彪西·欧石楠\n拉威尔·库普兰之墓（为萨克斯与竖琴改
+ 编）\n让-丹尼斯·米沙·克洛·甘盖\n莫里康内·加布里尔的双簧管，选自《教会》
+URL:https://www.shoac.com.cn/#/detail?projectId=1296111751408668672
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5a1b800d93831f89@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261216T103000Z
+DTEND:20261216T123000Z
+SUMMARY:晚高峰音乐会2：弦上东西丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:弦上东西丨上海交响乐团\n¥100 - ¥300\n巴赫·G弦上的咏叹调\n吉松隆·《鸟梦月华之时》\n唐彬·《寻猫 》\n
+ 唐彬·《追风筝》\n唐彬·《月牙泉》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21812&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_93af0c04ac526432@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261217T111500Z
+DTEND:20261217T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 1：黄家正丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:黄家正丨上海交响乐团\n免费\n贝多芬·f小调第一钢琴奏鸣曲，作品2之1\n贝多芬·十一首小品，作品119\n贝多芬·降B大
+ 调第二十九钢琴奏鸣曲，作品106「槌子键琴」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21837&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_720d501e91e00b32@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261219T020000Z
+DTEND:20261219T040000Z
+SUMMARY:2026东方市民音乐会：上海城市交响乐团音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:上海城市交响乐团\n¥80\n莫扎特·《费加罗的婚礼》序曲\n肖斯塔科维奇·《牛虻》组曲，作品97a\n莫扎特·G大调小夜曲
+ ，作品525
+URL:https://www.shoac.com.cn/#/detail?projectId=1253337944452595712
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f08c53793371cd78@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261219T113000Z
+DTEND:20261219T130000Z
+SUMMARY:大师之夜・浪漫主义的美与激情 叶甫根尼・米哈伊洛夫钢琴独奏新年音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥100 - ¥480\nM.格林卡/F.李斯特·切尔诺摩尔进行曲自歌剧《鲁斯兰与柳德米拉》\n斯克里亚宾·七首前奏曲\n拉
+ 赫玛尼诺夫·音画练习曲\n拉赫玛尼诺夫·前奏曲\n拉赫玛尼诺夫·音乐瞬间
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=669&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1fa555ec7dfb967b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261220T113000Z
+DTEND:20261220T133000Z
+SUMMARY:余隆、蒂博代与上海交响乐团演绎圣-桑丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:蒂博代与上海交响乐团\n指挥：余隆\n¥80 - ¥580\n圣-桑·F大调第五钢琴协奏曲，作品103「埃及」\n圣-桑·c
+ 小调第三交响曲，作品78，「管风琴」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21764&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b188c267a6819637@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261220T113000Z
+DTEND:20261220T133000Z
+SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳皇家交响乐团\n¥180 - ¥1280\n路德维希·凡·贝多芬·第七交响曲\n乔羽、刘炽·我的祖国\n何占豪、陈钢·
+ 小提琴协奏曲《梁山伯与祝英台》\n小约翰·施特劳斯·《蝙蝠》序曲\n安东·利奥波德·德沃夏克·斯拉夫舞曲 E小调 第2号
+URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_990a15004def0f88@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261225T113000Z
+DTEND:20261225T133000Z
+SUMMARY:维也纳皇家爱乐乐团新年音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳皇家爱乐乐团\n¥180 - ¥1080\n约翰·施特劳斯·春之声圆舞曲\n莫扎特·费加罗的婚礼 序曲\n莫扎特·快来
+ 吧，别迟疑\n安东宁·德沃夏克·第八号斯拉夫舞曲\n约翰·施特劳斯·闲聊波尔卡
+URL:https://www.shoac.com.cn/#/detail?projectId=1268619393556226048
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_223206253f6714aa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261226T113000Z
+DTEND:20261226T133000Z
+SUMMARY:维也纳皇家爱乐乐团新年音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳皇家爱乐乐团\n¥180 - ¥1080\n约翰·施特劳斯·春之声圆舞曲\n莫扎特·费加罗的婚礼 序曲\n莫扎特·快来
+ 吧，别迟疑\n安东宁·德沃夏克·第八号斯拉夫舞曲\n约翰·施特劳斯·闲聊波尔卡
+URL:https://www.shoac.com.cn/#/detail?projectId=1268619393556226048
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_184ddb0e2a9488e3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261231T113000Z
+DTEND:20261231T133000Z
+SUMMARY:维也纳春之声交响乐团新年音乐会-上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳春之声交响乐团\n¥180 - ¥1280\nJ. Strauss·蝙蝠序曲\nJ. Strauss·维也纳气质圆舞曲
+ \nJ. Strauss·春之声圆舞曲\nJ. Strauss·闲聊快速波尔卡\nJ. Strauss·皇帝圆舞曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1275851796095709184
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7b48045b343ff69a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261231T113000Z
+DTEND:20261231T133000Z
+SUMMARY:维也纳施特劳斯乐团2027新年音乐会
+LOCATION:上海大剧院 大剧场
+DESCRIPTION:维也纳施特劳斯乐团\n¥180 - ¥1280
+URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22509
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_219650131603b68b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261231T143000Z
+DTEND:20261231T163000Z
+SUMMARY:维也纳春之声交响乐团新年音乐会-上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳春之声交响乐团\n¥180 - ¥1280\nJ. Strauss·蝙蝠序曲\nJ. Strauss·维也纳气质圆舞曲
+ \nJ. Strauss·春之声圆舞曲\nJ. Strauss·闲聊快速波尔卡\nJ. Strauss·皇帝圆舞曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1275851796095709184
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0d8cb17efcdb5496@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261231T143000Z
+DTEND:20261231T163000Z
+SUMMARY:【跨年专场】2027新年音乐会·12月31日
+LOCATION:上海东方艺术中心 东方歌剧厅
+DESCRIPTION:¥180 - ¥680\n贝多芬·欢乐颂\n约翰·施特劳斯·春之声圆舞曲\n比才·卡门序曲\n蒙蒂·查尔达什舞曲\n约翰·施
+ 特劳斯·蓝色多瑙河
+URL:https://www.shoac.com.cn/#/detail?projectId=1291426021638946816
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_69cb687a5ab4d82c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270102T113000Z
+DTEND:20270102T133000Z
+SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳皇家交响乐团\n¥180 - ¥1280\n路德维希·凡·贝多芬·第七交响曲\n乔羽、刘炽·我的祖国\n何占豪、陈钢·
+ 小提琴协奏曲《梁山伯与祝英台》\n小约翰·施特劳斯·《蝙蝠》序曲\n安东·利奥波德·德沃夏克·斯拉夫舞曲 E小调 第2号
+URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a1059072b6e9c5e0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270103T113000Z
+DTEND:20270103T133000Z
+SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳皇家交响乐团\n¥180 - ¥1280\n路德维希·凡·贝多芬·第七交响曲\n乔羽、刘炽·我的祖国\n何占豪、陈钢·
+ 小提琴协奏曲《梁山伯与祝英台》\n小约翰·施特劳斯·《蝙蝠》序曲\n安东·利奥波德·德沃夏克·斯拉夫舞曲 E小调 第2号
+URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_652b4c61c1b031fe@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270107T113000Z
+DTEND:20270107T133000Z
+SUMMARY:帕胡德长笛独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:帕胡德长笛独奏会丨上海交响乐团\n免费\n卡尔·菲利普·埃马努埃尔·巴赫：a小调无伴奏长笛奏鸣曲，Wq. 132\n皮埃尔-
+ 奥克塔夫·费鲁·三首无伴奏长笛小品\n皮埃尔-奥克塔夫·费鲁·I. 被困的牧人\n皮埃尔-奥克塔夫·费鲁·II. 玉\n皮埃尔-奥克塔夫·费鲁·I
+ II. 端阳节
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21836&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e90e88e7ea6ebe93@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270108T113000Z
+DTEND:20270108T133000Z
+SUMMARY:魔笛与歌剧幻想——孙一凡、帕胡德与上海交响乐团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:帕胡德与上海交响乐团丨上海交响乐团\n指挥：孙一凡\n¥80 - ¥880\n柴可夫斯基·《罗密欧与朱丽叶》幻想序曲\n莫扎
+ 特·《魔笛》序曲、莫扎特（福布斯改编）：《魔笛》幻想曲\n莫扎特·柴可夫斯基（布朗斯坦、加姆佐夫改编）：连斯基的咏叹调，选自《叶甫盖尼·奥涅金》\
+ n柴可夫斯基·《哈姆雷特》幻想序曲，作品67\n柴可夫斯基·威尔第（F.多普勒、K.多普勒、加姆佐夫改编）：《弄臣》幻想曲，双长笛与乐队
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21765&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9b27938aca3a65b2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270113T103000Z
+DTEND:20270113T123000Z
+SUMMARY:晚高峰音乐会3：巴赫的N次方丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:巴赫的N次方丨上海交响乐团\n¥100 - ¥150\n巴赫·G大调第一无伴奏大提琴组曲，BWV 1007（选段）\n巴赫·
+ g小调第一无伴奏小提琴奏鸣曲，BWV 1001（选段）\n巴赫·《平均律键盘曲集》（选段）\n巴赫·G弦上的咏叹调\n巴赫·《羊儿可以安静地吃草》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21813&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ece7170ce790eb85@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270115T111500Z
+DTEND:20270115T131500Z
+SUMMARY:上交室内乐 5：英雄的致意——从地中海到新大陆丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:从地中海到新大陆丨上海交响乐团\n¥120\n华金·图里纳·《圆》，为钢琴、小提琴和大提琴而作的幻想曲，作品91\n雷蒙多·
+ 佩纳福特·《英雄三重奏》\n贝多芬·降B大调第七钢琴三重奏，作品97「大公」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21808&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3683215c07a68733@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270117T060000Z
+DTEND:20270117T080000Z
+SUMMARY:音乐地图课堂系列 4：舞蹈音乐丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:舞蹈音乐丨上海交响乐团\n免费\n亨德尔·F大调《水上音乐》第一组曲，HWV 348（选段）\n明库斯·「双人舞」，选自芭蕾
+ 舞剧《唐吉诃德》\n舒伯特·「芭蕾音乐第二首」，选自《罗莎蒙德》，D. 797\n柴可夫斯基·「小序曲」，选自《胡桃夹子》组曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21822&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_bee3be4ef1d33fd3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270120T113000Z
+DTEND:20270120T133000Z
+SUMMARY:错爱之境——余隆、卡瓦科斯、陆轶文与上海交响乐团演绎拉赫玛尼诺夫与周天丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:陆轶文与上海交响乐团演绎拉赫玛尼诺夫与周天丨上海交响乐团\n指挥：余隆\n¥80 - ¥580\n周天·小提琴与二胡协奏曲「
+ 错爱」（上海交响乐团委约，世界首演）\n拉赫玛尼诺夫·交响舞曲，作品45
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21766&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6ac54158d23827b2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270122T111500Z
+DTEND:20270122T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 2：孙嘉言丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:孙嘉言丨上海交响乐团\n免费\n贝多芬·降E大调第四钢琴奏鸣曲，作品7「大奏鸣曲」\n贝多芬·升F大调第二十四钢琴奏鸣曲，作
+ 品78「献给泰蕾兹」\n贝多芬·E大调第九钢琴奏鸣曲，作品14之1
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21838&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fc9028b597f8f35c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270129T113000Z
+DTEND:20270129T133000Z
+SUMMARY:2027上海新春音乐会 余隆、马友友、吴彤、吴蛮与上海交响乐团演绎赵麟 丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:吴蛮与上海交响乐团演绎赵麟 丨上海交响乐团\n指挥：余隆\n¥180 - ¥1880\n赵麟·《水云溶漾，为笙与管弦乐队所作
+ 》，选自交响音诗《千里江山》\n赵麟·大提琴与笙双协奏曲《度》\n赵麟·《月壑松风，为琵琶与管弦乐队所作》，选自交响音诗《千里江山》\n赵麟·大提
+ 琴与琵琶协奏曲《逍遥游》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21767&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_86dae958c91e62c4@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270226T113000Z
+DTEND:20270226T133000Z
+SUMMARY:黄屹、沙马尤、鲍力卓与上海交响乐团演绎拉威尔与理查·施特劳斯丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:鲍力卓与上海交响乐团演绎拉威尔与理查·施特劳斯丨上海交响乐团\n指挥：黄屹\n¥80 - ¥880\n柏辽兹·《罗马狂欢节》
+ 序曲\n拉威尔·D大调左手钢琴协奏曲\n理查·施特劳斯·《堂·吉诃德》，作品35
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21768&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c609f0eee111fc40@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270227T111500Z
+DTEND:20270227T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 3：孔嘉宁丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:孔嘉宁丨上海交响乐团\n免费\n贝多芬·g小调第十九钢琴奏鸣曲，作品49之1\n贝多芬·三首小品，选自《七首小品》，作品33
+ 之1-3\n贝多芬·c小调小品，WoO 52\n贝多芬·降E大调第十八钢琴奏鸣曲，作品31之3「狩猎」\n贝多芬·G大调第二十钢琴奏鸣曲，作品49
+ 之2
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21839&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7e358c8cbbc21e45@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270302T113000Z
+DTEND:20270302T123000Z
+SUMMARY:无言的浪漫——沙马尤钢琴独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:沙马尤钢琴独奏会丨上海交响乐团\n免费\n门德尔松·三首无词歌\n门德尔松·作品19之1 — 作品19之2 — 作品38之5
+ \n艾夫斯·《无（好）词歌》\n门德尔松·四首无词歌\n门德尔松·作品53之4 — 作品30之2 — 作品53之3 — 作品38之2
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21844&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_bb4489679c526e6e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270304T111500Z
+DTEND:20270304T121500Z
+SUMMARY:马尔钦·迪拉吉他独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:马尔钦·迪拉吉他独奏会丨上海交响乐团\n免费\n图里纳·塞维利亚舞曲，作品29\n马内恩·幻想奏鸣曲，作品22\n塔雷加·四
+ 首玛祖卡\n桑切斯-贝尔杜·《书》第一首\n罗德里戈·祈愿与舞曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21845&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a2158511b6229a44@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270305T113000Z
+DTEND:20270305T133000Z
+SUMMARY:汤沐海、卡瓦科斯、陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团\n指挥：汤沐海\n¥80 - ¥580\n普罗科菲耶夫·古典交响曲（第一交
+ 响曲），作品25\n米亚斯科夫斯基·大提琴协奏曲，作品66\n柴可夫斯基·D大调小提琴协奏曲，作品35
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21769&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_6791344621b70cc5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270312T113000Z
+DTEND:20270312T133000Z
+SUMMARY:水蓝、卡瓦科斯与上海交响乐团演绎巴托克与霍尔斯特《行星组曲》丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:卡瓦科斯与上海交响乐团\n指挥：水蓝\n¥80 - ¥580\n巴托克·第二小提琴协奏曲\n霍尔斯特·《行星组曲》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21770&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1706eab8781de6f5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270313T111500Z
+DTEND:20270313T121500Z
+SUMMARY:朱斯坦·泰勒演奏《哥德堡变奏曲》丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:丨上海交响乐团\n免费\n巴赫·《哥德堡变奏曲》，BWV 988
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21846&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4da52adfe0adc867@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270319T111500Z
+DTEND:20270319T121500Z
+SUMMARY:让-马克·路易萨达钢琴独奏会丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:马克·路易萨达钢琴独奏会丨上海交响乐团\n免费\n舒伯特·a小调第四钢琴奏鸣曲，D. 537\n舒伯特·f小调即兴曲，D. 
+ 935之1\n舒伯特·降A大调音乐瞬间，D. 780之2\n勃拉姆斯·a小调间奏曲，作品118之1\n勃拉姆斯·g小调叙事曲，作品118之3
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21847&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f37b58229e25494c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270319T113000Z
+DTEND:20270319T133000Z
+SUMMARY:柴可夫斯基2+2：林大叶、罗维与上海交响乐团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:罗维与上海交响乐团丨上海交响乐团\n指挥：林大叶\n¥80 - ¥580\n柴可夫斯基·G大调第二钢琴协奏曲，作品44\n柴
+ 可夫斯基·c小调第二交响曲，作品17「小俄罗斯」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21771&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_09bdd5648f5b8406@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270326T111500Z
+DTEND:20270326T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 4：贠思齐丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:贠思齐丨上海交响乐团\n免费\n贝多芬·e小调第二十七钢琴奏鸣曲，作品90\n贝多芬·G大调第二十五钢琴奏鸣曲，作品79「杜
+ 鹃」\n贝多芬·降A大调第十二钢琴奏鸣曲，作品26「葬礼进行曲」\n贝多芬·f小调第二十三钢琴奏鸣曲，作品57「热情」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21840&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4ec2feeae4213751@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270327T060000Z
+DTEND:20270327T080000Z
+SUMMARY:音乐地图课堂系列 5：歌剧音乐丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:歌剧音乐丨上海交响乐团\n免费\n莫扎特·《费加罗的婚礼》序曲\n普契尼·为弦乐四重奏而作的挽歌《菊花》\n比才·《采珠人》
+ 序曲\n马斯卡尼·《乡村骑士》间奏曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21823&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_057938d40e7c86fb@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270331T103000Z
+DTEND:20270331T123000Z
+SUMMARY:晚高峰音乐会4：三个世纪的春丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:三个世纪的春丨上海交响乐团\n免费\n维瓦尔第·E大调小提琴协奏曲「春」，选自《四季》\n贝多芬·F大调第五钢琴与小提琴奏鸣
+ 曲，作品24「春天」（选段）\n门德尔松·《春之歌》\n德彪西·《春》，L. 61\n莉莉·布朗热·《春天的清晨》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21814&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_bdff4278b7a05043@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270402T111500Z
+DTEND:20270402T131500Z
+SUMMARY:上交室内乐 6：美乐四重奏演绎法式浪漫与印象丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:美乐四重奏演绎法式浪漫与印象丨上海交响乐团\n免费\n福雷·三首歌曲\n福雷·I.「梦醒时分」，作品7之1\n福雷·II.「
+ 西西里舞曲」，作品78\n福雷·III.「月光」，作品46之2\n弗兰克·A大调小提琴与钢琴奏鸣曲，FWV 8
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21809&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2ad59accad545c84@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270403T113000Z
+DTEND:20270403T133000Z
+SUMMARY:拉赫林、麦克尔拉维与上海交响乐团演绎沃尔顿和马勒丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:麦克尔拉维与上海交响乐团演绎沃尔顿和马勒丨上海交响乐团\n指挥：朱利安·拉赫林\n¥80 - ¥580\n沃顿·中提琴协奏曲
+ \n马勒·D大调第一交响曲「巨人」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21772&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_256310ede4280ea1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270416T113000Z
+DTEND:20270416T133000Z
+SUMMARY:复调的巨浪—— 阿尔布雷希特、巴赫拉米与上海交响乐团演绎斯托科夫斯基交响巴赫丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:巴赫拉米与上海交响乐团演绎斯托科夫斯基交响巴赫丨上海交响乐团\n指挥：汉斯约尔格·阿尔布雷希特\n¥80 - ¥580\n约
+ 翰·塞巴斯蒂安·巴赫·d小调托卡塔与赋格，作品 565（斯托科夫斯基改编）\n约翰·塞巴斯蒂安·巴赫·D大调前奏曲与赋格，作品 532 （雷斯皮吉
+ 改编）\n约翰·塞巴斯蒂安·巴赫·d小调键盘协奏曲，作品1052（阿尔布雷希特改编）\n约翰·塞巴斯蒂安·巴赫·g小调幻想曲与赋格，作品 542 
+ （斯托科夫斯基改编）\n约翰·塞巴斯蒂安·巴赫·d小调恰空，选自第二小提琴帕蒂塔，作品1004（斯托科夫斯基改编）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21773&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c30e207105e1f0fd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270418T060000Z
+DTEND:20270418T080000Z
+SUMMARY:音乐地图课堂系列 6：民族乐派丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:民族乐派丨上海交响乐团\n免费\n鲍罗丁·在中亚细亚草原上\n巴托克·罗马尼亚民间舞曲，Sz. 56\n德沃夏克·《捷克组曲
+ 》（选段），作品39\n格里格·「夜曲」，选自《抒情小品集》，作品54之4
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21824&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_87c560dd655746b4@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270423T111500Z
+DTEND:20270423T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 5：史博阳丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:史博阳丨上海交响乐团\n免费\n贝多芬·c小调小快板，WoO 53\n贝多芬·c小调第五钢琴奏鸣曲，作品10之1\n贝多芬·
+ 六首小品，作品126
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21841&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_71a1a0854179d150@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270429T113000Z
+DTEND:20270429T133000Z
+SUMMARY:余隆、音乐永恒合唱团与上海交响乐团演绎肖斯塔科维奇第二、第三交响曲丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:音乐永恒合唱团与上海交响乐团\n指挥：余隆\n¥80 - ¥1280\n肖斯塔科维奇·B大调第二交响曲，作品14「献给十月」
+ \n肖斯塔科维奇·降E大调第三交响曲，作品20「五月一日」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21774&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_41a8819ec7ca8764@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270430T111500Z
+DTEND:20270430T121500Z
+SUMMARY:达内尔四重奏演绎肖斯塔科维奇丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:达内尔四重奏演绎肖斯塔科维奇丨上海交响乐团\n免费\n肖斯塔科维奇·C大调第一弦乐四重奏，作品49\n肖斯塔科维奇·c小调第
+ 八弦乐四重奏，作品110\n肖斯塔科维奇·降B大调第五弦乐四重奏，作品92
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21848&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_45deb62e813bbcdc@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270502T113000Z
+DTEND:20270502T133000Z
+SUMMARY:尘埃与回响—— 余隆、格内、音乐永恒合唱团与上海交响乐团肖斯塔科维奇第十三交响曲丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:音乐永恒合唱团与上海交响乐团肖斯塔科维奇第十三交响曲丨上海交响乐团\n指挥：余隆\n¥80 - ¥1280\n肖斯塔科维奇·
+ 降b小调第十三交响曲，作品113
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21775&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8e790696cbd9ca3d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270509T113000Z
+DTEND:20270509T133000Z
+SUMMARY:古斯塔夫·库恩、格哈特与上海交响乐团演绎舒曼和瓦格纳丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:格哈特与上海交响乐团演绎舒曼和瓦格纳丨上海交响乐团\n指挥：古斯塔夫·库恩\n¥80 - ¥1280\n舒曼·a小调大提琴协
+ 奏曲，作品129\n瓦格纳·《齐格弗里德》第三幕第三场（终场）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21776&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a0393d489150890d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270512T113000Z
+DTEND:20270512T133000Z
+SUMMARY:格哈特与薛颖佳演绎贝多芬丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:格哈特与薛颖佳演绎贝多芬丨上海交响乐团\n¥80 - ¥380\n贝多芬·C大调第四大提琴奏鸣曲，作品102之1\n普罗科菲
+ 耶夫·大提琴奏鸣曲，作品119\n普罗科菲耶夫·「柔板」，选自《灰姑娘》，作品97a\n普罗科菲耶夫·「圆舞曲—尾声」，选自《灰姑娘》（罗斯特罗波
+ 维奇改编）\n柴可夫斯基·随想曲，作品62
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21786&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b954926d13954d54@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270514T111500Z
+DTEND:20270514T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 6：居觐丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:居觐丨上海交响乐团\n免费\n贝多芬·C大调回旋曲，作品51之1\n贝多芬·F大调变奏曲，作品34\n贝多芬·降B大调第十一
+ 钢琴奏鸣曲，作品22\n贝多芬·降E大调第十三钢琴奏鸣曲，作品27之1「幻想曲风格的奏鸣曲」\n贝多芬·升c小调第十四钢琴奏鸣曲，作品27之2「月
+ 光」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21842&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e6bfb19e75c10ad6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270521T113000Z
+DTEND:20270521T123000Z
+SUMMARY:迪尼斯·索萨、革命浪漫管弦乐团与蒙特威尔第合唱团丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:革命浪漫管弦乐团与蒙特威尔第合唱团丨上海交响乐团\n指挥：迪尼斯·索萨\n免费\n贝多芬·《平静的海与幸福的航行》，作品11
+ 2\n勃拉姆斯·《命运之歌》，作品54\n贝多芬·d小调第九交响曲，作品125「合唱」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21849&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dfa412849cdb6d99@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270528T111500Z
+DTEND:20270528T131500Z
+SUMMARY:迪欧帝玛四重奏演绎贝多芬（一）丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:丨上海交响乐团\n¥80 - ¥380\n贝多芬·降E大调第十二弦乐四重奏，作品127\n贝多芬·a小调第十五弦乐四重奏，作
+ 品132
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21787&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d600d948d895ac11@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270529T070000Z
+DTEND:20270529T090000Z
+SUMMARY:迪欧帝玛四重奏演绎贝多芬（二）丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:丨上海交响乐团\n¥80 - ¥380\n贝多芬·降B大调第十三弦乐四重奏，作品130 及 降B大调弦乐四重奏「大赋格」，作
+ 品133\n贝多芬·升c小调第十四弦乐四重奏，作品131
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21788&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b43f2f6a449dd8d9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270529T113000Z
+DTEND:20270529T133000Z
+SUMMARY:波嘉、张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团\n指挥：安德里斯·波嘉\n¥80 - ¥880\n普罗科菲耶
+ 夫·g小调第二钢琴协奏曲，作品16\n柴可夫斯基·b小调第六交响曲，作品74「悲怆」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21777&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ff6a3b773788c0b5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270530T070000Z
+DTEND:20270530T090000Z
+SUMMARY:迪欧帝玛四重奏演绎贝多芬（三）丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:丨上海交响乐团\n¥80 - ¥380\n贝多芬·F大调第十六弦乐四重奏，作品135\n贝多芬·降B大调第十三弦乐四重奏，作
+ 品130（修订版终曲，1827）
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21789&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_220c793f79d3dd83@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270604T113000Z
+DTEND:20270604T133000Z
+SUMMARY:阿尔卑斯的号角—— 布里格尔、曾韵与上海交响乐团演绎格里埃尔和勃拉姆斯丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:曾韵与上海交响乐团演绎格里埃尔和勃拉姆斯丨上海交响乐团\n指挥：亚历山大·布里格尔\n¥80 - ¥880\n拉赫玛尼诺夫·
+ 《练声曲》\n格里埃尔·降B大调圆号协奏曲，作品91\n勃拉姆斯·c小调第一交响曲，作品68
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21778&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4a77af4d9cc0aa7c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270610T111500Z
+DTEND:20270610T131500Z
+SUMMARY:上交室内乐 7：管中日月——木管与铜管的时空对话丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:木管与铜管的时空对话丨上海交响乐团\n免费\n普朗克·双簧管、大管与钢琴三重奏\n莫扎特·降E大调钢琴三重奏，KV 498 
+ 「九柱球」\n巴赫·「恰空」，选自d小调第二无伴奏小提琴组曲，BWV 1004（菲尔·布林克改编）\n萨斯基亚·阿蓬·第一长号四重奏\n斯泰芬·韦
+ 尔赫尔斯特·《交响冒险》
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21810&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0c52b83688ecb8ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270612T111500Z
+DTEND:20270612T131500Z
+SUMMARY:华人贝多芬钢琴独奏全集 7：白立君丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 演艺厅
+DESCRIPTION:白立君丨上海交响乐团\n免费\n贝多芬·c小调变奏曲，WoO 80\n贝多芬·C大调第三钢琴奏鸣曲，作品2之3\n贝多芬·d
+ 小调第十七钢琴奏鸣曲，作品31之2「暴风雨」\n贝多芬·C大调第二十一钢琴奏鸣曲，作品53「华尔斯坦」
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21843&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_df214adf516d5b93@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270618T113000Z
+DTEND:20270618T133000Z
+SUMMARY:余隆、卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团音乐季
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团\n指挥：余隆\n¥80 - ¥580\n科恩戈尔德·D大调小提琴协
+ 奏曲，作品35\n马勒·升c小调第五交响曲
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21779&supportSeat=Y
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dab333c088dbd936@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270625T113000Z
+DTEND:20270625T133000Z
+SUMMARY:上海交响乐团2026-27音乐季闭幕音乐会 杨洋、卡瓦科斯与上海交响乐团纪念贝多芬逝世200周年
+LOCATION:捷豹上海交响音乐厅 主厅
+DESCRIPTION:上海交响乐团\n指挥：杨洋\n¥80 - ¥580\n贝多芬·F大调第八交响曲，作品93\n莫扎特·A大调第五小提琴协奏曲，
+ 作品219「土耳其」\n贝多芬·D大调小提琴协奏曲，作品61
+URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
+ id=21780&supportSeat=Y
+END:VEVENT
+END:VCALENDAR

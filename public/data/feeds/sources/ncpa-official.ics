@@ -1,0 +1,321 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 国家大剧院官网
+BEGIN:VEVENT
+UID:perf_00cd64400cb4cc5b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260903T113000Z
+DTEND:20260903T133000Z
+SUMMARY:“向胜利前进·英雄的赞歌”中国电影乐团交响经典音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中国电影乐团\n¥80 - ¥480\n阿隆·科普兰·平凡人的号角\n陈培勋·咏雪——选自交响诗我的祖国\n博·阿达米奇·瓦
+ 尔特保卫萨拉热窝\n伯蒂·希金斯·卡萨布兰卡\n埃克托尔·柏辽兹·拉科奇进行曲
+URL:https://wticket.chncpa.org/product.html?id=10002809
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1415a80c01690e36@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T113000Z
+DTEND:20260904T133000Z
+SUMMARY:“国乐中的经典”中国广播民族乐团《四大名著》交响金曲音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中国广播民族乐团\n¥80 - ¥480\n谷建芬·三国演义\n王立平·红楼梦\n赵季平·水浒传\n许镜清·西游记
+URL:https://wticket.chncpa.org/product.html?id=10002826
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_989cb77fccc57368@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T023000Z
+DTEND:20260905T043000Z
+SUMMARY:【唱响经典系列】“熠熠声辉”国家大剧院合唱团男声合唱音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:国家大剧院合唱团\n¥40\n杜纳耶夫斯基·青年歌\n诺索夫·遥远遥远\n谢多伊·莫斯科郊外的晚上\n弗朗西亚·香槟\n丹佛
+ 、达诺夫、尼维特·乡村路带我回家
+URL:https://wticket.chncpa.org/product.html?id=10002831
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8d85d127eebc6859@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T113000Z
+DTEND:20260905T133000Z
+SUMMARY:中国交响乐团2026/27音乐季开幕：水蓝、丹尼尔·洛扎科维奇与中国交响乐团音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中国交响乐团\n¥80 - ¥480\n莱奥什·雅纳切克·狂想曲塔拉斯·布尔巴\n理查·施特劳斯·交响诗唐璜，作品20号\n
+ 勃拉姆斯·D大调小提琴协奏曲，作品77号
+URL:https://wticket.chncpa.org/product.html?id=10002835
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fcadd6d6d2905a48@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T023000Z
+DTEND:20260906T043000Z
+SUMMARY:【国乐云韶系列】“舞韵韶音”中央民族乐团音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中央民族乐团\n¥40\n杨晓·醒狮起舞\n赵季平·龟兹舞\n朱琳·舞之光影\n刘文金·难忘的泼水节\n王丹红·弦上秧歌
+URL:https://wticket.chncpa.org/product.html?id=10002827
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a09c62c9806994e9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T063000Z
+DTEND:20260906T083000Z
+SUMMARY:斯图加特室内乐团音乐会
+LOCATION:北京艺术中心 音乐厅
+DESCRIPTION:斯图加特室内乐团\n¥80 - ¥380\n博凯里尼·F大调第十交响曲，作品35之4\n柴科夫斯基·如歌的行板，选自D大调第
+ 一弦乐四重奏，作品11\n圣-桑·A小调第一大提琴协奏曲（弦乐团改编版）\n斯卡尔科塔斯·为弦乐乐团而作的五首希腊舞曲\n约瑟夫·苏克·弦乐小夜曲
+ ，作品6
+URL:https://wticket.chncpa.org/product.html?id=10002861
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_748a7c06c7c5db54@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T113000Z
+DTEND:20260906T133000Z
+SUMMARY:“双韵合律”金野与北京民族乐团 中华四季暨2026乐季音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:金野与北京民族乐团\n¥80 - ¥480\n张小夫·双独奏协奏曲《中国故事》组曲\n双独奏与乐队《飞歌》\n双独奏与乐队《
+ 绣荷包》\n双独奏与乐队《囊玛·锅庄》\n双独奏与乐队《对花》
+URL:https://wticket.chncpa.org/product.html?id=10002813
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c2b95a8d820e4b23@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260908T113000Z
+DTEND:20260908T133000Z
+SUMMARY:“雅韵师承”名家音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥180 - ¥680\n施万春·节日序曲\n王云飞·巾帼\n栾凯·若一去不回\n快给大忙人让路\n夜深沉
+URL:https://wticket.chncpa.org/product.html?id=10002806
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f071d17af3491414@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260909T113000Z
+DTEND:20260909T133000Z
+SUMMARY:《星光—致敬引路人》中央音乐学院弘扬教育家精神原创作品音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥80 - ¥480\n史付红·逐光之翼\n郝维亚·我想做你的骄傲\n邹航·忠诚\n董立强·感怀\n胡银岳·沐光
+URL:https://wticket.chncpa.org/product.html?id=10002855
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_549e3bf9e66c4cba@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260910T113000Z
+DTEND:20260910T133000Z
+SUMMARY:花开的声音：郑健与国家大剧院合唱团女声合唱音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:郑健与国家大剧院合唱团\n¥80 - ¥380\n张泽浩、谢戈旋·花开的声音\n赵元任·教我如何不想他\n奥德威、周鑫泉·城
+ 南送别\n钱雷·人世间\n邱晨·小茉莉
+URL:https://wticket.chncpa.org/product.html?id=10002502
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_17fa52b852323023@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T113000Z
+DTEND:20260911T133000Z
+SUMMARY:花开的声音：郑健与国家大剧院合唱团女声合唱音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:郑健与国家大剧院合唱团\n¥80 - ¥380\n张泽浩、谢戈旋·花开的声音\n赵元任·教我如何不想他\n奥德威、周鑫泉·城
+ 南送别\n钱雷·人世间\n邱晨·小茉莉
+URL:https://wticket.chncpa.org/product.html?id=10002502
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d1924c9de9144558@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T023000Z
+DTEND:20260912T043000Z
+SUMMARY:【国乐云韶系列】“光影国韵”国乐影视菁萃音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥40\n傅庚辰·民族管弦乐《地道战》\n杨春林·民族管弦乐《歌剧名曲联奏》\n雷振邦·民族管弦乐《花儿为什么这样红》\n赵
+ 季平·民族管弦乐《立志》(选自《乔家大院》)\n赵季平·民族管弦乐《大宅门写意—卢沟晓月》
+URL:https://wticket.chncpa.org/product.html?id=10002829
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5ae02e2de185bf70@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T063000Z
+DTEND:20260912T083000Z
+SUMMARY:【河畔时光周末音乐会】沈媛 x 黎耕｜宇宙的和谐——管风琴知识音乐会
+LOCATION:北京艺术中心 音乐厅
+DESCRIPTION:¥40 - ¥80\n理查德·施特劳斯·查拉图斯特拉如是说\n格里格·日出 选自培尔金特\n德彪西·月光\n维瓦尔第·四季（
+ 春、夏、秋、冬）\n霍尔斯特·行星组曲之木星
+URL:https://wticket.chncpa.org/product.html?id=10002710
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7333ff8916367e16@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T113000Z
+DTEND:20260913T133000Z
+SUMMARY:“璀璨号角”安德烈·朱弗莱迪与北京交响乐团音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:安德烈·朱弗莱迪与北京交响乐团\n¥80 - ¥480\n约翰·威廉姆斯·奥林匹克号角与主题\n贝纳尔迪诺·蒙特尔迪·玛卡莲
+ 娜少女\n激情意大利\n我的太阳\n告别的时刻
+URL:https://wticket.chncpa.org/product.html?id=10002854
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4dac5aad601a11de@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260916T113000Z
+DTEND:20260916T133000Z
+SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n莫扎特·小提琴与中提琴协奏交响曲\n布鲁克纳·第九交响曲
+URL:https://wticket.chncpa.org/product.html?id=10002746
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4e5a9ef4ac59f4ca@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260917T113000Z
+DTEND:20260917T133000Z
+SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n贝多芬·第三钢琴协奏曲\n肖斯塔科维奇·第五交响曲
+URL:https://wticket.chncpa.org/product.html?id=10002746
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_45889ebb548ea937@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260918T113000Z
+DTEND:20260918T133000Z
+SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n利亚多夫·魔法湖\n普罗科菲耶夫·第三钢琴协奏曲\n柴科夫斯基
+ ·第五交响曲
+URL:https://wticket.chncpa.org/product.html?id=10002746
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5a67aa44426c2cf1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T063000Z
+DTEND:20260919T083000Z
+SUMMARY:【河畔时光周末音乐会】红旗颂歌·金秋雅韵——北京交响乐团专场音乐会
+LOCATION:北京艺术中心 音乐厅
+DESCRIPTION:北京交响乐团\n¥40 - ¥80\n吕其明·红旗颂\n张千一·我的家园\n鲍元恺·炎黄风情选曲\n茉莉花\n施光南·在希望
+ 的田野上
+URL:https://wticket.chncpa.org/product.html?id=10002731
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d9de4c42d00eb6eb@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T133000Z
+SUMMARY:一河流光:余隆携手王健与王丽雅演绎穆索尔斯基、拉赫玛尼诺夫和德沃夏克暨中国爱乐乐团2026-2027音乐季开幕音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:拉赫玛尼诺夫和德沃夏克暨中国爱乐乐团\n¥80 - ¥580\n莫杰斯特·穆索尔斯基·序曲莫斯科河上的黎明\, 选自歌剧霍万
+ 兴那\n谢尔盖·拉赫马尼诺夫·帕格尼尼主题狂想曲\, 作品43\n安东·德沃夏克·B小调大提琴协奏曲\, 作品104\, B.191
+URL:https://wticket.chncpa.org/product.html?id=10002818
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_127e7eb73b1f5953@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260924T113000Z
+DTEND:20260924T133000Z
+SUMMARY:王健与索舍尔大提琴与吉他二重奏音乐会－2026醇·萃古典
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥80 - ¥580\n皮亚佐拉·天使米隆加\n西贝柳斯·练习曲 Op.76 No.2\n弗雷·摇篮曲 Op.16\n大卫多
+ 夫·无词浪漫曲Op.23\n舒伯特·A小调阿佩乔尼琴奏鸣曲，D.821
+URL:https://wticket.chncpa.org/product.html?id=10002871
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_efd5e80b894fcb52@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260925T113000Z
+DTEND:20260925T133000Z
+SUMMARY:“皓月华章”中国广播民族乐团中秋节音乐会－国家大剧院“中华情怀·民乐名家”系列
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中国广播民族乐团\n¥80 - ¥480\n赵季平·庆典序曲\n张朝·月亮歌\n李滨扬·跳月\n春江花月夜\n李博禅·青青思
+ 念
+URL:https://wticket.chncpa.org/product.html?id=10002874
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_da1087dca95519d6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T023000Z
+DTEND:20260926T043000Z
+SUMMARY:【时代先声系列】“追光回响”北京交响乐团音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:北京交响乐团\n指挥：李昊冉\n¥40\n张朝·春之序曲\n杨帆·至先辈\n周龙·京华风韵\n李劭晟·清风云月\n柴科夫斯基
+ ·第五交响乐
+URL:https://wticket.chncpa.org/product.html?id=10002830
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7d05522bb23a77e9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T113000Z
+DTEND:20260926T133000Z
+SUMMARY:国家大剧院管弦乐团2026/27乐季开幕 “大地之歌”吕嘉、李立宏、安娜·韦勒、西蒙·奥尼尔与国家大剧院管弦乐团演绎马勒音乐会-20
+ 26醇·萃古典
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:国家大剧院管弦乐团\n¥80 - ¥480\n配乐诗朗诵《琵琶行》\n马勒·小柔板(选自升C小调第五号交响曲)\n马勒·大地
+ 之歌
+URL:https://wticket.chncpa.org/product.html?id=10002852
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2cdeaa7e3b6935f9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T113000Z
+DTEND:20260927T133000Z
+SUMMARY:“跨越阿尔卑斯山”吕思清小提琴独奏音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥100 - ¥680\n莫扎特·降B大调第10号小提琴奏鸣曲，K.378\n贝多芬·G大调第八小提琴钢琴奏鸣曲，作品30之
+ 3\n弗朗克·A大调小提琴与钢琴奏鸣曲，M.8
+URL:https://wticket.chncpa.org/product.html?id=10002873
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_507940a9cc666888@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261010T113000Z
+DTEND:20261010T133000Z
+SUMMARY:国家大剧院原创交响合唱音乐会《丰收中国》
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥80 - ¥480\n序曲\n耕织图\n根脉\n举国共庆丰收节\n晒秋
+URL:https://wticket.chncpa.org/product.html?id=10002836
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fe7b1c6bb99a0f48@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261011T113000Z
+DTEND:20261011T133000Z
+SUMMARY:国家大剧院原创交响合唱音乐会《丰收中国》
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥80 - ¥480\n序曲\n耕织图\n根脉\n举国共庆丰收节\n晒秋
+URL:https://wticket.chncpa.org/product.html?id=10002836
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_40910264f69d7e1e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T063000Z
+DTEND:20261017T083000Z
+SUMMARY:库伦齐斯与音乐永恒乐团演绎莫扎特、贝多芬—2026醇·萃古典
+LOCATION:北京艺术中心 音乐厅
+DESCRIPTION:库伦齐斯与音乐永恒乐团\n¥180 - ¥880\n沃尔夫冈·阿马德乌斯·莫扎特·歌剧费加罗的婚礼序曲，作品K.492\n沃
+ 尔夫冈·阿马德乌斯·莫扎特·A大调第二十三号钢琴协奏曲，作品K.488\n沃尔夫冈·阿马德乌斯·莫扎特·C大调第四十一号交响曲“朱庇特”，作品K.
+ 551
+URL:https://wticket.chncpa.org/product.html?id=10002817
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_561a369c15c55007@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261018T063000Z
+DTEND:20261018T083000Z
+SUMMARY:库伦齐斯与音乐永恒乐团演绎莫扎特、贝多芬—2026醇·萃古典
+LOCATION:北京艺术中心 音乐厅
+DESCRIPTION:库伦齐斯与音乐永恒乐团\n¥180 - ¥880\n路德维希·凡·贝多芬·科里奥兰序曲\n路德维希·凡·贝多芬·降B大调第四
+ 号交响曲\n路德维希·凡·贝多芬·A大调第七号交响曲
+URL:https://wticket.chncpa.org/product.html?id=10002817
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a4263615fd3d4a8b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261024T113000Z
+DTEND:20261024T133000Z
+SUMMARY:中国交响乐团2026/27音乐季：“纪念莎士比亚逝世410周年”莎士比亚文学作品交响音乐会
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:中国交响乐团\n¥80 - ¥480\n门德尔松·仲夏夜之梦选段\n拉尔夫·沃恩·威廉斯·天籁\n威廉·沃尔顿·皆大欢喜\n
+ 普罗科菲耶夫·罗密欧与朱丽叶组曲选段\n理查·施特劳斯·交响诗麦克白
+URL:https://wticket.chncpa.org/product.html?id=10002865
+END:VEVENT
+END:VCALENDAR

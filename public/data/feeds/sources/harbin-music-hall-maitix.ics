@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 哈尔滨音乐厅票务（麦座）
+BEGIN:VEVENT
+UID:perf_75edda0e02911305@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260828T110000Z
+DTEND:20260828T130000Z
+SUMMARY:【8.28】印象、浪漫与现代的交响音乐会
+LOCATION:哈尔滨音乐厅
+DESCRIPTION:哈尔滨交响乐团\n指挥：陈琳\n¥80 - ¥380\n克劳德·德彪西·小组曲\n马克斯·布鲁赫·g小调第一小提琴协奏曲，作
+ 品26\n谢尔盖·普罗科菲耶夫·罗密欧与朱丽叶第二组曲，作品64
+URL:https://hrbso.maitix.com/h5#/pages-order/projectDetail/index?projectId
+ =239358001
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ea2de18f6ddf11b1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260830T070000Z
+DTEND:20260830T080000Z
+SUMMARY:【8.30】铜管五重奏 室内乐音乐会
+LOCATION:哈尔滨音乐厅 室内乐厅
+DESCRIPTION:¥80 - ¥288
+URL:https://hrbso.maitix.com/h5#/pages-order/projectDetail/index?projectId
+ =239710001
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,133 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 广州大剧院官网
+BEGIN:VEVENT
+UID:perf_813a3b8d1a7b0e5c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T063000Z
+DTEND:20260913T083000Z
+SUMMARY:音乐后花园 德国新四重奏乐团音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:音乐后花园 德国新四重奏乐团\n¥80 起\n《桑巴姐姐》Samba di Didi\n《印第安的夏日》L'ete indi
+ en\n《爱我》Quiereme\n《约克吉他》Yorke's Guitar\n《为了我的爱》Per il mio Amore
+URL:https://3w.gzdjy.org/piao/4/24144.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c31e51c66f4cabd1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T113000Z
+DTEND:20260913T133000Z
+SUMMARY:《诗的中国》上海民族乐团音乐会
+LOCATION:广州大剧院 歌剧厅
+DESCRIPTION:上海民族乐团\n¥80 起
+URL:https://3w.gzdjy.org/piao/4/24178.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1d32dcede8c80ade@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T070000Z
+DTEND:20260927T090000Z
+SUMMARY:纯粹系列 约兰·索舍尔吉他独奏音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:¥180 起\n巴赫：《萨拉班德舞曲》和两首《加沃特舞曲》，选自第六号大提琴组曲，BWV1012\n巴赫：《萨拉班德舞曲》和
+ 《布雷舞曲》，选自第一号鲁特琴组曲，BWV996\n巴赫：《露尔舞曲》和《回旋加沃特舞曲》，选自第四号鲁特琴组曲，BWV1006a\n巴赫（约翰·
+ 瑟尔谢尔改编）：《前奏曲》《阿勒芒德舞曲》《库朗特舞曲》《萨拉班德舞曲》《布雷舞曲I、II》《吉格舞曲》，选自第三号大提琴组曲，BWV1009\n
+ 阿尔沃·帕特：《献给阿丽娜》
+URL:https://3w.gzdjy.org/piao/4/24143.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0b11467fbd3a2ac0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261010T113000Z
+DTEND:20261010T133000Z
+SUMMARY:郑君炽个人音乐会《Dear Future Me：致明日的我》
+LOCATION:广州大剧院 歌剧厅
+DESCRIPTION:
+URL:https://3w.gzdjy.org/piao/4/24201.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f3627e557129b8c9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T133000Z
+SUMMARY:音乐后花园 加拿大瑞林钢琴三重奏音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:¥80 起
+URL:https://3w.gzdjy.org/piao/4/24184.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d2b1ac5505db5d3f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T113000Z
+DTEND:20261017T133000Z
+SUMMARY:纯粹系列 “孤弦之歌”无伴奏小提琴的独白与狂想 黄滨小提琴独奏会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:¥180 起
+URL:https://3w.gzdjy.org/piao/4/24195.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7a539188e21712a6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261025T070000Z
+DTEND:20261025T090000Z
+SUMMARY:音乐后花园 德国FUKIO萨克斯四重奏音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:¥180 起\n1《托卡塔》 作品编号BWV 564——约翰·塞巴斯蒂安·巴赫\n2《第一四重奏》 ——让-巴蒂斯特·桑热莱
+ \n3《激烈的列车员》 ——罗宾·霍夫曼\n4《啊， 伟大的奥秘》 ——莫滕·劳里森\n5《 F小调第六弦乐四重奏》 ——费利克斯·门德尔松
+URL:https://3w.gzdjy.org/piao/4/24180.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_af1930a6a5045ffd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261101T113000Z
+DTEND:20261101T133000Z
+SUMMARY:香港天籁敦煌乐团《博物馆系列：来自文物的声音》音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:香港天籁敦煌乐团\n¥180 起
+URL:https://3w.gzdjy.org/piao/4/24205.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2b7852eb5602e3d9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261108T113000Z
+DTEND:20261108T133000Z
+SUMMARY:安妮-索菲·穆特与英国皇家爱乐乐团音乐会
+LOCATION:广州大剧院 歌剧厅
+DESCRIPTION:索菲·穆特与英国皇家爱乐乐团\n¥380 起\n巴特沃斯：《什罗普郡少年》狂想曲
+URL:https://3w.gzdjy.org/piao/4/24101.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_039062d8e9b6f461@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261115T113000Z
+DTEND:20261115T133000Z
+SUMMARY:音乐后花园 亚历山大・科布林钢琴独奏音乐会
+LOCATION:广州大剧院 实验剧场
+DESCRIPTION:¥180 起\n贝多芬·贝多芬《C 小调 32 首变奏曲》WoO 80\n勃拉姆斯·勃拉姆斯《四首叙事曲》Op.10\n拉赫
+ 玛尼诺夫·拉赫玛尼诺夫《音画练习曲》Op.39
+URL:https://3w.gzdjy.org/piao/4/24210.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d31dbc86d59e91e9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261227T113000Z
+DTEND:20261227T133000Z
+SUMMARY:维也纳春之声交响乐团新年音乐会
+LOCATION:广州大剧院 歌剧厅
+DESCRIPTION:维也纳春之声交响乐团\n¥180 起
+URL:https://3w.gzdjy.org/piao/4/24207.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0b37a4c24526eaf2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270110T113000Z
+DTEND:20270110T133000Z
+SUMMARY:维也纳皇家爱乐乐团新年音乐会
+LOCATION:广州大剧院 歌剧厅
+DESCRIPTION:维也纳皇家爱乐乐团\n¥180 起
+URL:https://3w.gzdjy.org/piao/4/24204.html
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,126 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 北京音乐厅官网
+BEGIN:VEVENT
+UID:perf_18f69f5dd8b787c3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T113000Z
+DTEND:20260904T133000Z
+SUMMARY:克里斯蒂安·布莱克肖钢琴独奏音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥499\n莫扎特·b小调柔板，K.540\n舒曼·交响练习曲，作品13（含遗作练习曲）\n舒伯特·第21号降B
+ 大调钢琴奏鸣曲，D.960
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238155004&eventId=268194099
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_94cc295c37d93531@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T113000Z
+DTEND:20260905T133000Z
+SUMMARY:乐见古典一一琥珀四重奏与陈萨专场音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥499\n柴可夫斯基·如歌的行板，D大调第一弦乐四重奏第二乐章，作品11号\n施尼特凯·第三弦乐四重奏\n肖斯
+ 塔科维奇·G小调钢琴五重奏，作品57号
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238821019&eventId=276786150
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b36e7c32fc3eb9ea@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T023000Z
+DTEND:20260912T043000Z
+SUMMARY:“和鸣”—中国交响乐团室内乐音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:中国交响乐团\n¥69 - ¥299\n格里格·霍尔堡组曲选段\n柴可夫斯基·C大调弦乐小夜曲\n聂耳曲 杨帆改编·金蛇狂舞
+ \n何占豪、陈钢·黄凯然改编梁祝选段\n约翰・庞德・奥德威曲 杨帆改编·送别
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238886091&eventId=277833794
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_41e12e1b2e0df554@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T113000Z
+DTEND:20260913T133000Z
+SUMMARY:打开音乐之门·百年之澜一一民国女子音乐肖像
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥399\n阳关三叠\n梅花三弄\n任光·渔光曲\n刘天华·烛影摇红\n黄自·花非花
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238837025&eventId=276830090
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3c7ad3c4a68395be@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260918T113000Z
+DTEND:20260918T133000Z
+SUMMARY:乐见古典一一克里斯托夫·巴拉蒂小提琴独奏音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥299\n巴赫·E大调第三号帕蒂塔，BWV1006\n巴赫·G大调第一号奏鸣曲，BWV1001\n巴赫·A小调
+ 第二号奏鸣曲，BWV1003\n巴赫·D小调第二号帕蒂塔，BWV\,1004
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238823022&eventId=276787210
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_492990f5a332c57b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T133000Z
+SUMMARY:2026年国家艺术院团演出演播季 中国交响乐团2026/27音乐季《长征组歌》中国交响乐团交响音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:年国家艺术院团演出演播季 中国交响乐团\n¥80 - ¥380\n吕其明·交响序曲《红旗颂》\n田丰·《渔家傲·反第一次大“
+ 围剿”》\n田丰·《忆秦娥·娄山关》\n田丰·《清平乐·六盘山》\n沈亚威·《七律·人民解放军占领南京》
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =239094014&eventId=280311102
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_11f7384fa620d09c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261001T113000Z
+DTEND:20261001T133000Z
+SUMMARY:音乐嘉年华·万里山河同心曲 爱乐男声合唱团 十·一 献礼大型主题合唱音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:音乐嘉年华·万里山河同心曲 爱乐男声合唱团\n¥99 - ¥599\n刘帜·我的祖国\n李劫夫·我们走在大路上\n羊鸣·我爱
+ 祖国的蓝天\n施光南·在希望的田野上\n铁源、徐锡宜·十五的月亮
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238930038&eventId=277808569
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_04a28eed4f7644ec@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261003T113000Z
+DTEND:20261003T133000Z
+SUMMARY:音乐嘉年华“江山如此多娇”红色经典交响音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥499\n吕其明·红旗颂\n茉莉花\n茅源、刘铁山·瑶族舞曲\n沂蒙山民歌主题狂想曲\n梨花颂(选自京剧《大唐
+ 贵妃》)
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238814024&eventId=276779196
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3f7ff4d4a3b8d820@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T133000Z
+SUMMARY:中国交响乐团2026/27音乐季 纪念肖斯塔科维奇诞辰120周年“老张的老肖”交响音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:中国交响乐团\n¥80 - ¥380\n王西麟·《火把节》\n柴科夫斯基·降b小调第一钢琴协奏曲\,作品23号\n肖斯塔科维
+ 奇·b小调第六交响曲\,作品54号
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =239913006&eventId=283642193
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b9a02dbcb2aa12ab@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261025T113000Z
+DTEND:20261025T133000Z
+SUMMARY:乐见古典·孤弦之歌——无伴奏小提琴的独白与狂想：黄滨小提琴独奏音乐会
+LOCATION:北京音乐厅
+DESCRIPTION:¥99 - ¥399\n巴赫·E大调第三无伴奏小提琴组曲，BWV1006\n伊萨伊·A小调第二无伴奏小提琴奏鸣曲，Op.27
+ No.2\n帕格尼尼·“磨坊女”主题变奏曲\n恩斯特·“夏日最后的玫瑰”变奏曲\n恩斯特·“魔王”大随想曲，Op.26
+URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
+ =238593004&eventId=274162006
+END:VEVENT
+END:VCALENDAR

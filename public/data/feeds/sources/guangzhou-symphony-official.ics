@@ -1,0 +1,228 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 广州交响乐团官网
+BEGIN:VEVENT
+UID:perf_0bea78c8bf21075d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T120000Z
+DTEND:20260911T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季开幕音乐会 黄屹×王健演绎柴科夫斯基
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：黄屹\n¥80 - ¥680\n柴科夫斯基·弗兰切斯卡·达·里米尼，作品32\n柴科夫斯基·洛可可主题
+ 变奏曲，作品33\n柴科夫斯基·E小调第五交响曲，作品64
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5080
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fc93bb3668c82e7d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260930T120000Z
+DTEND:20260930T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（2）杨洋演绎莫扎特
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：杨洋\n¥80 - ¥380\n莫扎特·歌剧女人心序曲，K. 588\n莫扎特·降E大调交响协奏曲，K
+ . 297b\n莫扎特·C大调第四十一交响曲“朱庇特”，K. 551
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5081
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_755a6ac931c0fe09@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261023T120000Z
+DTEND:20261023T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（3）崔琳涵携手法佐·塞依
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：崔琳涵\n¥80 - ¥380\n法佐·塞依·大地母亲（中国首演）\n柴科夫斯基·D大调第三交响曲“波
+ 兰”，作品29
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5082
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f08308294ac890d5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261105T120000Z
+DTEND:20261105T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（4）吕绍嘉演绎勃拉姆斯
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：吕绍嘉\n¥80 - ¥380\n韦伯·歌剧奥伯龙序曲，J.306\n马克斯·布鲁赫·苏格兰幻想曲，作
+ 品46\n勃拉姆斯·C小调第一交响曲，作品68
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5083
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ddd20fd24edf74b4@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261120T120000Z
+DTEND:20261120T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（5）俞峰×秦立巍演绎俄罗斯经典
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：俞峰\n¥80 - ¥380\n肖斯塔科维奇·降E大调第一大提琴协奏曲，作品107\n柴科夫斯基·曼弗
+ 雷德交响曲，作品58
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5084
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_cb18a92da70b7624@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261218T120000Z
+DTEND:20261218T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（6）黄屹×蒂博戴法式璀璨浪漫夜
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：黄屹\n¥80 - ¥380\n拉威尔·悼念公主的帕凡舞曲\n圣-桑·F大调第五钢琴协奏曲，作品103
+ \n柏辽兹·幻想交响曲，作品14
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5085
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9599d073808987b9@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261224T120000Z
+DTEND:20261224T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（7）余隆的柴科夫斯基协奏曲之夜
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：余隆\n¥80 - ¥680\n柴科夫斯基·D大调小提琴协奏曲，作品35\n柴科夫斯基·G大调第二钢琴
+ 协奏曲，作品44
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5086
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7c65731cf70fcfe7@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270110T120000Z
+DTEND:20270110T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（8）丁嘉滢携手长笛之王帕胡德
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：丁嘉滢\n¥80 - ¥680\n罗密欧与朱丽叶幻想序曲歌剧魔笛序曲，K.620\n魔笛主题幻想曲，为
+ 长笛与管弦乐队而作连斯基咏叹调，选自歌剧叶甫盖尼·奥涅金，为长笛与管弦乐队而作\n哈姆雷特幻想序曲，作品67\n弄臣幻想曲，为双长笛与管弦乐队而作
+ \n第二长笛·黄郁婷(广州交响乐团长笛声部副首席)
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5087
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7f373a20ea8b3ced@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270306T120000Z
+DTEND:20270306T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（9）德彪西与拉威尔的梦幻交响
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：西尔万·康布勒兰 Sylvain Cambreling\n¥80 - ¥380\n德彪西·牧神午后前奏
+ 曲\n拉威尔·D大调左手钢琴协奏曲\n德彪西·为管弦乐而作的意象集\, L.122
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5088
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_16df5ef2c7df1877@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270314T120000Z
+DTEND:20270314T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（10）黄屹携手卡瓦科斯
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：黄屹\n¥80 - ¥380\n巴托克·第二小提琴协奏曲，BB 117\n巴托克·乐队协奏曲，BB 1
+ 23
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5089
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e601a64006613047@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270327T120000Z
+DTEND:20270327T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（11）拉赫林的马勒第一交响曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：朱利安·拉赫林 Julian Rachlin\n¥80 - ¥380\n沃尔顿·中提琴协奏曲\n马勒·
+ D大调第一交响曲“巨人”
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5090
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ffe6fe9ced683f15@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270402T120000Z
+DTEND:20270402T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（12）余隆的柴科夫斯基第六交响曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：余隆\n¥80 - ¥680\n马勒·亡儿之歌\n柴科夫斯基·B小调第六交响曲“悲怆”，作品74
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5091
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_34bc507d8363ebcd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270417T120000Z
+DTEND:20270417T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（13）彼得·弗洛的布鲁克纳第四交响曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：克劳斯·彼得·弗洛 Claus Peter Flor\n¥80 - ¥680\n贝多芬·C小调第三钢琴
+ 协奏曲，作品37\n布鲁克纳·降E大调第四交响曲“浪漫”，WAB 104
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5092
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2bf12b26daad83d7@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270423T120000Z
+DTEND:20270423T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（14）交响巴赫
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：汉斯约尔格·阿尔布雷希特 Hansjörg Albrecht\n¥80 - ¥380\n约翰·塞巴斯蒂
+ 安·巴赫（改编·列奥波尔德·斯托科夫斯基）：D小调托卡塔与赋格，BWV 565\n约翰·塞巴斯蒂安·巴赫（改编·奥托里诺·雷斯皮基）：D大调前奏曲
+ 与赋格，BWV 532\n约翰·塞巴斯蒂安·巴赫 （改编·汉斯约尔格·阿尔布雷希特）：D小调键盘协奏曲，BWV 1052\n约翰·塞巴斯蒂安·巴赫
+ （改编·列奥波尔德·斯托科夫斯基）：G小调幻想曲与赋格，BWV 542\n约翰·塞巴斯蒂安·巴赫（改编·列奥波尔德·斯托科夫斯基）：D小调恰空，B
+ WV 1004
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5093
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1f1166d6bcefd449@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270505T120000Z
+DTEND:20270505T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（15）黄屹 × 戈埃内 × 音乐永恒合唱团演绎肖斯塔科维奇第十三交响曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：黄屹\n¥80 - ¥680\n肖斯塔科维奇·降B小调第十三交响曲，为男低音独唱、男声合唱与管弦乐队而
+ 作作品113
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5094
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a409d15d37ec74fe@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270514T120000Z
+DTEND:20270514T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（16）阿尔班·格哈特演绎舒曼大提琴协奏曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：金郁矿\n¥80 - ¥380\n柴科夫斯基·风暴序曲，作品76\n舒曼·A小调大提琴协奏曲， 作品1
+ 29\n柴科夫斯基·C小调第二交响曲“小俄罗斯”， 作品17
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5095
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_26dfaa8801f81b67@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270606T120000Z
+DTEND:20270606T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（17）安德里斯·波嘉演绎柴科夫斯基
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：安德里斯·波嘉 Andris Poga\n¥80 - ¥380\n理查·施特劳斯·降E大调第一圆号协奏
+ 曲，作品11\n普罗科菲耶夫·C大调第三钢琴协奏曲，作品26\n柴科夫斯基·F小调第四交响曲，作品36
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5096
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4f31af8f2d09d149@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270611T120000Z
+DTEND:20270611T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（18）柴科夫斯基与肖邦
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：亚历山大·布里格 Alexander Briger\n¥80 - ¥380\n柴科夫斯基·G小调第一交
+ 响曲“冬日梦幻”，作品13\n肖邦·E小调第一钢琴协奏曲，作品11
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5097
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_697ee7301aea2b17@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270709T120000Z
+DTEND:20270709T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季（19）黄屹 × 张昊辰 × 上海四重奏
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：黄屹\n¥80 - ¥680\n约翰·亚当斯·绝对创造\n柴科夫斯基·降B小调第一钢琴协奏曲，作品23
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5098
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_472676b3445c9ca5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270716T120000Z
+DTEND:20270716T140000Z
+SUMMARY:广州交响乐团2026/2027音乐季闭幕音乐会 余隆的马勒第五交响曲
+LOCATION:星海音乐厅 交响乐演奏大厅
+DESCRIPTION:广州交响乐团\n指挥：余隆\n¥80 - ¥680\n莫扎特·降E大调交响协奏曲，K.364\n马勒·升C小调第五交响曲
+URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5099
+END:VEVENT
+END:VCALENDAR

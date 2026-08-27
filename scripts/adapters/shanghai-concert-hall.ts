@@ -335,7 +335,8 @@ function splitNames(value: string) {
     .replace(/\s+\/\s+/g, "、")
     .split(/[、，,；;]/)
     .map((name) => cleanText(name))
-    .filter((name) => name && name.length <= 40 && !workKeywordPattern.test(name));
+    .filter((name) => name && name.length <= 40 && !workKeywordPattern.test(name))
+    .filter((name) => !/[的而]/.test(name) && !/^从.+到/.test(name) && !/等$/.test(name));
 }
 
 function dedupeProgram(program: ProgramItem[]) {

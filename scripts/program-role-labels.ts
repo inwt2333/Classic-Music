@@ -65,3 +65,9 @@ export function isProgramRoleLabel(value: string | undefined) {
   const vocalForce = "(?:(?:男|女|童|混|男女)声)?(?:独唱|领唱|合唱|对唱|齐唱|重唱|演唱)";
   return new RegExp(`^${vocalForce}(?:[与及和]${vocalForce})*$`).test(normalized);
 }
+
+const performanceForceSuffixPattern = /(?:低音提琴|大提琴|中提琴|小提琴|钢琴|管风琴|双簧管|单簧管|长笛|大管|圆号|小号|长号|竖琴|吉他|二胡|古筝|琵琶|笛子|唢呐|指挥|独奏|独唱|领奏|领唱|演唱|演奏|二重奏|三重奏|四重奏|五重奏|重奏)+$/;
+
+export function stripPerformanceForceSuffix(value: string) {
+  return value.replace(performanceForceSuffixPattern, "");
+}

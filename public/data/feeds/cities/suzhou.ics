@@ -1,0 +1,228 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 苏州
+BEGIN:VEVENT
+UID:perf_c8752a5779423d4a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260912T113000Z
+DTEND:20260912T133000Z
+SUMMARY:无界 苏州交响乐团2026 - 27音乐季开幕音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：许忠\n吕其明·红旗颂\n阿城词/赵季平曲·哥哥撑排走丹江\n美丽其格·草原上升起不落的太阳\n许珩哲
+ 词/陶陌曲·雨落庭间歌满楼\n樊孝斌词/刘聪曲·鸟儿在风中歌唱
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=239349005
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c7658839ca0f0925@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261010T113000Z
+DTEND:20261010T133000Z
+SUMMARY:贝蒂杰拉德指挥《西游记》
+LOCATION:苏州文化艺术中心 大剧院
+DESCRIPTION:苏州交响乐团\n指挥：洛朗·贝蒂杰拉德\n洛朗·贝蒂杰拉德·为大型乐队而作的芭蕾《西游记》
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238937069
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4dfa333e30a481c2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261030T113000Z
+DTEND:20261030T133000Z
+SUMMARY:许忠、祖克曼与苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心
+DESCRIPTION:苏州交响乐团\n指挥：许忠\n鲁塞尔·A大调第四交响曲\n莫扎特·G大调第三小提琴协奏曲\n巴托克·乐队协奏曲，BB 123
+URL:https://www.szsorch.com/2026-27-Music-Season/2087374603217092608.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_72ad792e5392547c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261118T113000Z
+DTEND:20261118T133000Z
+SUMMARY:苏州交响乐团十周年音乐会
+LOCATION:苏州文化艺术中心 大剧院
+DESCRIPTION:苏州交响乐团\n指挥：陈燮阳\n拉赫玛尼诺夫·E小调第二交响曲第三乐章\n威尔第·西西里晚祷序曲\n李斯特·交响诗第三首《前
+ 奏曲》，S. 97\n吴祖强、杜鸣心等·红色娘子军组曲（选段）\n周湘林·金鸡湖序曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=239349005
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f143b5b224957d0b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261225T113000Z
+DTEND:20261225T133000Z
+SUMMARY:格调室内乐 · 一
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n加布里埃利·供器乐演奏的坎佐纳第二首\n丹尼尔松·协奏组曲为四支圆号与大号而作\n克雷斯波·第一美洲组曲\n
+ 米奇·沃布莱斯基·号角曲\n江苏民歌 / 米奇·沃布莱斯基改编·茉莉花
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238967076
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_568ae2e4556418e5@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270108T113000Z
+DTEND:20270108T133000Z
+SUMMARY:“皇帝”与“英雄”——苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：俞潞\n贝多芬·降E大调第五钢琴协奏曲\n贝多芬·降E大调第三交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238895073
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a41731d080b8d35c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270306T113000Z
+DTEND:20270306T133000Z
+SUMMARY:柏辽兹之夜
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：陈燮阳\n柏辽兹·罗马狂欢节序曲\n柏辽兹·幻想交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238967077
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_78c79194474f6c64@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270326T113000Z
+DTEND:20270326T133000Z
+SUMMARY:大师系列 · 一
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n朱利亚尼·大序曲\n巴赫·恰空舞曲\n门德尔松·威尼斯船歌\n巴里奥斯·大圣堂\n肖邦·雨滴前奏曲，No. 
+ 15
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=239107015
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_cc2b02e6d6a0d59f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270327T113000Z
+DTEND:20270327T133000Z
+SUMMARY:高纬度的回声——苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：大卫·多本菲尔德\n里姆斯基-科萨科夫·西班牙随想曲\n布劳威尔·第四吉他协奏曲（“多伦多协奏曲”）\
+ n西贝柳斯·D大调第二交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238896069
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_209d68f716a583d6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270410T113000Z
+DTEND:20270410T133000Z
+SUMMARY:格调室内乐 · 二
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n舒伯特·降B大调弦乐三重奏，D. 471\n莫扎特·降E大调圆号五重奏\n勃拉姆斯·降B大调第三弦乐四重奏
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238942070
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d3023876583f2059@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270417T113000Z
+DTEND:20270417T133000Z
+SUMMARY:舒曼与勃拉姆斯——苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：许忠\n舒曼·D小调第四交响曲\n勃拉姆斯·F大调第三交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238967078
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_478d00f5dc14a62e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270424T113000Z
+DTEND:20270424T133000Z
+SUMMARY:陈燮阳演绎肖斯塔科维奇音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：陈燮阳\n肖斯塔科维奇·哈姆雷特组曲a（选段）\n肖斯塔科维奇·G小调第十一交响曲“1905”
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238924075
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fa5bd9d37bf0a3fa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270508T113000Z
+DTEND:20270508T133000Z
+SUMMARY:大师系列 · 二
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n肖斯塔科维奇·G小调钢琴五重奏\n弗兰克·F小调钢琴五重奏
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238924076
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1c634a833285a60c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270515T113000Z
+DTEND:20270515T133000Z
+SUMMARY:巨人的肖像——许忠与苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：许忠\n贝多芬·C小调第三号钢琴协奏曲\n马勒·E小调第七交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=239111012
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a125c17d58ca4536@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270529T113000Z
+DTEND:20270529T133000Z
+SUMMARY:特别策划——交响童话《小王子》
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：许忠\n贝因图斯·交响组曲《小王子》
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=239094020
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_590373cf2b915f33@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270605T113000Z
+DTEND:20270605T133000Z
+SUMMARY:节奏狂欢——苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：李飚\n法雅·三角帽第二组曲\n伯恩斯坦·交响舞曲选自《西区故事》\n拉威尔·波莱罗舞曲\n吉纳斯特拉
+ ·芭蕾舞剧《南美大牧场》
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238906067
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_09010152ebf29c68@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270619T113000Z
+DTEND:20270619T133000Z
+SUMMARY:古典回望——苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：克劳斯·彼得·弗洛\n莫扎特·序曲选自《魔笛》\n莫扎特·A大调单簧管协奏曲\n勃拉姆斯·E小调第四交
+ 响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238937071
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_fc027957705ae656@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270710T113000Z
+DTEND:20270710T133000Z
+SUMMARY:华夏音乐节·泱泱国风 纪念——陈燮阳与苏州交响乐团音乐会
+LOCATION:苏州文化艺术中心 金鸡湖音乐厅
+DESCRIPTION:苏州交响乐团\n指挥：陈燮阳\n刘福安、卞祖善、马友道、程寿昌·八一交响诗\n施咏康·纪念圆号协奏曲\n丁善德·长征交响曲
+URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
+ e=154b6a7e32bde544195712ec00058f3e#/pages-order/projectDetail/index?proje
+ ctId=238949065
+END:VEVENT
+END:VCALENDAR

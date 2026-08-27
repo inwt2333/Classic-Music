@@ -1,0 +1,142 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 凯迪拉克·上海音乐厅官网
+BEGIN:VEVENT
+UID:perf_c48a6dcf55e66b25@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260828T113000Z
+DTEND:20260828T130000Z
+SUMMARY:保罗·刘易斯钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n沃尔夫冈·阿玛多伊斯·莫扎特·C大调第十号钢琴奏鸣曲\n弗朗西斯·普朗克·即兴曲，第7–12首\n克
+ 劳德·德彪西·欢乐岛\n弗朗西斯·普朗克·即兴曲，第1–6首 & 第13–15首\n沃尔夫冈·阿玛多伊斯·莫扎特·C小调第十四号钢琴奏鸣曲
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=681&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7ce9209c74cb391e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T113000Z
+DTEND:20260904T130000Z
+SUMMARY:朱凯源小提琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥380\n勃拉姆斯·匈牙利舞曲四首\n格里格·C小调第三号小提琴奏鸣曲\n理查·施特劳斯·《玫瑰骑士》圆舞曲\
+ n理查·施特劳斯·降E大调小提琴奏鸣曲
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=684&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e98c9aa158ddae21@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260911T113000Z
+DTEND:20260911T130000Z
+SUMMARY:邂逅巴赫—丹尼尔・洛扎科维奇小提琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n巴赫·G小调第1号小提琴无伴奏奏鸣曲\n巴赫·E大调第3号小提琴帕蒂塔\n巴赫·D小调第2号小提琴帕
+ 蒂塔
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=685&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f338b41289177945@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260918T113000Z
+DTEND:20260918T130000Z
+SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会——巴赫与莫扎特跨越时代的对话
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:阿姆斯特丹美泉宫室内乐团\n¥80 - ¥120\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·G大调第二号长笛四
+ 重奏，KV 285a\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·C小调慢板与赋格（改编自巴赫管风琴奏鸣曲第2号）\n沃尔夫冈·阿玛多
+ 伊斯·莫扎特 W.A. Mozart·A大调第四号长笛四重奏，KV 298\n沃尔夫冈·阿玛多伊斯·莫扎特 W.A. Mozart·G小调慢板与赋
+ 格（赋格改编自巴赫《平均律键盘曲集第二卷》G小调前奏曲与赋格）
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=688&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_1dff4f2f811b68b8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T130000Z
+SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会：巨匠之外——贝多芬、舒伯特及挚友们
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:阿姆斯特丹美泉宫室内乐团\n¥80 - ¥120\n路德维希·凡·贝多芬 L.v. Beethoven·D大调小夜曲作品25
+ （长笛、小提琴与中提琴）\n约瑟夫·海顿 J. Haydn·A小调长笛、中提琴与大提琴三重奏( 改编自Hob.XI:87，约1770年 ）\n弗里
+ 德里希·哈特曼·格拉夫 F.H. Graf·G大调四重奏\n弗朗茨·舒伯特 F. Schubert·降B大调弦乐三重奏（1816年）\n费迪南德·
+ 里斯 F. Ries·C大调长笛四重奏，作品145 第一号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=687&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_77119e4e9acc56ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260921T113000Z
+DTEND:20260921T130000Z
+SUMMARY:基里尔·格斯坦钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥580\n弗朗茨·李斯特·I 愿那日蒙福Benedetto sia il giorno\n弗朗茨·李斯特·但丁
+ 幻想奏鸣曲\n弗朗茨·李斯特·降E小调谐谑曲，作品\n向勃拉姆斯致敬·II. 港口酒馆音乐\n布雷特·迪恩·F小调钢琴奏鸣曲， 作品
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=686&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ae3033b221aceac0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260927T060000Z
+DTEND:20260927T073000Z
+SUMMARY:【玲珑国乐】乐养仲秋——音乐疗愈现场
+LOCATION:凯迪拉克·上海音乐厅 音乐立方-B2
+DESCRIPTION:¥180\n刘铁山、茅沅·云瑶\n丁培峰·梦渡江南\n贺绿汀·念•旧时\n左宏元·三生映梦\n王惠然·彝火·重生
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=682&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_428237f7340cb6ed@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261003T113000Z
+DTEND:20261003T130000Z
+SUMMARY:本杰明·格罗夫纳钢琴独奏音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n沃尔夫冈·阿玛多伊斯·莫扎特·降B大调钢琴奏鸣曲\n路德维希·凡·贝多芬·升C小调第十四钢琴奏鸣曲“
+ 月光”，作品27号第2首\n亚历山大·斯克里亚宾·升G小调第二钢琴奏鸣曲，作品19号\n弗朗茨·李斯特·彼特拉克十四行诗第104首\, S. 16
+ 1 No.5\n弗里德里克·肖邦·降B小调第二钢琴奏鸣曲，作品35号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=689&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_83dfd633ed36dee7@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261011T093000Z
+DTEND:20261011T130000Z
+SUMMARY:弦咏浪漫——卡米尔·托马斯与朱利安·博考大提琴与钢琴音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥80 - ¥480\n约翰内斯·勃拉姆斯·E小调第一号大提琴与钢琴奏鸣曲，作品38号\n弗雷德里克·肖邦·G小调大提琴与钢
+ 琴奏鸣曲，作品65号
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=690&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_417af241b5652460@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T130000Z
+SUMMARY:法国凡酷四重奏《大师杰作》音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥100 - ¥380\n莫扎特·C大调第19号弦乐四重奏“不协和音”\n勃拉姆斯·A小调第2号弦乐四重奏\n德彪西·G小调
+ 弦乐四重奏\n海顿·D大调弦乐四重奏\n门德尔松·F小调第6号弦乐四重奏
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=691&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e72ca0ec05e8100b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261031T113000Z
+DTEND:20261031T130000Z
+SUMMARY:《双琴对韵：跨越时空的变奏》双钢琴音乐会
+LOCATION:凯迪拉克·上海音乐厅 音乐立方-B2
+DESCRIPTION:¥80 - ¥180
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=683&activeType=0
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f08c53793371cd78@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261219T113000Z
+DTEND:20261219T130000Z
+SUMMARY:大师之夜・浪漫主义的美与激情 叶甫根尼・米哈伊洛夫钢琴独奏新年音乐会
+LOCATION:凯迪拉克·上海音乐厅 大厅
+DESCRIPTION:¥100 - ¥480\nM.格林卡/F.李斯特·切尔诺摩尔进行曲自歌剧《鲁斯兰与柳德米拉》\n斯克里亚宾·七首前奏曲\n拉
+ 赫玛尼诺夫·音画练习曲\n拉赫玛尼诺夫·前奏曲\n拉赫玛尼诺夫·音乐瞬间
+URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=669&activeType=0
+END:VEVENT
+END:VCALENDAR

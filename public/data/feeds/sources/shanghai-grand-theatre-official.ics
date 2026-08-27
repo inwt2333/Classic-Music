@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 上海大剧院官网
+BEGIN:VEVENT
+UID:perf_75adb76eedaa88bd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T130500Z
+SUMMARY:一个人的古典——巴拉蒂演绎巴赫无伴奏小提琴奏鸣曲与组曲
+LOCATION:上海大剧院 中剧场
+DESCRIPTION:¥100 - ¥380\n巴赫E大调第三号帕蒂塔，BWV1006·巴赫G小调第一号奏鸣曲，BWV 1001\n巴赫E大调第三
+ 号帕蒂塔，BWV1006·巴赫A小调第二号奏鸣曲，BWV 1003
+URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22557
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7b48045b343ff69a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261231T113000Z
+DTEND:20261231T133000Z
+SUMMARY:维也纳施特劳斯乐团2027新年音乐会
+LOCATION:上海大剧院 大剧场
+DESCRIPTION:维也纳施特劳斯乐团\n¥180 - ¥1280
+URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22509
+END:VEVENT
+END:VCALENDAR

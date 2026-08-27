@@ -1,0 +1,194 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 深圳交响乐团官网
+BEGIN:VEVENT
+UID:perf_46e96e010bae8358@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260904T120000Z
+DTEND:20260904T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季开幕：布鲁克纳的苍穹
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n安东·布鲁克纳·c小调第八交响曲
+URL:https://szyyt.com/performance/show_100000987069388.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_de4ee3680ffa173b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260906T113000Z
+DTEND:20260906T133000Z
+SUMMARY:深圳交响乐团×深圳音乐厅特别呈现 漫游室内乐系列音乐会V 炽夜探戈
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:深圳交响乐团\n¥88 - ¥118\n罗琳娜•麦肯尼特（洛德·金 改编）：艾维拉探戈\n尼诺•罗塔（洛德·罗密欧与朱丽叶\
+ n阿斯托尔•皮亚佐拉（洛德·金 改编）：布宜诺斯艾利斯午夜零时\n胡安•卡洛斯•科维安（洛德·金 改编）：怀旧\n雅各布•加德（洛德·金 改编）：
+ 嫉妒
+URL:https://szyyt.com/performance/show_100001022094115.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_20c21b0da9656ec6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260917T113000Z
+DTEND:20260917T133000Z
+SUMMARY:《图兰朵》——首演100周年纪念音乐会 深圳交响乐团2026-2027乐季
+LOCATION:深圳音乐厅
+DESCRIPTION:深圳交响乐团
+URL:http://www.sso.org.cn/infodetail.action?id=8a7d559d9eedeea001a02e5fe88
+ e00da&pid=305
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a75b383e136ddbe6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261007T113000Z
+DTEND:20261007T133000Z
+SUMMARY:深圳交响乐团×深圳音乐厅特别呈现 漫游室内乐系列音乐会VI 弦上独白
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:深圳交响乐团\n¥88 - ¥118\n弗朗茨·舒伯特·c小调弦乐四重奏，D.703\n亚历山大·鲍罗丁·D大调第二弦乐四重
+ 奏\n德米特里·肖斯塔科维奇·c小调第八弦乐四重奏，Op.110
+URL:https://szyyt.com/performance/show_100001033279885.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0f8d051a4d184de0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T113000Z
+DTEND:20261016T133000Z
+SUMMARY:新世界的“记忆” 深圳交响乐团2026-2027音乐季
+LOCATION:深圳音乐厅
+DESCRIPTION:深圳交响乐团\n扬·贝拉·节日序曲\n安东宁·德沃夏克·g小调钢琴协奏曲\,作品33\n安东宁·德沃夏克·e小调第九交响曲“
+ 自新世界”\,作品95
+URL:http://www.sso.org.cn/infodetail.action?id=8a7d559d9eedeea001a013e794a
+ 600cd&pid=305
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_384dd1e014ee7aaf@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261127T120000Z
+DTEND:20261127T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——海之交响
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n艾尔玛·兰普森·海之交响I\n艾尔玛·兰普森·海之交响Ⅱ\n克洛德·德彪西·大海
+URL:https://szyyt.com/performance/show_100000988433573.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8dd97e7476f6e81b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261211T120000Z
+DTEND:20261211T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——布鲁克纳的浪漫
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n爱德华·埃尔加·e小调大提琴协奏曲，作品85\n安东·布鲁克纳·降E大调第四交响曲“
+ 浪漫”
+URL:https://szyyt.com/performance/show_100000989128224.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_f5d2b227832d0b74@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261218T120000Z
+DTEND:20261218T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——醇享勃兰登堡
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n约翰·塞巴斯蒂安·巴赫·F大调第一号勃兰登堡协奏曲，作品1046\n约翰·塞巴斯蒂安
+ ·巴赫·G大调第三号勃兰登堡协奏曲，作品1048\nⅡ 快板\n约翰·塞巴斯蒂安·巴赫·D大调第五号勃兰登堡协奏曲，作品1050\nⅡ 热情地
+URL:https://szyyt.com/performance/show_100000989832713.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_52c2f62e43fab3e0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270305T120000Z
+DTEND:20270305T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——庄严巨制
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n安东宁·德沃夏克·a小调小提琴协奏曲，作品53\n弗朗茨·舒伯特·C大调第九交响曲“
+ 伟大”，作品D. 944
+URL:https://szyyt.com/performance/show_100000990557195.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_41dc098254e33407@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270312T120000Z
+DTEND:20270312T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——命运的抉择
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n路德维希・凡・贝多芬·大赋格，作品133\n路德维希・凡・贝多芬·科里奥兰\n路德维
+ 希・凡・贝多芬·c小调第五交响曲，作品67
+URL:https://szyyt.com/performance/show_100000991282867.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ab3ae8cecc1388d3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270326T120000Z
+DTEND:20270326T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——三生万物
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n谢尔盖·拉赫玛尼诺夫·d小调第三钢琴协奏曲，作品30\n谢尔盖·拉赫玛尼诺夫·a小调
+ 第三交响曲，作品44
+URL:https://szyyt.com/performance/show_100000991964858.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_45f1258c50b4ac2c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270409T113000Z
+DTEND:20270409T133000Z
+SUMMARY:深圳交响乐团2026-2027乐季——乐圣与师徒--纪念贝多芬逝世200周年
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n路德维希·凡·贝多芬·C大调第一钢琴协奏曲，作品15\n路德维希·凡·贝多芬·降B大
+ 调第二钢琴协奏曲，作品19\n路德维希·凡·贝多芬·c小调第三钢琴协奏曲，作品37\n路德维希·凡·贝多芬·G大调第四钢琴协奏曲，作品58\n路德
+ 维希·凡·贝多芬·降E大调第五钢琴协奏曲“皇帝”，作品73
+URL:https://szyyt.com/performance/show_100000992661244.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_189c497984c0bf4e@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270423T120000Z
+DTEND:20270423T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——峰弦指上
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n沃尔夫冈·阿玛迪斯·莫扎特·D大调嬉游曲，作品K. 136\n沃尔夫冈·阿玛迪斯·莫
+ 扎特·D大调第四小提琴协奏曲，作品K. 218\n路德维希·凡·贝多芬·C大调第一交响曲，作品21
+URL:https://szyyt.com/performance/show_100000993332236.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b42591e29a237e5c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270507T120000Z
+DTEND:20270507T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——法兰西绮梦
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n莫里斯·拉威尔·库普兰之墓\n埃克托尔·柏辽兹·克利奥帕特拉之死\n埃克托尔·柏辽兹
+ ·夏夜\n莫里斯·拉威尔·达芙妮与克洛埃
+URL:https://szyyt.com/performance/show_100000994034146.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7d3be7939def15f8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270521T120000Z
+DTEND:20270521T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——英伦之谜
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n爱德华·埃尔加·b小调小提琴协奏曲，作品61\n爱德华·埃尔加·谜语变奏曲，作品36
+ \n主题·行板\n变奏一·同一速度\n变奏二·快板
+URL:https://szyyt.com/performance/show_100000994712679.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_74439e3f35d12bfd@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270611T120000Z
+DTEND:20270611T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季——琴歌共舞
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n朱塞佩·威尔第·茶花女\n爱德华·格里格·a小调钢琴协奏曲，作品16\n谢尔盖·拉赫
+ 玛尼诺夫·交响舞曲，作品45
+URL:https://szyyt.com/performance/show_100000995458514.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dfbbd9a0909c5829@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20270709T120000Z
+DTEND:20270709T140000Z
+SUMMARY:深圳交响乐团2026-2027乐季闭幕：布鲁克纳的丰碑
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n凯里·特纳·兵马俑\n安东·布鲁克纳·E大调第七交响曲
+URL:https://szyyt.com/performance/show_100000996176323.html
+END:VEVENT
+END:VCALENDAR

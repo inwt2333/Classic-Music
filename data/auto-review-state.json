@@ -1,5 +1,5 @@
 {
-  "lastReviewedDetectedAt": "2026-08-24T12:10:18.432Z",
-  "reviewedAt": "2026-08-26T12:20:53.023Z",
-  "runNote": "auto-review 2026-08-28: queue review, fixed shenzhen long-march suite layout + beijing br-split/credit formats; 2026-08-28 regeneration changes left for next run"
+  "lastReviewedDetectedAt": "2026-08-26T12:12:01.443Z",
+  "reviewedAt": "2026-08-27T12:16:53.134Z",
+  "runNote": "auto-review 2026-08-30: reviewed 2026-08-26 batch (8 added), fixed shenzhen credit-line attachment + performer suffix/prose guards; three new sources (gz/js/wuhan) collected 28 events, pre-checked healthy; today regeneration changes left for next run"
 }

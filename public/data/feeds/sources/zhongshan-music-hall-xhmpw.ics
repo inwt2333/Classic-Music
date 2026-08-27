@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 中山公园音乐堂（小红帽票务）
+BEGIN:VEVENT
+UID:perf_a974e219de0d256b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260831T113000Z
+DTEND:20260831T133000Z
+SUMMARY:民族交响诗《大运河》音乐会
+LOCATION:中山公园音乐堂
+DESCRIPTION:¥80 - ¥280\n开河\n黄金水道\n漕运沧桑\n江河万古流\n舟楫通南北
+URL:https://xhmpw.com/t48697.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_2acb1748605a33a1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260930T113000Z
+DTEND:20260930T133000Z
+SUMMARY:我和我的祖国一 2026 红色经典交响演唱十一音乐会
+LOCATION:中山公园音乐堂
+DESCRIPTION:¥100 - ¥580\n红旗颂\n七律·长征\n我爱五指山\,我爱万泉河\n红色娘子军\n中国心
+URL:https://xhmpw.com/t48600.html
+END:VEVENT
+END:VCALENDAR

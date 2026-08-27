@@ -1,0 +1,68 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 浙江交响乐团官网
+BEGIN:VEVENT
+UID:perf_debea88ddb74f93d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T113000Z
+DTEND:20260926T130000Z
+SUMMARY:浙江交响乐团2026年音乐季 (总第215期)永恒的经典
+LOCATION:杭州运河大剧院歌剧厅
+DESCRIPTION:浙江交响乐团\n沃伊切赫·基拉尔·奥拉瓦\n费利克斯·诺沃维斯基·波罗的海传奇序曲\n柴可夫斯基·第五交响曲
+URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
+ 90%e5%9b%a22026%e5%b9%b4%e9%9f%b3%e4%b9%90%e5%ad%a3-%e6%80%bb%e7%ac%ac215
+ %e6%9c%9f%e6%b0%b8%e6%81%92%e7%9a%84%e7%bb%8f%e5%85%b8/
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_a1fc1038b20d1e3a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261023T113000Z
+DTEND:20261023T130000Z
+SUMMARY:浙江交响乐团2026年音乐季 (总第216期)英雄的诗篇
+LOCATION:杭州运河大剧院歌剧厅
+DESCRIPTION:浙江交响乐团\n凯鲁比尼·阿纳克里翁(逃亡者之爱)序曲（中国首演）\n米歇尔·曼加尼·第三号单簧管协奏曲（世界首演）\n肖斯
+ 塔科维奇·卓娅组曲（中国首演）
+URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
+ 90%e5%9b%a22026%e5%b9%b4%e9%9f%b3%e4%b9%90%e5%ad%a3-%e6%80%bb%e7%ac%ac216
+ %e6%9c%9f%e8%8b%b1%e9%9b%84%e7%9a%84%e8%af%97%e7%af%87/
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c79c9367b346c8e6@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261113T113000Z
+DTEND:20261113T130000Z
+SUMMARY:浙江交响乐团2026年音乐季 (总第217期)命运对话
+LOCATION:杭州运河大剧院歌剧厅
+DESCRIPTION:浙江交响乐团\n勃拉姆斯·悲剧序曲\n勃拉姆斯·a小调双重协奏曲\n肖斯塔科维奇·第五交响曲
+URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
+ 90%e5%9b%a22026%e5%b9%b4%e9%9f%b3%e4%b9%90%e5%ad%a3-%e6%80%bb%e7%ac%ac217
+ %e6%9c%9f%e5%91%bd%e8%bf%90%e5%af%b9%e8%af%9d/
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dbb60205f9032c9c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261120T113000Z
+DTEND:20261120T130000Z
+SUMMARY:浙江交响乐团2026年青年演奏家系列（二）
+LOCATION:浙江音乐厅
+DESCRIPTION:浙江交响乐团
+URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
+ 90%e5%9b%a22026%e5%b9%b4%e9%9d%92%e5%b9%b4%e6%bc%94%e5%a5%8f%e5%ae%b6%e7%
+ b3%bb%e5%88%97%ef%bc%88%e4%ba%8c%ef%bc%89/
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5d49b2607d8a15b4@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261211T113000Z
+DTEND:20261211T130000Z
+SUMMARY:浙江交响乐团2026年音乐季 (总第218期)伟大的友谊
+LOCATION:杭州运河大剧院歌剧厅
+DESCRIPTION:浙江交响乐团\n德沃夏克·a小调小提琴协奏曲\n勃拉姆斯·第一交响曲
+URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
+ 90%e5%9b%a22026%e5%b9%b4%e9%9f%b3%e4%b9%90%e5%ad%a3-%e6%80%bb%e7%ac%ac218
+ %e6%9c%9f%e4%bc%9f%e5%a4%a7%e7%9a%84%e5%8f%8b%e8%b0%8a/
+END:VEVENT
+END:VCALENDAR

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { isProgramRoleLabel } from "../program-role-labels";
+import { isProgramRoleLabel, stripPerformanceForceSuffix } from "../program-role-labels";
 import { extractNcpaProgramEvidence, parseNcpaDetail, parseNcpaPriceTiers } from "./national-centre-performing-arts";
 
 const parsed = parseNcpaDetail({
@@ -332,6 +332,9 @@ assert.deepEqual(performanceForceIsNotComposer.program.map((item) => [item.compo
 assert.equal(isProgramRoleLabel("第一乐章"), true);
 assert.equal(isProgramRoleLabel("男女声领唱与混声合唱"), true);
 assert.equal(isProgramRoleLabel("男声独唱与混声合唱"), true);
+assert.equal(stripPerformanceForceSuffix("索舍尔大提琴"), "索舍尔");
+assert.equal(stripPerformanceForceSuffix("王健"), "王健");
+assert.equal(stripPerformanceForceSuffix("张昊辰钢琴"), "张昊辰");
 
 const scopedEvidenceDetail = {
   introduce: [

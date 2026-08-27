@@ -1,0 +1,249 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 西安音乐厅官网
+BEGIN:VEVENT
+UID:perf_92ce9c874d943d79@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T113000Z
+DTEND:20260905T130000Z
+SUMMARY:谭盾对话贝多芬音乐会｜XSO西安交响乐团2026音乐季
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:XSO西安交响乐团\n¥100 - ¥580\n贝多芬·《普罗米修斯的万物众生》序曲\n谭盾·《卧虎藏龙》马林巴协奏曲\n谭
+ 盾·合唱协奏曲《九歌》\n贝多芬·《欢乐颂》，选自第九号交响曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6026
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5802064c497f4eaa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260909T114500Z
+DTEND:20260909T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30\n迈克尔·伯里特·追影\n刘恒·面对面\n刘恒·回忆\n山泽洋之·花回廊·风龙\n罗德里戈与加布里埃拉·塔马昆
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b98124507989a439@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260920T114500Z
+DTEND:20260920T131500Z
+SUMMARY:基里尔·格斯坦钢琴独奏音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥80 - ¥480\n李斯特·b小调钢琴奏鸣曲\n李斯特·匈牙利快速进行曲\n勃拉姆斯·f小调第三号钢琴奏鸣曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6016
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e977ac1c822b3ebc@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261013T114500Z
+DTEND:20261013T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30\n安东·约瑟夫·理查·木管五重奏Op.88\, No.2 降E大调\n威廉·希金斯·莫扎特木管五重奏指南\n胡利奥·
+ 梅达利亚·《南美的美好时代》组曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_4d14f8b2b224605f@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261015T114500Z
+DTEND:20261015T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
+LOCATION:西安·开元大剧院 小剧场
+DESCRIPTION:¥30\n布鲁赫·8首小品\n勃拉姆斯·a 小调单簧管三重奏
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5b317138950670ca@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261028T114500Z
+DTEND:20261028T132500Z
+SUMMARY:大师之夜｜阿格里奇 × 文格洛夫 × 伊瑟利斯音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥380 - ¥1680\n舒曼·《幻想曲》\n贝多芬·g小调第二号钢琴与大提琴奏鸣曲\n克莱斯勒·《美丽的罗斯马琳》、《爱
+ 的忧伤》\n贝多芬·A大调第九号小提琴奏鸣曲《克莱采》
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6105
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8383a0ffb85746fa@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261030T114500Z
+DTEND:20261030T131500Z
+SUMMARY:安特耶·魏特哈斯与XSO西安交响乐团演绎门德尔松作品音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:安特耶·魏特哈斯与XSO西安交响乐团\n¥100 - ¥480\n门德尔松·《赫布里底群岛》序曲\n门德尔松·e小调小提琴协
+ 奏曲\n门德尔松·A大调第四号“意大利”交响曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6063
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_0d20e0f9ac91c4ea@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261031T030000Z
+DTEND:20261031T040000Z
+SUMMARY:古典直通车-周末快线 跟着现代室内乐四重奏漫游音乐世界
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30 - ¥90\n巴赫·小步舞曲\n超越巴洛克\n蓝阳\n土耳其进行曲\n在山魔王的宫殿里
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6113
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_c9991568a31a2130@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261031T113000Z
+DTEND:20261031T143000Z
+SUMMARY:安特耶·魏特哈斯演绎巴赫无伴奏小提琴奏鸣曲与组曲全本
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥100 - ¥480\n约翰·塞巴斯蒂安·巴赫·g小调第一奏鸣曲\n约翰·塞巴斯蒂安·巴赫·b小调第一组曲\n约翰·塞巴斯
+ 蒂安·巴赫·a小调第二奏鸣曲\n约翰·塞巴斯蒂安·巴赫·d小调第二组曲\n约翰·塞巴斯蒂安·巴赫·C大调第三奏鸣曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6062
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_af6aa9e125f46263@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261103T114500Z
+DTEND:20261103T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30\n莱哈尔·《茱迪塔》\n古诺·我愿活在美梦中《罗密欧与朱丽叶》\n比才·塞维利亚老城墙旁边《卡门》\n莫扎特·就在此
+ 刻《狄托的仁慈》\n普契尼·今夜无人入睡《图兰朵》
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d478c6bf9692875c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261104T114500Z
+DTEND:20261104T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
+LOCATION:西安·开元大剧院 小剧场
+DESCRIPTION:¥30\n栾凯·“沂蒙的女儿”\n陆在易·《我爱这土地》\n晁然·《定风波\,莫听穿林打叶声》\n黄自·《思乡》\n王龙·山
+ 之高
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_50165cdc86be09bc@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261105T120000Z
+DTEND:20261105T140000Z
+SUMMARY:【深圳】克里斯蒂安·齐默尔曼钢琴独奏音乐会
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:¥100 - ¥1680
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6135
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_9e2e52970877a5ff@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261111T113000Z
+DTEND:20261111T130000Z
+SUMMARY:【天津】克里斯蒂安·齐默尔曼钢琴独奏音乐会
+LOCATION:天津大剧院 音乐厅
+DESCRIPTION:¥280 - ¥1480
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6141
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_8162e355755a7b33@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261113T114500Z
+DTEND:20261113T131500Z
+SUMMARY:【西安】克里斯蒂安·齐默尔曼钢琴独奏音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥280 - ¥1480
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6137
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_32df8f1af88a7891@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261114T113000Z
+DTEND:20261114T130000Z
+SUMMARY:【西安】克里斯蒂安·齐默尔曼钢琴独奏音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥280 - ¥1480
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6137
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_74a12ded12a79b7a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261115T113000Z
+DTEND:20261115T133000Z
+SUMMARY:暴雪35周年官方游戏交响音乐会（Jason Hayes领衔）西安站#
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥280 - ¥1380
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6019
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_40f05edcff7ff228@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261117T114500Z
+DTEND:20261117T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30\n乔治·比才·卡门组曲\n凯琳·乔伊斯·跳弹\n欧文·柏林·盛装打扮\n埃尼奥·莫里科内·莫里科内时刻\n尼克·拉罗
+ 卡·老虎拉格
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d4f1165db5d57cfe@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261119T114500Z
+DTEND:20261119T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
+LOCATION:西安·开元大剧院 小剧场
+DESCRIPTION:¥30\n乔治·比才·卡门组曲\n凯琳·乔伊斯·跳弹\n欧文·柏林·盛装打扮\n埃尼奥·莫里科内·莫里科内时刻\n尼克·拉罗
+ 卡·老虎拉格
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ecea68f13f857df8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261120T114500Z
+DTEND:20261120T134500Z
+SUMMARY:卡蒂雅·布尼亚季什维莉钢琴独奏音乐会
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥100 - ¥480\n舒曼·C大调幻想曲\n李斯特·第1号梅菲斯特圆舞曲\n李斯特·第6号匈牙利狂想曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6092
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_480ed913a6efd91b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261121T113000Z
+DTEND:20261121T132000Z
+SUMMARY:芭比系列室内乐奇旅——与公主们的约定
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥100 - ¥380
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6136
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_e4cff791db0021d0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261127T114500Z
+DTEND:20261127T133500Z
+SUMMARY:张国勇、穆洛娃与XSO西安交响乐团演绎巴赫、贝多芬、勃拉姆斯
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:穆洛娃与XSO西安交响乐团\n¥100 - ¥580\n巴赫·d小调托卡塔与赋格\n贝多芬·D大调小提琴协奏曲\n勃拉姆斯·
+ e小调第四号交响曲
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6150
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_56d94ccd015c6588@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261201T114500Z
+DTEND:20261201T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
+LOCATION:西安音乐厅 交响大厅
+DESCRIPTION:¥30\n路德维希·凡·贝多芬·升C小调第十四弦乐四重奏\n罗伯特·舒曼·A小调第一弦乐四重奏\n费利克斯·门德尔松·D大调
+ 弦乐四重奏\n谢尔盖·普罗科菲耶夫·B小调第一弦乐四重奏\n亚历山大·鲍罗丁·D大调第二弦乐四重奏
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_38fda920a459b964@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261202T114500Z
+DTEND:20261202T124500Z
+SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
+LOCATION:西安·开元大剧院 小剧场
+DESCRIPTION:¥30\n路德维希·凡·贝多芬·升C小调第十四弦乐四重奏\n罗伯特·舒曼·A小调第一弦乐四重奏\n费利克斯·门德尔松·D大调
+ 弦乐四重奏\n谢尔盖·普罗科菲耶夫·B小调第一弦乐四重奏\n亚历山大·鲍罗丁·D大调第二弦乐四重奏
+URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
+END:VEVENT
+END:VCALENDAR

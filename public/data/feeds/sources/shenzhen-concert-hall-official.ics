@@ -1,0 +1,215 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Classic-Music//Concert Calendar//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:古典音乐演出日历 · 深圳音乐厅官网
+BEGIN:VEVENT
+UID:perf_581c81dff2dd8737@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260828T120000Z
+DTEND:20260828T140000Z
+SUMMARY:魅之回响——远古与大地多民族童声合唱音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥2 - ¥630\n张阿雅·大山小事\n潘行紫旻·紫\n茉莉花（江苏民歌）\n官宇·水色壮乡•祈福调\n一曲嘹歌绕壮山（壮
+ 族原生态民歌）
+URL:https://szyyt.com/performance/show_100001019264395.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_66f93803ad8820c0@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260829T120000Z
+DTEND:20260829T140000Z
+SUMMARY:把世界唱给你听一一世界青年合唱团2026深圳音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:把世界唱给你听一一世界青年合唱团\n¥2 - ¥768\n解放我·Libera me\n苦厄·Afflictus\n我们的先
+ 辈·Unsere Stimmen\n宏大的大厅·A Csarnok\n智者之回·Vox Serena
+URL:https://szyyt.com/performance/show_100001024883931.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_160c8fd3e84dc61c@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260905T120000Z
+DTEND:20260905T140000Z
+SUMMARY:深圳歌剧舞剧院合唱团2026—2027演出季开幕 《长征组歌》专场音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:深圳歌剧舞剧院合唱团\n¥180 - ¥680\n田丰·沁园春·雪\n田丰·忆秦娥·娄山关\n彦克、吕远·七律·长征\n晨耕
+ 、生茂、唐诃、遇秋·长征组歌
+URL:https://szyyt.com/performance/show_100001036063587.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_3ee8b677c99b371b@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260913T120000Z
+DTEND:20260913T140000Z
+SUMMARY:2026深圳“一带一路”国际音乐季 著名女高音歌唱家普莱蒂·颜德独唱音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥180 - ¥680\n罗西尼·诺言，选自艺术歌曲集《音乐晚会》\n罗西尼·“美妙歌声随风飘荡”，选自歌剧《塞维利亚的理发
+ 师》\n多尼采蒂·不幸的爱情\n多尼采蒂·“姑娘的秋波”，选自歌剧《唐·帕斯夸莱》\n马斯涅·沉思曲，选自歌剧《泰伊思》（钢琴独奏）
+URL:https://szyyt.com/performance/show_100001038836822.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_bed790d1d72830f2@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260919T113000Z
+DTEND:20260919T133000Z
+SUMMARY:漫步古典夜 在水一方——肖玛中外艺术歌曲音乐会
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:¥80 - ¥280\nG.卡契尼·阿玛丽莉\nG.帕伊谢洛·在我的心里不再感到\n维瓦尔第·与我的挚爱相伴\n亨德尔·悄然
+ 前行，暗中观察\n亨德尔·我的爱，你在哪里？
+URL:https://szyyt.com/performance/show_100000956977894.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dd320cf21f6cc0b8@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260924T113000Z
+DTEND:20260924T133000Z
+SUMMARY:月满·流光——FUSICIANZ融合乐团中秋跨界音乐会
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:FUSICIANZ融合乐团\n¥80 - ¥280\n情迷夜缤纷\n流水卡农（似水流年×Canon in D×Memorie
+ s）\n瑶族舞曲\n七索\n梵梦
+URL:https://szyyt.com/performance/show_100001015027551.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_dae6c71640cd0672@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20260926T120000Z
+DTEND:20260926T140000Z
+SUMMARY:星辰与诗篇——基里尔•格斯坦演绎李斯特
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥2 - ¥768\n弗朗茨•李斯特·彼得拉克十四行诗三首，S. 158\n弗朗茨•李斯特·旅行岁月\n弗朗茨•李斯特·匈牙
+ 利快速进行曲，S. 233\n弗朗茨•李斯特·两首波罗乃兹舞曲\n弗朗茨•李斯特·b小调钢琴奏鸣曲，S. 178
+URL:https://szyyt.com/performance/show_100001012253485.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_62680c4d968322ca@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261016T120000Z
+DTEND:20261016T140000Z
+SUMMARY:2026深圳“一带一路”国际音乐季——新世界的“记忆”
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:¥80 - ¥880\n扬·贝拉·节日序曲\n安东宁·德沃夏克·g小调钢琴协奏曲，作品33\n安东宁·德沃夏克·e小调第九交
+ 响曲“自新世界”，作品95
+URL:https://szyyt.com/performance/show_100000987749239.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_db65939eb6b1e626@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T113000Z
+DTEND:20261017T133000Z
+SUMMARY:漫步古典夜 来自莱茵河的问候——勃拉姆斯三首钢琴奏鸣曲全集
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:¥2 - ¥448\n约翰内斯·勃拉姆斯·C大调第一钢琴奏鸣曲，Op. 1\n约翰内斯·勃拉姆斯·升f小调第二钢琴奏鸣曲，O
+ p. 2\n约翰内斯·勃拉姆斯·f小调第三钢琴奏鸣曲，Op. 5
+URL:https://szyyt.com/performance/show_100001009496842.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d37a11ccb81172f3@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261017T120000Z
+DTEND:20261017T140000Z
+SUMMARY:2026深圳“一带一路”国际音乐季 “闪耀的我们”李朕与武汉星河室内合唱团音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:李朕与武汉星河室内合唱团\n¥80 - ¥680\n冯翔·汉阳门花园\n吴昊·那时繁星\n刘心遥·生命之诗\n陈佳明·城里的
+ 月光\n邓垚·诀别书
+URL:https://szyyt.com/performance/show_100001044423135.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_7f14a61f7d23ff39@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261023T120000Z
+DTEND:20261023T140000Z
+SUMMARY:汉努•林图、蔡珂宜与新加坡交响乐团音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:蔡珂宜与新加坡交响乐团\n¥100 - ¥880\n王辰威·姐妹岛\n费利克斯·门德尔松·e小调小提琴协奏曲，Op. 64（
+ 小提琴：蔡珂宜）\n古斯塔夫·马勒·D大调第一交响曲“巨人”，GMW 11
+URL:https://szyyt.com/performance/show_100001020622765.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_ad8672dd91bf2509@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261028T113000Z
+DTEND:20261028T133000Z
+SUMMARY:法佐•塞依钢琴独奏音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥100 - ¥680\n沃尔夫冈•阿玛德乌斯•莫扎特·第十一A大调钢琴奏鸣曲，K. 331\n克劳德•德彪西·前奏曲第一册
+ ，CD 125\n克劳德•德彪西·贝加摩组曲\n莫里斯•拉威尔·镜子组曲，M. 43\n法佐•塞依·克拉罗斯：预言殿堂，Op. 112（中国首演）
+URL:https://szyyt.com/performance/show_100001034626716.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_689177b59d34ec2a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261101T113000Z
+DTEND:20261101T133000Z
+SUMMARY:安特耶•魏特哈斯演绎巴赫无伴奏小提琴奏鸣曲与组曲全集音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥80 - ¥480\n约翰•塞巴斯蒂安•巴赫·g小调第一小提琴奏鸣曲，BWV 1001\n约翰•塞巴斯蒂安•巴赫·a小调第
+ 二小提琴奏鸣曲，BWV 1003\n约翰•塞巴斯蒂安•巴赫·C大调第三小提琴奏鸣曲，BWV 1005
+URL:https://szyyt.com/performance/show_100001016496992.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_275e03651e992e35@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261105T120000Z
+DTEND:20261105T140000Z
+SUMMARY:克里斯蒂安·齐默尔曼钢琴独奏音乐会·深圳
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥100 - ¥1680
+URL:https://szyyt.com/performance/show_100001037424792.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_36bd90496ba77871@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261106T113000Z
+DTEND:20261106T133000Z
+SUMMARY:凝光漱石 -- 武怀琛古琴专场演奏会
+LOCATION:深圳音乐厅 五楼小剧场
+DESCRIPTION:¥120 - ¥380\n1 乌夜啼\n2 山居吟\n3 欸乃\n4 沧海龙吟\n5 大胡笳
+URL:https://szyyt.com/performance/show_100001030413995.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_d50fe1dba9d0197d@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261107T113000Z
+DTEND:20261107T133000Z
+SUMMARY:管风琴之夜 风从海上来——沈媛×段志强知识音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥80 - ¥280\n沈媛·丝绸之路上的八首歌\n沈媛·风从海上来·蓝色文明的记忆\n柴可夫斯基·胡桃夹子\n格里格·培尔
+ ·金特\n李斯特·传奇，II.“圣弗朗索瓦行走在水面之上”，S.175
+URL:https://szyyt.com/performance/show_100001017878314.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_b7e26f2cd96cd6b1@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261113T120000Z
+DTEND:20261113T140000Z
+SUMMARY:卡蒂雅•布尼亚季什维莉钢琴独奏音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:¥180 - ¥1080\n弗朗茨•舒伯特·降B大调第二十一钢琴奏鸣曲\, D. 960\n埃里克•萨蒂·三首玄秘曲\n弗雷
+ 德里克•肖邦·e小调前奏曲，Op. 28，No. 4\n弗雷德里克•肖邦·升c小调第三谐谑曲，Op. 39\n约翰•塞巴斯蒂安•巴赫·D大调第三管
+ 弦乐组曲
+URL:https://szyyt.com/performance/show_100001043029457.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_5e04a591a6aab5bf@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261129T073000Z
+DTEND:20261129T093000Z
+SUMMARY:从莫扎特到拉赫玛尼诺夫——广州交响乐团音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:广州交响乐团\n¥80 - ¥680\n梁皓一·天穹之志：大湾华章（广州交响乐团委约）\n沃尔夫冈•阿马德乌斯•莫扎特·降E
+ 大调交响协奏曲，K. 297b\n谢尔盖•拉赫玛尼诺夫·e小调第二交响曲，Op. 27
+URL:https://szyyt.com/performance/show_100001041637612.html
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_efcb68ab6664a45a@classic-music
+DTSTAMP:20260827T120909Z
+DTSTART:20261225T120000Z
+DTEND:20261225T140000Z
+SUMMARY:维也纳圆舞曲乐团新年音乐会
+LOCATION:深圳音乐厅 二楼演奏大厅
+DESCRIPTION:维也纳圆舞曲乐团\n¥180 - ¥680\n施多尔茨·维也纳的问候进行曲\n雷哈尔·卢森堡伯爵\n小约翰·施特劳斯·爱之歌
+ 圆舞曲\n小约翰·施特劳斯·电话波尔卡\n小约翰·施特劳斯·吉普赛男爵
+URL:https://szyyt.com/performance/show_100001023488935.html
+END:VEVENT
+END:VCALENDAR

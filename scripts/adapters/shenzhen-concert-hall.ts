@@ -153,6 +153,37 @@ function parseProgram(html: string, confidence: ProgramItem["confidence"] = "off
     }
     lastProgramLineHadCjk = /[\u3400-\u9fff]/.test(line);
 
+    const creditRolePrefix = /^(?:作词|填词|词|诗词|诗|作曲|曲|词曲|编曲|编配|改编|合唱改编|扩词|配器)[：:]/;
+    const creditOnlyLine = line
+      .replace(/\s+(?=(?:作词|填词|词|诗词|诗|作曲|曲|词曲|编曲|编配|改编|合唱改编|扩词|配器)[：:])/g, " ｜ ")
+      .split(/[｜|]/)
+      .map(cleanText)
+      .filter(Boolean);
+    if (
+      program.length &&
+      creditOnlyLine.length >= 1 &&
+      creditOnlyLine.every((segment) => creditRolePrefix.test(segment) || /^原.{0,12}(?:诗|乐府|民歌|古曲|曲牌)$/.test(segment))
+    ) {
+      const last = program.at(-1)!;
+      for (const segment of creditOnlyLine) {
+        const match = segment.match(/^(.{1,6}?)[：:]\s*(.+)$/);
+        if (match) {
+          const role = cleanText(match[1]);
+          const name = cleanText(match[2].replace(/[【\[]([^】\]]*)[】\]]/g, ""));
+          if (role === "曲" || role === "作曲") last.composer ||= name;
+          else if (role === "词曲") {
+            last.composer ||= name;
+            last.credits = [...(last.credits ?? []), { name, role: "词" }];
+          } else {
+            last.credits = [...(last.credits ?? []), { name, role }];
+          }
+        } else if (/^原.{0,12}(?:诗|乐府|民歌|古曲|曲牌)$/.test(segment)) {
+          last.credits = [...(last.credits ?? []), { name: segment, role: "来源" }];
+        }
+      }
+      continue;
+    }
+
     const delimited = line.match(/^([^—－\-:：]{2,36})[—－\-:：]\s*(.+)$/);
     if (delimited) {
       if (isPersonnelLabel(delimited[1])) {

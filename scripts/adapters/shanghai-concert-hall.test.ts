@@ -148,4 +148,16 @@ assert.deepEqual(
   ],
 );
 
+const ensembleProse = parseShanghaiConcertHallContent(`
+  <div class="detail">
+    <h1>阿姆斯特丹美泉宫室内乐团音乐会</h1>
+    <div>演奏曲目</div>
+    <p>长笛｜马丁· 鲁特 Marten Root</p>
+    <p>乐团：</p>
+    <p>乐团的规模因曲目而异，从三重奏到九重奏。该乐团的多张唱片由 Globe Records 唱片公司发行。</p>
+  </div>
+`);
+assert.ok(ensembleProse.performers.some((name) => name.includes("鲁特")));
+assert.ok(ensembleProse.performers.every((name) => !/[的而]/.test(name) && !/^从/.test(name)));
+
 console.log("Shanghai Concert Hall adapter tests passed.");
