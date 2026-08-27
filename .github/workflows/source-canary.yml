@@ -1,0 +1,55 @@
+name: Source Canary
+
+on:
+  schedule:
+    # 每天 10:07（Asia/Shanghai）巡检全部来源页面是否仍然可解析
+    - cron: "7 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Probe all sources
+        id: probe
+        run: npm run scrape:probe
+
+      - name: Open or update failure issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "🚨 采集金丝雀失败：来源页面可能改版或不可达";
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `金丝雀在 ${new Date().toISOString()} 检测到采集失败。\n\n- 运行记录：${runUrl}\n- 请检查日志中 \`[probe] ... ok=false\` 的来源，保存原始页面到 scripts/fixtures/ 并修复对应 adapter。\n- 修复后请关闭本 issue；若已存在同类 issue 请在其下追加评论。`;
+            const issues = await github.rest.issues.listForRepo({
+              ...context.repo,
+              state: "open",
+              labels: "canary",
+              per_page: 10,
+            });
+            const existing = issues.data.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: existing.number, body });
+            } else {
+              await github.rest.issues.create({
+                ...context.repo,
+                title,
+                body,
+                labels: ["canary", "data-quality"],
+              });
+            }

@@ -9753,3 +9753,28 @@ body {
 .source-subscribe-links a:hover {
   background: #e4f0ec;
 }
+
+.source-stats-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #eef4f2;
+  font-size: 12px;
+}
+
+.source-stats-card span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.source-stats-card small {
+  color: #6b7a75;
+}
+
+.source-stats-card strong {
+  font-size: 13px;
+}

@@ -243,8 +243,9 @@ type SourceConfig = z.infer<typeof sourceConfigSchema>["sources"][number];
 const useAi = process.argv.includes("--ai");
 const explicitOcr = process.argv.includes("--ocr");
 const useOcr = !process.argv.includes("--no-ocr");
+const probeMode = process.argv.includes("--probe");
 const sourceFilterArg = process.argv.find((arg) => arg.startsWith("--source="))?.slice("--source=".length) ?? "";
-const sourceFilter = sourceFilterArg
+const sourceFilterIds = sourceFilterArg
   ? new Set(sourceFilterArg.split(",").map((value) => value.trim()).filter(Boolean))
   : null;
 const root = process.cwd();
@@ -334,13 +335,14 @@ const composerMap = [
 async function main() {
   const startedAt = new Date().toISOString();
   const parsedConfig = sourceConfigSchema.parse(JSON.parse(await readFile(sourceConfigPath, "utf8")));
+  const sourceFilter = sourceFilterIds ?? (probeMode ? new Set(parsedConfig.sources.map((source) => source.id)) : null);
   const config = {
     ...parsedConfig,
     sources: sourceFilter
       ? parsedConfig.sources.filter((source) => sourceFilter.has(source.id))
       : parsedConfig.sources,
   };
-  if (sourceFilter && !config.sources.length) {
+  if (sourceFilterIds && !config.sources.length) {
     throw new Error(`--source=${sourceFilterArg} 未匹配到任何来源，可用 id 见 sources/shanghai.sources.json`);
   }
   const dataset: ConcertDataset = {
@@ -402,7 +404,7 @@ async function main() {
   }
 
   if (sourceFilter) {
-    // 单源探针模式：只重新采集指定来源并输出对比信息，不落库、不导出、不写健康快照。
+    // 单源探针/金丝雀模式：只重新采集指定来源并输出对比信息，不落库、不导出、不写健康快照。
     for (const source of dataset.sources) {
       console.log(
         `[probe] ${source.id}: ok=${source.ok} discovered=${source.rawCount ?? "-"} normalized=${source.normalizedCount ?? "-"}`,
@@ -412,6 +414,7 @@ async function main() {
     for (const event of dataset.events.slice(0, 5)) {
       console.log(`  ${event.dateLabel} ${event.timeLabel} | ${event.title.slice(0, 40)} | 曲目 ${event.program.length} 条`);
     }
+    if (dataset.stats.errors.length) process.exitCode = 1;
     return;
   }
 

@@ -7,8 +7,20 @@ import type { ConcertIndexDataset } from "../types";
 
 type SourceStatus = ConcertIndexDataset["sources"][number];
 
+type DatasetStats = {
+  generatedAt: string;
+  events: { total: number; byCity: Record<string, number>; byQuality: Record<string, number> };
+  sources: Array<{ id: string; name: string; ok: boolean; normalizedCount?: number; message?: string }>;
+  knowledge: {
+    publishedWorks: number;
+    publishedComposers: number;
+    automation?: { statusCounts: Record<string, number>; lastUpdatedAt?: string };
+  };
+};
+
 export default function SourcesWorkspace() {
   const [dataset, setDataset] = useState<ConcertIndexDataset>();
+  const [stats, setStats] = useState<DatasetStats>();
   const [error, setError] = useState("");
   const profileId = new URLSearchParams(window.location.search).get("sources");
   const activeProfile = profileId && !["1", "orchestras", "venues"].includes(profileId)
@@ -21,6 +33,10 @@ export default function SourcesWorkspace() {
       console.error("Unable to load source directory", loadError);
       setError("页面暂时无法载入，请稍后重试。");
     });
+    fetch(`${import.meta.env.BASE_URL}data/stats.json`)
+      .then((response) => (response.ok ? response.json() : Promise.reject(new Error("no stats"))))
+      .then(setStats)
+      .catch(() => setStats(undefined));
   }, []);
 
   const statuses = useMemo(
@@ -48,6 +64,7 @@ export default function SourcesWorkspace() {
             dataset={dataset}
             error={error}
             statuses={statuses}
+            stats={stats}
             activeCategory={activeCategory}
           />
         )}
@@ -60,11 +77,13 @@ function SourceDirectory({
   dataset,
   error,
   statuses,
+  stats,
   activeCategory,
 }: {
   dataset?: ConcertIndexDataset;
   error: string;
   statuses: Map<string, SourceStatus>;
+  stats?: DatasetStats;
   activeCategory: SourceProfile["category"];
 }) {
   const activeProfiles = sourceProfiles.filter((profile) => profile.category === activeCategory);
@@ -89,6 +108,16 @@ function SourceDirectory({
           </dl>
         ) : null}
       </header>
+
+      {stats ? (
+        <aside className="source-stats-card" aria-label="运行状态">
+          <span><small>数据更新</small><strong>{formatTimestamp(stats.generatedAt)}</strong></span>
+          <span><small>采集来源</small><strong>{stats.sources.filter((source) => source.ok).length}/{stats.sources.length} 正常</strong></span>
+          <span><small>收录演出</small><strong>{stats.events.total} 场</strong></span>
+          <span><small>待人工确认</small><strong>{stats.events.byQuality["needs-review"] ?? 0} 场</strong></span>
+          <span><small>知识库</small><strong>{stats.knowledge.publishedWorks} 部作品 · {stats.knowledge.publishedComposers} 位作曲家</strong></span>
+        </aside>
+      ) : null}
 
       <nav className="source-directory-tabs" aria-label="数据来源类型">
         <a className={activeCategory === "orchestra" ? "active" : ""} href="?sources=orchestras">

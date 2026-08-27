@@ -37,6 +37,7 @@ type PreparedData = {
   entities: EntityDataset;
   changes: ChangeDataset;
   eventRedirects: Record<string, string>;
+  knowledgeAutomation: { statusCounts: Record<string, number>; lastUpdatedAt?: string };
   publishedDataset: ConcertDataset;
   publishedEntities: EntityDataset;
   knowledge: PreparedKnowledge;
@@ -94,7 +95,8 @@ export async function prepareAndPersistDataset(
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
   const knowledge = prepareKnowledge(knowledgeRegistry, publishedDataset);
-  const prepared = { dataset: canonicalDataset, index, entities, changes, eventRedirects, publishedDataset, publishedEntities, knowledge };
+  const knowledgeAutomation = await summarizeKnowledgeAutomation(resolve(dirname(databasePath), ".."));
+  const prepared = { dataset: canonicalDataset, index, entities, changes, eventRedirects, knowledgeAutomation, publishedDataset, publishedEntities, knowledge };
 
   await persistSqlite(prepared, databasePath);
   await exportStaticData(prepared, outputPath);
@@ -148,12 +150,14 @@ export async function reapplyManualReviewsAndPersist(
   const index = buildIndex(publishedDataset);
   const publishedEntities = buildEntities(publishedDataset);
   const knowledge = prepareKnowledge(knowledgeRegistry, publishedDataset);
+  const knowledgeAutomation = await summarizeKnowledgeAutomation(resolve(dirname(databasePath), ".."));
   const prepared = {
     dataset: reviewedDataset,
     index,
     entities,
     changes,
     eventRedirects,
+    knowledgeAutomation,
     publishedDataset,
     publishedEntities,
     knowledge,
@@ -643,6 +647,7 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
   );
   await writeFile(resolve(knowledgeDir, "index.json"), JSON.stringify(prepared.knowledge.index), "utf8");
   await writeFeedFiles(prepared, dataDir);
+  await writeStatsFile(prepared, dataDir);
   await Promise.all([
     ...prepared.publishedDataset.events.map((event) =>
       writeFile(resolve(detailDir, `${event.id}.json`), JSON.stringify(event), "utf8"),
@@ -654,6 +659,56 @@ async function exportStaticData(prepared: PreparedData, outputPath: string) {
       writeFile(resolve(knowledgeComposerDir, `${composer.id}.json`), JSON.stringify(composer), "utf8"),
     ),
   ]);
+}
+
+async function summarizeKnowledgeAutomation(root: string) {
+  try {
+    const state = JSON.parse(await readFile(resolve(root, "knowledge/automation-state.json"), "utf8"));
+    const statusCounts: Record<string, number> = {};
+    let lastUpdatedAt = "";
+    for (const entry of Object.values<any>(state.candidates ?? {})) {
+      if (!entry?.status) continue;
+      statusCounts[entry.status] = (statusCounts[entry.status] ?? 0) + 1;
+      if (typeof entry.updatedAt === "string" && entry.updatedAt > lastUpdatedAt) lastUpdatedAt = entry.updatedAt;
+    }
+    return { statusCounts, lastUpdatedAt: lastUpdatedAt || undefined };
+  } catch {
+    return { statusCounts: {} as Record<string, number>, lastUpdatedAt: undefined };
+  }
+}
+
+async function writeStatsFile(prepared: PreparedData, dataDir: string) {
+  const qualityCounts: Record<string, number> = {};
+  const cityCounts: Record<string, number> = {};
+  for (const event of prepared.publishedDataset.events) {
+    qualityCounts[event.dataQuality] = (qualityCounts[event.dataQuality] ?? 0) + 1;
+    cityCounts[event.city] = (cityCounts[event.city] ?? 0) + 1;
+  }
+  const changeCounts: Record<string, number> = {};
+  for (const change of prepared.changes.changes) {
+    changeCounts[change.type] = (changeCounts[change.type] ?? 0) + 1;
+  }
+  const stats = {
+    schemaVersion: 1,
+    generatedAt: prepared.dataset.generatedAt,
+    events: { total: prepared.publishedDataset.events.length, byCity: cityCounts, byQuality: qualityCounts },
+    sources: prepared.dataset.sources.map((source) => ({
+      id: source.id,
+      name: source.name,
+      ok: source.ok,
+      eventCount: source.eventCount,
+      rawCount: source.rawCount,
+      normalizedCount: source.normalizedCount,
+      message: source.message,
+    })),
+    changes: { total: prepared.changes.changes.length, byType: changeCounts },
+    knowledge: {
+      publishedWorks: prepared.knowledge.index.works.length,
+      publishedComposers: prepared.knowledge.index.composers.length,
+      automation: prepared.knowledgeAutomation,
+    },
+  };
+  await writeFile(resolve(dataDir, "stats.json"), JSON.stringify(stats), "utf8");
 }
 
 async function writeFeedFiles(prepared: PreparedData, dataDir: string) {

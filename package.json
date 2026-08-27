@@ -14,6 +14,7 @@
     "scrape:ocr": "tsx scripts/scrape.ts --ocr",
     "scrape:no-ocr": "tsx scripts/scrape.ts --no-ocr",
     "scrape:ai": "tsx scripts/scrape.ts --ai",
+    "scrape:probe": "tsx scripts/scrape.ts --no-ocr --probe",
     "reviews:apply": "tsx scripts/apply-reviews.ts",
     "knowledge:enrich": "tsx scripts/auto-enrich-knowledge.ts",
     "knowledge:dry-run": "tsx scripts/auto-enrich-knowledge.ts --dry-run",
