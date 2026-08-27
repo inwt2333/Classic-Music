@@ -103,6 +103,13 @@ import {
   selectProgramReviewCandidates,
   verifyProgramWithAi,
 } from "./ai/program-verifier";
+import {
+  extractGzdjyProgramLines,
+  parseGzdjyFirstShowTime,
+  parseGzdjyListResponse,
+  parseGzdjyPriceTiers,
+  type GzdjyListRow,
+} from "./adapters/guangzhou-grand-theatre";
 
 const sourceConfigSchema = z.object({
   city: z.string(),
@@ -233,6 +240,12 @@ const sourceConfigSchema = z.object({
         city: z.string(), venue: z.string(), pageSize: z.number().int().positive().max(100).default(50),
         projectIds: z.array(z.string()).default([]), seedFile: z.string().default("data/source-seeds/harbin-maitix.json"),
         allowEmpty: z.boolean().default(true),
+      }),
+      z.object({
+        id: z.string(), name: z.string(), adapter: z.literal("gzdjy-mservice"),
+        url: z.string().url(), apiBase: z.string().url(),
+        city: z.string().default("广州"), venue: z.string(),
+        pageSize: z.number().int().positive().max(50).default(10),
       }),
     ]),
   ),
@@ -510,6 +523,8 @@ function scrapeSource(source: SourceConfig, scrapedAt: string) {
       return scrapeXianConcertHall(source, scrapedAt);
     case "harbin-maitix-api":
       return scrapeHarbinMaitix(source, scrapedAt);
+    case "gzdjy-mservice":
+      return scrapeGuangzhouGrandTheatre(source, scrapedAt);
   }
 }
 
@@ -1251,6 +1266,115 @@ function normalizeNcpaEvent(
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
   }, extractNcpaProgramEvidence(detail, String(session.sessionDate ?? "")));
+}
+
+async function scrapeGuangzhouGrandTheatre(
+  source: Extract<SourceConfig, { adapter: "gzdjy-mservice" }>,
+  scrapedAt: string,
+) {
+  const rows: GzdjyListRow[] = [];
+  let total = 0;
+  for (let pageIndex = 1; pageIndex <= 20; pageIndex += 1) {
+    const response = await fetchWithRetry(`${source.apiBase}/MService.asmx/searchV5`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36 ClassicMusicCalendar/1.0",
+        accept: "application/json",
+        referer: source.url,
+      },
+      body: JSON.stringify({
+        jsondata: JSON.stringify({
+          OrgId: "86",
+          SiteId: "36",
+          TicketParentId: "0",
+          TicketChildId: "0",
+          DateIndex: "0",
+          Key: "",
+          MinPrice: "0",
+          MaxPrice: "0",
+          PageIndex: String(pageIndex),
+          PageSize: String(source.pageSize),
+          PlaceId: "0",
+          DetailTime: "",
+          IsHistory: "0",
+          TicketStatusId: "0",
+        }),
+      }),
+    });
+    if (!response.ok) throw new Error(`广州大剧院列表 HTTP ${response.status}`);
+    const page = parseGzdjyListResponse(await response.text());
+    total = page.total;
+    rows.push(...page.rows);
+    if (!page.rows.length || rows.length >= total) break;
+  }
+
+  const classicalRows = rows.filter((row) => row.category === "音乐会" || isClassicalish(row.name));
+  await writeFile(
+    resolve(snapshotDir, `${source.id}.list.json`),
+    JSON.stringify(classicalRows, null, 2),
+    "utf8",
+  );
+
+  const events: ConcertEvent[] = [];
+  for (const row of classicalRows) {
+    const detailUrl = `${source.apiBase}${row.link.split("?")[0]}`;
+    const html = await fetchText(detailUrl);
+    await writeFile(resolve(snapshotDir, `${source.id}.${row.id}.html`), html, "utf8");
+    const normalized = normalizeGzdjyEvent(row, html, source, scrapedAt);
+    if (normalized) events.push(normalized);
+  }
+
+  return { rawCount: classicalRows.length, events };
+}
+
+function normalizeGzdjyEvent(
+  row: GzdjyListRow,
+  detailHtml: string,
+  source: Extract<SourceConfig, { adapter: "gzdjy-mservice" }>,
+  scrapedAt: string,
+): ConcertEvent | undefined {
+  const start = parseGzdjyFirstShowTime(row.dateText);
+  // 列表行可能包含连演多天/多场次，这里只取首场，其余场次待官网提供结构化数据后再拆分。
+  if (!start || start.getTime() <= Date.now()) return undefined;
+  const labels = formatChinaDateLabels(start);
+  const title = cleanText(row.name);
+  const place = splitVenueAndHall(row.place, source.venue);
+  const priceTiers = parseGzdjyPriceTiers(row.priceText);
+  const programLines = extractGzdjyProgramLines(detailHtml);
+  const program = programLines.map((line) => ({
+    title: line,
+    composer: isProgramRoleLabel(line) ? undefined : inferComposers(line)[0],
+    confidence: "official" as const,
+  }));
+  const composers = uniqueStrings(program.map((item) => item.composer)) as string[];
+  const detailUrl = `${source.apiBase}${row.link.split("?")[0]}`;
+
+  return registerProgramEvidence({
+    id: `gzdjy_${row.id}`,
+    title,
+    city: source.city,
+    venue: place.venue,
+    hall: place.hall,
+    startTime: start.toISOString(),
+    weekday: labels.weekday,
+    dateLabel: labels.dateLabel,
+    timeLabel: labels.timeLabel,
+    price: priceTiers.length ? `¥${priceTiers[0]} 起` : undefined,
+    priceTiers: priceTiers.length ? priceTiers : undefined,
+    status: "scheduled",
+    ticketUrl: detailUrl,
+    sourceName: source.name,
+    sourceUrl: detailUrl,
+    scrapedAt,
+    ensemble: inferEnsemble(title),
+    performers: inferPerformers(title),
+    composers,
+    program,
+    tags: inferTags(title, composers),
+    dataQuality: program.length ? "scraped" : "needs-review",
+  }, programLines.join("\n"));
 }
 
 function mapNcpaSaleStatus(value: string): ConcertEvent["ticketStatus"] {

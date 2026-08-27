@@ -179,9 +179,23 @@
       "city": "哈尔滨",
       "venue": "哈尔滨音乐厅",
       "pageSize": 50,
-      "projectIds": ["238906060", "239249002", "239358001"],
+      "projectIds": [
+        "238906060",
+        "239249002",
+        "239358001"
+      ],
       "seedFile": "data/source-seeds/harbin-maitix.json",
       "allowEmpty": true
+    },
+    {
+      "id": "guangzhou-grand-theatre-official",
+      "name": "广州大剧院官网",
+      "adapter": "gzdjy-mservice",
+      "url": "https://3w.gzdjy.org/list.html",
+      "apiBase": "https://3w.gzdjy.org",
+      "city": "广州",
+      "venue": "广州大剧院",
+      "pageSize": 10
     }
   ]
 }

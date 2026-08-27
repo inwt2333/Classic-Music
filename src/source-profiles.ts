@@ -243,6 +243,18 @@ export const sourceProfiles: SourceProfile[] = [
     coverImage: "harbin-concert-hall.jpg",
     logoUrl: `${import.meta.env.BASE_URL}source-logos/harbin-music-hall.jpg`,
   },
+  {
+    id: "guangzhou-grand-theatre",
+    sourceId: "guangzhou-grand-theatre-official",
+    category: "venue",
+    name: "广州大剧院",
+    city: "广州",
+    summary: "珠江新城的地标性表演艺术中心",
+    description: "广州大剧院坐落于珠江新城，由建筑师扎哈·哈迪德设计，以“圆润双砾”的造型成为广州的城市地标之一。剧院设歌剧厅、实验剧场等空间，节目覆盖歌剧、交响乐、室内乐、独奏会、戏剧与舞蹈，是华南地区连接国际舞台的重要演出平台。",
+    details: ["剧院于 2010 年投入使用，歌剧厅约 1800 座，以歌剧和大型交响演出为主；实验剧场则承接室内乐、独奏、先锋戏剧与亲子演出。“纯粹系列”“音乐后花园”等品牌音乐会板块持续引入名家名团，让广州观众能以较亲民的票价听到独奏与室内乐现场。"],
+    coverImage: "guangzhou-grand-theatre.jpg",
+    officialUrl: "https://www.gzdjy.org/",
+  },
 ];
 
 export function sourceCoverUrl(file: string) {
