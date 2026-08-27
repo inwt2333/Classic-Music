@@ -149,6 +149,8 @@ function extractLines(html: string) {
   return $.root().text().split(/\n+/).map(cleanText).filter(Boolean);
 }
 
+export { extractLines };
+
 // 综合剧院（如江苏大剧院）的详情把艺术家介绍与曲目混排；
 // 存在「曲目单」标记时只解析标记之后的段落，遇艺术家介绍/温馨提示等段落截止。
 export function sliceProgramSection(lines: string[]) {

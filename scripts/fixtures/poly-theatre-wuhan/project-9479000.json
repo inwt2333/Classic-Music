@@ -1,0 +1,132 @@
+{
+  "detail": {
+    "activityTagImg": "",
+    "antiFraud": true,
+    "antiFraudImg": "https://cdn.polyt.cn/assets/third/fraud_prevention.jpg",
+    "autonymConfig": null,
+    "brief": null,
+    "cRefund": null,
+    "cShow": null,
+    "cityName": "武汉",
+    "couponsLabel": true,
+    "discuss": false,
+    "douYinRefundFlag": false,
+    "douYinShelfStatus": true,
+    "extendDtos": null,
+    "flash": false,
+    "frequency": false,
+    "img": "https://cdn.polyt.cn/jpg/2026-06-11/433161e50e01e2e44323d4df9fe55277.jpg",
+    "introduces": null,
+    "invoiceNotes": null,
+    "invoicingTime": 1781330400000,
+    "isCalendar": "0",
+    "isOpenAddCommonly": false,
+    "isOpenShop": "1",
+    "isOpenticket": "1",
+    "isSellOut": "0",
+    "maxPrice": 680,
+    "minPrice": 180,
+    "newMode": null,
+    "noticeContent": null,
+    "noticePopup": false,
+    "noticeTitle": null,
+    "outStockRegister": false,
+    "payActivityDetailImg": "",
+    "pcBuyTicket": true,
+    "pickUpType": null,
+    "placeLatitudePoint": "30.561127",
+    "placeLongitudePoint": "114.259084",
+    "platProductStatus": "02",
+    "platShelfStatus": true,
+    "preferentialDto": {
+      "activityTagImg": "",
+      "cultureCouponId": [],
+      "discountTicket": [
+        {
+          "amount": null,
+          "count": null,
+          "discount": 88,
+          "giftCount": null,
+          "price": 680
+        }
+      ],
+      "giftTicket": [],
+      "memberDistription": [
+        "普通会员100折",
+        "金卡会员85折",
+        "银卡会员90折",
+        "白金会员80折"
+      ],
+      "newMemberDistription": [
+        {
+          "happenTime": 1792755000000,
+          "saleClassList": [
+            "普通会员100折",
+            "金卡会员85折",
+            "银卡会员90折",
+            "白金会员80折"
+          ],
+          "showName": "2026.10.23 星期五 19:30"
+        },
+        {
+          "happenTime": 1792823400000,
+          "saleClassList": [
+            "普通会员100折",
+            "金卡会员85折",
+            "银卡会员90折",
+            "白金会员80折"
+          ],
+          "showName": "2026.10.24 星期六 14:30"
+        }
+      ],
+      "packageTicket": [],
+      "tagImg": [
+        "https://cdn.polyt.cn/png/2025-04-18/583fff14fae7a623eb0170aee7bfd10f.png",
+        "https://cdn.polyt.cn/png/2025-04-18/08bc3c13b0862e1c0128cecfcc6a00ee.png"
+      ]
+    },
+    "productId": 9479000,
+    "productName": "凡人修仙传动画视听音乐会（武汉站）",
+    "productPrice": null,
+    "productReservation": null,
+    "productSource": "POLY",
+    "productStatus": "02",
+    "productSubtypeId": "1099120100000000001",
+    "productSubtypeName": "交响乐/管弦乐",
+    "productTypeId": "1099120000000000001",
+    "productTypeName": "音乐会",
+    "productTypeNameForIo": "音乐会",
+    "projectAnnouncement": "演出票具有时效性，如非演出变更或取消的原因，不提供退换票服务，请谨慎购买。演员、曲目、出场顺序均以当天现场演出为准。",
+    "projectDesp": "<p><strong>凡人修仙传动画视听音乐会 武汉站</strong></p><p><span style=\"color: rgb(255, 255, 255); background-color: rgb(207, 19, 34);\"><strong>演出地址：武汉琴台大剧院 </strong></span></p><p><span style=\"color: rgb(38, 38, 38);\"><strong>全网开票时间：</strong></span><span style=\"color: rgb(38, 38, 38);\">2026年6月13日14:00</span></p><p><span style=\"color: rgb(38, 38, 38);\">优先购：白金会员、金卡会员 6月13日12:00-13:45</span></p><p><span style=\"color: rgb(38, 38, 38);\"><strong>早鸟优惠：</strong></span><span style=\"color: rgb(38, 38, 38);\">指定区域（蓝色）680票价享88折优惠。</span></p><p style=\"text-align: start;\"><span style=\"color: rgb(38, 38, 38);\"><strong>会员优惠：</strong></span><span style=\"color: rgb(38, 38, 38);\">银卡9折，金卡85折，白金8折</span>，限购6张。</p><p style=\"text-align: start;\"><span style=\"color: rgb(231, 95, 51);\"><strong>早鸟优惠与会员折扣不叠加。</strong></span></p><p style=\"text-align: start;\"><span style=\"color: rgb(0, 0, 0); background-color: rgb(252, 251, 207);\">本场演出1米2以下儿童谢绝入场，1米2以上儿童凭票入场，一人一票，大小同价、对号入座，</span><span style=\"color: rgb(0, 0, 0); background-color: rgb(252, 251, 207);\"><u>请为随行儿童购买同一楼层的演出票，不可跨楼层入座！</u></span></p><p style=\"text-align: start;\"><span style=\"color: rgb(38, 38, 38);\">演出时长约90分钟，中场休息15分钟；时长仅供参考，具体以现场为准。</span></p><p style=\"text-align: start;\"><span style=\"color: rgb(38, 38, 38);\">***************************</span></p><p><strong>【购票须知】</strong></p><p style=\"text-align: start;\">1.<span style=\"color: rgb(207, 19, 34);\"><strong>演出票具有时效性，如非演出变更或取消的原因，不提供退换票服务。演员及曲目以演出当天为准。</strong></span></p><p style=\"text-align: start;\">2.演出票仅限观看当天当场次演出，逾期失效，请提前取票、准时入场、对号入座。<span style=\"color: rgb(0, 0, 0); background-color: rgb(255, 213, 145);\">演出票作为唯一入场凭证，遗失、破损、涂改、遮挡，将禁止入场，请妥善保管。</span></p><p style=\"text-align: start;\">3.剧场<span style=\"background-color: rgb(255, 213, 145);\">两侧靠边座位、二三楼座位</span>可能因部分演出的舞台布局或呈现角度，导致<span style=\"background-color: rgb(255, 213, 145);\">部分场景存在视角局限</span>，请根据自身需求选择合适座位。</p><p style=\"text-align: start;\">4.<span style=\"background-color: rgb(255, 213, 145);\">“</span><span style=\"background-color: rgb(255, 213, 145);\"><strong>未成年人观众</strong></span><span style=\"background-color: rgb(255, 213, 145);\">”请在购票前经过法定监护人允准</span>，如购票订单成功生成并完成支付，<span style=\"background-color: rgb(255, 213, 145);\">平台默认其为“法定监护人”授权允准购票，并由法定监护人承担一切相关责任。</span>我司不支持以“未成年人”未经监护人允准等相关理由，申请退票等行为。</p><p style=\"text-align: start;\">5.观演期间请保持场内安静，迟到观众请在观众厅外等候，听从服务人员安排安静入场，若因迟到须等候入场，不得以此要求退票。</p><p style=\"text-align: start;\">6.演出票无快递服务，请前往琴台票务中心现场取票。</p><p style=\"text-align: start;\">7.演出取票：剧院官方渠道线上订单凭取票码至自助机取票。</p><p style=\"text-align: start;\">1）平时取票：周一至周日 9:30-17:30，票务中心取票。</p><p style=\"text-align: start;\">2）演出当天取票：</p><p style=\"text-align: start;\"> &nbsp; &nbsp; &nbsp;9:30-18:00 票务中心</p><p style=\"text-align: start;\"> &nbsp; &nbsp; &nbsp;18:30-19:30 剧院大厅自助机</p><p style=\"text-align: start;\"> &nbsp; &nbsp; &nbsp;早场、下午场演出，请于演出前1小时，前往剧院大厅自助机取票。</p><p style=\"text-align: start;\">3）如在剧院代售点购票，请遵守相关代售点的取票要求。</p><p style=\"text-align: start;\">8.如需开发票，请于演出实际结束后1个月内凭纸质演出票及支付记录到琴台票务中心大剧院窗口或联系剧院线上客服开具。发票开具时间：周一至周五（9:30-17:00）</p><p>****************************************</p><p style=\"text-align: start;\"><strong>演出简介：</strong><img src=\"https://cdn.polyt.cn/jpg/2026-06-11/d255a46984de6fab9348db2e8f28f9b2.jpg\" alt=\"\" data-href=\"\" style=\"\"></p>",
+    "projectImgs": [],
+    "pxqProductId": null,
+    "returnTicketSet": "0",
+    "salesType": "0",
+    "selfSupport": false,
+    "shelfStatus": true,
+    "shellBeforeStatus": "13",
+    "showBefore": 300,
+    "showDesc": null,
+    "showLasts": "90",
+    "showPlaceAddress": "武汉市汉阳区知音大道7号",
+    "showPlaceName": "武汉琴台大剧院",
+    "showSaleBeginTime": true,
+    "showSeatMap": null,
+    "showStartToEndTime": "2026.10.23-10.24",
+    "site": 0,
+    "tagImg": [
+      "https://cdn.polyt.cn/png/2025-04-18/583fff14fae7a623eb0170aee7bfd10f.png",
+      "https://cdn.polyt.cn/png/2025-04-18/08bc3c13b0862e1c0128cecfcc6a00ee.png"
+    ],
+    "theaterId": 1142,
+    "theaterNameForIo": "武汉琴台大剧院",
+    "thirdProductStatus": null,
+    "ticketAgent": false,
+    "tourId": null,
+    "video": null,
+    "videoImg": null,
+    "whetherToShowSelfLabel": true,
+    "xiaoGuoSite": false
+  },
+  "shows": null
+}

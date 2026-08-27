@@ -110,6 +110,13 @@ import {
   parseGzdjyPriceTiers,
   type GzdjyListRow,
 } from "./adapters/guangzhou-grand-theatre";
+import {
+  extractPolytProgram,
+  mapPolytTicketStatus,
+  parsePolytRecommendList,
+  parsePolytShowList,
+  type PolytProduct,
+} from "./adapters/poly-theatre";
 
 const sourceConfigSchema = z.object({
   city: z.string(),
@@ -247,6 +254,12 @@ const sourceConfigSchema = z.object({
         url: z.string().url(), apiBase: z.string().url(),
         city: z.string().default("广州"), venue: z.string(),
         pageSize: z.number().int().positive().max(50).default(10),
+      }),
+      z.object({
+        id: z.string(), name: z.string(), adapter: z.literal("polyt-pc-api"),
+        url: z.string().url(), apiBase: z.string().url(),
+        city: z.string(), venue: z.string(),
+        pageSize: z.number().int().positive().max(100).default(100),
       }),
     ]),
   ),
@@ -526,6 +539,8 @@ function scrapeSource(source: SourceConfig, scrapedAt: string) {
       return scrapeHarbinMaitix(source, scrapedAt);
     case "gzdjy-mservice":
       return scrapeGuangzhouGrandTheatre(source, scrapedAt);
+    case "polyt-pc-api":
+      return scrapePolyTheatre(source, scrapedAt);
   }
 }
 
@@ -1376,6 +1391,108 @@ function normalizeGzdjyEvent(
     tags: inferTags(title, composers),
     dataQuality: program.length ? "scraped" : "needs-review",
   }, programLines.join("\n"));
+}
+
+async function fetchPolytJson(
+  source: Extract<SourceConfig, { adapter: "polyt-pc-api" }>,
+  path: string,
+  params: Record<string, string> = {},
+) {
+  const url = new URL(`${source.apiBase.replace(/\/$/, "")}${path}`);
+  for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+  const response = await fetchWithRetry(url, () => ({
+    headers: {
+      // 保利 PC 网关强制要求 Channel 头标识站点，缺失时报「未查询到分销渠道」。
+      channel: "theatre_pc",
+      accept: "application/json",
+      "user-agent": "Mozilla/5.0 ClassicMusicCalendar/1.0",
+      origin: source.url.replace(/\/$/, ""),
+      referer: source.url,
+    },
+    signal: AbortSignal.timeout(30_000),
+  }));
+  if (!response.ok) throw new Error(`保利接口 HTTP ${response.status}`);
+  const data = await response.json() as Record<string, any>;
+  if (String(data.code) !== "200") {
+    throw new Error(`保利接口 ${data.code ?? "unknown"}：${data.errors?.[0] ?? "请求失败"}`);
+  }
+  return data;
+}
+
+async function scrapePolyTheatre(
+  source: Extract<SourceConfig, { adapter: "polyt-pc-api" }>,
+  scrapedAt: string,
+) {
+  const products: PolytProduct[] = [];
+  for (let page = 1; page <= 5; page += 1) {
+    const listResponse = await fetchPolytJson(source, "/good/recommends", {
+      page: String(page),
+      size: String(source.pageSize),
+      sort: "RECENTLY_PERFORMANCE",
+    });
+    const pageData = parsePolytRecommendList(JSON.stringify(listResponse));
+    products.push(...pageData.products);
+    if (!pageData.products.length || products.length >= pageData.total) break;
+  }
+
+  const classicalProducts = products.filter((product) => {
+    // 保利把流行演唱会/音乐节也归入「音乐会」大类，先按子分类排除再走古典关键词。
+    if (/音乐节|演唱会/.test(product.subCategory)) return false;
+    return product.category === "音乐会" || isClassicalish(product.name);
+  });
+  await writeFile(
+    resolve(snapshotDir, `${source.id}.list.json`),
+    JSON.stringify(classicalProducts, null, 2),
+    "utf8",
+  );
+
+  const events: ConcertEvent[] = [];
+  for (const product of classicalProducts) {
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 300));
+    let detail: Record<string, any> | null = null;
+    let showsRaw: Record<string, any> | null = null;
+    try {
+      detail = (await fetchPolytJson(source, `/good/project/detail/${product.productId}`)).data ?? null;
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 200));
+      showsRaw = await fetchPolytJson(source, `/good/shows/${product.productId}`);
+    } catch (error) {
+      console.warn(
+        `[source] ${source.name}: 项目 ${product.productId} 请求失败，跳过：${error instanceof Error ? error.message : String(error)}`,
+      );
+      continue;
+    }
+    await writeFile(resolve(snapshotDir, `${source.id}.${product.productId}.json`), JSON.stringify({ detail, shows: showsRaw?.data ?? null }, null, 2), "utf8");
+
+    const program = detail ? extractPolytProgram(detail) : [];
+    const description = cleanText(String(detail?.projectDesp ?? "").replace(/<[^>]+>/g, " ")).slice(0, 400) || undefined;
+    const shows = showsRaw ? parsePolytShowList(JSON.stringify(showsRaw)) : [];
+    const detailUrl = `${source.url.replace(/\/$/, "")}/#/detail?productId=${product.productId}`;
+
+    for (const show of shows) {
+      if (show.happenAt.getTime() <= Date.now()) continue;
+      const event = createSimpleEvent({
+        source,
+        scrapedAt,
+        sourceRecordId: show.showId,
+        projectId: product.productId,
+        title: product.name,
+        start: show.happenAt,
+        venue: product.place || source.venue,
+        hall: show.venueName,
+        priceTiers: show.priceTiers,
+        description,
+        program,
+        performers: [],
+        sourceUrl: detailUrl,
+        ticketUrl: detailUrl,
+        evidenceText: String(detail?.projectDesp ?? ""),
+      });
+      event.ticketStatus = mapPolytTicketStatus(show);
+      events.push(event);
+    }
+  }
+
+  return { rawCount: classicalProducts.length, events };
 }
 
 function mapNcpaSaleStatus(value: string): ConcertEvent["ticketStatus"] {

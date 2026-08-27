@@ -209,6 +209,16 @@
       "pageSize": 50,
       "detailUrlTemplate": "https://www.jsartcentre.org/new_ticket_del2.html?id={id}",
       "allowEmpty": false
+    },
+    {
+      "id": "wuhan-qintai-poly-official",
+      "name": "武汉琴台大剧院（保利）",
+      "adapter": "polyt-pc-api",
+      "url": "https://whqtdjy.polyt.cn/",
+      "apiBase": "https://whqtdjy.polyt.cn/platform-backend",
+      "city": "武汉",
+      "venue": "武汉琴台大剧院",
+      "pageSize": 100
     }
   ]
 }

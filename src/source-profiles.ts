@@ -268,6 +268,18 @@ export const sourceProfiles: SourceProfile[] = [
     coverPosition: "center 30%",
     officialUrl: "https://www.jsartcentre.org/",
   },
+  {
+    id: "wuhan-qintai-poly",
+    sourceId: "wuhan-qintai-poly-official",
+    category: "venue",
+    name: "武汉琴台大剧院",
+    city: "武汉",
+    summary: "知音湖畔的保利系综合剧院",
+    description: "武汉琴台大剧院坐落于汉阳知音大道月湖之畔，与琴台音乐厅、武汉美术馆共同组成琴台文化中心。剧院由保利剧院管理公司运营，以音乐剧、舞剧、话剧和大型演出为主，同时承接交响与视听音乐会等演出，是武汉两江四岸最重要的演出场馆之一。",
+    details: ["剧院 2008 年投入使用，歌剧厅约 1600 座。作为保利院线成员，其节目与全国保利剧院联动巡演，常引进英文原版音乐剧与国内头部舞剧；交响视听、跨界音乐会亦定期上演。同园区的琴台音乐厅（独立运营）专注古典音乐，与本站数据互补。"],
+    coverImage: "wuhan-qintai-poly.jpg",
+    officialUrl: "https://whqtdjy.polyt.cn/",
+  },
 ];
 
 export function sourceCoverUrl(file: string) {
