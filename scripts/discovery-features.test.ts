@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   buildFollowNotifications,
+  buildRecommendations,
   buildSavedFilterNotifications,
   detectDataIssues,
   isFollowTargetActive,
@@ -231,6 +232,21 @@ assert.equal(
   )[0].read,
   true,
 );
+
+const recommendationEvents = [
+  summary({ id: "marked-event", ensemble: "广州交响乐团", programPreview: [{ knowledgeWorkId: "work_000001", composer: "贝多芬", title: "第五交响曲" }] }),
+  summary({ id: "same-work-event", title: "另一场贝五", programPreview: [{ knowledgeWorkId: "work_000001", composer: "贝多芬", title: "第五交响曲" }] }),
+  summary({ id: "unrelated-event", title: "无关演出", city: "北京" }),
+];
+const recommendations = buildRecommendations({
+  events: recommendationEvents,
+  follows: {},
+  personalEvents: { "marked-event": "interested" },
+  now: new Date("2026-08-01T00:00:00.000Z").getTime(),
+});
+assert.equal(recommendations.length, 1);
+assert.equal(recommendations[0].event.id, "same-work-event");
+assert.ok(recommendations[0].reason.includes("第五交响曲"));
 
 const issues = detectDataIssues(summary({
   dataQuality: "needs-review",

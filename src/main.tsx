@@ -165,7 +165,23 @@ function App() {
   const [loadState, setLoadState] = useState("正在加载演出");
   const [query, setQuery] = useState(initialParams.get("q") ?? "");
   const [datePreset, setDatePreset] = useState<DatePreset>((initialParams.get("date") as DatePreset) || "all");
-  const [city, setCity] = useState(initialParams.get("city") ?? "全部城市");
+  const [city, setCity] = useState(() => {
+    const fromUrl = initialParams.get("city");
+    if (fromUrl) return fromUrl;
+    try {
+      return window.localStorage.getItem("classic-music.city") ?? "全部城市";
+    } catch {
+      return "全部城市";
+    }
+  });
+  useEffect(() => {
+    try {
+      if (city === "全部城市") window.localStorage.removeItem("classic-music.city");
+      else window.localStorage.setItem("classic-music.city", city);
+    } catch {
+      // 隐私模式下 localStorage 不可用，忽略即可。
+    }
+  }, [city]);
   const [venue, setVenue] = useState(initialParams.get("venue") ?? "全部场馆");
   const [ensemble, setEnsemble] = useState(initialParams.get("ensemble") ?? "全部乐团");
   const [genre, setGenre] = useState(initialParams.get("genre") ?? "全部类型");
@@ -629,6 +645,31 @@ function App() {
   ]);
 
   const changesByEvent = useMemo(() => latestChangesByEvent(changes), [changes]);
+  const relatedEvents = useMemo(() => {
+    if (!selectedDetail) return [];
+    const workIds = new Set(selectedDetail.program.map((item) => item.knowledgeWorkId).filter(Boolean) as string[]);
+    const composers = new Set(selectedDetail.composers);
+    const now = Date.now();
+    return dataset.events
+      .filter((event) => event.id !== selectedDetail.id && new Date(event.startTime).getTime() > now)
+      .map((event) => {
+        const sharedWork = event.programPreview.find((item) => item.knowledgeWorkId && workIds.has(item.knowledgeWorkId));
+        const sharesComposer = event.programPreview.some((item) => item.composer && composers.has(item.composer));
+        const score = sharedWork ? 3 : sharesComposer ? 2 : event.ensemble && event.ensemble === selectedDetail.ensemble ? 1 : 0;
+        return { event, score, shared: sharedWork?.title };
+      })
+      .filter((entry) => entry.score > 0)
+      .sort((left, right) => right.score - left.score || left.event.startTime.localeCompare(right.event.startTime))
+      .slice(0, 4)
+      .map(({ event, shared }) => ({
+        id: event.id,
+        title: event.title,
+        dateLabel: event.dateLabel,
+        timeLabel: event.timeLabel,
+        venue: event.venue,
+        shared,
+      }));
+  }, [dataset.events, selectedDetail]);
   const displayedEvents = useMemo(
     () => sortConcerts(filteredEvents, sortMode, changesByEvent),
     [changesByEvent, filteredEvents, sortMode],
@@ -1482,6 +1523,11 @@ function App() {
           onToggleFollow={updateFollow}
           personalStatus={selectedDetail ? resolvedPersonalEvents[selectedDetail.id] : undefined}
           onSetPersonalStatus={updatePersonalStatus}
+          relatedEvents={relatedEvents}
+          onSelectRelated={(eventId) => {
+            const event = dataset.events.find((item) => item.id === eventId);
+            if (event) selectEvent(event);
+          }}
         />
       </section>
         </>

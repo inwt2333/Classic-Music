@@ -63,6 +63,8 @@ export default function EventDetail({
   onToggleFollow,
   personalStatus,
   onSetPersonalStatus,
+  relatedEvents,
+  onSelectRelated,
 }: {
   event: ConcertEvent | null;
   loading: boolean;
@@ -83,6 +85,8 @@ export default function EventDetail({
   onToggleFollow: (target: FollowTarget) => void;
   personalStatus?: PersonalEventStatus;
   onSetPersonalStatus: (event: ConcertEvent, status: PersonalEventStatus | null) => void;
+  relatedEvents: Array<{ id: string; title: string; dateLabel: string; timeLabel: string; venue: string; shared?: string }>;
+  onSelectRelated: (eventId: string) => void;
 }) {
   const [correctionOpen, setCorrectionOpen] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -131,6 +135,19 @@ export default function EventDetail({
   const showEvidenceImages = evidenceImages.length > 0
     && event.dataQuality !== "manual-reviewed"
     && (event.program.length === 0 || event.dataQuality === "ocr-assisted" || event.extraction?.accepted === false);
+  const knowledgeWorksForEvent = event.program
+    .map((item) => (item.knowledgeWorkId ? knowledgeWorksById.get(item.knowledgeWorkId) : undefined))
+    .filter((work): work is KnowledgeWorkSummary => Boolean(work));
+  const highlights: string[] = [];
+  for (const work of knowledgeWorksForEvent) {
+    if (work.upcomingEventCount === 1) highlights.push(`本季仅此一场 · ${work.composerName}《${work.title}》`);
+    if ((work.genreFamily === "orchestral" || work.genreFamily === "concerto") && (work.durationMinutes ?? 0) >= 40) {
+      highlights.push(`大部头曲目 · 《${work.title}》约 ${work.durationMinutes} 分钟`);
+    }
+  }
+  if (event.ticketStatus === "pre-sale") highlights.push("尚未开票 · 可提前收藏关注");
+  if ((event.sources?.length ?? 1) > 1) highlights.push(`${event.sources!.length} 个官方渠道同场呈现`);
+  const eventHighlights = highlights.slice(0, 4);
 
   return (
     <section
@@ -199,6 +216,12 @@ export default function EventDetail({
           <Check size={15} />已购
         </button>
       </div>
+
+      {eventHighlights.length ? (
+        <div className="event-highlights" aria-label="本场看点">
+          {eventHighlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
+        </div>
+      ) : null}
 
       {dataIssues.length ? <div className="quality-card warning">
         <Flag size={18} />
@@ -310,6 +333,36 @@ export default function EventDetail({
             ))}
           </div>
         </details>
+      ) : null}
+
+      {knowledgeWorksForEvent.length ? (
+        <>
+          <SectionTitle icon={<BookOpenText size={17} />} title="行前聆听指南" />
+          <div className="prep-list">
+            {knowledgeWorksForEvent.map((work) => (
+              <button key={work.id} type="button" className="prep-item" onClick={() => onExploreWork(work.id)}>
+                <strong>{work.composerName}《{work.title}》</strong>
+                <span>{work.summary}</span>
+                <em>{work.difficulty ?? "了解作品"} · 完整指南</em>
+              </button>
+            ))}
+          </div>
+        </>
+      ) : null}
+
+      {relatedEvents.length ? (
+        <>
+          <SectionTitle icon={<Music size={17} />} title="相关演出" />
+          <div className="related-list">
+            {relatedEvents.map((related) => (
+              <button key={related.id} type="button" className="related-item" onClick={() => onSelectRelated(related.id)}>
+                <span className="related-date">{related.dateLabel} {related.timeLabel}</span>
+                <span className="related-title">{related.title}</span>
+                <span className="related-venue">{related.venue}{related.shared ? ` · 同演《${related.shared}》` : ""}</span>
+              </button>
+            ))}
+          </div>
+        </>
       ) : null}
 
       <SectionTitle icon={<ExternalLink size={17} />} title="数据来源" />

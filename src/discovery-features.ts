@@ -12,7 +12,7 @@ import {
   personNameVariants,
   samePersonName,
 } from "./person-identity";
-import { matchesExpandedSearch } from "./product-features";
+import { matchesExpandedSearch, type PersonalEventStatus } from "./product-features";
 import { dateMatchesPreset, normalizeEnsembleName, normalizeVenueName } from "./utils";
 
 export type FollowTargetType = "person" | "composer" | "work" | "ensemble" | "venue" | "city" | "filter";
@@ -394,6 +394,70 @@ export function buildSavedFilterNotifications(
         });
     })
     .sort((left, right) => right.change.detectedAt.localeCompare(left.change.detectedAt));
+}
+
+export type ConcertRecommendation = {
+  event: ConcertEventSummary;
+  reason: string;
+  score: number;
+};
+
+export function buildRecommendations({
+  events,
+  follows,
+  personalEvents,
+  now = Date.now(),
+}: {
+  events: ConcertEventSummary[];
+  follows: FollowMap;
+  personalEvents: Record<string, PersonalEventStatus>;
+  now?: number;
+}): ConcertRecommendation[] {
+  const markedIds = new Set(Object.keys(personalEvents));
+  const markedEvents = events.filter((event) => markedIds.has(event.id));
+  const markedWorkIds = new Set(
+    markedEvents.flatMap((event) => event.programPreview.map((item) => item.knowledgeWorkId).filter(Boolean) as string[]),
+  );
+  const markedComposers = new Set(
+    markedEvents.flatMap((event) => event.programPreview.map((item) => item.composer).filter(Boolean) as string[]),
+  );
+  const markedEnsembles = new Set(markedEvents.map((event) => normalizeEnsembleName(event.ensemble)).filter(Boolean) as string[]);
+
+  const recommendations = new Map<string, ConcertRecommendation>();
+  const bump = (event: ConcertEventSummary, reason: string, score: number) => {
+    const existing = recommendations.get(event.id);
+    if (existing && existing.score >= score) return;
+    recommendations.set(event.id, { event, reason, score });
+  };
+
+  for (const event of events) {
+    if (markedIds.has(event.id)) continue;
+    if (new Date(event.startTime).getTime() <= now) continue;
+
+    for (const target of Object.values(follows)) {
+      if (target.type === "city" && event.city === target.name) bump(event, `你关注的城市 · ${target.name}`, 6);
+      if (target.type === "venue" && normalizeVenueName(event.venue) === target.name) bump(event, `你关注的场馆 · ${target.name}`, 6);
+      if (target.type === "ensemble" && normalizeEnsembleName(event.ensemble)?.includes(target.name.toLocaleLowerCase("zh-CN"))) {
+        bump(event, `你关注的乐团 · ${target.name}`, 5);
+      }
+      if (target.type === "person" && event.mainPerson && samePersonName(event.mainPerson, target.name)) {
+        bump(event, `你关注的音乐家 · ${target.name}`, 5);
+      }
+    }
+
+    const sharedWork = event.programPreview.find((item) => item.knowledgeWorkId && markedWorkIds.has(item.knowledgeWorkId));
+    if (sharedWork?.knowledgeWorkId) bump(event, `你标记过《${sharedWork.title}》`, 4);
+
+    const sharedComposer = event.programPreview.find((item) => item.composer && markedComposers.has(item.composer));
+    if (sharedComposer?.composer) bump(event, `你听过${sharedComposer.composer}的作品`, 3);
+
+    const ensemble = normalizeEnsembleName(event.ensemble);
+    if (ensemble && markedEnsembles.has(ensemble)) bump(event, `你关注过${ensemble}`, 2);
+  }
+
+  return [...recommendations.values()]
+    .sort((left, right) => right.score - left.score || left.event.startTime.localeCompare(right.event.startTime))
+    .slice(0, 6);
 }
 
 function eventMatchesSavedFilter(event: ConcertEventSummary, filter: SavedFilterState) {

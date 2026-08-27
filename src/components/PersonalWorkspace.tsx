@@ -8,11 +8,12 @@ import {
   ChevronRight,
   CircleAlert,
   Crown,
+  Sparkles,
   LibraryBig,
   MapPin,
   Music,
-  Search,
   ScanText,
+  Search,
   Trash2,
   UserRound,
   UsersRound,
@@ -36,6 +37,7 @@ import {
   savedFilterHref,
   type PersonalEventListItem,
 } from "../personal-profile";
+import { buildRecommendations } from "../discovery-features";
 import {
   type PersonalEventSnapshotMap,
 } from "../product-features";
@@ -98,6 +100,10 @@ export default function PersonalWorkspace() {
 
   const groupedFollows = useMemo(() => groupFollowTargets(follows), [follows]);
   const followCount = Object.keys(follows).length;
+  const recommendations = useMemo(
+    () => (dataset ? buildRecommendations({ events: dataset.events, follows, personalEvents }) : []),
+    [dataset, follows, personalEvents],
+  );
   const typedPersonalEventSnapshots: PersonalEventSnapshotMap = personalEventSnapshots;
   const personalCounts = useMemo(() => countPersonalEvents(personalEvents), [personalEvents]);
   const eventMap = useMemo(() => new Map(dataset?.events.map((event) => [event.id, event]) ?? []), [dataset]);
@@ -202,6 +208,21 @@ export default function PersonalWorkspace() {
               <section className="personal-admin-panel">
                 <div><span><ScanText size={20} /></span><div><small>ADMINISTRATION</small><h2>数据审核</h2><p>检查待确认的节目单与公众号导入候选，并保存管理员审核结果。</p></div></div>
                 <a href="?review=1"><ScanText size={16} />进入审核工作台<ChevronRight size={15} /></a>
+              </section>
+            ) : null}
+
+            {recommendations.length ? (
+              <section className="personal-section personal-recommendations">
+                <header><div><Sparkles size={18} /><span><h2>为你推荐</h2><p>基于你的关注、想去与已购记录生成的近期演出建议。</p></span></div></header>
+                <div className="personal-recommendation-list">
+                  {recommendations.map(({ event, reason }) => (
+                    <a key={event.id} className="personal-recommendation-item" href={`${import.meta.env.BASE_URL}?event=${event.id}`}>
+                      <span className="personal-recommendation-reason">{reason}</span>
+                      <strong>{event.title}</strong>
+                      <small>{event.dateLabel} {event.weekday} {event.timeLabel} · {event.venue}</small>
+                    </a>
+                  ))}
+                </div>
               </section>
             ) : null}
 
