@@ -1,0 +1,36 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Parser regression tests
+        run: npm run test:parser
+
+      - name: Data and knowledge tests
+        run: npm run test:data
+
+      - name: Data audit
+        run: npm run audit:data
+
+      - name: Build
+        run: npm run build

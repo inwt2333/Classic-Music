@@ -111,14 +111,6 @@ const sourceConfigSchema = z.object({
       z.object({
         id: z.string(),
         name: z.string(),
-        adapter: z.literal("localhub-jsonld"),
-        url: z.string().url(),
-        city: z.string().default("上海"),
-        venue: z.string(),
-      }),
-      z.object({
-        id: z.string(),
-        name: z.string(),
         adapter: z.literal("shsymphony-api"),
         url: z.string().url(),
         city: z.string().default("上海"),
@@ -251,6 +243,10 @@ type SourceConfig = z.infer<typeof sourceConfigSchema>["sources"][number];
 const useAi = process.argv.includes("--ai");
 const explicitOcr = process.argv.includes("--ocr");
 const useOcr = !process.argv.includes("--no-ocr");
+const sourceFilterArg = process.argv.find((arg) => arg.startsWith("--source="))?.slice("--source=".length) ?? "";
+const sourceFilter = sourceFilterArg
+  ? new Set(sourceFilterArg.split(",").map((value) => value.trim()).filter(Boolean))
+  : null;
 const root = process.cwd();
 const sourceConfigPath = resolve(root, "sources/shanghai.sources.json");
 const outputPath = resolve(root, process.env.SCRAPE_OUTPUT_PATH || "public/data/events.json");
@@ -337,7 +333,16 @@ const composerMap = [
 
 async function main() {
   const startedAt = new Date().toISOString();
-  const config = sourceConfigSchema.parse(JSON.parse(await readFile(sourceConfigPath, "utf8")));
+  const parsedConfig = sourceConfigSchema.parse(JSON.parse(await readFile(sourceConfigPath, "utf8")));
+  const config = {
+    ...parsedConfig,
+    sources: sourceFilter
+      ? parsedConfig.sources.filter((source) => sourceFilter.has(source.id))
+      : parsedConfig.sources,
+  };
+  if (sourceFilter && !config.sources.length) {
+    throw new Error(`--source=${sourceFilterArg} 未匹配到任何来源，可用 id 见 sources/shanghai.sources.json`);
+  }
   const dataset: ConcertDataset = {
     generatedAt: startedAt,
     city: config.city,
@@ -392,8 +397,22 @@ async function main() {
     }
   }
 
-  if (aiConfig) {
+  if (aiConfig && !sourceFilter) {
     dataset.stats.aiEnhancedEvents += await reviewProgramsWithAi(dataset.events, aiConfig);
+  }
+
+  if (sourceFilter) {
+    // 单源探针模式：只重新采集指定来源并输出对比信息，不落库、不导出、不写健康快照。
+    for (const source of dataset.sources) {
+      console.log(
+        `[probe] ${source.id}: ok=${source.ok} discovered=${source.rawCount ?? "-"} normalized=${source.normalizedCount ?? "-"}`,
+      );
+    }
+    console.log(`[probe] ${dataset.sources.length} 个来源采集完成（未持久化）。示例事件：`);
+    for (const event of dataset.events.slice(0, 5)) {
+      console.log(`  ${event.dateLabel} ${event.timeLabel} | ${event.title.slice(0, 40)} | 曲目 ${event.program.length} 条`);
+    }
+    return;
   }
 
   await writeFile(
@@ -488,23 +507,7 @@ function scrapeSource(source: SourceConfig, scrapedAt: string) {
       return scrapeXianConcertHall(source, scrapedAt);
     case "harbin-maitix-api":
       return scrapeHarbinMaitix(source, scrapedAt);
-    case "localhub-jsonld":
-      return scrapeLocalHub(source, scrapedAt);
   }
-}
-
-async function scrapeLocalHub(
-  source: Extract<SourceConfig, { adapter: "localhub-jsonld" }>,
-  scrapedAt: string,
-) {
-  const html = await fetchText(source.url);
-  await writeFile(resolve(snapshotDir, `${source.id}.html`), html, "utf8");
-  const rawEvents = extractLocalHubEvents(html);
-  const events = rawEvents
-    .filter((event) => isClassicalish(event.name ?? ""))
-    .map((event) => normalizeLocalHubEvent(event, source, scrapedAt));
-
-  return { rawCount: rawEvents.length, events };
 }
 
 async function scrapeShanghaiSymphony(
@@ -2069,68 +2072,6 @@ async function fetchText(url: string) {
     throw new Error(`HTTP ${response.status}`);
   }
   return response.text();
-}
-
-function extractLocalHubEvents(html: string) {
-  const $ = cheerio.load(html);
-  const events: Array<Record<string, any>> = [];
-
-  $('script[type="application/ld+json"]').each((_, element) => {
-    const raw = $(element).text().trim();
-    if (!raw) return;
-    try {
-      const json = JSON.parse(raw);
-      const jsonEvents = Array.isArray(json.event) ? json.event : [];
-      for (const event of jsonEvents) {
-        if (event?.["@type"] === "MusicEvent" || event?.name) {
-          events.push(event);
-        }
-      }
-    } catch {
-      // Ignore malformed metadata from upstream pages.
-    }
-  });
-
-  return events;
-}
-
-function normalizeLocalHubEvent(
-  raw: Record<string, any>,
-  source: { id: string; name: string; url: string; city: string; venue: string },
-  scrapedAt: string,
-): ConcertEvent {
-  const start = new Date(raw.startDate);
-  const labels = formatChinaDateLabels(start);
-  const title = cleanText(raw.name ?? "未命名演出");
-  const composers = inferComposers(title);
-  const program = inferProgram(title, composers);
-  const performers = inferPerformers(title);
-  const tags = inferTags(title, composers);
-  const venue = cleanText(raw.location?.name ?? source.venue);
-
-  return {
-    id: stableId(`${source.id}:${raw.url ?? title}:${raw.startDate}`),
-    title,
-    city: source.city,
-    venue,
-    startTime: start.toISOString(),
-    endTime: raw.endDate ? new Date(raw.endDate).toISOString() : undefined,
-    weekday: labels.weekday,
-    dateLabel: labels.dateLabel,
-    timeLabel: labels.timeLabel,
-    price: raw.offers?.price ? `¥${raw.offers.price} 起` : undefined,
-    status: raw.eventStatus?.includes("Cancelled") ? "cancelled" : "scheduled",
-    ticketUrl: raw.url ?? raw.offers?.url,
-    sourceName: source.name,
-    sourceUrl: source.url,
-    scrapedAt,
-    ensemble: inferEnsemble(title),
-    performers,
-    composers,
-    program,
-    tags,
-    dataQuality: program.length ? "scraped" : "needs-review",
-  };
 }
 
 function normalizeShanghaiSymphonyEvent(
