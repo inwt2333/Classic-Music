@@ -105,6 +105,7 @@ import {
 } from "./ai/program-verifier";
 import {
   extractGzdjyProgramLines,
+  parseGzdjyProgramLine,
   parseGzdjyFirstShowTime,
   parseGzdjyListResponse,
   parseGzdjyPriceTiers,
@@ -1359,11 +1360,16 @@ function normalizeGzdjyEvent(
   const place = splitVenueAndHall(row.place, source.venue);
   const priceTiers = parseGzdjyPriceTiers(row.priceText);
   const programLines = extractGzdjyProgramLines(detailHtml);
-  const program = programLines.map((line) => ({
-    title: line,
-    composer: isProgramRoleLabel(line) ? undefined : inferComposers(line)[0],
-    confidence: "official" as const,
-  }));
+  const program = programLines
+    .map((line) => parseGzdjyProgramLine(line))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((item) => ({
+      composer: item.composer && !isProgramRoleLabel(item.composer) ? item.composer : undefined,
+      title: item.title,
+      alternateTitles: item.alternateTitles,
+      movements: item.movements,
+      confidence: "official" as const,
+    }));
   const composers = uniqueStrings(program.map((item) => item.composer)) as string[];
   const detailUrl = `${source.apiBase}${row.link.split("?")[0]}`;
 

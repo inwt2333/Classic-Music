@@ -1,5 +1,5 @@
 {
-  "lastReviewedDetectedAt": "2026-08-26T12:12:01.443Z",
-  "reviewedAt": "2026-08-27T12:16:53.134Z",
-  "runNote": "auto-review 2026-08-30: reviewed 2026-08-26 batch (8 added), fixed shenzhen credit-line attachment + performer suffix/prose guards; three new sources (gz/js/wuhan) collected 28 events, pre-checked healthy; today regeneration changes left for next run"
+  "lastReviewedDetectedAt": "2026-08-27T12:09:09.581Z",
+  "reviewedAt": "2026-08-28T12:31:28.223Z",
+  "runNote": "auto-review 2026-09-01: reviewed 2026-08-27 batch (34 added incl. new-source events + 6 price), fixed gzdjy line parser + maitix lone-composer/aria layouts; today regeneration changes left for next run"
 }

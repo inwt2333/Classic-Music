@@ -114,4 +114,30 @@ assert.ok(
   "演奏家角色词不应被识别为作曲家",
 );
 
+const jscRomeo = parseHarbinMaitixDetail(
+  JSON.parse(readFileSync(resolve(jscFixtureDir, "maitix-238912026.json"), "utf8")),
+);
+assert.deepEqual(jscRomeo.program.map((item) => [item.composer ?? "—", item.movements?.length ?? 0]), [
+  ["瓦格纳", 0],
+  ["谢尔盖·谢尔盖耶维奇·普罗科菲耶夫", 3],
+  ["谢尔盖·谢尔盖耶维奇·普罗科菲耶夫", 8],
+]);
+assert.equal(jscRomeo.program[1].title, "D大调第一小提琴协奏曲，作品19");
+assert.equal(jscRomeo.program[2].movements?.[0].title, "蒙泰古家族与凯普莱特家族");
+
+const jscArias = parseHarbinMaitixDetail(
+  JSON.parse(readFileSync(resolve(jscFixtureDir, "maitix-239251010.json"), "utf8")),
+);
+assert.equal(jscArias.program.length, 10);
+assert.deepEqual(
+  jscArias.program.slice(0, 3).map((item) => [item.composer ?? "—", item.title.split(" ")[0]]),
+  [
+    ["比才", "卡门序曲"],
+    ["威尔第", "女人善变"],
+    ["雷昂卡瓦洛", "先生们，女士们，可以开始了吗？"],
+  ],
+);
+assert.ok(jscArias.program.some((item) => item.composer === "莱哈尔" && item.title.startsWith("你是我心中的挚爱")));
+assert.ok(jscArias.program.every((item) => !/拉开帷幕|将运用/.test(item.title)));
+
 console.log("Harbin Maitix parser tests passed.");

@@ -69,36 +69,59 @@ export function parseHarbinMaitixProgram(input: string[] | string) {
   const lines = Array.isArray(input) ? input.map(cleanText).filter(Boolean) : extractLines(input);
   const program: ProgramItem[] = [];
   let index = 0;
+  let pendingComposer: string | undefined;
 
   while (index < lines.length) {
-    const header = parseWorkHeader(lines[index]);
+    const line = cleanText(lines[index]);
+    if (isHalfMarker(line)) {
+      pendingComposer = undefined;
+      index += 1;
+      continue;
+    }
+    const loneComposer = parseLoneComposer(line);
+    if (loneComposer) {
+      pendingComposer = loneComposer;
+      index += 1;
+      continue;
+    }
+    const header = parseWorkHeader(lines[index], pendingComposer);
     if (!header) {
       index += 1;
       continue;
     }
+    pendingComposer = undefined;
 
     const item: ProgramItem = { composer: header.composer, title: header.title, confidence: "official" };
     const english: string[] = [];
     const movements: NonNullable<ProgramItem["movements"]> = [];
     index += 1;
 
-    while (index < lines.length && !isWorkHeader(lines[index])) {
+    while (
+      index < lines.length &&
+      !isWorkHeader(lines[index]) &&
+      !parseLoneComposer(lines[index]) &&
+      !isHalfMarker(lines[index]) &&
+      !isBracketFirstLine(lines[index])
+    ) {
       const line = lines[index];
       const movement = parseMovement(line);
       if (movement) {
         const next = lines[index + 1];
-        if (hasChinese(movement.title) && next && !hasChinese(next) && /[A-Za-z]{3}/.test(next)) {
+        const nextMovement = next ? parseMovement(next) : undefined;
+        const nextIsMovement = Boolean(nextMovement && nextMovement.number !== movement.number);
+        const nextIsCast = next ? /^(?:指挥|钢琴|小提琴|中提琴|大提琴|长笛|双簧管|单簧管|圆号|乐团|管弦乐团|交响乐团|合唱团|演唱|演奏|独奏|领奏|领唱|朗诵|主持人|艺术指导|女高音|女中音|男高音|男中音|男低音)[^：:]*[：:]/.test(cleanText(next)) : false;
+        if (hasChinese(movement.title) && next && !hasChinese(next) && !nextIsMovement && !nextIsCast && /[A-Za-z]{3}/.test(next)) {
           movements.push({ ...movement, alternateTitles: [cleanText(next)] });
           index += 2;
           continue;
         }
-        if (next && hasChinese(next) && !isWorkHeader(next)) {
+        if (next && hasChinese(next) && !isWorkHeader(next) && !nextIsMovement && !nextIsCast) {
           movements.push({ number: movement.number, title: stripMovementNumber(next), alternateTitles: [movement.title] });
           index += 2;
           continue;
         }
         const following = lines[index + 2];
-        if (next && !hasChinese(next) && following && hasChinese(following) && !isWorkHeader(following)) {
+        if (next && !hasChinese(next) && !nextIsMovement && following && hasChinese(following) && !isWorkHeader(following) && !following.match?.(/^第\s*[一二三四五六七八九十\d]+\s*乐章/)) {
           movements.push({
             number: movement.number,
             title: stripMovementNumber(following),
@@ -108,6 +131,10 @@ export function parseHarbinMaitixProgram(input: string[] | string) {
           continue;
         }
         movements.push(movement);
+        index += 1;
+        continue;
+      }
+      if (/^(?:指挥|钢琴|小提琴|中提琴|大提琴|长笛|双簧管|单簧管|圆号|乐团|管弦乐团|交响乐团|合唱团|演唱|演奏|独奏|领奏|领唱|朗诵|主持人|艺术指导|女高音|女中音|男高音|男中音|男低音)[^：:]*[：:]/.test(line)) {
         index += 1;
         continue;
       }
@@ -167,13 +194,33 @@ export function sliceProgramSection(lines: string[]) {
   return section.length ? section : lines;
 }
 
-function parseWorkHeader(line: string) {
+function parseWorkHeader(line: string, pendingComposer?: string) {
   const normalized = cleanText(line).replace(/^【|】$/g, "");
+  const bracketFirst = normalized.match(/^《\s*([^》]{2,100})\s*》\s*(.*)$/);
+  if (bracketFirst) {
+    const title = cleanText(`${bracketFirst[1]} ${bracketFirst[2]}`.replace(/[《》]/g, ""));
+    const structuredAria = /选自.{0,24}(?:轻)?(?:歌剧|话剧).{0,16}(?:咏叹调|间奏曲|序曲)/.test(title);
+    if (looksLikeWork(title) && (structuredAria || !isProseLine(title))) {
+      const ariaComposer = title.match(/选自([一-龥·]{2,12}?)(?:轻)?(?:歌剧|话剧)/);
+      return { composer: pendingComposer ?? (cleanText(ariaComposer?.[1] ?? "") || undefined), title };
+    }
+  }
+  if (pendingComposer) {
+    if (
+      !/《|》|[：:]/.test(normalized) &&
+      normalized.length >= 4 &&
+      normalized.length <= 60 &&
+      looksLikeWork(normalized) &&
+      !isProseLine(normalized)
+    ) {
+      return { composer: pendingComposer, title: normalized };
+    }
+  }
   const bracket = normalized.match(/^(?:[一二三四五六七八九十]+|\d+)?[.、．]?\s*([^《》：:]{2,30})\s*《\s*([^》]{2,100})\s*》\s*(.*)$/);
   if (bracket) {
     const composer = cleanText(bracket[1]);
     const title = cleanText(`${bracket[2]} ${bracket[3]}`);
-    if (isPlausibleComposer(composer) && looksLikeWork(title)) return { composer, title };
+    if (isPlausibleComposer(composer) && looksLikeWork(title) && !isProseLine(title) && title.length <= 80) return { composer, title };
   }
   const numbered = normalized.match(/^(?:[一二三四五六七八九十]+|\d+)[.、．]\s*(.{2,40}?)[：:]\s*(.+)$/);
   const plain = normalized.match(/^([^：:]{2,30})[：:]\s*(.+)$/);
@@ -181,8 +228,25 @@ function parseWorkHeader(line: string) {
   if (!match) return undefined;
   const composer = cleanText(match[1]);
   const title = cleanText(match[2].replace(/[《》]/g, ""));
-  if (!isPlausibleComposer(composer) || !looksLikeWork(title)) return undefined;
+  if (!isPlausibleComposer(composer) || !looksLikeWork(title) || isProseLine(title)) return undefined;
   return { composer, title };
+}
+
+function isProseLine(value: string) {
+  return value.length >= 30 && (value.match(/[，。；]/g) ?? []).length >= 2;
+}
+
+export function parseLoneComposer(line: string) {
+  const match = cleanText(line).match(/^([^：《》\s]{2,24})[：:]\s*$/);
+  return match && isPlausibleComposer(match[1]) ? cleanText(match[1]) : undefined;
+}
+
+function isHalfMarker(line: string) {
+  return /^(?:上|下)半场[：:]?$/.test(cleanText(line).replace(/\s/g, ""));
+}
+
+function isBracketFirstLine(line: string) {
+  return /^《[^》]{2,100}》/.test(cleanText(line));
 }
 
 function isWorkHeader(line: string) {
@@ -190,7 +254,8 @@ function isWorkHeader(line: string) {
 }
 
 function parseMovement(line: string): NonNullable<ProgramItem["movements"]>[number] | undefined {
-  const match = cleanText(line).match(/^(?:第\s*)?((?:[IVX]+|\d+|[一二三四五六七八九十]+))(?:\s*乐章)?\s*[.、．:：]\s*(.+)$/i);
+  const named = cleanText(line).match(/^第\s*([一二三四五六七八九十\d]+)\s*乐章\s+(.+)$/);
+  const match = named ?? cleanText(line).match(/^(?:第\s*)?((?:[IVX]+|\d+|[一二三四五六七八九十]+))(?:\s*乐章)?\s*[.、．:：]\s*(.+)$/i);
   if (!match || isWorkHeader(line)) return undefined;
   return { number: match[1], title: cleanText(match[2]) };
 }
@@ -215,12 +280,12 @@ function parseCast(lines: string[]) {
 }
 
 function looksLikeWork(value: string) {
-  return /交响曲|协奏曲|奏鸣曲|四重奏|三重奏|组曲|小品集|序曲|变奏曲|幻想曲|狂想曲|舞曲|练习曲|夜曲|前奏曲|赋格|作品|Op\.|曲$/i.test(value);
+  return /交响曲|协奏曲|奏鸣曲|四重奏|三重奏|组曲|小品集|序曲|变奏曲|幻想曲|狂想曲|舞曲|练习曲|夜曲|前奏曲|赋格|间奏曲|谐谑曲|浪漫曲|咏叹调|选自|作品|Op\.|曲$/i.test(value);
 }
 
 function isPlausibleComposer(value: string) {
   return hasChinese(value) &&
-    value.length <= 12 &&
+    value.length <= (value.includes("·") ? 24 : 12) &&
     !/——/.test(value) &&
     !/^[一二三四五六七八九十\d]+[、.．]?$/.test(value) &&
     !/(?:演奏|独奏|指挥|演唱)$/.test(value) &&

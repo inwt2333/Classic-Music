@@ -6,7 +6,7 @@ METHOD:PUBLISH
 X-WR-CALNAME:古典音乐演出日历 · 江苏大剧院官网
 BEGIN:VEVENT
 UID:perf_ec9fcb8c653f47f2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260829T113000Z
 DTEND:20260829T130000Z
 SUMMARY:瞬息之境——克里斯蒂安·布莱克肖钢琴独奏音乐会
@@ -17,28 +17,29 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238293072
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6e1709ed8f25b9a8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T130000Z
 SUMMARY:“永恒爱情”罗密欧与朱丽叶——谭利华、黄滨与江苏交响乐团纪念普罗科菲耶夫诞辰135周年交响音乐会
 LOCATION:江苏大剧院 --音乐厅
-DESCRIPTION:黄滨与江苏交响乐团\n指挥：谭利华\n¥80 - ¥280\n瓦格纳·黎恩济：序曲
+DESCRIPTION:黄滨与江苏交响乐团\n指挥：谭利华\n¥80 - ¥280\n瓦格纳·黎恩济：序曲\n谢尔盖·谢尔盖耶维奇·普罗科菲耶夫·D
+ 大调第一小提琴协奏曲，作品19\n谢尔盖·谢尔盖耶维奇·普罗科菲耶夫·罗密欧与朱丽叶 芭蕾组曲，作品64b
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238912026
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_97d1df50315e7dd7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T130000Z
 SUMMARY:瑞士华裔钢琴家赵梅笛与欧洲音乐家室内乐团——演绎狂想曲与电影原声之夜音乐
 LOCATION:江苏大剧院 --音乐厅
 DESCRIPTION:瑞士华裔钢琴家赵梅笛与欧洲音乐家室内乐团\n¥80 - ¥380\n乔治·格什温·蓝色狂想曲\n帕布罗·德·萨拉萨蒂·流浪者
- 之歌，作品20\n约翰·威廉姆斯·辛德勒的名单主题曲\n杰里·博克·屋顶上的提琴手主题曲\n赵梅笛·星球大战狂想曲（根据约翰·威廉姆斯的主题创作）
+ 之歌，作品20\n黄河钢琴协奏曲\n约翰·威廉姆斯·辛德勒的名单主题曲\n杰里·博克·屋顶上的提琴手主题曲
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239139005
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_eb6a71cf9ce2cd59@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T130000Z
 SUMMARY:2026年江苏省演艺集团民族乐团音乐季——《山海同鸣》民族管弦音乐会
@@ -48,7 +49,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239529001
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_591b7ebdb0da05e7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260920T113000Z
 DTEND:20260920T130000Z
 SUMMARY:南京市文旅消费政府补贴剧目2026“名家名团”系列-安东尼奥·帕帕诺爵士、刘晓禹和伦敦交响乐团音乐会
@@ -59,7 +60,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238291104
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_df34a89188583544@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T113000Z
 DTEND:20260924T130000Z
 SUMMARY:“幻想与变奏”陈萨钢琴独奏音乐会
@@ -70,24 +71,19 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238578027
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_501579502bf85e00@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261004T113000Z
 DTEND:20261004T133000Z
 SUMMARY:“魏”你歌唱——中外经典声乐作品音乐会
 LOCATION:江苏大剧院 --音乐厅
-DESCRIPTION:江苏交响乐团\n指挥：林友声\n¥80 - ¥1280\n江苏交响乐团将以一曲·卡门序曲 拉开帷幕，热烈而充满张力。随后，魏
- 松的学生们——于浩磊、沈佳瑜、秦天、刘涛、赵丽丽、韩蓬——将轮番登场，用八种截然不同的人设征服你：《弄臣》里公爵的轻浮浪荡、《丑角》里小丑的悲怆嘶
- 吼、《托斯卡》里画家临终前的星光眷恋……每一首咏叹调都是一场微型戏剧，让你在一晚看尽人间爱恨。而魏松本人将以《奥赛罗》中那句痛彻心扉的“神啊，你为
- 何羞辱我？”重磅压轴，用他标志性的金属质感嗓音，把悲剧英雄的屈辱与愤怒砸进你心里。上半场尾声，师生五人还将同台飙歌，用《重归苏莲托》和《登山缆车》
- 两首意大利民歌点燃全场——那画面，想想就过瘾。\n汤非将用·莫尼山 和《天之大》带你去往草原与故乡的远方；方琼将运用中国古诗词的吟诵元素，唱出《幽
- 兰操》“一唱三叹”的韵味，营造出非常唯美的“空谷幽兰”意境；随后，魏松的每一位学生都将献上一首饱含中国韵味的作品——从徐沛东笔下苍茫的《忆秦娥·恒
- 山月》，再到栾凯作曲、陈道斌作词的深情告白《我怎样去爱你》……当青主谱曲的《大江东去》在魏松的诠释下响起，苏轼的千古豪情将被赋予全新的生命。最后，
- 全体演唱者将共同唱响《为你歌唱》——这不仅是献给观众的歌，更是这个“音乐大家庭”对舞台、对彼此最真挚的告白。
+DESCRIPTION:江苏交响乐团\n指挥：林友声\n¥80 - ¥1280\n比才·卡门序曲，选自比才歌剧卡门序曲\n威尔第·女人善变，选自威尔
+ 第歌剧弄臣公爵的咏叹调\n雷昂卡瓦洛·先生们，女士们，可以开始了吗？，选自雷昂卡瓦洛歌剧丑角托尼奥的咏叹调\n雷昂卡瓦洛·穿上戏袍，选自雷昂卡瓦洛
+ 歌剧丑角卡尼奥的咏叹调\n莱哈尔·你是我心中的挚爱，选自莱哈尔轻歌剧微笑王国苏城的咏叹调
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239251010
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1ac573ed35488182@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261005T113000Z
 DTEND:20261005T130000Z
 SUMMARY:【积分兑换】月映山河——江苏大剧院室内乐音乐会
@@ -97,7 +93,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239487004
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0db513999fa416a8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261007T113000Z
 DTEND:20261007T130000Z
 SUMMARY:“循音·镇厅之宝”管风琴系列——“声声入沁 如风哥德堡”约尔格·哈卢贝克管风琴独奏音乐会
@@ -108,7 +104,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238922002
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6cc0029bfad3b9e1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261018T113000Z
 DTEND:20261018T130000Z
 SUMMARY:“仰望远方·致敬经典”——谢继群与南京民族乐团笛子独奏专场音乐会
@@ -123,7 +119,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239111008
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1b8834796ebba776@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T113000Z
 DTEND:20261106T132000Z
 SUMMARY:“弦弹西东”碰碰和亚历山大·波达切夫竖琴古筝重奏音乐会
@@ -134,7 +130,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239520002
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5a150e899717b79c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T113000Z
 DTEND:20261113T130000Z
 SUMMARY:2026江苏大剧院“名家名团”“镜像莫扎特”系列——柏林爱乐巴洛克独奏家合奏团与柏林爱乐双首席音乐会

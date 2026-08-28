@@ -5,54 +5,18 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:古典音乐演出日历（全部城市）
 BEGIN:VEVENT
-UID:perf_75edda0e02911305@classic-music
-DTSTAMP:20260827T120909Z
-DTSTART:20260828T110000Z
-DTEND:20260828T130000Z
-SUMMARY:【8.28】印象、浪漫与现代的交响音乐会
-LOCATION:哈尔滨音乐厅
-DESCRIPTION:哈尔滨交响乐团\n指挥：陈琳\n¥80 - ¥380\n克劳德·德彪西·小组曲\n马克斯·布鲁赫·g小调第一小提琴协奏曲，作
- 品26\n谢尔盖·普罗科菲耶夫·罗密欧与朱丽叶第二组曲，作品64
-URL:https://hrbso.maitix.com/h5#/pages-order/projectDetail/index?projectId
- =239358001
-END:VEVENT
-BEGIN:VEVENT
-UID:perf_b1cd93db3f8e6915@classic-music
-DTSTAMP:20260827T120909Z
-DTSTART:20260828T111500Z
-DTEND:20260828T131500Z
-SUMMARY:马思聪的音乐碎片
-LOCATION:捷豹上海交响音乐厅 演艺厅
-DESCRIPTION:上海交响乐团\n¥80 - ¥200\n马思聪·《内蒙组曲》\n马思聪·《西藏音诗》\n马思聪·《山歌》\n马思聪·《新疆狂
- 想曲》\n马思聪·《阿美组曲》
-URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
- id=21857&supportSeat=Y
-END:VEVENT
-BEGIN:VEVENT
-UID:perf_c48a6dcf55e66b25@classic-music
-DTSTAMP:20260827T120909Z
-DTSTART:20260828T113000Z
-DTEND:20260828T130000Z
-SUMMARY:保罗·刘易斯钢琴独奏音乐会
-LOCATION:凯迪拉克·上海音乐厅 大厅
-DESCRIPTION:¥80 - ¥480\n沃尔夫冈·阿玛多伊斯·莫扎特·C大调第十号钢琴奏鸣曲\n弗朗西斯·普朗克·即兴曲，第7–12首\n克
- 劳德·德彪西·欢乐岛\n弗朗西斯·普朗克·即兴曲，第1–6首 & 第13–15首\n沃尔夫冈·阿玛多伊斯·莫扎特·C小调第十四号钢琴奏鸣曲
-URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=681&activeType=0
-END:VEVENT
-BEGIN:VEVENT
-UID:perf_581c81dff2dd8737@classic-music
-DTSTAMP:20260827T120909Z
-DTSTART:20260828T120000Z
-DTEND:20260828T140000Z
-SUMMARY:魅之回响——远古与大地多民族童声合唱音乐会
-LOCATION:深圳音乐厅 二楼演奏大厅
-DESCRIPTION:¥2 - ¥630\n张阿雅·大山小事\n潘行紫旻·紫\n茉莉花（江苏民歌）\n官宇·水色壮乡•祈福调\n一曲嘹歌绕壮山（壮
- 族原生态民歌）
-URL:https://szyyt.com/performance/show_100001019264395.html
+UID:perf_ad83d8df1af5fec4@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260829T060000Z
+DTEND:20260829T080000Z
+SUMMARY:星耀之约·音你闪耀音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥680
+URL:https://www.shoac.com.cn/#/detail?projectId=1299017649881477120
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ca6ae48053f3bbb6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260829T113000Z
 DTEND:20260829T133000Z
 SUMMARY:许忠与上海歌剧院交响乐团演绎莫扎特
@@ -63,7 +27,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1276853225232302080
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ec9fcb8c653f47f2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260829T113000Z
 DTEND:20260829T130000Z
 SUMMARY:瞬息之境——克里斯蒂安·布莱克肖钢琴独奏音乐会
@@ -74,7 +38,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238293072
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_66f93803ad8820c0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260829T120000Z
 DTEND:20260829T140000Z
 SUMMARY:把世界唱给你听一一世界青年合唱团2026深圳音乐会
@@ -84,8 +48,18 @@ DESCRIPTION:把世界唱给你听一一世界青年合唱团\n¥2 - ¥768\n解�
 URL:https://szyyt.com/performance/show_100001024883931.html
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_ee5ef32e7fe595c1@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260830T060000Z
+DTEND:20260830T080000Z
+SUMMARY:星耀之约·音你闪耀音乐会
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥680
+URL:https://www.shoac.com.cn/#/detail?projectId=1299017649881477120
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_93fd23c27ad58adc@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260830T060000Z
 DTEND:20260830T080000Z
 SUMMARY:Key上海交响乐音乐会2026——键曲回响
@@ -96,7 +70,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1288848393559138304
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ea2de18f6ddf11b1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260830T070000Z
 DTEND:20260830T080000Z
 SUMMARY:【8.30】铜管五重奏 室内乐音乐会
@@ -107,7 +81,7 @@ URL:https://hrbso.maitix.com/h5#/pages-order/projectDetail/index?projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_48d03b4d7848ab06@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260830T113000Z
 DTEND:20260830T133000Z
 SUMMARY:Key上海交响乐音乐会2026——键曲回响
@@ -118,7 +92,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1288848393559138304
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a974e219de0d256b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260831T113000Z
 DTEND:20260831T133000Z
 SUMMARY:民族交响诗《大运河》音乐会
@@ -128,7 +102,7 @@ URL:https://xhmpw.com/t48697.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_00cd64400cb4cc5b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260903T113000Z
 DTEND:20260903T133000Z
 SUMMARY:“向胜利前进·英雄的赞歌”中国电影乐团交响经典音乐会
@@ -139,7 +113,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002809
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_69619ec6fd78cdf3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260903T114500Z
 DTEND:20260903T134500Z
 SUMMARY:《光与行-苏美玲独唱音乐会》
@@ -149,7 +123,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1287044463345242112
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6fa37ec9ec423f60@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T133000Z
 SUMMARY:南方回响-Marcin Dylla(马钦·迪拉)古典吉他演奏音乐会
@@ -160,7 +134,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1279023567967125504
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7ce9209c74cb391e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T130000Z
 SUMMARY:朱凯源小提琴独奏音乐会
@@ -171,7 +145,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=684&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1415a80c01690e36@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T133000Z
 SUMMARY:“国乐中的经典”中国广播民族乐团《四大名著》交响金曲音乐会
@@ -181,7 +155,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002826
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_18f69f5dd8b787c3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T133000Z
 SUMMARY:克里斯蒂安·布莱克肖钢琴独奏音乐会
@@ -193,17 +167,18 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6e1709ed8f25b9a8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T130000Z
 SUMMARY:“永恒爱情”罗密欧与朱丽叶——谭利华、黄滨与江苏交响乐团纪念普罗科菲耶夫诞辰135周年交响音乐会
 LOCATION:江苏大剧院 --音乐厅
-DESCRIPTION:黄滨与江苏交响乐团\n指挥：谭利华\n¥80 - ¥280\n瓦格纳·黎恩济：序曲
+DESCRIPTION:黄滨与江苏交响乐团\n指挥：谭利华\n¥80 - ¥280\n瓦格纳·黎恩济：序曲\n谢尔盖·谢尔盖耶维奇·普罗科菲耶夫·D
+ 大调第一小提琴协奏曲，作品19\n谢尔盖·谢尔盖耶维奇·普罗科菲耶夫·罗密欧与朱丽叶 芭蕾组曲，作品64b
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238912026
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b288f08773faa14c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T114500Z
 DTEND:20260904T134500Z
 SUMMARY:未来大师：浮生若梦——汪月含早期钢琴独奏音乐会
@@ -214,7 +189,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1216386638815326208
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_46e96e010bae8358@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T120000Z
 DTEND:20260904T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季开幕：布鲁克纳的苍穹
@@ -224,7 +199,7 @@ URL:https://szyyt.com/performance/show_100000987069388.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dafacbc62c2e4b94@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T020000Z
 DTEND:20260905T040000Z
 SUMMARY:2026东方市民音乐会：法朵音乐节——葡萄牙歌后克里斯蒂娜·布兰科音乐会
@@ -234,7 +209,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253302967820189696
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_989cb77fccc57368@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T023000Z
 DTEND:20260905T043000Z
 SUMMARY:【唱响经典系列】“熠熠声辉”国家大剧院合唱团男声合唱音乐会
@@ -245,7 +220,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002831
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1313462567317362@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T133000Z
 SUMMARY:帕格尼尼冠军之夜——吉博尼&达莉娅小提琴与吉他音乐会
@@ -256,7 +231,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1280905486115831808
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8d85d127eebc6859@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T133000Z
 SUMMARY:中国交响乐团2026/27音乐季开幕：水蓝、丹尼尔·洛扎科维奇与中国交响乐团音乐会
@@ -267,7 +242,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002835
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6006a3b19600f91a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T133000Z
 SUMMARY:中国交响乐团2026/27音乐季开幕音乐会 水蓝、丹尼尔·洛扎科维奇与中国交响乐团China National Symphony O
@@ -280,7 +255,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/38b1f8c729a941d9920104e7410
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_94cc295c37d93531@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T133000Z
 SUMMARY:乐见古典一一琥珀四重奏与陈萨专场音乐会
@@ -292,7 +267,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_92ce9c874d943d79@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T130000Z
 SUMMARY:谭盾对话贝多芬音乐会｜XSO西安交响乐团2026音乐季
@@ -303,18 +278,18 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6026
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_97d1df50315e7dd7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T130000Z
 SUMMARY:瑞士华裔钢琴家赵梅笛与欧洲音乐家室内乐团——演绎狂想曲与电影原声之夜音乐
 LOCATION:江苏大剧院 --音乐厅
 DESCRIPTION:瑞士华裔钢琴家赵梅笛与欧洲音乐家室内乐团\n¥80 - ¥380\n乔治·格什温·蓝色狂想曲\n帕布罗·德·萨拉萨蒂·流浪者
- 之歌，作品20\n约翰·威廉姆斯·辛德勒的名单主题曲\n杰里·博克·屋顶上的提琴手主题曲\n赵梅笛·星球大战狂想曲（根据约翰·威廉姆斯的主题创作）
+ 之歌，作品20\n黄河钢琴协奏曲\n约翰·威廉姆斯·辛德勒的名单主题曲\n杰里·博克·屋顶上的提琴手主题曲
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239139005
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_160c8fd3e84dc61c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T120000Z
 DTEND:20260905T140000Z
 SUMMARY:深圳歌剧舞剧院合唱团2026—2027演出季开幕 《长征组歌》专场音乐会
@@ -325,7 +300,7 @@ URL:https://szyyt.com/performance/show_100001036063587.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fcadd6d6d2905a48@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260906T023000Z
 DTEND:20260906T043000Z
 SUMMARY:【国乐云韶系列】“舞韵韶音”中央民族乐团音乐会
@@ -335,7 +310,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002827
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a09c62c9806994e9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260906T063000Z
 DTEND:20260906T083000Z
 SUMMARY:斯图加特室内乐团音乐会
@@ -347,7 +322,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002861
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4d6abef4805ad402@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260906T113000Z
 DTEND:20260906T133000Z
 SUMMARY:上海爱乐乐团2026-2027音乐季 开幕音乐会
@@ -358,7 +333,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1287373359820890112
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_748a7c06c7c5db54@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260906T113000Z
 DTEND:20260906T133000Z
 SUMMARY:“双韵合律”金野与北京民族乐团 中华四季暨2026乐季音乐会
@@ -369,7 +344,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002813
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_de4ee3680ffa173b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260906T113000Z
 DTEND:20260906T133000Z
 SUMMARY:深圳交响乐团×深圳音乐厅特别呈现 漫游室内乐系列音乐会V 炽夜探戈
@@ -381,7 +356,7 @@ URL:https://szyyt.com/performance/show_100001022094115.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c2b95a8d820e4b23@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260908T113000Z
 DTEND:20260908T133000Z
 SUMMARY:“雅韵师承”名家音乐会
@@ -391,7 +366,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002806
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f071d17af3491414@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260909T113000Z
 DTEND:20260909T133000Z
 SUMMARY:《星光—致敬引路人》中央音乐学院弘扬教育家精神原创作品音乐会
@@ -401,7 +376,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002855
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5802064c497f4eaa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260909T114500Z
 DTEND:20260909T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
@@ -411,7 +386,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b93eba4e56e2b085@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260910T113000Z
 DTEND:20260910T133000Z
 SUMMARY:德国斯图加特室内乐团2026上海音乐会
@@ -423,7 +398,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1276893942516318208
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_549e3bf9e66c4cba@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260910T113000Z
 DTEND:20260910T133000Z
 SUMMARY:花开的声音：郑健与国家大剧院合唱团女声合唱音乐会
@@ -434,7 +409,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002502
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c669952a6b02d398@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T113000Z
 DTEND:20260911T133000Z
 SUMMARY:上海交响乐团2026-27音乐季开幕音乐会（一） 余隆与卡瓦科斯纪念肖斯塔科维奇诞辰120周年
@@ -446,7 +421,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9c5cfdbf11f3d7cb@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T113000Z
 DTEND:20260911T133000Z
 SUMMARY:奥斯卡·罗曼耶卓钢琴独奏音乐会-上海站
@@ -457,7 +432,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253696578524217344
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e98c9aa158ddae21@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T113000Z
 DTEND:20260911T130000Z
 SUMMARY:邂逅巴赫—丹尼尔・洛扎科维奇小提琴独奏音乐会
@@ -468,7 +443,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=685&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_17fa52b852323023@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T113000Z
 DTEND:20260911T133000Z
 SUMMARY:花开的声音：郑健与国家大剧院合唱团女声合唱音乐会
@@ -479,7 +454,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002502
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_abbe287cfe86fd55@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T113000Z
 DTEND:20260911T133000Z
 SUMMARY:北京大学 2026 新生音乐会Peking University 2026 Freshmen Concert
@@ -490,7 +465,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/79967fdf071a4c249c96cd6d07e
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d1924c9de9144558@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T023000Z
 DTEND:20260912T043000Z
 SUMMARY:【国乐云韶系列】“光影国韵”国乐影视菁萃音乐会
@@ -501,7 +476,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002829
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b36e7c32fc3eb9ea@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T023000Z
 DTEND:20260912T043000Z
 SUMMARY:“和鸣”—中国交响乐团室内乐音乐会
@@ -513,7 +488,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5ae02e2de185bf70@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T063000Z
 DTEND:20260912T083000Z
 SUMMARY:【河畔时光周末音乐会】沈媛 x 黎耕｜宇宙的和谐——管风琴知识音乐会
@@ -524,7 +499,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002710
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2a203fb9aad9c7ff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T111500Z
 DTEND:20260912T131500Z
 SUMMARY:内尔松·格纳钢琴独奏会丨上海交响乐团音乐季
@@ -536,7 +511,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c8752a5779423d4a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T113000Z
 DTEND:20260912T133000Z
 SUMMARY:无界 苏州交响乐团2026 - 27音乐季开幕音乐会
@@ -548,8 +523,18 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
  ctId=239349005
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_0309cdcfadd8b492@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260912T113000Z
+DTEND:20260912T133000Z
+SUMMARY:原创大型交响乐《地球的红飘带》
+LOCATION:国家大剧院 音乐厅
+DESCRIPTION:¥80 - ¥480\n长路当歌\n英雄的黎明
+URL:https://wticket.chncpa.org/product.html?id=10002793
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_8a7e7dbb86fcb403@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T114500Z
 DTEND:20260912T134500Z
 SUMMARY:海上雅乐·浙派古筝艺术音乐会
@@ -560,18 +545,17 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1276912060246290432
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_813a3b8d1a7b0e5c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T063000Z
 DTEND:20260913T083000Z
 SUMMARY:音乐后花园 德国新四重奏乐团音乐会
 LOCATION:广州大剧院 实验剧场
-DESCRIPTION:音乐后花园 德国新四重奏乐团\n¥80 起\n《桑巴姐姐》Samba di Didi\n《印第安的夏日》L'ete indi
- en\n《爱我》Quiereme\n《约克吉他》Yorke's Guitar\n《为了我的爱》Per il mio Amore
+DESCRIPTION:音乐后花园 德国新四重奏乐团\n¥80 起\n桑巴姐姐\n印第安的夏日\n爱我\n约克吉他\n为了我的爱
 URL:https://3w.gzdjy.org/piao/4/24144.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_68276ae3dc49e5a3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T113000Z
 DTEND:20260913T133000Z
 SUMMARY:上海交响乐团2026-27音乐季开幕音乐会（二） 肖斯塔科维奇第十交响曲
@@ -583,7 +567,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7333ff8916367e16@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T113000Z
 DTEND:20260913T133000Z
 SUMMARY:“璀璨号角”安德烈·朱弗莱迪与北京交响乐团音乐会
@@ -594,7 +578,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002854
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_41e12e1b2e0df554@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T113000Z
 DTEND:20260913T133000Z
 SUMMARY:打开音乐之门·百年之澜一一民国女子音乐肖像
@@ -605,7 +589,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c31e51c66f4cabd1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T113000Z
 DTEND:20260913T133000Z
 SUMMARY:《诗的中国》上海民族乐团音乐会
@@ -615,7 +599,7 @@ URL:https://3w.gzdjy.org/piao/4/24178.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3ee8b677c99b371b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T120000Z
 DTEND:20260913T140000Z
 SUMMARY:2026深圳“一带一路”国际音乐季 著名女高音歌唱家普莱蒂·颜德独唱音乐会
@@ -626,7 +610,7 @@ URL:https://szyyt.com/performance/show_100001038836822.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4dac5aad601a11de@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260916T113000Z
 DTEND:20260916T133000Z
 SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
@@ -636,7 +620,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002746
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4e5a9ef4ac59f4ca@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260917T113000Z
 DTEND:20260917T133000Z
 SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
@@ -645,31 +629,30 @@ DESCRIPTION:安东尼奥·帕帕诺与伦敦交响乐团\n¥280 - ¥1680\n贝多
 URL:https://wticket.chncpa.org/product.html?id=10002746
 END:VEVENT
 BEGIN:VEVENT
-UID:perf_20c21b0da9656ec6@classic-music
-DTSTAMP:20260827T120909Z
+UID:perf_bb33e898351f3fcf@classic-music
+DTSTAMP:20260828T122718Z
 DTSTART:20260917T113000Z
 DTEND:20260917T133000Z
-SUMMARY:《图兰朵》——首演100周年纪念音乐会 深圳交响乐团2026-2027乐季
-LOCATION:深圳音乐厅
-DESCRIPTION:深圳交响乐团
-URL:http://www.sso.org.cn/infodetail.action?id=8a7d559d9eedeea001a02e5fe88
- e00da&pid=305
+SUMMARY:马林斯基剧院 x 深圳交响乐团 x 深圳歌剧舞剧院 歌剧《图兰朵》首演100周年纪念音乐会
+LOCATION:深圳音乐厅 演奏大厅
+DESCRIPTION:深圳交响乐团\n¥80 - ¥880\n贾科莫·普契尼·图兰朵（音乐会版歌剧）
+URL:https://szyyt.com/performance/show_100001047298239.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ba27c8aeef435537@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260918T113000Z
 DTEND:20260918T133000Z
 SUMMARY:张国勇、卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团音乐季
 LOCATION:捷豹上海交响音乐厅 主厅
-DESCRIPTION:卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团\n指挥：张国勇\n¥80 - ¥180\n门德尔松·《仲夏夜之梦》组曲，作
+DESCRIPTION:卡瓦科斯与上海交响乐团演绎门德尔松丨上海交响乐团\n指挥：张国勇\n¥80 - ¥580\n门德尔松·《仲夏夜之梦》组曲，作
  品61\n门德尔松·e小调小提琴协奏曲，作品64\n勃拉姆斯·D大调小提琴协奏曲，作品77
 URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
  id=21756&supportSeat=Y
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f338b41289177945@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260918T113000Z
 DTEND:20260918T130000Z
 SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会——巴赫与莫扎特跨越时代的对话
@@ -682,7 +665,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=688&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_45889ebb548ea937@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260918T113000Z
 DTEND:20260918T133000Z
 SUMMARY:安东尼奥·帕帕诺与伦敦交响乐团音乐会—2026醇·萃古典
@@ -693,7 +676,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002746
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3c7ad3c4a68395be@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260918T113000Z
 DTEND:20260918T133000Z
 SUMMARY:乐见古典一一克里斯托夫·巴拉蒂小提琴独奏音乐会
@@ -705,7 +688,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_91c586018e13cb84@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T020000Z
 DTEND:20260919T040000Z
 SUMMARY:2026东方市民音乐会：舞蹈与歌剧——牛牛钢琴独奏音乐会
@@ -716,8 +699,18 @@ DESCRIPTION:¥50 - ¥80\n普罗科菲耶夫·《罗密欧与朱丽叶》选曲�
 URL:https://www.shoac.com.cn/#/detail?projectId=1253400899781230592
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_819698c9f57beffc@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260919T060000Z
+DTEND:20260919T080000Z
+SUMMARY:新加坡文化节2026--《和鸣》 音乐会 Harmonic Echoes
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥69 - ¥129
+URL:https://www.shoac.com.cn/#/detail?projectId=1298680541604474880
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_5a67aa44426c2cf1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T063000Z
 DTEND:20260919T083000Z
 SUMMARY:【河畔时光周末音乐会】红旗颂歌·金秋雅韵——北京交响乐团专场音乐会
@@ -728,7 +721,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002731
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6d09ad2e10903796@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T070000Z
 DTEND:20260919T090000Z
 SUMMARY:碎片之一「惊叹」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季
@@ -738,8 +731,18 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
  id=21851&supportSeat=Y
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_c7073b4b45d4b91d@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260919T110000Z
+DTEND:20260919T130000Z
+SUMMARY:新加坡文化节2026--《和鸣》 音乐会 Harmonic Echoes
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥69 - ¥129
+URL:https://www.shoac.com.cn/#/detail?projectId=1298680541604474880
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_6bf86effee0af052@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T111500Z
 DTEND:20260919T131500Z
 SUMMARY:碎片之二「激荡」：阿莉莎·韦勒斯坦独奏会丨上海交响乐团音乐季
@@ -750,7 +753,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1dff4f2f811b68b8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T130000Z
 SUMMARY:阿姆斯特丹美泉宫室内乐团音乐会：巨匠之外——贝多芬、舒伯特及挚友们
@@ -763,7 +766,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=687&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d9de4c42d00eb6eb@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T133000Z
 SUMMARY:一河流光:余隆携手王健与王丽雅演绎穆索尔斯基、拉赫玛尼诺夫和德沃夏克暨中国爱乐乐团2026-2027音乐季开幕音乐会
@@ -774,7 +777,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002818
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_10afd21a3e92bfb2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T133000Z
 SUMMARY:《长征组歌》交响音乐会“Suite of Songs on the Long March”Symphonic Concert
@@ -785,7 +788,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/db9a03e9937b484dba42dfe11b7
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_75adb76eedaa88bd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T130500Z
 SUMMARY:一个人的古典——巴拉蒂演绎巴赫无伴奏小提琴奏鸣曲与组曲
@@ -796,7 +799,7 @@ URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22557
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_492990f5a332c57b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T133000Z
 SUMMARY:2026年国家艺术院团演出演播季 中国交响乐团2026/27音乐季《长征组歌》中国交响乐团交响音乐会
@@ -808,7 +811,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bed790d1d72830f2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T133000Z
 SUMMARY:漫步古典夜 在水一方——肖玛中外艺术歌曲音乐会
@@ -819,7 +822,7 @@ URL:https://szyyt.com/performance/show_100000956977894.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_eb6a71cf9ce2cd59@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T130000Z
 SUMMARY:2026年江苏省演艺集团民族乐团音乐季——《山海同鸣》民族管弦音乐会
@@ -828,8 +831,28 @@ DESCRIPTION:年江苏省演艺集团民族乐团\n指挥：张伟\n¥80 - ¥180
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239529001
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_1eb3348d2a5db7fd@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260920T060000Z
+DTEND:20260920T080000Z
+SUMMARY:新加坡文化节2026--《和鸣》 音乐会 Harmonic Echoes
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥69 - ¥129
+URL:https://www.shoac.com.cn/#/detail?projectId=1298680541604474880
+END:VEVENT
+BEGIN:VEVENT
+UID:perf_73e13430a8a07ca5@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20260920T110000Z
+DTEND:20260920T130000Z
+SUMMARY:新加坡文化节2026--《和鸣》 音乐会 Harmonic Echoes
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥69 - ¥129
+URL:https://www.shoac.com.cn/#/detail?projectId=1298680541604474880
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_591b7ebdb0da05e7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260920T113000Z
 DTEND:20260920T130000Z
 SUMMARY:南京市文旅消费政府补贴剧目2026“名家名团”系列-安东尼奥·帕帕诺爵士、刘晓禹和伦敦交响乐团音乐会
@@ -840,7 +863,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238291104
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b98124507989a439@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260920T114500Z
 DTEND:20260920T131500Z
 SUMMARY:基里尔·格斯坦钢琴独奏音乐会
@@ -850,7 +873,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6016
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_77119e4e9acc56ff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260921T113000Z
 DTEND:20260921T130000Z
 SUMMARY:基里尔·格斯坦钢琴独奏音乐会
@@ -861,20 +884,20 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=686&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_91e3136286910fa8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260922T113000Z
 DTEND:20260922T133000Z
 SUMMARY:哈德利希小提琴独奏音乐会丨上海交响乐团音乐季
 LOCATION:捷豹上海交响音乐厅 主厅
-DESCRIPTION:哈德利希小提琴独奏音乐会丨上海交响乐团\n¥180 - ¥780\n泰勒曼·E大调第八无伴奏小提琴幻想曲，TWV 40:21
- \n科尔里奇-泰勒·珀金森·《路易斯安那布鲁斯漫步——一首独奏小提琴的蛋糕舞曲》\n科尔里奇-泰勒·珀金森·《布鲁斯形式》\n伊萨依·G大调无伴奏
- 小提琴奏鸣曲，作品27之5\n马克·奥康纳·《梅纽因随想曲》
+DESCRIPTION:哈德利希小提琴独奏音乐会丨上海交响乐团\n¥180 - ¥1080\n泰勒曼·E大调第八无伴奏小提琴幻想曲，TWV 40:2
+ 1\n科尔里奇-泰勒·珀金森·《路易斯安那布鲁斯漫步——一首独奏小提琴的蛋糕舞曲》\n科尔里奇-泰勒·珀金森·《布鲁斯形式》\n伊萨依·G大调无伴
+ 奏小提琴奏鸣曲，作品27之5\n马克·奥康纳·《梅纽因随想曲》
 URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
  id=21830&supportSeat=Y
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_15f1e272a6de76ab@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260922T113000Z
 DTEND:20260922T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-安东尼奥·帕帕诺与伦敦交响乐团音乐会-“与国同进 与君同行”国泰海通倾情支持
@@ -885,7 +908,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1275881439496785920
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_19da9b1d8bf95494@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260923T113000Z
 DTEND:20260923T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-安东尼奥·帕帕诺与伦敦交响乐团音乐会-“与国同进 与君同行”国泰海通倾情支持
@@ -895,7 +918,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1275881439496785920
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_02ba0048b11fb7b1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T111500Z
 DTEND:20260924T131500Z
 SUMMARY:斯特拉迪瓦里四重奏演绎莫扎特丨上海交响乐团音乐季
@@ -907,7 +930,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_127e7eb73b1f5953@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T113000Z
 DTEND:20260924T133000Z
 SUMMARY:王健与索舍尔大提琴与吉他二重奏音乐会－2026醇·萃古典
@@ -918,7 +941,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002871
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dd320cf21f6cc0b8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T113000Z
 DTEND:20260924T133000Z
 SUMMARY:月满·流光——FUSICIANZ融合乐团中秋跨界音乐会
@@ -929,7 +952,7 @@ URL:https://szyyt.com/performance/show_100001015027551.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_df34a89188583544@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T113000Z
 DTEND:20260924T130000Z
 SUMMARY:“幻想与变奏”陈萨钢琴独奏音乐会
@@ -940,7 +963,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238578027
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fb4a811d30495550@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260925T113000Z
 DTEND:20260925T133000Z
 SUMMARY:孙一凡、上海交响乐团与国家大剧院合唱团演绎《布兰诗歌》丨上海交响乐团音乐季
@@ -951,18 +974,18 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_efd5e80b894fcb52@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260925T113000Z
 DTEND:20260925T133000Z
 SUMMARY:“皓月华章”中国广播民族乐团中秋节音乐会－国家大剧院“中华情怀·民乐名家”系列
 LOCATION:国家大剧院 音乐厅
-DESCRIPTION:中国广播民族乐团\n¥80 - ¥480\n赵季平·庆典序曲\n张朝·月亮歌\n李滨扬·跳月\n春江花月夜\n李博禅·青青思
- 念
+DESCRIPTION:中国广播民族乐团\n¥80 - ¥480\n赵季平·庆典序曲\n张朝·月亮歌\n李滨扬·跳月\n胡延江·玛依拉变奏曲\n李博
+ 禅·青青思念
 URL:https://wticket.chncpa.org/product.html?id=10002874
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6df5a422ba4f37ff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260925T114500Z
 DTEND:20260925T134500Z
 SUMMARY:《浪漫之夜：肖邦和他的朋友们》传世经典名曲音乐会
@@ -972,7 +995,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1283426947536793600
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_da1087dca95519d6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T023000Z
 DTEND:20260926T043000Z
 SUMMARY:【时代先声系列】“追光回响”北京交响乐团音乐会
@@ -983,7 +1006,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002830
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fcef4e2c5363b09a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T113000Z
 DTEND:20260926T133000Z
 SUMMARY:环球之旅——国家大剧院合唱团音乐会丨上海交响乐团音乐季
@@ -995,7 +1018,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4bcd03fc45685816@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T113000Z
 DTEND:20260926T133000Z
 SUMMARY:王健与约兰·索舍尔大提琴、吉他二重奏音乐会
@@ -1006,7 +1029,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1274387787331162112
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7d05522bb23a77e9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T113000Z
 DTEND:20260926T133000Z
 SUMMARY:国家大剧院管弦乐团2026/27乐季开幕 “大地之歌”吕嘉、李立宏、安娜·韦勒、西蒙·奥尼尔与国家大剧院管弦乐团演绎马勒音乐会-20
@@ -1018,7 +1041,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002852
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_debea88ddb74f93d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T113000Z
 DTEND:20260926T130000Z
 SUMMARY:浙江交响乐团2026年音乐季 (总第215期)永恒的经典
@@ -1030,7 +1053,7 @@ URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dae6c71640cd0672@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260926T120000Z
 DTEND:20260926T140000Z
 SUMMARY:星辰与诗篇——基里尔•格斯坦演绎李斯特
@@ -1041,7 +1064,7 @@ URL:https://szyyt.com/performance/show_100001012253485.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ae3033b221aceac0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T060000Z
 DTEND:20260927T073000Z
 SUMMARY:【玲珑国乐】乐养仲秋——音乐疗愈现场
@@ -1051,7 +1074,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=682&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6c5118620d8cb67a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T070000Z
 DTEND:20260927T090000Z
 SUMMARY:凯拉斯演绎巴赫无伴奏大提琴组曲丨上海交响乐团音乐季
@@ -1064,20 +1087,19 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1d32dcede8c80ade@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T070000Z
 DTEND:20260927T090000Z
 SUMMARY:纯粹系列 约兰·索舍尔吉他独奏音乐会
 LOCATION:广州大剧院 实验剧场
-DESCRIPTION:¥180 起\n巴赫：《萨拉班德舞曲》和两首《加沃特舞曲》，选自第六号大提琴组曲，BWV1012\n巴赫：《萨拉班德舞曲》和
- 《布雷舞曲》，选自第一号鲁特琴组曲，BWV996\n巴赫：《露尔舞曲》和《回旋加沃特舞曲》，选自第四号鲁特琴组曲，BWV1006a\n巴赫（约翰·
- 瑟尔谢尔改编）：《前奏曲》《阿勒芒德舞曲》《库朗特舞曲》《萨拉班德舞曲》《布雷舞曲I、II》《吉格舞曲》，选自第三号大提琴组曲，BWV1009\n
- 阿尔沃·帕特：《献给阿丽娜》
+DESCRIPTION:¥180 起\n巴赫·萨拉班德舞曲和两首加沃特舞曲，选自第六号大提琴组曲，BWV1012\n巴赫·萨拉班德舞曲和布雷舞曲，选
+ 自第一号鲁特琴组曲，BWV996\n巴赫·露尔舞曲和回旋加沃特舞曲，选自第四号鲁特琴组曲，BWV1006a\n巴赫·前奏曲 阿勒芒德舞曲 库朗特舞
+ 曲 萨拉班德舞曲 布雷舞曲I、II 吉格舞曲，选自第三号大提琴组曲，BWV1009\n阿尔沃·帕特·献给阿丽娜
 URL:https://3w.gzdjy.org/piao/4/24143.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8270532f1150fa0c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T113000Z
 DTEND:20260927T133000Z
 SUMMARY:《梁祝》东方经典交响音乐会
@@ -1087,7 +1109,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1286672503416872960
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2cdeaa7e3b6935f9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T113000Z
 DTEND:20260927T133000Z
 SUMMARY:“跨越阿尔卑斯山”吕思清小提琴独奏音乐会
@@ -1098,7 +1120,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002873
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c9bf8a4211886384@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260927T114500Z
 DTEND:20260927T134500Z
 SUMMARY:取消 未来大师：梦幻瞬间——安娜斯塔西娅·沃尔乔克钢琴独奏音乐会
@@ -1109,7 +1131,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1217826360255213568
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2465218ef2febb27@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260929T103000Z
 DTEND:20260929T123000Z
 SUMMARY:晚高峰音乐会1：时间里的莫扎特丨上海交响乐团音乐季
@@ -1121,7 +1143,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3b6ed56d82b33245@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260930T113000Z
 DTEND:20260930T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演剧目 上海交响乐团纪念长征胜利90周年音乐会丨上海交响乐团音乐季
@@ -1133,7 +1155,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2acb1748605a33a1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260930T113000Z
 DTEND:20260930T133000Z
 SUMMARY:我和我的祖国一 2026 红色经典交响演唱十一音乐会
@@ -1143,7 +1165,7 @@ URL:https://xhmpw.com/t48600.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8800e69717c202a5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261001T113000Z
 DTEND:20261001T133000Z
 SUMMARY:我和我的祖国-2026红色经典交响演唱音乐会
@@ -1153,7 +1175,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1287363242257866752
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_11f7384fa620d09c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261001T113000Z
 DTEND:20261001T133000Z
 SUMMARY:音乐嘉年华·万里山河同心曲 爱乐男声合唱团 十·一 献礼大型主题合唱音乐会
@@ -1164,8 +1186,18 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
  =238930038&eventId=277808569
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_1f673a0099b81128@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20261001T113000Z
+DTEND:20261001T133000Z
+SUMMARY:征途如歌—中国电影乐团国庆视听交响音乐会
+LOCATION:中山公园音乐堂
+DESCRIPTION:中国电影乐团\n¥100 - ¥580\n竹笛与乐队·牧民新歌
+URL:https://xhmpw.com/t48959.html
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_00730c5d2c688944@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261001T114500Z
 DTEND:20261001T134500Z
 SUMMARY:《巴洛克与探戈》—— 维瓦尔第VS.皮亚佐拉的四季对话
@@ -1175,7 +1207,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1296843135003652096
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1c48599877347ff9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261002T113000Z
 DTEND:20261002T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-破界交响 乐无边界 德国古典电子跨界乐队“交响狂徒”上海2026音乐会
@@ -1186,7 +1218,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1279100605757157376
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7de4da8acfa3de49@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261003T111500Z
 DTEND:20261003T131500Z
 SUMMARY:「复刻回忆」Pianoboy高至豪流行钢琴音乐会
@@ -1196,7 +1228,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1246540212129697792
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_94ea8f3351d9e4fa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261003T113000Z
 DTEND:20261003T133000Z
 SUMMARY:维也纳之声-金秋交响音乐会
@@ -1206,7 +1238,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1278380144847257600
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_428237f7340cb6ed@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261003T113000Z
 DTEND:20261003T130000Z
 SUMMARY:本杰明·格罗夫纳钢琴独奏音乐会
@@ -1218,7 +1250,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=689&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_04a28eed4f7644ec@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261003T113000Z
 DTEND:20261003T133000Z
 SUMMARY:音乐嘉年华“江山如此多娇”红色经典交响音乐会
@@ -1230,7 +1262,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b77346aea0c693ae@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261004T113000Z
 DTEND:20261004T133000Z
 SUMMARY:维也纳圆舞曲之夜-2026交响音乐会
@@ -1241,24 +1273,19 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1287403318006308864
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_501579502bf85e00@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261004T113000Z
 DTEND:20261004T133000Z
 SUMMARY:“魏”你歌唱——中外经典声乐作品音乐会
 LOCATION:江苏大剧院 --音乐厅
-DESCRIPTION:江苏交响乐团\n指挥：林友声\n¥80 - ¥1280\n江苏交响乐团将以一曲·卡门序曲 拉开帷幕，热烈而充满张力。随后，魏
- 松的学生们——于浩磊、沈佳瑜、秦天、刘涛、赵丽丽、韩蓬——将轮番登场，用八种截然不同的人设征服你：《弄臣》里公爵的轻浮浪荡、《丑角》里小丑的悲怆嘶
- 吼、《托斯卡》里画家临终前的星光眷恋……每一首咏叹调都是一场微型戏剧，让你在一晚看尽人间爱恨。而魏松本人将以《奥赛罗》中那句痛彻心扉的“神啊，你为
- 何羞辱我？”重磅压轴，用他标志性的金属质感嗓音，把悲剧英雄的屈辱与愤怒砸进你心里。上半场尾声，师生五人还将同台飙歌，用《重归苏莲托》和《登山缆车》
- 两首意大利民歌点燃全场——那画面，想想就过瘾。\n汤非将用·莫尼山 和《天之大》带你去往草原与故乡的远方；方琼将运用中国古诗词的吟诵元素，唱出《幽
- 兰操》“一唱三叹”的韵味，营造出非常唯美的“空谷幽兰”意境；随后，魏松的每一位学生都将献上一首饱含中国韵味的作品——从徐沛东笔下苍茫的《忆秦娥·恒
- 山月》，再到栾凯作曲、陈道斌作词的深情告白《我怎样去爱你》……当青主谱曲的《大江东去》在魏松的诠释下响起，苏轼的千古豪情将被赋予全新的生命。最后，
- 全体演唱者将共同唱响《为你歌唱》——这不仅是献给观众的歌，更是这个“音乐大家庭”对舞台、对彼此最真挚的告白。
+DESCRIPTION:江苏交响乐团\n指挥：林友声\n¥80 - ¥1280\n比才·卡门序曲，选自比才歌剧卡门序曲\n威尔第·女人善变，选自威尔
+ 第歌剧弄臣公爵的咏叹调\n雷昂卡瓦洛·先生们，女士们，可以开始了吗？，选自雷昂卡瓦洛歌剧丑角托尼奥的咏叹调\n雷昂卡瓦洛·穿上戏袍，选自雷昂卡瓦洛
+ 歌剧丑角卡尼奥的咏叹调\n莱哈尔·你是我心中的挚爱，选自莱哈尔轻歌剧微笑王国苏城的咏叹调
 URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239251010
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1ac573ed35488182@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261005T113000Z
 DTEND:20261005T130000Z
 SUMMARY:【积分兑换】月映山河——江苏大剧院室内乐音乐会
@@ -1268,7 +1295,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239487004
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_993d06f4a9a11cb6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261006T113000Z
 DTEND:20261006T133000Z
 SUMMARY:来自奥地利的天籁-维也纳童声合唱团音乐会
@@ -1280,7 +1307,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1282816491156930560
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4698356ac25670e0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261007T113000Z
 DTEND:20261007T133000Z
 SUMMARY:迪图瓦、莱昂斯卡娅与上海交响乐团演绎莫扎特与雷斯皮吉《罗马三部曲》丨上海交响乐团音乐季
@@ -1292,7 +1319,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a75b383e136ddbe6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261007T113000Z
 DTEND:20261007T133000Z
 SUMMARY:深圳交响乐团×深圳音乐厅特别呈现 漫游室内乐系列音乐会VI 弦上独白
@@ -1303,7 +1330,7 @@ URL:https://szyyt.com/performance/show_100001033279885.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0db513999fa416a8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261007T113000Z
 DTEND:20261007T130000Z
 SUMMARY:“循音·镇厅之宝”管风琴系列——“声声入沁 如风哥德堡”约尔格·哈卢贝克管风琴独奏音乐会
@@ -1314,7 +1341,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238922002
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1d6dd52e5823a860@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261010T113000Z
 DTEND:20261010T133000Z
 SUMMARY:宁峰与德国波茨坦室内乐团演绎莫扎特全套小提琴协奏曲
@@ -1325,7 +1352,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1278668590912405504
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c7658839ca0f0925@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261010T113000Z
 DTEND:20261010T133000Z
 SUMMARY:贝蒂杰拉德指挥《西游记》
@@ -1337,7 +1364,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_507940a9cc666888@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261010T113000Z
 DTEND:20261010T133000Z
 SUMMARY:国家大剧院原创交响合唱音乐会《丰收中国》
@@ -1347,7 +1374,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002836
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0b11467fbd3a2ac0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261010T113000Z
 DTEND:20261010T133000Z
 SUMMARY:郑君炽个人音乐会《Dear Future Me：致明日的我》
@@ -1357,7 +1384,7 @@ URL:https://3w.gzdjy.org/piao/4/24201.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_83dfd633ed36dee7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261011T093000Z
 DTEND:20261011T130000Z
 SUMMARY:弦咏浪漫——卡米尔·托马斯与朱利安·博考大提琴与钢琴音乐会
@@ -1368,7 +1395,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=690&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d815305d37a8783f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261011T113000Z
 DTEND:20261011T133000Z
 SUMMARY:宁峰与德国波茨坦室内乐团演绎莫扎特全套小提琴协奏曲
@@ -1379,7 +1406,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1278668590912405504
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fe7b1c6bb99a0f48@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261011T113000Z
 DTEND:20261011T133000Z
 SUMMARY:国家大剧院原创交响合唱音乐会《丰收中国》
@@ -1389,7 +1416,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002836
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7085cde220c70441@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261013T113000Z
 DTEND:20261013T133000Z
 SUMMARY:汉努·林图、蔡珂宜与新加坡交响乐团丨上海交响乐团音乐季
@@ -1401,7 +1428,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b9f19673ebe375ad@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261013T113000Z
 DTEND:20261013T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-女高音安娜·奈瑞贝科音乐会-上药雷允上 虔脩蕴佳作
@@ -1412,7 +1439,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1284902605109579776
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e977ac1c822b3ebc@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261013T114500Z
 DTEND:20261013T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
@@ -1423,7 +1450,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3ab72638e8c6a690@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261015T111500Z
 DTEND:20261015T131500Z
 SUMMARY:上交室内乐1·上交弦乐队演绎尼尔森、伯恩斯坦与巴托克丨上海交响乐团音乐季
@@ -1435,7 +1462,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_15ec1091535baba0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261015T113000Z
 DTEND:20261015T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-女高音安娜·奈瑞贝科音乐会-上药雷允上 虔脩蕴佳作
@@ -1446,7 +1473,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1284902605109579776
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4d14f8b2b224605f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261015T114500Z
 DTEND:20261015T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
@@ -1456,7 +1483,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_471f50836fea1370@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-世界音乐传奇阿努什卡·香卡2026上海音乐会
@@ -1467,7 +1494,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1284160086591655936
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_417af241b5652460@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T130000Z
 SUMMARY:法国凡酷四重奏《大师杰作》音乐会
@@ -1478,7 +1505,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=691&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_193b29444ce2a0e4@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:纪念肖斯塔科维奇诞辰 120 周年“老张的老肖”交响音乐会Commemorating the 120th Anniversary o
@@ -1490,7 +1517,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/629231e8a9a6457cab045ba3740
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3f7ff4d4a3b8d820@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:中国交响乐团2026/27音乐季 纪念肖斯塔科维奇诞辰120周年“老张的老肖”交响音乐会
@@ -1502,7 +1529,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0f8d051a4d184de0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:新世界的“记忆” 深圳交响乐团2026-2027音乐季
@@ -1514,7 +1541,7 @@ URL:http://www.sso.org.cn/infodetail.action?id=8a7d559d9eedeea001a013e794a
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f3627e557129b8c9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:音乐后花园 加拿大瑞林钢琴三重奏音乐会
@@ -1524,7 +1551,7 @@ URL:https://3w.gzdjy.org/piao/4/24184.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_62680c4d968322ca@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T120000Z
 DTEND:20261016T140000Z
 SUMMARY:2026深圳“一带一路”国际音乐季——新世界的“记忆”
@@ -1535,7 +1562,7 @@ URL:https://szyyt.com/performance/show_100000987749239.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8d4f5dcf2c26be1f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T020000Z
 DTEND:20261017T040000Z
 SUMMARY:2026东方市民音乐会：刻在我心底的名字——北京大学百周年纪念讲堂室内合唱团音乐会
@@ -1546,7 +1573,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253397390704869376
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_40910264f69d7e1e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T063000Z
 DTEND:20261017T083000Z
 SUMMARY:库伦齐斯与音乐永恒乐团演绎莫扎特、贝多芬—2026醇·萃古典
@@ -1558,7 +1585,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002817
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d818d2420962a305@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T113000Z
 DTEND:20261017T133000Z
 SUMMARY:莉莉亚·齐柏丝坦钢琴独奏音乐会
@@ -1569,7 +1596,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1227972199646834688
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_db65939eb6b1e626@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T113000Z
 DTEND:20261017T133000Z
 SUMMARY:漫步古典夜 来自莱茵河的问候——勃拉姆斯三首钢琴奏鸣曲全集
@@ -1580,17 +1607,18 @@ URL:https://szyyt.com/performance/show_100001009496842.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d2b1ac5505db5d3f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T113000Z
 DTEND:20261017T133000Z
 SUMMARY:纯粹系列 “孤弦之歌”无伴奏小提琴的独白与狂想 黄滨小提琴独奏会
 LOCATION:广州大剧院 实验剧场
-DESCRIPTION:¥180 起
+DESCRIPTION:¥180 起\n巴赫·E大调第三无伴奏小提琴组曲，BWV 1006\n伊萨伊·A小调第二无伴奏小提琴奏鸣曲，Op.27 No
+ .2\n米尔斯坦·帕格尼尼偶记\n帕格尼尼·A小调第24首随想曲
 URL:https://3w.gzdjy.org/piao/4/24195.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d37a11ccb81172f3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261017T120000Z
 DTEND:20261017T140000Z
 SUMMARY:2026深圳“一带一路”国际音乐季 “闪耀的我们”李朕与武汉星河室内合唱团音乐会
@@ -1601,7 +1629,7 @@ URL:https://szyyt.com/performance/show_100001044423135.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_83c7e8762fb75d0e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261018T060000Z
 DTEND:20261018T080000Z
 SUMMARY:音乐地图课堂系列 1：古典主义时期丨上海交响乐团音乐季
@@ -1614,7 +1642,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_26229805b05ad53c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261018T060000Z
 DTEND:20261018T080000Z
 SUMMARY:2026上海儿童视听交响音乐会—演唱版
@@ -1624,7 +1652,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1285984706600927232
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_561a369c15c55007@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261018T063000Z
 DTEND:20261018T083000Z
 SUMMARY:库伦齐斯与音乐永恒乐团演绎莫扎特、贝多芬—2026醇·萃古典
@@ -1635,7 +1663,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002817
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6cc0029bfad3b9e1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261018T113000Z
 DTEND:20261018T130000Z
 SUMMARY:“仰望远方·致敬经典”——谢继群与南京民族乐团笛子独奏专场音乐会
@@ -1650,7 +1678,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239111008
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e0ab3fdfd74e880d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261019T113000Z
 DTEND:20261019T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-图甘·索契耶夫与维也纳爱乐乐团2026上海音乐会
@@ -1661,7 +1689,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1264259457443942400
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7a275615732ad1f0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261020T113000Z
 DTEND:20261020T133000Z
 SUMMARY:加贝塔与科帕钦斯卡娅丨上海交响乐团音乐季
@@ -1673,7 +1701,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8b7011af45c3f659@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261020T113000Z
 DTEND:20261020T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-图甘·索契耶夫与维也纳爱乐乐团2026上海音乐会
@@ -1684,7 +1712,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1264259457443942400
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b41620d631a3c2db@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261022T111500Z
 DTEND:20261022T131500Z
 SUMMARY:奥皮茨与上海四重奏丨上海交响乐团音乐季
@@ -1696,7 +1724,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3680789f67ff0d77@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261022T113000Z
 DTEND:20261022T133000Z
 SUMMARY:帕沃·雅尔维、亚历山大·康托洛夫与爱沙尼亚节日管弦乐团音乐会
@@ -1707,7 +1735,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1291792979474534400
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8a94074c8e85a2b1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261023T113000Z
 DTEND:20261023T133000Z
 SUMMARY:奥滕萨默、奥皮茨与上海交响乐团纪念莫扎特诞辰270周年丨上海交响乐团音乐季
@@ -1719,7 +1747,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a1fc1038b20d1e3a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261023T113000Z
 DTEND:20261023T130000Z
 SUMMARY:浙江交响乐团2026年音乐季 (总第216期)英雄的诗篇
@@ -1732,7 +1760,7 @@ URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6ec73b8884038c12@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261023T113000Z
 DTEND:20261023T133000Z
 SUMMARY:凡人修仙传动画视听音乐会（武汉站）
@@ -1742,7 +1770,7 @@ URL:https://whqtdjy.polyt.cn/#/detail?productId=9479000
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7f14a61f7d23ff39@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261023T120000Z
 DTEND:20261023T140000Z
 SUMMARY:汉努•林图、蔡珂宜与新加坡交响乐团音乐会
@@ -1753,7 +1781,7 @@ URL:https://szyyt.com/performance/show_100001020622765.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b1d03d7f572b36c1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261024T063000Z
 DTEND:20261024T083000Z
 SUMMARY:凡人修仙传动画视听音乐会（武汉站）
@@ -1763,7 +1791,7 @@ URL:https://whqtdjy.polyt.cn/#/detail?productId=9479000
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9f87f6889df7c932@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261024T113000Z
 DTEND:20261024T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-今夜星光灿烂——阿格里奇/文格洛夫/伊瑟利斯领衔室内乐音乐节
@@ -1774,7 +1802,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1291341703482720256
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a4263615fd3d4a8b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261024T113000Z
 DTEND:20261024T133000Z
 SUMMARY:中国交响乐团2026/27音乐季：“纪念莎士比亚逝世410周年”莎士比亚文学作品交响音乐会
@@ -1785,7 +1813,7 @@ URL:https://wticket.chncpa.org/product.html?id=10002865
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0ada956a3642e125@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261024T113000Z
 DTEND:20261024T133000Z
 SUMMARY:纪念莎士比亚逝世 410 周年莎士比亚文学作品交响音乐会Commemorating the 410th Anniversary of
@@ -1797,7 +1825,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/5e8dc7feef7646f1994a1b0a177
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dbaf2d3bc76bd238@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261024T114500Z
 DTEND:20261024T134500Z
 SUMMARY:海上雅乐·古弦心声—陆笑姿独奏音乐会
@@ -1807,18 +1835,18 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1291417109140361216
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7a539188e21712a6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261025T070000Z
 DTEND:20261025T090000Z
 SUMMARY:音乐后花园 德国FUKIO萨克斯四重奏音乐会
 LOCATION:广州大剧院 实验剧场
-DESCRIPTION:¥180 起\n1《托卡塔》 作品编号BWV 564——约翰·塞巴斯蒂安·巴赫\n2《第一四重奏》 ——让-巴蒂斯特·桑热莱
- \n3《激烈的列车员》 ——罗宾·霍夫曼\n4《啊， 伟大的奥秘》 ——莫滕·劳里森\n5《 F小调第六弦乐四重奏》 ——费利克斯·门德尔松
+DESCRIPTION:¥180 起\n约翰·塞巴斯蒂安·巴赫·托卡塔 作品编号BWV 564\n让-巴蒂斯特·桑热莱·第一四重奏\n罗宾·霍夫曼·
+ 激烈的列车员\n莫滕·劳里森·啊， 伟大的奥秘\n费利克斯·门德尔松·F小调第六弦乐四重奏
 URL:https://3w.gzdjy.org/piao/4/24180.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_64f2a582e787d8f2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261025T111500Z
 DTEND:20261025T131500Z
 SUMMARY:奥皮茨演绎舒伯特与勃拉姆斯丨上海交响乐团音乐季
@@ -1830,7 +1858,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_30629d0c8881ac4e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261025T113000Z
 DTEND:20261025T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-今夜星光灿烂——阿格里奇/文格洛夫/伊瑟利斯领衔室内乐音乐节
@@ -1841,7 +1869,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1291341703482720256
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b9a02dbcb2aa12ab@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261025T113000Z
 DTEND:20261025T133000Z
 SUMMARY:乐见古典·孤弦之歌——无伴奏小提琴的独白与狂想：黄滨小提琴独奏音乐会
@@ -1853,7 +1881,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ad8672dd91bf2509@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261028T113000Z
 DTEND:20261028T133000Z
 SUMMARY:法佐•塞依钢琴独奏音乐会
@@ -1864,7 +1892,7 @@ URL:https://szyyt.com/performance/show_100001034626716.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5b317138950670ca@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261028T114500Z
 DTEND:20261028T132500Z
 SUMMARY:大师之夜｜阿格里奇 × 文格洛夫 × 伊瑟利斯音乐会
@@ -1875,7 +1903,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6105
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d33f9ef59feb68e9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261029T111500Z
 DTEND:20261029T131500Z
 SUMMARY:德奈什·瓦尔永钢琴独奏会丨上海交响乐团音乐季
@@ -1887,7 +1915,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_084ca9952bb7778e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261030T113000Z
 DTEND:20261030T133000Z
 SUMMARY:大地与传说——吕绍嘉、法齐尔·萨伊与上海交响乐团丨上海交响乐团音乐季
@@ -1899,7 +1927,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4dfa333e30a481c2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261030T113000Z
 DTEND:20261030T133000Z
 SUMMARY:许忠、祖克曼与苏州交响乐团音乐会
@@ -1909,7 +1937,7 @@ URL:https://www.szsorch.com/2026-27-Music-Season/2087374603217092608.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8383a0ffb85746fa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261030T114500Z
 DTEND:20261030T131500Z
 SUMMARY:安特耶·魏特哈斯与XSO西安交响乐团演绎门德尔松作品音乐会
@@ -1920,7 +1948,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6063
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0d20e0f9ac91c4ea@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261031T030000Z
 DTEND:20261031T040000Z
 SUMMARY:古典直通车-周末快线 跟着现代室内乐四重奏漫游音乐世界
@@ -1930,7 +1958,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6113
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6979ea50efa37277@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261031T113000Z
 DTEND:20261031T133000Z
 SUMMARY:幻奏盛宴·2026上海场
@@ -1941,7 +1969,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1281668336988991488
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e72ca0ec05e8100b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261031T113000Z
 DTEND:20261031T130000Z
 SUMMARY:《双琴对韵：跨越时空的变奏》双钢琴音乐会
@@ -1951,7 +1979,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=683&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_62482cb7ced9d7fe@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261031T113000Z
 DTEND:20261031T133000Z
 SUMMARY:“法兰西浪漫”水蓝、哈维尔·佩里亚内斯与中国交响乐团音乐会“French Romance” Lan Shui, Javier Per
@@ -1963,7 +1991,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/5b1a7bdddfb44c10af6a8668249
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c9991568a31a2130@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261031T113000Z
 DTEND:20261031T143000Z
 SUMMARY:安特耶·魏特哈斯演绎巴赫无伴奏小提琴奏鸣曲与组曲全本
@@ -1974,7 +2002,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6062
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_689177b59d34ec2a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261101T113000Z
 DTEND:20261101T133000Z
 SUMMARY:安特耶•魏特哈斯演绎巴赫无伴奏小提琴奏鸣曲与组曲全集音乐会
@@ -1985,7 +2013,7 @@ URL:https://szyyt.com/performance/show_100001016496992.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_af1930a6a5045ffd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261101T113000Z
 DTEND:20261101T133000Z
 SUMMARY:香港天籁敦煌乐团《博物馆系列：来自文物的声音》音乐会
@@ -1995,7 +2023,7 @@ URL:https://3w.gzdjy.org/piao/4/24205.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_af6aa9e125f46263@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261103T114500Z
 DTEND:20261103T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
@@ -2006,7 +2034,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ec562d69f3db703d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261104T113000Z
 DTEND:20261104T133000Z
 SUMMARY:爱的喜悦——女高音安吉拉·乔治乌独唱音乐会
@@ -2017,7 +2045,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1279106246710161408
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d478c6bf9692875c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261104T114500Z
 DTEND:20261104T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
@@ -2028,7 +2056,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ba6bfc9f6baca049@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261105T113000Z
 DTEND:20261105T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-维京格尔·奥拉夫松钢琴独奏音乐会
@@ -2039,7 +2067,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1291025259950788608
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_275e03651e992e35@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261105T120000Z
 DTEND:20261105T140000Z
 SUMMARY:克里斯蒂安·齐默尔曼钢琴独奏音乐会·深圳
@@ -2049,7 +2077,7 @@ URL:https://szyyt.com/performance/show_100001037424792.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_50165cdc86be09bc@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261105T120000Z
 DTEND:20261105T140000Z
 SUMMARY:【深圳】克里斯蒂安·齐默尔曼钢琴独奏音乐会
@@ -2059,7 +2087,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6135
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9a143ba172dafb03@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T111500Z
 DTEND:20261106T131500Z
 SUMMARY:上交室内乐 2：北极星四重奏演绎莫扎特与德沃夏克丨上海交响乐团音乐季
@@ -2071,7 +2099,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e8ea06e5b8c8e223@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T113000Z
 DTEND:20261106T133000Z
 SUMMARY:米歇尔·达尔贝托演奏莫扎特丨上海交响乐团音乐季
@@ -2084,7 +2112,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_41df39ef2c6a2a2a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T113000Z
 DTEND:20261106T133000Z
 SUMMARY:40Fingers—意大利指弹天团世界巡演 上海站
@@ -2094,7 +2122,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1279444699979481088
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_36bd90496ba77871@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T113000Z
 DTEND:20261106T133000Z
 SUMMARY:凝光漱石 -- 武怀琛古琴专场演奏会
@@ -2104,7 +2132,7 @@ URL:https://szyyt.com/performance/show_100001030413995.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1b8834796ebba776@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T113000Z
 DTEND:20261106T132000Z
 SUMMARY:“弦弹西东”碰碰和亚历山大·波达切夫竖琴古筝重奏音乐会
@@ -2115,7 +2143,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=239520002
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_991820f70c48c3bb@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T020000Z
 DTEND:20261107T040000Z
 SUMMARY:2026东方市民音乐会：海上双钢琴师——小捷杰耶夫与方演双钢琴音乐会
@@ -2126,7 +2154,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253307189416525824
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3d757ade77866837@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T113000Z
 DTEND:20261107T133000Z
 SUMMARY:节奏幻想——钱骏平、林喆与上海交响乐团 丨上海交响乐团音乐季
@@ -2138,7 +2166,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a01075ca6a633c30@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T113000Z
 DTEND:20261107T133000Z
 SUMMARY:【交响+演唱】“四大名著”红楼梦·西游记·三国演义·水浒传 大型交响演唱会
@@ -2148,7 +2176,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1261311744527515648
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_347e92e473cd712e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T113000Z
 DTEND:20261107T133000Z
 SUMMARY:《布兰诗歌》交响合唱音乐会“Carmina Burana”Symphonic Choral Concert
@@ -2159,7 +2187,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/0599e48e3ac142c3933cf9eb522
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d50fe1dba9d0197d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T113000Z
 DTEND:20261107T133000Z
 SUMMARY:管风琴之夜 风从海上来——沈媛×段志强知识音乐会
@@ -2170,7 +2198,7 @@ URL:https://szyyt.com/performance/show_100001017878314.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_58cff8b2d704c29b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261107T113000Z
 DTEND:20261107T133000Z
 SUMMARY:《2026罗大佑春龙交响夜音乐会》武汉站
@@ -2180,17 +2208,18 @@ URL:https://whqtdjy.polyt.cn/#/detail?productId=9244700
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2b7852eb5602e3d9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261108T113000Z
 DTEND:20261108T133000Z
 SUMMARY:安妮-索菲·穆特与英国皇家爱乐乐团音乐会
 LOCATION:广州大剧院 歌剧厅
-DESCRIPTION:索菲·穆特与英国皇家爱乐乐团\n¥380 起\n巴特沃斯：《什罗普郡少年》狂想曲
+DESCRIPTION:索菲·穆特与英国皇家爱乐乐团\n¥380 起\n巴特沃斯·什罗普郡少年狂想曲\n门德尔松·E小调小提琴协奏曲\n贝多芬·C小
+ 调第五交响曲“命运”
 URL:https://3w.gzdjy.org/piao/4/24101.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6599afbd2450356d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261108T113000Z
 DTEND:20261108T133000Z
 SUMMARY:《2026罗大佑春龙交响夜音乐会》武汉站
@@ -2199,8 +2228,20 @@ DESCRIPTION:¥200 - ¥1580
 URL:https://whqtdjy.polyt.cn/#/detail?productId=9244700
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_6760b6859c1d6cc7@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20261109T113000Z
+DTEND:20261109T133000Z
+SUMMARY:瓦西里∙佩特连科与英国皇家爱乐乐团2026上海音乐会
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:佩特连科与英国皇家爱乐乐团\n指挥：瓦西里·佩特连科\n¥280 - ¥1280\n巴特沃斯·《什罗普郡少年》狂想曲\n谭盾
+ ·《狼图腾》低音提琴协奏曲\nSoloist·Jason Henery\, RPO's Principal Double Bass\n斯特拉文斯基
+ ·彼得鲁什卡（1947年版）
+URL:https://www.shoac.com.cn/#/detail?projectId=1296828957845090304
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_9e2e52970877a5ff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261111T113000Z
 DTEND:20261111T130000Z
 SUMMARY:【天津】克里斯蒂安·齐默尔曼钢琴独奏音乐会
@@ -2210,7 +2251,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6141
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_605438689a8a6c99@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261112T113000Z
 DTEND:20261112T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-完全莫扎特——诺亚·本迪克斯-巴尔格利、梅第扬 与柏林爱乐巴洛克独奏家合奏团音乐会-上药神象荣
@@ -2222,7 +2263,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1278712085746053120
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f5beffef1faa4c7a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T113000Z
 DTEND:20261113T133000Z
 SUMMARY:秋夜北国回响——李心草、秦立巍与上海交响乐团丨上海交响乐团音乐季
@@ -2234,7 +2275,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c79c9367b346c8e6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T113000Z
 DTEND:20261113T130000Z
 SUMMARY:浙江交响乐团2026年音乐季 (总第217期)命运对话
@@ -2246,7 +2287,7 @@ URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5a150e899717b79c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T113000Z
 DTEND:20261113T130000Z
 SUMMARY:2026江苏大剧院“名家名团”“镜像莫扎特”系列——柏林爱乐巴洛克独奏家合奏团与柏林爱乐双首席音乐会
@@ -2257,7 +2298,7 @@ URL:https://www.jsartcentre.org/new_ticket_del2.html?id=238910074
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8162e355755a7b33@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T114500Z
 DTEND:20261113T131500Z
 SUMMARY:【西安】克里斯蒂安·齐默尔曼钢琴独奏音乐会
@@ -2267,7 +2308,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6137
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b7e26f2cd96cd6b1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T120000Z
 DTEND:20261113T140000Z
 SUMMARY:卡蒂雅•布尼亚季什维莉钢琴独奏音乐会
@@ -2278,8 +2319,18 @@ DESCRIPTION:¥180 - ¥1080\n弗朗茨•舒伯特·降B大调第二十一钢琴�
 URL:https://szyyt.com/performance/show_100001043029457.html
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_3371cc4fb4077976@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20261114T113000Z
+DTEND:20261114T133000Z
+SUMMARY:厦门爱歌室内合唱团专场音乐会『万物有声』巡演上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:厦门爱歌室内合唱团\n¥100 - ¥680
+URL:https://www.shoac.com.cn/#/detail?projectId=1299009194365939712
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_b5e0236ddf17ec2e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261114T113000Z
 DTEND:20261114T133000Z
 SUMMARY:纪念莫扎特诞辰 270 周年交响音乐会Commemorating the 270th Anniversary of Mozart’s
@@ -2291,7 +2342,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/ec95a77cf6e64c3594456ccc058
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_32df8f1af88a7891@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261114T113000Z
 DTEND:20261114T130000Z
 SUMMARY:【西安】克里斯蒂安·齐默尔曼钢琴独奏音乐会
@@ -2300,8 +2351,19 @@ DESCRIPTION:¥280 - ¥1480
 URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6137
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_bbc6c35aee173f30@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20261114T114500Z
+DTEND:20261114T134500Z
+SUMMARY:海上雅乐 喜马拉雅·风信—愈心音乐剧场
+LOCATION:上海东方艺术中心 东方演奏厅
+DESCRIPTION:¥180 - ¥320\n序曲 · 风起\n风的消息 —— 长笛与打击乐\n清风拂面…笛声悠扬，我听到山间细雨、林间风歌…！
+ \n第一章 · 萌生\n随风而行 —— 扬琴
+URL:https://www.shoac.com.cn/#/detail?projectId=1298998294091264000
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_898cdf4c7306782a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261115T060000Z
 DTEND:20261115T080000Z
 SUMMARY:音乐地图课堂系列 2：浪漫主义时期丨上海交响乐团音乐季
@@ -2313,7 +2375,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c54e0115856a5d1b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261115T113000Z
 DTEND:20261115T133000Z
 SUMMARY:第二十五届中国上海国际艺术节参演节目-卡蒂雅·布尼亚季什维莉钢琴独奏音乐会
@@ -2324,7 +2386,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1289608913147367424
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_74a12ded12a79b7a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261115T113000Z
 DTEND:20261115T133000Z
 SUMMARY:暴雪35周年官方游戏交响音乐会（Jason Hayes领衔）西安站#
@@ -2334,18 +2396,18 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6019
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_039062d8e9b6f461@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261115T113000Z
 DTEND:20261115T133000Z
 SUMMARY:音乐后花园 亚历山大・科布林钢琴独奏音乐会
 LOCATION:广州大剧院 实验剧场
-DESCRIPTION:¥180 起\n贝多芬·贝多芬《C 小调 32 首变奏曲》WoO 80\n勃拉姆斯·勃拉姆斯《四首叙事曲》Op.10\n拉赫
- 玛尼诺夫·拉赫玛尼诺夫《音画练习曲》Op.39
+DESCRIPTION:¥180 起\n贝多芬·C 小调 32 首变奏曲WoO 80\n勃拉姆斯·四首叙事曲Op.10\n拉赫玛尼诺夫·音画练习曲O
+ p.39
 URL:https://3w.gzdjy.org/piao/4/24210.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a6e49b98981ed639@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261117T113000Z
 DTEND:20261117T133000Z
 SUMMARY:第八届上海早期音乐节 忧思——塔利斯学者合唱团丨上海交响乐团音乐季
@@ -2357,7 +2419,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_40f05edcff7ff228@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261117T114500Z
 DTEND:20261117T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
@@ -2368,7 +2430,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5fd2e122846c34bd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261118T111500Z
 DTEND:20261118T131500Z
 SUMMARY:上交室内乐 3：马勒第四交响曲室内乐版丨上海交响乐团音乐季
@@ -2380,7 +2442,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_72ad792e5392547c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261118T113000Z
 DTEND:20261118T133000Z
 SUMMARY:苏州交响乐团十周年音乐会
@@ -2393,7 +2455,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d4f1165db5d57cfe@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261119T114500Z
 DTEND:20261119T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
@@ -2404,7 +2466,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d7bd0885477dd2a5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261120T113000Z
 DTEND:20261120T133000Z
 SUMMARY:暴雪35周年官方游戏交响音乐会（Jason Hayes 领衔）
@@ -2414,7 +2476,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1263853537697910784
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dbb60205f9032c9c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261120T113000Z
 DTEND:20261120T130000Z
 SUMMARY:浙江交响乐团2026年青年演奏家系列（二）
@@ -2426,7 +2488,7 @@ URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ecea68f13f857df8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261120T114500Z
 DTEND:20261120T134500Z
 SUMMARY:卡蒂雅·布尼亚季什维莉钢琴独奏音乐会
@@ -2436,7 +2498,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6092
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4e8659b25a1a62aa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261121T020000Z
 DTEND:20261121T040000Z
 SUMMARY:2026东方市民音乐会：俄罗斯浪漫曲——莫斯科国立柴科夫斯基音乐学院室内合唱团音乐会
@@ -2447,7 +2509,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253307636814544896
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_480ed913a6efd91b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261121T113000Z
 DTEND:20261121T132000Z
 SUMMARY:芭比系列室内乐奇旅——与公主们的约定
@@ -2457,7 +2519,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6136
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_489824db7e73f483@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261122T070000Z
 DTEND:20261122T130000Z
 SUMMARY:第八届上海早期音乐节 叶斯廷·戴维斯演唱约翰·道兰丨上海交响乐团音乐季
@@ -2469,7 +2531,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e4cff791db0021d0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261127T114500Z
 DTEND:20261127T133500Z
 SUMMARY:张国勇、穆洛娃与XSO西安交响乐团演绎巴赫、贝多芬、勃拉姆斯
@@ -2480,7 +2542,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/6150
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_384dd1e014ee7aaf@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261127T120000Z
 DTEND:20261127T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——海之交响
@@ -2490,7 +2552,7 @@ URL:https://szyyt.com/performance/show_100000988433573.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5b63594176a2e744@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261128T111500Z
 DTEND:20261128T131500Z
 SUMMARY:可可和丹麦豆豆爵士三人行丨上海交响乐团音乐季
@@ -2501,7 +2563,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_87b9c211456a8684@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261128T114500Z
 DTEND:20261128T134500Z
 SUMMARY:海上雅乐·琶音诗话——李晖与琵琶舞室内乐音乐会
@@ -2512,7 +2574,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1296497903689027584
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5e04a591a6aab5bf@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261129T073000Z
 DTEND:20261129T093000Z
 SUMMARY:从莫扎特到拉赫玛尼诺夫——广州交响乐团音乐会
@@ -2523,7 +2585,7 @@ URL:https://szyyt.com/performance/show_100001041637612.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_73692c5245e66ce1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261130T111500Z
 DTEND:20261130T131500Z
 SUMMARY:第八届上海早期音乐节 忧郁的排遣——安德烈亚斯·施泰尔独奏会丨上海交响乐团音乐季
@@ -2536,7 +2598,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_56d94ccd015c6588@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261201T114500Z
 DTEND:20261201T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（西安音乐厅站）
@@ -2547,7 +2609,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5840
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_61a2b4d90dfc8b8b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261202T113000Z
 DTEND:20261202T133000Z
 SUMMARY:皮奥特·安德谢夫斯基钢琴独奏会丨上海交响乐团音乐季
@@ -2558,7 +2620,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_38fda920a459b964@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261202T114500Z
 DTEND:20261202T124500Z
 SUMMARY:「XSO古典直通车」轻享系列音乐会（开元大剧院站）
@@ -2569,7 +2631,7 @@ URL:https://www.snpac.com/sxtheatre/#/ticket/detail/5839
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_269d8df72c050bff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261205T020000Z
 DTEND:20261205T040000Z
 SUMMARY:2026东方市民音乐会：神奇的管风琴之旅——马丁·施梅丁管风琴音乐会
@@ -2581,7 +2643,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253337499306917888
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5a848033a5c2f885@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261205T114500Z
 DTEND:20261205T134500Z
 SUMMARY:未来大师：巴赫×苏轼 跨时空的邂逅——匡俊宏吉他独奏音乐会
@@ -2593,7 +2655,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1217826798790668288
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_795cf10eb5479743@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261211T111500Z
 DTEND:20261211T131500Z
 SUMMARY:上交室内乐 4：风与键的编年史丨上海交响乐团音乐季
@@ -2605,7 +2667,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5d49b2607d8a15b4@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261211T113000Z
 DTEND:20261211T130000Z
 SUMMARY:浙江交响乐团2026年音乐季 (总第218期)伟大的友谊
@@ -2617,7 +2679,7 @@ URL:https://www.zjso.org/event/%e6%b5%99%e6%b1%9f%e4%ba%a4%e5%93%8d%e4%b9%
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_783fb9d413c11640@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261211T114500Z
 DTEND:20261211T134500Z
 SUMMARY:未来大师：对话金奖——琥珀四重奏与王丽雅音乐会
@@ -2628,7 +2690,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1288863526841192448
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8dd97e7476f6e81b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261211T120000Z
 DTEND:20261211T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——布鲁克纳的浪漫
@@ -2639,7 +2701,7 @@ URL:https://szyyt.com/performance/show_100000989128224.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bd2f7fd7465f9e50@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261212T060000Z
 DTEND:20261212T080000Z
 SUMMARY:音乐地图课堂系列 3：乐无中西丨上海交响乐团音乐季
@@ -2651,7 +2713,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_400979604aad424f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261213T114500Z
 DTEND:20261213T134500Z
 SUMMARY:未来大师：心的形状——竖琴与萨克斯二重奏音乐会
@@ -2662,7 +2724,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1296111751408668672
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_5a1b800d93831f89@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261216T103000Z
 DTEND:20261216T123000Z
 SUMMARY:晚高峰音乐会2：弦上东西丨上海交响乐团音乐季
@@ -2674,7 +2736,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_93af0c04ac526432@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261217T111500Z
 DTEND:20261217T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 1：黄家正丨上海交响乐团音乐季
@@ -2686,7 +2748,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_357b0f29d508574e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261218T113000Z
 DTEND:20261218T133000Z
 SUMMARY:“不朽之爱”陈美安与中国交响乐团音乐会“Immortal Love”Mei-Ann Chen and the China Natio
@@ -2698,7 +2760,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/8098c6b81a1f4065befb344db2e
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f5d2b227832d0b74@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261218T120000Z
 DTEND:20261218T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——醇享勃兰登堡
@@ -2709,7 +2771,7 @@ URL:https://szyyt.com/performance/show_100000989832713.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_720d501e91e00b32@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261219T020000Z
 DTEND:20261219T040000Z
 SUMMARY:2026东方市民音乐会：上海城市交响乐团音乐会
@@ -2720,7 +2782,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1253337944452595712
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f08c53793371cd78@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261219T113000Z
 DTEND:20261219T130000Z
 SUMMARY:大师之夜・浪漫主义的美与激情 叶甫根尼・米哈伊洛夫钢琴独奏新年音乐会
@@ -2731,7 +2793,7 @@ URL:https://www.shanghaiconcerthall.com.cn/showDetails?id=669&activeType=0
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1fa555ec7dfb967b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261220T113000Z
 DTEND:20261220T133000Z
 SUMMARY:余隆、蒂博代与上海交响乐团演绎圣-桑丨上海交响乐团音乐季
@@ -2743,7 +2805,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b188c267a6819637@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261220T113000Z
 DTEND:20261220T133000Z
 SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
@@ -2754,7 +2816,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_990a15004def0f88@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261225T113000Z
 DTEND:20261225T133000Z
 SUMMARY:维也纳皇家爱乐乐团新年音乐会
@@ -2765,7 +2827,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1268619393556226048
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f143b5b224957d0b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261225T113000Z
 DTEND:20261225T133000Z
 SUMMARY:格调室内乐 · 一
@@ -2778,7 +2840,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_efcb68ab6664a45a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261225T120000Z
 DTEND:20261225T140000Z
 SUMMARY:维也纳圆舞曲乐团新年音乐会
@@ -2789,7 +2851,7 @@ URL:https://szyyt.com/performance/show_100001023488935.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_223206253f6714aa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261226T113000Z
 DTEND:20261226T133000Z
 SUMMARY:维也纳皇家爱乐乐团新年音乐会
@@ -2800,7 +2862,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1268619393556226048
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_45deb6006ef1956b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261226T113000Z
 DTEND:20261226T133000Z
 SUMMARY:2027 新年音乐会 2027 New Year ’s Concert
@@ -2811,7 +2873,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/52c7d5db7cb5409e9eebdca48fb
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d31dbc86d59e91e9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261227T113000Z
 DTEND:20261227T133000Z
 SUMMARY:维也纳春之声交响乐团新年音乐会
@@ -2821,7 +2883,7 @@ URL:https://3w.gzdjy.org/piao/4/24207.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_184ddb0e2a9488e3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261231T113000Z
 DTEND:20261231T133000Z
 SUMMARY:维也纳春之声交响乐团新年音乐会-上海站
@@ -2832,7 +2894,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1275851796095709184
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7b48045b343ff69a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261231T113000Z
 DTEND:20261231T133000Z
 SUMMARY:维也纳施特劳斯乐团2027新年音乐会
@@ -2841,19 +2903,8 @@ DESCRIPTION:维也纳施特劳斯乐团\n¥180 - ¥1280
 URL:https://www.shgtheatre.com/shtheatre/index.html#/ticket/detail/22509
 END:VEVENT
 BEGIN:VEVENT
-UID:perf_219650131603b68b@classic-music
-DTSTAMP:20260827T120909Z
-DTSTART:20261231T143000Z
-DTEND:20261231T163000Z
-SUMMARY:维也纳春之声交响乐团新年音乐会-上海站
-LOCATION:上海东方艺术中心 东方音乐厅
-DESCRIPTION:维也纳春之声交响乐团\n¥180 - ¥1280\nJ. Strauss·蝙蝠序曲\nJ. Strauss·维也纳气质圆舞曲
- \nJ. Strauss·春之声圆舞曲\nJ. Strauss·闲聊快速波尔卡\nJ. Strauss·皇帝圆舞曲
-URL:https://www.shoac.com.cn/#/detail?projectId=1275851796095709184
-END:VEVENT
-BEGIN:VEVENT
 UID:perf_0d8cb17efcdb5496@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261231T143000Z
 DTEND:20261231T163000Z
 SUMMARY:【跨年专场】2027新年音乐会·12月31日
@@ -2863,8 +2914,19 @@ DESCRIPTION:¥180 - ¥680\n贝多芬·欢乐颂\n约翰·施特劳斯·春之声
 URL:https://www.shoac.com.cn/#/detail?projectId=1291426021638946816
 END:VEVENT
 BEGIN:VEVENT
+UID:perf_219650131603b68b@classic-music
+DTSTAMP:20260828T122718Z
+DTSTART:20261231T143000Z
+DTEND:20261231T163000Z
+SUMMARY:维也纳春之声交响乐团新年音乐会-上海站
+LOCATION:上海东方艺术中心 东方音乐厅
+DESCRIPTION:维也纳春之声交响乐团\n¥180 - ¥1280\nJ. Strauss·蝙蝠序曲\nJ. Strauss·维也纳气质圆舞曲
+ \nJ. Strauss·春之声圆舞曲\nJ. Strauss·闲聊快速波尔卡\nJ. Strauss·皇帝圆舞曲
+URL:https://www.shoac.com.cn/#/detail?projectId=1275851796095709184
+END:VEVENT
+BEGIN:VEVENT
 UID:perf_69cb687a5ab4d82c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270102T113000Z
 DTEND:20270102T133000Z
 SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
@@ -2875,7 +2937,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a1059072b6e9c5e0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270103T113000Z
 DTEND:20270103T133000Z
 SUMMARY:维也纳皇家交响乐团2027新年音乐会--上海站
@@ -2886,7 +2948,7 @@ URL:https://www.shoac.com.cn/#/detail?projectId=1273645303282028544
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_652b4c61c1b031fe@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270107T113000Z
 DTEND:20270107T133000Z
 SUMMARY:帕胡德长笛独奏会丨上海交响乐团音乐季
@@ -2899,7 +2961,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e90e88e7ea6ebe93@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270108T113000Z
 DTEND:20270108T133000Z
 SUMMARY:魔笛与歌剧幻想——孙一凡、帕胡德与上海交响乐团丨上海交响乐团音乐季
@@ -2912,7 +2974,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_568ae2e4556418e5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270108T113000Z
 DTEND:20270108T133000Z
 SUMMARY:“皇帝”与“英雄”——苏州交响乐团音乐会
@@ -2924,7 +2986,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7993da1dcd1e64dc@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270110T113000Z
 DTEND:20270110T133000Z
 SUMMARY:《大地春声·山河行旅》合唱音乐会“Spring Echoes on Earth · A Travel Through Mountai
@@ -2936,7 +2998,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/676e90d3b66847648877cc4636f
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0b37a4c24526eaf2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270110T113000Z
 DTEND:20270110T133000Z
 SUMMARY:维也纳皇家爱乐乐团新年音乐会
@@ -2946,7 +3008,7 @@ URL:https://3w.gzdjy.org/piao/4/24204.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9b27938aca3a65b2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270113T103000Z
 DTEND:20270113T123000Z
 SUMMARY:晚高峰音乐会3：巴赫的N次方丨上海交响乐团音乐季
@@ -2958,7 +3020,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ece7170ce790eb85@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270115T111500Z
 DTEND:20270115T131500Z
 SUMMARY:上交室内乐 5：英雄的致意——从地中海到新大陆丨上海交响乐团音乐季
@@ -2970,7 +3032,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2097c1cd01165b33@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270116T113000Z
 DTEND:20270116T133000Z
 SUMMARY:“蝶恋”吕思清、景焕与中国交响乐团音乐会“Butterfly in Love”Lu Siqing, Jing Huan and th
@@ -2982,7 +3044,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/e4d641a004b1498a8f54d2e2566
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3683215c07a68733@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270117T060000Z
 DTEND:20270117T080000Z
 SUMMARY:音乐地图课堂系列 4：舞蹈音乐丨上海交响乐团音乐季
@@ -2994,7 +3056,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bee3be4ef1d33fd3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270120T113000Z
 DTEND:20270120T133000Z
 SUMMARY:错爱之境——余隆、卡瓦科斯、陆轶文与上海交响乐团演绎拉赫玛尼诺夫与周天丨上海交响乐团音乐季
@@ -3006,7 +3068,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6ac54158d23827b2@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270122T111500Z
 DTEND:20270122T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 2：孙嘉言丨上海交响乐团音乐季
@@ -3018,7 +3080,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b152758ca0e5eb87@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270123T113000Z
 DTEND:20270123T133000Z
 SUMMARY:“弦续红楼 乐聆马勒”交响音乐会“Red Chamber Echoes & Mahler Melodies”Symphonic Co
@@ -3030,7 +3092,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/30503588ca8c49719f2be3157e4
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fc9028b597f8f35c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270129T113000Z
 DTEND:20270129T133000Z
 SUMMARY:2027上海新春音乐会 余隆、马友友、吴彤、吴蛮与上海交响乐团演绎赵麟 丨上海交响乐团音乐季
@@ -3043,7 +3105,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0a94879246c4194f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270221T113000Z
 DTEND:20270221T133000Z
 SUMMARY:柴科夫斯基经典作品音乐会Tchaikovsky Classics Concert
@@ -3054,7 +3116,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/2b0377e30ed749b5bfcc5be2269
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_86dae958c91e62c4@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270226T113000Z
 DTEND:20270226T133000Z
 SUMMARY:黄屹、沙马尤、鲍力卓与上海交响乐团演绎拉威尔与理查·施特劳斯丨上海交响乐团音乐季
@@ -3066,7 +3128,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c609f0eee111fc40@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270227T111500Z
 DTEND:20270227T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 3：孔嘉宁丨上海交响乐团音乐季
@@ -3079,7 +3141,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7e358c8cbbc21e45@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270302T113000Z
 DTEND:20270302T123000Z
 SUMMARY:无言的浪漫——沙马尤钢琴独奏会丨上海交响乐团音乐季
@@ -3091,7 +3153,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bb4489679c526e6e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270304T111500Z
 DTEND:20270304T121500Z
 SUMMARY:马尔钦·迪拉吉他独奏会丨上海交响乐团音乐季
@@ -3103,7 +3165,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a2158511b6229a44@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270305T113000Z
 DTEND:20270305T133000Z
 SUMMARY:汤沐海、卡瓦科斯、陈亦柏与上海交响乐团演绎俄罗斯经典丨上海交响乐团音乐季
@@ -3115,7 +3177,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_52c2f62e43fab3e0@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270305T120000Z
 DTEND:20270305T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——庄严巨制
@@ -3126,7 +3188,7 @@ URL:https://szyyt.com/performance/show_100000990557195.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a41731d080b8d35c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270306T113000Z
 DTEND:20270306T133000Z
 SUMMARY:柏辽兹之夜
@@ -3138,7 +3200,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6123c41af28f042c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270307T113000Z
 DTEND:20270307T133000Z
 SUMMARY:“聂鲁达的歌声”戴维·霍斯、杰奈·布里奇斯与中国交响乐团音乐会“Neruda Songs”David Hoose, J’Nai Br
@@ -3150,7 +3212,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/81a3ae93d7644c46aabe3f50065
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_6791344621b70cc5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270312T113000Z
 DTEND:20270312T133000Z
 SUMMARY:水蓝、卡瓦科斯与上海交响乐团演绎巴托克与霍尔斯特《行星组曲》丨上海交响乐团音乐季
@@ -3161,7 +3223,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_41dc098254e33407@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270312T120000Z
 DTEND:20270312T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——命运的抉择
@@ -3172,7 +3234,7 @@ URL:https://szyyt.com/performance/show_100000991282867.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1706eab8781de6f5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270313T111500Z
 DTEND:20270313T121500Z
 SUMMARY:朱斯坦·泰勒演奏《哥德堡变奏曲》丨上海交响乐团音乐季
@@ -3183,7 +3245,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7f94a5d6e0a58238@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270313T113000Z
 DTEND:20270313T133000Z
 SUMMARY:“大地的诗与歌”中俄合唱作品音乐会“Poems and Songs of the Earth” Chinese-Russian Ch
@@ -3195,7 +3257,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/186de77a32904108bc2f42a3223
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4da52adfe0adc867@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270319T111500Z
 DTEND:20270319T121500Z
 SUMMARY:让-马克·路易萨达钢琴独奏会丨上海交响乐团音乐季
@@ -3207,7 +3269,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f37b58229e25494c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270319T113000Z
 DTEND:20270319T133000Z
 SUMMARY:柴可夫斯基2+2：林大叶、罗维与上海交响乐团丨上海交响乐团音乐季
@@ -3219,7 +3281,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c445c138b8f22ec7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270320T113000Z
 DTEND:20270320T133000Z
 SUMMARY:“绅士的浪漫”余隆、徐惟聆演绎埃尔加“Gentleman’s Romance”Yu Long and Xu Weiling’s In
@@ -3231,7 +3293,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/26dcd18c9c0d47fb9d102f22e68
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_09bdd5648f5b8406@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270326T111500Z
 DTEND:20270326T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 4：贠思齐丨上海交响乐团音乐季
@@ -3243,7 +3305,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_78c79194474f6c64@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270326T113000Z
 DTEND:20270326T133000Z
 SUMMARY:大师系列 · 一
@@ -3256,7 +3318,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ab3ae8cecc1388d3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270326T120000Z
 DTEND:20270326T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——三生万物
@@ -3267,7 +3329,7 @@ URL:https://szyyt.com/performance/show_100000991964858.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4ec2feeae4213751@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270327T060000Z
 DTEND:20270327T080000Z
 SUMMARY:音乐地图课堂系列 5：歌剧音乐丨上海交响乐团音乐季
@@ -3279,7 +3341,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_cc2b02e6d6a0d59f@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270327T113000Z
 DTEND:20270327T133000Z
 SUMMARY:高纬度的回声——苏州交响乐团音乐会
@@ -3292,7 +3354,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_057938d40e7c86fb@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270331T103000Z
 DTEND:20270331T123000Z
 SUMMARY:晚高峰音乐会4：三个世纪的春丨上海交响乐团音乐季
@@ -3304,7 +3366,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bdff4278b7a05043@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270402T111500Z
 DTEND:20270402T131500Z
 SUMMARY:上交室内乐 6：美乐四重奏演绎法式浪漫与印象丨上海交响乐团音乐季
@@ -3316,7 +3378,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2ad59accad545c84@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270403T113000Z
 DTEND:20270403T133000Z
 SUMMARY:拉赫林、麦克尔拉维与上海交响乐团演绎沃尔顿和马勒丨上海交响乐团音乐季
@@ -3328,7 +3390,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e0ebb5a071d0c440@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270403T113000Z
 DTEND:20270403T133000Z
 SUMMARY:“聆听美好”中国交响乐团合唱音乐会“Embrace the Beauty”China National Symphony Orche
@@ -3340,7 +3402,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/b8830bac66f44a5e9941859d27d
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_45f1258c50b4ac2c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270409T113000Z
 DTEND:20270409T133000Z
 SUMMARY:深圳交响乐团2026-2027乐季——乐圣与师徒--纪念贝多芬逝世200周年
@@ -3352,7 +3414,7 @@ URL:https://szyyt.com/performance/show_100000992661244.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_209d68f716a583d6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270410T113000Z
 DTEND:20270410T133000Z
 SUMMARY:格调室内乐 · 二
@@ -3364,7 +3426,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d53f9ac1b8bb0040@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270410T113000Z
 DTEND:20270410T133000Z
 SUMMARY:“月光玫瑰”水蓝、朱利安·拉赫林与中国交响乐团音乐会“Moonlit Rose”Lan Shui，Julian Rachlin an
@@ -3376,7 +3438,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/91f775c5cc1042d0ba259a02d54
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_51b06aab30961997@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270410T113000Z
 DTEND:20270410T133000Z
 SUMMARY:“冰与火”卡尔 - 海因茨·施特芬斯沈洋与中国交响乐团演绎穆索尔斯基、勃拉姆斯“Ice and Fire”Karl-Heinz St
@@ -3389,7 +3451,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/1918a2f193b5461c9bd964302cc
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_256310ede4280ea1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270416T113000Z
 DTEND:20270416T133000Z
 SUMMARY:复调的巨浪—— 阿尔布雷希特、巴赫拉米与上海交响乐团演绎斯托科夫斯基交响巴赫丨上海交响乐团音乐季
@@ -3403,7 +3465,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d3023876583f2059@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270417T113000Z
 DTEND:20270417T133000Z
 SUMMARY:舒曼与勃拉姆斯——苏州交响乐团音乐会
@@ -3415,7 +3477,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_bf287561a7b37c94@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270417T113000Z
 DTEND:20270417T133000Z
 SUMMARY:“浪漫咏叹”中国交响乐团合唱音乐会“Romantic Arias”China National Symphony Orchestra
@@ -3427,7 +3489,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/d0c999dcbb29495f9022b9ce5c8
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_c30e207105e1f0fd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270418T060000Z
 DTEND:20270418T080000Z
 SUMMARY:音乐地图课堂系列 6：民族乐派丨上海交响乐团音乐季
@@ -3439,7 +3501,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_87c560dd655746b4@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270423T111500Z
 DTEND:20270423T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 5：史博阳丨上海交响乐团音乐季
@@ -3451,7 +3513,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9bab06d700b08eda@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270423T113000Z
 DTEND:20270423T133000Z
 SUMMARY:“悲歌与史诗”安德烈斯·德尔弗斯马克西米利安·霍农与中国交响乐团音乐会“Elegies & Epics”Andreas Delfs,
@@ -3463,7 +3525,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/fc2b3c2097704faab8b19895c51
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_189c497984c0bf4e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270423T120000Z
 DTEND:20270423T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——峰弦指上
@@ -3474,7 +3536,7 @@ URL:https://szyyt.com/performance/show_100000993332236.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_478d00f5dc14a62e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270424T113000Z
 DTEND:20270424T133000Z
 SUMMARY:陈燮阳演绎肖斯塔科维奇音乐会
@@ -3486,7 +3548,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_71a1a0854179d150@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270429T113000Z
 DTEND:20270429T133000Z
 SUMMARY:余隆、音乐永恒合唱团与上海交响乐团演绎肖斯塔科维奇第二、第三交响曲丨上海交响乐团音乐季
@@ -3498,7 +3560,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_41a8819ec7ca8764@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270430T111500Z
 DTEND:20270430T121500Z
 SUMMARY:达内尔四重奏演绎肖斯塔科维奇丨上海交响乐团音乐季
@@ -3510,7 +3572,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_45deb62e813bbcdc@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270502T113000Z
 DTEND:20270502T133000Z
 SUMMARY:尘埃与回响—— 余隆、格内、音乐永恒合唱团与上海交响乐团肖斯塔科维奇第十三交响曲丨上海交响乐团音乐季
@@ -3522,7 +3584,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_535d6e5839bc44df@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270504T113000Z
 DTEND:20270504T133000Z
 SUMMARY:“青春啊！青春”“Youth! Youth”Choral Concert
@@ -3533,7 +3595,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/fc48ec890c1342fba2ae0a7df9b
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_64c0f3ede16fe698@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270507T113000Z
 DTEND:20270507T133000Z
 SUMMARY:国家大剧院五月音乐节“古韵新声”芭芭拉·德拉甘与中国交响乐团音乐会NCPA May Festival“Ancient Rhythms
@@ -3546,7 +3608,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/0f514b40d7424079807560301cf
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b42591e29a237e5c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270507T120000Z
 DTEND:20270507T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——法兰西绮梦
@@ -3557,7 +3619,7 @@ URL:https://szyyt.com/performance/show_100000994034146.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fa5bd9d37bf0a3fa@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270508T113000Z
 DTEND:20270508T133000Z
 SUMMARY:大师系列 · 二
@@ -3569,7 +3631,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_8e790696cbd9ca3d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270509T113000Z
 DTEND:20270509T133000Z
 SUMMARY:古斯塔夫·库恩、格哈特与上海交响乐团演绎舒曼和瓦格纳丨上海交响乐团音乐季
@@ -3581,7 +3643,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a0393d489150890d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270512T113000Z
 DTEND:20270512T133000Z
 SUMMARY:格哈特与薛颖佳演绎贝多芬丨上海交响乐团音乐季
@@ -3594,7 +3656,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b954926d13954d54@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270514T111500Z
 DTEND:20270514T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 6：居觐丨上海交响乐团音乐季
@@ -3607,7 +3669,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1c634a833285a60c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270515T113000Z
 DTEND:20270515T133000Z
 SUMMARY:巨人的肖像——许忠与苏州交响乐团音乐会
@@ -3619,7 +3681,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d86c6e13dbfe8ce1@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270515T113000Z
 DTEND:20270515T133000Z
 SUMMARY:“伊比利亚”约瑟·庞斯与中国交响乐团音乐会“Iberia”Josep Pons and the China National Sym
@@ -3631,7 +3693,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/3108a3813946440abb693c9ff6b
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e6bfb19e75c10ad6@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270521T113000Z
 DTEND:20270521T123000Z
 SUMMARY:迪尼斯·索萨、革命浪漫管弦乐团与蒙特威尔第合唱团丨上海交响乐团音乐季
@@ -3643,7 +3705,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7d3be7939def15f8@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270521T120000Z
 DTEND:20270521T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——英伦之谜
@@ -3654,7 +3716,7 @@ URL:https://szyyt.com/performance/show_100000994712679.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dfa412849cdb6d99@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270528T111500Z
 DTEND:20270528T131500Z
 SUMMARY:迪欧帝玛四重奏演绎贝多芬（一）丨上海交响乐团音乐季
@@ -3666,7 +3728,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d600d948d895ac11@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270529T070000Z
 DTEND:20270529T090000Z
 SUMMARY:迪欧帝玛四重奏演绎贝多芬（二）丨上海交响乐团音乐季
@@ -3678,7 +3740,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b43f2f6a449dd8d9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270529T113000Z
 DTEND:20270529T133000Z
 SUMMARY:波嘉、张昊辰与上海交响乐团演绎普罗科菲耶夫和柴可夫斯基丨上海交响乐团音乐季
@@ -3690,7 +3752,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a125c17d58ca4536@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270529T113000Z
 DTEND:20270529T133000Z
 SUMMARY:特别策划——交响童话《小王子》
@@ -3702,7 +3764,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a4ef6aceee0d3249@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270529T113000Z
 DTEND:20270529T133000Z
 SUMMARY:音乐会歌剧《托斯卡》Opera in Concert “Tosca ”
@@ -3713,7 +3775,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/36372d0c9b31444b91e2480a568
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ff6a3b773788c0b5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270530T070000Z
 DTEND:20270530T090000Z
 SUMMARY:迪欧帝玛四重奏演绎贝多芬（三）丨上海交响乐团音乐季
@@ -3725,7 +3787,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_220c793f79d3dd83@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270604T113000Z
 DTEND:20270604T133000Z
 SUMMARY:阿尔卑斯的号角—— 布里格尔、曾韵与上海交响乐团演绎格里埃尔和勃拉姆斯丨上海交响乐团音乐季
@@ -3737,7 +3799,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_590373cf2b915f33@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270605T113000Z
 DTEND:20270605T133000Z
 SUMMARY:节奏狂欢——苏州交响乐团音乐会
@@ -3750,7 +3812,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2eedad9853e3e512@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270606T113000Z
 DTEND:20270606T133000Z
 SUMMARY:纪念李德伦诞辰 110 周年音乐会Concert in Commemoration of the 110th Anniversary
@@ -3762,7 +3824,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/9ebeee2b1cb24161ba688977909
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4a77af4d9cc0aa7c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270610T111500Z
 DTEND:20270610T131500Z
 SUMMARY:上交室内乐 7：管中日月——木管与铜管的时空对话丨上海交响乐团音乐季
@@ -3775,7 +3837,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_74439e3f35d12bfd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270611T120000Z
 DTEND:20270611T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季——琴歌共舞
@@ -3786,7 +3848,7 @@ URL:https://szyyt.com/performance/show_100000995458514.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0c52b83688ecb8ff@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270612T111500Z
 DTEND:20270612T131500Z
 SUMMARY:华人贝多芬钢琴独奏全集 7：白立君丨上海交响乐团音乐季
@@ -3798,7 +3860,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_d628893b22693258@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270613T113000Z
 DTEND:20270613T133000Z
 SUMMARY:“爱之蕴含”水蓝、王峥嵘与中国交响乐团音乐会“Essence of Love”Lan Shui，Wang Zhengrong and
@@ -3810,7 +3872,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/837acae6d6554f9492fceba9117
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_df214adf516d5b93@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270618T113000Z
 DTEND:20270618T133000Z
 SUMMARY:余隆、卡瓦科斯与上海交响乐团演绎科恩戈尔德与马勒丨上海交响乐团音乐季
@@ -3822,7 +3884,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_09010152ebf29c68@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270619T113000Z
 DTEND:20270619T133000Z
 SUMMARY:古典回望——苏州交响乐团音乐会
@@ -3835,7 +3897,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dab333c088dbd936@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270625T113000Z
 DTEND:20270625T133000Z
 SUMMARY:上海交响乐团2026-27音乐季闭幕音乐会 杨洋、卡瓦科斯与上海交响乐团纪念贝多芬逝世200周年
@@ -3847,7 +3909,7 @@ URL:https://shsymphony.cn/symphonypc/index.html#/zh-CN/pc/musicale-detail?
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dfbbd9a0909c5829@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270709T120000Z
 DTEND:20270709T140000Z
 SUMMARY:深圳交响乐团2026-2027乐季闭幕：布鲁克纳的丰碑
@@ -3857,7 +3919,7 @@ URL:https://szyyt.com/performance/show_100000996176323.html
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fc027957705ae656@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270710T113000Z
 DTEND:20270710T133000Z
 SUMMARY:华夏音乐节·泱泱国风 纪念——陈燮阳与苏州交响乐团音乐会
@@ -3869,7 +3931,7 @@ URL:https://sscac.maitix.com/h5?code=003e5MFa1SBzcM0qf7Ia11lXco3e5MFD&stat
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_23d73fe553edd801@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270710T113000Z
 DTEND:20270710T133000Z
 SUMMARY:“北国回声”水蓝、扬·沃格勒与中国交响乐团音乐会“Echoes of the Northern Lands”Lan Shui，Jan
@@ -3881,7 +3943,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/5ccd59aff6434517879a679e99e
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_05ee087b33cca33e@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270717T113000Z
 DTEND:20270717T133000Z
 SUMMARY:“极光” 世界经典合唱音乐会“Aurora”World Classic Choral Concert
@@ -3892,7 +3954,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/cb11171263524fe2948109c28e6
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_36e1b41c0bb3d593@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270718T113000Z
 DTEND:20270718T133000Z
 SUMMARY:中国交响乐团2026/27 音乐季闭幕音乐会水蓝、陆威、曾韵与中国交响乐团China National Symphony Orche
@@ -3905,7 +3967,7 @@ URL:https://www.cnso.com.cn/zgjxyt/ycrc/202607/81a8036a25e949158a6cc032766
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_49b8f1b97f0326f5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260829T113000Z
 DTEND:20260829T133000Z
 SUMMARY:星弧之路·启程 广州星弧合唱团 5 周年音乐会
@@ -3916,7 +3978,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5063
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0bea78c8bf21075d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260911T120000Z
 DTEND:20260911T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季开幕音乐会 黄屹×王健演绎柴科夫斯基
@@ -3927,7 +3989,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5080
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_0b57d92f465e0f67@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260920T060000Z
 DTEND:20260920T080000Z
 SUMMARY:2026管风琴艺术季 午后音乐会（1）音乐之声
@@ -3938,7 +4000,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5076
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_dc705d65397fbb29@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260924T120000Z
 DTEND:20260924T140000Z
 SUMMARY:钢琴名家系列 浪漫王者 基里尔·格斯坦钢琴独奏会
@@ -3949,7 +4011,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5064
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_fc93bb3668c82e7d@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260930T120000Z
 DTEND:20260930T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（2）杨洋演绎莫扎特
@@ -3960,7 +4022,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5081
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_910d0007c4ac5b4a@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261021T120000Z
 DTEND:20261021T140000Z
 SUMMARY:汉努·林图 × 蔡珂宜 新加坡交响乐团 2026 广州音乐会
@@ -3971,7 +4033,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5051
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_755a6ac931c0fe09@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261023T120000Z
 DTEND:20261023T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（3）崔琳涵携手法佐·塞依
@@ -3982,7 +4044,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5082
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_f08308294ac890d5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261105T120000Z
 DTEND:20261105T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（4）吕绍嘉演绎勃拉姆斯
@@ -3993,7 +4055,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5083
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ede1233175efb435@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261106T120000Z
 DTEND:20261106T140000Z
 SUMMARY:畅响湾区 大师神韵——香港中乐团经典国风音乐会
@@ -4004,7 +4066,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5061
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b4511f5351415e40@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261113T120000Z
 DTEND:20261113T140000Z
 SUMMARY:年度音乐大赏 巴洛克瑰宝 法比奥·比昂迪 × 欧洲嘉兰古乐团《四季》
@@ -4015,7 +4077,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5074
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ddd20fd24edf74b4@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261120T120000Z
 DTEND:20261120T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（5）俞峰×秦立巍演绎俄罗斯经典
@@ -4026,7 +4088,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5084
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_cb18a92da70b7624@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261218T120000Z
 DTEND:20261218T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（6）黄屹×蒂博戴法式璀璨浪漫夜
@@ -4037,7 +4099,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5085
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_9599d073808987b9@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261224T120000Z
 DTEND:20261224T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（7）余隆的柴科夫斯基协奏曲之夜
@@ -4048,7 +4110,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5086
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7c65731cf70fcfe7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270110T120000Z
 DTEND:20270110T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（8）丁嘉滢携手长笛之王帕胡德
@@ -4060,7 +4122,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5087
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_7f373a20ea8b3ced@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270306T120000Z
 DTEND:20270306T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（9）德彪西与拉威尔的梦幻交响
@@ -4071,7 +4133,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5088
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_16df5ef2c7df1877@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270314T120000Z
 DTEND:20270314T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（10）黄屹携手卡瓦科斯
@@ -4082,7 +4144,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5089
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_e601a64006613047@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270327T120000Z
 DTEND:20270327T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（11）拉赫林的马勒第一交响曲
@@ -4093,7 +4155,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5090
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_ffe6fe9ced683f15@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270402T120000Z
 DTEND:20270402T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（12）余隆的柴科夫斯基第六交响曲
@@ -4103,7 +4165,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5091
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_34bc507d8363ebcd@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270417T120000Z
 DTEND:20270417T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（13）彼得·弗洛的布鲁克纳第四交响曲
@@ -4114,7 +4176,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5092
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_2bf12b26daad83d7@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270423T120000Z
 DTEND:20270423T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（14）交响巴赫
@@ -4128,7 +4190,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5093
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_1f1166d6bcefd449@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270505T120000Z
 DTEND:20270505T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（15）黄屹 × 戈埃内 × 音乐永恒合唱团演绎肖斯塔科维奇第十三交响曲
@@ -4139,7 +4201,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5094
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_a409d15d37ec74fe@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270514T120000Z
 DTEND:20270514T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（16）阿尔班·格哈特演绎舒曼大提琴协奏曲
@@ -4150,7 +4212,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5095
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_26dfaa8801f81b67@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270606T120000Z
 DTEND:20270606T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（17）安德里斯·波嘉演绎柴科夫斯基
@@ -4161,7 +4223,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5096
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_4f31af8f2d09d149@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270611T120000Z
 DTEND:20270611T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（18）柴科夫斯基与肖邦
@@ -4172,7 +4234,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5097
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_697ee7301aea2b17@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270709T120000Z
 DTEND:20270709T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季（19）黄屹 × 张昊辰 × 上海四重奏
@@ -4182,7 +4244,7 @@ URL:https://www.concerthall.com.cn/events/neweventdetail.php?id=5098
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_472676b3445c9ca5@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20270716T120000Z
 DTEND:20270716T140000Z
 SUMMARY:广州交响乐团2026/2027音乐季闭幕音乐会 余隆的马勒第五交响曲

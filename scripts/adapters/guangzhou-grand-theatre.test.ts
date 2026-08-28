@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -6,6 +8,7 @@ import {
   parseGzdjyFirstShowTime,
   parseGzdjyListResponse,
   parseGzdjyPriceTiers,
+  parseGzdjyProgramLine,
 } from "./guangzhou-grand-theatre";
 
 async function main() {
@@ -69,7 +72,28 @@ async function main() {
   );
   assert.deepEqual(program24178, [], "无曲目单页面应返回空数组而非噪声");
 
-  console.log("Guangzhou Grand Theatre parser tests passed.");
+  const mutterLines = extractGzdjyProgramLines(
+  readFileSync(resolve(process.cwd(), "scripts/fixtures/guangzhou-grand-theatre/mutter-24101.html"), "utf8"),
+);
+assert.equal(mutterLines.length, 3);
+const mutterProgram = mutterLines.map((line) => parseGzdjyProgramLine(line)).filter(Boolean);
+assert.deepEqual(
+  mutterProgram.map((item) => [item?.composer ?? "—", item?.title]),
+  [
+    ["巴特沃斯", "什罗普郡少年狂想曲"],
+    ["门德尔松", "E小调小提琴协奏曲"],
+    ["贝多芬", "C小调第五交响曲“命运”"],
+  ],
+);
+assert.equal(parseGzdjyProgramLine("1《托卡塔》 作品编号BWV 564——约翰·塞巴斯蒂安·巴赫")?.composer, "约翰·塞巴斯蒂安·巴赫");
+assert.equal(parseGzdjyProgramLine("《桑巴姐姐》Samba di Didi")?.alternateTitles?.[0], "Samba di Didi");
+assert.equal(parseGzdjyProgramLine("曼努埃尔·庞塞：《南方小奏鸣曲》——《田野》《歌谣》《节庆》")?.movements?.length, 3);
+assert.equal(parseGzdjyProgramLine("《太阳升起》 约兰·索舍尔改编")?.credits?.[0].name, "约兰·索舍尔");
+assert.equal(parseGzdjyProgramLine("巴赫（约翰·瑟尔谢尔改编）：《前奏曲》《阿勒芒德舞曲》")?.credits?.[0].role, "改编");
+assert.equal(parseGzdjyProgramLine("贝多芬《C 小调 32 首变奏曲》WoO 80")?.composer, "贝多芬");
+assert.equal(parseGzdjyProgramLine("2《第一四重奏》 ——让-巴蒂斯特·桑热莱")?.composer, "让-巴蒂斯特·桑热莱");
+
+console.log("Guangzhou Grand Theatre parser tests passed.");
 }
 
 main().catch((error) => {

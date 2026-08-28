@@ -6,7 +6,7 @@ METHOD:PUBLISH
 X-WR-CALNAME:古典音乐演出日历 · 北京音乐厅官网
 BEGIN:VEVENT
 UID:perf_18f69f5dd8b787c3@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260904T113000Z
 DTEND:20260904T133000Z
 SUMMARY:克里斯蒂安·布莱克肖钢琴独奏音乐会
@@ -18,7 +18,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_94cc295c37d93531@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260905T113000Z
 DTEND:20260905T133000Z
 SUMMARY:乐见古典一一琥珀四重奏与陈萨专场音乐会
@@ -30,7 +30,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b36e7c32fc3eb9ea@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260912T023000Z
 DTEND:20260912T043000Z
 SUMMARY:“和鸣”—中国交响乐团室内乐音乐会
@@ -42,7 +42,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_41e12e1b2e0df554@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260913T113000Z
 DTEND:20260913T133000Z
 SUMMARY:打开音乐之门·百年之澜一一民国女子音乐肖像
@@ -53,7 +53,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3c7ad3c4a68395be@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260918T113000Z
 DTEND:20260918T133000Z
 SUMMARY:乐见古典一一克里斯托夫·巴拉蒂小提琴独奏音乐会
@@ -65,7 +65,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_492990f5a332c57b@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20260919T113000Z
 DTEND:20260919T133000Z
 SUMMARY:2026年国家艺术院团演出演播季 中国交响乐团2026/27音乐季《长征组歌》中国交响乐团交响音乐会
@@ -77,7 +77,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_11f7384fa620d09c@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261001T113000Z
 DTEND:20261001T133000Z
 SUMMARY:音乐嘉年华·万里山河同心曲 爱乐男声合唱团 十·一 献礼大型主题合唱音乐会
@@ -89,7 +89,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_04a28eed4f7644ec@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261003T113000Z
 DTEND:20261003T133000Z
 SUMMARY:音乐嘉年华“江山如此多娇”红色经典交响音乐会
@@ -101,7 +101,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_3f7ff4d4a3b8d820@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261016T113000Z
 DTEND:20261016T133000Z
 SUMMARY:中国交响乐团2026/27音乐季 纪念肖斯塔科维奇诞辰120周年“老张的老肖”交响音乐会
@@ -113,7 +113,7 @@ URL:https://www.bjconcerthall.cn/bjyyt/ycgp/ycgpxq.shtml?type=pc&projectId
 END:VEVENT
 BEGIN:VEVENT
 UID:perf_b9a02dbcb2aa12ab@classic-music
-DTSTAMP:20260827T120909Z
+DTSTAMP:20260828T122718Z
 DTSTART:20261025T113000Z
 DTEND:20261025T133000Z
 SUMMARY:乐见古典·孤弦之歌——无伴奏小提琴的独白与狂想：黄滨小提琴独奏音乐会

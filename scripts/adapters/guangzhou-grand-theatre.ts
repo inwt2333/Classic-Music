@@ -77,7 +77,88 @@ export function extractGzdjyProgramLines(html: string): string[] {
     if (/演出曲目|Programme/i.test(line)) return false;
     if (/中场休息|Intermission/i.test(line)) return false;
     if (/温馨提示|仅供参考|版权所有/.test(line)) return false;
-    // 只保留「《曲名》…」形态的行，演奏家介绍、致谢等文本一律不当作曲目。
-    return /《.+》/.test(line);
+    // 只保留「《曲名》…」与「作曲者：曲名」形态的行，演奏家介绍、致谢等文本一律不当作曲目。
+    return /《.+》/.test(line) || /^[一-龥·]{2,12}\s*[：:]\s*[一-龥A-Za-z].{0,60}$/.test(line);
   });
+}
+
+export type GzdjyProgramItem = {
+  composer?: string;
+  title: string;
+  credits?: Array<{ name: string; role: string }>;
+  alternateTitles?: string[];
+  movements?: Array<{ number?: string; title: string }>;
+  number?: string;
+};
+
+function cleanGzdjyText(value: string) {
+  return value.replace(/ /g, " ").replace(/\s{2,}/g, " ").trim();
+}
+
+export function parseGzdjyProgramLine(line: string): GzdjyProgramItem | undefined {
+  let value = line.replace(/ /g, " ").trim();
+  const numbered = value.match(/^(\d{1,2})\s*[.、．]?\s*(《.+)$/) ?? value.match(/^(\d{1,2})\s*[.、．]\s*(.+)$/);
+  if (numbered) {
+    value = numbered[2].trim();
+  }
+  if (!value || value.length > 90) return undefined;
+
+  let composer: string | undefined;
+  let title = value;
+  const credits: Array<{ name: string; role: string }> = [];
+  const alternateTitles: string[] = [];
+  const movements: Array<{ number?: string; title: string }> = [];
+
+  const adjacentComposer = title.match(/^([一-龥·]{2,12})\s*《(.+)$/);
+  const parenComposer = title.match(/^([^\s《》（()：:]{2,20})\s*[（(]([^（）()]{2,20})[）)]\s*[：:]\s*(.+)$/);
+  const plainComposer = title.match(/^([^\s《》（()：:]{2,20})\s*[：:]\s*(.+)$/);
+  const colonPrefix = parenComposer ?? plainComposer ?? adjacentComposer;
+  if (colonPrefix) {
+    composer = colonPrefix[1];
+    if (parenComposer && /改编|编曲|编配|配器$/.test(parenComposer[2])) {
+      credits.push({ name: cleanGzdjyText(parenComposer[2].replace(/改编|编曲|编配|配器$/, "")), role: "改编" });
+    }
+    title = adjacentComposer && !parenComposer && !plainComposer ? adjacentComposer[2] : colonPrefix[parenComposer ? 3 : 2];
+  }
+
+  const dashComposer = title.match(/^(.{2,60}?)\s*[—－-]{2}\s*([一-龥A-Za-z·\-\s]{2,24})$/);
+  if (dashComposer && !/选自|改编|独奏|重奏/.test(dashComposer[2])) {
+    composer = composer || cleanGzdjyText(dashComposer[2]);
+    title = dashComposer[1].trim();
+  }
+
+  const movementSeries = title.match(/^(.{2,40}?)\s*[—－-]{2}\s*((?:《[^》]{1,20}》\s*){2,})$/);
+  if (movementSeries) {
+    title = movementSeries[1].trim();
+    for (const movement of movementSeries[2].matchAll(/《([^》]+)》/g)) {
+      movements.push({ title: movement[1].trim() });
+    }
+  }
+
+  const arrangerSuffix = title.match(/^(.{2,40}?)\s+([一-龥·]{2,12})\s*改编$/);
+  if (arrangerSuffix) {
+    title = arrangerSuffix[1].trim();
+    credits.push({ name: cleanGzdjyText(arrangerSuffix[2]), role: "改编" });
+  }
+
+  const latinSuffix = title.match(/(?:\s+|》)([A-Z'’][A-Za-zÀ-ÿ'’.-]*(?:\s+[A-Za-zÀ-ÿ'’.-]+)*)$/);
+  if (latinSuffix && latinSuffix.index !== undefined) {
+    const before = title.slice(0, latinSuffix.index).trim();
+    if (/[一-龥]$/.test(before)) {
+      title = before;
+      alternateTitles.push(cleanGzdjyText(latinSuffix[1]));
+    }
+  }
+
+  title = cleanGzdjyText(title.replace(/》\s*《/g, " ").replace(/[《》]/g, ""));
+  if (!title || title.length < 2) return undefined;
+  if (composer && composer.length > 24) composer = undefined;
+  return {
+    composer: composer ? cleanGzdjyText(composer) : undefined,
+    title,
+    credits: credits.length ? credits : undefined,
+    alternateTitles: alternateTitles.length ? alternateTitles : undefined,
+    movements: movements.length ? movements : undefined,
+    number: numbered?.[1],
+  };
 }
