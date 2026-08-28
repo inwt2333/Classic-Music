@@ -433,16 +433,25 @@ async function main() {
 
   if (sourceFilter) {
     // 单源探针/金丝雀模式：只重新采集指定来源并输出对比信息，不落库、不导出、不写健康快照。
+    // PROBE_KNOWN_FAILED 列出已知长期故障的来源（如星海 SPA 改版待重建），它们的失败不算事故。
+    const knownFailed = new Set(
+      (process.env.PROBE_KNOWN_FAILED ?? "").split(",").map((value) => value.trim()).filter(Boolean),
+    );
     for (const source of dataset.sources) {
+      const tolerated = !source.ok && knownFailed.has(source.id) ? "（已知故障，容忍）" : "";
       console.log(
-        `[probe] ${source.id}: ok=${source.ok} discovered=${source.rawCount ?? "-"} normalized=${source.normalizedCount ?? "-"}`,
+        `[probe] ${source.id}: ok=${source.ok} discovered=${source.rawCount ?? "-"} normalized=${source.normalizedCount ?? "-"}${tolerated}`,
       );
     }
     console.log(`[probe] ${dataset.sources.length} 个来源采集完成（未持久化）。示例事件：`);
     for (const event of dataset.events.slice(0, 5)) {
       console.log(`  ${event.dateLabel} ${event.timeLabel} | ${event.title.slice(0, 40)} | 曲目 ${event.program.length} 条`);
     }
-    if (dataset.stats.errors.length) process.exitCode = 1;
+    const unexpected = dataset.sources.filter((source) => !source.ok && !knownFailed.has(source.id));
+    if (unexpected.length) {
+      console.error(`[probe] ${unexpected.length} 个非已知故障来源失败：${unexpected.map((source) => source.id).join(", ")}`);
+      process.exitCode = 1;
+    }
     return;
   }
 
