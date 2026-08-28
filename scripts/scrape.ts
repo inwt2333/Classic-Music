@@ -1901,7 +1901,14 @@ async function scrapeGuangzhouSymphony(
   }
   const supplementalUrls = new Set<string>();
   for (const indexUrl of source.supplementalIndexUrls) {
-    const html = await fetchLegacyChineseText(indexUrl);
+    // 补充索引挂在星海旧站（concerthall.com.cn）上，该站已改版下线；
+    // 拉取失败时降级为空，主站索引照常发现演出，不能让死链拖垮整个来源。
+    const html = await fetchLegacyChineseText(indexUrl).catch((error) => {
+      console.warn(
+        `[source] ${source.name}: 补充索引不可用（${indexUrl}）：${error instanceof Error ? error.message : String(error)}`,
+      );
+      return "";
+    });
     for (const detailUrl of discoverGuangzhouSymphonySupplementalUrls(html, indexUrl)) {
       supplementalUrls.add(detailUrl);
     }
@@ -1918,7 +1925,7 @@ async function scrapeGuangzhouSymphony(
       evidenceText: html }));
   }
   for (const detailUrl of supplementalUrls) {
-    const html = await fetchLegacyChineseText(detailUrl);
+    const html = await fetchLegacyChineseText(detailUrl).catch(() => "");
     const parsed = parseXinghaiConcertHallDetail(html, detailUrl);
     const start = parsed.dateTime ? parseFlexibleChinaDate(parsed.dateTime) : undefined;
     if (!start || !/广州交响乐团|广交/.test(parsed.title)) continue;
