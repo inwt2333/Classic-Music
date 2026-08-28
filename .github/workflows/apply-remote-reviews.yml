@@ -21,13 +21,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check Supabase secrets
+        id: secrets
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::未配置 SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY secrets，本轮跳过远程审核拉取；在仓库 Secrets 中配置并执行 supabase/migrations/202608270001_remote_review_queue.sql 后自动生效"
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Pull and apply remote review submissions
+        if: steps.secrets.outputs.available == 'true'
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npx tsx scripts/pull-remote-reviews.ts
 
       - name: Commit applied reviews
+        if: steps.secrets.outputs.available == 'true'
         run: |
           git config user.name "classic-music-review-bot"
           git config user.email "classic-music-review-bot@users.noreply.github.com"
