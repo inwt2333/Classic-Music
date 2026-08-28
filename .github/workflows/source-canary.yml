@@ -30,7 +30,13 @@ jobs:
         env:
           # 已知长期故障的来源（星海 SPA 改版待重建），探测失败不算金丝雀事故。
           PROBE_KNOWN_FAILED: xinghai-concert-hall-official
-        run: npm run scrape:probe
+        run: |
+          if npm run scrape:probe; then
+            exit 0
+          fi
+          echo "::warning::首次探测失败，120 秒后重试一次，以排除美国 runner 访问国内站点的瞬时网络抖动"
+          sleep 120
+          npm run scrape:probe
 
       - name: Open or update failure issue
         if: failure() && steps.probe.outcome == 'failure'
