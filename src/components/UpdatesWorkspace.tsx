@@ -32,6 +32,54 @@ const categoryMeta: Record<UpdateCategory, { label: string; icon: typeof Sparkle
 
 const productUpdates: ProductUpdate[] = [
   {
+    date: "2026-08-28",
+    title: "知识库与个人发现大扩充",
+    summary: "作品知识库一次性新增 27 部经典与 10 位作曲家，并为演出详情和个人页带来一套发现与行前功能。",
+    items: [
+      { category: "feature", title: "27 部新作品指南", description: "新增维瓦尔第《四季》、马勒第一、巴托克《乐队协奏曲》、柴可夫斯基第四/第五/第六、西贝柳斯小提琴协奏曲、勃拉姆斯第二钢琴协奏曲、布鲁赫、贝多芬「热情」、舒曼《童年情景》、拉威尔左手协奏曲、普罗科菲耶夫、雷斯皮吉「罗马三部曲」、圣-桑「埃及」、福雷《帕凡舞曲》等完整聆听指南，全部附真实录音推荐与来源。" },
+      { category: "feature", title: "10 位新作曲家", description: "维瓦尔第、马勒、巴托克、西贝柳斯、布鲁赫、舒曼、雷斯皮吉、圣-桑、福雷、米亚斯科夫斯基入驻作曲家库。" },
+      { category: "feature", title: "本场看点", description: "演出详情顶部以标签提示「本季仅此一场」「大部头曲目」「即将开票」等看点，均由数据字段生成。" },
+      { category: "feature", title: "行前聆听指南", description: "详情页曲目命中知识库时，按作品给出一句导赏、难度与完整指南入口，方便演出前预习。" },
+      { category: "feature", title: "相关演出", description: "详情页底部推荐同作品、同作曲家或同乐团的近期演出。" },
+      { category: "feature", title: "为你推荐", description: "个人页新增基于关注、想去与已购记录的演出推荐，每条附推荐理由，不做黑箱打分。" },
+      { category: "feature", title: "筛选订阅提醒", description: "保存的筛选升级为订阅：新演出命中条件时在消息中心生成提醒。" },
+      { category: "improvement", title: "记住常用城市", description: "城市选择自动记忆，下次访问直接进入你关注的城市，全国结果仍可一键切换。" },
+      { category: "fix", title: "知识关联修复", description: "官网把作品号写进标题（如「E小调第二交响曲，作品27」）时也能正确关联知识库，大量此类演出自动补上作品指南。" },
+    ],
+  },
+  {
+    date: "2026-08-28",
+    title: "新增三个演出来源",
+    summary: "覆盖范围扩展到南京与武汉，来源总数增至 21 个，广州增至两个来源。",
+    items: [
+      { category: "feature", title: "广州大剧院", description: "接入官方票务数据，音乐后花园、纯粹系列等音乐会板块 12 场上线，曲目单完整解析。" },
+      { category: "feature", title: "江苏大剧院（南京）", description: "接入麦座票务平台，布莱克肖、陈萨、帕帕诺与爵士、柏林爱乐巴洛克独奏家等 14 场上线，南京首次纳入覆盖。" },
+      { category: "feature", title: "武汉琴台大剧院", description: "打通保利票务平台，交响视听音乐会等演出按场次收录，武汉首次纳入覆盖；每场带精确时间、票价档与售票状态。" },
+      { category: "fix", title: "广州交响乐团数据恢复", description: "修复一个被旧链接拖累的采集缺陷——广交官网数据此前一直沿用旧快照，现恢复实时更新（30 场）。" },
+    ],
+  },
+  {
+    date: "2026-08-28",
+    title: "订阅、票务状态与离线",
+    summary: "演出数据可以订阅进日历软件，票务状态一目了然，网站可安装到桌面与手机主屏。",
+    items: [
+      { category: "feature", title: "日历与 RSS 订阅", description: "来源页提供全部城市、单城市与单来源的 iCal 日历订阅，以及数据变更 RSS；日历软件中演出随官网每 8 小时自动更新。" },
+      { category: "feature", title: "售票状态", description: "国家大剧院、上海交响、保利来源的演出显示「售票中 / 即将开票 / 已售罄 / 停售」状态，售罄后不再显示购票按钮。" },
+      { category: "feature", title: "PWA 安装", description: "网站可安装为桌面/手机应用，核心数据与知识页支持离线缓存，二次打开更快。" },
+      { category: "improvement", title: "旧链接重定向", description: "演出合并导致链接失效时自动跳转到新页面，个人想去/已购标记同步跟随迁移。" },
+    ],
+  },
+  {
+    date: "2026-08-28",
+    title: "采集可靠性加固",
+    summary: "新增每日来源巡检与自动化检查，问题从「人翻日志才发现」变为「当天自动告警」。",
+    items: [
+      { category: "improvement", title: "来源金丝雀", description: "每天上午自动巡检全部 21 个来源页面，连续失败才判定为改版事故并自动创建议题，跨境网络抖动自动重试。" },
+      { category: "improvement", title: "运行状态公开", description: "来源页顶部展示数据更新时间、来源健康、收录规模与待确认数量，站内即可了解数据新鲜度。" },
+      { category: "improvement", title: "代码检查前移", description: "代码合入前的检查流程覆盖全部测试与构建，构建类问题不再等到部署最后一步才暴露。" },
+    ],
+  },
+  {
     date: "2026-08-11",
     title: "节目单智能复核",
     summary: "在保留各官网专用解析规则的基础上，引入有原文约束的文字复核和图片识别，并为接口异常提供自动降级。",
