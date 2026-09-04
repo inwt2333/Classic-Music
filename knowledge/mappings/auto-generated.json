@@ -152,6 +152,21 @@
       "reviewedAt": "2026-08-08T16:18:23.991Z"
     },
     {
+      "id": "mapping_auto_25671e77960a28c9",
+      "workId": "work_000017",
+      "composers": [
+        "柴科夫斯基"
+      ],
+      "titles": [
+        "降b小调第一钢琴协奏曲，作品23号"
+      ],
+      "opus": [
+        "作品23"
+      ],
+      "method": "automated-exact",
+      "reviewedAt": "2026-09-04T17:46:21.434Z"
+    },
+    {
       "id": "mapping_auto_2d20a5288dcdfb84",
       "workId": "work_000024",
       "composers": [
