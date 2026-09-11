@@ -238,14 +238,14 @@
     "879227420286c418070ec169": {
       "status": "needs_completion",
       "workId": "work_auto_958f678568a3fb7b",
-      "attempts": 9,
-      "updatedAt": "2026-09-04T17:46:21.434Z",
+      "attempts": 10,
+      "updatedAt": "2026-09-11T17:52:56.980Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_2a203fb9aad9c7ff"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4",
-      "nextRetryAt": "2026-09-11T17:46:21.434Z"
+      "nextRetryAt": "2026-09-18T17:52:56.980Z"
     },
     "f131d65eaa6401a87fef6d89": {
       "status": "published",
@@ -986,8 +986,8 @@
     },
     "61c2a65a3a290f75576077bc": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-09-10T17:50:51.156Z",
+      "attempts": 2,
+      "updatedAt": "2026-09-11T17:52:56.980Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_256310ede4280ea1"
@@ -996,8 +996,8 @@
     },
     "621295df0f23d11c955e497a": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-09-10T17:50:51.156Z",
+      "attempts": 2,
+      "updatedAt": "2026-09-11T17:52:56.980Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_7e358c8cbbc21e45"
@@ -1006,8 +1006,8 @@
     },
     "63435c8b24880294b22acb96": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-09-10T17:50:51.156Z",
+      "attempts": 2,
+      "updatedAt": "2026-09-11T17:52:56.980Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_c609f0eee111fc40"
@@ -1016,8 +1016,8 @@
     },
     "65838804dce60c4ee2e24a48": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-09-10T17:50:51.156Z",
+      "attempts": 2,
+      "updatedAt": "2026-09-11T17:52:56.980Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_dfa412849cdb6d99"
