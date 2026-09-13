@@ -80,6 +80,33 @@ async function expectAnonymousWriteDenied(table: PrivateTable, body: Record<stri
 }
 
 async function main() {
+  try {
+    await verifySupabase();
+  } catch (error) {
+    // 演出数据是纯静态产物，不应因登录后端不可用而停发。
+    // 网络层失败（DNS 不存在/拒连/超时）视为项目级外部故障：警告放行；
+    // 配置类错误（缺变量、私网地址、迁移缺失、RLS 失效）仍然硬失败。
+    if (isProjectOutage(error)) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(
+        `::warning::Supabase 项目不可达（${message}）。登录与个人功能在项目恢复前不可用，静态演出数据不受影响，部署继续。` +
+          "若项目已被删除或长期暂停，请到 supabase.com 恢复/重建项目，更新 Actions variables 中的 VITE_SUPABASE_URL 与 VITE_SUPABASE_PUBLISHABLE_KEY，并执行 supabase/migrations 下的迁移。",
+      );
+      return;
+    }
+    throw error;
+  }
+}
+
+function isProjectOutage(error: unknown) {
+  if (error instanceof Error && /HTTP 540/.test(error.message)) return true;
+  const code = (error as { cause?: { code?: string } })?.cause?.code ?? "";
+  if (/^E(?:NOTFOUND|CONNREFUSED|CONNRESET|TIMEDOUT|AI_AGAIN|HOSTUNREACH|NETUNREACH)$/.test(code)) return true;
+  const message = error instanceof Error ? error.message : String(error);
+  return /fetch failed|ENOTFOUND|ECONNREFUSED|ECONNRESET|ETIMEDOUT|EAI_AGAIN|EHOSTUNREACH|ENETUNREACH|timeout|aborted|network/i.test(message);
+}
+
+async function verifySupabase() {
   const settingsResponse = await request("auth/v1/settings");
   if (!settingsResponse.ok) throw new Error(`Supabase Auth is unavailable (HTTP ${settingsResponse.status})`);
   const settings = await settingsResponse.json() as { external?: { email?: boolean }; mailer_autoconfirm?: boolean };
