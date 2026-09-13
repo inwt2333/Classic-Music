@@ -316,14 +316,14 @@
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "671ddf6bcbecb3e67b566b6f": {
-      "status": "skipped",
-      "attempts": 1,
-      "updatedAt": "2026-08-08T16:21:56.089Z",
-      "reason": "The proposed work 'C大调弦乐小夜曲，KV 648' is a newly discovered work, but the provided evidence does not confirm its identity or structure; the official source mentions it but lacks details on movements and duration.；The proposal includes a movement structure (single movement) and duration (12 minutes) that are not supported by any supplied evidence, violating the rule that objective facts must be cited from evidence.；The recording evidence provided (apple_music_6795295401) is a general album and does not specifically reference KV 648, so it cannot support any recording recommendation.；The proposal's instrumentation '两把小提琴、低音提琴' is mentioned in the official source, but the source does not confirm the exact number of violin parts or the absence of viola, so it may be incomplete or inaccurate.；The composition years '约1766-1769' are not explicitly stated in the evidence; the official source only says '约10至13岁', which could correspond to a range but not exact years.；The work is a recent discovery, and the official source does not provide a complete movement list or detailed structure, making it impossible to confirm the proposed single-movement structure.",
+      "status": "failed",
+      "attempts": 2,
+      "updatedAt": "2026-09-13T17:37:45.200Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_2465218ef2febb27"
       ],
-      "pipelineVersion": "deepseek-v4-flash:2.0.3"
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
     },
     "00af96ce7654aa379b3720e2": {
       "status": "skipped",
@@ -1026,11 +1026,41 @@
     },
     "66ca71f1a11265af1b5b6a31": {
       "status": "failed",
-      "attempts": 2,
-      "updatedAt": "2026-09-12T17:25:53.033Z",
+      "attempts": 3,
+      "updatedAt": "2026-09-13T17:37:45.200Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_d33f9ef59feb68e9"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "14f940d2b4b410dbb65a81b4": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-09-13T17:37:45.200Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_c49c87df39add37b"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "261d33f4ef26ae7c1ecc3464": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-09-13T17:37:45.200Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_3ab12e393822fac3"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "51753155206c4e570a2b66d8": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-09-13T17:37:45.200Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_4c8a0a100d0d4bfc"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     }
