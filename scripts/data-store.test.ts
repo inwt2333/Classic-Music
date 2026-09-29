@@ -4,6 +4,7 @@ import {
   buildChanges,
   buildChangeEventSnapshot,
   buildEntities,
+  buildEventRedirects,
   buildIndex,
   mergeChangeHistory,
   mergeCrossSourceEvents,
@@ -124,6 +125,94 @@ const sameHallDifferentConcert = mergeCrossSourceEvents([
   },
 ], sources);
 assert.equal(sameHallDifferentConcert.length, 2);
+
+const beijingOrchestra: ConcertEvent = {
+  ...baseEvent,
+  id: "perf_30988a43ee02960c",
+  title: "纪念肖斯塔科维奇诞辰 120 周年“老张的老肖”交响音乐会Commemorating the 120th Anniversary of Shostakovich’s Birth “Shostakovich of Mr. Zhang”Symphonic Concert",
+  city: "北京",
+  venue: "北京音乐厅",
+  hall: undefined,
+  startTime: "2026-10-16T11:30:00.000Z",
+  ensemble: "中国交响乐团",
+  conductor: "张国勇",
+  performers: ["张国勇", "王安祺"],
+  program: [
+    { composer: "柴科夫斯基", title: "降b小调第一钢琴协奏曲，作品23号", confidence: "official" },
+    { composer: "肖斯塔科维奇", title: "b小调第六交响曲，作品54号", confidence: "official" },
+  ],
+  sourceName: "来源 A",
+  sources: [{ sourceId: "source-a", sourceName: "来源 A", sourceRecordId: "cnso-oct16", sourceUrl: "https://example.com/a", scrapedAt: baseEvent.scrapedAt }],
+};
+const beijingHall: ConcertEvent = {
+  ...beijingOrchestra,
+  id: "perf_3f7ff4d4a3b8d820",
+  title: "中国交响乐团2026/27音乐季 纪念肖斯塔科维奇诞辰120周年“老张的老肖”交响音乐会",
+  conductor: undefined,
+  performers: [],
+  program: [
+    { composer: "王西麟", title: "《火把节》", confidence: "ai" },
+    { composer: "柴科夫斯基", title: "降b小调第一钢琴协奏曲,作品23号", confidence: "ai" },
+    { composer: "肖斯塔科维奇", title: "b小调第六交响曲,作品54号", confidence: "ai" },
+  ],
+  sourceName: "来源 B",
+  sources: [{ sourceId: "source-b", sourceName: "来源 B", sourceRecordId: "hall-oct16", sourceUrl: "https://example.com/b", scrapedAt: baseEvent.scrapedAt }],
+};
+const beijingMerged = mergeCrossSourceEvents([beijingOrchestra, beijingHall], sources);
+assert.equal(beijingMerged.length, 1);
+assert.equal(beijingMerged[0].sources?.length, 2);
+assert.equal(beijingMerged[0].program.length, 3);
+const beforeMerge: ConcertDataset = {
+  schemaVersion: 2,
+  generatedAt: "2026-10-01T00:00:00.000Z",
+  city: "北京",
+  events: [beijingOrchestra, beijingHall],
+  sources,
+  stats: { rawEvents: 2, normalizedEvents: 2, aiEnhancedEvents: 0, errors: [] },
+};
+const afterMerge: ConcertDataset = { ...beforeMerge, events: beijingMerged };
+assert.deepEqual(buildEventRedirects(beforeMerge, afterMerge), {
+  [beijingOrchestra.id]: beijingMerged[0].id,
+});
+assert.equal(buildChanges(beforeMerge, afterMerge).changes.some((item) => item.type === "removed"), false);
+
+const longMarchOrchestra: ConcertEvent = {
+  ...beijingOrchestra,
+  id: "cnso-sept19",
+  title: "《长征组歌》交响音乐会“Suite of Songs on the Long March”Symphonic Concert",
+  startTime: "2026-09-19T11:30:00.000Z",
+  program: [{ composer: "吕其明", title: "交响序曲红旗颂", confidence: "official" }],
+};
+const longMarchHall: ConcertEvent = {
+  ...beijingHall,
+  id: "hall-sept19",
+  title: "2026年国家艺术院团演出演播季 中国交响乐团2026/27音乐季《长征组歌》中国交响乐团交响音乐会",
+  startTime: longMarchOrchestra.startTime,
+  program: [{ composer: "吕其明", title: "交响序曲《红旗颂》", confidence: "ai" }],
+};
+assert.equal(mergeCrossSourceEvents([longMarchOrchestra, longMarchHall], sources).length, 1);
+assert.equal(mergeCrossSourceEvents([
+  longMarchOrchestra,
+  { ...longMarchHall, program: [{ composer: "贝多芬", title: "第五交响曲", confidence: "ai" }] },
+], sources).length, 2);
+
+const shakespeareOrchestra: ConcertEvent = {
+  ...beijingOrchestra,
+  id: "cnso-oct24",
+  title: "纪念莎士比亚逝世 410 周年莎士比亚文学作品交响音乐会Commemorating the 410th Anniversary of Shakespeare’s DeathShakespeare’s Literary Works Symphonic Concert",
+  venue: "国家大剧院",
+  hall: "音乐厅",
+  startTime: "2026-10-24T11:30:00.000Z",
+  program: [{ composer: "门德尔松", title: "仲夏夜之梦选段", confidence: "official" }],
+};
+const shakespeareHall: ConcertEvent = {
+  ...shakespeareOrchestra,
+  id: "ncpa-oct24",
+  title: "中国交响乐团2026/27音乐季：“纪念莎士比亚逝世410周年”莎士比亚文学作品交响音乐会",
+  program: [{ composer: "门德尔松", title: "仲夏夜之梦选段", confidence: "ai" }],
+  sourceName: "来源 B",
+};
+assert.equal(mergeCrossSourceEvents([shakespeareOrchestra, shakespeareHall], sources).length, 1);
 
 const numberedWorks = mergeCrossSourceEvents([{
   ...baseEvent,

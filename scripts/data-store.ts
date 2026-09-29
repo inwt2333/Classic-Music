@@ -433,6 +433,21 @@ export function buildEventRedirects(
   for (const [currentId, oldEvent] of matches) {
     if (oldEvent.id !== currentId) redirects[oldEvent.id] = currentId;
   }
+  const currentBySourceRecord = new Map<string, Set<string>>();
+  for (const event of current.events) {
+    for (const key of sourceRecordKeys(event)) {
+      const ids = currentBySourceRecord.get(key) ?? new Set<string>();
+      ids.add(event.id);
+      currentBySourceRecord.set(key, ids);
+    }
+  }
+  const currentIds = new Set(current.events.map((event) => event.id));
+  for (const oldEvent of previous.events) {
+    if (currentIds.has(oldEvent.id)) continue;
+    const ids = new Set(sourceRecordKeys(oldEvent).flatMap((key) =>
+      Array.from(currentBySourceRecord.get(key) ?? [])));
+    if (ids.size === 1) redirects[oldEvent.id] = Array.from(ids)[0];
+  }
   return redirects;
 }
 
@@ -469,7 +484,10 @@ export function buildChanges(  previous: ConcertDataset | null,
 
   const changes: DatasetChange[] = [];
   const previousMatches = matchPreviousEvents(previous.events, current.events);
-  const matchedPreviousIds = new Set(Array.from(previousMatches.values(), (event) => event.id));
+  const matchedPreviousIds = new Set([
+    ...Array.from(previousMatches.values(), (event) => event.id),
+    ...Object.keys(buildEventRedirects(previous, current)),
+  ]);
 
   for (const event of current.events) {
     const old = previousMatches.get(event.id);
@@ -1146,8 +1164,8 @@ function shouldMerge(a: ConcertEvent, b: ConcertEvent) {
   const bHall = normalizeIdentity(b.hall ?? embeddedHall(b.venue));
   if (aHall && bHall && aHall !== bHall) return false;
 
-  const aTitle = normalizeIdentity(a.title);
-  const bTitle = normalizeIdentity(b.title);
+  const aTitle = comparableEventTitle(a.title);
+  const bTitle = comparableEventTitle(b.title);
   if (aTitle === bTitle) return true;
   const similarity = diceCoefficient(aTitle, bTitle);
   if (
@@ -1160,8 +1178,23 @@ function shouldMerge(a: ConcertEvent, b: ConcertEvent) {
 
   const peopleOverlap = intersects([a.conductor, ...a.performers], [b.conductor, ...b.performers]);
   const workOverlap = programIntersects(a.program, b.program);
+  if (workOverlap && sharedQuotedTitle(a.title, b.title)) return true;
   if (similarity >= 0.25 && peopleOverlap && workOverlap) return true;
   return similarity >= 0.68 && (peopleOverlap || workOverlap);
+}
+
+function comparableEventTitle(title: string) {
+  const chineseTitle = normalizeIdentity(title.replace(/[A-Za-z]{4,}[^\u3400-\u9fff]*$/u, ""));
+  return chineseTitle.length >= 8 ? chineseTitle : normalizeIdentity(title);
+}
+
+function sharedQuotedTitle(a: string, b: string) {
+  const phrases = (title: string) => Array.from(
+    title.matchAll(/[《“]([^》”]+)[》”]/gu),
+    (match) => normalizeIdentity(match[1]),
+  ).filter((phrase) => phrase.length >= 4);
+  const left = new Set(phrases(a));
+  return phrases(b).some((phrase) => left.has(phrase));
 }
 
 function sourceReference(event: ConcertEvent, sourceId: string): EventSourceReference {
