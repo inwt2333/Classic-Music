@@ -17,7 +17,7 @@ import {
 import { parseZhongshanMusicHallDetail, parseZhongshanMusicHallProgramText } from "./zhongshan-music-hall";
 import { parseZhejiangSymphonyCalendar, parseZhejiangSymphonyProgram } from "./zhejiang-symphony";
 import { isXianConcertHallClassical } from "./xian-concert-hall";
-import { parseXinghaiConcertHallDetail } from "./xinghai-concert-hall";
+import { parseXinghaiConcertHallDetail, parseXinghaiConcertHallApiDetail, selectXinghaiConcertHallPrograms } from "./xinghai-concert-hall";
 
 assert.equal(isShanghaiGrandTheatreClassical({ category: "音乐剧 MUSICAL", fullCnName: "摇滚音乐剧" }), false);
 assert.equal(isShanghaiGrandTheatreClassical({ category: "音乐会 CONCERT", fullCnName: "肖邦钢琴独奏音乐会" }), true);
@@ -314,6 +314,46 @@ assert.deepEqual(szyytBarbie.program.at(-3), {
   title: "胡桃夹子-花之圆舞曲",
   confidence: "official",
 });
+
+const xinghaiApi = parseXinghaiConcertHallApiDetail({
+  fullCnName: "卡蒂雅·布尼亚季什维莉 钢琴独奏音乐会",
+  venueName: "交响乐演奏大厅",
+  showContent: `<p>钢琴：卡蒂雅·布尼亚季什维莉</p><p>主要曲目</p>
+    <p>舒伯特：降B大调第二十一钢琴奏鸣曲, D. 960</p>
+    <p>Schubert: Piano Sonata No. 21 in B-flat major, D. 960</p>
+    <p>萨蒂：第一玄秘曲</p><p>Satie: Gymnopédie No. 1</p>
+    <p>钢琴：卡蒂雅·布尼亚季什维莉</p>
+    <p>* 演出信息以最新公布为准，星海音乐厅保留最终解释权</p>
+    <p>本场音乐会呈现浪漫主义钢琴音乐。</p>
+    <p>票价：180 / 280 / 480 / 680 / 880 / VIP 1080</p>
+    <p>艺术家简介</p><p>卡蒂雅：钢琴家介绍</p>`,
+});
+assert.deepEqual(xinghaiApi.program.map((item) => [item.composer, item.title]), [
+  ["舒伯特", "降B大调第二十一钢琴奏鸣曲, D. 960"], ["萨蒂", "第一玄秘曲"],
+]);
+assert.deepEqual(xinghaiApi.program[1].alternateTitles, ["Gymnopédie No. 1"]);
+assert.deepEqual(xinghaiApi.priceTiers, [180, 280, 480, 680, 880, 1080]);
+assert.deepEqual(xinghaiApi.performers, ["卡蒂雅·布尼亚季什维莉"]);
+assert.equal(xinghaiApi.hall, "交响乐演奏大厅");
+assert.deepEqual(parseXinghaiConcertHallApiDetail({ showContent: "<p>钢琴：某人</p><p>介绍文字</p>" }).program, []);
+const xinghaiApiList = selectXinghaiConcertHallPrograms({ success: true, data: [
+  { id: 1, cnName: "卡门之夜", category: "交响乐", endTime: "2026-10-12 22:00:00" },
+  { id: 2, cnName: "历史钢琴独奏会", endTime: "2025-07-17 22:00:00" },
+  { id: 3, cnName: "爵士钢琴音乐会", endTime: "2026-10-12 22:00:00" },
+  { id: 4, cnName: "演艺新空间展映", endTime: "2026-11-01 17:00:00" },
+] }, Date.parse("2026-10-09T00:00:00+08:00"));
+assert.deepEqual(xinghaiApiList.map((item) => item.id), [1]);
+assert.throws(() => selectXinghaiConcertHallPrograms({ success: false, msg: "unavailable" }), /unavailable/);
+for (const disclaimer of ["* 演出曲目及顺序以现场为准", "注：演出曲目及顺序请以现场为准", "* 实际曲目以现场为准"]) {
+  const headingProgram = parseXinghaiConcertHallApiDetail({ showContent: `<p>演出曲目</p>
+    <p>法佐·塞依</p><p>《大地母亲》（中国首演）</p>
+    <p>彼得·伊里奇·柴科夫斯基</p><p>D大调第三交响曲（波兰），作品29</p>
+    <p>${disclaimer}</p><p>演出介绍正文</p>` }).program;
+  assert.deepEqual(headingProgram.map((item) => [item.composer, item.title]), [
+    ["法佐·塞依", "大地母亲 （中国首演）"],
+    ["彼得·伊里奇·柴科夫斯基", "D大调第三交响曲（波兰），作品29"],
+  ]);
+}
 
 const xinghai = parseXinghaiConcertHallDetail(`
   <h1>石进钢琴音乐会---星海音乐厅</h1>

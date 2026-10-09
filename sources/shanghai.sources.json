@@ -127,8 +127,9 @@
     {
       "id": "xinghai-concert-hall-official",
       "name": "星海音乐厅官网",
-      "adapter": "xinghai-concert-hall-html",
-      "url": "https://www.concerthall.com.cn/events/newindex.php",
+      "adapter": "xinghai-concert-hall-api",
+      "url": "https://www.concerthall.com.cn",
+      "cmpAppKey": "XHwebsite",
       "city": "广州",
       "venue": "星海音乐厅"
     },

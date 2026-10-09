@@ -5,7 +5,10 @@ import {
   getHarbinMaitixPriceTiers,
   parseHarbinMaitixDetail,
   parseHarbinMaitixSeedFile,
+  parseHarbinMaitixProgram,
+  parseLoneComposer,
 } from "./harbin-maitix";
+import { normalizeProgramItemCredits } from "../data-store";
 
 const parsed = parseHarbinMaitixDetail({
   projectName: "四重奏回响：贝多芬·舒曼室内乐之夜",
@@ -139,5 +142,33 @@ assert.deepEqual(
 );
 assert.ok(jscArias.program.some((item) => item.composer === "莱哈尔" && item.title.startsWith("你是我心中的挚爱")));
 assert.ok(jscArias.program.every((item) => !/拉开帷幕|将运用/.test(item.title)));
+
+// 官网把演唱形式放在书名号前；词曲署名在书名号后。
+const longMarchSongs = parseHarbinMaitixDetail({
+  projectName: "《红军不怕远征难·长征组歌》合唱音乐会",
+  projectDetail: `<h3>曲目单<br>
+    混声合唱《没有共产党就没有新中国》 曹火星 词曲<br>
+    混声合唱《十送红军》 张士燮 词 朱正本 曲<br>
+    混声合唱《三大纪律八项注意》 红军革命歌曲<br>
+    混声合唱《南泥湾》 贺敬之 词 马可 曲<br>
+    男高音独唱《红星照我去战斗》 集体 词 傅庚辰 曲 演唱：赵天刃<br>
+    男高音独唱《怀念战友》 雷振邦 词 雷振邦 赵心水 曲演唱：王超<br>
+    女高音独唱《我爱你中国》 瞿琮 词 郑秋枫 曲 演唱：王一凤<br>
+    混声合唱《嘉陵江上》 端木蕻良 词 贺绿汀 曲<br>
+    混声合唱《追寻》 张和平 词 舒楠 曲<br>
+    混声合唱《在灿烂阳光下》 集体 词 印青 曲<br>
+    艺术家介绍</h3>`,
+});
+assert.equal(longMarchSongs.program.length, 10);
+assert.ok(longMarchSongs.program.every((item) => item.composer === undefined));
+assert.equal(longMarchSongs.program[0].title, "没有共产党就没有新中国 曹火星 词曲");
+const farewell = normalizeProgramItemCredits(longMarchSongs.program[1]);
+assert.equal(farewell.title, "十送红军");
+assert.equal(farewell.composer, "朱正本");
+assert.deepEqual(farewell.credits, [{ name: "张士燮", role: "词" }]);
+assert.equal(longMarchSongs.program[5].title, "怀念战友 雷振邦 词 雷振邦 赵心水 曲");
+assert.equal(parseLoneComposer("混声合唱："), undefined);
+assert.deepEqual(parseHarbinMaitixProgram(["混声合唱：", "《黄河协奏曲》"])
+  .map((item) => [item.composer, item.title]), [[undefined, "黄河协奏曲"]]);
 
 console.log("Harbin Maitix parser tests passed.");

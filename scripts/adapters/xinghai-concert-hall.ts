@@ -1,5 +1,87 @@
 import * as cheerio from "cheerio";
 import type { ProgramItem } from "../../src/types";
+import { parseChinaDate } from "../china-time";
+import { isProgramRoleLabel } from "../program-role-labels";
+
+type XinghaiProgram = {
+  id: number | string;
+  cnName?: string;
+  fullCnName?: string;
+  category?: string;
+  tag?: string;
+  startTime?: string;
+  endTime?: string;
+};
+
+export function selectXinghaiConcertHallPrograms(response: { success?: boolean; msg?: string; data?: XinghaiProgram[] }, now = Date.now()) {
+  if (!response.success || !Array.isArray(response.data)) {
+    throw new Error(`Xinghai list API: ${response.msg || "invalid response"}`);
+  }
+  return response.data.filter((item) => {
+    const title = cleanText(item.fullCnName || item.cnName || "");
+    const end = parseChinaDate(item.endTime || item.startTime || "").getTime();
+    return item.id && Number.isFinite(end) && end >= now
+      && isXinghaiConcertHallClassical(`${title} ${item.category || ""} ${item.tag || ""}`);
+  });
+}
+
+export function parseXinghaiConcertHallApiDetail(detail: {
+  fullCnName?: string; cnName?: string; venueName?: string; programInfo?: string; showContent?: string;
+}) {
+  const html = detail.showContent || detail.programInfo || "";
+  const lines = htmlLines(html);
+  const start = lines.findIndex((line) => /^(?:(?:主要|演出|参考)\s*)?(?:曲目(?:单)?|节目单)(?:\s*PROGRAMME)?[：:]?$/i.test(line));
+  const rest = start >= 0 ? lines.slice(start + 1) : [];
+  const end = rest.findIndex((line) => /曲目.*为准/.test(line)
+    || /^(?:\*?\s*演出信息|票价|艺术家|演出阵容|温馨提示|购票)/.test(line));
+  const programLines = end >= 0 ? rest.slice(0, end) : rest;
+  const program = parseApiProgram(programLines);
+  const performerLines = start >= 0 ? lines.slice(0, start) : [];
+  const artistLines = performerLines.filter((line) => /^(?:指挥|钢琴|小提琴|中提琴|大提琴|长笛|独奏|演唱|乐团)[：:]/.test(line));
+  const priceLine = lines.find((line) => /^票价[：:]/.test(line)) || "";
+  return {
+    title: cleanText(detail.fullCnName || detail.cnName || ""),
+    hall: detail.venueName?.replace(/^星海音乐厅\s*/, ""),
+    program,
+    conductor: artistLines.find((line) => /^指挥[：:]/.test(line))?.replace(/^指挥[：:]\s*/, ""),
+    performers: unique(artistLines.filter((line) => !/^(?:指挥|乐团)[：:]/.test(line)).flatMap(parseArtistNames)),
+    priceTiers: unique(Array.from(priceLine.matchAll(/\d+/g)).map((match) => Number(match[0]))).sort((a, b) => a - b),
+  };
+}
+
+function parseApiProgram(lines: string[]) {
+  const items: ProgramItem[] = [];
+  let composer: string | undefined;
+  for (const raw of lines) {
+    const line = cleanText(raw.replace(/^(?:\d+|[一二三四五六七八九十]+)[.、．]\s*/, ""));
+    if (!line || /中场休息|^(?:上|下)半场/.test(line)) continue;
+    if (/^[\u3400-\u9fff]+(?:[·•][\u3400-\u9fff]+)+$/.test(line) && line.length <= 24) {
+      composer = line;
+      continue;
+    }
+    const prefix = line.match(/^([^：:]{1,40})[：:]/)?.[1];
+    if (prefix && isProgramRoleLabel(prefix)) continue;
+    const bracketFirst = line.match(/^《([^》]+)》(.*)$/);
+    if (bracketFirst) {
+      items.push({ composer, title: cleanText(`${bracketFirst[1]} ${bracketFirst[2]}`), confidence: "official" });
+      continue;
+    }
+    const pair = line.match(/^([^：:《》（）()]{2,40})(?:[（(]改编[：:].+?[）)])?[：:]\s*(.*)$/);
+    if (pair) {
+      const label = cleanText(pair[1]);
+      const isForce = isProgramRoleLabel(label) || /协奏曲|管弦乐|序幕|第.+部分|颂歌|终篇/.test(label);
+      composer = isForce ? undefined : label;
+      if (pair[2]) items.push({ composer, title: stripBookTitle(pair[2]), confidence: "official" });
+      continue;
+    }
+    if (/演唱[：:∶]/.test(line)) {
+      items.push({ title: stripBookTitle(line.replace(/\s*演唱[：:∶].*$/, "")), confidence: "official" });
+      continue;
+    }
+    items.push({ composer, title: stripBookTitle(line), confidence: "official" });
+  }
+  return dedupeProgram(mergeXinghaiProgramTranslations(items));
+}
 
 export function isXinghaiConcertHallClassical(title: string) {
   if (/爵士|流行|摇滚|动漫|影视|电影主题|亲子|音乐剧/.test(title)) return false;

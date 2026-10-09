@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import type { ProgramItem } from "../../src/types";
+import { isProgramRoleLabel } from "../program-role-labels";
 
 export type HarbinMaitixProject = {
   projectToken?: string | number;
@@ -220,6 +221,12 @@ function parseWorkHeader(line: string, pendingComposer?: string) {
   if (bracket) {
     const composer = cleanText(bracket[1]);
     const title = cleanText(`${bracket[2]} ${bracket[3]}`);
+    if (isProgramRoleLabel(composer.replace(/^(?:男|女)(?:高|中|低)音(?=独唱|领唱|合唱)/, ""))) {
+      return {
+        composer: undefined,
+        title: cleanText(title.replace(/\s*(?:演唱|领唱)[：:].*$/, "")),
+      };
+    }
     if (isPlausibleComposer(composer) && looksLikeWork(title) && !isProseLine(title) && title.length <= 80) return { composer, title };
   }
   const numbered = normalized.match(/^(?:[一二三四五六七八九十]+|\d+)[.、．]\s*(.{2,40}?)[：:]\s*(.+)$/);
@@ -285,6 +292,7 @@ function looksLikeWork(value: string) {
 
 function isPlausibleComposer(value: string) {
   return hasChinese(value) &&
+    !isProgramRoleLabel(value) &&
     value.length <= (value.includes("·") ? 24 : 12) &&
     !/——/.test(value) &&
     !/^[一二三四五六七八九十\d]+[、.．]?$/.test(value) &&

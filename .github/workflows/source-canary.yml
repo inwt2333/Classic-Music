@@ -27,9 +27,6 @@ jobs:
 
       - name: Probe all sources
         id: probe
-        env:
-          # 已知长期故障的来源（星海 SPA 改版待重建），探测失败不算金丝雀事故。
-          PROBE_KNOWN_FAILED: xinghai-concert-hall-official
         run: |
           for attempt in 1 2 3; do
             if npm run scrape:probe; then
