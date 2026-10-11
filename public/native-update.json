@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "publishedAt": "2026-10-11T16:47:17.705Z",
+  "windows": {
+    "version": "1.0.0",
+    "notes": "1.0.0：新增顶部应用更新入口、独立更新页面和每天启动检查；显示发行说明与下载进度，支持取消与重试；SHA-256 校验后重启替换，保留账号与收藏。修复更新源缺失被误报为最新版，提供 GitHub Release 备用源。",
+    "url": "https://github.com/inwt2333/Classic-Music/releases/download/native-v1.0.0/Classic-Music-Windows-1.0.0.exe",
+    "sha256": "2938ff7078d5b825847112bdb7fc96a0814b8609caafeab6d927eab50282f093",
+    "size": 82331786
+  },
+  "android": {
+    "version": "1.0.0",
+    "versionCode": 30002,
+    "notes": "1.0.0：我的、设置和更新记录均可进入应用更新；每天启动检查，显示版本说明和下载进度，支持取消、重试及继续安装；校验包名、版本、SHA-256 和发布签名，下载后接续系统覆盖安装。修复更新源缺失被误报为最新版，提供 GitHub Release 备用源。",
+    "url": "https://github.com/inwt2333/Classic-Music/releases/download/native-v1.0.0/Classic-Music-Android-1.0.0.apk",
+    "sha256": "6194044847d4a3276b317f49fe89143e2738294efc9d0cfc50e38c602ba150c1",
+    "size": 12443740
+  }
+}
