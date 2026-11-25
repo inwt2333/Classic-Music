@@ -2231,8 +2231,8 @@
     },
     "22713884f60b3c42b4dc4b5e": {
       "status": "failed",
-      "attempts": 2,
-      "updatedAt": "2026-11-24T23:37:26.385Z",
+      "attempts": 3,
+      "updatedAt": "2026-11-25T23:17:03.809Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_0dd5ec661dd6ea80"
@@ -2241,8 +2241,8 @@
     },
     "2f56aa6b434481d21921d900": {
       "status": "failed",
-      "attempts": 2,
-      "updatedAt": "2026-11-24T23:37:26.385Z",
+      "attempts": 3,
+      "updatedAt": "2026-11-25T23:17:03.809Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_4ab39673a455929a"
@@ -2251,11 +2251,31 @@
     },
     "3a4e39954927b13402105f8c": {
       "status": "failed",
-      "attempts": 1,
-      "updatedAt": "2026-11-24T23:37:26.385Z",
+      "attempts": 2,
+      "updatedAt": "2026-11-25T23:17:03.809Z",
       "reason": "DeepSeek 请求失败（HTTP 401）",
       "sourceEventIds": [
         "perf_1a4f8c03ca243ac3"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "52b755dd6b85c062acd0062c": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-11-25T23:17:03.809Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_4ab39673a455929a"
+      ],
+      "pipelineVersion": "deepseek-v4-flash:2.0.4"
+    },
+    "8048a802516f69c119ac97b2": {
+      "status": "failed",
+      "attempts": 1,
+      "updatedAt": "2026-11-25T23:17:03.809Z",
+      "reason": "DeepSeek 请求失败（HTTP 401）",
+      "sourceEventIds": [
+        "perf_e6a32385601ab685"
       ],
       "pipelineVersion": "deepseek-v4-flash:2.0.4"
     }
